@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <!-- SEO Meta -->
-<title>전시·팝업·매장 인쇄 발주파일 제작 | JPHIC 제이픽</title>
-<meta name="description" content="전시 부스, 팝업스토어, 매장 사이니지, ID카드, 메뉴판까지. 인쇄소에서 바로 쓰는 고해상도 PDF 발주파일 전문. 칼선·색상·재단선 완벽 세팅. 오픈챗 실시간 상담.">
-<meta name="keywords" content="전시 배너 제작, 팝업스토어 인쇄, 발주파일 제작, 부스 현수막, 사이니지 영상 제작, ID카드 대량 제작, 스카시 칼선, 메뉴판 제작, 아크릴 인쇄, 원단 출력, 행사 인쇄물, 코엑스 전시 출력, 킨텍스 배너, VMD 인쇄">
+<title>전시·팝업·매장- PDF 발주파일 전문- JPHIC 제이픽</title>
+<meta name="description" content="코엑스·킨텍스 전시 부스, 팝업스토어, 매장 사이니지부터 사원증·메뉴판까지. 성원애드피아·레드프린팅 가이드 준수 및 인쇄소 반려 파일 완벽 수정. 300dpi 고해상도 PDF 발주파일 전문 세팅.">
+<meta name="keywords" content="전시 배너 제작, 팝업스토어 인쇄, 발주파일 제작, 부스 현수막, 사이니지 영상, ID카드 제작, 사원증 인쇄, 스카시 칼선, 메뉴판 제작, 코엑스 전시 출력, 킨텍스 배너, 벡스코 전시회, 성원애드피아 칼선 오류, 고해상도 변환, 로고 복원, 마스터 PDF">
 <meta name="robots" content="index, follow">
 
 <!-- OG Tags -->
-<meta property="og:title" content="출력 전날 파일 거절당하셨나요? | JPHIC 제이픽">
-<meta property="og:description" content="전시·행사·매장 발주파일 전문. 인쇄소가 바로 쓰는 마스터 PDF로 납품합니다.">
+<meta property="og:title" content="출력 전날 PDF 파일 거절당하셨나요? | JPHIC 제이픽">
+<meta property="og:description" content="전시·행사·매장 발주파일 전문. 마스터 PDF파일로 납품합니다.">
 <meta property="og:image" content="https://jphic.co.kr/og-image.jpg">
 <meta property="og:url" content="https://jphic.co.kr">
 <meta property="og:type" content="website">
@@ -30,7 +30,7 @@
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "JPHIC 제이픽",
-  "description": "발주용 인쇄파일 PDF 제작 전문",
+  "description": "발주용 인쇄파일 제작 전문",
   "url": "https://jphic.co.kr",
   "contactPoint": {
     "@type": "ContactPoint",
@@ -59,9 +59,9 @@ body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: #333
 /* 띠 배너 */
 .jphic-marquee-wrapper { background-color: var(--mc); width: 100%; overflow: hidden; position: fixed; top: 70px; z-index: 9999; height: 40px; display: flex; align-items: center; }
 .jphic-marquee-container { width: 100%; max-width: 1400px; margin: 0 auto; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
-.marquee-content { display: inline-block; white-space: nowrap; animation: jphic-marquee 35s linear infinite; }
-.m-text { color: #ffffff; font-size: 13px; font-weight: 500; margin-right: 40px; }
-.m-link { color: #ffffff; font-size: 13px; font-weight: 800; text-decoration: underline; margin-right: 80px; }
+.marquee-content { display: inline-block; white-space: nowrap; animation: jphic-marquee 62s linear infinite; }
+.m-text { color: #ffffff; font-size: 14px; font-weight: 700; margin-right: 20px; }
+.m-link { color: #efb5a5; font-size: 13px; font-weight: 200; text-decoration: underline; margin-right: 80px; }
 @keyframes jphic-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* NAV */
@@ -73,15 +73,33 @@ body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: #333
 .nav-links a:hover { color: #fff; }
 .nav-cta { background-color: #A93825; color: #ffffff; padding: 8px 18px; border-radius: 50px; font-weight: 700; font-size: 13px; text-decoration: none; transition: 0.3s; }
 .nav-cta:hover { filter: brightness(1.1); }
-@media (max-width: 900px) { .nav-links { display: none; } }
+
+/* 햄버거 메뉴 및 모바일 드롭다운 최적화 */
+.hamburger { display: none; background: transparent; border: none; color: #fff; font-size: 1.6rem; cursor: pointer; transition: 0.3s; }
+
+@media (max-width: 900px) { 
+  .hamburger { display: block; }
+  .nav-links { 
+    display: flex; flex-direction: column; 
+    position: absolute; top: 70px; left: 0; 
+    transform: none; /* 모바일에서 화면 밖으로 밀려나는 이슈 수정 */
+    width: 100%; background: #3B3940; 
+    padding: 0; gap: 0; 
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease-in-out; align-items: center; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 9990;
+  }
+  .nav-links.active { max-height: 450px; border-top: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+  .nav-links a { font-size: 1.05rem; width: 100%; text-align: center; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); margin: 0; }
+}
 
 /* Section Common & Anchor Fix */
 section[id] { scroll-margin-top: 110px; }
 .sec { padding: 120px 5%; }
 .sec-hd { text-align: center; margin-bottom: 60px; }
 .sec-hd .label { display: inline-block; font-size: .75rem; font-weight: 800; letter-spacing: .14em; color: var(--mc); text-transform: uppercase; margin-bottom: 14px; }
-.sec-hd h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; letter-spacing: -.04em; color: var(--dk); line-height: 1.3; margin-bottom: 14px; word-break: keep-all; }
-.sec-hd p { font-size: 1.05rem; color: #666; line-height: 1.7; word-break: keep-all; }
+.sec-hd h2 { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 900; letter-spacing: -.04em; color: var(--dk); line-height: 1.35; margin-bottom: 14px; word-break: keep-all; }
+.sec-hd p { font-size: clamp(0.95rem, 2vw, 1.05rem); color: #666; line-height: 1.7; word-break: keep-all; }
 .sec-hd.light h2 { color: #fff; }
 .sec-hd.light p { color: rgba(255,255,255,.9); }
 
@@ -89,12 +107,12 @@ section[id] { scroll-margin-top: 110px; }
 .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 140px 5% 80px; background: #2a323d; color: #fff; position: relative; overflow: hidden; }
 #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.6; pointer-events: none; }
 .hero-overlay { position: absolute; inset: 0; background: rgba(217, 129, 102, 0.05); z-index: 2; pointer-events: none; }
-.hero-inner { position: relative; z-index: 3; max-width: 860px; }
-.hero h1 { font-size: clamp(2.2rem, 5vw, 4.2rem); font-weight: 900; line-height: 1.3; letter-spacing: -.03em; margin-bottom: 24px; word-break: keep-all; }
+.hero-inner { position: relative; z-index: 3; max-width: 860px; width: 100%; }
+.hero h1 { font-size: clamp(2rem, 5vw, 4.2rem); font-weight: 900; line-height: 1.35; letter-spacing: -.03em; margin-bottom: 24px; word-break: keep-all; }
 .hero h1 .hl { color: var(--mc); display: block; margin-top: 10px;}
-.hero-sub { font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255,255,255,.8); margin-bottom: 40px; line-height: 1.8; font-weight: 400; word-break: keep-all; }
+.hero-sub { font-size: clamp(0.95rem, 2vw, 1.15rem); color: rgba(255,255,255,.8); margin-bottom: 40px; line-height: 1.8; font-weight: 400; word-break: keep-all; }
 .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
-.btn-primary { padding: 18px 36px; border-radius: 50px; background: var(--mc); color: #fff; font-size: 1.1rem; font-weight: 800; text-decoration: none; transition: .3s; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 8px 20px rgba(217,129,102,.3); }
+.btn-primary { padding: 16px 32px; border-radius: 50px; background: var(--mc); color: #fff; font-size: clamp(1rem, 2vw, 1.1rem); font-weight: 800; text-decoration: none; transition: .3s; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 8px 20px rgba(217,129,102,.3); }
 .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(217,129,102,.4); }
 .sub-links { font-size: 0.85rem; color: rgba(255,255,255,.5); display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 .sub-links a { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,.8); text-decoration: none; padding: 6px 16px; border-radius: 20px; transition: 0.3s; }
@@ -103,20 +121,20 @@ section[id] { scroll-margin-top: 110px; }
 /* 2. TRUST BAR (카운팅 효과) */
 .trust-bar { background: #1e242c; padding: 40px 5%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; z-index: 10; border-top: 1px solid rgba(255,255,255,0.05); }
 .trust-item { text-align: center; color: #fff; }
-.trust-num { font-size: 2.2rem; font-weight: 900; color: var(--mc); margin-bottom: 4px; display: block; }
-.trust-desc { font-size: 0.85rem; color: rgba(255,255,255,0.6); font-weight: 500; }
-@media (max-width: 768px) { .trust-bar { grid-template-columns: repeat(2, 1fr); gap: 30px; } }
+.trust-num { font-size: clamp(1.8rem, 4vw, 2.2rem); font-weight: 900; color: var(--mc); margin-bottom: 4px; display: block; }
+.trust-desc { font-size: 0.85rem; color: rgba(255,255,255,0.6); font-weight: 500; word-break: keep-all; }
+@media (max-width: 768px) { .trust-bar { grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 30px 5%; } }
 
 /* 3. CATEGORIES - 활기찬 디자인 */
 .category-sec { background: #ffffff; }
 .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto 40px; }
-.cat-card { background: #fff; border: 2px solid rgba(217,129,102,0.15); border-radius: 20px; padding: 36px 30px; transition: 0.3s; text-decoration: none; color: inherit; display: block; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+.cat-card { background: #fff; border: 2px solid rgba(217,129,102,0.15); border-radius: 20px; padding: 32px 24px; transition: 0.3s; text-decoration: none; color: inherit; display: block; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
 .cat-card:hover { transform: translateY(-5px); border-color: var(--mc); box-shadow: 0 12px 30px rgba(217,129,102,0.45); border-width: 2px; }
 .cat-num { font-size: 0.9rem; font-weight: 900; color: var(--mc); opacity: 0.6; margin-bottom: 12px; display: block; }
-.cat-card h3 { font-size: 1.3rem; font-weight: 900; color: var(--dk); margin-bottom: 10px; }
-.cat-card p { font-size: 0.95rem; color: #666; line-height: 1.5; font-weight: 500;}
+.cat-card h3 { font-size: 1.25rem; font-weight: 900; color: var(--dk); margin-bottom: 10px; word-break: keep-all; }
+.cat-card p { font-size: 0.95rem; color: #666; line-height: 1.5; font-weight: 500; word-break: keep-all; }
 
-.material-note { max-width: 1200px; margin: 0 auto; background: rgba(217,129,102,0.1); padding: 20px 30px; border-radius: 12px; font-size: 0.95rem; font-weight: 600; color: var(--dk); text-align: center; border: 1px dashed rgba(217,129,102,0.5); word-break: keep-all; }
+.material-note { max-width: 1200px; margin: 0 auto; background: rgba(217,129,102,0.1); padding: 20px 24px; border-radius: 12px; font-size: 0.95rem; font-weight: 600; color: var(--dk); text-align: center; border: 1px dashed rgba(217,129,102,0.5); word-break: keep-all; }
 @media (max-width: 900px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .cat-grid { grid-template-columns: 1fr; } }
 
@@ -124,36 +142,69 @@ section[id] { scroll-margin-top: 110px; }
 .why-sec { background: #f2efed; text-align: center; padding-bottom: 100px; }
 .why-inner { max-width: 900px; margin: 0 auto; }
 .vs-box { display: flex; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(217,129,102,0.08); margin-top: 40px; border: 1px solid rgba(217,129,102,0.15); text-align: left;}
-.vs-col { flex: 1; padding: 50px 40px; }
+.vs-col { flex: 1; padding: 40px 30px; }
 .vs-col.bad { background: #fafafa; border-right: 1px solid var(--border); }
-.vs-col h4 { font-size: 1.2rem; font-weight: 900; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; word-break: keep-all; }
+.vs-col h4 { font-size: 1.15rem; font-weight: 900; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; word-break: keep-all; line-height: 1.4; }
 .vs-col.bad h4 { color: #888; }
 .vs-col.good h4 { color: var(--mc); }
 .vs-list { list-style: none; }
-.vs-list li { margin-bottom: 16px; font-size: 1rem; color: #555; display: flex; align-items: flex-start; gap: 10px; font-weight: 600; word-break: keep-all;}
-.vs-list li i { margin-top: 4px; font-size: 0.9rem; }
+.vs-list li { margin-bottom: 16px; font-size: 0.95rem; color: #555; display: flex; align-items: flex-start; gap: 10px; font-weight: 600; word-break: keep-all;}
+.vs-list li i { margin-top: 4px; font-size: 0.9rem; flex-shrink: 0; }
 .vs-col.bad .vs-list li i { color: #ccc; }
 .vs-col.good .vs-list li i { color: var(--mc); }
-@media (max-width: 768px) { .vs-box { flex-direction: column; } .vs-col.bad { border-right: none; border-bottom: 1px solid var(--border); } .vs-col { padding: 40px 24px; } }
+@media (max-width: 768px) { .vs-box { flex-direction: column; } .vs-col.bad { border-right: none; border-bottom: 1px solid var(--border); } .vs-col { padding: 30px 20px; } }
 
-/* 5. TRACKS */
-.track-sec { background: var(--dk); }
-.track-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
-.track-card { background: rgba(255,255,255,0.03); border: 2px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 40px 30px; display: flex; flex-direction: column; transition: 0.3s; position: relative; }
+/* 5. TRACKS (가로 슬라이드 및 좌우 화살표 최적화) */
+.track-sec { background: var(--dk); position: relative; overflow: hidden; } 
+.track-wrap { position: relative; max-width: 1200px; margin: 0 auto; }
+.track-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.track-card { background: rgba(255,255,255,0.03); border: 2px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 40px 24px; display: flex; flex-direction: column; transition: 0.3s; position: relative; }
 .track-card:hover { border-color: var(--mc); box-shadow: 0 12px 30px rgba(217,129,102,0.45); transform: translateY(-10px); background: rgba(255,255,255,0.05); }
 .t-badge { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; margin-bottom: 20px; }
 .track-card:nth-child(1) .t-badge { background: rgba(255,255,255,0.1); color: #fff; }
 .track-card:nth-child(2) .t-badge { background: var(--mc); color: #fff; }
 .track-card:nth-child(3) .t-badge { border: 1px solid var(--mc); color: var(--mc); }
-.track-card h3 { font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 16px; word-break: keep-all; }
+.track-card h3 { font-size: clamp(1.25rem, 3vw, 1.4rem); font-weight: 900; color: #fff; margin-bottom: 16px; word-break: keep-all; }
 .track-card p { font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 30px; flex-grow: 1; word-break: keep-all;}
-.t-price { font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+.t-price { font-size: clamp(1.5rem, 4vw, 1.8rem); font-weight: 900; color: #fff; margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 .t-price span { font-size: 1rem; font-weight: 500; color: rgba(255,255,255,0.5); }
 .btn-track { display: block; text-align: center; padding: 16px; border-radius: 12px; font-weight: 800; font-size: 0.95rem; text-decoration: none; transition: 0.3s; word-break: keep-all; cursor: pointer; border: none; font-family: inherit; }
 .track-card:nth-child(1) .btn-track, .track-card:nth-child(3) .btn-track { background: rgba(255,255,255,0.1); color: #fff; }
 .track-card:nth-child(2) .btn-track { background: var(--mc); color: #fff; }
 
-/* 6. 리사이징 & 모션 섹션 배경 (왕복 파도 및 3초 스테이 복구) */
+/* Track 스와이퍼 조작 화살표 버튼 (기본적으로 숨김 처리, 모바일에서 보임) */
+.track-arrow { display: none; position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 50%; z-index: 10; cursor: pointer; backdrop-filter: blur(5px); font-size: 1rem; align-items: center; justify-content: center; transition: 0.3s; }
+.track-arrow:hover { background: var(--mc); border-color: var(--mc); }
+.track-prev { left: -10px; }
+.track-next { right: -10px; }
+
+/* 링크 이동 시 카드 하이라이트 애니메이션 */
+.track-card.active-highlight {
+  border-color: #fff !important;
+  box-shadow: 0 0 30px rgba(217,129,102,0.8) !important;
+  transform: translateY(-10px) !important;
+  background: rgba(217,129,102,0.15) !important;
+  animation: cardHighlight 0.6s ease-in-out infinite alternate;
+}
+@keyframes cardHighlight {
+  from { box-shadow: 0 0 10px rgba(217,129,102,0.4); border-color: var(--mc); }
+  to { box-shadow: 0 0 30px rgba(217,129,102,0.8); border-color: #fff; }
+}
+
+/* 모바일 전용 가로 슬라이드 + 화살표 렌더링 */
+@media (max-width: 900px) { 
+  .track-wrap { padding: 0 5%; }
+  .track-arrow { display: flex; }
+  .track-grid { 
+    display: flex; flex-wrap: nowrap; overflow-x: auto; 
+    scroll-snap-type: x mandatory; scrollbar-width: none; 
+    gap: 16px; padding: 10px 0 30px; scroll-behavior: smooth;
+  }
+  .track-grid::-webkit-scrollbar { display: none; }
+  .track-card { flex: 0 0 85%; scroll-snap-align: center; min-width: 280px; }
+}
+
+/* 6. 리사이징 & 모션 섹션 */
 .aurora-sec { 
   position: relative; 
   background: linear-gradient(135deg, #da8266 0%, #d04b27 50%, #da8266 100%); 
@@ -172,22 +223,20 @@ section[id] { scroll-margin-top: 110px; }
 .aurora-sec .sec-hd .label { color: #ffffff !important; opacity: 1; font-weight: 900; }
 .aurora-sec .sec-hd h2 { color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.15); }
 
-/* 박스 등장 모션 디졸브 오버라이드 및 어두운 글래스모피즘 적용 */
-.aurora-box { max-width: 900px; margin: 0 auto; background: rgba(255,255,255,0.15); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.25); padding: 50px 40px; border-radius: 24px; text-align: center; color: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.1); opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+/* 박스 등장 모션 디졸브 및 어두운 글래스모피즘 */
+.aurora-box { max-width: 900px; margin: 0 auto; background: rgba(255,255,255,0.15); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.25); padding: 40px 30px; border-radius: 24px; text-align: center; color: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.1); opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
 .aurora-box.on { opacity: 1; transform: translateY(0); }
 
-.aurora-icon { font-size: 3rem; margin-bottom: 20px; display: block; color: #fff; }
-.aurora-box h3 { font-size: 1.6rem; font-weight: 900; margin-bottom: 24px; color: #fff; }
+.aurora-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; color: #fff; }
+.aurora-box h3 { font-size: clamp(1.3rem, 3vw, 1.6rem); font-weight: 900; margin-bottom: 24px; color: #fff; word-break: keep-all; }
 
 .aurora-list { list-style: none; padding: 0; margin: 0 auto; display: inline-block; text-align: left; }
-.aurora-list li { font-size: 1.05rem; line-height: 1.8; color: #ffffff; margin-bottom: 14px; font-weight: 500; display: flex; align-items: flex-start; gap: 12px; word-break: keep-all; opacity: 0; transform: translateX(-10px); transition: 0.5s; }
+.aurora-list li { font-size: 1rem; line-height: 1.7; color: #ffffff; margin-bottom: 14px; font-weight: 500; display: flex; align-items: flex-start; gap: 12px; word-break: keep-all; opacity: 0; transform: translateX(-10px); transition: 0.5s; }
 .aurora-box.on li { opacity: 1; transform: translateX(0); }
 .aurora-box.on li:nth-child(1) { transition-delay: 0.2s; }
 .aurora-box.on li:nth-child(2) { transition-delay: 0.4s; }
 .aurora-box.on li:nth-child(3) { transition-delay: 0.6s; }
-
-/* 체크 이모지 톤앤매너 수정 (부드러운 상아색) */
-.aurora-list li i { color: #fff2e6; margin-top: 6px; font-size: 1rem; }
+.aurora-list li i { color: #fff2e6; margin-top: 5px; font-size: 1rem; flex-shrink: 0;}
 
 /* 7. PORTFOLIO */
 .gallery-sec { background: #2c343f; padding: 100px 0; overflow: hidden; }
@@ -195,15 +244,16 @@ section[id] { scroll-margin-top: 110px; }
 .gallery-wrap { position: relative; max-width: 1400px; margin: 0 auto; }
 .g-track { display: flex; gap: 16px; padding: 20px 5% 10px; overflow-x: auto; scrollbar-width: none; }
 .g-track::-webkit-scrollbar { display: none; }
-.g-card { flex: 0 0 320px; height: 420px; border-radius: 20px; overflow: hidden; position: relative; background: #444; transition: 0.3s; }
+.g-card { flex: 0 0 280px; height: 380px; border-radius: 20px; overflow: hidden; position: relative; background: #444; transition: 0.3s; }
 .g-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 .g-card img { width: 100%; height: 100%; object-fit: cover; }
 .g-tag { position: absolute; top: 16px; left: 16px; background: rgba(0,0,0,0.7); color: #fff; padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; z-index: 2; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2);}
+@media (min-width: 768px) { .g-card { flex: 0 0 320px; height: 420px; } }
 
 /* 8. REVIEWS */
 .review-sec { background: var(--bg); }
 .review-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
-.review-card { background: var(--white); border: 2px solid var(--border); border-radius: 20px; padding: 36px 32px; box-shadow: 0 4px 16px rgba(0,0,0,.02); display: flex; flex-direction: column; transition: 0.3s; }
+.review-card { background: var(--white); border: 2px solid var(--border); border-radius: 20px; padding: 32px 24px; box-shadow: 0 4px 16px rgba(0,0,0,.02); display: flex; flex-direction: column; transition: 0.3s; }
 .review-card:hover { border-color: var(--mc); box-shadow: 0 12px 30px rgba(217,129,102,0.45); border-width: 2px; transform: translateY(-5px); }
 .review-stars { color: var(--mc); font-size: 0.9rem; margin-bottom: 14px; letter-spacing: 2px; }
 .review-text { font-size: 0.95rem; color: #444; line-height: 1.7; margin-bottom: 24px; font-weight: 500; word-break: keep-all; flex-grow: 1; }
@@ -217,12 +267,11 @@ section[id] { scroll-margin-top: 110px; }
 #faq-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.4; pointer-events: none; }
 .faq-container { max-width: 860px; margin: 0 auto; position: relative; z-index: 5; }
 .faq-item { margin-bottom: 16px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.15); backdrop-filter: blur(10px); }
-.faq-q { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 1.05rem; word-break: keep-all; line-height: 1.4; gap: 16px; }
+.faq-q { padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 1rem; word-break: keep-all; line-height: 1.4; gap: 16px; }
 .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-.faq-a-inner { padding: 0 32px 32px; font-size: 0.95rem; color: rgba(255,255,255,0.9); line-height: 1.7; word-break: keep-all; }
+.faq-a-inner { padding: 0 24px 24px; font-size: 0.95rem; color: rgba(255,255,255,0.9); line-height: 1.7; word-break: keep-all; }
 .faq-item.active .faq-a { max-height: 600px; }
 .faq-item.active .faq-q { color: #ffe6db; }
-@media (max-width: 600px) { .faq-q { padding: 20px 24px; font-size: 1rem; } .faq-a-inner { padding: 0 24px 24px; } }
 
 /* FOOTER */
 footer { background: #1a1e24; color: rgba(255,255,255,.4); padding: 60px 5%; font-size: 0.85rem; text-align: center; }
@@ -234,13 +283,12 @@ footer { background: #1a1e24; color: rgba(255,255,255,.4); padding: 60px 5%; fon
 .rv.on { opacity: 1; transform: translateY(0); }
 .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
 
-/* MODAL UI IMPROVEMENTS */
+/* MODAL UI (원본 유지) */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.3s; backdrop-filter: blur(5px); padding: 20px;}
 .modal-overlay.active { opacity: 1; pointer-events: auto; }
 .modal-box { background: var(--bg); width: 100%; max-width: 700px; border-radius: 24px; overflow: hidden; max-height: 90vh; display: flex; flex-direction: column; position: relative;}
 .modal-close { position: absolute; top: 16px; right: 20px; font-size: 2rem; color: #999; cursor: pointer; z-index: 10; line-height: 1;}
 
-/* 타이틀 테이블 높이 절반 줄임 */
 .modal-header { padding: 15px 30px 10px; background: #fff; border-bottom: 1px solid var(--border); } 
 .modal-header h2 { font-size: 1.2rem; font-weight: 900; color: var(--dk); margin-bottom: 4px;}
 .modal-header p { font-size: 0.85rem; color: #888; margin: 0; }
@@ -249,7 +297,6 @@ footer { background: #1a1e24; color: rgba(255,255,255,.4); padding: 60px 5%; fon
 .f-group { margin-bottom: 20px; }
 .f-label { display: block; font-size: 0.9rem; font-weight: 800; color: var(--dk); margin-bottom: 8px; }
 
-/* 인풋 텍스트 50% 연하게, 볼드 해제 */
 .f-input, .f-textarea { width: 100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 0.9rem; background: #fff; transition: 0.2s; color: rgba(51, 51, 51, 0.5); font-weight: 400; }
 .f-input::placeholder, .f-textarea::placeholder { color: rgba(51, 51, 51, 0.3); font-weight: 400; }
 .f-input:focus, .f-textarea:focus { outline: none; border-color: var(--mc); box-shadow: 0 0 0 3px rgba(217,129,102,0.1); color: var(--dk); }
@@ -259,7 +306,6 @@ footer { background: #1a1e24; color: rgba(255,255,255,.4); padding: 60px 5%; fon
 .f-radio + label { display: flex; flex-direction: column; padding: 18px; border: 2px solid var(--border); border-radius: 16px; cursor: pointer; background: #fff; transition: 0.2s; }
 .f-radio:checked + label { border-color: var(--mc); background: rgba(217,129,102,0.05); }
 
-/* 동적 아이템 한 줄 배치 */
 .item-row { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; background: #fafafa; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border); }
 .item-name { flex: 1; min-width: 0; }
 .size-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
@@ -270,14 +316,12 @@ footer { background: #1a1e24; color: rgba(255,255,255,.4); padding: 60px 5%; fon
 .btn-row-action.remove { background: #fbeaea; color: #e05555; }
 .btn-row-action.remove:hover { background: #e05555; color: #fff; }
 
-/* 수정 정책 박스 강조 */
 .policy-box { background: rgba(217,129,102,0.08); border: 2px solid var(--mc); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
 .policy-box h4 { font-size: 1rem; font-weight: 900; color: var(--mc); margin-bottom: 10px; }
 .policy-box ul { list-style: none; margin: 0; padding: 0; }
 .policy-box ul li { font-size: 0.95rem; color: #444; font-weight: 600; margin-bottom: 6px; }
 .policy-box ul li::before { content: '·'; color: var(--mc); font-weight: 900; margin-right: 6px;}
 
-/* 최종 복사 화면 */
 .copy-box { background: #1e242c; color: #fff; padding: 20px; border-radius: 12px; font-family: monospace; font-size: 0.88rem; line-height: 1.6; white-space: pre-wrap; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.1);}
 .modal-notice-text { font-size: 0.95rem; font-weight: 800; color: var(--mc); text-align: center; margin-bottom: 20px; }
 .status-badge { display: inline-block; padding: 4px 10px; background: #eee; border-radius: 6px; font-size: 0.8rem; font-weight: 800; margin-bottom: 10px; color: #666; }
@@ -285,14 +329,36 @@ footer { background: #1a1e24; color: rgba(255,255,255,.4); padding: 60px 5%; fon
 .btn-submit-modal { width: 100%; padding: 18px; border-radius: 12px; background: var(--mc); color: #fff; font-size: 1.1rem; font-weight: 900; border: none; cursor: pointer; transition: 0.3s; margin-top: 10px;}
 .btn-submit-modal:hover { background: #c26e55; }
 
-/* 단계별 폼 제어 */
 .form-step { display: none; animation: fadeIn 0.4s ease; }
 .form-step.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* 날짜 선택 커스텀 */
 .date-wrapper { position: relative; display: block; }
 input[type="date"]::-webkit-calendar-picker-indicator { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+
+
+/* =========================================================
+   최신 스마트폰 모바일 최적화 (여백, 폰트 비율 재조정)
+   ========================================================= */
+@media (max-width: 600px) {
+  /* 섹션 기본 여백 축소 */
+  .sec { padding: 80px 5%; }
+  .sec-hd { margin-bottom: 40px; }
+  .hero { padding: 120px 5% 60px; }
+  
+  .faq-q { padding: 18px 20px; font-size: 0.95rem; }
+  .faq-a-inner { padding: 0 20px 20px; font-size: 0.9rem; }
+  
+  /* 모달 레이아웃 유지용 */
+  .modal-body { padding: 20px 20px 30px; }
+  .f-options { grid-template-columns: 1fr; }
+  .item-row { flex-direction: column; align-items: stretch; }
+  .size-group { justify-content: flex-end; }
+}
+
+@media (max-width: 480px) {
+  .trust-bar { grid-template-columns: 1fr 1fr; gap: 20px; }
+}
 </style>
 </head>
 <body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
@@ -301,10 +367,17 @@ input[type="date"]::-webkit-calendar-picker-indicator { position: absolute; top:
 <div class="jphic-marquee-wrapper">
   <div class="jphic-marquee-container">
     <div class="marquee-content" onmouseover="this.style.animationPlayState='paused'" onmouseout="this.style.animationPlayState='running'">
-      <span class="m-text">[5-6월 전시 참가사 전용] 현장 출력 사고를 미리 체크하는 '발주 PDF 파일 무상 진단' 받아보세요</span>
+      <span class="m-text">[5-8월 전시 참가사 전용] 현장 출력 사고를 미리 체크하는 '발주 PDF 파일 무상 진단' 받아보세요</span>
       <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="m-link">실시간 무상 진단 문의하기 (오픈챗) →</a>
-      <span class="m-text">[5-6월 전시 참가사 전용] 현장 출력 사고를 미리 체크하는 '발주 PDF 파일 무상 진단' 받아보세요</span>
-      <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="m-link">실시간 무상 진단 문의하기 (오픈챗) →</a>
+      <span class="m-text">[킨텍스] 코리아빌드 참가사 전용 — 인쇄소에 바로 넘기는 고해상도 발주 PDF 대행</span>
+      <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="m-link">제작문의하기 (오픈챗) →</a>
+      <span class="m-text">서울국제식품산업대전 · 서울 국제 주류·와인 박람회 · 창업·프랜차이즈 박람회 · 코리아빌드위크 · 친환경·에너지대전 · 한국전자전 KES · 서울국제스포츠레저산업전 (SPOEX) · 대한민국 관광박람회 (KOTFA) · 미트엑스포 · 서울국제아웃도어캠핑&레포츠페스티벌 · SIMTOS 2026 (서울국제생산제조기술전) · 서울사케페스티벌 · 부산모빌리티쇼  · 코리아 드론쇼 · 서울카페쇼 · 컴업2026 · NesRise · SMART TECH KOREA · Seoul Food & Hotel </span>
+      <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="m-link">제작문의하기 (오픈챗) →</a>
+      <span class="m-text">부스 배치도 · 명찰 · 고급 메뉴판 · 제품 카탈로그 · 시식대 · 배너 · 아크릴 스탠드 · LED 광고영상</span>
+      <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="m-link">제작문의하기 (오픈챗) →</a>
+      <span class="m-text">"대형 출력물 칼선 세팅", "현장 시공용 도면 최적화", "강렬한 원단 출력"</span>
+      <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="m-link">제작문의하기 (오픈챗) →</a>
+      <span class="m-text">""AI 생성 이미지 고화질 출력", "캔바(Canva)/망고보드 파일 인쇄 최적화", "디자이너 없는 기업용 발주 파일 세팅"</span>
     </div>
   </div>
 </div>
@@ -312,16 +385,21 @@ input[type="date"]::-webkit-calendar-picker-indicator { position: absolute; top:
 <!-- 네비게이션 -->
 <nav class="nav">
   <a href="#" class="logo">JPHIC <span>PDF</span></a>
-  <div class="nav-links">
-    <a href="#categories">제작분야</a>
-    <a href="#why">거절당하는 이유</a>
-    <a href="#tracks">서비스선택</a>
-    <a href="#motion-resize">화면/모션</a>
-    <a href="#portfolio">포트폴리오</a>
-    <a href="#reviews">고객후기</a>
-    <a href="#faq">자주묻는 질문</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#categories" onclick="closeMobileMenu()">제작분야</a>
+    <a href="#why" onclick="closeMobileMenu()">WHY JPHIC</a>
+    <a href="#tracks" onclick="closeMobileMenu()">서비스</a>
+    <a href="#motion-resize" onclick="closeMobileMenu()">움직이는 PDF</a>
+    <a href="#portfolio" onclick="closeMobileMenu()">포트폴리오</a>
+    <a href="#reviews" onclick="closeMobileMenu()">고객후기</a>
+    <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
   </div>
-  <a href="#" class="nav-cta" onclick="openModal('Track A'); return false;">제작 의뢰서 작성</a>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <a href="#" class="nav-cta" onclick="openModal('Track A'); return false;">제작 의뢰서 작성</a>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
 </nav>
 
 <!-- 1. HERO -->
@@ -329,17 +407,17 @@ input[type="date"]::-webkit-calendar-picker-indicator { position: absolute; top:
   <canvas id="hero-canvas"></canvas>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
-    <h1 class="rv d1">출력 전날,<br><span class="hl">파일이 거절당한 적 있나요?</span></h1>
+    <h1 class="rv d1">PDF 파일<br><span class="hl">출력 전에 한 번만 더 확인했더라면...</span></h1>
     <p class="hero-sub rv d2">
-      해상도, 칼선, 색상값. 화면에선 완벽했는데 인쇄소에선 다른 얘기를 합니다.<br>
-      발주 직전 마지막 관문, JPHIC가 막아드립니다.
+      해상도, 칼선, 색상값. 화면에선 완벽했는데, 왜 이렇게 나왔지?<br>
+      발주 직전 마지막 관문, JPHIC 제이픽이 케어해드립니다.
     </p>
     <div class="hero-actions rv d3">
-      <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="btn-primary">▶ 오픈챗으로 파일 무상진단 받기</a>
+      <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="btn-primary">▶ PDF 무상진단 받기</a>
     </div>
     <div class="sub-links rv d3">
-      <a href="#tracks">자료가 부족하다면? →</a>
-      <a href="#tracks">오늘 당장 급하다면? →</a>
+      <a href="#tracks" onclick="scrollToTrackCard(event, 1)">자료가 부족하다면? →</a>
+      <a href="#tracks" onclick="scrollToTrackCard(event, 2)">오늘 당장 급하다면? →</a>
     </div>
   </div>
 </section>
@@ -347,16 +425,16 @@ input[type="date"]::-webkit-calendar-picker-indicator { position: absolute; top:
 <!-- 2. TRUST BAR -->
 <div class="trust-bar rv">
   <div class="trust-item">
-    <div class="trust-num"><span class="counter" data-target="380">0</span>+</div>
+    <div class="trust-num"><span class="counter" data-target="880">0</span>+</div>
     <span class="trust-desc">전시·행사·매장 프로젝트 납품</span>
   </div>
   <div class="trust-item">
-    <div class="trust-num"><span class="counter" data-target="60">0</span>+</div>
+    <div class="trust-num"><span class="counter" data-target="360">0</span>+</div>
     <span class="trust-desc">공공기관·병원·브랜드 파트너사</span>
   </div>
   <div class="trust-item">
-    <div class="trust-num"><span class="counter" data-target="6">0</span>년</div>
-    <span class="trust-desc">2019년부터 축적된 현장 데이터</span>
+    <div class="trust-num"><span class="counter" data-target="10">0</span>년</div>
+    <span class="trust-desc">2016년부터 축적된 현장 데이터</span>
   </div>
   <div class="trust-item">
     <div class="trust-num"><span class="counter" data-target="92">0</span>%</div>
@@ -369,7 +447,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { position: absolute; top:
   <div class="sec-hd rv">
     <div class="label">Categories</div>
     <h2>어떤 제작물이 필요하세요?</h2>
-    <p>어느 인쇄소, 출력업체에 넘겨도 바로 쓸 수 있는 구조로 세팅합니다.</p>
+    <p>지금 카드를 클릭하시고 내용을 전달해 보세요.</p>
   </div>
   
   <div class="cat-grid">
@@ -443,37 +521,43 @@ input[type="date"]::-webkit-calendar-picker-indicator { position: absolute; top:
   </div>
 </section>
 
-<!-- 5. TRACKS -->
+<!-- 5. TRACKS (가로 스크롤 및 화살표 적용) -->
 <section class="sec track-sec" id="tracks">
   <div class="sec-hd light rv">
     <div class="label">Pricing & Services</div>
     <h2>자료 준비 상태에 맞게 골라주세요</h2>
-    <p>디자인 에이전시처럼 비싸지 않고, 무책임하게 파일만 던지지 않습니다.</p>
+    <p>브랜드 자산 부자가 되실 여러분들 모이세요!!</p>
   </div>
   
-  <div class="track-grid">
-    <div class="track-card rv d1">
-      <span class="t-badge">Track A. 자료가 준비됨</span>
-      <h3>발주용 PDF 즉시 제작</h3>
-      <p>로고 원본, 사용할 이미지, 들어갈 텍스트가 모두 준비되어 있나요? 현장에서 바로 쓸 수 있는 구조로 재배열합니다.</p>
-      <div class="t-price">49,000<span>원~</span></div>
-      <button onclick="openModal('Track A')" class="btn-track">제작 의뢰서 쓰기</button>
-    </div>
-    
-    <div class="track-card highlight rv d2">
-      <span class="t-badge">Track B. 자료가 부족함</span>
-      <h3>브랜드 자산 구축 (소재 세팅)</h3>
-      <p>저화질 로고만 있거나 이미지가 없어도 괜찮습니다. JPHIC가 소재를 먼저 세팅해 드립니다.</p>
-      <div class="t-price">490,000<span>원~</span></div>
-      <a href="https://open.kakao.com/o/stjMY8oi" target="_blank" class="btn-track">오픈챗으로 자산 구축 문의</a>
-    </div>
-    
-    <div class="track-card rv d3">
-      <span class="t-badge"><i class="fa-solid fa-bolt"></i> 긴급 부스터</span>
-      <h3>오늘 당장 파일이 필요함</h3>
-      <p>전시 시공이 코앞인데 파일이 반려되었나요? 당일 시안 최우선 처리 및 발주처 직접 소통을 대행합니다.</p>
-      <div class="t-price">+99,000<span>원 추가</span></div>
-      <a href="https://open.kakao.com/o/slzk38oi" target="_blank" class="btn-track">오픈챗으로 긴급 일정 문의</a>
+  <div class="track-wrap">
+    <!-- 좌우 스와이프 조작 버튼 (모바일용) -->
+    <button class="track-arrow track-prev" id="trackPrevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="track-arrow track-next" id="trackNextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+
+    <div class="track-grid" id="trackGrid">
+      <div class="track-card rv d1">
+        <span class="t-badge">Track A. 자료가 준비됨</span>
+        <h3>발주용 PDF 즉시 제작</h3>
+        <p>로고 원본, 사용할 이미지, 들어갈 텍스트가 모두 준비되어 있나요? 현장에서 바로 쓸 수 있는 구조로 재배열합니다.</p>
+        <div class="t-price">49,000<span>원~</span></div>
+        <button onclick="openModal('Track A')" class="btn-track">제작 의뢰서 쓰기</button>
+      </div>
+      
+      <div class="track-card highlight rv d2">
+        <span class="t-badge">Track B. 자료가 부족함</span>
+        <h3>브랜드 자산 구축 (기초 그래픽 세팅)</h3>
+        <p>저화질 로고만 있거나 이미지가 없어도 괜찮습니다. JPHIC이 기초 그래픽을 먼저 세팅해 드립니다.</p>
+        <div class="t-price">490,000<span>원~</span></div>
+        <a href="https://open.kakao.com/o/stjMY8oi" target="_blank" class="btn-track">오픈챗-자산 구축 문의</a>
+      </div>
+      
+      <div class="track-card rv d3">
+        <span class="t-badge"><i class="fa-solid fa-bolt"></i> 긴급 부스터</span>
+        <h3>오늘 당장 파일이 필요함</h3>
+        <p>전시 시공이 코앞인데 파일이 반려되었나요? 당일 시안 최우선 처리 및 발주처 직접 소통을 대행합니다.</p>
+        <div class="t-price">+99,000<span>원 추가</span></div>
+        <a href="https://open.kakao.com/o/slzk38oi" target="_blank" class="btn-track">오픈챗-긴급 일정 문의</a>
+      </div>
     </div>
   </div>
 </section>
@@ -529,6 +613,10 @@ input[type="date"]::-webkit-calendar-picker-indicator { position: absolute; top:
   </div>
 </section>
 
+
+
+
+
 <!-- 9. FAQ -->
 <section class="sec faq-sec" id="faq">
   <canvas id="faq-canvas"></canvas>
@@ -538,32 +626,53 @@ input[type="date"]::-webkit-calendar-picker-indicator { position: absolute; top:
   </div>
   
   <div class="faq-container rv d1">
+
     <div class="faq-item">
-      <div class="faq-q"><span>Q. 현장 설치나 실사 출력도 직접 진행해 주시나요?</span> <i class="fa-solid fa-chevron-down"></i></div>
-      <div class="faq-a"><div class="faq-a-inner"><br>직접 출력하지 않습니다. 대신 어느 인쇄소나 출력업체에 넘겨도 바로 쓸 수 있는 '완벽한 발주 파일(Master PDF)'을 만드는 데 100% 집중합니다. 브랜딩 자산 구축을 맡겨주시면 발주처와의 소통도 대행해 드립니다.</div></div>
+      <div class="faq-q"><span>Q. 코엑스·킨텍스·세텍·벡스코 전시 부스 파일도 작업 가능한가요?</span> <i class="fa-solid fa-chevron-down"></i></div>
+      <div class="faq-a"><div class="faq-a-inner"><br>네, 가능합니다. 코엑스(COEX)·킨텍스(KINTEX)·세텍(SETEC)·벡스코(BEXCO)·aT센터·수원메쎄·송도컨벤시아 등 국내 주요 전시장 발주 사양에 맞게 작업합니다. 전시 부스 벽면, 포토월, 배너 세트, 현수막, 롤업배너, 스카시 등 현장 출력에 최적화된 발주 파일(Master PDF)로 납품합니다. 직접 출력은 하지 않으며, 어느 출력업체에 넘겨도 바로 쓸 수 있는 파일 제작에만 집중합니다.</div></div>
     </div>
+
     <div class="faq-item">
-      <div class="faq-q"><span>Q. 로고는 있는데 고화질 파일이 아니고 캡처본 뿐입니다. 작업이 가능한가요?</span> <i class="fa-solid fa-chevron-down"></i></div>
-      <div class="faq-a"><div class="faq-a-inner"><br>이 경우는 [Track B. 브랜드 자산 구축] 팀으로 문의주셔야 합니다. 캡처본(JPG 등)으로는 대형 출력이 불가능하므로, JPHIC에서 대형 인쇄가 가능한 벡터(Vector) 형식으로 로고를 재드로잉 및 변환해 드립니다. 이렇게 세팅된 파일은 향후 어떤 발주에서도 깨지지 않는 고객님의 소중한 '자산'이 됩니다.</div></div>
+      <div class="faq-q"><span>Q. 로고 원본이 없고 캡처본(JPG)만 있습니다. 작업이 가능한가요?</span> <i class="fa-solid fa-chevron-down"></i></div>
+      <div class="faq-a"><div class="faq-a-inner"><br>이 경우는 [Track B. 브랜드 자산 구축] 팀으로 문의주셔야 합니다. 캡처본(JPG)이나 저해상도 이미지는 대형 실사 출력, 현수막, 아크릴 간판 제작 시 깨질 수 있습니다. JPHIC에서 벡터(AI·EPS·SVG) 형식으로 로고를 재드로잉·변환해 드립니다. 한 번 세팅해두면 이후 포스터, 명찰, 사원증, 판촉물 제작에도 그대로 사용 가능한 브랜드 자산이 됩니다.</div></div>
     </div>
+
     <div class="faq-item">
       <div class="faq-q"><span>Q. 이미 사내 디자이너가 만든 파일이 있는데, 왜 JPHIC가 별도로 필요한가요?</span> <i class="fa-solid fa-chevron-down"></i></div>
-      <div class="faq-a"><div class="faq-a-inner"><br>모니터 속 가상의 디자인과 현실의 출력물은 다릅니다. 아무리 예쁜 디자인이라도 해상도 부족, 폰트 유실, 칼선 누락이 있으면 인쇄소가 거절합니다. 저희는 이 디자인 파일들이 대형 전시나 매장 사이니지에 맞게 기계적 오차 없이 구동되도록 구조를 '최적화'합니다.</div></div>
+      <div class="faq-a"><div class="faq-a-inner"><br>모니터 속 디자인과 실제 출력물은 다른 법칙이 적용됩니다. AI 생성 이미지나 화면용 파일은 72dpi 기준이라 대형 실사 출력·현수막·배너 제작 시 해상도가 무너집니다. 폰트 유실, 칼선 누락, CMYK 색상값 오류가 있으면 인쇄소가 파일을 거절합니다. 저희는 전시 부스, 팝업스토어, 매장 사이니지, 특수 인쇄물 등 발주 현장에 맞게 파일 구조를 최적화합니다.</div></div>
     </div>
+
     <div class="faq-item">
-      <div class="faq-q"><span>Q. 출력소에서 자꾸 요구하는 '칼선'과 '재단선'이 도대체 뭔가요?</span> <i class="fa-solid fa-chevron-down"></i></div>
-      <div class="faq-a"><div class="faq-a-inner"><br>디자인이 인쇄된 후 올바른 모양으로 잘려나가기 위해 기계에 입력하는 절취선 데이터입니다. 칼선이 없으면 팝업스토어 입체 스카시나 스티커를 자를 수 없고, 재단선(안전 여백)이 없으면 인쇄물이 잘릴 때 보기 싫은 흰 여백이 노출됩니다. JPHIC는 기계가 인식할 수 있는 완벽한 수학적 선 데이터를 설계하여 파일에 포함시킵니다.</div></div>
+      <div class="faq-q"><span>Q. 출력소에서 요구하는 '칼선'과 '재단선'이 뭔가요?</span> <i class="fa-solid fa-chevron-down"></i></div>
+      <div class="faq-a"><div class="faq-a-inner"><br>인쇄 후 올바른 형태로 잘려나가기 위해 기계에 입력하는 절취선 데이터입니다. 칼선이 없으면 팝업스토어 입체 스카시, 스티커, 아크릴 재단, 원단 컷팅이 불가능합니다. 재단선(블리드 여백)이 없으면 현수막·배너·포스터 가장자리에 흰 여백이 노출됩니다. JPHIC는 CNC 커팅기·플로터가 인식할 수 있는 수학적 칼선 데이터를 설계해 파일에 포함시킵니다.</div></div>
     </div>
+
     <div class="faq-item">
       <div class="faq-q"><span>Q. 당장 내일이 전시 시공인데 파일이 반려되었습니다. 오늘 중으로 해결될까요?</span> <i class="fa-solid fa-chevron-down"></i></div>
-      <div class="faq-a"><div class="faq-a-inner"><br>네, 가능합니다. [긴급 부스터] 전담팀을 통해 당일 시안 최우선 처리 및 발주처 직접 소통을 대행해 드립니다. 물리적 시공 기한이 촉박한 경우, 오류 수정과 인쇄소 호환 세팅을 즉각적으로 진행해 현장 사고를 막습니다. 반드시 전용 오픈챗으로 일정 가능 여부를 먼저 문의해 주세요.</div></div>
+      <div class="faq-a"><div class="faq-a-inner"><br>네, 가능합니다. [긴급 부스터] 전담팀을 통해 당일 파일 수정·인쇄소 호환 세팅을 최우선으로 처리합니다. 코엑스·킨텍스 등 현장 시공 기한이 촉박한 전시 부스, 팝업스토어, 행사 배너 긴급 작업 경험이 다수 있습니다. 반드시 전용 오픈챗으로 일정 가능 여부를 먼저 확인해 주세요.</div></div>
     </div>
+
     <div class="faq-item">
-      <div class="faq-q"><span>Q. 파일이나 쓸만한 로고 원본이 아무것도 없어요. 어떡하죠?</span> <i class="fa-solid fa-chevron-down"></i></div>
-      <div class="faq-a"><div class="faq-a-inner"><br>괜찮습니다. 기초 세팅부터 함께하는 [Track B. 브랜드 자산 구축] 전담팀으로 오시면 됩니다. 로고 변환부터 이미지 소싱, 사양 확인, 톤앤매너 정리까지 모두 세팅해 드립니다. 한 번 제대로 만들어둔 자산은 다음 행사 준비를 훨씬 수월하게 만듭니다.</div></div>
+      <div class="faq-q"><span>Q. ID카드·사원증·명찰·명패도 대량으로 작업 가능한가요?</span> <i class="fa-solid fa-chevron-down"></i></div>
+      <div class="faq-a"><div class="faq-a-inner"><br>네, 가능합니다. 사원증, 학생증, 행사 명찰, 명패, 출입증, 카드키, 주차증, 입주민 카드 등 대량 ID 인쇄물 발주 파일 제작을 합니다. 데이터 병합(Data Merge) 방식으로 수백 장 이상도 처리 가능하며, 카드 인쇄 업체에 바로 넘길 수 있는 발주 파일로 납품합니다.</div></div>
     </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span>Q. 종이 말고 원단·아크릴·나무·스티커·시트지에 출력하는 파일도 되나요?</span> <i class="fa-solid fa-chevron-down"></i></div>
+      <div class="faq-a"><div class="faq-a-inner"><br>네, 됩니다. 종이 인쇄 외에도 원단 출력(현수막·패브릭), 아크릴 인쇄·재단, 나무·동판 레이저 각인, 실리콘·고무 인쇄, 바닥 플로어그래픽, 유리문 시트지, UV 특수 인쇄 등 소재별 발주 파일 작업이 가능합니다. 소재마다 해상도 기준과 색상 세팅 방식이 다르므로, 발주처와 소재를 알려주시면 그에 맞게 파일을 세팅합니다.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span>Q. 파일이나 쓸 만한 원본 자료가 아무것도 없어요. 어떡하죠?</span> <i class="fa-solid fa-chevron-down"></i></div>
+      <div class="faq-a"><div class="faq-a-inner"><br>괜찮습니다. [Track B. 브랜드 자산 구축] 팀으로 오시면 됩니다. 로고 벡터 변환, 유료 이미지 소싱, 레퍼런스 정리, 색상·폰트 세팅까지 처음부터 함께합니다. 전시 부스, 팝업스토어, 매장 사이니지, 행사 인쇄물 — 한 번 제대로 세팅해둔 자산은 이후 모든 발주 작업이 훨씬 빨라지고 브랜드 자산이 늘어납니다.</div></div>
+    </div>
+
   </div>
 </section>
+
+
+
+
 
 <!-- FOOTER -->
 <footer>
@@ -774,6 +883,98 @@ if(gt) {
   autoScroll();
 }
 
+// 서비스 선택(트랙) 가로 슬라이드 조작 로직 (화살표 버튼 이벤트)
+const trackGrid = document.getElementById('trackGrid');
+const trackPrevBtn = document.getElementById('trackPrevBtn');
+const trackNextBtn = document.getElementById('trackNextBtn');
+let tgDir = 1;
+let tgIsDown = false;
+let autoScrollTimer;
+
+if(trackGrid) {
+  // 사용자가 수동으로 스크롤(터치/버튼 클릭)할 경우 자동 스크롤 일시 정지
+  function pauseAutoScroll() {
+    tgIsDown = true;
+    clearTimeout(autoScrollTimer);
+    autoScrollTimer = setTimeout(() => { tgIsDown = false; }, 3000); // 3초 뒤 자동 스크롤 재개
+  }
+
+  trackGrid.addEventListener('touchstart', pauseAutoScroll);
+  trackGrid.addEventListener('mousedown', pauseAutoScroll);
+
+  // 화살표 버튼 클릭 시 스크롤 이동
+  if(trackPrevBtn) {
+    trackPrevBtn.addEventListener('click', () => {
+      pauseAutoScroll();
+      trackGrid.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+  }
+  if(trackNextBtn) {
+    trackNextBtn.addEventListener('click', () => {
+      pauseAutoScroll();
+      trackGrid.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+  }
+
+  // 핑퐁 자동 스크롤 함수
+  function autoScrollTrack() {
+    if (!tgIsDown && window.innerWidth <= 900) {
+      trackGrid.scrollLeft += tgDir * 0.8;
+      // 끝에 도달하면 방향 전환
+      if (trackGrid.scrollLeft >= trackGrid.scrollWidth - trackGrid.clientWidth - 1) {
+        tgDir = -1;
+      } else if (trackGrid.scrollLeft <= 0) {
+        tgDir = 1;
+      }
+    }
+    requestAnimationFrame(autoScrollTrack);
+  }
+  autoScrollTrack();
+}
+
+// 서브 링크 클릭 시 특정 카드로 스크롤 및 하이라이트 함수
+function scrollToTrackCard(event, index) {
+  event.preventDefault();
+  
+  // 자동 스크롤 일시 정지 (모바일 가로 스크롤 방해 방지)
+  tgIsDown = true;
+  clearTimeout(autoScrollTimer);
+  autoScrollTimer = setTimeout(() => { tgIsDown = false; }, 3000);
+
+  const trackSec = document.getElementById('tracks');
+  const headerOffset = 110; 
+  const elementPosition = trackSec.getBoundingClientRect().top;
+  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  
+  window.scrollTo({
+    top: offsetPosition,
+    behavior: "smooth"
+  });
+
+  const trackGrid = document.getElementById('trackGrid');
+  if(!trackGrid) return;
+  const cards = trackGrid.querySelectorAll('.track-card');
+  const targetCard = cards[index];
+  if(!targetCard) return;
+
+  setTimeout(() => {
+    // 모바일 가로 스크롤 대상 카드로 자동 이동
+    if (window.innerWidth <= 900) {
+      const scrollPos = targetCard.offsetLeft - trackGrid.offsetLeft - 16;
+      trackGrid.scrollTo({ left: scrollPos, behavior: 'smooth' });
+    }
+
+    // 카드가 반짝이는 하이라이트 효과 적용
+    cards.forEach(c => c.classList.remove('active-highlight'));
+    targetCard.classList.add('active-highlight');
+    
+    // 2.5초 후 하이라이트 클래스 해제
+    setTimeout(() => {
+      targetCard.classList.remove('active-highlight');
+    }, 4000);
+  }, 400); // 부드러운 세로 스크롤 이동 완료를 기다린 후 실행
+}
+
 // FAQ 아코디언
 document.querySelectorAll('.faq-q').forEach(q => {
   q.addEventListener('click', () => {
@@ -784,7 +985,7 @@ document.querySelectorAll('.faq-q').forEach(q => {
   });
 });
 
-// 모달 로직 & 담당팀 오픈챗 동적 할당
+// 모달 로직 & 담당팀 오픈챗 동적 할당 (원본 기능 유지)
 const modal = document.getElementById('orderModal');
 const title = document.getElementById('modal-title');
 const desc = document.getElementById('modal-desc');
@@ -813,7 +1014,7 @@ function nextStep(step) {
       return;
     }
     title.innerText = "상세 내용 입력";
-    desc.innerText = ""; // 소제목 삭제
+    desc.innerText = ""; 
   }
   document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
   document.getElementById('step' + step).classList.add('active');
@@ -825,7 +1026,7 @@ function addRow(btn) {
   const newRow = document.createElement('div');
   newRow.className = 'item-row';
   newRow.innerHTML = `
-    <input type="text" class="f-input item-name" placeholder="요청명 (예: 엑스배너)">
+    <input type="text" class="f-input item-name" placeholder="요청명 (예: 코엑스 부스 백월)">
     <div class="size-group">
       <input type="number" class="f-input item-w" placeholder="가로">
       <span class="size-unit">×</span>
@@ -882,11 +1083,11 @@ ${dataStatus}`;
 
   document.getElementById('copyTextResult').innerText = result;
   
-  // 모달 안의 오픈챗 열기 버튼의 링크(URL)를 선택한 상황에 맞게 동적 업데이트
+  // 모달 안의 오픈챗 열기 버튼의 링크(URL)를 동적 업데이트
   document.getElementById('modalOpenChatBtn').href = chatUrl;
   
   title.innerText = "복사 후 오픈챗으로 이동";
-  desc.innerText = ""; // 소제목 삭제
+  desc.innerText = "";
   document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
   document.getElementById('step3').classList.add('active');
 }
@@ -906,6 +1107,40 @@ function copyToClipboard() {
   }
   document.body.removeChild(textArea);
 }
+
+// 모바일 햄버거 메뉴 토글 로직
+function toggleMobileMenu() {
+  const navLinks = document.getElementById('navLinks');
+  const icon = document.querySelector('#hamburgerBtn i');
+  navLinks.classList.toggle('active');
+  if(navLinks.classList.contains('active')) {
+    icon.classList.remove('fa-bars');
+    icon.classList.add('fa-xmark');
+  } else {
+    icon.classList.remove('fa-xmark');
+    icon.classList.add('fa-bars');
+  }
+}
+
+// 모바일 메뉴 링크 클릭 시 사이드바 닫기
+function closeMobileMenu() {
+  const navLinks = document.getElementById('navLinks');
+  const icon = document.querySelector('#hamburgerBtn i');
+  if(navLinks.classList.contains('active')) {
+    navLinks.classList.remove('active');
+    icon.classList.remove('fa-xmark');
+    icon.classList.add('fa-bars');
+  }
+}
+
+// 모바일 메뉴 외부 영역 클릭 시 메뉴 닫히도록 예외처리
+document.addEventListener('click', function(e) {
+  const navLinks = document.getElementById('navLinks');
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+    closeMobileMenu();
+  }
+});
 </script>
 </body>
 </html>
