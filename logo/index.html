@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!-- SEO Meta -->
+<title>제이픽 JPHIC LOGO | AI 로고를 진짜 쓸 수 있는 벡터 파일로</title>
+<meta name="description" content="AI로 만든 예쁜 로고, 인쇄하려니 다 깨지시나요? 간판집에서 AI 파일을 달라고 하나요? 무한 확대 벡터화, 대형 전시월 분할, 스카시 칼선 세팅으로 진짜 자산을 만들어 드립니다.">
+<meta name="keywords" content="로고 벡터화, AI 로고 인쇄, 로고 배경제거, 누끼따기, 고해상도 로고 복원, 간판 AI 파일, 로고 일러스트 변환, 일러스트레이터, JPHIC, 제이픽">
+<meta name="robots" content="index, follow">
+
+<!-- Favicon & OG Image -->
+<link rel="icon" type="image/png" href="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/29200347-c087-4ffd-a5e5-c9f9fcf62a91_rw_600.png?h=ecbb5159ae457c253c2a9088c46271e1">
+<meta property="og:image" content="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/1c469739-7b2c-4fe6-9fc5-1fea2beb350b_rw_1200.jpg?h=9c3ec3c802bd311919b98da867096a6f">
+<meta property="og:title" content="제이픽 JPHIC LOGO | 화면에서만 예쁜 로고, 진짜 자산으로 바꾸다">
+
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* JPHIC LOGO Theme Variables (Professional Blue/Indigo Harmony) */
+:root {
+  --mc: #3b82f6; /* Blue */
+  --mc-hover: #2563eb; 
+  --mc-light: rgba(59, 130, 246, 0.15);
+  --grad-main: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%); 
+  --canva-grad: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); 
+  
+  --bg: #090a0c; 
+  --bg-alt: #161a22; /* 숨 쉴 틈: 섹션 교차용 배경색 (명도 차등 조절) */
+  --card: #121318; 
+  --card-hover: #1a1c23;
+  --panel: rgba(18, 19, 24, 0.8); 
+  
+  --text-main: #F8FAFC;
+  --text-sub: #94A3B8;
+  --text-dim: #64748B;
+  
+  --border: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(59, 130, 246, 0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100vw; overflow-x: hidden; scroll-behavior: smooth; background: var(--bg); }
+body { font-family: 'Pretendard', sans-serif; color: var(--text-main); line-height: 1.6; word-break: keep-all;}
+
+/* Background Grid Pattern */
+.grid-bg { position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; opacity: 0.3; pointer-events: none;}
+
+/* Marquee Banner */
+.jphic-marquee-wrapper { background-color: var(--card); width: 100%; overflow: hidden; position: fixed; top: 70px; z-index: 9999; height: 44px; display: flex; align-items: center; border-bottom: 1px solid var(--border);}
+.jphic-marquee-container { width: 100%; max-width: 1400px; margin: 0 auto; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+.marquee-content { display: flex; white-space: nowrap; animation: jphic-marquee 40s linear infinite; width: max-content; }
+.marquee-group { display: flex; align-items: center; }
+.m-text { color: var(--text-sub); font-size: 14px; font-weight: 500; margin-right: 15px; flex-shrink: 0; }
+.m-link { color: var(--mc); font-size: 12px; font-weight: 600; text-decoration: underline; margin-right: 80px; cursor: pointer; flex-shrink: 0; }
+@keyframes jphic-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* NAV */
+.nav { position: fixed; top: 0; width: 100%; z-index: 10000; height: 70px; background-color: rgba(9, 10, 12, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; border-bottom: 1px solid var(--border); }
+.logo { font-size: 1.1rem; font-weight: 900; color: #fff; text-decoration: none; }
+.logo span { color: var(--mc); }
+.nav-links { display: flex; gap: 40px; position: absolute; left: 50%; transform: translateX(-50%); }
+.nav-links a { color: var(--text-sub); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: .2s; }
+.nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+.nav-cta { background: var(--text-main); color: var(--bg); padding: 10px 24px; border-radius: 50px; font-weight: 800; font-size: 14px; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; font-family: inherit;}
+.nav-cta:hover { background: var(--mc); color: #fff; box-shadow: 0 4px 15px var(--border-glow);}
+
+/* Hamburger */
+.hamburger { display: none; background: transparent; border: none; color: #fff; font-size: 1.6rem; cursor: pointer; transition: 0.3s; }
+@media (max-width: 1050px) { 
+  .hamburger { display: block; }
+  .nav-links { display: flex; flex-direction: column; position: absolute; top: 70px; left: 0; transform: none; width: 100%; background: var(--card); border-bottom: 1px solid var(--border); padding: 0; gap: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; align-items: center; z-index: 9990;}
+  .nav-links.active { max-height: 500px; padding-bottom: 10px; }
+  .nav-links a { font-size: 1.05rem; width: 100%; text-align: center; padding: 16px 0; border-bottom: 1px solid var(--border); margin: 0; color: #fff;}
+}
+
+/* Sections Base (상단 여백 축소로 타이틀 위치 개선, 하단 여백은 넓게 유지) */
+section[id] { scroll-margin-top: 70px; }
+.sec { padding: 90px 5% 150px; position: relative; border-top: none;}
+.sec-hd { text-align: center; margin-bottom: 60px; }
+.sec-hd .label { display: inline-block; font-size: 0.85rem; font-weight: 900; letter-spacing: 0.1em; color: var(--mc); margin-bottom: 16px; padding: 6px 16px; background: var(--mc-light); border-radius: 50px; border: 1px solid var(--border-glow);}
+.sec-hd h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; letter-spacing: -0.04em; color: var(--text-main); line-height: 1.35; margin-bottom: 16px; }
+.sec-hd p { font-size: clamp(1rem, 2vw, 1.1rem); color: var(--text-sub); line-height: 1.7; font-weight: 500;}
+
+/* Alternate Background Colors */
+.bg-alt { background: var(--bg-alt); }
+.bg-base { background: var(--bg); }
+
+/* Scroll Animation */
+.rv { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.rv.on { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; }
+
+/* 1. HERO SECTION */
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 160px 5% 60px; position: relative; overflow: hidden; background: var(--bg); }
+.hero::before { content: ''; position: absolute; top: 10%; left: 30%; width: 400px; height: 400px; background: var(--mc); border-radius: 80%; filter: blur(80px); z-index: 0; opacity: 0.15; pointer-events: none; animation: auraRandomPulse1 4s ease-in-out infinite alternate; }
+.hero::after { content: ''; position: absolute; bottom: 10%; right: 90%; width: 400px; height: 400px; background: #60a5fa; border-radius: 50%; filter: blur(120px); z-index: 0; opacity: 0.1; pointer-events: none; animation: auraRandomPulse2 5s ease-in-out infinite alternate; }
+
+@keyframes auraRandomPulse1 { 0% { transform: scale(1); opacity: 0.15; } 100% { transform: scale(1.3); opacity: 0.08; } }
+@keyframes auraRandomPulse2 { 0% { transform: scale(1); opacity: 0.1; } 100% { transform: scale(1.5); opacity: 0.18; } }
+
+.hero-inner { position: relative; z-index: 3; max-width: 900px; width: 100%; display: flex; flex-direction: column; align-items: center;}
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--panel); border: 1px solid var(--border); padding: 8px 20px; border-radius: 50px; font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 24px; }
+.hero h1 { font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.25; letter-spacing: -0.03em; margin-bottom: 24px; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.4);}
+.hero h1 .hl { background: var(--canva-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-sub { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--text-sub); margin-bottom: 40px; line-height: 1.7; font-weight: 500; }
+
+.btn-primary { padding: 20px 44px; border-radius: 50px; background: var(--grad-main); color: #fff; font-size: clamp(1.1rem, 2vw, 1.25rem); font-weight: 900; text-decoration: none; transition: .3s; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px var(--border-glow); border: none; cursor: pointer; margin-bottom: 20px;}
+.btn-primary:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5); }
+
+/* Hero Chat Bubbles */
+.hero-chat-area { width: 100%; max-width: 780px; height: 170px; margin: 0 auto 30px; position: relative; pointer-events: none; overflow: hidden; mask-image: linear-gradient(to bottom, transparent, black 10%, black 55%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);}
+.bubble-seq { position: absolute; left: 50%; transform: translateX(-50%); background: var(--card); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); padding: 16px 28px; border-radius: 50px; font-size: 1.05rem; font-weight: 600; box-shadow: 0 15px 40px rgba(0,0,0,0.4); opacity: 0; white-space: nowrap; animation: floatBubble 24s infinite; }
+@media (max-width: 768px) { .bubble-seq { font-size: 0.85rem; white-space: normal; text-align: center; width: 90%; border-radius: 20px; padding: 14px 20px;} }
+
+@keyframes floatBubble { 0% { opacity: 0; bottom: -30px; transform: translateX(-50%) scale(0.8); } 5% { opacity: 1; bottom: 30px; transform: translateX(-50%) scale(1); } 15% { opacity: 1; bottom: 30px; transform: translateX(-50%) scale(1); } 20% { opacity: 1; bottom: 100px; transform: translateX(-50%) scale(0.68); } 30% { opacity: 1; bottom: 100px; transform: translateX(-50%) scale(0.68); } 40% { opacity: 0; bottom: 240px; transform: translateX(-50%) scale(0.4); } 100% { opacity: 0; bottom: 240px; transform: translateX(-50%) scale(0.9); } }
+.bs-1 { animation-delay: 0s; } .bs-2 { animation-delay: 3s; } .bs-3 { animation-delay: 6s; } .bs-4 { animation-delay: 9s; } .bs-5 { animation-delay: 12s; } .bs-6 { animation-delay: 15s; } .bs-7 { animation-delay: 18s; } .bs-8 { animation-delay: 21s; }
+
+.story-box { background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-left: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 40px; text-align: left; box-shadow: 0 30px 60px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 30px; max-width: 860px; margin: 0 auto; position: relative;}
+.story-box::before { content: 'Client Message'; position: absolute; top: -14px; left: 40px; background: var(--card); border: 1px solid var(--border); color: var(--text-sub); font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; letter-spacing: 1px;}
+@media (max-width: 768px) { .story-box { flex-direction: column; text-align: center; } .story-box::before { left: 50%; transform: translateX(-50%); } }
+.story-icon { font-size: 3.5rem; color: var(--text-dim); }
+.story-text h3 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.4;}
+.story-text p { font-size: 1rem; color: var(--text-sub); line-height: 1.6;}
+.story-text strong { color: var(--mc); }
+
+/* --- CARD HOVER MASTER EFFECTS --- */
+.hover-card-fx { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; z-index: 1; }
+.hover-card-fx:hover { transform: translateY(-12px); border-color: var(--mc); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15); background: var(--card-hover); z-index: 10; }
+
+/* 2. PAIN POINTS */
+.pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto;}
+@media (max-width: 900px) { .pain-grid { grid-template-columns: 1fr; max-width: 600px;} }
+.pain-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: left; }
+.pain-icon { font-size: 2.5rem; color: var(--text-dim); margin-bottom: 20px; transition: 0.3s;}
+.pain-card:hover .pain-icon { color: var(--mc); transform: scale(1.1); }
+.pain-card h3 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 16px; line-height: 1.4;}
+.pain-card p { font-size: 1rem; color: var(--text-sub); line-height: 1.6;}
+
+/* 3. THE PROBLEM (Limitation) */
+.prob-list { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;}
+.prob-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; display: flex; align-items: flex-start; gap: 30px;}
+@media (max-width: 768px) { .prob-card { flex-direction: column; padding: 30px; gap: 20px; } }
+.prob-icon { width: 70px; height: 70px; background: var(--bg); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; border: 1px solid var(--border); flex-shrink: 0; transition: 0.3s;}
+.prob-card:hover .prob-icon { color: var(--mc); border-color: var(--mc-light); background: var(--mc-light);}
+.prob-text { flex-grow: 1; max-width: 600px; text-align: left;}
+.prob-text h4 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.4;}
+.prob-text p { font-size: 1.05rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 0;}
+
+.btn-center-wrap { text-align: center; margin-top: 60px; }
+.btn-large { display: inline-block; padding: 20px 40px; background: var(--mc); color: #fff; font-size: 1.15rem; font-weight: 900; border-radius: 50px; text-decoration: none; transition: 0.3s; box-shadow: 0 10px 25px var(--border-glow); border: none; cursor: pointer;}
+.btn-large:hover { background: var(--mc-hover); transform: translateY(-3px); box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);}
+
+/* 4. SERVICES VISUAL */
+.svc-wrap { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;}
+.svc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: stretch; background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; transition: 0.3s;}
+.svc-row:nth-child(even) .svc-text { order: 2; }
+.svc-row:nth-child(even) .svc-visual { order: 1; }
+.svc-text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start;}
+.svc-num { font-size: 3rem; font-weight: 900; color: var(--border); line-height: 1; font-family: monospace; margin-bottom: 16px; transition: 0.3s;}
+.svc-row:hover .svc-num { color: var(--mc); opacity: 0.5;}
+.svc-text h3 { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 16px;}
+.svc-text p { font-size: 1.05rem; color: var(--text-sub); line-height: 1.7;}
+.svc-tag { display: inline-block; padding: 6px 14px; background: var(--mc-light); color: var(--mc); border-radius: 50px; font-size: 0.85rem; font-weight: 700; margin-top: 20px; border: 1px solid var(--border-glow);}
+
+.svc-visual { background: #0c0d12; border: 1px solid var(--border); border-radius: 16px; height: 100%; min-height: 280px; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; box-shadow: inset 0 0 40px rgba(0,0,0,0.5); transition: 0.3s;}
+.svc-row:hover .svc-visual { border-color: var(--mc-light); }
+
+/* 시각화 모형 커스텀 (LOGO 전용) */
+.mock-nodes { width: 120px; height: 120px; border: 3px solid var(--text-sub); border-radius: 30px; position: relative; }
+.m-node { width: 12px; height: 12px; background: #fff; border: 2px solid var(--mc); border-radius: 50%; position: absolute; transition: 0.3s;}
+.m-node:nth-child(1) { top: -6px; left: 50%; transform: translateX(-50%); }
+.m-node:nth-child(2) { bottom: -6px; left: 50%; transform: translateX(-50%); }
+.m-node:nth-child(3) { left: -6px; top: 50%; transform: translateY(-50%); }
+.m-node:nth-child(4) { right: -6px; top: 50%; transform: translateY(-50%); }
+.svc-row:hover .mock-nodes { border-color: var(--mc); box-shadow: inset 0 0 20px rgba(59,130,246,0.3); }
+
+.mock-bg-remove { width: 150px; height: 150px; background: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+.mock-bg-remove i { font-size: 5rem; color: #000; z-index: 2; position: relative; }
+.mock-bg-remove::after { content: ''; position: absolute; inset: 0; background: repeating-conic-gradient(#333 0% 25%, transparent 0% 50%) 50% / 20px 20px; opacity: 0; transition: 0.5s; z-index: 1;}
+.svc-row:hover .mock-bg-remove::after { opacity: 1; }
+.svc-row:hover .mock-bg-remove i { color: var(--mc); filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));}
+
+/* 대형분할 및 칼선 세팅 CSS 애니메이션 */
+.mock-grid-split { display: flex; gap: 2px; width: 160px; height: 110px; position: relative; transition: 0.5s; align-items: center; justify-content: center;}
+.m-box { width: 50px; height: 110px; background: rgba(59, 130, 246, 0.1); border: 2px dashed var(--text-dim); transition: 0.5s;}
+.m-scissor { position: absolute; top: -20px; left: 0; color: #fff; font-size: 1.5rem; opacity: 0; transition: 0.5s; text-shadow: 0 0 10px rgba(0,0,0,0.8);}
+.svc-row:hover .mock-grid-split { gap: 12px; }
+.svc-row:hover .m-box { border: 2px solid var(--mc); background: rgba(59, 130, 246, 0.3); box-shadow: 0 0 15px var(--border-glow); }
+.svc-row:hover .m-scissor { opacity: 1; animation: scissorCut 2s infinite linear; }
+@keyframes scissorCut { 0% { left: -10px; top: -20px; } 50% { left: 150px; top: -20px; } 100% { left: -10px; top: -20px; } }
+
+@media (max-width: 900px) {
+  .svc-row { grid-template-columns: 1fr; gap: 30px; text-align: center; padding: 30px; }
+  .svc-text { align-items: center; }
+  .svc-row:nth-child(even) .svc-text { order: 1; }
+  .svc-row:nth-child(even) .svc-visual { order: 2; height: auto; min-height: 250px; }
+}
+
+/* 5. HOW TO (Process) */
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; }
+@media (max-width: 900px) { .svc-grid { grid-template-columns: 1fr; max-width: 600px; } }
+.svc-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: left; }
+.svc-card .svc-num { font-size: 4rem; font-weight: 900; color: rgba(255,255,255,0.03); line-height: 1; position: absolute; top: 30px; right: 30px; transition: 0.4s; margin-bottom: 0;}
+.svc-card:hover .svc-num { color: var(--mc-light); }
+.svc-card h3 { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 16px; margin-top: 20px; }
+.svc-card p { font-size: 1.05rem; color: var(--text-sub); line-height: 1.7; margin-bottom: 24px; }
+
+/* 6. COMPARISON (Pixel vs Vector) */
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 900px; margin: 0 auto; }
+@media (max-width: 768px) { .compare-grid { grid-template-columns: 1fr; } }
+.comp-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: center; }
+.comp-visual { height: 150px; display: flex; justify-content: center; align-items: center; font-size: 5rem; font-weight: 900; margin-bottom: 20px; }
+.comp-pixel { color: #fff; text-shadow: 2px 2px 0px #f00, -2px -2px 0px #0ff; filter: blur(1.5px); }
+.comp-vector { color: var(--mc); filter: drop-shadow(0 10px 20px var(--border-glow)); }
+.comp-card h3 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 12px;}
+.comp-card p { font-size: 1rem; color: var(--text-sub); line-height: 1.6; }
+
+/* 8. HOW TO USE (워크플로우 디자인 보완) */
+.how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; position: relative;}
+@media (max-width: 900px) { .how-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .how-grid { grid-template-columns: 1fr; } }
+.step-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: left; position: relative; z-index: 2; transition: 0.3s;}
+.step-card:hover { border-color: var(--mc); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15); background: var(--card-hover);}
+.step-num { font-size: 3.5rem; font-weight: 900; color: rgba(255,255,255,0.05); position: absolute; top: 20px; right: 24px; line-height: 1; transition: 0.3s;}
+.step-card:hover .step-num { color: rgba(59, 130, 246, 0.15); }
+.step-card h4 { font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 12px; position: relative; z-index: 2;}
+.step-card p { font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; word-break: keep-all; margin: 0; position: relative; z-index: 2;}
+.step-card.final { border-color: var(--mc); background: rgba(59, 130, 246, 0.05); }
+.step-card.final .step-num { color: var(--mc); opacity: 0.2;}
+
+/* 9. REVIEWS */
+.review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;}
+@media (max-width: 900px) { .review-grid { grid-template-columns: 1fr; } }
+.review-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px 30px; display: flex; flex-direction: column; gap: 16px; text-align: left;}
+.stars { color: var(--mc); font-size: 1rem; letter-spacing: 2px; }
+.r-quote { font-size: 1rem; color: var(--text-main); line-height: 1.6; font-weight: 500; flex-grow: 1; word-break: keep-all; }
+.r-client { font-size: 0.85rem; color: var(--text-sub); border-top: 1px solid var(--border); padding-top: 16px; }
+.r-client strong { color: var(--mc); display: block; margin-bottom: 4px; font-size: 0.9rem;}
+
+/* 10. PRICING */
+.price-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 900px; margin: 0 auto;}
+@media (max-width: 768px) { .price-grid-2 { grid-template-columns: 1fr; } }
+.price-card-2 { background: var(--card); border: 2px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: left; display: flex; flex-direction: column; }
+.price-card-2.featured { border-color: var(--mc); background: rgba(59, 130, 246, 0.05); transform: none; }
+.price-card-2 .p-title { font-size: 1.6rem; font-weight: 900; color: #fff; margin-bottom: 16px; text-align: center;}
+.price-card-2 .p-desc { font-size: 1.05rem; color: var(--text-sub); margin-bottom: 30px; line-height: 1.6; word-break: keep-all; text-align: center;}
+
+/* 리스트 속성 (미포함 텍스트, 중앙선 삭제 / Dim 처리만 유지 / flex-grow로 하단 버튼 위치 통일) */
+.p-list { list-style: none !important; padding-left: 0 !important; margin-bottom: 30px; text-align: left; flex-grow: 1; }
+.p-list li { list-style-type: none !important; font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; color: #94A3B8; }
+.p-list li i { font-size: 0.85rem; margin-top: 4px; flex-shrink: 0; color: var(--mc); }
+.p-list li.dim { color: rgba(255,255,255,0.4); }
+.p-list li.dim i { color: rgba(255,255,255,0.3); }
+
+.price-card-2 .p-btn { display: inline-block; width: 100%; padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; font-weight: 800; font-size: 1.05rem; text-decoration: none; transition: 0.3s; cursor: pointer; font-family: inherit; text-align: center;}
+.price-card-2.featured .p-btn { background: var(--grad-main); border-color: transparent; color: #fff; box-shadow: 0 10px 20px var(--border-glow);}
+.price-card-2 .p-btn:hover { background: var(--mc-hover); color: #fff; border-color: var(--mc-hover);}
+
+/* 11. FINAL CTA & UNIVERSE */
+.final-cta { text-align: center; padding: 150px 5% 120px; position: relative; overflow: hidden; background: linear-gradient(70deg, #0f172a, #3b82f6, #0f172a, #1e3a8a, #0f172a); background-size: 400% 400%; animation: auroraContinuous 15s ease-in-out infinite; border-bottom: 1px solid rgba(255,255,255,0.1);}
+@keyframes auroraContinuous { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.final-cta h2 { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 24px; line-height: 1.3; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.5);}
+.final-cta p { color: rgba(255,255,255,0.9); font-size: 1.1rem; }
+
+.uni-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1200px; margin: 60px auto 0; position: relative; z-index: 2;}
+@media (max-width: 900px) { .uni-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+@media (max-width: 600px) { .uni-grid { grid-template-columns: 1fr; } }
+.uni-card { background: rgba(17,17,17,0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 30px 20px; text-decoration: none; transition: 0.3s; display: block; position: relative; text-align: left;}
+.uni-card:hover { border-color: rgba(255,255,255,0.4); background: rgba(0,0,0,0.4); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3);}
+/* 현재 페이지(LOGO) 하이라이트 */
+.uni-card.current { border-color: var(--mc); background: rgba(59, 130, 246, 0.2); box-shadow: 0 0 30px rgba(59, 130, 246, 0.2); }
+.uni-card.current::before { content: '현재 단계'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--mc); color: #fff; font-size: 0.75rem; font-weight: 900; padding: 4px 12px; border-radius: 20px; }
+.uni-step { font-size: 0.75rem; color: rgba(255,255,255,0.6); font-weight: 800; letter-spacing: 1px; display: block; margin-bottom: 8px;}
+.uni-title { font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 8px;}
+.uni-title span { color: rgba(255,255,255,0.5); transition: 0.3s; }
+.uni-card.c-core:hover .uni-title span { color: #00BBAC; } 
+.uni-card.c-logo .uni-title span { color: #3b82f6; } /* LOGO active color */
+.uni-card.c-pdf:hover .uni-title span { color: #da8266; } 
+.uni-card.c-agency:hover .uni-title span { color: #cbd5e1; } 
+.uni-desc { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.5;}
+
+/* Modal Form */
+.modal-overlay { position: fixed; inset: 0; background: rgba(10, 12, 15, 0.85); z-index: 100000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.3s; backdrop-filter: blur(8px); padding: 20px;}
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal-box { background: var(--bg); width: 100%; max-width: 600px; border-radius: 20px; border: 1px solid var(--border); overflow: hidden; max-height: 90vh; display: flex; flex-direction: column; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.6);}
+.modal-close { position: absolute; top: 14px; right: 20px; font-size: 1.8rem; color: var(--text-sub); cursor: pointer; z-index: 10; line-height: 1; transition: 0.2s;}
+.modal-close:hover { color: #fff; }
+.modal-body { padding: 30px; overflow-y: auto; flex: 1; }
+.modal-header { text-align: center; margin-bottom: 30px; }
+.modal-header h2 { font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.modal-header p { font-size: 0.95rem; color: var(--text-sub); }
+
+.f-group { margin-bottom: 24px; }
+.f-label { display: block; font-family: 'Pretendard', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+.f-input, .f-textarea { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 12px; font-family: 'Pretendard', sans-serif; font-size: 1rem; background: rgba(0,0,0,0.2); color: #fff; transition: 0.2s;}
+.f-input:focus, .f-textarea:focus { outline: none; border-color: var(--mc); background: rgba(59, 130, 246, 0.05); }
+
+.f-options { display: flex; flex-direction: column; gap: 10px; }
+.option-card { display: flex; flex-direction: column; padding: 16px; border: 1px solid var(--border); border-radius: 12px; cursor: pointer; background: var(--card); transition: 0.2s; }
+.option-card:hover { border-color: #555; }
+.option-card strong { font-family: 'Pretendard', sans-serif; font-size: 1rem; color: #fff; margin-bottom: 4px; font-weight: 800;}
+.option-card span { font-family: 'Pretendard', sans-serif; font-size: 0.9rem; color: var(--text-sub); line-height: 1.4;}
+.f-radio { display: none; }
+.f-radio:checked + .option-card { border-color: var(--mc); background: var(--mc-light); }
+
+.check-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.check-btn { font-family: 'Pretendard', sans-serif; display: inline-block; padding: 8px 16px; border: 1px solid var(--border); border-radius: 50px; cursor: pointer; font-size: 0.95rem; color: var(--text-sub); transition: 0.2s; background: rgba(0,0,0,0.2);}
+.f-check { display: none; }
+.f-check:checked + .check-btn { background: var(--mc); color: #fff; border-color: var(--mc); }
+
+.btn-submit-modal { display: block; width: 100%; padding: 18px; border-radius: 12px; background: var(--mc); color: #fff; font-size: 1.1rem; font-family: 'Pretendard', sans-serif; font-weight: 900; border: none; cursor: pointer; transition: 0.3s; text-align: center;}
+.btn-submit-modal:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-submit-modal:not(:disabled):hover { opacity: 0.9; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
+
+.copy-box { background: rgba(0,0,0,0.5); color: #e2e8f0; padding: 20px; border-radius: 12px; font-family: 'Pretendard', sans-serif; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; margin-bottom: 20px; border: 1px solid var(--border); height: 180px; overflow-y: auto;}
+
+.form-step { display: none; animation: fadeIn 0.4s ease; }
+.form-step.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Footer */
+footer { background: #000; color: var(--text-dim); padding: 60px 5%; font-size: 0.85rem; text-align: center;}
+.f-logo { font-size: 1.2rem; font-weight: 900; color: #fff; display: block; margin-bottom: 16px; }
+.f-logo span { color: var(--mc); }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<!-- Marquee -->
+<div class="jphic-marquee-wrapper">
+  <div class="jphic-marquee-container">
+    <div class="marquee-content" onmouseover="this.style.animationPlayState='paused'" onmouseout="this.style.animationPlayState='running'">
+      <div class="marquee-group">
+        <span class="m-text">"로고 파일에 하얀 배경이 같이 뽑혀서 쓸 수가 없대요."</span>
+        <span class="m-link" onclick="openModal()">배경 투명화(누끼) 요청하기 →</span>
+        <span class="m-text">"간판집에서 AI 원본 파일을 달라고 하는데 그게 뭔가요?"</span>
+        <span class="m-link" onclick="openModal()">무한 확대 벡터 파일 만들기 →</span>
+        <span class="m-text">"그림 파일로 크게 뽑았더니 모자이크처럼 다 깨져요."</span>
+        <span class="m-link" onclick="openModal()">고해상도 로고 복원하기 →</span>
+      </div>
+      <div class="marquee-group">
+        <span class="m-text">"로고 파일에 하얀 배경이 같이 뽑혀서 쓸 수가 없대요."</span>
+        <span class="m-link" onclick="openModal()">배경 투명화(누끼) 요청하기 →</span>
+        <span class="m-text">"간판집에서 AI 원본 파일을 달라고 하는데 그게 뭔가요?"</span>
+        <span class="m-link" onclick="openModal()">무한 확대 벡터 파일 만들기 →</span>
+        <span class="m-text">"그림 파일로 크게 뽑았더니 모자이크처럼 다 깨져요."</span>
+        <span class="m-link" onclick="openModal()">고해상도 로고 복원하기 →</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <a href="#" class="logo">JPHIC <span>LOGO</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#pain" onclick="closeMobileMenu()">우리의 고민</a>
+    <a href="#services-visual" onclick="closeMobileMenu()">로고 솔루션</a>
+    <a href="#compare" onclick="closeMobileMenu()">벡터의 차이</a>
+    <a href="#how" onclick="closeMobileMenu()">워크플로우</a>
+    <a href="#reviews" onclick="closeMobileMenu()">리얼 후기</a>
+    <a href="#pricing" onclick="closeMobileMenu()">서비스 플랜</a>
+  </div>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <button onclick="openModal()" class="nav-cta">제이픽, 벡터 파일 만들어줘!</button>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- 1. HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag rv d1" style="margin-top: 40px;"><i class="fa-solid fa-bezier-curve" style="color: #fff;"></i> High-Resolution Vectorization</div>
+    <h1 class="rv d1">예쁜 로고, 인쇄하려니<br><span class="hl">다 깨지고 튕기시나요?</span></h1>
+    <p class="hero-sub rv d2">무한 확대 벡터화, 대형 전시월 분할, 스카시 칼선 세팅.<br>화면에서만 예쁜 이미지를 기계가 읽을 수 있는 <b>진짜 자산으로</b> 바꿔 드립니다.</p>
+
+    <!-- Chat Bubbles -->
+    <div class="hero-chat-area rv d3">
+      <div class="bubble-seq bs-1">간판집에서 AI(일러스트) 원본 파일을 달래요</div>
+      <div class="bubble-seq bs-2">무료 사이트에서 변환했더니 선이 찌그러지고 색이 이상해요</div>
+      <div class="bubble-seq bs-3">로고 뒤에 하얀 네모 배경 좀 투명하게 없애주세요 (누끼)</div>
+      <div class="bubble-seq bs-4">대형 전시월 사이즈에 맞게 원장 패널을 나눠야 한대요</div>
+      <div class="bubble-seq bs-5">자수 업체에서 그림 파일로는 자수를 못 친대요</div>
+      <div class="bubble-seq bs-6">입체 간판을 하려는데 기계가 깎을 외곽선(칼선)이 필요하대요</div>
+      <div class="bubble-seq bs-7">명함 인쇄소에서 해상도가 낮아서 반려당했어요</div>
+      <div class="bubble-seq bs-8">캔바로 예쁘게 만들었는데 크게 뽑으니 화질이 너무 구려요</div>
+    </div>
+
+    <div class="hero-actions rv d3">
+      <button onclick="openModal()" class="btn-primary"><i class="fa-solid fa-bezier-curve"></i> 제이픽, 우리 브랜드 벡터 파일 만들어줘!</button>
+    </div>
+    <br><br><br>
+
+    <!-- Story Box -->
+    <div class="story-box rv d3">
+      <div class="story-icon"><i class="fa-regular fa-comment-dots"></i></div>
+      <div class="story-text">
+        <h3>"AI로 만든 그림은 왜 간판으로 못 만드나요?"</h3>
+        <p>AI 이미지나 일반 그림 파일(JPG, PNG)은 수많은 '점(Pixel)'으로 이루어져 있어 확대하면 깨지고, 기계가 외곽선을 인식하지 못합니다.<br>간판, 인쇄, 자수 등 실물로 제작하기 위해서는 이 점들을 수학적인 곡선인 <strong>벡터(Vector/AI) 파일</strong>로 변환하는 전문적인 복원 작업이 반드시 필요합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PAIN POINTS (고민 열거) -> 배경 교차 1 -->
+<section class="sec bg-alt" id="pain">
+  <div class="sec-hd rv">
+    <div class="label">Problem</div>
+    <h2>지금, 이런 고민하고 계시죠?</h2>
+    <p>이미지는 예쁜데 현장에서 쓸 수 없어서 답답한 순간들.</p>
+  </div>
+  <div class="pain-grid">
+    <div class="pain-card hover-card-fx rv d1">
+      <i class="fa-solid fa-border-all pain-icon"></i>
+      <h3>하얀 배경의 저주 (누끼)</h3>
+      <p>"옷이나 패키지에 인쇄하려고 하는데 로고 뒤에 하얀 네모 배경이 같이 뽑혀서 쓸 수가 없대요. 글씨만 딱 떼어낼 수 없나요?"</p>
+    </div>
+    <div class="pain-card hover-card-fx rv d2">
+      <i class="fa-solid fa-compress pain-icon"></i>
+      <h3>픽셀의 한계 (계단 현상)</h3>
+      <p>"스마트폰 화면에선 분명 선명했는데, 현수막으로 크게 뽑으려고 하니까 로고 테두리가 모자이크처럼 계단 현상이 나며 깨집니다."</p>
+    </div>
+    <div class="pain-card hover-card-fx rv d3">
+      <i class="fa-solid fa-robot pain-icon"></i>
+      <h3>자동 변환기의 참사</h3>
+      <p>"무료 사이트에서 클릭 한 번으로 벡터 변환을 했더니, 선이 울퉁불퉁하고 색깔이 다 뭉개져서 도저히 브랜드 로고로 쓸 수가 없어요."</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. THE LIMITATION -> 배경 교차 2 -->
+<section class="sec bg-base" id="problem">
+  <div class="sec-hd rv">
+    <div class="label">Limitation</div>
+    <h2>이미지 파일(JPG)이 진짜 자산이 될 수 없는 이유</h2>
+    <p>비즈니스가 커질수록 벡터(AI) 원본 파일은 선택이 아닌 필수입니다.</p>
+  </div>
+  <br><br>
+  <div class="prob-list">
+    <div class="prob-card hover-card-fx rv d3">
+      <div class="prob-icon"><i class="fa-solid fa-scissors"></i></div>
+      <div class="prob-text">
+        <h4>간판 기계가 읽지 못하는 선</h4>
+        <p>입체 간판(스카시)을 깎거나 시트지를 오려내는 기계는 이미지의 색상이 아니라 '외곽선(Path)'을 따라 움직입니다. 벡터 파일이 없으면 커팅 자체가 불가능합니다.</p>
+      </div>
+    </div>
+    <div class="prob-card hover-card-fx rv d1">
+      <div class="prob-icon"><i class="fa-solid fa-droplet"></i></div>
+      <div class="prob-text">
+        <h4>색상 변경과 수정의 불가능</h4>
+        <p>배경과 로고가 하나로 합쳐진 그림 파일은 나중에 글자 색상만 블랙으로 바꾸거나 배치를 수정하고 싶어도 할 수가 없습니다. 요소별로 레이어가 분리된 원본이 필요합니다.</p>
+      </div>
+    </div>
+    <div class="prob-card hover-card-fx rv d2">
+      <div class="prob-icon"><i class="fa-solid fa-print"></i></div>
+      <div class="prob-text">
+        <h4>상표권 등록 및 고품질 인쇄 불가</h4>
+        <p>상표권을 출원하거나, 명함/브로셔 등 선명함이 생명인 고품질 인쇄를 진행할 때 인쇄소에서는 무조건 해상도 저하가 없는 AI(일러스트) 파일을 요구합니다.</p>
+      </div>
+    </div>
+  </div>
+  <div class="btn-center-wrap rv d3">
+    <button onclick="openModal()" class="btn-large">제이픽, 벡터(AI) 변환 상담해줘!</button>
+  </div>
+</section>
+
+<!-- 4. SERVICES 1 (이해하기 쉬운 시각화) -> 배경 교차 3 -->
+<section class="sec bg-alt" id="services-visual">
+  <div class="sec-hd rv">
+    <div class="label">Solution</div>
+    <h2>제이픽 로고는 무엇을 해주나요?</h2>
+    <p>전문 디자이너의 수작업으로 진짜 쓸 수 있는 로고 자산을 완성합니다.</p>
+  </div>
+  <div class="svc-wrap">
+    <div class="svc-row hover-card-fx rv d1">
+      <div class="svc-text">
+        <div class="svc-num">01</div>
+        <h3>수동 펜툴 벡터 복원 (Tracing)</h3>
+        <p>어설픈 자동 변환기를 쓰지 않습니다. 전문가가 직접 일러스트레이터 펜툴을 이용하여 엉망인 점(Anchor point)들을 최소화하고 매끄러운 곡선으로 완벽하게 새로 그립니다.</p>
+        <span class="svc-tag">#장인의_손길</span>
+      </div>
+      <div class="svc-visual">
+        <div class="mock-nodes">
+          <div class="m-node"></div><div class="m-node"></div><div class="m-node"></div><div class="m-node"></div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-row hover-card-fx rv d2">
+      <div class="svc-text">
+        <div class="svc-num">02</div>
+        <h3>완벽한 배경 투명화 (누끼)</h3>
+        <p>로고 주변의 지저분한 하얀 배경을 깔끔하게 제거하여, 어떤 색상의 옷이나 간판, 웹사이트 위에 올려도 투명하게 어우러지도록 분리해 냅니다.</p>
+        <span class="svc-tag">#투명_로고</span>
+      </div>
+      <div class="svc-visual">
+        <div class="mock-bg-remove">
+          <i class="fa-solid fa-crown"></i>
+        </div>
+      </div>
+    </div>
+    <!-- NEW Visual: 대형 분할 및 스카시 칼선 CSS 애니메이션 -->
+    <div class="svc-row hover-card-fx rv d3">
+      <div class="svc-text">
+        <div class="svc-num">03</div>
+        <h3>대형 전시월 분할 및 간판 칼선</h3>
+        <p>전시월 등 대형 사이즈 출력을 위해 원장 규격에 맞게 이미지를 분할하고, 입체 간판(스카시) 제작을 위한 정밀한 외곽선(Path) 레이어 작업을 세팅합니다.</p>
+        <span class="svc-tag">#대형출력 #입체간판</span>
+      </div>
+      <div class="svc-visual">
+        <div class="mock-grid-split">
+          <div class="m-box"></div>
+          <div class="m-box"></div>
+          <div class="m-box"></div>
+          <i class="fa-solid fa-scissors m-scissor"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. SERVICES 2 (Process) -> 배경 교차 4 -->
+<section class="sec bg-base" id="services">
+  <div class="sec-hd rv">
+    <div class="label">Process</div>
+    <h2>제이픽 로고는 어떻게 기획하나요?</h2>
+    <p>가장 완벽한 브랜드 자산을 만드는 3단계 로고 튜닝.</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card hover-card-fx rv d1">
+      <div class="svc-num">01</div>
+      <i class="fa-solid fa-bezier-curve" style="font-size:2.5rem; color:var(--mc); margin-bottom:10px;"></i>
+      <h3>이미지 진단 및 수동 벡터화</h3>
+      <p>전달해주신 픽셀 이미지를 분석하여 화질 손실 없이 선명하게 확대 가능한 수학적 벡터(AI) 파일로 새롭게 복원합니다.</p>
+    </div>
+    <div class="svc-card hover-card-fx rv d2">
+      <div class="svc-num">02</div>
+      <i class="fa-solid fa-table-columns" style="font-size:2.5rem; color:var(--mc); margin-bottom:10px;"></i>
+      <h3>대형 출력용 원장 분할 작업</h3>
+      <p>코엑스, 킨텍스 등 대형 전시월에 들어갈 거대한 이미지를 인쇄소 원장 규격에 맞춰 손실 없이 깔끔하게 분할 세팅합니다.</p>
+    </div>
+    <div class="svc-card hover-card-fx rv d3">
+      <div class="svc-num">03</div>
+      <i class="fa-solid fa-pen-nib" style="font-size:2.5rem; color:var(--mc); margin-bottom:10px;"></i>
+      <h3>스카시(입체간판) 레이어 세팅</h3>
+      <p>커팅 기계가 정확하게 인식하고 자를 수 있도록, 로고 외곽선을 따라 정밀한 칼선(Path) 레이어를 분리하여 제공합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. COMPARISON (Pixel vs Vector) -> 배경 교차 5 -->
+<section class="sec bg-alt" id="compare">
+  <div class="sec-hd rv">
+    <div class="label">Difference</div>
+    <h2>픽셀과 벡터의 차이</h2>
+    <p>왜 기계와 인쇄소는 벡터(Vector)만 고집할까요?</p>
+  </div>
+  <div class="compare-grid">
+    <div class="comp-card hover-card-fx rv d1">
+      <div class="comp-visual">
+        <span class="comp-pixel">A</span>
+      </div>
+      <h3>일반 이미지 (픽셀/비트맵)</h3>
+      <p>JPG, PNG, GIF 형식입니다. 수많은 네모난 점들로 색상을 표현하기 때문에 확대하면 점의 경계가 계단처럼 다 드러나며 이미지가 박살 납니다. 기계는 선을 읽을 수 없습니다.</p>
+    </div>
+    <div class="comp-card hover-card-fx rv d2">
+      <div class="comp-visual">
+        <span class="comp-vector">A</span>
+      </div>
+      <h3>벡터 이미지 (AI/SVG)</h3>
+      <p>일러스트레이터로 작업한 형식입니다. 점과 점 사이를 '수학적 공식'으로 연결하여 곡선을 유지하므로, 우주만큼 확대해도 100% 선명함을 유지하고 기계가 선을 따라 커팅할 수 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. HOW TO USE -> 배경 교차 6 -->
+<section class="sec bg-base" id="how">
+  <div class="sec-hd rv">
+    <div class="label">Work Flow</div>
+    <h2>제이픽의 벡터화 워크플로우</h2>
+    <p>복잡한 파일 변환, 제이픽에 맡기고 편하게 쉬세요.</p>
+  </div>
+  <div class="how-grid rv d1">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <h4>이미지 전달 및 진단</h4>
+      <p>깨진 이미지, AI가 만든 로고, 캔바 캡처본 등 파일의 형태를 제이픽에 전달해 주세요.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <h4>전문가 수동 펜툴 복원</h4>
+      <p>자동 변환기를 쓰지 않고, 디자이너가 직접 일러스트레이터로 깔끔한 선과 면을 새로 따서 복원합니다.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <h4>용도에 맞춘 특수 세팅</h4>
+      <p>요청하신 목적에 따라 전시월 원장 분할이나 스카시용 칼선 레이어를 맞춤 세팅합니다.</p>
+    </div>
+    <div class="step-card final">
+      <div class="step-num">04</div>
+      <h4>마스터 파일 패키지 납품</h4>
+      <p>AI, SVG, 고해상도 투명 PNG 등 어디든 바로 쓸 수 있는 완전한 자산 패키지를 전달해 드립니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. REVIEWS -> 배경 교차 7 -->
+<section class="sec bg-alt" id="reviews">
+  <div class="sec-hd rv">
+    <div class="label">Reviews</div>
+    <h2>파트너스 리얼 후기</h2>
+    <p>제이픽의 터치를 거쳐 진짜 자산으로 거듭난 브랜드들.</p>
+  </div>
+  <div class="review-grid">
+    <div class="review-card hover-card-fx rv d1">
+      <div class="stars">★★★★★</div>
+      <div class="r-quote">"캔바로 만든 로고를 간판집에 줬더니 쓸 수가 없다고 해서 멘붕이었어요. 제이픽에 맡겼더니 반나절 만에 완벽한 AI 파일로 만들어주셔서 간판 무사히 달았습니다!"</div>
+      <div class="r-client">
+        <strong>[기본 로고 벡터화] 이용</strong>
+        1인 카페 대표
+      </div>
+    </div>
+    <div class="review-card hover-card-fx rv d2">
+      <div class="stars">★★★★★</div>
+      <div class="r-quote">"코엑스 전시월을 준비하는데 이미지가 너무 커서 인쇄소에서 원장 사이즈로 잘라오라고 하더라고요. 제이픽에서 깔끔하게 패널별로 분할 컷팅해주셔서 무사히 부스 설치했습니다!"</div>
+      <div class="r-client">
+        <strong>[대형 전시월 분할] 이용</strong>
+        스타트업 마케팅 팀장
+      </div>
+    </div>
+    <div class="review-card hover-card-fx rv d3">
+      <div class="stars">★★★★★</div>
+      <div class="r-quote">"입체 간판을 만드려는데 기계가 깎을 외곽선(칼선)이 필요하다고 해서 막막했습니다. 제이픽에서 스카시용 레이어까지 완벽하게 분리해 주셔서 정말 든든했습니다."</div>
+      <div class="r-client">
+        <strong>[스카시 칼선 세팅] 이용</strong>
+        신규 F&B 프랜차이즈 기획자
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. PRICING (2개 포인트 + 미포함 텍스트/취소선 제거, Dim 유지) -> 배경 교차 8 -->
+<section class="sec bg-base" id="pricing">
+  <div class="sec-hd rv">
+    <div class="label">Pricing</div>
+    <h2>로고 벡터화 플랜</h2>
+    <p>로고의 복잡도와 사용 목적에 따라 합리적인 플랜을 선택하세요.</p>
+  </div>
+  <div class="price-grid-2">
+    <!-- 플랜 1 -->
+    <div class="price-card-2 hover-card-fx rv d1">
+      <h3 class="p-title">로고 기본 벡터화</h3>
+      <p class="p-desc">깨지는 글자나 단순한 그림을 깔끔한 무한확대 벡터 파일(AI)로 복원하고 하얀 배경을 투명하게 제거합니다.</p>
+      <ul class="p-list">
+        <li><i class="fa-solid fa-check"></i> <span>수동 펜툴 외곽선(Path) 복원</span></li>
+        <li><i class="fa-solid fa-check"></i> <span>배경 투명화 (누끼) 작업</span></li>
+        <li><i class="fa-solid fa-check"></i> <span>AI / PNG / SVG 원본 제공</span></li>
+        <li class="dim"><i></i> <span>대형 전시월 원장 분할 작업</span></li>
+        <li class="dim"><i></i> <span>스카시 간판 칼선 레이어 세팅</span></li>
+      </ul>
+      <a onclick="openModal()" class="p-btn">제이픽, 기본 로고 벡터화해줘!</a>
+    </div>
+    <!-- 플랜 2 -->
+    <div class="price-card-2 featured hover-card-fx rv d2">
+      <h3 class="p-title">대형 출력 및 칼선 세팅</h3>
+      <p class="p-desc">대형 전시월 출력을 위해 원장 사이즈에 맞게 이미지를 재단하고, 입체 간판 제작을 위한 정밀 칼선 레이어를 세팅합니다.</p>
+      <ul class="p-list">
+        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">로고 벡터화 및 누끼 작업 기본 포함</span></li>
+        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">대형 전시월/현수막 원장 분할 작업</span></li>
+        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">스카시/채널 간판용 외곽 칼선(Path) 세팅</span></li>
+        <li class="dim"><i></i> <span>새로운 로고 디자인 기획</span></li>
+        <li class="dim"><i></i> <span>인쇄소 직접 발주 대행</span></li>
+      </ul>
+      <a onclick="openModal()" class="p-btn">제이픽, 전시월 분할/칼선 세팅해줘!</a>
+    </div>
+  </div>
+</section>
+
+<!-- 10. FINAL CTA & UNIVERSE (제이드와 완벽한 조화를 이루는 다크틸/스카이블루 그라데이션) -->
+<section class="sec final-cta">
+  <div class="rv d1">
+    <h2>JPHIC UNIVERSE</h2>
+    <p>벡터 파일이 완성되셨나요?<br>이제 간판, 현수막, 명함을 발주할 차례입니다.</p><br>
+    
+    <div class="uni-grid rv d2">
+      <a href="https://jphic.co.kr/core" target="_blank" class="uni-card c-core">
+        <span class="uni-step">STEP 1. 아이디어 다듬기</span>
+        <h3 class="uni-title">JPHIC <span>CORE</span></h3>
+        <p class="uni-desc">AI 프롬프트 교정 및<br>디자인 디테일 리터칭</p>
+      </a>
+      <div class="uni-card c-logo current">
+        <span class="uni-step">STEP 2. 진짜 파일 만들기</span>
+        <h3 class="uni-title">JPHIC <span>LOGO</span></h3>
+        <p class="uni-desc">깨지는 이미지를 무한 확대<br>벡터(AI) 파일로 기초 자산화</p>
+      </div>
+      <a href="https://jphic.co.kr/pdf" target="_blank" class="uni-card c-pdf">
+        <span class="uni-step">STEP 3. 현장 인쇄 사고 0%</span>
+        <h3 class="uni-title">JPHIC <span>PDF</span></h3>
+        <p class="uni-desc">간판, 현수막, 부스 제작을 위한<br>마스터 발주 파일 세팅</p>
+      </a>
+      <a href="https://jphic.co.kr/agency" target="_blank" class="uni-card c-agency">
+        <span class="uni-step">STEP 4. 계속 써먹기</span>
+        <h3 class="uni-title">JPHIC <span>AGENCY</span></h3>
+        <p class="uni-desc">전담 디자인 파트너 매칭<br>SNS/배너 무한 베리에이션</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="f-logo">JPHIC <span>LOGO</span></span>
+  © 2026 JPHIC. All Rights Reserved. 영구적인 브랜드 자산 벡터화 에이전시
+</footer>
+
+<!-- MODAL FORM -->
+<div class="modal-overlay" id="orderModal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeModalDirect()">&times;</div>
+
+    <div class="modal-body">
+      <!-- Step 1 -->
+      <div class="form-step active" id="step1">
+        <div class="modal-header">
+          <h2>어떤 작업을 원하시나요?</h2>
+          <p>화면에서만 예쁜 이미지를 진짜 자산으로 바꿔드립니다.</p>
+        </div>
+        <div class="f-group">
+          <div class="f-options">
+            <input type="radio" name="track" id="trA" value="로고 기본 벡터화 및 누끼" class="f-radio" checked>
+            <label for="trA" class="option-card">
+              <strong>🛠️ 로고 기본 벡터화 및 누끼</strong>
+              <span>깨지는 글자나 단순한 그림을 깔끔한 무한확대 파일(AI)로 복원하고 배경을 없앱니다.</span>
+            </label>
+            <input type="radio" name="track" id="trB" value="대형 전시월 분할 및 스카시 칼선" class="f-radio">
+            <label for="trB" class="option-card">
+              <strong>✂️ 대형 전시월 분할 및 스카시 칼선</strong>
+              <span>전시월 사이즈에 맞게 이미지를 분할하거나 입체 간판용 칼선 레이어를 정밀하게 세팅합니다.</span>
+            </label>
+            <input type="radio" name="track" id="trC" value="발주파일까지 한번에 (PDF)" class="f-radio">
+            <label for="trC" class="option-card">
+              <strong>💎 발주파일까지 한번에 → <a href="https://jphic.co.kr/pdf" target="_blank" style="color:var(--mc);">JPHIC PDF</a></strong>
+              <span>벡터화 완료 후 간판, 명함, 배너 발주용 인쇄 마스터 세팅까지 제이픽이 끝까지 케어합니다.</span>
+            </label>
+          </div>
+        </div>
+        <button class="btn-submit-modal" onclick="nextStep(2)">상세 정보 입력하기 <i class="fa-solid fa-arrow-right" style="margin-left:8px;"></i></button>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="form-step" id="step2">
+        <div class="modal-header">
+          <h2>조금만 더 알려주세요</h2>
+          <p>담당자가 내용을 확인하고 빠르게 복원을 도와드립니다.</p>
+        </div>
+        <div class="f-group">
+          <label class="f-label">기본 정보 (Name / 연락처)</label>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="req-name" class="f-input" placeholder="성함" style="flex: 1;">
+            <input type="text" id="req-phone" class="f-input" placeholder="010-0000-0000" style="flex: 2;">
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label">현재 필요한 해결책은? (복수 선택)</label>
+          <div class="check-tags">
+            <input type="checkbox" name="problem" id="p1" value="인쇄시 깨짐(해상도 낮음)" class="f-check">
+            <label for="p1" class="check-btn">인쇄시 다 깨짐</label>
+            <input type="checkbox" name="problem" id="p2" value="간판집에서 AI파일 요구" class="f-check">
+            <label for="p2" class="check-btn">AI 원본 필요</label>
+            <input type="checkbox" name="problem" id="p3" value="하얀 배경 없애기(누끼)" class="f-check">
+            <label for="p3" class="check-btn">배경 투명화(누끼)</label>
+            <input type="checkbox" name="problem" id="p4" value="대형 사이즈(전시월) 분할" class="f-check">
+            <label for="p4" class="check-btn">대형(전시월) 분할</label>
+            <input type="checkbox" name="problem" id="p5" value="입체 간판(스카시) 칼선" class="f-check">
+            <label for="p5" class="check-btn">스카시(입체간판) 칼선</label>
+            <input type="checkbox" name="problem" id="p6" value="색상/레이어 분리 필요" class="f-check">
+            <label for="p6" class="check-btn">색상/레이어 분리</label>
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label">사용 목적</label>
+          <input type="text" id="req-use" class="f-input" placeholder="예: 외부 대형 간판 제작, 코엑스 전시월, 명함 등">
+        </div>
+        <div class="f-group">
+          <label class="f-label">추가 요청사항</label>
+          <textarea id="req-memo" class="f-textarea" placeholder="복원/분할 시 특별히 주의해야 할 사이즈나 디테일이 있다면 적어주세요." rows="3"></textarea>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn-submit-modal" style="background:#1e293b; flex:1; box-shadow:none;" onclick="nextStep(1)">이전</button>
+          <button id="btn-submit" class="btn-submit-modal" style="flex:2;" onclick="submitFormToSheet()">제이픽, 이대로 벡터 복원해줘!</button>
+        </div>
+      </div>
+
+      <!-- Step 3 (접수 완료 + 복사 박스) -->
+      <div class="form-step" id="step3">
+        <div class="modal-header">
+          <h2 style="color: var(--mc);">신청이 구글 시트에 접수되었습니다! 🎉</h2>
+          <p>아래 내용을 복사해서 <b style="color:#fff;">오픈챗</b>에 복원할 파일과 함께 남겨주시면 상담이 시작됩니다.</p>
+        </div>
+        
+        <div class="copy-box" id="copyTextResult"></div>
+        
+        <div style="display:flex; flex-direction: column; gap:12px;">
+          <button class="btn-submit-modal" style="background:#1e293b; font-size:1rem; padding:14px; box-shadow:none;" onclick="copyToClipboard(this)"><i class="fa-regular fa-copy" style="margin-right:8px;"></i> 요약 내용 복사하기</button>
+          <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="btn-submit-modal" style="text-decoration:none;"><i class="fa-solid fa-comment" style="margin-right:8px;"></i> JPHIC LOGO 오픈챗 열기</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const navAnchors = document.querySelectorAll('.nav-links a');
+navAnchors.forEach(anchor => {
+  anchor.addEventListener('click', function() {
+    navAnchors.forEach(a => a.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { 
+    if(e.isIntersecting) e.target.classList.add('on'); 
+    else e.target.classList.remove('on');
+  });
+}, { threshold: 0.05, rootMargin: "0px 0px -50px 0px" });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+function toggleMobileMenu() {
+  const navLinks = document.getElementById('navLinks');
+  navLinks.classList.toggle('active');
+}
+function closeMobileMenu() {
+  document.getElementById('navLinks').classList.remove('active');
+}
+
+const modal = document.getElementById('orderModal');
+
+function openModal() {
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  resetStep();
+}
+
+function closeModal(e) {
+  if(e.target === modal) closeModalDirect();
+}
+
+function closeModalDirect() {
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function resetStep() {
+  document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('req-name').value = '';
+  document.getElementById('req-phone').value = '';
+  document.getElementById('req-use').value = '';
+  document.getElementById('req-memo').value = '';
+  document.querySelectorAll('input[name="problem"]').forEach(el => el.checked = false);
+}
+
+function nextStep(step) {
+  document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step' + step).classList.add('active');
+}
+
+async function submitFormToSheet() {
+  const btn = document.getElementById('btn-submit');
+  btn.innerText = "구글로 접수 중...";
+  btn.disabled = true;
+
+  const track = document.querySelector('input[name="track"]:checked').value;
+  const name = document.getElementById('req-name').value || '미입력';
+  const phone = document.getElementById('req-phone').value || '미입력';
+  const problems = Array.from(document.querySelectorAll('input[name="problem"]:checked')).map(el => el.value);
+  const problemText = problems.length > 0 ? problems.join(', ') : '없음';
+  const use = document.getElementById('req-use').value || '미입력';
+  const memo = document.getElementById('req-memo').value || '없음';
+
+  // LOGO 사이트에서 유입되었음을 구글 시트에 알리기 위한 꼬리표
+  const payload = {
+    site: "JPHIC LOGO",
+    name: name,
+    phone: phone,
+    brand: use, 
+    need: `서비스: ${track} / 증상: ${problemText}`,
+    memo: memo
+  };
+
+  const result = `📋 JPHIC LOGO 복원 신청서\n____________________________\n■ 신청 서비스: ${track}\n■ 신청자명: ${name}\n■ 연락처: ${phone}\n■ 주요 문제: ${problemText}\n■ 사용 목적: ${use}\n■ 추가 메모: ${memo}\n____________________________\n※ 작성하신 내용과 복원할 파일을 상담창에 올려주세요!`;
+  document.getElementById('copyTextResult').innerText = result;
+
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzC2AzSg-3y2hRQnVOqpVzWCapcVTuIsPIN5Z-nrrnMSMzUS10TOclaVAyBz7qJVIEZ/exec";
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" }, 
+      body: JSON.stringify(payload)
+    });
+    nextStep(3); 
+  } catch (error) {
+    console.error('Error!', error);
+    nextStep(3); 
+  } finally {
+    btn.innerText = "제이픽, 이대로 벡터 복원해줘!";
+    btn.disabled = false;
+  }
+}
+
+function copyToClipboard(btn) {
+  const text = document.getElementById('copyTextResult').innerText;
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.select();
+  try {
+    document.execCommand('copy');
+    const originalHtml = btn.innerHTML;
+    btn.innerHTML = "<i class='fa-solid fa-check' style='margin-right:8px;'></i> 복사 완료!";
+    btn.style.background = "var(--mc)";
+    setTimeout(() => {
+      btn.innerHTML = originalHtml;
+      btn.style.background = "#1e293b"; 
+    }, 2000);
+  } catch (err) {
+    console.error('복사 실패');
+  }
+  document.body.removeChild(textArea);
+}
+</script>
+</body>
+</html>

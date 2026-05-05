@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!-- SEO Meta -->
+<title>제이픽 JPHIC CORE | 캔바(Canva)·AI 로고에 디자이너의 터치를 더하다</title>
+<meta name="description" content="아이디어는 있는데 모양이 안 나오나요? AI 프롬프트 교정 및 디자인 디테일 리터칭으로 생성한 이미지를 예쁜 초안으로 다듬어 드립니다.">
+<meta name="keywords" content="AI 프롬프트, 로고 리터칭, 디자인 교정, 캔바 로고 인쇄, 자간 맞추기, 날것의 이미지, JPHIC CORE, 제이픽">
+<meta name="robots" content="index, follow">
+
+<!-- Favicon & OG Image -->
+<link rel="icon" type="image/png" href="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/a778a4ff-50c5-44d9-90e7-1fd841102087_rw_600.png?h=8150e74a1f7b08a7071f248bf3c1f149">
+<meta property="og:image" content="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/c4991130-14ea-4cc6-bd95-ac13cb440258_rw_1200.jpg?h=e83b919f7c81a9a790bed12e1378c16d">
+<meta property="og:title" content="제이픽 JPHIC CORE | AI 생성이미지에 디자이너의 터치를 더하다">
+
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* JPHIC CORE Theme Variables (Mint/Teal & Ocean Blue Harmony) */
+:root {
+  --mc: #00BBAC; 
+  --mc-hover: #00E5D2; 
+  --mc-light: rgba(0, 187, 172, 0.15);
+  --grad-main: linear-gradient(135deg, #2dd4bf 0%, #00BBAC 100%); 
+  --canva-grad: linear-gradient(135deg, #00BBAC 0%, #0284c7 100%); 
+  
+  --bg: #090a0c; 
+  --card: #121318; 
+  --card-hover: #1a1c23;
+  --panel: rgba(18, 19, 24, 0.8); 
+  
+  --text-main: #F8FAFC;
+  --text-sub: #94A3B8;
+  --text-dim: #64748B;
+  
+  --border: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(0, 187, 172, 0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100vw; overflow-x: hidden; scroll-behavior: smooth; background: var(--bg); }
+body { font-family: 'Pretendard', sans-serif; color: var(--text-main); line-height: 1.6; word-break: keep-all;}
+
+/* Background Grid Pattern */
+.grid-bg { position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; opacity: 0.3; pointer-events: none;}
+
+/* Marquee Banner */
+.jphic-marquee-wrapper { background-color: var(--card); width: 100%; overflow: hidden; position: fixed; top: 70px; z-index: 9999; height: 44px; display: flex; align-items: center; border-bottom: 1px solid var(--border);}
+.jphic-marquee-container { width: 100%; max-width: 1400px; margin: 0 auto; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+.marquee-content { display: flex; white-space: nowrap; animation: jphic-marquee 40s linear infinite; width: max-content; }
+.marquee-group { display: flex; align-items: center; }
+.m-text { color: var(--text-sub); font-size: 14px; font-weight: 500; margin-right: 15px; flex-shrink: 0; }
+.m-link { color: var(--mc); font-size: 12px; font-weight: 600; text-decoration: underline; margin-right: 80px; cursor: pointer; flex-shrink: 0; }
+@keyframes jphic-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* NAV */
+.nav { position: fixed; top: 0; width: 100%; z-index: 10000; height: 70px; background-color: rgba(9, 10, 12, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; border-bottom: 1px solid var(--border); }
+.logo { font-size: 1.1rem; font-weight: 900; color: #fff; text-decoration: none; }
+.logo span { color: var(--mc); }
+.nav-links { display: flex; gap: 36px; position: absolute; left: 50%; transform: translateX(-50%); }
+.nav-links a { color: var(--text-sub); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: .2s; }
+.nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+.nav-cta { background: var(--text-main); color: var(--bg); padding: 10px 24px; border-radius: 50px; font-weight: 800; font-size: 14px; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; font-family: inherit;}
+.nav-cta:hover { background: var(--mc); color: #fff; box-shadow: 0 4px 15px var(--border-glow);}
+
+/* Hamburger */
+.hamburger { display: none; background: transparent; border: none; color: #fff; font-size: 1.6rem; cursor: pointer; transition: 0.3s; }
+@media (max-width: 1050px) { 
+  .hamburger { display: block; }
+  .nav-links { display: flex; flex-direction: column; position: absolute; top: 70px; left: 0; transform: none; width: 100%; background: var(--card); border-bottom: 1px solid var(--border); padding: 0; gap: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; align-items: center; z-index: 9990;}
+  .nav-links.active { max-height: 500px; padding-bottom: 10px; }
+  .nav-links a { font-size: 1.05rem; width: 100%; text-align: center; padding: 16px 0; border-bottom: 1px solid var(--border); margin: 0; color: #fff;}
+}
+
+/* Sections Base */
+section[id] { scroll-margin-top: 110px; }
+.sec { padding: 140px 5%; position: relative; border-top: none;}
+.sec-hd { text-align: center; margin-bottom: 60px; }
+.sec-hd .label { display: inline-block; font-size: 0.85rem; font-weight: 900; letter-spacing: 0.1em; color: var(--mc); margin-bottom: 16px; padding: 6px 16px; background: var(--mc-light); border-radius: 50px; border: 1px solid var(--border-glow);}
+.sec-hd h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; letter-spacing: -0.04em; color: var(--text-main); line-height: 1.35; margin-bottom: 16px; }
+.sec-hd p { font-size: clamp(1rem, 2vw, 1.1rem); color: var(--text-sub); line-height: 1.7; font-weight: 500;}
+
+/* Scroll Animation */
+.rv { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.rv.on { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; }
+
+/* 1. HERO SECTION */
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 160px 5% 60px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: 10%; left: 30%; width: 400px; height: 400px; background: var(--mc); border-radius: 80%; filter: blur(60px); z-index: 0; opacity: 0.11; pointer-events: none; animation: auraRandomPulse1 3s ease-in-out infinite alternate; }
+.hero::after { content: ''; position: absolute; bottom: 10%; right: 90%; width: 400px; height: 400px; background: #0284c7; border-radius: 50%; filter: blur(150px); z-index: 0; opacity: 0.15; pointer-events: none; animation: auraRandomPulse2 3s ease-in-out infinite alternate; }
+
+@keyframes auraRandomPulse1 { 0% { transform: scale(1); opacity: 0.11; } 25% { transform: scale(1.6); opacity: 0.15; } 60% { transform: scale(2.4); opacity: 0.08; } 100% { transform: scale(1.3); opacity: 0.12; } }
+@keyframes auraRandomPulse2 { 0% { transform: scale(1); opacity: 0.15; } 35% { transform: scale(2.2); opacity: 0.10; } 75% { transform: scale(1.5); opacity: 0.18; } 100% { transform: scale(2.4); opacity: 0.09; } }
+
+.hero-inner { position: relative; z-index: 3; max-width: 900px; width: 100%; display: flex; flex-direction: column; align-items: center;}
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--panel); border: 1px solid var(--border); padding: 8px 20px; border-radius: 50px; font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 24px; }
+.hero h1 { font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.25; letter-spacing: -0.03em; margin-bottom: 24px; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.4);}
+.hero h1 .hl { background: var(--canva-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-sub { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--text-sub); margin-bottom: 40px; line-height: 1.7; font-weight: 500; }
+
+.btn-primary { padding: 20px 44px; border-radius: 50px; background: var(--grad-main); color: #fff; font-size: clamp(1.1rem, 2vw, 1.25rem); font-weight: 900; text-decoration: none; transition: .3s; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px var(--border-glow); border: none; cursor: pointer; margin-bottom: 20px;}
+.btn-primary:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(0, 187, 172, 0.5); }
+
+.hero-chat-area { width: 100%; max-width: 780px; height: 170px; margin: 0 auto 30px; position: relative; pointer-events: none; overflow: hidden; mask-image: linear-gradient(to bottom, transparent, black 10%, black 55%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);}
+.bubble-seq { position: absolute; left: 50%; transform: translateX(-50%); background: var(--card); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); padding: 16px 28px; border-radius: 50px; font-size: 1.05rem; font-weight: 600; box-shadow: 0 15px 40px rgba(0,0,0,0.4); opacity: 0; white-space: nowrap; animation: floatBubble 30s infinite; }
+@media (max-width: 768px) { .bubble-seq { font-size: 0.85rem; white-space: normal; text-align: center; width: 90%; border-radius: 20px; padding: 14px 20px;} }
+
+@keyframes floatBubble {
+  0% { opacity: 0; bottom: -30px; transform: translateX(-50%) scale(0.8); }
+  2% { opacity: 1; bottom: 30px; transform: translateX(-50%) scale(1); }
+  10% { opacity: 1; bottom: 30px; transform: translateX(-50%) scale(1); }
+  12% { opacity: 1; bottom: 100px; transform: translateX(-50%) scale(0.68); }
+  20% { opacity: 1; bottom: 100px; transform: translateX(-50%) scale(0.68); }
+  32% { opacity: 0; bottom: 240px; transform: translateX(-50%) scale(0.4); }
+  100% { opacity: 0; bottom: 240px; transform: translateX(-50%) scale(0.9); }
+}
+.bs-1 { animation-delay: 0s; } .bs-2 { animation-delay: 3s; } .bs-3 { animation-delay: 6s; } .bs-4 { animation-delay: 9s; } .bs-5 { animation-delay: 12s; } .bs-6 { animation-delay: 15s; } .bs-7 { animation-delay: 18s; } .bs-8 { animation-delay: 21s; } .bs-9 { animation-delay: 24s; } .bs-10 { animation-delay: 27s; }
+
+.story-box { background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-left: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 40px; text-align: left; box-shadow: 0 30px 60px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 30px; max-width: 860px; margin: 0 auto; position: relative;}
+.story-box::before { content: 'Client Message'; position: absolute; top: -14px; left: 40px; background: var(--card); border: 1px solid var(--border); color: var(--text-sub); font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; letter-spacing: 1px;}
+@media (max-width: 768px) { .story-box { flex-direction: column; text-align: center; } .story-box::before { left: 50%; transform: translateX(-50%); } }
+.story-icon { font-size: 3.5rem; color: var(--text-dim); }
+.story-text h3 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.4;}
+.story-text p { font-size: 1rem; color: var(--text-sub); line-height: 1.6;}
+.story-text strong { color: var(--mc); }
+
+/* --- CARD HOVER MASTER EFFECTS --- */
+.hover-card-fx {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative; overflow: hidden; z-index: 1;
+}
+.hover-card-fx:hover {
+  transform: translateY(-12px) scale(1.02); border-color: var(--mc); box-shadow: 0 20px 40px rgba(0, 187, 172, 0.15); background: var(--card-hover); z-index: 10;
+}
+
+/* 2. PAIN POINTS 1 (고민 열거) */
+.pain-sec { background: var(--bg); }
+.pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto;}
+@media (max-width: 900px) { .pain-grid { grid-template-columns: 1fr; max-width: 600px;} }
+.pain-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: left; }
+.pain-icon { font-size: 2.5rem; color: var(--text-dim); margin-bottom: 20px; transition: 0.3s;}
+.pain-card:hover .pain-icon { color: var(--mc); transform: scale(1.1); }
+.pain-card h3 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 16px; line-height: 1.4;}
+.pain-card p { font-size: 1rem; color: var(--text-sub); line-height: 1.6;}
+
+/* 3. THE PROBLEM (Limitation) */
+.problem-sec { background: rgba(255,255,255,0.04); }
+.prob-list { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;}
+.prob-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; display: flex; align-items: flex-start; gap: 30px;}
+@media (max-width: 768px) { .prob-card { flex-direction: column; padding: 30px; gap: 20px; } }
+.prob-icon { width: 70px; height: 70px; background: var(--bg); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; border: 1px solid var(--border); flex-shrink: 0; transition: 0.3s;}
+.prob-card:hover .prob-icon { color: var(--mc); border-color: var(--mc-light); background: var(--mc-light);}
+.prob-text { flex-grow: 1; max-width: 600px; text-align: left;}
+.prob-text h4 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.4;}
+.prob-text p { font-size: 1.05rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 0;}
+.btn-center-wrap { text-align: center; margin-top: 60px; }
+.btn-large { display: inline-block; padding: 20px 40px; background: var(--mc); color: #fff; font-size: 1.15rem; font-weight: 900; border-radius: 50px; text-decoration: none; transition: 0.3s; box-shadow: 0 10px 25px var(--border-glow); border: none; cursor: pointer;}
+.btn-large:hover { background: var(--mc-hover); transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0,187,172,0.4);}
+
+/* 4. SERVICES 1 (이해하기 쉬운 시각화) */
+.service-visual-sec { background: var(--bg); }
+.svc-wrap { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;}
+.svc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: stretch; background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px; transition: 0.3s;}
+.svc-row:nth-child(even) .svc-text { order: 2; }
+.svc-row:nth-child(even) .svc-visual { order: 1; }
+.svc-text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start;}
+.svc-num { font-size: 3rem; font-weight: 900; color: var(--border); line-height: 1; font-family: monospace; margin-bottom: 16px; transition: 0.3s;}
+.svc-row:hover .svc-num { color: var(--mc); opacity: 0.5;}
+.svc-text h3 { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 16px;}
+.svc-text p { font-size: 1.05rem; color: var(--text-sub); line-height: 1.7;}
+.svc-tag { display: inline-block; padding: 6px 14px; background: var(--mc-light); color: var(--mc); border-radius: 50px; font-size: 0.85rem; font-weight: 700; margin-top: 20px; border: 1px solid var(--border-glow);}
+.svc-visual { background: #0c0d12; border: 1px solid var(--border); border-radius: 16px; height: 100%; min-height: 280px; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; box-shadow: inset 0 0 40px rgba(0,0,0,0.5); transition: 0.3s;}
+.svc-row:hover .svc-visual { border-color: var(--mc-light); }
+.mock-prompt { display: flex; flex-direction: column; gap: 15px; width: 80%; }
+.mock-p-box { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 12px; border-radius: 8px; color: var(--text-sub); font-size: 0.85rem; font-family: monospace; display: flex; align-items: center; gap: 10px;}
+.mock-p-box.active { border-color: var(--mc); color: #fff; background: var(--mc-light); }
+.mock-p-arrow { text-align: center; color: var(--mc); font-size: 1.5rem; animation: floatDown 2s infinite ease-in-out; }
+@keyframes floatDown { 0% { transform: translateY(-5px); } 50% { transform: translateY(5px); } 100% { transform: translateY(-5px); } }
+.mock-fix { display: flex; align-items: center; gap: 20px; font-weight: 900; font-size: 2rem; color: #fff; }
+.mock-broken { filter: blur(2px) contrast(2); letter-spacing: -5px; transform: skewX(10deg); color: var(--text-dim); }
+.mock-fixed { letter-spacing: 2px; color: var(--mc); text-shadow: 0 0 15px var(--border-glow); }
+.mock-draft { width: 140px; height: 140px; background: linear-gradient(135deg, var(--card), #1e293b); border: 2px solid var(--mc); border-radius: 20px; display: flex; justify-content: center; align-items: center; position: relative; box-shadow: 0 10px 30px var(--border-glow);}
+.mock-draft i { font-size: 4rem; color: #fff; }
+.mock-draft::after { content: '✓'; position: absolute; bottom: -10px; right: -10px; background: var(--mc); color: #fff; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1rem; font-weight: bold; }
+@media (max-width: 900px) {
+  .svc-row { grid-template-columns: 1fr; gap: 30px; text-align: center; padding: 30px; }
+  .svc-text { align-items: center; }
+  .svc-row:nth-child(even) .svc-text { order: 1; }
+  .svc-row:nth-child(even) .svc-visual { order: 2; height: auto; min-height: 250px; }
+}
+
+/* 5. SERVICES 2 (Process) */
+.service-sec-hover { background: rgba(255,255,255,0.04); }
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; }
+@media (max-width: 900px) { .svc-grid { grid-template-columns: 1fr; max-width: 600px; } }
+.svc-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: left; }
+.svc-card .svc-num { font-size: 4rem; font-weight: 900; color: rgba(255,255,255,0.03); line-height: 1; position: absolute; top: 30px; right: 30px; transition: 0.4s; margin-bottom: 0;}
+.svc-card:hover .svc-num { color: var(--mc-light); }
+.svc-card h3 { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 16px; margin-top: 20px; }
+.svc-card p { font-size: 1.05rem; color: var(--text-sub); line-height: 1.7; margin-bottom: 24px; }
+
+/* 6. LOGO STRUCTURE */
+.gallery-sec { background: var(--bg); }
+.gallery-wrap { max-width: 1200px; margin: 0 auto; }
+.g-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 900px) { .g-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .g-grid { grid-template-columns: 1fr; } }
+.g-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: center; display: flex; flex-direction: column; align-items: center;}
+.g-tag { position: absolute; top: 24px; left: 24px; font-size: 0.75rem; font-weight: 800; color: #fff; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 4px 12px; border-radius: 50px; transition: 0.3s;}
+.g-card:hover .g-tag { background: var(--mc-light); color: var(--mc); border-color: var(--mc); }
+.g-icon { font-size: 2.8rem; color: var(--text-dim); margin-bottom: 20px; transition: 0.3s;}
+.g-card:hover .g-icon { color: var(--mc); }
+.g-card h3 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 12px; }
+.g-card p { font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; word-break: keep-all; margin: 0; }
+
+/* 7. FREE PROMPT HUB */
+.prompt-hub-sec { background: rgba(255,255,255,0.04); padding-bottom: 140px; }
+.hub-container { max-width: 1400px; margin: 0 auto; text-align: center;}
+.tada-text { font-size: 1.3rem; font-weight: 600; color: var(--text-main); margin-bottom: 50px; line-height: 1.6; text-align: center;}
+.tada-text span { background: var(--canva-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
+.hub-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px;}
+.hub-tab { padding: 12px 24px; background: var(--card); border: 1px solid var(--border); border-radius: 50px; font-size: 0.95rem; font-weight: 700; color: var(--text-sub); cursor: pointer; transition: 0.2s;}
+.hub-tab:hover { border-color: var(--text-sub); color: #fff;}
+.hub-tab.active { background: #fff; color: #111; border-color: #fff; }
+
+.slider-wrap { position: relative; padding: 0 50px; }
+@media (max-width: 768px) { .slider-wrap { padding: 0; } }
+.slide-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--card); border: 1px solid var(--border); color: #fff; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: 0.2s;}
+.slide-btn:hover { background: var(--mc); border-color: var(--mc); }
+.slide-prev { left: 0; } .slide-next { right: 0; }
+
+.prompt-track { display: none; gap: 24px; overflow-x: auto; padding-bottom: 40px; scrollbar-width: none; scroll-behavior: smooth;}
+.prompt-track.active { display: flex; }
+.p-card { flex: 0 0 470px; background: var(--card); border-radius: 16px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); text-align: left; transition: 0.3s;}
+.p-card:hover { border-color: var(--mc); transform: translateY(-5px); }
+@media (max-width: 600px) { .p-card { flex: 0 0 90%; } }
+.p-header { background: rgba(0,0,0,0.3); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border);}
+.p-mac-dots { display: flex; gap: 6px; }
+.mac-dot { width: 10px; height: 10px; border-radius: 50%; background: #475569; opacity: 0.5; }
+.p-date { font-size: 0.8rem; color: var(--text-dim); font-weight: 600; letter-spacing: 0.5px;}
+
+.p-body { padding: 36px 30px; flex-grow: 1; display: flex; flex-direction: column;}
+.p-card h4 { font-size: 1.6rem; font-weight: 900; color: #fff; margin-bottom: 24px; line-height: 1.3;}
+.p-code-box { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; flex-grow: 1;}
+.p-code { color: #E2E8F0; font-size: 1rem; line-height: 1.7; word-break: break-all; font-weight: 400;}
+.p-code span.hl { color: var(--mc); font-weight: 700; }
+.btn-copy { padding: 16px; background: rgba(255,255,255,0.05); color: #fff; font-size: 1rem; font-weight: 800; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; font-family: 'Pretendard', sans-serif;}
+
+/* 8. HOW TO USE */
+.how-sec { background: var(--bg); padding: 120px 5%;}
+.how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;}
+@media (max-width: 900px) { .how-grid { grid-template-columns: repeat(2, 1fr); gap: 40px;} }
+@media (max-width: 600px) { .how-grid { grid-template-columns: 1fr; } }
+.step-card { position: relative; padding: 20px; text-align: left;}
+.step-num { font-size: 3rem; font-weight: 900; color: var(--border); margin-bottom: 16px; line-height: 1;}
+.step-card h4 { font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 12px;}
+.step-card p { font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; word-break: keep-all;}
+.step-card.final .step-num { color: var(--mc); opacity: 0.3;}
+.step-card.final h4 { color: var(--mc); }
+
+/* 9. REVIEWS */
+.review-sec { background: rgba(255,255,255,0.04); padding-bottom: 100px; }
+.review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;}
+@media (max-width: 900px) { .review-grid { grid-template-columns: 1fr; } }
+.review-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px 30px; display: flex; flex-direction: column; gap: 16px; text-align: left;}
+.stars { color: var(--mc); font-size: 1rem; letter-spacing: 2px; }
+.r-quote { font-size: 1rem; color: var(--text-main); line-height: 1.6; font-weight: 500; flex-grow: 1; word-break: keep-all; }
+.r-client { font-size: 0.85rem; color: var(--text-sub); border-top: 1px solid var(--border); padding-top: 16px; }
+.r-client strong { color: var(--mc); display: block; margin-bottom: 4px; font-size: 0.9rem;}
+
+/* 10. PRICING (2 Cards) */
+.pricing-sec { background: var(--bg); padding-top: 60px; padding-bottom: 140px; }
+.price-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 900px; margin: 0 auto; align-items: stretch;}
+@media (max-width: 768px) { .price-grid-2 { grid-template-columns: 1fr; } }
+.price-card-2 { background: var(--card); border: 2px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: center; display: flex; flex-direction: column; }
+.price-card-2.featured { border-color: var(--mc); background: rgba(0, 187, 172, 0.05); }
+
+.price-card-2 .p-title { font-size: 1.6rem; font-weight: 900; color: #fff; margin-bottom: 16px;}
+.price-card-2 .p-desc { font-size: 1.05rem; color: var(--text-sub); margin-bottom: 30px; line-height: 1.6; word-break: keep-all;}
+
+/* 중복 점표시 완벽 제거 & 체크표시만 유지하는 리스트 설정 */
+.p-list { list-style: none !important; padding-left: 0 !important; margin-bottom: 30px; text-align: left; flex-grow: 1; }
+.p-list li { list-style: none !important; font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; color: #94A3B8; }
+.p-list li i { font-size: 0.85rem; margin-top: 4px; flex-shrink: 0; color: var(--mc); }
+
+/* 안되는 것 표시 스타일 (dim 처리 및 취소선) */
+.p-list li.dim { color: rgba(255,255,255,0.4); }
+.p-list li.dim i { color: rgba(255,255,255,0.3); }
+
+
+.price-card-2 .p-btn { display: inline-block; width: 100%; padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; font-weight: 800; font-size: 1.05rem; text-decoration: none; transition: 0.3s; cursor: pointer; font-family: inherit;}
+.price-card-2.featured .p-btn { background: var(--grad-main); border-color: transparent; color: #fff; box-shadow: 0 10px 20px var(--border-glow);}
+.price-card-2 .p-btn:hover { background: var(--mc-hover); color: #fff; border-color: var(--mc-hover);}
+
+/* 11. FINAL CTA & UNIVERSE (제이드와 완벽한 조화를 이루는 다크틸/스카이블루 그라데이션) */
+.final-cta { text-align: center; padding: 120px 5% 100px; position: relative; overflow: hidden; background: linear-gradient(70deg, #0f172a, #00BBAC, #0f172a, #083344, #0f172a); background-size: 400% 400%; animation: auroraContinuous 15s ease-in-out infinite; border-bottom: 1px solid rgba(255,255,255,0.1);}
+@keyframes auroraContinuous { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.final-cta h2 { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 24px; line-height: 1.3; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.5);}
+.final-cta p { color: rgba(255,255,255,0.9); font-size: 1.1rem; }
+
+/* JPHIC UNIVERSE */
+.uni-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1200px; margin: 60px auto 0; position: relative; z-index: 2;}
+@media (max-width: 900px) { .uni-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+@media (max-width: 600px) { .uni-grid { grid-template-columns: 1fr; } }
+.uni-card { background: rgba(17,17,17,0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 30px 20px; text-decoration: none; transition: 0.3s; display: block; position: relative; text-align: left;}
+.uni-card:hover { border-color: rgba(255,255,255,0.4); background: rgba(0,0,0,0.4); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3);}
+/* 현재 페이지(CORE) 하이라이트 */
+.uni-card.current { border-color: var(--mc); background: rgba(0, 187, 172, 0.2); box-shadow: 0 0 30px rgba(0, 187, 172, 0.2); }
+.uni-card.current::before { content: '현재 단계'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--mc); color: #fff; font-size: 0.75rem; font-weight: 900; padding: 4px 12px; border-radius: 20px; }
+.uni-step { font-size: 0.75rem; color: rgba(255,255,255,0.6); font-weight: 800; letter-spacing: 1px; display: block; margin-bottom: 8px;}
+.uni-title { font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 8px;}
+.uni-title span { color: rgba(255,255,255,0.5); transition: 0.3s; }
+.uni-card.c-core .uni-title span { color: #00BBAC; } 
+.uni-card.c-logo:hover .uni-title span { color: #4678d2; } 
+.uni-card.c-pdf:hover .uni-title span { color: #da8266; } 
+.uni-card.c-agency:hover .uni-title span { color: #cbd5e1; } 
+.uni-desc { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.5;}
+
+/* Modal Form */
+.modal-overlay { position: fixed; inset: 0; background: rgba(10, 12, 15, 0.85); z-index: 100000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.3s; backdrop-filter: blur(8px); padding: 20px;}
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal-box { background: var(--bg); width: 100%; max-width: 600px; border-radius: 20px; border: 1px solid var(--border); overflow: hidden; max-height: 90vh; display: flex; flex-direction: column; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.6);}
+.modal-close { position: absolute; top: 14px; right: 20px; font-size: 1.8rem; color: var(--text-sub); cursor: pointer; z-index: 10; line-height: 1; transition: 0.2s;}
+.modal-close:hover { color: #fff; }
+.modal-body { padding: 30px; overflow-y: auto; flex: 1; }
+.modal-header { text-align: center; margin-bottom: 30px; }
+.modal-header h2 { font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.modal-header p { font-size: 0.95rem; color: var(--text-sub); }
+
+.f-group { margin-bottom: 24px; }
+.f-label { display: block; font-family: 'Pretendard', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+.f-input, .f-textarea { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 12px; font-family: 'Pretendard', sans-serif; font-size: 1rem; background: rgba(0,0,0,0.2); color: #fff; transition: 0.2s;}
+.f-input:focus, .f-textarea:focus { outline: none; border-color: var(--mc); background: rgba(0, 187, 172, 0.05); }
+
+.f-options { display: flex; flex-direction: column; gap: 10px; }
+.option-card { display: flex; flex-direction: column; padding: 16px; border: 1px solid var(--border); border-radius: 12px; cursor: pointer; background: var(--card); transition: 0.2s; }
+.option-card:hover { border-color: #555; }
+.option-card strong { font-family: 'Pretendard', sans-serif; font-size: 1rem; color: #fff; margin-bottom: 4px; font-weight: 800;}
+.option-card span { font-family: 'Pretendard', sans-serif; font-size: 0.9rem; color: var(--text-sub); line-height: 1.4;}
+.f-radio { display: none; }
+.f-radio:checked + .option-card { border-color: var(--mc); background: var(--mc-light); }
+
+.check-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.check-btn { font-family: 'Pretendard', sans-serif; display: inline-block; padding: 8px 16px; border: 1px solid var(--border); border-radius: 50px; cursor: pointer; font-size: 0.95rem; color: var(--text-sub); transition: 0.2s; background: rgba(0,0,0,0.2);}
+.f-check { display: none; }
+.f-check:checked + .check-btn { background: var(--mc); color: #fff; border-color: var(--mc); }
+
+.btn-submit-modal { display: block; width: 100%; padding: 18px; border-radius: 12px; background: var(--mc); color: #fff; font-size: 1.1rem; font-family: 'Pretendard', sans-serif; font-weight: 900; border: none; cursor: pointer; transition: 0.3s; text-align: center;}
+.btn-submit-modal:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-submit-modal:not(:disabled):hover { opacity: 0.9; box-shadow: 0 4px 15px rgba(0, 187, 172, 0.3); }
+
+.copy-box { background: rgba(0,0,0,0.5); color: #e2e8f0; padding: 20px; border-radius: 12px; font-family: 'Pretendard', sans-serif; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; margin-bottom: 20px; border: 1px solid var(--border); height: 180px; overflow-y: auto;}
+
+.form-step { display: none; animation: fadeIn 0.4s ease; }
+.form-step.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Footer */
+footer { background: #000; color: var(--text-dim); padding: 60px 5%; font-size: 0.85rem; text-align: center;}
+.f-logo { font-size: 1.2rem; font-weight: 900; color: #fff; display: block; margin-bottom: 16px; }
+.f-logo span { color: var(--mc); }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<!-- Marquee -->
+<div class="jphic-marquee-wrapper">
+  <div class="jphic-marquee-container">
+    <div class="marquee-content" onmouseover="this.style.animationPlayState='paused'" onmouseout="this.style.animationPlayState='running'">
+      <div class="marquee-group">
+        <span class="m-text">"캔바에서 이쁘게 잘 만들었는데, 인쇄소에서 쓸 수 없는 파일이래요."</span>
+        <span class="m-link" onclick="openModal()">진짜 쓸 수 있는 파일로 만들기 →</span>
+        <span class="m-text">"프롬프트 짜는 것도 일이고, 자간/행간 맞추는 것도 어려워요."</span>
+        <span class="m-link" onclick="openModal()">디자인 프롬프트 교정 맡기기 →</span>
+        <span class="m-text">"기본 템플릿 느낌을 지우고 진짜 브랜드 로고처럼 완성하고 싶다면?"</span>
+        <span class="m-link" onclick="openModal()">제이픽 디테일 리터칭 요청하기 →</span>
+      </div>
+      <div class="marquee-group">
+        <span class="m-text">"캔바에서 이쁘게 잘 만들었는데, 인쇄소에서 쓸 수 없는 파일이래요."</span>
+        <span class="m-link" onclick="openModal()">진짜 쓸 수 있는 파일로 만들기 →</span>
+        <span class="m-text">"프롬프트 짜는 것도 일이고, 자간/행간 맞추는 것도 어려워요."</span>
+        <span class="m-link" onclick="openModal()">디자인 프롬프트 교정 맡기기 →</span>
+        <span class="m-text">"기본 템플릿 느낌을 지우고 진짜 브랜드 로고처럼 완성하고 싶다면?"</span>
+        <span class="m-link" onclick="openModal()">제이픽 디테일 리터칭 요청하기 →</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <a href="#" class="logo">JPHIC <span>CORE</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#pain" onclick="closeMobileMenu()">우리의 고민</a>
+    <a href="#problem" onclick="closeMobileMenu()">진짜 최종이 안되는 이유</a>
+    <a href="#services-visual" onclick="closeMobileMenu()">코어 솔루션</a>
+    <a href="#logo-types" onclick="closeMobileMenu()">로고 구조</a>
+    <a href="#prompts" onclick="closeMobileMenu()">무료 프롬프트</a>
+    <a href="#how" onclick="closeMobileMenu()">워크플로우</a>
+    <a href="#reviews" onclick="closeMobileMenu()">리얼 후기</a>
+    <a href="#pricing" onclick="closeMobileMenu()">서비스 플랜</a>
+  </div>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <button onclick="openModal()" class="nav-cta">제이픽, 기초 프롬프트 도와줘!</button>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- 1. HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag rv d1" style="margin-top: 40px;"><i class="fa-solid fa-wand-magic-sparkles" style="color: #fff;"></i> AI & Design Retouching</div>
+    <h1 class="rv d1">캔바에서 이미지 생성했는데<br><span class="hl">살짝 고치고 싶은데 어떻게?</span></h1>
+    <p class="hero-sub rv d2">AI 프롬프트 교정 및 디자인 디테일 리터칭<br>생성한 이미지를 <b>예쁜 초안으로</b> 다듬어 드립니다.</p>
+
+    <!-- Chat Bubbles -->
+    <div class="hero-chat-area rv d3">
+      <div class="bubble-seq bs-1">폰트와 자간, 행간 등 디테일을 더 손보고 싶은데 잘 안되네요</div>
+      <div class="bubble-seq bs-2">제목과 내용의 가독성 높이고 싶은데 수정이 어려워요</div>
+      <div class="bubble-seq bs-3">미드저니/캔바로 뽑았는데 원하는 느낌이 안 난다</div>
+      <div class="bubble-seq bs-4">컬러를 미세하게 조정하고 싶은데, 모르겠어요</div>
+      <div class="bubble-seq bs-5">이미지는 예쁜데 안에 들어간 영문 스펠링이 다 깨졌다</div>
+      <div class="bubble-seq bs-6">머릿속 아이디어를 시각화해 줄 사람이 필요하다</div>
+      <div class="bubble-seq bs-7">메인-서브 컬러 수정할 색상값 어떻게 넣어요?</div>
+      <div class="bubble-seq bs-8">이미지 다운로드해서 수정하려고 했는데 그것도 안되네요</div>
+      <div class="bubble-seq bs-9">로고는 디테일 수정이 끝나야 활용 가능할 듯</div>
+      <div class="bubble-seq bs-10">그냥 1차 스케치 정도로 시간절약은 되었지만 다시 만들어야 해요</div>
+    </div>
+
+    <div class="hero-actions rv d3">
+      <button onclick="openModal()" class="btn-primary"><i class="fa-solid fa-wand-magic-sparkles"></i> 제이픽, 우리 브랜드 예쁜 초안 만들어줘!</button>
+    </div>
+    <br><br><br>
+
+    <!-- Story Box -->
+    <div class="story-box rv d3">
+      <div class="story-icon"><i class="fa-regular fa-comment-dots"></i></div>
+      <div class="story-text">
+        <h3>"로고를 프롬프트로 생성했는데, 어디를 더 고쳐야 더 예뻐지죠?"</h3>
+        <p>캔바는 참 잘 만들어주는 최고의 툴입니다. 프롬프트로 조금씩 수정이 필요해보이기는한데 <br>어디를 고쳐야 좋아보일지 모르겠다고 제이픽에게 문의를 요청하시는 분들이 많아졌어요.<br>여러분이 만든 그 예쁜 로고를 <strong>진짜 쓸 수 있는 최종 이미지</strong>로 제이픽이 완성해 드릴게요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PAIN POINTS 1 (고민 열거) -->
+<section class="sec pain-sec hover-card-fx" id="pain" style="overflow:visible; border-radius:0; border:none; z-index:auto; background:var(--bg);">
+  <div class="sec-hd rv">
+    <div class="label">Problem</div>
+    <h2>지금, 이런 고민하고 계시죠?</h2>
+    <p>아무리 프롬프트를 고쳐 써도, 해결되지 않는 2%의 답답함.</p>
+  </div>
+  <div class="pain-grid">
+    <div class="pain-card hover-card-fx rv d1">
+      <i class="fa-solid fa-robot pain-icon"></i>
+      <h3>AI가 내 말을 못 알아듣는다</h3>
+      <p>"미드저니, 캔바로 아무리 돌려도 내가 원하는 구도와 비율, 그 특유의 감성이 안 나와서 답답해요."</p>
+    </div>
+    <div class="pain-card hover-card-fx rv d2">
+      <i class="fa-solid fa-spell-check pain-icon"></i>
+      <h3>그림은 예쁜데 글씨가 다 깨진다</h3>
+      <p>"이미지는 마음에 드는데 안에 들어간 영어 스펠링이 엉망이고, 폰트도 바꿀 수가 없어서 쓸 수가 없어요."</p>
+    </div>
+    <div class="pain-card hover-card-fx rv d3">
+      <i class="fa-solid fa-head-side-virus pain-icon"></i>
+      <h3>머릿속에만 있고 표현이 안 된다</h3>
+      <p>"내가 원하는 느낌을 말로 설명하기가 너무 어려워요. 찰떡같이 알아듣고 스케치해 줄 사람이 필요해요."</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. THE PROBLEM (Limitation) -->
+<section class="sec problem-sec" id="problem">
+  <div class="sec-hd rv">
+    <div class="label">Limitation</div>
+    <h2>프롬프트를 아무리 잘 써도 진짜 최종이 안 되는 이유</h2>
+    <p>AI가 이미지를 너무 잘 그려주지만, 수정도 어렵고 인쇄도 어렵답니다.</p>
+  </div>
+  <br><br>
+  <div class="prob-list">
+    <div class="prob-card hover-card-fx rv d3">
+      <div class="prob-icon"><i class="fa-solid fa-scissors"></i></div>
+      <div class="prob-text">
+        <h4>배경이 섞인 통이미지</h4>
+        <p>간판이나 명함에 넣으려면 로고의 형태(심볼)에 투명 배경이 필요합니다. 흰 배경에 갇힌 JPG 파일은 활용도가 0%입니다.</p>
+      </div>
+    </div>
+    <div class="prob-card hover-card-fx rv d1">
+      <div class="prob-icon"><i class="fa-solid fa-text-width"></i></div>
+      <div class="prob-text">
+        <h4>어딘가 엉성한 자간과 행간</h4>
+        <p>글씨 사이가 너무 넓거나 좁아서 뭔가 '템플릿' 느낌이 나지 않나요? 폰트의 시각적 밸런스와 심볼의 황금비율은 디자이너가 직접 눈으로 맞춰야 합니다.</p>
+      </div>
+    </div>
+    <div class="prob-card hover-card-fx rv d2">
+      <div class="prob-icon"><i class="fa-solid fa-palette"></i></div>
+      <div class="prob-text">
+        <h4>화면과 다른 인쇄 컬러 (RGB)</h4>
+        <p>화면에서 빛나던 그 색상, 명함으로 뽑으면 탁하고 어둡게 나옵니다. 빛(RGB)의 색상을 인쇄 전용 잉크값(CMYK)으로 미세하게 분리하고 교정하는 작업이 필수입니다.</p>
+      </div>
+    </div>
+  </div>
+  <div class="btn-center-wrap rv d3">
+    <button onclick="openModal()" class="btn-large">제이픽, AI생성한 이미지 리터치해줘!</button>
+  </div>
+</section>
+
+<!-- 4. SERVICES 1 (이해하기 쉬운 시각화) -->
+<section class="sec service-visual-sec" id="services-visual">
+  <div class="sec-hd rv">
+    <div class="label">Solution</div>
+    <h2>제이픽 코어는 무엇을 해주나요?</h2>
+    <p>날것의 이미지를 예쁜 초안으로 다듬어내는 기획 솔루션입니다.</p>
+  </div>
+  <div class="svc-wrap">
+    <div class="svc-row hover-card-fx rv d1">
+      <div class="svc-text">
+        <div class="svc-num">01</div>
+        <h3>AI 프롬프트 교정 및 생성</h3>
+        <p>답답했던 프롬프트 작성을 대신해 드립니다. 수만 장의 생성 노하우와 디자인 문법을 결합하여 대표님이 원하셨던 정확한 이미지를 뽑아냅니다.</p>
+        <span class="svc-tag">#원하는_그림_그대로</span>
+      </div>
+      <div class="svc-visual">
+        <div class="mock-prompt">
+          <div class="mock-p-box"><i class="fa-solid fa-keyboard"></i> "예쁜 로고 그려줘..."</div>
+          <div class="mock-p-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+          <div class="mock-p-box active" style="font-weight:700;"><i class="fa-solid fa-check-double"></i> "Minimalist vector, golden ratio..."</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-row hover-card-fx rv d2">
+      <div class="svc-text">
+        <div class="svc-num">02</div>
+        <h3>디자인 디테일 정밀 리터칭</h3>
+        <p>AI가 생성한 이미지의 찌그러진 텍스트, 안 맞는 좌우 대칭, 어색한 컬러톤을 디자이너의 손길로 정교하게 수정하고 자간을 교정합니다.</p>
+        <span class="svc-tag">#디자이너의_터치</span>
+      </div>
+      <div class="svc-visual">
+        <div class="mock-fix">
+          <span class="mock-broken">COFFEE</span>
+          <i class="fa-solid fa-arrow-right" style="color:var(--text-dim); font-size:1rem;"></i>
+          <span class="mock-fixed">COFFEE</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-row hover-card-fx rv d3">
+      <div class="svc-text">
+        <div class="svc-num">03</div>
+        <h3>기초 자산의 '예쁜 초안' 완성</h3>
+        <p>단순한 그림 한 장이 아니라, 앞으로 계속 쓰일 브랜드의 코어(Core) 비주얼로 방향성을 잡고 예쁜 초안 기획해 드립니다.</p>
+        <span class="svc-tag">#날것을_예쁜_초안으로</span>
+      </div>
+      <div class="svc-visual">
+        <div class="mock-draft">
+          <i class="fa-solid fa-compass-drafting"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. SERVICES 2 (이해구조 굿 - 동적 모션) -->
+<section class="sec service-sec-hover" id="services">
+  <div class="sec-hd rv">
+    <div class="label">Process</div>
+    <h2>제이픽 코어는 어떻게 기획하나요?</h2>
+    <p>가장 완벽한 브랜드 자산을 만드는 3단계 코어 튜닝.</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card hover-card-fx rv d1">
+      <div class="svc-num">01</div>
+      <i class="fa-solid fa-keyboard" style="font-size:2.5rem; color:var(--mc); margin-bottom:10px;"></i>
+      <h3>AI 프롬프트 최적화</h3>
+      <p>수만 장의 생성 노하우와 디자인 문법을 결합하여, 대표님이 원하셨던 정확한 형태의 이미지를 단번에 뽑아냅니다.</p>
+    </div>
+    <div class="svc-card hover-card-fx rv d2">
+      <div class="svc-num">02</div>
+      <i class="fa-solid fa-pen-nib" style="font-size:2.5rem; color:var(--mc); margin-bottom:10px;"></i>
+      <h3>디테일 정밀 리터칭</h3>
+      <p>AI가 뭉개버린 텍스트, 안 맞는 좌우 대칭, 어색한 픽셀들을 디자이너의 손길로 정교하게 다듬어냅니다.</p>
+    </div>
+    <div class="svc-card hover-card-fx rv d3">
+      <div class="svc-num">03</div>
+      <i class="fa-solid fa-compass-drafting" style="font-size:2.5rem; color:var(--mc); margin-bottom:10px;"></i>
+      <h3>'예쁜 초안' 완성</h3>
+      <p>단순한 그림이 아니라, 앞으로 계속 변형해서 쓰일 수 있는 튼튼한 브랜드 코어(Core) 비주얼로 방향성을 잡습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. LOGO STRUCTURE -->
+<section class="sec gallery-sec" id="logo-types">
+  <div class="sec-hd rv">
+    <div class="label">Structure</div>
+    <h2>로고는 이런 구조로 생성해요</h2>
+    <p>로고의 형태를 미리 알면, 제이픽 프롬프트를 만들 때 더 빠르고 정확하게 소통할 수 있습니다.</p>
+  </div>
+  <div class="gallery-wrap">
+    <div class="g-grid">
+      <div class="g-card hover-card-fx rv d1">
+        <span class="g-tag">추천 구조</span>
+        <i class="fa-solid fa-shapes g-icon"></i>
+        <h3>조합형 (Combo)</h3>
+        <p>그림과 글자가 함께 있는 대중적인 형태.</p>
+        <p>분리하여 따로 쓸 수 있게 추출합니다.</p>
+      </div>
+      <div class="g-card hover-card-fx rv d2">
+        <span class="g-tag">간판 제작이 쉬운</span>
+        <i class="fa-brands fa-apple g-icon"></i>
+        <h3>심볼형 (Icon)</h3>
+        <p>글자 없이 그림만 있는 형태.</p>
+        <p>재단용 칼선이 깔끔하게 따기 좋고 어울립니다.</p>
+      </div>
+      <div class="g-card hover-card-fx rv d3">
+        <span class="g-tag">가독성 최고</span>
+        <i class="fa-solid fa-font g-icon"></i>
+        <h3>워드마크형 (Text)</h3>
+        <p>그림 없이 글자 자체가 로고.</p>
+        <p>폰트 간격과 구조를 정밀하게 재배치합니다.</p>
+      </div>
+      <div class="g-card hover-card-fx rv d1">
+        <span class="g-tag">클래식 감성</span>
+        <i class="fa-solid fa-certificate g-icon"></i>
+        <h3>엠블럼형 (Badge)</h3>
+        <p>테두리 안에 모든 요소가 갇힌 형태.</p>
+        <p>뭉치지 않게 레이어별로 정밀 복원합니다.</p>
+      </div>
+      <div class="g-card hover-card-fx rv d2">
+        <span class="g-tag">임팩트</span>
+        <i class="fa-solid fa-c g-icon"></i>
+        <h3>이니셜형 (Lettering)</h3>
+        <p>첫 글자를 형상화한 형태.</p>
+        <p>단순하지만 강렬한 선의 굵기 밸런스를 맞춥니다.</p>
+      </div>
+      <div class="g-card hover-card-fx rv d3">
+        <span class="g-tag">브랜드 마스코트</span>
+        <i class="fa-solid fa-paw g-icon"></i>
+        <h3>캐릭터형 (Mascot)</h3>
+        <p>복잡한 캐릭터나 동물이 포함된 형태.</p>
+        <p>디테일을 잃지 않는 선에서 벡터화합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. FREE PROMPT HUB -->
+<section class="sec prompt-hub-sec" id="prompts">
+  <div class="sec-hd rv">
+    <div class="label">Free Prompt</div>
+    <h2>제이픽이 제공하는 AI 프롬프트로 만들어보세요!</h2>
+    <p>"나도 로고 만들어보고 싶은데 뭐라고 쳐야 할지 모르겠어요."</p>
+    <p>무료 프롬프트를 복사해서 직접 만들어보세요. 그리고 진짜 쓸 수 있는 파일을 제이픽에게 요청해보세요.</p>
+  </div>
+  <br><br><br>
+  <div class="hub-tabs">
+    <div class="hub-tab" onclick="switchTab('it')">IT·스타트업</div>
+    <div class="hub-tab" onclick="switchTab('beauty')">전문직</div>
+    <div class="hub-tab active" onclick="switchTab('cafe')">카페·베이커리</div>
+    <div class="hub-tab" onclick="switchTab('shop')">쇼핑몰·커머스</div>
+    <div class="hub-tab" onclick="switchTab('food')">음식점·외식</div>
+    <div class="hub-tab" onclick="switchTab('creator')">소호샵</div>
+  </div>
+  <div class="hub-container rv d1">
+    <div class="tada-text"><span>대괄호 [ ___ ] 안의 단어를 바꿔서 프롬프트를 완성하기!</span></div>
+    <div class="slider-wrap">
+      <button class="slide-btn slide-prev" onclick="slideTrack(-494)"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="slide-btn slide-next" onclick="slideTrack(494)"><i class="fa-solid fa-chevron-right"></i></button>
+      <div id="promptTracks"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. HOW TO USE -->
+<section class="sec how-sec" id="how">
+  <div class="sec-hd rv">
+    <div class="label">Work Flow</div>
+    <h2>제이픽의 워크플로우</h2>
+    <p>프롬프트 복사부터 진짜 최종까지 원스톱으로</p>
+  </div>
+  <div class="how-grid rv d1">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <h4>프롬프트 복사해서 생성</h4>
+      <p>[ ___ ] 괄호 안 단어를 내 브랜드 워딩으로 바꾸고, 캔바AI, 미드저니에 붙여넣기해서 생성합니다.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <h4>생성 이미지 확인과 수정</h4>
+      <p>조금씩 프롬프트를 사용해서 수정합니다.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <h4>제이드에게 리터치 요청</h4>
+      <p>마음에 드는 결과물이 안나왔나요? 후반작업 도와드립니다.</p>
+    </div>
+    <div class="step-card final">
+      <div class="step-num">04</div>
+      <h4>JPHIC 벡터 완성</h4>
+      <p>결과물을 JPHIC에 맡기면 인쇄·간판에 바로 쓸 수 있는 벡터파일로 완성됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9. REVIEWS -->
+<section class="sec review-sec" id="reviews">
+  <div class="sec-hd rv">
+    <div class="label">Reviews</div>
+    <h2>파트너스 리얼 후기</h2>
+    <p>제이픽의 터치를 거쳐 탄생한 예쁜 초안들.</p>
+  </div>
+  <div class="review-grid">
+    <div class="review-card hover-card-fx rv d1">
+      <div class="stars">★★★★★</div>
+      <div class="r-quote">"머릿속에 있던 로고 이미지를 개떡같이 설명했는데 정말 찰떡같이 예쁜 초안으로 뽑아주셨어요! 소통이 안 돼서 답답했던 체증이 싹 내려갔습니다."</div>
+      <div class="r-client">
+        <strong>[기획 상담] 이용</strong>
+        1인 카페 대표
+      </div>
+    </div>
+    <div class="review-card hover-card-fx rv d2">
+      <div class="stars">★★★★★</div>
+      <div class="r-quote">"AI로 예쁘게 뽑은 이미지가 있었는데 영문 스펠링이 엉망이었어요. 제이픽에서 텍스트 교정은 물론이고 폰트 밸런스까지 잡아주셔서 드디어 쓸 수 있게 됐습니다."</div>
+      <div class="r-client">
+        <strong>[디테일 리터칭] 이용</strong>
+        스타트업 마케팅 담당자
+      </div>
+    </div>
+    <div class="review-card hover-card-fx rv d3">
+      <div class="stars">★★★★★</div>
+      <div class="r-quote">"캔바 무료 템플릿만 쓰다가 우리만의 오리지널 초안이 생겨서 너무 든든합니다. 디자인 방향이 잡혔으니 다음 단계인 벡터화(LOGO)도 바로 맡기려고요!"</div>
+      <div class="r-client">
+        <strong>[프롬프트 생성] 이용</strong>
+        신규 F&B 프랜차이즈 기획자
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. PRICING (2개 포인트 + 안되는 것 표시 포함) -->
+<section class="sec pricing-sec" id="pricing">
+  <div class="sec-hd rv">
+    <div class="label">Pricing</div>
+    <h2>JPHIC CORE 서비스 플랜</h2>
+    <p>필요한 만큼의 디자이너 터치를 선택하세요.</p>
+  </div>
+  <div class="price-grid-2">
+    <div class="price-card-2 hover-card-fx rv d1">
+      <h3 class="p-title">아이디어 시각화</h3>
+      <p class="p-desc">원하는 느낌의 레퍼런스나 설명만 있으면, 최적의 AI 프롬프트를 교정 및 생성하여 여러 장의 초안 시안을 뽑아드립니다.</p>
+      <ul class="p-list">
+        <li><i class="fa-solid fa-check"></i> <span>프롬프트 최적화 작업</span></li>
+        <li><i class="fa-solid fa-check"></i> <span>AI 시안 4종 생성</span></li>
+        <li><i class="fa-solid fa-check"></i> <span>1회 피드백 및 재생성</span></li>
+        <li class="dim"><i class="fa-solid fa-xmark"></i> <span>무한확대 벡터(PDF/SVG) 변환</span></li>
+        <li class="dim"><i class="fa-solid fa-xmark"></i> <span>발주처 사양 확인 및 소통</span></li>
+        <li class="dim"><i class="fa-solid fa-xmark"></i> <span>인쇄용 발주 파일 세팅</span></li>
+      </ul>
+      <a onclick="openModal()" class="p-btn">제이픽, 내 아이디어 시각화해줘!</a>
+    </div>
+    <div class="price-card-2 featured hover-card-fx rv d2">
+      <h3 class="p-title">디테일 리터칭</h3>
+      <p class="p-desc">이미 가지고 계신 캔바/AI 이미지의 어색한 부분(글자 깨짐, 자간, 형태 밸런스)을 디자이너가 직접 정교하게 다듬습니다.</p>
+      <ul class="p-list">
+        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">텍스트(영문/한글) 완전 교정</span></li>
+        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">좌우 대칭 및 컬러톤 보정</span></li>
+        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">고해상도(PNG) 파일 제공</span></li>
+        <li class="dim"><i class="fa-solid fa-xmark"></i> <span>무한확대 벡터(PDF/SVG) 변환</span></li>
+        <li class="dim"><i class="fa-solid fa-xmark"></i> <span>발주처 사양 확인 및 소통</span></li>
+        <li class="dim"><i class="fa-solid fa-xmark"></i> <span>인쇄용 발주 파일 세팅</span></li>
+      </ul>
+      <a onclick="openModal()" class="p-btn">제이픽, 내 이미지 디테일 교정해줘!</a>
+    </div>
+  </div>
+</section>
+
+<!-- 11. FINAL CTA & UNIVERSE (제이드와 완벽한 조화를 이루는 다크틸/스카이블루 그라데이션) -->
+<section class="sec final-cta">
+  <div class="rv d1">
+    <h2>JPHIC UNIVERSE</h2>
+    <p>최종 생성 이미지 결정하셨나요?<br>이제 진짜 쓸 수 파일로 만들 차례입니다.</p><br>
+    
+    <div class="uni-grid rv d2">
+      <div class="uni-card c-core current">
+        <span class="uni-step">STEP 1. 아이디어 다듬기</span>
+        <h3 class="uni-title">JPHIC <span>CORE</span></h3>
+        <p class="uni-desc">AI 프롬프트 교정 및<br>디자인 디테일 리터칭</p>
+      </div>
+      <a href="https://jphic.co.kr/logo" target="_blank" class="uni-card c-logo">
+        <span class="uni-step">STEP 2. 진짜 파일 만들기</span>
+        <h3 class="uni-title">JPHIC <span>LOGO</span></h3>
+        <p class="uni-desc">깨지는 이미지를 무한 확대<br>벡터(AI) 파일로 기초 자산화</p>
+      </a>
+      <a href="https://jphic.co.kr/pdf" target="_blank" class="uni-card c-pdf">
+        <span class="uni-step">STEP 3. 대형대량 발주파일</span>
+        <h3 class="uni-title">JPHIC <span>PDF</span></h3>
+        <p class="uni-desc">간판, 현수막, 부스 제작을 위한<br>마스터 발주 파일 세팅</p>
+      </a>
+      <a href="https://jphic.co.kr/agency" target="_blank" class="uni-card c-agency">
+        <span class="uni-step">STEP 4. 실행 무한 확장</span>
+        <h3 class="uni-title">JPHIC <span>AGENCY</span></h3>
+        <p class="uni-desc">전담 디자인 파트너 매칭<br>SNS/웹/영상 무한 베리에이션</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="f-logo">JPHIC <span>CORE</span></span>
+  © 2026 JPHIC. All Rights Reserved. 디자인 전문프롬프트 엔지니어링 & 브랜드 에이전시
+</footer>
+
+<!-- MODAL FORM -->
+<div class="modal-overlay" id="orderModal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeModalDirect()">&times;</div>
+
+    <div class="modal-body">
+      <!-- Step 1 -->
+      <div class="form-step active" id="step1">
+        <div class="modal-header">
+          <h2>원하시는 케어 단계를 선택해 주세요</h2>
+          <p>날것의 아이디어를 전문가의 터치로 다듬어 드립니다.</p>
+        </div>
+        <div class="f-group">
+          <div class="f-options">
+            <input type="radio" name="track" id="trA" value="프롬프트 진단 및 리터치" class="f-radio" checked>
+            <label for="trA" class="option-card">
+              <strong>✨ 프롬프트 생성 및 수정 (AI Prompt Fix)</strong>
+              <span>"생성은 했는데 2% 아쉬워요." 제이픽이 프롬프트를 교정하고 미적 완성도를 높여드립니다.</span>
+            </label>
+            <input type="radio" name="track" id="trB" value="프린트용 벡터 변환" class="f-radio">
+            <label for="trB" class="option-card">
+              <strong>🛠️ 로고 벡터 자산화 → <a href="https://jphic.co.kr/logo" target="_blank" style="color:var(--mc);">JPHIC LOGO</a></strong>
+              <span>후보정 완료된 이미지를 무한확대 벡터파일(AI·SVG)로 자산화합니다.</span>
+            </label>
+            <input type="radio" name="track" id="trC" value="전체 올인원 패키지" class="f-radio">
+            <label for="trC" class="option-card">
+              <strong>💎 발주파일까지 한번에 → <a href="https://jphic.co.kr" target="_blank" style="color:var(--mc);">JPHIC PDF</a></strong>
+              <span>벡터화부터 간판·명함·배너 발주파일 세팅까지 제이픽이 끝까지 케어합니다.</span>
+            </label>
+          </div>
+        </div>
+        <button class="btn-submit-modal" onclick="nextStep(2)">상세 정보 입력하기 <i class="fa-solid fa-arrow-right" style="margin-left:8px;"></i></button>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="form-step" id="step2">
+        <div class="modal-header">
+          <h2>조금만 더 알려주세요</h2>
+          <p>담당자가 내용을 확인하고 빠르게 초안 기획을 도와드립니다.</p>
+        </div>
+        <div class="f-group">
+          <label class="f-label">기본 정보 (Name / 연락처)</label>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="req-name" class="f-input" placeholder="성함" style="flex: 1;">
+            <input type="text" id="req-phone" class="f-input" placeholder="010-0000-0000" style="flex: 2;">
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label">현재 어떤 점이 어려우신가요? (복수 선택)</label>
+          <div class="check-tags">
+            <input type="checkbox" name="problem" id="p1" value="자간/행간 어색함" class="f-check">
+            <label for="p1" class="check-btn">자간/행간 어색함</label>
+            <input type="checkbox" name="problem" id="p2" value="인쇄 컬러(CMYK) 걱정" class="f-check">
+            <label for="p2" class="check-btn">인쇄 컬러 걱정</label>
+            <input type="checkbox" name="problem" id="p3" value="레이아웃 배치 미흡" class="f-check">
+            <label for="p3" class="check-btn">레이아웃 재배치</label>
+            <input type="checkbox" name="problem" id="p4" value="프롬프트 수정 한계" class="f-check">
+            <label for="p4" class="check-btn">프롬프트 수정</label>
+            <input type="checkbox" name="problem" id="p5" value="벡터 파일 필요" class="f-check">
+            <label for="p5" class="check-btn">벡터 파일(AI)</label>
+            <input type="checkbox" name="problem" id="p6" value="해상도/화질 깨짐" class="f-check">
+            <label for="p6" class="check-btn">해상도/화질 깨짐</label>
+            <input type="checkbox" name="problem" id="p7" value="배경 투명" class="f-check">
+            <label for="p7" class="check-btn">배경 투명</label>
+            <input type="checkbox" name="problem" id="p8" value="어디를 고칠지 모름" class="f-check">
+            <label for="p8" class="check-btn">어디를 고칠지 모름</label>
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label">사용 목적</label>
+          <input type="text" id="req-use" class="f-input" placeholder="예: 인스타그램 프로필, 명함 인쇄, 간판 제작 등">
+        </div>
+        <div class="f-group">
+          <label class="f-label">추가 요청사항</label>
+          <textarea id="req-memo" class="f-textarea" placeholder="수정하고 싶은 구체적인 아이디어나 고민을 적어주세요." rows="3"></textarea>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn-submit-modal" style="background:#1e293b; flex:1; box-shadow:none;" onclick="nextStep(1)">이전</button>
+          <button id="btn-submit" class="btn-submit-modal" style="flex:2;" onclick="submitFormToSheet()">제이픽, 이대로 기획 접수해줘!</button>
+        </div>
+      </div>
+
+      <!-- Step 3 (접수 완료 + 복사 박스) -->
+      <div class="form-step" id="step3">
+        <div class="modal-header">
+          <h2 style="color: var(--mc);">신청이 구글 시트에 접수되었습니다! 🎉</h2>
+          <p>아래 내용을 복사해서 <b style="color:#fff;">오픈챗</b>에 남겨주시면 상담이 바로 시작됩니다.</p>
+        </div>
+        
+        <div class="copy-box" id="copyTextResult"></div>
+        
+        <div style="display:flex; flex-direction: column; gap:12px;">
+          <button class="btn-submit-modal" style="background:#1e293b; font-size:1rem; padding:14px; box-shadow:none;" onclick="copyToClipboard(this)"><i class="fa-regular fa-copy" style="margin-right:8px;"></i> 요약 내용 복사하기</button>
+          <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="btn-submit-modal" style="text-decoration:none;"><i class="fa-solid fa-comment" style="margin-right:8px;"></i> JPHIC CORE 오픈챗 열기</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const navAnchors = document.querySelectorAll('.nav-links a');
+navAnchors.forEach(anchor => {
+  anchor.addEventListener('click', function() {
+    navAnchors.forEach(a => a.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { 
+    if(e.isIntersecting) e.target.classList.add('on'); 
+    else e.target.classList.remove('on');
+  });
+}, { threshold: 0.05, rootMargin: "0px 0px -50px 0px" });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+function toggleMobileMenu() {
+  const navLinks = document.getElementById('navLinks');
+  navLinks.classList.toggle('active');
+}
+function closeMobileMenu() {
+  document.getElementById('navLinks').classList.remove('active');
+}
+
+const promptData = {
+  cafe: [
+    { title: "미니멀 라인아트 로고", date: "2026.04.30", code: "A minimalist continuous line art logo of a <span class='hl'>[coffee bean]</span>, elegant, clean white background, single black line, flat vector graphic." },
+    { title: "따뜻한 일러스트 엠블럼", date: "2026.04.28", code: "A warm vintage illustration emblem logo for a bakery featuring a <span class='hl'>[croissant]</span>, pastel colors, soft edges, flat design." },
+    { title: "모던 카페 심볼", date: "2026.05.01", code: "Modern circular emblem logo for a specialty coffee shop, <span class='hl'>[coffee cup]</span> at center, navy and gold color palette." },
+    { title: "레트로 베이커리 마스코트", date: "2026.05.02", code: "1950s rubber hose cartoon mascot of a <span class='hl'>[donut]</span>, bold outlines, vibrant colors, playful cafe logo." },
+    { title: "고급스러운 골드 타이포", date: "2026.05.03", code: "High-end luxury cafe logo, <span class='hl'>[initial C]</span> in gold serif font, dark marble background, sophisticated vibe." },
+    { title: "내추럴 식물 컨셉", date: "2026.05.04", code: "Eco-friendly cafe logo featuring a <span class='hl'>[coffee cherry branch]</span>, earthy green tones, simple elegant line drawing." }
+  ],
+  it: [
+    { title: "기하학 폴리곤 로고", date: "2026.04.29", code: "An abstract geometric polygon logo representing <span class='hl'>[data network]</span>, shades of blue and cyan, sharp edges, modern tech company style." },
+    { title: "SaaS 텍스트 로고", date: "2026.04.30", code: "Modern sans-serif typography logo for a software brand, hidden <span class='hl'>[arrow]</span> symbol in negative space, flat vector." },
+    { title: "네트워크 도트", date: "2026.05.01", code: "Logo of connected dots forming a <span class='hl'>[hexagon]</span>, futuristic technology style, neon glow effect on dark background." },
+    { title: "미니멀 앱아이콘", date: "2026.05.02", code: "Flat vector app icon logo of a <span class='hl'>[lightning bolt]</span>, yellow and dark grey, rounded corners, clean design." },
+    { title: "AI 두뇌 컨셉", date: "2026.05.03", code: "Conceptual logo of a <span class='hl'>[human brain]</span> made of glowing circuits, digital gradient, innovative tech startup style." },
+    { title: "데이터 그리드", date: "2026.05.04", code: "Strict grid-based logo of a <span class='hl'>[cube]</span>, isometric view, architecture and tech fusion, minimalist line art." }
+  ],
+  beauty: [
+    { title: "모던 세리프 이니셜", date: "2026.04.30", code: "A luxury beauty brand monogram logo using the letter <span class='hl'>[M]</span>, thin elegant serif styling, gold color on white background." },
+    { title: "오가닉 리프 심볼", date: "2026.04.25", code: "A minimalist wellness logo featuring a continuous line drawing of a <span class='hl'>[monstera leaf]</span>, sage green color, organic, soothing." },
+    { title: "수채화 플로럴", date: "2026.05.01", code: "Delicate floral symbol logo of a <span class='hl'>[peony]</span>, soft pink watercolor, luxury skincare aesthetic, elegant." },
+    { title: "스파 & 릴렉스", date: "2026.05.02", code: "Abstract symbol of <span class='hl'>[water ripples]</span>, zen style, teal and white, calming beauty clinic logo." },
+    { title: "메이크업 스튜디오", date: "2026.05.03", code: "Stylish signature style logo for a <span class='hl'>[makeup studio]</span>, handwritten script font, chic gold foil texture." },
+    { title: "에스테틱 페이스 라인", date: "2026.05.04", code: "Fluid abstract line drawing of a <span class='hl'>[woman's profile]</span>, sophisticated, high-end dermatology clinic style." }
+  ],
+  shop: [
+    { title: "타이포그래피 + 별 심볼", date: "2026.04.30", code: "A modern typography logo for a clothing brand, featuring the letter <span class='hl'>[S]</span> integrated with a <span class='hl'>[four-pointed star]</span>, clean, monochrome." },
+    { title: "볼드 스트릿 패션", date: "2026.05.01", code: "Bold heavyweight typography logo for a streetwear brand, neon orange text on black, industrial style." },
+    { title: "쇼핑백 아이콘 조합", date: "2026.05.02", code: "Modern icon logo of a <span class='hl'>[shopping bag]</span> integrated with a smile, ecommerce friendly, bright blue tones." },
+    { title: "키즈 어패럴 로고", date: "2026.05.03", code: "Playful colorful logo for a children's clothing shop, <span class='hl'>[cloud and sun]</span> icon, rounded bubble font." },
+    { title: "핸드메이드 크래프트", date: "2026.05.04", code: "Rustic artisanal logo for handmade jewelry shop, <span class='hl'>[needle and thread]</span> icon, warm earth tones, minimal." },
+    { title: "프리미엄 럭셔리 심볼", date: "2026.05.05", code: "Minimalist fashion house logo, <span class='hl'>[interlocking initials]</span>, silver metallic finish on black, premium feel." }
+  ],
+  food: [
+    { title: "레트로 캐릭터 엠블럼", date: "2026.04.30", code: "A retro 1950s rubber hose cartoon style mascot logo of a happy <span class='hl'>[hamburger]</span>, bold outlines, vintage red and cream colors." },
+    { title: "모던 다이닝 워드마크", date: "2026.05.01", code: "Elegant wordmark logo for a fine dining restaurant, <span class='hl'>[fork and knife]</span> hidden in negative space, dark charcoal and gold." },
+    { title: "캐주얼 펍 네온스타일", date: "2026.05.02", code: "Neon sign style logo for a local pub, glowing <span class='hl'>[beer mug]</span> icon, bright yellow and purple, brick wall background." },
+    { title: "아시안 퓨전 심볼", date: "2026.05.03", code: "Minimalist Asian cuisine logo featuring a <span class='hl'>[bowl and chopsticks]</span>, bold red and black brush stroke style." },
+    { title: "빈티지 피자리아", date: "2026.05.04", code: "Vintage style pizzeria emblem logo, distressed texture, <span class='hl'>[pizza slice]</span> illustration, classic green and red." },
+    { title: "비건 푸드 오가닉", date: "2026.05.05", code: "Fresh organic food brand logo, bright green <span class='hl'>[sprout]</span> icon, friendly rounded sans-serif typography." }
+  ],
+  creator: [
+    { title: "네온사인 마스코트", date: "2026.04.28", code: "An esports mascot logo of a cool <span class='hl'>[wolf with sunglasses]</span>, bold thick outlines, vibrant neon pink and cyan colors, dark background." },
+    { title: "크리에이터 이니셜", date: "2026.05.01", code: "Dynamic gaming channel logo, overlapping letters <span class='hl'>[G and T]</span>, sharp futuristic edges, glowing electric blue." },
+    { title: "친근 동네 전문가", date: "2026.05.02", code: "Friendly cartoon logo for a local service hero, a smiling <span class='hl'>[plumber]</span> holding a wrench, bright orange and blue." },
+    { title: "클래식 스탬프 로고", date: "2026.05.03", code: "Vintage rubber stamp style logo for a craft workshop, <span class='hl'>[tools crossed]</span> in the center, grunge texture, black ink." },
+    { title: "팝아트 스타일 프로필", date: "2026.05.04", code: "Pop art comic style profile logo of a <span class='hl'>[photographer]</span> holding a camera, halftone dot background, vivid colors." },
+    { title: "미니멀 텍스트박스", date: "2026.05.05", code: "Very simple and clean logo of a <span class='hl'>[speech bubble]</span> with bold text inside, black and yellow, perfect for community apps." }
+  ]
+};
+
+function renderPrompts() {
+  const container = document.getElementById('promptTracks');
+  let html = '';
+  Object.keys(promptData).forEach(cat => {
+    html += `<div class="prompt-track ${cat === 'cafe' ? 'active' : ''}" id="tab-${cat}">`;
+    promptData[cat].forEach(p => {
+      html += `
+        <div class="p-card">
+          <div class="p-header">
+            <div class="p-mac-dots"><div class="mac-dot"></div><div class="mac-dot"></div><div class="mac-dot"></div></div>
+            <div class="p-date">Update: ${p.date}</div>
+          </div>
+          <div class="p-body">
+            <h4>${p.title}</h4>
+            <div class="p-code-box">
+              <div class="p-code">${p.code}</div>
+            </div>
+            <button class="btn-copy" onclick="copyPromptText(this)">프롬프트 복사하기</button>
+          </div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  });
+  container.innerHTML = html;
+  attachDragScroll('.prompt-track');
+}
+renderPrompts();
+
+function switchTab(tabId) {
+  document.querySelectorAll('.hub-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.prompt-track').forEach(g => g.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+}
+
+function slideTrack(amount) {
+  const activeTrack = document.querySelector('.prompt-track.active');
+  activeTrack.scrollBy({ left: amount, behavior: 'smooth' });
+}
+
+function copyPromptText(btn) {
+  const codeBox = btn.closest('.p-body').querySelector('.p-code');
+  const textToCopy = codeBox.innerText;
+  const textArea = document.createElement("textarea");
+  textArea.value = textToCopy;
+  document.body.appendChild(textArea);
+  textArea.select();
+  try {
+    document.execCommand('copy');
+    const originHtml = btn.innerHTML;
+    btn.innerHTML = "<i class='fa-solid fa-check'></i> 복사 완료!";
+    btn.style.background = "var(--mc)";
+    btn.style.color = "#fff";
+    btn.style.borderColor = "var(--mc)";
+    setTimeout(() => {
+      btn.innerHTML = originHtml;
+      btn.style.background = "rgba(255,255,255,0.05)";
+      btn.style.color = "#fff";
+      btn.style.borderColor = "var(--border)";
+    }, 2000);
+  } catch(e) {
+    alert("복사에 실패했습니다.");
+  }
+  document.body.removeChild(textArea);
+}
+
+function attachDragScroll(selector) {
+  document.querySelectorAll(selector).forEach(slider => {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.style.cursor = 'grabbing';
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.style.cursor = 'grab';
+    });
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.style.cursor = 'grab';
+    });
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 2; 
+      slider.scrollLeft = scrollLeft - walk;
+    });
+  });
+}
+
+const modal = document.getElementById('orderModal');
+
+function openModal() {
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  resetStep();
+}
+
+function closeModal(e) {
+  if(e.target === modal) closeModalDirect();
+}
+
+function closeModalDirect() {
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function resetStep() {
+  document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('req-name').value = '';
+  document.getElementById('req-phone').value = '';
+  document.getElementById('req-use').value = '';
+  document.getElementById('req-memo').value = '';
+  document.querySelectorAll('input[name="problem"]').forEach(el => el.checked = false);
+}
+
+function nextStep(step) {
+  document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step' + step).classList.add('active');
+}
+
+async function submitFormToSheet() {
+  const btn = document.getElementById('btn-submit');
+  btn.innerText = "구글로 접수 중...";
+  btn.disabled = true;
+
+  const track = document.querySelector('input[name="track"]:checked').value;
+  const name = document.getElementById('req-name').value || '미입력';
+  const phone = document.getElementById('req-phone').value || '미입력';
+  const problems = Array.from(document.querySelectorAll('input[name="problem"]:checked')).map(el => el.value);
+  const problemText = problems.length > 0 ? problems.join(', ') : '없음';
+  const use = document.getElementById('req-use').value || '미입력';
+  const memo = document.getElementById('req-memo').value || '없음';
+
+  const payload = {
+    site: "JPHIC CORE",
+    name: name,
+    phone: phone,
+    brand: use, 
+    need: `서비스: ${track} / 증상: ${problemText}`,
+    memo: memo
+  };
+
+  const result = `📋 JPHIC CORE 상담 신청서\n____________________________\n■ 신청 서비스: ${track}\n■ 신청자명: ${name}\n■ 연락처: ${phone}\n■ 주요 고민: ${problemText}\n■ 사용 목적: ${use}\n■ 추가 메모: ${memo}\n____________________________\n※ 작성하신 내용을 상담창에 붙여넣어 주세요!`;
+  document.getElementById('copyTextResult').innerText = result;
+
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzC2AzSg-3y2hRQnVOqpVzWCapcVTuIsPIN5Z-nrrnMSMzUS10TOclaVAyBz7qJVIEZ/exec";
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" }, 
+      body: JSON.stringify(payload)
+    });
+    nextStep(3); 
+  } catch (error) {
+    console.error('Error!', error);
+    nextStep(3); 
+  } finally {
+    btn.innerText = "제이픽, 이대로 기획 접수해줘!";
+    btn.disabled = false;
+  }
+}
+
+function copyToClipboard(btn) {
+  const text = document.getElementById('copyTextResult').innerText;
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.select();
+  try {
+    document.execCommand('copy');
+    const originalHtml = btn.innerHTML;
+    btn.innerHTML = "<i class='fa-solid fa-check' style='margin-right:8px;'></i> 복사 완료!";
+    btn.style.background = "var(--mc)";
+    setTimeout(() => {
+      btn.innerHTML = originalHtml;
+      btn.style.background = "#1e293b"; 
+    }, 2000);
+  } catch (err) {
+    console.error('복사 실패');
+  }
+  document.body.removeChild(textArea);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!-- SEO Meta -->
+<title>제이픽 JPHIC MOTION | 멈춰있는 디자인을 움직이는 무기로</title>
+<meta name="description" content="기존 편집 디자인을 활용한 베이직 모션 그래픽부터 생성형 AI, 실사 촬영을 결합한 크리에이티브 영상 기획까지. 릴스, 쇼츠, 디지털 사이니지 영상을 제작합니다.">
+<meta name="keywords" content="모션 그래픽, 쇼츠 영상 제작, 릴스 제작, 디지털 사이니지, 전광판 영상, 생성형 AI 영상, 영상 기획, 스토리보드, 에디토리얼 모션, JPHIC, 제이픽">
+<meta name="robots" content="index, follow">
+
+<!-- Favicon & OG Image -->
+<link rel="icon" type="image/png" href="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/48c9ef49-ded7-47de-856c-019f73e52a0e_rw_600.png?h=c8fa60ea8c97e6bba1faa9a6d3888a9e">
+<meta property="og:image" content="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/4464ff20-a917-4e39-8b8c-6751bc452c73_rw_1200.jpg?h=27146dbd4adbda948dc3e5385c5f6afb">
+<meta property="og:title" content="제이픽 JPHIC MOTION | 멈춰있는 자산을 움직이는 무기로">
+
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* JPHIC MOTION Theme Variables (Creative Purple Harmony) */
+:root {
+  --mc: #9868d8; /* Primary Purple */
+  --mc-hover: #7e52b5; 
+  --mc-light: rgba(152, 104, 216, 0.15);
+  --grad-main: linear-gradient(135deg, #b886ee 0%, #9868d8 100%); 
+  --canva-grad: linear-gradient(135deg, #9868d8 0%, #f472b6 100%); /* Purple to Pink */
+  
+  --bg: #090a0c; 
+  --bg-alt: #161a22; /* 숨 쉴 틈: 섹션 교차용 배경색 */
+  --card: #121318; 
+  --card-hover: #1a1c23;
+  --panel: rgba(18, 19, 24, 0.8); 
+  
+  --text-main: #F8FAFC;
+  --text-sub: #94A3B8;
+  --text-dim: #64748B;
+  
+  --border: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(152, 104, 216, 0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100vw; overflow-x: hidden; scroll-behavior: smooth; background: var(--bg); }
+body { font-family: 'Pretendard', sans-serif; color: var(--text-main); line-height: 1.6; word-break: keep-all;}
+
+/* Background Grid Pattern */
+.grid-bg { position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; opacity: 0.3; pointer-events: none;}
+
+/* Marquee Banner */
+.jphic-marquee-wrapper { background-color: var(--card); width: 100%; overflow: hidden; position: fixed; top: 70px; z-index: 9999; height: 44px; display: flex; align-items: center; border-bottom: 1px solid var(--border);}
+.jphic-marquee-container { width: 100%; max-width: 1400px; margin: 0 auto; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+.marquee-content { display: flex; white-space: nowrap; animation: jphic-marquee 40s linear infinite; width: max-content; }
+.marquee-group { display: flex; align-items: center; }
+.m-text { color: var(--text-sub); font-size: 14px; font-weight: 500; margin-right: 15px; flex-shrink: 0; }
+.m-link { color: var(--mc); font-size: 12px; font-weight: 600; text-decoration: underline; margin-right: 80px; cursor: pointer; flex-shrink: 0; }
+@keyframes jphic-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* NAV */
+.nav { position: fixed; top: 0; width: 100%; z-index: 10000; height: 70px; background-color: rgba(9, 10, 12, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; border-bottom: 1px solid var(--border); }
+.logo { font-size: 1.1rem; font-weight: 900; color: #fff; text-decoration: none; }
+.logo span { color: var(--mc); }
+.nav-links { display: flex; gap: 40px; position: absolute; left: 50%; transform: translateX(-50%); }
+.nav-links a { color: var(--text-sub); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: .2s; }
+.nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+.nav-cta { background: var(--text-main); color: var(--bg); padding: 10px 24px; border-radius: 50px; font-weight: 800; font-size: 14px; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; font-family: inherit;}
+.nav-cta:hover { background: var(--mc); color: #fff; box-shadow: 0 4px 15px var(--border-glow);}
+
+/* Hamburger */
+.hamburger { display: none; background: transparent; border: none; color: #fff; font-size: 1.6rem; cursor: pointer; transition: 0.3s; }
+@media (max-width: 1050px) { 
+  .hamburger { display: block; }
+  .nav-links { display: flex; flex-direction: column; position: absolute; top: 70px; left: 0; transform: none; width: 100%; background: var(--card); border-bottom: 1px solid var(--border); padding: 0; gap: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; align-items: center; z-index: 9990;}
+  .nav-links.active { max-height: 500px; padding-bottom: 10px; }
+  .nav-links a { font-size: 1.05rem; width: 100%; text-align: center; padding: 16px 0; border-bottom: 1px solid var(--border); margin: 0; color: #fff;}
+}
+
+/* Sections Base (간격 대폭 확보 180px) */
+section[id] { scroll-margin-top: 70px; }
+.sec { padding: 180px 5%; position: relative; border-top: none;}
+.sec-hd { text-align: center; margin-bottom: 60px; }
+.sec-hd .label { display: inline-block; font-size: 0.85rem; font-weight: 900; letter-spacing: 0.1em; color: var(--mc); margin-bottom: 16px; padding: 6px 16px; background: var(--mc-light); border-radius: 50px; border: 1px solid var(--border-glow);}
+.sec-hd h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; letter-spacing: -0.04em; color: var(--text-main); line-height: 1.35; margin-bottom: 16px; }
+.sec-hd p { font-size: clamp(1rem, 2vw, 1.1rem); color: var(--text-sub); line-height: 1.7; font-weight: 500;}
+
+/* Alternate Background Colors */
+.bg-alt { background: var(--bg-alt); }
+.bg-base { background: var(--bg); }
+
+/* Scroll Animation */
+.rv { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.rv.on { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; }
+
+/* 1. HERO SECTION */
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 160px 5% 60px; position: relative; overflow: hidden; background: var(--bg); }
+.hero::before { content: ''; position: absolute; top: 10%; left: 30%; width: 400px; height: 400px; background: var(--mc); border-radius: 80%; filter: blur(80px); z-index: 0; opacity: 0.15; pointer-events: none; animation: auraRandomPulse1 4s ease-in-out infinite alternate; }
+.hero::after { content: ''; position: absolute; bottom: 10%; right: 90%; width: 400px; height: 400px; background: #c084fc; border-radius: 50%; filter: blur(120px); z-index: 0; opacity: 0.1; pointer-events: none; animation: auraRandomPulse2 5s ease-in-out infinite alternate; }
+
+@keyframes auraRandomPulse1 { 0% { transform: scale(1); opacity: 0.15; } 100% { transform: scale(1.3); opacity: 0.08; } }
+@keyframes auraRandomPulse2 { 0% { transform: scale(1); opacity: 0.1; } 100% { transform: scale(1.5); opacity: 0.18; } }
+
+.hero-inner { position: relative; z-index: 3; max-width: 900px; width: 100%; display: flex; flex-direction: column; align-items: center;}
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--panel); border: 1px solid var(--border); padding: 8px 20px; border-radius: 50px; font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 24px; }
+.hero h1 { font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.25; letter-spacing: -0.03em; margin-bottom: 24px; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.4);}
+.hero h1 .hl { background: var(--canva-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-sub { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--text-sub); margin-bottom: 40px; line-height: 1.7; font-weight: 500; }
+
+.btn-primary { padding: 20px 44px; border-radius: 50px; background: var(--grad-main); color: #fff; font-size: clamp(1.1rem, 2vw, 1.25rem); font-weight: 900; text-decoration: none; transition: .3s; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px var(--border-glow); border: none; cursor: pointer; margin-bottom: 20px;}
+.btn-primary:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(152, 104, 216, 0.5); }
+
+/* Hero Chat Bubbles */
+.hero-chat-area { width: 100%; max-width: 780px; height: 170px; margin: 0 auto 30px; position: relative; pointer-events: none; overflow: hidden; mask-image: linear-gradient(to bottom, transparent, black 10%, black 55%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);}
+.bubble-seq { position: absolute; left: 50%; transform: translateX(-50%); background: var(--card); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); padding: 16px 28px; border-radius: 50px; font-size: 1.05rem; font-weight: 600; box-shadow: 0 15px 40px rgba(0,0,0,0.4); opacity: 0; white-space: nowrap; animation: floatBubble 24s infinite; }
+@media (max-width: 768px) { .bubble-seq { font-size: 0.85rem; white-space: normal; text-align: center; width: 90%; border-radius: 20px; padding: 14px 20px;} }
+
+@keyframes floatBubble { 0% { opacity: 0; bottom: -30px; transform: translateX(-50%) scale(0.8); } 5% { opacity: 1; bottom: 30px; transform: translateX(-50%) scale(1); } 15% { opacity: 1; bottom: 30px; transform: translateX(-50%) scale(1); } 20% { opacity: 1; bottom: 100px; transform: translateX(-50%) scale(0.68); } 30% { opacity: 1; bottom: 100px; transform: translateX(-50%) scale(0.68); } 40% { opacity: 0; bottom: 240px; transform: translateX(-50%) scale(0.4); } 100% { opacity: 0; bottom: 240px; transform: translateX(-50%) scale(0.9); } }
+.bs-1 { animation-delay: 0s; } .bs-2 { animation-delay: 3s; } .bs-3 { animation-delay: 6s; } .bs-4 { animation-delay: 9s; } .bs-5 { animation-delay: 12s; } .bs-6 { animation-delay: 15s; } .bs-7 { animation-delay: 18s; } .bs-8 { animation-delay: 21s; }
+
+.story-box { background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-left: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 40px; text-align: left; box-shadow: 0 30px 60px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 30px; max-width: 860px; margin: 0 auto; position: relative;}
+.story-box::before { content: 'Client Message'; position: absolute; top: -14px; left: 40px; background: var(--card); border: 1px solid var(--border); color: var(--text-sub); font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; letter-spacing: 1px;}
+@media (max-width: 768px) { .story-box { flex-direction: column; text-align: center; } .story-box::before { left: 50%; transform: translateX(-50%); } }
+.story-icon { font-size: 3.5rem; color: var(--text-dim); }
+.story-text h3 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.4;}
+.story-text p { font-size: 1rem; color: var(--text-sub); line-height: 1.6;}
+.story-text strong { color: var(--mc); }
+
+/* --- CARD HOVER MASTER EFFECTS --- */
+.hover-card-fx { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; z-index: 1; }
+.hover-card-fx:hover { transform: translateY(-12px) scale(1.02); border-color: var(--mc); box-shadow: 0 20px 40px rgba(152, 104, 216, 0.15); background: var(--card-hover); z-index: 10; }
+
+/* 2. PAIN POINTS */
+.pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto;}
+@media (max-width: 900px) { .pain-grid { grid-template-columns: 1fr; max-width: 600px;} }
+.pain-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: left; }
+.pain-icon { font-size: 2.5rem; color: var(--text-dim); margin-bottom: 20px; transition: 0.3s;}
+.pain-card:hover .pain-icon { color: var(--mc); transform: scale(1.1); }
+.pain-card h3 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 16px; line-height: 1.4;}
+.pain-card p { font-size: 1rem; color: var(--text-sub); line-height: 1.6;}
+
+/* 3. MOTION CATEGORIES (1행 3칸, 2줄 확장 레이아웃) */
+.category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+@media (max-width: 900px) { .category-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .category-grid { grid-template-columns: 1fr; } }
+.cat-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px 30px; text-align: center; }
+.cat-icon { font-size: 2.5rem; color: var(--text-dim); margin-bottom: 20px; transition: 0.3s; }
+.cat-card:hover .cat-icon { color: var(--mc); transform: scale(1.1); }
+.cat-card h4 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 12px; }
+.cat-card p { font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; margin: 0; word-break: keep-all; }
+
+/* 4. SERVICES VISUAL */
+.svc-wrap { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;}
+.svc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: stretch; background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; transition: 0.3s;}
+.svc-row:nth-child(even) .svc-text { order: 2; }
+.svc-row:nth-child(even) .svc-visual { order: 1; }
+.svc-text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start;}
+.svc-num { font-size: 3rem; font-weight: 900; color: var(--border); line-height: 1; font-family: monospace; margin-bottom: 16px; transition: 0.3s;}
+.svc-row:hover .svc-num { color: var(--mc); opacity: 0.5;}
+.svc-text h3 { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 16px;}
+.svc-text p { font-size: 1.05rem; color: var(--text-sub); line-height: 1.7;}
+.svc-tag { display: inline-block; padding: 6px 14px; background: var(--mc-light); color: var(--mc); border-radius: 50px; font-size: 0.85rem; font-weight: 700; margin-top: 20px; border: 1px solid var(--border-glow);}
+
+.svc-visual { background: #0c0d12; border: 1px solid var(--border); border-radius: 16px; height: 100%; min-height: 280px; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; box-shadow: inset 0 0 40px rgba(0,0,0,0.5); transition: 0.3s;}
+.svc-row:hover .svc-visual { border-color: var(--mc-light); }
+
+/* 시각화 모형 커스텀 (MOTION 전용) */
+.mock-editorial { width: 140px; height: 160px; background: #fff; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; gap: 10px; position: relative; }
+.mock-editorial .m-img { width: 100%; height: 60px; background: var(--text-dim); border-radius: 4px; animation: slideInLeft 2s ease-in-out infinite alternate; }
+.mock-editorial .m-txt { width: 60%; height: 10px; background: var(--mc); border-radius: 4px; animation: slideInRight 2s ease-in-out infinite alternate 0.5s; }
+.mock-editorial .m-txt2 { width: 80%; height: 8px; background: #ccc; border-radius: 4px; animation: slideInRight 2s ease-in-out infinite alternate 0.7s; }
+@keyframes slideInLeft { 0% { transform: translateX(-20px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+@keyframes slideInRight { 0% { transform: translateX(20px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+
+.mock-storyboard { display: flex; gap: 10px; }
+.m-sb-frame { width: 60px; height: 60px; border: 2px solid var(--text-sub); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--text-sub); position: relative; transition: 0.3s;}
+.m-sb-frame::after { content: ''; position: absolute; bottom: -15px; left: 10px; right: 10px; height: 2px; background: var(--text-dim); }
+.svc-row:hover .m-sb-frame { border-color: var(--mc); color: var(--mc); transform: scale(1.1); }
+.svc-row:hover .m-sb-frame:nth-child(1) { transition-delay: 0s; }
+.svc-row:hover .m-sb-frame:nth-child(2) { transition-delay: 0.2s; }
+.svc-row:hover .m-sb-frame:nth-child(3) { transition-delay: 0.4s; }
+
+.mock-ai-video { position: relative; font-size: 5rem; color: var(--text-dim); }
+.mock-ai-video .fa-wand-magic-sparkles { position: absolute; top: -10px; right: -20px; font-size: 2rem; color: var(--mc); opacity: 0; transition: 0.3s; }
+.svc-row:hover .mock-ai-video { color: #fff; filter: drop-shadow(0 0 20px var(--border-glow)); }
+.svc-row:hover .mock-ai-video .fa-wand-magic-sparkles { opacity: 1; animation: floatBubble 2s infinite alternate; }
+
+@media (max-width: 900px) {
+  .svc-row { grid-template-columns: 1fr; gap: 30px; text-align: center; padding: 30px; }
+  .svc-text { align-items: center; }
+  .svc-row:nth-child(even) .svc-text { order: 1; }
+  .svc-row:nth-child(even) .svc-visual { order: 2; height: auto; min-height: 250px; }
+}
+
+/* 5. HOW TO (Process) */
+.how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; position: relative;}
+@media (max-width: 900px) { .how-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .how-grid { grid-template-columns: 1fr; } }
+.step-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: left; position: relative; z-index: 2; transition: 0.3s;}
+.step-card:hover { border-color: var(--mc); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(152, 104, 216, 0.15); background: var(--card-hover);}
+.step-num { font-size: 3.5rem; font-weight: 900; color: rgba(255,255,255,0.05); position: absolute; top: 20px; right: 24px; line-height: 1; transition: 0.3s;}
+.step-card:hover .step-num { color: rgba(152, 104, 216, 0.15); }
+.step-card h4 { font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 12px; position: relative; z-index: 2;}
+.step-card p { font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; word-break: keep-all; margin: 0; position: relative; z-index: 2;}
+.step-card.final { border-color: var(--mc); background: rgba(152, 104, 216, 0.05); }
+.step-card.final .step-num { color: var(--mc); opacity: 0.2;}
+
+/* 6. REVIEWS */
+.review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;}
+@media (max-width: 900px) { .review-grid { grid-template-columns: 1fr; } }
+.review-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px 30px; display: flex; flex-direction: column; gap: 16px; text-align: left;}
+.stars { color: var(--mc); font-size: 1rem; letter-spacing: 2px; }
+.r-quote { font-size: 1rem; color: var(--text-main); line-height: 1.6; font-weight: 500; flex-grow: 1; word-break: keep-all; }
+.r-client { font-size: 0.85rem; color: var(--text-sub); border-top: 1px solid var(--border); padding-top: 16px; }
+.r-client strong { color: var(--mc); display: block; margin-bottom: 4px; font-size: 0.9rem;}
+
+/* 7. PRICING (2 Cards) */
+.price-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 900px; margin: 0 auto;}
+@media (max-width: 768px) { .price-grid-2 { grid-template-columns: 1fr; } }
+.price-card-2 { background: var(--card); border: 2px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: left; display: flex; flex-direction: column; }
+.price-card-2.featured { border-color: var(--mc); background: rgba(152, 104, 216, 0.05); transform: none; }
+.price-card-2 .p-title { font-size: 1.6rem; font-weight: 900; color: #fff; margin-bottom: 16px; text-align: center;}
+.price-card-2 .p-desc { font-size: 1.05rem; color: var(--text-sub); margin-bottom: 30px; line-height: 1.6; word-break: keep-all; text-align: center;}
+
+/* 리스트 속성 */
+.p-list { list-style: none !important; padding-left: 0 !important; margin-bottom: 30px; text-align: left; flex-grow: 1; }
+.p-list li { list-style-type: none !important; font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; color: #94A3B8; }
+.p-list li i { font-size: 0.85rem; margin-top: 4px; flex-shrink: 0; color: var(--mc); }
+.p-list li.dim { color: rgba(255,255,255,0.4); }
+.p-list li.dim i { color: rgba(255,255,255,0.3); }
+
+.price-card-2 .p-btn { display: inline-block; width: 100%; padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; font-weight: 800; font-size: 1.05rem; text-decoration: none; transition: 0.3s; cursor: pointer; font-family: inherit; text-align: center;}
+.price-card-2.featured .p-btn { background: var(--grad-main); border-color: transparent; color: #fff; box-shadow: 0 10px 20px var(--border-glow);}
+.price-card-2 .p-btn:hover { background: var(--mc-hover); color: #fff; border-color: var(--mc-hover);}
+
+/* 8. FINAL CTA & UNIVERSE (JPHIC UNIVERSE 5 Grid) */
+.final-cta { text-align: center; padding: 150px 5% 120px; position: relative; overflow: hidden; background: linear-gradient(70deg, #0f172a, #9868d8, #0f172a, #4c1d95, #0f172a); background-size: 400% 400%; animation: auroraContinuous 15s ease-in-out infinite; border-bottom: 1px solid rgba(255,255,255,0.1);}
+@keyframes auroraContinuous { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.final-cta h2 { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 24px; line-height: 1.3; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.5);}
+.final-cta p { color: rgba(255,255,255,0.9); font-size: 1.1rem; }
+
+/* 5단계를 위한 그리드 변경 */
+.uni-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; max-width: 1400px; margin: 60px auto 0; position: relative; z-index: 2;}
+@media (max-width: 1100px) { .uni-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+@media (max-width: 768px) { .uni-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .uni-grid { grid-template-columns: 1fr; } }
+.uni-card { background: rgba(17,17,17,0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 30px 20px; text-decoration: none; transition: 0.3s; display: block; position: relative; text-align: left;}
+.uni-card:hover { border-color: rgba(255,255,255,0.4); background: rgba(0,0,0,0.4); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3);}
+/* 현재 페이지(MOTION) 하이라이트 */
+.uni-card.current { border-color: var(--mc); background: rgba(152, 104, 216, 0.2); box-shadow: 0 0 30px rgba(152, 104, 216, 0.2); }
+.uni-card.current::before { content: '현재 단계'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--mc); color: #fff; font-size: 0.75rem; font-weight: 900; padding: 4px 12px; border-radius: 20px; }
+.uni-step { font-size: 0.75rem; color: rgba(255,255,255,0.6); font-weight: 800; letter-spacing: 1px; display: block; margin-bottom: 8px;}
+.uni-title { font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 8px;}
+.uni-title span { color: rgba(255,255,255,0.5); transition: 0.3s; }
+.uni-card.c-core:hover .uni-title span { color: #00BBAC; } 
+.uni-card.c-logo:hover .uni-title span { color: #3b82f6; } 
+.uni-card.c-pdf:hover .uni-title span { color: #ea580c; } 
+.uni-card.c-motion .uni-title span { color: #9868d8; } /* MOTION active color */
+.uni-card.c-agency:hover .uni-title span { color: #cbd5e1; } 
+.uni-desc { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.5;}
+
+/* Modal Form */
+.modal-overlay { position: fixed; inset: 0; background: rgba(10, 12, 15, 0.85); z-index: 100000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.3s; backdrop-filter: blur(8px); padding: 20px;}
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal-box { background: var(--bg); width: 100%; max-width: 600px; border-radius: 20px; border: 1px solid var(--border); overflow: hidden; max-height: 90vh; display: flex; flex-direction: column; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.6);}
+.modal-close { position: absolute; top: 14px; right: 20px; font-size: 1.8rem; color: var(--text-sub); cursor: pointer; z-index: 10; line-height: 1; transition: 0.2s;}
+.modal-close:hover { color: #fff; }
+.modal-body { padding: 30px; overflow-y: auto; flex: 1; }
+.modal-header { text-align: center; margin-bottom: 30px; }
+.modal-header h2 { font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.modal-header p { font-size: 0.95rem; color: var(--text-sub); }
+
+.f-group { margin-bottom: 24px; }
+.f-label { display: block; font-family: 'Pretendard', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+.f-input, .f-textarea { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 12px; font-family: 'Pretendard', sans-serif; font-size: 1rem; background: rgba(0,0,0,0.2); color: #fff; transition: 0.2s;}
+.f-input:focus, .f-textarea:focus { outline: none; border-color: var(--mc); background: rgba(152, 104, 216, 0.05); }
+
+.f-options { display: flex; flex-direction: column; gap: 10px; }
+.option-card { display: flex; flex-direction: column; padding: 16px; border: 1px solid var(--border); border-radius: 12px; cursor: pointer; background: var(--card); transition: 0.2s; }
+.option-card:hover { border-color: #555; }
+.option-card strong { font-family: 'Pretendard', sans-serif; font-size: 1rem; color: #fff; margin-bottom: 4px; font-weight: 800;}
+.option-card span { font-family: 'Pretendard', sans-serif; font-size: 0.9rem; color: var(--text-sub); line-height: 1.4;}
+.f-radio { display: none; }
+.f-radio:checked + .option-card { border-color: var(--mc); background: var(--mc-light); }
+
+.check-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.check-btn { font-family: 'Pretendard', sans-serif; display: inline-block; padding: 8px 16px; border: 1px solid var(--border); border-radius: 50px; cursor: pointer; font-size: 0.95rem; color: var(--text-sub); transition: 0.2s; background: rgba(0,0,0,0.2);}
+.f-check { display: none; }
+.f-check:checked + .check-btn { background: var(--mc); color: #fff; border-color: var(--mc); }
+
+.btn-submit-modal { display: block; width: 100%; padding: 18px; border-radius: 12px; background: var(--mc); color: #fff; font-size: 1.1rem; font-family: 'Pretendard', sans-serif; font-weight: 900; border: none; cursor: pointer; transition: 0.3s; text-align: center;}
+.btn-submit-modal:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-submit-modal:not(:disabled):hover { opacity: 0.9; box-shadow: 0 4px 15px rgba(152, 104, 216, 0.3); }
+
+.copy-box { background: rgba(0,0,0,0.5); color: #e2e8f0; padding: 20px; border-radius: 12px; font-family: 'Pretendard', sans-serif; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; margin-bottom: 20px; border: 1px solid var(--border); height: 180px; overflow-y: auto;}
+
+.form-step { display: none; animation: fadeIn 0.4s ease; }
+.form-step.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Footer */
+footer { background: #000; color: var(--text-dim); padding: 60px 5%; font-size: 0.85rem; text-align: center;}
+.f-logo { font-size: 1.2rem; font-weight: 900; color: #fff; display: block; margin-bottom: 16px; }
+.f-logo span { color: var(--mc); }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<!-- Marquee -->
+<div class="jphic-marquee-wrapper">
+  <div class="jphic-marquee-container">
+    <div class="marquee-content" onmouseover="this.style.animationPlayState='paused'" onmouseout="this.style.animationPlayState='running'">
+      <div class="marquee-group">
+        <span class="m-text">"포스터 디자인, 움직이는 인스타 릴스로 만들고 싶다면?"</span>
+        <span class="m-link" onclick="openModal()">에디토리얼 모션 신청하기 →</span>
+        <span class="m-text">"촬영 비용 부담 없이 고퀄리티 AI 광고 영상 제작"</span>
+        <span class="m-link" onclick="openModal()">크리에이티브 영상 상담하기 →</span>
+        <span class="m-text">"매장 전광판 시선을 사로잡는 디지털 사이니지 모션"</span>
+        <span class="m-link" onclick="openModal()">전광판 영상 세팅하기 →</span>
+      </div>
+      <div class="marquee-group">
+        <span class="m-text">"포스터 디자인, 움직이는 인스타 릴스로 만들고 싶다면?"</span>
+        <span class="m-link" onclick="openModal()">에디토리얼 모션 신청하기 →</span>
+        <span class="m-text">"촬영 비용 부담 없이 고퀄리티 AI 광고 영상 제작"</span>
+        <span class="m-link" onclick="openModal()">크리에이티브 영상 상담하기 →</span>
+        <span class="m-text">"매장 전광판 시선을 사로잡는 디지털 사이니지 모션"</span>
+        <span class="m-link" onclick="openModal()">전광판 영상 세팅하기 →</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <a href="#" class="logo">JPHIC <span>MOTION</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#pain" onclick="closeMobileMenu()">우리의 고민</a>
+    <a href="#categories" onclick="closeMobileMenu()">모션 카테고리</a>
+    <a href="#services-visual" onclick="closeMobileMenu()">모션 솔루션</a>
+    <a href="#how" onclick="closeMobileMenu()">워크플로우</a>
+    <a href="#reviews" onclick="closeMobileMenu()">리얼 후기</a>
+    <a href="#pricing" onclick="closeMobileMenu()">서비스 플랜</a>
+  </div>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <button onclick="openModal()" class="nav-cta">제이픽, 모션 영상 만들어줘!</button>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- 1. HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag rv d1" style="margin-top: 40px;"><i class="fa-solid fa-film" style="color: #fff;"></i> Editorial Motion & Creative Video</div>
+    <h1 class="rv d1">멈춰있는 디자인,<br><span class="hl">움직이는 무기로 만들고 싶나요?</span></h1>
+    <p class="hero-sub rv d2">기본 편집 레이아웃에 역동적인 모션을 더하는 베이직 작업부터,<br>스토리보드 기획과 생성형 AI를 결합한 <b>크리에이티브 영상 콘텐츠</b>를 제작합니다.</p>
+
+    <!-- Chat Bubbles -->
+    <div class="hero-chat-area rv d3">
+      <div class="bubble-seq bs-1">포스터 만든 걸로 인스타 릴스도 올려야 한대요</div>
+      <div class="bubble-seq bs-2">전광판에 띄울 역동적인 모션 영상이 필요해요</div>
+      <div class="bubble-seq bs-3">촬영 없이 AI로 고퀄리티 브랜드 필름을 만들 수 있나요?</div>
+      <div class="bubble-seq bs-4">어떻게 움직일지 스토리보드부터 기획해줄 파트너가 필요해요</div>
+      <div class="bubble-seq bs-5">찍어둔 실사 영상 소스에 화려한 모션 그래픽을 넣고 싶어요</div>
+      <div class="bubble-seq bs-6">스킵하기 전 시선을 뺏는 강렬한 유튜브 범퍼 광고가 필요해요</div>
+      <div class="bubble-seq bs-7">상세페이지를 움직이는 숏폼으로 재가공 할 수 있나요?</div>
+      <div class="bubble-seq bs-8">영상 제작 예산이 너무 적은데 고퀄리티로 뽑고 싶어요</div>
+    </div>
+
+    <div class="hero-actions rv d3">
+      <button onclick="openModal()" class="btn-primary"><i class="fa-solid fa-film"></i> 제이픽, 우리 브랜드 영상 만들어줘!</button>
+    </div>
+    <br><br><br>
+
+    <!-- Story Box -->
+    <div class="story-box rv d3">
+      <div class="story-icon"><i class="fa-regular fa-comment-dots"></i></div>
+      <div class="story-text">
+        <h3>"잘 만든 디자인, 왜 종이에만 가둬두시나요?"</h3>
+        <p>요즘 사람들은 움직이지 않는 것에 시선을 주지 않습니다. 숏폼(릴스/쇼츠)과 옥외 매체(DOOH)가 주도하는 시장에서 <strong>역동적인 움직임(Motion)은 선택이 아닌 필수 생존 전략</strong>입니다.<br>편집 레이아웃에 숨을 불어넣는 기초 모션부터 무한한 상상력의 AI 생성 영상까지, 시선을 사로잡는 강력한 무기를 만들어 드립니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PAIN POINTS -> 배경 교차 1 -->
+<section class="sec bg-alt hover-card-fx" id="pain" style="overflow:visible; border-radius:0; border:none; z-index:auto;">
+  <div class="sec-hd rv">
+    <div class="label">Problem</div>
+    <h2>지금, 이런 고민하고 계시죠?</h2>
+    <p>영상 콘텐츠 제작을 막막하게 만드는 주요 원인들.</p>
+  </div>
+  <div class="pain-grid">
+    <div class="pain-card hover-card-fx rv d1">
+      <i class="fa-solid fa-money-bill-wave pain-icon"></i>
+      <h3>영상 제작비의 엄청난 압박</h3>
+      <p>"짧은 광고 영상 하나 찍으려니 기획, 로케이션 촬영, 편집까지 수백만 원의 예산이 들어서 시작할 엄두조차 나지 않아요."</p>
+    </div>
+    <div class="pain-card hover-card-fx rv d2">
+      <i class="fa-solid fa-face-frown-open pain-icon"></i>
+      <h3>어설픈 무료 템플릿의 한계</h3>
+      <p>"무료 편집 앱이나 템플릿으로 텍스트만 대충 움직이게 만들었더니 촌스럽고 우리 브랜드만의 고급스러운 느낌이 전혀 안 살아요."</p>
+    </div>
+    <div class="pain-card hover-card-fx rv d3">
+      <i class="fa-solid fa-person-circle-question pain-icon"></i>
+      <h3>스토리보드 기획의 부재</h3>
+      <p>"영상으로 만들고 싶은 마음은 굴뚝 같은데, 어떤 흐름으로 움직여야 시선을 끌지 스토리보드를 짤 줄 몰라서 백지 상태입니다."</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. MOTION CATEGORIES (1행 3칸, 2줄 확장 레이아웃) -> 배경 교차 2 -->
+<section class="sec bg-base" id="categories">
+  <div class="sec-hd rv">
+    <div class="label">Categories</div>
+    <h2>JPHIC MOTION 적용 분야</h2>
+    <p>다양한 영상 플랫폼과 오프라인 매체에 최적화된 결과물을 제작합니다.</p>
+  </div>
+  <div class="category-grid rv d1">
+    <div class="cat-card hover-card-fx">
+      <i class="fa-solid fa-mobile-screen cat-icon"></i>
+      <h4>인스타 쇼츠·릴스</h4>
+      <p>가로형 소스를 모바일 최적화<br>세로형 숏폼 모션 그래픽으로 변환</p>
+    </div>
+    <div class="cat-card hover-card-fx">
+      <i class="fa-solid fa-tv cat-icon"></i>
+      <h4>디지털 사이니지</h4>
+      <p>매장 메뉴판, 백화점 대형 전광판용<br>무한 루핑(반복 재생) 모션</p>
+    </div>
+    <div class="cat-card hover-card-fx">
+      <i class="fa-solid fa-rectangle-ad cat-icon"></i>
+      <h4>유튜브 범퍼·광고 영상</h4>
+      <p>스킵(Skip)하기 전 시선을 뺏는<br>짧고 강렬한 트랜지션 광고 영상</p>
+    </div>
+    <div class="cat-card hover-card-fx">
+      <i class="fa-solid fa-brain cat-icon"></i>
+      <h4>생성형 AI 브랜드 필름</h4>
+      <p>실제 촬영 없이 생성형 AI만으로<br>연출하는 압도적 스케일의 브랜드 영상</p>
+    </div>
+    <div class="cat-card hover-card-fx">
+      <i class="fa-solid fa-video cat-icon"></i>
+      <h4>실사 촬영 결합 모션</h4>
+      <p>직접 촬영한 영상 소스 위에<br>그래픽과 타이포 모션을 믹스 매치</p>
+    </div>
+    <div class="cat-card hover-card-fx">
+      <i class="fa-solid fa-image cat-icon"></i>
+      <h4>에디토리얼 모션 포스터</h4>
+      <p>완성된 포스터나 배너의 레이아웃을<br>분해하여 역동적인 움직임 부여</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. SERVICES VISUAL -> 배경 교차 3 -->
+<section class="sec bg-alt" id="services-visual">
+  <div class="sec-hd rv">
+    <div class="label">Solution</div>
+    <h2>제이픽 모션은 무엇을 해주나요?</h2>
+    <p>기본 소스 활용부터 완벽한 무에서 유를 창조하는 영상까지.</p>
+  </div>
+  <div class="svc-wrap">
+    <div class="svc-row hover-card-fx rv d1">
+      <div class="svc-text">
+        <div class="svc-num">01</div>
+        <h3>기존 디자인을 움직이게 (Basic Motion)</h3>
+        <p>전단지, 포스터 등으로 편집 레이아웃이 끝난 원본 파일(AI, PSD)을 활용하여 요소별로 생동감 있는 움직임을 부여하고 영상 매체 규격으로 확장합니다.</p>
+        <span class="svc-tag">#가성비_최고 #에디토리얼모션</span>
+      </div>
+      <div class="svc-visual">
+        <div class="mock-editorial">
+          <div class="m-img"></div>
+          <div class="m-txt"></div>
+          <div class="m-txt2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-row hover-card-fx rv d2">
+      <div class="svc-text">
+        <div class="svc-num">02</div>
+        <h3>스토리보드 기획 및 연출 제안</h3>
+        <p>단순한 효과를 넘어, "어떻게 시선을 끌고 어떤 메시지를 남길 것인가"에 대한 치밀한 스토리보드(콘티) 기획 작업이 동반되는 크리에이티브 솔루션입니다.</p>
+        <span class="svc-tag">#스토리텔링 #영상기획</span>
+      </div>
+      <div class="svc-visual">
+        <div class="mock-storyboard">
+          <div class="m-sb-frame">S1</div>
+          <div class="m-sb-frame">S2</div>
+          <div class="m-sb-frame">S3</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-row hover-card-fx rv d3">
+      <div class="svc-text">
+        <div class="svc-num">03</div>
+        <h3>생성형 AI 및 실사 믹스 매치</h3>
+        <p>촬영 예산이 부족해도 문제없습니다. 실사 영상 소스와 화려한 2D 모션 그래픽을 결합하거나, 최신 프롬프트를 활용해 100% 생성형 AI 고퀄리티 영상을 제작합니다.</p>
+        <span class="svc-tag">#생성형AI #비주얼이펙트</span>
+      </div>
+      <div class="svc-visual">
+        <div class="mock-ai-video">
+          <i class="fa-solid fa-clapperboard"></i>
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. HOW TO (Process) -> 배경 교차 4 -->
+<section class="sec bg-base" id="how">
+  <div class="sec-hd rv">
+    <div class="label">Work Flow</div>
+    <h2>제이픽 영상 제작 워크플로우</h2>
+    <p>기획부터 최종 렌더링까지 체계적인 프로세스.</p>
+  </div>
+  <div class="how-grid rv d1">
+    <div class="step-card hover-card-fx">
+      <div class="step-num">01</div>
+      <h4>목적 및 에셋 전달</h4>
+      <p>제작할 영상의 타깃 플랫폼(릴스/전광판 등)과 활용할 디자인 원본, 로고 에셋을 제이픽에 전달합니다.</p>
+    </div>
+    <div class="step-card hover-card-fx">
+      <div class="step-num">02</div>
+      <h4>스토리보드(기획) 제안</h4>
+      <p>어떤 타이밍에 어떤 움직임과 텍스트가 등장할지, 전체 영상의 흐름을 기획한 스토리보드안을 컨펌합니다.</p>
+    </div>
+    <div class="step-card hover-card-fx">
+      <div class="step-num">03</div>
+      <h4>모션 제작 및 AI 렌더링</h4>
+      <p>스토리보드를 바탕으로 애프터이펙트 모션 작업, 실사 편집, 또는 생성형 AI 비디오 렌더링을 진행합니다.</p>
+    </div>
+    <div class="step-card final hover-card-fx">
+      <div class="step-num">04</div>
+      <h4>최종 영상 납품 (MP4/MOV)</h4>
+      <p>매체 규격에 완벽하게 세팅된 고화질 최종 영상 파일과 프록시본을 납품합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. REVIEWS -> 배경 교차 5 -->
+<section class="sec bg-alt" id="reviews">
+  <div class="sec-hd rv">
+    <div class="label">Reviews</div>
+    <h2>파트너스 리얼 후기</h2>
+    <p>제이픽의 모션으로 죽어있던 콘텐츠가 살아난 사례들.</p>
+  </div>
+  <div class="review-grid">
+    <div class="review-card hover-card-fx rv d1">
+      <div class="stars">★★★★★</div>
+      <div class="r-quote">"상세페이지용으로 만든 이미지만 딱 드렸는데, 트렌디한 BGM에 맞춰서 인스타 릴스로 찰떡같이 만들어주셨어요. 확실히 이미지만 올릴 때보다 반응이 대박입니다!"</div>
+      <div class="r-client">
+        <strong>[베이직 모션] 이용</strong>
+        패션 커머스 대표
+      </div>
+    </div>
+    <div class="review-card hover-card-fx rv d2">
+      <div class="stars">★★★★★</div>
+      <div class="r-quote">"제품 홍보 영상을 만들어야 하는데 촬영 스튜디오 대관 예산이 없어서 막막했어요. 제이픽에서 생성형 AI로 대기업 CF 부럽지 않은 고퀄리티 브랜드 필름을 뽑아주셨습니다."</div>
+      <div class="r-client">
+        <strong>[크리에이티브 AI 영상] 이용</strong>
+        스타트업 마케팅 팀장
+      </div>
+    </div>
+    <div class="review-card hover-card-fx rv d3">
+      <div class="stars">★★★★★</div>
+      <div class="r-quote">"매장 바깥에 달린 세로형 전광판(사이니지)이 너무 심심해서 역동적인 모션을 넣었더니, 지나가던 사람들이 전광판을 쳐다보면서 매장에 들어오는 비율이 확 늘었습니다."</div>
+      <div class="r-client">
+        <strong>[베이직 모션] 이용</strong>
+        대형 F&B 프랜차이즈 점주
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. PRICING (2 Cards) -> 배경 교차 6 -->
+<section class="sec bg-base" id="pricing">
+  <div class="sec-hd rv">
+    <div class="label">Pricing</div>
+    <h2>영상 모션 기획 플랜</h2>
+    <p>단순 모션 추가부터 크리에이티브 AI 결합까지 선택하세요.</p>
+  </div>
+  <div class="price-grid-2">
+    <!-- 플랜 1 -->
+    <div class="price-card-2 hover-card-fx rv d1">
+      <h3 class="p-title">에디토리얼 베이직 모션</h3>
+      <p class="p-desc">포스터, 배너 등 이미 완성된 편집 레이아웃 원본 파일을 기반으로 트렌디한 타이포그래피 모션과 요소별 애니메이션을 추가하는 가성비 솔루션입니다.</p>
+      <ul class="p-list">
+        <li><i class="fa-solid fa-check"></i> <span>기존 편집 레이아웃(디자인)의 동적 영상화</span></li>
+        <li><i class="fa-solid fa-check"></i> <span>쇼츠/릴스 등 숏폼 사이즈 베리에이션</span></li>
+        <li><i class="fa-solid fa-check"></i> <span>디지털 사이니지(메뉴판/전광판) 루핑 모션</span></li>
+        <li class="dim"><i></i> <span>새로운 영상 콘티/스토리보드 기획</span></li>
+        <li class="dim"><i></i> <span>생성형 AI 영상 및 실사 믹스매치</span></li>
+      </ul>
+      <a onclick="openModalWithService('에디토리얼 베이직 모션')" class="p-btn">제이픽, 기본 레이아웃 영상으로 만들어줘!</a>
+    </div>
+    <!-- 플랜 2 -->
+    <div class="price-card-2 featured hover-card-fx rv d2">
+      <h3 class="p-title">크리에이티브 & AI 모션</h3>
+      <p class="p-desc">단순한 움직임을 넘어, 어떻게 시선을 사로잡을지 스토리보드를 기획하고 촬영본 합성 또는 최신 생성형 AI를 활용해 창조적인 브랜드 영상을 제작합니다.</p>
+      <ul class="p-list">
+        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">영상 콘셉트 및 스토리보드(콘티) 기획 제안</span></li>
+        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">제공된 실사 영상 소스와 2D 그래픽 믹스 매치</span></li>
+        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">촬영 없이 만드는 100% 생성형 AI 영상 제작</span></li>
+        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">유튜브/브랜드 필름/광고 등 고퀄리티 마스터링</span></li>
+      </ul>
+      <a onclick="openModalWithService('크리에이티브 AI 영상 제작')" class="p-btn">제이픽, 크리에이티브 AI 영상 제작해줘!</a>
+    </div>
+  </div>
+</section>
+
+<!-- 8. FINAL CTA & UNIVERSE (5단계) -->
+<section class="sec final-cta">
+  <div class="rv d1">
+    <h2>JPHIC UNIVERSE</h2>
+    <p>영상이 완성되셨나요?<br>이 강력한 무기를 지속적으로 관리해 줄 에이전시를 만나보세요.</p><br>
+    
+    <div class="uni-grid rv d2">
+      <a href="https://jphic.co.kr/core" target="_blank" class="uni-card c-core">
+        <span class="uni-step">STEP 1. 아이디어 다듬기</span>
+        <h3 class="uni-title">JPHIC <span>CORE</span></h3>
+        <p class="uni-desc">AI 프롬프트 교정 및<br>디자인 디테일 리터칭</p>
+      </a>
+      <a href="https://jphic.co.kr/logo" target="_blank" class="uni-card c-logo">
+        <span class="uni-step">STEP 2. 진짜 파일 만들기</span>
+        <h3 class="uni-title">JPHIC <span>LOGO</span></h3>
+        <p class="uni-desc">깨지는 이미지를 무한 확대<br>벡터(AI) 파일로 기초 자산화</p>
+      </a>
+      <a href="https://jphic.co.kr/pdf" target="_blank" class="uni-card c-pdf">
+        <span class="uni-step">STEP 3. 현장 인쇄 사고 0%</span>
+        <h3 class="uni-title">JPHIC <span>PDF</span></h3>
+        <p class="uni-desc">간판, 현수막, 부스 제작을 위한<br>마스터 발주 파일 세팅</p>
+      </a>
+      <!-- MOTION CURRENT -->
+      <div class="uni-card c-motion current">
+        <span class="uni-step">STEP 4. 움직이는 무기</span>
+        <h3 class="uni-title">JPHIC <span>MOTION</span></h3>
+        <p class="uni-desc">정지된 레이아웃 모션화 및<br>생성형 AI 광고 영상 제작</p>
+      </div>
+      <a href="https://jphic.co.kr/agency" target="_blank" class="uni-card c-agency">
+        <span class="uni-step">STEP 5. 계속 써먹기</span>
+        <h3 class="uni-title">JPHIC <span>AGENCY</span></h3>
+        <p class="uni-desc">전담 디자인 파트너 매칭<br>브랜드 자산 무한 베리에이션</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="f-logo">JPHIC <span>MOTION</span></span>
+  © 2026 JPHIC. All Rights Reserved. 에디토리얼 모션 및 크리에이티브 AI 영상 에이전시
+</footer>
+
+<!-- MODAL FORM -->
+<div class="modal-overlay" id="orderModal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeModalDirect()">&times;</div>
+
+    <div class="modal-body">
+      <!-- Step 1 -->
+      <div class="form-step active" id="step1">
+        <div class="modal-header">
+          <h2>어떤 영상 작업을 원하시나요?</h2>
+          <p>멈춰있는 디자인 자산을 생동감 넘치게 바꿔드립니다.</p>
+        </div>
+        <div class="f-group">
+          <div class="f-options">
+            <input type="radio" name="track" id="trA" value="에디토리얼 베이직 모션" class="f-radio" checked>
+            <label for="trA" class="option-card">
+              <strong>🎬 에디토리얼 베이직 모션 (기본)</strong>
+              <span>완성된 포스터나 배너 원본을 활용하여 릴스, 사이니지용으로 움직임을 추가합니다.</span>
+            </label>
+            <input type="radio" name="track" id="trB" value="크리에이티브 및 생성형 AI 영상" class="f-radio">
+            <label for="trB" class="option-card">
+              <strong>✨ 크리에이티브 및 생성형 AI 영상 (고급)</strong>
+              <span>스토리보드 기획이 들어가며, 생성형 AI 및 실사 믹스매치를 통해 광고 영상을 만듭니다.</span>
+            </label>
+            <input type="radio" name="track" id="trC" value="장기 전담 영상/디자인 케어" class="f-radio">
+            <label for="trC" class="option-card">
+              <strong>🤝 장기 전담 디자인 파트너 → <a href="https://jphic.co.kr/agency" target="_blank" style="color:var(--mc);">JPHIC AGENCY</a></strong>
+              <span>매월 꾸준하게 브랜드 영상 및 디자인 베리에이션 작업이 필요한 경우입니다.</span>
+            </label>
+          </div>
+        </div>
+        <button class="btn-submit-modal" onclick="nextStep(2)">상세 정보 입력하기 <i class="fa-solid fa-arrow-right" style="margin-left:8px;"></i></button>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="form-step" id="step2">
+        <div class="modal-header">
+          <h2>조금만 더 알려주세요</h2>
+          <p>담당자가 내용을 확인하고 영상 기획을 빠르게 도와드립니다.</p>
+        </div>
+        <div class="f-group">
+          <label class="f-label">기본 정보 (Name / 연락처)</label>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="req-name" class="f-input" placeholder="성함" style="flex: 1;">
+            <input type="text" id="req-phone" class="f-input" placeholder="010-0000-0000" style="flex: 2;">
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label">필요한 영상 카테고리 (복수 선택)</label>
+          <div class="check-tags">
+            <input type="checkbox" name="problem" id="p1" value="인스타 릴스/쇼츠" class="f-check">
+            <label for="p1" class="check-btn">인스타 릴스/쇼츠</label>
+            <input type="checkbox" name="problem" id="p2" value="디지털 사이니지(메뉴판/전광판)" class="f-check">
+            <label for="p2" class="check-btn">디지털 사이니지</label>
+            <input type="checkbox" name="problem" id="p3" value="유튜브 범퍼/광고" class="f-check">
+            <label for="p3" class="check-btn">유튜브 범퍼/광고</label>
+            <input type="checkbox" name="problem" id="p4" value="생성형 AI 결합" class="f-check">
+            <label for="p4" class="check-btn">생성형 AI 결합</label>
+            <input type="checkbox" name="problem" id="p5" value="실사 영상 + 그래픽 합성" class="f-check">
+            <label for="p5" class="check-btn">실사 영상 합성</label>
+            <input type="checkbox" name="problem" id="p6" value="스토리보드 기획 필요" class="f-check">
+            <label for="p6" class="check-btn">스토리 기획 필요</label>
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label">사용 목적 및 플랫폼</label>
+          <input type="text" id="req-use" class="f-input" placeholder="예: 인스타그램 광고 집행, 백화점 옥외 전광판, 브랜드 유튜브 등">
+        </div>
+        <div class="f-group">
+          <label class="f-label">추가 요청사항</label>
+          <textarea id="req-memo" class="f-textarea" placeholder="머릿속에 그리고 있는 영상의 무드(분위기)나 참고할 만한 레퍼런스가 있다면 자유롭게 적어주세요." rows="3"></textarea>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn-submit-modal" style="background:#1e293b; flex:1; box-shadow:none;" onclick="nextStep(1)">이전</button>
+          <button id="btn-submit" class="btn-submit-modal" style="flex:2;" onclick="submitFormToSheet()">제이픽, 이대로 모션 신청해줘!</button>
+        </div>
+      </div>
+
+      <!-- Step 3 (접수 완료 + 복사 박스) -->
+      <div class="form-step" id="step3">
+        <div class="modal-header">
+          <h2 style="color: var(--mc);">신청이 구글 시트에 접수되었습니다! 🎉</h2>
+          <p>아래 내용을 복사해서 <b style="color:#fff;">오픈챗</b>에 원본 소스(파일)와 함께 남겨주시면 기획이 시작됩니다.</p>
+        </div>
+        
+        <div class="copy-box" id="copyTextResult"></div>
+        
+        <div style="display:flex; flex-direction: column; gap:12px;">
+          <button class="btn-submit-modal" style="background:#1e293b; font-size:1rem; padding:14px; box-shadow:none;" onclick="copyToClipboard(this)"><i class="fa-regular fa-copy" style="margin-right:8px;"></i> 요약 내용 복사하기</button>
+          <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="btn-submit-modal" style="text-decoration:none;"><i class="fa-solid fa-comment" style="margin-right:8px;"></i> JPHIC MOTION 오픈챗 열기</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const navAnchors = document.querySelectorAll('.nav-links a');
+navAnchors.forEach(anchor => {
+  anchor.addEventListener('click', function() {
+    navAnchors.forEach(a => a.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { 
+    if(e.isIntersecting) e.target.classList.add('on'); 
+    else e.target.classList.remove('on');
+  });
+}, { threshold: 0.05, rootMargin: "0px 0px -50px 0px" });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+function toggleMobileMenu() {
+  const navLinks = document.getElementById('navLinks');
+  navLinks.classList.toggle('active');
+}
+function closeMobileMenu() {
+  document.getElementById('navLinks').classList.remove('active');
+}
+
+const modal = document.getElementById('orderModal');
+
+function openModal() {
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  resetStep();
+}
+
+function openModalWithService(serviceName) {
+  openModal();
+  if(serviceName === '에디토리얼 베이직 모션') document.getElementById('trA').checked = true;
+  else if(serviceName === '크리에이티브 AI 영상 제작') document.getElementById('trB').checked = true;
+}
+
+function closeModal(e) {
+  if(e.target === modal) closeModalDirect();
+}
+
+function closeModalDirect() {
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function resetStep() {
+  document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('req-name').value = '';
+  document.getElementById('req-phone').value = '';
+  document.getElementById('req-use').value = '';
+  document.getElementById('req-memo').value = '';
+  document.querySelectorAll('input[name="problem"]').forEach(el => el.checked = false);
+}
+
+function nextStep(step) {
+  document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step' + step).classList.add('active');
+}
+
+async function submitFormToSheet() {
+  const btn = document.getElementById('btn-submit');
+  btn.innerText = "구글로 접수 중...";
+  btn.disabled = true;
+
+  const track = document.querySelector('input[name="track"]:checked').value;
+  const name = document.getElementById('req-name').value || '미입력';
+  const phone = document.getElementById('req-phone').value || '미입력';
+  const problems = Array.from(document.querySelectorAll('input[name="problem"]:checked')).map(el => el.value);
+  const problemText = problems.length > 0 ? problems.join(', ') : '없음';
+  const use = document.getElementById('req-use').value || '미입력';
+  const memo = document.getElementById('req-memo').value || '없음';
+
+  // MOTION 사이트에서 유입되었음을 구글 시트에 알리기 위한 꼬리표
+  const payload = {
+    site: "JPHIC MOTION",
+    name: name,
+    phone: phone,
+    brand: use, 
+    need: `서비스: ${track} / 카테고리: ${problemText}`,
+    memo: memo
+  };
+
+  const result = `📋 JPHIC MOTION 제작 신청서\n____________________________\n■ 신청 서비스: ${track}\n■ 신청자명: ${name}\n■ 연락처: ${phone}\n■ 영상 카테고리: ${problemText}\n■ 목적/플랫폼: ${use}\n■ 추가 메모: ${memo}\n____________________________\n※ 작성하신 내용과 활용할 디자인 원본 소스를 오픈챗에 올려주세요!`;
+  document.getElementById('copyTextResult').innerText = result;
+
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzC2AzSg-3y2hRQnVOqpVzWCapcVTuIsPIN5Z-nrrnMSMzUS10TOclaVAyBz7qJVIEZ/exec";
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" }, 
+      body: JSON.stringify(payload)
+    });
+    nextStep(3); 
+  } catch (error) {
+    console.error('Error!', error);
+    nextStep(3); 
+  } finally {
+    btn.innerText = "제이픽, 이대로 모션 신청해줘!";
+    btn.disabled = false;
+  }
+}
+
+function copyToClipboard(btn) {
+  const text = document.getElementById('copyTextResult').innerText;
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.select();
+  try {
+    document.execCommand('copy');
+    const originalHtml = btn.innerHTML;
+    btn.innerHTML = "<i class='fa-solid fa-check' style='margin-right:8px;'></i> 복사 완료!";
+    btn.style.background = "var(--mc)";
+    setTimeout(() => {
+      btn.innerHTML = originalHtml;
+      btn.style.background = "#1e293b"; 
+    }, 2000);
+  } catch (err) {
+    console.error('복사 실패');
+  }
+  document.body.removeChild(textArea);
+}
+</script>
+</body>
+</html>
