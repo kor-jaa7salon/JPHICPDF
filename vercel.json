@@ -1,5 +1,5 @@
 {
-  "rootDirectory": "public",
+  "outputDirectory": "public",
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
