@@ -1,192 +1,364 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JPHIC UNIVERSE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <!-- [파비콘 설정] public 폴더의 자산을 루트(/) 경로로 호출 -->
-    <link rel="icon" href="/favicon-uv.png" type="image/png">
-    <link rel="apple-touch-icon" href="/favicon-uv.png">
+<title>JPHIC UNIVERSE | 브랜드 자산을 완성하는 5단계 솔루션</title>
 
-    <!-- [메타 태그 / OG 이미지] 공유 시 og-universe.jpg가 나타나도록 설정 -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="JPHIC UNIVERSE">
-    <meta property="og:description" content="아이디어를 무한히 확장되는 브랜드 자산으로 만드는 5단계 솔루션">
-    <meta property="og:image" content="/og-universe.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="/og-universe.jpg">
+<!-- 파비콘 설정 예시 (실제 파일명으로 교체 필요) -->
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-    <style>
-        :root {
-            --bg-color: #f4f1ee; /* Neutral Sand / Greige */
-            --point-orange: #d35400; /* Brick Orange */
-            --text-main: #2d2d2d;
-        }
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-color);
-            font-family: 'Pretendard', sans-serif;
-            color: var(--text-main);
-            overflow: hidden;
-        }
+<style>
+:root {
+  --bg: hsl(220, 25%, 2%);
+  --text-main: #F8FAFC; 
+  --text-sub: #94A3B8;
+  --border: rgba(255, 255, 255, 0.05);
+  --c-core: #00BBAC;
+  --c-logo: #3b82f6;
+  --c-pdf: #ea580c;
+  --c-motion: #9868d8;
+  --c-agency: #cbd5e1;
+}
 
-        .universe-container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+/* 텍스트 드래그 및 복사 방지 */
+* { 
+  margin: 0; padding: 0; box-sizing: border-box; 
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+}
 
-        /* 슬라이더 스타일 */
-        .hero-slider {
-            position: relative;
-            width: 80%;
-            max-width: 1200px;
-            height: 400px;
-        }
+html, body { max-width: 100vw; min-height: 100vh; overflow-x: hidden; background: var(--bg); font-family: 'Pretendard', sans-serif; color: var(--text-main); line-height: 1.6; word-break: keep-all; scroll-behavior: smooth; }
 
-        .hero-slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transform: translateX(80px); /* 우측 대기 */
-            transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-            pointer-events: none;
-        }
+/* 배경 레이아웃 */
+.universe-bg { position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.02) 0%, transparent 60%), linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 100% 100%, 60px 60px, 60px 60px; pointer-events: none;}
+.event-horizon { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotateX(65deg); width: 100vw; height: 100vw; min-width: 1000px; min-height: 1000px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.03); box-shadow: 0 0 150px rgba(255,255,255,0.01), inset 0 0 100px rgba(255,255,255,0.01); z-index: 0; pointer-events: none; animation: spinHole 60s linear infinite; }
+@keyframes spinHole { 100% { transform: translate(-50%, -50%) rotateX(65deg) rotateZ(360deg); } }
 
-        /* 활성화된 슬라이드 (중앙 등장) */
-        .hero-slide.active {
-            opacity: 1;
-            transform: translateX(0);
-            pointer-events: auto;
-        }
+/* 상단 네비게이션 */
+.nav-header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; z-index: 1000; }
+.logo { font-size: 1.2rem; font-weight: 900; color: #fff; text-decoration: none; }
+.top-cta-group { display: flex; gap: 10px; }
+.top-btn { padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; background: rgba(255,255,255,0.05); color: #fff; backdrop-filter: blur(10px); }
+.top-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); background: rgba(255,255,255,0.1); border-color: #fff; }
 
-        /* 퇴장하는 슬라이드 (좌측으로 디졸브) */
-        .hero-slide.prev-out {
-            opacity: 0;
-            transform: translateX(-80px);
-        }
+/* 히어로 슬라이더 (오른쪽 -> 왼쪽 디졸브 로직) */
+.hero-slider { position: relative; width: 100%; height: 85vh; overflow: hidden; z-index: 10; display: flex; align-items: center; }
+.hero-track { position: relative; width: 100%; height: 100%; }
+.hero-slide { 
+  position: absolute; inset: 0; width: 100%; height: 100%; 
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 10%;
+  opacity: 0; transform: translateX(40px); /* 우측에서 대기 */
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1); 
+  pointer-events: none;
+}
+.hero-slide.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+.hero-slide.prev-out { opacity: 0; transform: translateX(-40px); } /* 좌측으로 사라짐 */
 
-        .slide-title {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            letter-spacing: -0.05em;
-        }
+.hero-tag { display: inline-block; padding: 6px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 50px; font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 25px; color: var(--text-sub); }
+.hero-slide h1 { font-size: clamp(1.8rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.3; margin-bottom: 35px; color: #fff; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
 
-        .slide-desc {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            text-align: center;
-            max-width: 600px;
-            color: #666;
-        }
+.hero-go-btn { 
+  padding: 16px 32px; border-radius: 50px; background: rgba(255,255,255,0.05); color: #fff; 
+  text-decoration: none; font-weight: 800; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.2); 
+  transition: 0.3s; display: flex; align-items: center; gap: 10px; cursor: pointer;
+}
+/* 서비스 컬러 포인트 */
+.c1 .hero-go-btn:hover, .c4 .hero-go-btn:hover, .c7 .hero-go-btn:hover, .c10 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-core); border-color: var(--c-core); }
+.c2 .hero-go-btn:hover, .c9 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-logo); border-color: var(--c-logo); }
+.c3 .hero-go-btn:hover, .c8 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-pdf); border-color: var(--c-pdf); }
+.c5 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-motion); border-color: var(--c-motion); }
+.c6 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-agency); border-color: var(--c-agency); }
 
-        /* 하단 서비스 인디케이터 */
-        .nav-dots {
-            position: absolute;
-            bottom: 10%;
-            display: flex;
-            gap: 20px;
-        }
+.hero-slide.c1 h1 span, .hero-slide.c4 h1 span, .hero-slide.c7 h1 span, .hero-slide.c10 h1 span { color: var(--c-core); }
+.hero-slide.c2 h1 span, .hero-slide.c9 h1 span { color: var(--c-logo); }
+.hero-slide.c3 h1 span, .hero-slide.c8 h1 span { color: var(--c-pdf); }
+.hero-slide.c5 h1 span { color: var(--c-motion); }
+.hero-slide.c6 h1 span { color: var(--c-agency); }
 
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ccc;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+.slider-dots { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 20; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: 0.3s; }
+.dot.active { background: #fff; width: 24px; border-radius: 10px; }
 
-        .dot.active {
-            background: var(--point-orange);
-            transform: scale(1.3);
-        }
-    </style>
+.nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; transition: 0.3s; }
+.nav-arrow:hover { background: #fff; color: #000; }
+.prev { left: 30px; } .next { right: 30px; }
+
+/* 서비스 카드 그리드 및 상단 간격 보정 */
+.hub-wrapper { padding: 80px 5% 120px; position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; }
+.hub-grid { display: flex; flex-direction: column; align-items: center; gap: 30px; width: 100%; }
+.hub-card { 
+  width: 100%; max-width: 720px; border: 1px solid rgba(255,255,255,0.03); 
+  border-radius: 28px; padding: 45px 55px; text-decoration: none; 
+  display: flex; align-items: center; justify-content: space-between; 
+  position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.4); 
+  transition: 0.5s; scroll-margin-top: 100px;
+}
+
+.c-core { --theme: var(--c-core); --glow: rgba(0,187,172,0.4); background: hsl(220, 25%, 4%); }
+.c-logo { --theme: var(--c-logo); --glow: rgba(59,130,246,0.4); background: hsl(220, 25%, 6%); }
+.c-pdf { --theme: var(--c-pdf); --glow: rgba(234,88,12,0.4); background: hsl(220, 25%, 4%); }
+.c-motion { --theme: var(--c-motion); --glow: rgba(152,104,216,0.4); background: hsl(220, 25%, 6%); }
+.c-agency { --theme: var(--c-agency); --glow: rgba(203, 213, 225, 0.2); background: hsl(220, 25%, 4%); }
+
+.c-info { width: 75%; display: flex; flex-direction: column; }
+.c-step { font-size: 0.85rem; font-weight: 900; color: var(--theme); margin-bottom: 12px; letter-spacing: 1px; }
+.c-title { font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.c-subtitle { font-size: 1.1rem; color: var(--theme); font-weight: 800; margin-bottom: 20px; }
+.c-desc { font-size: 1rem; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 30px; }
+.c-link { color: var(--theme); font-weight: 800; display: flex; align-items: center; gap: 8px; }
+
+.c-icon { 
+  font-size: 5.5rem; color: var(--theme); opacity: 0.8; 
+  transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
+  filter: drop-shadow(0 0 15px var(--theme)); 
+}
+
+/* 강조 효과 클래스 */
+.hub-card.highlight-glow {
+  border-color: var(--theme) !important;
+  box-shadow: 0 0 40px var(--glow) !important;
+  transform: translateY(-10px);
+}
+.hub-card.highlight-glow .c-icon { transform: scale(1.1) rotate(5deg); opacity: 1; }
+
+@media (hover: hover) {
+  .hub-card:hover { transform: translateY(-10px); border-color: var(--theme); box-shadow: 0 0 40px var(--glow); }
+  .hub-card:hover .c-icon { transform: scale(1.1) rotate(5deg); opacity: 1; }
+  .c-agency:hover .c-icon { transform: translate(60px, -40px) scale(1.6) rotate(15deg); }
+}
+
+@media (max-width: 768px) {
+  .nav-arrow { display: none; }
+  .hub-wrapper { padding-top: 60px; }
+  .hub-card { padding: 35px; flex-direction: column; align-items: flex-start; overflow: hidden; scroll-margin-top: 80px; }
+  .c-icon { position: absolute; top: 30px; right: 30px; font-size: 3.5rem; }
+  .top-btn { padding: 8px 12px; font-size: 0.7rem; }
+}
+</style>
 </head>
-<body>
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 
-<div class="universe-container">
-    <div class="hero-slider">
-        <!-- 5대 서비스 슬라이드 -->
-        <div class="hero-slide active" data-index="0">
-            <h1 class="slide-title">CORE</h1>
-            <p class="slide-desc">아이디어의 본질을 정렬하고 AI 프롬프트를 교정하여 브랜드의 뿌리를 설계합니다.</p>
-        </div>
-        <div class="hero-slide" data-index="1">
-            <h1 class="slide-title">LOGO</h1>
-            <p class="slide-desc">설계된 가치를 시각적 벡터 자산으로 전환하여 확장 가능한 심볼을 구축합니다.</p>
-        </div>
-        <div class="hero-slide" data-index="2">
-            <h1 class="slide-title">PDF</h1>
-            <p class="slide-desc">오차 없는 도면과 기술 설계를 통해 인쇄 공정의 완벽한 결과물을 보장합니다.</p>
-        </div>
-        <div class="hero-slide" data-index="3">
-            <h1 class="slide-title">MOTION</h1>
-            <p class="slide-desc">브랜드 자산에 생동감을 불어넣어 무빙 에셋과 영상 가이드를 제작합니다.</p>
-        </div>
-        <div class="hero-slide" data-index="4">
-            <h1 class="slide-title">AGENCY</h1>
-            <p class="slide-desc">브랜드의 페르소나를 대행하여 파트너십과 운영을 효율적으로 관리합니다.</p>
-        </div>
-    </div>
+<div class="universe-bg"></div>
+<div class="event-horizon"></div>
 
-    <div class="nav-dots">
-        <div class="dot active"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+<!-- 상단 네비게이션 -->
+<nav class="nav-header">
+  <a href="#" class="logo">JPHIC</a>
+  <div class="top-cta-group">
+    <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="top-btn">
+      <i class="fa-solid fa-comment"></i> 제이픽, 이거 물어볼게요
+    </a>
+    <div class="top-btn" onclick="copyEmail('info@jphic.co.kr')">
+      <i class="fa-solid fa-envelope"></i> info@jphic.co.kr
     </div>
+  </div>
+</nav>
+
+<section class="hero-slider">
+  <div class="nav-arrow prev" onclick="manualMove(-1)"><i class="fa-solid fa-chevron-left"></i></div>
+  <div class="nav-arrow next" onclick="manualMove(1)"><i class="fa-solid fa-chevron-right"></i></div>
+  
+  <div class="hero-track" id="heroTrack">
+    <!-- 10개 헤드카피 슬라이드 -->
+    <div class="hero-slide active c1">
+      <div class="hero-tag">CORE STEP</div>
+      <h1>생성형 AI로 뽑은 로고,<br><span>왜 내 브랜드 자산이 되지 못할까요?</span></h1>
+      <div class="hero-go-btn" onclick="scrollToSection('section-core')">솔루션 확인하기 <i class="fa-solid fa-arrow-down"></i></div>
+    </div>
+    <div class="hero-slide c2">
+      <div class="hero-tag">LOGO STEP</div>
+      <h1>크게 인쇄하면 깨지는 로고,<br><span>아직도 파일 하나로 버티고 계신가요?</span></h1>
+      <div class="hero-go-btn" onclick="scrollToSection('section-logo')">벡터 자산화 시작 <i class="fa-solid fa-arrow-down"></i></div>
+    </div>
+    <div class="hero-slide c3">
+      <div class="hero-tag">PRINT STEP</div>
+      <h1>간판 업체에서 퇴짜 맞은 로고 파일,<br><span>제이픽이 숨을 불어넣습니다.</span></h1>
+      <div class="hero-go-btn" onclick="scrollToSection('section-pdf')">인쇄 세팅하기 <i class="fa-solid fa-arrow-down"></i></div>
+    </div>
+    <div class="hero-slide c4">
+      <div class="hero-tag">VISION</div>
+      <h1>어둠 속에 잠든 당신의 아이디어를<br><span>무한히 확장되는 브랜드 자산으로.</span></h1>
+      <div class="hero-go-btn" onclick="scrollToSection('section-core')">여정 시작하기 <i class="fa-solid fa-arrow-down"></i></div>
+    </div>
+    <div class="hero-slide c5">
+      <div class="hero-tag">MOTION</div>
+      <h1>멈춰있던 스케치가 움직이는 무기가 될 때,<br><span>브랜드의 진짜 성장이 시작됩니다.</span></h1>
+      <div class="hero-go-btn" onclick="scrollToSection('section-motion')">무기 장착하기 <i class="fa-solid fa-arrow-down"></i></div>
+    </div>
+    <div class="hero-slide c6">
+      <div class="hero-tag">AGENCY</div>
+      <h1>로고 하나로 끝내지 마세요.<br><span>리사이징부터 관리까지 전담팀이 됩니다.</span></h1>
+      <div class="hero-go-btn" onclick="scrollToSection('section-agency')">파트너십 확인 <i class="fa-solid fa-arrow-down"></i></div>
+    </div>
+    <div class="hero-slide c7">
+      <div class="hero-tag">QUALITY</div>
+      <h1>디테일의 한 끗 차이가<br><span>템플릿과 브랜드 자산을 결정합니다.</span></h1>
+      <div class="hero-go-btn" onclick="scrollToSection('section-core')">디테일 교정받기 <i class="fa-solid fa-arrow-down"></i></div>
+    </div>
+    <div class="hero-slide c8">
+      <div class="hero-tag">TRUST</div>
+      <h1>인쇄 사고 0%, 픽셀 깨짐 0%.<br><span>완벽한 마스터 데이터를 보장합니다.</span></h1>
+      <div class="hero-go-btn" onclick="scrollToSection('section-pdf')">신뢰의 인쇄파일 <i class="fa-solid fa-arrow-down"></i></div>
+    </div>
+    <div class="hero-slide c9">
+      <div class="hero-tag">ACTION</div>
+      <h1>아이디어만 가져오세요.<br><span>발주 파일까지 가는 가장 빠른 5단계.</span></h1>
+      <div class="hero-go-btn" onclick="scrollToSection('section-logo')">지금 실행하기 <i class="fa-solid fa-arrow-down"></i></div>
+    </div>
+    <div class="hero-slide c10">
+      <div class="hero-tag">JPHIC UNIVERSE</div>
+      <h1>당신의 브랜드는 준비되었습니다.<br><span>이제 제이픽 유니버스를 실행하세요.</span></h1>
+      <div class="hero-go-btn" onclick="scrollToSection('section-core')">프로젝트 접수 <i class="fa-solid fa-arrow-down"></i></div>
+    </div>
+  </div>
+  <div class="slider-dots" id="dots"></div>
+</section>
+
+<div class="hub-wrapper">
+  <div class="hub-grid">
+    <a href="/core" id="section-core" class="hub-card c-core">
+      <div class="c-info">
+        <span class="c-step">STEP 01</span>
+        <div class="c-title">CORE</div>
+        <div class="c-subtitle">아이디어 다듬기</div>
+        <p class="c-desc">"AI로 뽑긴 했는데 어딘가 엉성해요."<br>전문 프롬프트 교정 및 디자인 디테일 리터칭으로 생성된 이미지를 완벽한 초안으로 만듭니다.</p>
+        <div class="c-link">코어 다듬기 <i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+      <i class="fa-solid fa-wand-magic-sparkles c-icon"></i>
+    </a>
+    <a href="/logo" id="section-logo" class="hub-card c-logo">
+      <div class="c-info">
+        <span class="c-step">STEP 02</span>
+        <div class="c-title">LOGO</div>
+        <div class="c-subtitle">진짜 자산 만들기</div>
+        <p class="c-desc">"크게 뽑았더니 글씨가 다 깨져요."<br>픽셀 이미지를 수동 펜툴로 정밀 복원하여 무한 확대가 가능한 벡터(AI) 원본으로 자산화합니다.</p>
+        <div class="c-link">벡터 자산화 <i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+      <i class="fa-solid fa-bezier-curve c-icon"></i>
+    </a>
+    <a href="/pdf" id="section-pdf" class="hub-card c-pdf">
+      <div class="c-info">
+        <span class="c-step">STEP 03</span>
+        <div class="c-title">PDF</div>
+        <div class="c-subtitle">현장 인쇄 사고 0%</div>
+        <p class="c-desc">"인쇄소에서 여백이 없다고 반려했어요."<br>까다로운 인쇄 가이드에 맞춰 재단선, 칼선, CMYK 변환까지 마스터 발주 파일을 세팅합니다.</p>
+        <div class="c-link">인쇄 세팅하기 <i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+      <i class="fa-solid c-icon" style="font-family:'Font Awesome 6 Free'; font-weight:900;">&#xf02f;</i>
+    </a>
+    <a href="/motion" id="section-motion" class="hub-card c-motion">
+      <div class="c-info">
+        <span class="c-step">STEP 04</span>
+        <div class="c-title">MOTION</div>
+        <div class="c-subtitle">움직이는 무기</div>
+        <p class="c-desc">"포스터를 인스타 릴스 영상으로 쓰고 싶어요."<br>에디토리얼 모션화부터 생성형 AI를 결합한 크리에이티브 광고 영상을 제작합니다.</p>
+        <div class="c-link">영상 제작하기 <i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+      <i class="fa-solid fa-film c-icon"></i>
+    </a>
+    <a href="/agency" id="section-agency" class="hub-card c-agency">
+      <div class="c-info">
+        <span class="c-step">STEP 05</span>
+        <div class="c-title">AGENCY</div>
+        <div class="c-subtitle">계속 써먹기</div>
+        <p class="c-desc">"디자이너 채용 없이 우리 브랜드를 관리하고 싶어요."<br>만들어진 자산을 무한 리사이징하고 시즌 프로모션을 관리하는 전담 파트너십입니다.</p>
+        <div class="c-link">전담팀 고용하기 <i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+      <i class="fa-solid fa-infinity c-icon"></i>
+    </a>
+  </div>
 </div>
 
 <script>
-    let currentIndex = 0;
-    const slides = document.querySelectorAll('.hero-slide');
-    const dots = document.querySelectorAll('.dot');
+const slides = document.querySelectorAll('.hero-slide');
+const dotsContainer = document.getElementById('dots');
+let index = 0;
+let autoPlay;
 
-    function updateSlider(nextIndex) {
-        const prevIndex = currentIndex;
-        
-        // 기존 활성 슬라이드 퇴장 처리
-        slides[prevIndex].classList.remove('active');
-        slides[prevIndex].classList.add('prev-out');
-        dots[prevIndex].classList.remove('active');
+slides.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.classList.add('dot');
+  if(i===0) dot.classList.add('active');
+  dot.onclick = () => goToSlide(i);
+  dotsContainer.appendChild(dot);
+});
+const dots = document.querySelectorAll('.dot');
 
-        // 새 슬라이드 등장 처리
-        currentIndex = nextIndex;
-        slides[currentIndex].classList.remove('prev-out');
-        slides[currentIndex].classList.add('active');
-        dots[currentIndex].classList.add('active');
-
-        // 퇴장 애니메이션 완료 후 클래스 정리
-        setTimeout(() => {
-            slides.forEach((s, i) => {
-                if (i !== currentIndex) s.classList.remove('prev-out');
-            });
-        }, 1200);
+function updateSlider(dir) {
+  slides.forEach((s, i) => {
+    s.classList.remove('active', 'prev-out');
+    if (i === index) {
+      s.classList.add('active');
+    } else {
+      // 이전 슬라이드는 왼쪽으로 보내는 효과를 위한 클래스
+      s.classList.add('prev-out');
     }
+  });
+  dots.forEach((d, i) => d.classList.toggle('active', i === index));
+}
 
-    function autoPlay() {
-        let next = (currentIndex + 1) % slides.length;
-        updateSlider(next);
-    }
+function moveSlide(dir) {
+  index += dir;
+  if(index >= slides.length) index = 0;
+  if(index < 0) index = slides.length - 1;
+  updateSlider(dir);
+}
 
-    // 4초마다 자동 전환 (스테이 시간 확보)
-    setInterval(autoPlay, 4000);
+function manualMove(dir) {
+  stopAutoPlay();
+  moveSlide(dir);
+  startAutoPlay();
+}
+
+function goToSlide(i) {
+  stopAutoPlay();
+  index = i;
+  updateSlider();
+  startAutoPlay();
+}
+
+// 4초 스테이
+function startAutoPlay() {
+  autoPlay = setInterval(() => moveSlide(1), 4000); 
+}
+
+function stopAutoPlay() {
+  clearInterval(autoPlay);
+}
+
+function copyEmail(email) {
+  navigator.clipboard.writeText(email).then(() => {
+    alert('이메일 주소가 복사되었습니다: ' + email);
+  });
+}
+
+function scrollToSection(id) {
+  const target = document.getElementById(id);
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth' });
+    target.classList.add('highlight-glow');
+    setTimeout(() => {
+      target.classList.remove('highlight-glow');
+    }, 2000);
+  }
+}
+
+// 텍스트 드래그 및 우클릭 원천 방지
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 85 || e.keyCode === 117)) {
+    return false;
+  }
+});
+
+startAutoPlay();
 </script>
 
 </body>
