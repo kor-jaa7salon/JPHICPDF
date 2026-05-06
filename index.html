@@ -6,9 +6,6 @@
 
 <title>JPHIC UNIVERSE | 브랜드 자산을 완성하는 5단계 솔루션</title>
 
-<!-- 파비콘 설정 예시 (실제 파일명으로 교체 필요) -->
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
-
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -49,18 +46,15 @@ html, body { max-width: 100vw; min-height: 100vh; overflow-x: hidden; background
 .top-btn { padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; background: rgba(255,255,255,0.05); color: #fff; backdrop-filter: blur(10px); }
 .top-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); background: rgba(255,255,255,0.1); border-color: #fff; }
 
-/* 히어로 슬라이더 (오른쪽 -> 왼쪽 디졸브 로직) */
+/* 히어로 슬라이더 (디졸브 및 상하 이동 로직) */
 .hero-slider { position: relative; width: 100%; height: 85vh; overflow: hidden; z-index: 10; display: flex; align-items: center; }
 .hero-track { position: relative; width: 100%; height: 100%; }
 .hero-slide { 
   position: absolute; inset: 0; width: 100%; height: 100%; 
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 10%;
-  opacity: 0; transform: translateX(40px); /* 우측에서 대기 */
-  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1); 
-  pointer-events: none;
+  opacity: 0; transform: translateY(-15px); transition: opacity 0.8s ease, transform 0.8s ease; pointer-events: none;
 }
-.hero-slide.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
-.hero-slide.prev-out { opacity: 0; transform: translateX(-40px); } /* 좌측으로 사라짐 */
+.hero-slide.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
 .hero-tag { display: inline-block; padding: 6px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 50px; font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 25px; color: var(--text-sub); }
 .hero-slide h1 { font-size: clamp(1.8rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.3; margin-bottom: 35px; color: #fff; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
@@ -70,7 +64,6 @@ html, body { max-width: 100vw; min-height: 100vh; overflow-x: hidden; background
   text-decoration: none; font-weight: 800; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.2); 
   transition: 0.3s; display: flex; align-items: center; gap: 10px; cursor: pointer;
 }
-/* 서비스 컬러 포인트 */
 .c1 .hero-go-btn:hover, .c4 .hero-go-btn:hover, .c7 .hero-go-btn:hover, .c10 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-core); border-color: var(--c-core); }
 .c2 .hero-go-btn:hover, .c9 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-logo); border-color: var(--c-logo); }
 .c3 .hero-go-btn:hover, .c8 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-pdf); border-color: var(--c-pdf); }
@@ -121,7 +114,6 @@ html, body { max-width: 100vw; min-height: 100vh; overflow-x: hidden; background
   filter: drop-shadow(0 0 15px var(--theme)); 
 }
 
-/* 강조 효과 클래스 */
 .hub-card.highlight-glow {
   border-color: var(--theme) !important;
   box-shadow: 0 0 40px var(--glow) !important;
@@ -149,7 +141,6 @@ html, body { max-width: 100vw; min-height: 100vh; overflow-x: hidden; background
 <div class="universe-bg"></div>
 <div class="event-horizon"></div>
 
-<!-- 상단 네비게이션 -->
 <nav class="nav-header">
   <a href="#" class="logo">JPHIC</a>
   <div class="top-cta-group">
@@ -167,7 +158,7 @@ html, body { max-width: 100vw; min-height: 100vh; overflow-x: hidden; background
   <div class="nav-arrow next" onclick="manualMove(1)"><i class="fa-solid fa-chevron-right"></i></div>
   
   <div class="hero-track" id="heroTrack">
-    <!-- 10개 헤드카피 슬라이드 -->
+    <!-- 각 슬라이드에 active 클래스로 제어 -->
     <div class="hero-slide active c1">
       <div class="hero-tag">CORE STEP</div>
       <h1>생성형 AI로 뽑은 로고,<br><span>왜 내 브랜드 자산이 되지 못할까요?</span></h1>
@@ -292,15 +283,9 @@ slides.forEach((_, i) => {
 });
 const dots = document.querySelectorAll('.dot');
 
-function updateSlider(dir) {
+function updateSlider() {
   slides.forEach((s, i) => {
-    s.classList.remove('active', 'prev-out');
-    if (i === index) {
-      s.classList.add('active');
-    } else {
-      // 이전 슬라이드는 왼쪽으로 보내는 효과를 위한 클래스
-      s.classList.add('prev-out');
-    }
+    s.classList.toggle('active', i === index);
   });
   dots.forEach((d, i) => d.classList.toggle('active', i === index));
 }
@@ -309,7 +294,7 @@ function moveSlide(dir) {
   index += dir;
   if(index >= slides.length) index = 0;
   if(index < 0) index = slides.length - 1;
-  updateSlider(dir);
+  updateSlider();
 }
 
 function manualMove(dir) {
@@ -325,7 +310,7 @@ function goToSlide(i) {
   startAutoPlay();
 }
 
-// 4초 스테이
+// 스테이 시간 4초로 변경
 function startAutoPlay() {
   autoPlay = setInterval(() => moveSlide(1), 4000); 
 }
@@ -351,7 +336,6 @@ function scrollToSection(id) {
   }
 }
 
-// 텍스트 드래그 및 우클릭 원천 방지
 document.addEventListener('keydown', function(e) {
   if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 85 || e.keyCode === 117)) {
     return false;
