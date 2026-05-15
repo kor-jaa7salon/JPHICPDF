@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPHIC | 픽셀벡터 무료진단</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <!-- React & Lucide Icons -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Lucide CDN -->
+    <script src="https://unpkg.com/lucide@0.284.0"></script>
+    <style>
+        body { font-family: "Pretendard", sans-serif; background-color: #030712; color: white; margin: 0; -webkit-font-smoothing: antialiased; }
+        .grid-bg {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        input::placeholder { color: #52525b; }
+        input { font-size: 16px !important; } /* 모바일 자동 줌 방지 및 가독성 확보 */
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, createElement } = React;
+
+        const Icon = ({ name, size = 24, className = "", color = "currentColor", strokeWidth = 2 }) => {
+            const [iconData, setIconData] = useState(null);
+            useEffect(() => {
+                if (window.lucide && window.lucide.icons[name]) {
+                    const [tag, attrs, children] = window.lucide.icons[name];
+                    setIconData({ tag, attrs, children });
+                }
+            }, [name]);
+            if (!iconData) return <div style={{ width: size, height: size }} className={className} />;
+            return createElement('svg', { ...iconData.attrs, width: size, height: size, className: `lucide lucide-${name.toLowerCase()} ${className}`, stroke: color, strokeWidth, style: { fill: 'none' } }, iconData.children.map((child, i) => createElement(child[0], { ...child[1], key: i })));
+        };
+
+        // 새로운 구글 앱스 스크립트 URL 반영
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxLZLBGMnxDFLdXpqBCr2sRGzm0IeHkben_yWLZgcZUShXLYATr0l614N5A_hgYVhgE/exec"; 
+        const OPEN_CHAT_URL = "https://open.kakao.com/o/s154Q5ui";
+
+        const LOGO_TYPES = [
+            { id: 'type1', name: '워드마크형', desc: '텍스트 중심의 깔끔한 브랜드 로고', version: '1.0', price: 49000 },
+            { id: 'type2', name: '심볼형', desc: '추상적/구체적 그래픽 아이콘 중심', version: '2.0', price: 79000 },
+            { id: 'type3', name: '엠블럼형', desc: '도형 안에 텍스트와 문양이 결합된 형태', version: '2.0', price: 79000 },
+            { id: 'type4', name: '캐릭터형', desc: '브랜드 마스코트 기반 일러스트 로고', version: '2.0', price: 79000 },
+            { id: 'type5', name: '미니멀형', desc: '최소한의 라인으로 구성된 세련된 로고', version: '1.0', price: 49000 },
+            { id: 'type6', name: '캘리그라피형', desc: '손글씨 느낌의 유니크한 로고', version: '2.0', price: 79000 },
+        ];
+
+        const FLOW_STEPS = [
+            { id: 1, label: '이미지 진단', sub: '무료 변환 가능 여부 체크', status: 'active' },
+            { id: 2, label: '벡터 변환', sub: 'AI 이미지를 고품질 벡터로', status: 'pending' },
+            { id: 3, label: '최종 확정', sub: '원본 파일 및 저작권 확보', status: 'pending' }
+        ];
+
+        function App() {
+            const [selectedType, setSelectedType] = useState(null);
+            const [isSubmitting, setIsSubmitting] = useState(false);
+            const [isSubmitted, setIsSubmitted] = useState(false);
+            const [currentTime, setCurrentTime] = useState(new Date());
+            const [formData, setFormData] = useState({ userName: '', userPhone: '', userEmail: '', agreePrivacy: false });
+
+            useEffect(() => {
+                const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+                return () => clearInterval(timer);
+            }, []);
+
+            const handleInputChange = (e) => {
+                const { name, value, type, checked } = e.target;
+                setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+            };
+
+            const handleSubmit = async () => {
+                if (!formData.userName || !formData.userPhone || !formData.userEmail || !formData.agreePrivacy || !selectedType) return;
+                setIsSubmitting(true);
+                
+                // 구글 시트 전송 파라미터 구성 (URLSearchParams 방식이 가장 안정적임)
+                const params = new URLSearchParams();
+                params.append('timestamp', new Date().toLocaleString('ko-KR'));
+                params.append('userName', formData.userName);
+                params.append('userPhone', formData.userPhone);
+                params.append('userEmail', formData.userEmail);
+                params.append('logoType', selectedType.name); // 시트의 'logoType' 컬럼에 '워드마크형' 등 할당
+                params.append('difficulty', selectedType.version);
+                params.append('price', "0");
+                params.append('source', 'PixelVector_Free_Diagnosis_Mobile');
+
+                try {
+                    await fetch(SCRIPT_URL, { 
+                        method: 'POST', 
+                        mode: 'no-cors', 
+                        body: params 
+                    });
+                    setIsSubmitted(true);
+                } catch (e) { 
+                    console.error("전송 에러:", e);
+                } finally { 
+                    setIsSubmitting(false); 
+                }
+            };
+
+            const isFormValid = formData.userName && formData.userPhone && formData.userEmail && formData.agreePrivacy && selectedType;
+
+            return (
+                <div className="min-h-screen relative overflow-x-hidden pb-40">
+                    {/* 배경 그리드 */}
+                    <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-0 grid-bg"></div>
+                    
+                    {/* 네비게이션 */}
+                    <nav className="fixed top-0 w-full h-16 px-6 flex justify-between items-center z-[100] bg-[#030712]/80 backdrop-blur-md border-b border-white/[0.05]">
+                        <div className="text-xl font-black tracking-tighter uppercase text-white">JPHIC UNIVERSE</div>
+                        <div className="text-[12px] font-bold text-zinc-400 flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+                            <Icon name="Clock" size={14} color="#00BBAC" />
+                            {currentTime.toLocaleTimeString('ko-KR', { hour12: false, hour: '2-digit', minute: '2-digit' })}
+                        </div>
+                    </nav>
+
+                    <main className="max-w-xl mx-auto px-6 pt-32 relative z-10 space-y-16">
+                        {/* 헤더 섹션 */}
+                        <section className="space-y-6 text-center sm:text-left">
+                            <div className="inline-flex items-center gap-2 bg-[#00BBAC]/10 text-[#00BBAC] px-4 py-2 rounded-full border border-[#00BBAC]/20">
+                                <span className="text-[13px] font-black uppercase tracking-widest">Free Diagnosis</span>
+                            </div>
+                            <h1 className="text-4xl sm:text-6xl font-black leading-[1.1] tracking-tight text-white">
+                                AI 이미지를<br/>
+                                <span className="text-white/40">완벽한 자산으로.</span>
+                            </h1>
+
+                            {/* 프로세스 트리 */}
+                            <div className="mt-12 p-6 bg-white/[0.02] border border-white/5 rounded-3xl relative overflow-hidden text-left">
+                                <div className="flex items-center gap-2 mb-8 opacity-60">
+                                    <Icon name="GitGraph" size={16} color="#00BBAC" />
+                                    <span className="text-[12px] font-black tracking-widest uppercase text-zinc-400">Service Process Tree</span>
+                                </div>
+                                <div className="space-y-0 relative">
+                                    {FLOW_STEPS.map((step, idx) => (
+                                        <div key={step.id} className="relative flex items-start gap-6">
+                                            <div className="flex flex-col items-center">
+                                                <div className={`w-9 h-9 rounded-full flex items-center justify-center border-2 z-10 transition-all ${step.status === 'active' ? 'bg-[#00BBAC] border-[#00BBAC] text-black shadow-[0_0_15px_rgba(0,187,172,0.4)]' : 'bg-zinc-900 border-zinc-800 text-zinc-600'}`}>
+                                                    {step.status === 'active' ? <Icon name="Check" size={18} color="black" strokeWidth={3} /> : <span className="text-[14px] font-black">{step.id}</span>}
+                                                </div>
+                                                {idx !== FLOW_STEPS.length - 1 && <div className={`w-0.5 h-12 my-1 ${step.status === 'active' ? 'bg-[#00BBAC]' : 'bg-zinc-800'}`}></div>}
+                                            </div>
+                                            <div className={`pt-1 transition-all ${step.status === 'active' ? 'opacity-100' : 'opacity-30'}`}>
+                                                <h4 className="font-bold text-[17px] text-white">{step.label}</h4>
+                                                <p className="text-[14px] text-zinc-500">{step.sub}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* 01. 선택 섹션 */}
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-3 border-b border-white/[0.1] pb-5">
+                                <span className="text-[13px] font-black text-[#00BBAC] tracking-[0.1em] uppercase">01 / Selection</span>
+                                <h3 className="text-xl font-bold">로고 형태 선택</h3>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {LOGO_TYPES.map(type => (
+                                    <button key={type.id} onClick={() => setSelectedType(type)} className={`p-6 rounded-2xl border transition-all text-left group relative overflow-hidden ${selectedType?.id === type.id ? 'bg-white/5 border-[#00BBAC] shadow-[0_0_20px_rgba(0,187,172,0.15)]' : 'bg-white/[0.02] border-white/5 hover:border-white/20'}`}>
+                                        <div className="flex justify-between items-start mb-3 relative z-10">
+                                            <span className={`text-[17px] font-bold ${selectedType?.id === type.id ? 'text-white' : 'text-zinc-400'}`}>{type.name}</span>
+                                            <span className={`text-[11px] px-2 py-1 rounded-md font-bold ${selectedType?.id === type.id ? 'bg-[#00BBAC] text-black' : 'bg-zinc-800 text-zinc-500'}`}>Ver {type.version}</span>
+                                        </div>
+                                        <p className="text-[14px] text-zinc-500 leading-snug mb-5">{type.desc}</p>
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-[14px] font-mono text-zinc-700 line-through">₩{type.price.toLocaleString()}</span>
+                                            <span className={`text-[18px] font-black font-mono ${selectedType?.id === type.id ? 'text-[#00BBAC]' : 'text-zinc-400'}`}>₩0</span>
+                                        </div>
+                                        {selectedType?.id === type.id && <div className="absolute top-4 right-4"><Icon name="CheckCircle2" size={20} color="#00BBAC" /></div>}
+                                    </button>
+                                ))}
+                            </div>
+                        </section>
+
+                        {/* 02. 연락처 섹션 */}
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-3 border-b border-white/[0.1] pb-5">
+                                <span className="text-[13px] font-black text-[#00BBAC] tracking-[0.1em] uppercase">02 / Contact</span>
+                                <h3 className="text-xl font-bold">의뢰인 정보</h3>
+                            </div>
+                            <div className="space-y-5">
+                                <input name="userName" value={formData.userName} onChange={handleInputChange} placeholder="성함 또는 기업명" className="w-full bg-white/[0.03] border border-white/[0.1] rounded-2xl py-5 px-6 text-[16px] text-white focus:outline-none focus:border-[#00BBAC] transition-all" />
+                                <input name="userPhone" value={formData.userPhone} onChange={handleInputChange} placeholder="연락처 (-제외)" className="w-full bg-white/[0.03] border border-white/[0.1] rounded-2xl py-5 px-6 text-[16px] text-white focus:outline-none focus:border-[#00BBAC] transition-all" />
+                                <input name="userEmail" value={formData.userEmail} onChange={handleInputChange} placeholder="이메일 주소" className="w-full bg-white/[0.03] border border-white/[0.1] rounded-2xl py-5 px-6 text-[16px] text-white focus:outline-none focus:border-[#00BBAC] transition-all" />
+                                
+                                <label className="flex items-center gap-4 p-6 bg-[#00BBAC]/[0.03] border border-[#00BBAC]/10 rounded-2xl cursor-pointer hover:bg-[#00BBAC]/5 transition-colors">
+                                    <input type="checkbox" name="agreePrivacy" checked={formData.agreePrivacy} onChange={handleInputChange} className="hidden" />
+                                    <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${formData.agreePrivacy ? 'bg-[#00BBAC] border-[#00BBAC]' : 'border-white/20'}`}>
+                                        {formData.agreePrivacy && <Icon name="Check" size={14} color="black" strokeWidth={4} />}
+                                    </div>
+                                    <div className="flex-1">
+                                        <span className="font-bold text-[#00BBAC] text-[15px] block mb-0.5">개인정보 수집 동의 (필수)</span>
+                                        <span className="text-zinc-600 text-[13px]">무료 진단 리포트 발송 용도입니다.</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </section>
+
+                        {/* 제출 상태에 따른 UI */}
+                        {isSubmitted ? (
+                            <div className="bg-white/5 border border-[#00BBAC]/30 p-10 rounded-3xl space-y-8 text-center shadow-[0_0_50px_rgba(0,187,172,0.1)] animate-in fade-in zoom-in duration-500">
+                                <div className="w-20 h-20 bg-[#00BBAC]/20 rounded-full flex items-center justify-center mx-auto">
+                                    <Icon name="CheckCircle2" size={40} color="#00BBAC" />
+                                </div>
+                                <div className="space-y-2">
+                                    <h4 className="text-2xl font-black italic uppercase tracking-tighter text-white">SUCCESS!</h4>
+                                    <p className="text-zinc-400 text-[16px] leading-relaxed">진단 예약이 완료되었습니다.<br/>이제 오픈챗으로 사진을 보내주세요.</p>
+                                </div>
+                                <a href={OPEN_CHAT_URL} target="_blank" className="flex items-center justify-center gap-3 w-full bg-[#00BBAC] text-black font-black py-6 rounded-2xl shadow-[0_10px_40px_rgba(0,187,172,0.3)] text-[18px] hover:scale-[1.02] transition-transform">
+                                    <Icon name="MessageCircle" size={24} color="black" />
+                                    <span>오픈챗으로 이미지 전송</span>
+                                    <Icon name="ChevronRight" size={20} color="black" />
+                                </a>
+                            </div>
+                        ) : (
+                            <div className="space-y-5 pb-10">
+                                <button disabled={!isFormValid || isSubmitting} onClick={handleSubmit} className={`w-full py-6 rounded-2xl font-black text-[18px] flex items-center justify-center gap-3 transition-all ${isFormValid ? 'bg-white text-black hover:bg-[#00BBAC] hover:text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)]' : 'bg-zinc-900 text-zinc-700 cursor-not-allowed border border-white/5'}`}>
+                                    {isSubmitting ? <Icon name="Loader2" size={28} color="#00BBAC" className="animate-spin" /> : <><Icon name="ShieldCheck" size={24} /><span>무료 진단 신청하기</span></>}
+                                </button>
+                                <div className="text-center text-zinc-600 text-[13px] font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                                    <Icon name="AlertCircle" size={14} color="currentColor" /> 신청 후 오픈챗 연결이 필수입니다
+                                </div>
+                            </div>
+                        )}
+                    </main>
+
+                    {/* 하단 플로팅 바 (모바일 가독성 강조) */}
+                    {!isSubmitted && (
+                        <div className="fixed bottom-0 inset-x-0 p-4 z-[90] bg-gradient-to-t from-[#030712] via-[#030712]/95 to-transparent">
+                            <div className="max-w-xl mx-auto">
+                                <div className={`p-5 rounded-2xl backdrop-blur-2xl border border-white/10 flex justify-between items-center transition-all ${selectedType ? 'bg-[#00BBAC]/10 border-[#00BBAC]/30' : 'bg-white/5 opacity-40'}`}>
+                                    <div>
+                                        <span className="text-[11px] text-[#00BBAC] font-black uppercase tracking-widest block mb-0.5">Current Selection</span>
+                                        <span className="text-[16px] font-bold text-white">{selectedType?.name || '유형을 선택해주세요'}</span>
+                                    </div>
+                                    <div className="text-right">
+                                        <span className="text-[11px] text-zinc-500 font-black uppercase tracking-widest block mb-0.5">Estimate</span>
+                                        <span className="text-[24px] font-mono font-black text-white">₩0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
