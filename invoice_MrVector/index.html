@@ -134,23 +134,28 @@
             }
 
             const btn = document.getElementById('submit-btn');
+            const originalBtnText = btn.innerText;
             btn.innerText = "데이터 전송 중...";
             btn.disabled = true;
 
+            // 신청 시간 생성
+            const now = new Date();
+            const formattedDate = now.getFullYear() + ". " + (now.getMonth() + 1) + ". " + now.getDate() + ". " + now.toLocaleTimeString();
+
             // 구글 앱스 스크립트로 보낼 데이터 파라미터 구성
-            const params = new URLSearchParams({
-                userName: name,
-                userPhone: phone,
-                userEmail: email,
-                logoType: selectedType,
-                timestamp: new Date().toLocaleString('ko-KR'),
-                difficulty: '1.0',
-                price: '0',
-                source: 'Blog_Promotion_Free'
-            });
+            // 팁: 시트의 헤더 순서와 맞추기 위해 파라미터 이름을 명확히 확인하세요.
+            const params = new URLSearchParams();
+            params.append('timestamp', formattedDate);
+            params.append('userName', name);
+            params.append('userPhone', phone);
+            params.append('userEmail', email);
+            params.append('logoType', selectedType);
+            params.append('difficulty', '1.0');
+            params.append('price', '0');
+            params.append('source', 'Blog_Promotion_Free');
 
             try {
-                // 데이터 전송
+                // 데이터 전송 (GET 방식 쿼리스트링 결합)
                 await fetch(SCRIPT_URL + "?" + params.toString(), {
                     method: 'POST',
                     mode: 'no-cors'
@@ -160,14 +165,14 @@
                 document.getElementById('action-area').innerHTML = `
                     <div class="bg-white/5 border border-[#00BBAC]/30 p-8 rounded-3xl text-center space-y-6">
                         <div class="text-[#00BBAC] font-black text-xl">신청이 접수되었습니다!</div>
-                        <p class="text-zinc-400 text-sm">마지막 단계: 아래 버튼을 눌러 오픈챗으로<br/>진단받을 AI 생성 이미지를 보내주세요.</p>
+                        <p class="text-zinc-400 text-sm">마지막 단계: 아래 버튼을 눌러 카카오톡으로<br/>진단받을 AI 생성 이미지를 보내주세요.</p>
                         <a href="${OPEN_CHAT_URL}" target="_blank" class="block w-full py-5 bg-[#00BBAC] text-black font-black rounded-xl hover:bg-[#00d4c3] transition-all">카카오톡으로 이미지 보내기</a>
                     </div>
                 `;
             } catch (e) {
                 console.error(e);
-                alert("전송 중 오류가 발생했습니다. 구글 앱스 스크립트 설정을 다시 확인해 주세요.");
-                btn.innerText = "무료 진단 신청하기 (0원)";
+                alert("전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+                btn.innerText = originalBtnText;
                 btn.disabled = false;
             }
         }
