@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JPHIC UNIVERSE - AI 픽셀벡터 무료진단</title>
+    <title>Mr.Vector | 무료 픽셀벡터 진단</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { 
             font-family: 'Pretendard', sans-serif; 
@@ -13,318 +14,274 @@
             color: white; 
             margin: 0; 
             overflow-x: hidden;
-            -webkit-user-select: none;
-            user-select: none;
             word-break: keep-all;
+            padding-bottom: 60px; 
         }
         .grid-bg {
             background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), 
                               linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-size: 50px 50px;
         }
-        .accent-text { color: #00BBAC; }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .accent-color { color: #00BBAC; }
         .accent-bg { background-color: #00BBAC; }
         
-        /* 인풋 상태 스타일 */
-        input:focus { border-color: #00BBAC !important; outline: none; background-color: rgba(0, 187, 172, 0.05) !important; }
-        
-        /* 에러 발생 시 스타일 (빨간색 강조) */
-        .input-error { 
-            border-color: #f17f93 !important; 
-            background-color: rgba(241, 127, 147, 0.15) !important; 
-            box-shadow: 0 0 15px rgba(241, 127, 147, 0.2);
+        .type-card {
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
         }
-        .input-error::placeholder {
-            color: #f17f93 !important;
-            opacity: 0.8;
+        .type-card.active {
+            border-color: #00BBAC;
+            background: rgba(0, 187, 172, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 187, 172, 0.2);
+        }
+        
+        input, textarea {
+            background: rgba(0, 0, 0, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+        }
+        input:focus { border-color: #00BBAC !important; outline: none; }
+        
+        .benefit-bubble {
+            position: relative;
+            background: linear-gradient(135deg, #00BBAC 0%, #8B5CF6 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+            animation: bounce 2s infinite;
+        }
+        .benefit-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #6b46c1;
         }
 
-        .selected-card { 
-            border-color: #00BBAC !important; 
-            background-color: rgba(0, 187, 172, 0.15) !important;
-            box-shadow: 0 0 25px rgba(0, 187, 172, 0.2);
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
-        input {
-            -webkit-user-select: text !important;
-            user-select: text !important;
-            font-size: 18px !important;
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.95);
+            z-index: 5000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        .benefit-banner {
-            background: linear-gradient(90deg, rgba(0, 187, 172, 0.6) 0%, rgba(0, 143, 131, 0.6) 100%);
-            border-bottom: 1px solid rgba(0, 187, 172, 0.2);
-        }
-        .floating-selection {
-            background: rgba(10, 15, 26, 0.98);
-            backdrop-filter: blur(25px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            transform: translateY(100%);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.9);
-        }
-        .floating-selection.active {
-            transform: translateY(0);
-        }
-        .active-scale:active { transform: scale(0.96); }
-        
-        /* 스크롤바 숨김 */
-        ::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="selection:bg-[#00BBAC]/5" oncontextmenu="return false">
-    <div class="fixed inset-0 pointer-events-none opacity-[0.05] z-0 grid-bg"></div>
+<body class="grid-bg min-h-screen">
 
-    <!-- 상단 혜택 배너 -->
-    <div class="fixed top-0 w-full z-[110] benefit-banner py-2.5 px-4 text-center shadow-lg">
-        <p class="text-white/80 text-[14px] font-semibold tracking-tight">
-            🎁 무료진단 이후 <span class="text-white font-black underline underline-offset-4">당일 최종 확정 시</span> 비용의 <span class="text-white font-black">7.7% 할인</span> 적용!
-        </p>
+    <div id="loading" class="loading-overlay">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#00BBAC] mb-4"></div>
+        <p class="font-bold text-[#00BBAC]">벡터씨에게 전달하고 있어요. 잠시만요.</p>
     </div>
 
-    <!-- 네비게이션 -->
-    <nav class="fixed top-10 w-full h-20 px-6 flex justify-between items-center z-[100] bg-[#030712]/90 backdrop-blur-md border-b border-white/[0.08]">
-        <div class="text-xl font-[950] tracking-tighter uppercase flex items-center gap-3">
-            벡터씨 도와줘!
-            <span class="text-[11px] bg-[#00BBAC] text-black px-2 py-0.5 rounded font-mono font-bold">V2.5</span>
-        </div>
-        <div id="top-date" class="text-[13px] font-bold text-zinc-400 bg-white/5 px-4 py-2 rounded-full border border-white/10"></div>
-    </nav>
-
-    <main id="main-content" class="max-w-xl mx-auto px-6 pt-48 relative z-10 pb-96">
-        <section class="mb-20">
-            <div class="inline-flex items-center gap-2 bg-[#00BBAC]/15 text-[#00BBAC] px-4 py-1.5 rounded-full border border-[#00BBAC]/30 mb-8">
-                <span class="text-[13px] font-black uppercase tracking-[0.2em] font-mono">벡터씨's</span>
-            </div>
-            <!-- 헤드카피 수정: '진짜 쓸 수 있는 파일로.' 전체 글씨색 변경 -->
-            <h1 class="text-[44px] sm:text-6xl font-[900] leading-[1.1] tracking-tight mb-8">
-                AI 이미지를<br/>
-                <span class="accent-text">진짜 쓸 수 있는 파일로.</span>
+    <div class="max-w-xl mx-auto px-6 py-12 md:py-20" id="main-container">
+        <header class="text-center mb-12">
+            <div class="inline-block px-4 py-1 rounded-full border border-[#00BBAC]/30 text-[#00BBAC] text-xs font-bold mb-4 tracking-widest uppercase">Free Service</div>
+            <h1 class="text-6xl font-[950] mb-4 tracking-tight leading-tight">
+                AI로 생성한 이미지를<span class="accent-color"> <br> 진짜 쓸 수 있는 파일로.</span>
             </h1>
-            <p class="text-zinc-400 text-[22px] leading-relaxed font-bold">
-                벡터씨, 무료진단해주세요.<br/>
-                내 파일은 픽셀인가? 벡터인가? 인쇄가능한가?
-            </p>
-        </section>
+            <p class="text-zinc-400 font-medium italic">"이거 인쇄되나요? 안 깨지나요?"<br/>고민말고 벡터씨에게 진단받으세요.</p>
+        </header>
 
-        <!-- 01: 로고 유형 선택 -->
-        <section class="mb-20">
-            <div class="flex items-center gap-3 border-b-2 border-white/[0.1] pb-5 mb-10">
-                <span class="text-[16px] font-black accent-text tracking-widest uppercase font-mono">01</span>
-                <h3 class="text-[26px] font-black">AI로 만든 로고 형태는?</h3>
-            </div>
-            <div class="grid grid-cols-2 gap-4" id="type-grid"></div>
-            <p class="mt-6 text-[15px] text-[#00BBAC] font-bold text-center italic opacity-80">* 벡터씨 블로그를 통해 신청하시면 무료입니다.</p>
-        </section>
-
-        <!-- 02: 신청 정보 입력 -->
-        <section class="mb-20">
-            <div class="flex items-center gap-3 border-b-2 border-white/[0.1] pb-5 mb-10">
-                <span class="text-[16px] font-black accent-text tracking-widest uppercase font-mono">02</span>
-                <h3 class="text-[26px] font-black">파일 회신 받을 곳</h3>
-            </div>
-            <div class="space-y-5">
-                <div class="relative">
-                    <input type="text" id="userName" oninput="updateFloating(); checkInput(this);" placeholder="성함 또는 기업명" class="w-full bg-white/[0.04] border-2 border-white/[0.1] rounded-2xl py-7 px-8 text-white text-[20px] font-bold transition-all placeholder:text-zinc-600">
+        <form id="diagnosisForm" onsubmit="handleVectorSubmit(event)" class="space-y-6">
+            <div class="glass-card p-8 rounded-[32px] space-y-6">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-8 h-8 rounded-full accent-bg flex items-center justify-center text-black font-black text-sm">1</div>
+                    <h2 class="text-xl font-extrabold tracking-tight text-white">진단 리포트 회신 받을 곳</h2>
                 </div>
-                <input type="tel" id="userPhone" oninput="checkInput(this)" placeholder="연락처 (숫자만)" class="w-full bg-white/[0.04] border-2 border-white/[0.1] rounded-2xl py-7 px-8 text-white text-[20px] font-bold transition-all placeholder:text-zinc-600">
-                <input type="email" id="userEmail" oninput="checkInput(this)" placeholder="결과 수신 이메일 주소" class="w-full bg-white/[0.04] border-2 border-white/[0.1] rounded-2xl py-7 px-8 text-white text-[20px] font-bold transition-all placeholder:text-zinc-600">
-                
-                <label id="privacy-label" class="flex items-center gap-6 p-7 bg-white/[0.03] border-2 border-white/[0.05] rounded-3xl cursor-pointer hover:bg-white/[0.08] transition-all">
-                    <input type="checkbox" id="agreePrivacy" onchange="checkInput(this)" class="w-8 h-8 accent-[#00BBAC]">
-                    <span class="text-[17px] text-zinc-400 font-bold leading-tight">개인정보 수집 및 이용에 동의합니다 (필수)</span>
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="text" id="userName" required class="w-full px-5 py-4 rounded-2xl text-md font-bold" placeholder="성함/업체명">
+                        <input type="tel" id="userPhone" required pattern="[0-9]{10,11}" class="w-full px-5 py-4 rounded-2xl text-md font-bold" placeholder="연락처(숫자만)">
+                    </div>
+                    <input type="email" id="userEmail" required class="w-full px-5 py-4 rounded-2xl text-md font-bold" placeholder="회신 받을 이메일 주소">
+                </div>
+            </div>
+
+            <div class="glass-card p-8 rounded-[32px] space-y-6">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-8 h-8 rounded-full accent-bg flex items-center justify-center text-black font-black text-sm">2</div>
+                    <h2 class="text-xl font-extrabold tracking-tight text-white">진단할 이미지 형태</h2>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="type-card p-4 rounded-2xl flex flex-col items-center gap-2" onclick="selectType(this, '워드마크형')">
+                        <i class="fas fa-font text-xl opacity-50"></i>
+                        <span class="text-sm font-bold">워드마크형</span>
+                    </div>
+                    <div class="type-card p-4 rounded-2xl flex flex-col items-center gap-2" onclick="selectType(this, '조합형')">
+                        <i class="fas fa-layer-group text-xl opacity-50"></i>
+                        <span class="text-sm font-bold">조합형</span>
+                    </div>
+                    <div class="type-card p-4 rounded-2xl flex flex-col items-center gap-2" onclick="selectType(this, '심볼/캐릭터형')">
+                        <i class="fas fa-paw text-xl opacity-50"></i>
+                        <span class="text-sm font-bold">심볼/캐릭터형</span>
+                    </div>
+                    <div class="type-card p-4 rounded-2xl flex flex-col items-center gap-2" onclick="selectType(this, '기타/모름')">
+                        <i class="fas fa-question text-xl opacity-50"></i>
+                        <span class="text-sm font-bold">기타/모름</span>
+                    </div>
+                </div>
+                <input type="hidden" id="selectedLogoType" required>
+            </div>
+
+            <div class="glass-card p-8 rounded-[32px] space-y-6">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-8 h-8 rounded-full accent-bg flex items-center justify-center text-black font-black text-sm">3</div>
+                    <h2 class="text-xl font-extrabold tracking-tight text-white">이미지 파일 첨부</h2>
+                </div>
+                <div class="border-2 border-dashed border-white/10 rounded-2xl p-8 text-center bg-black/20 hover:bg-black/40 transition-all cursor-pointer relative">
+                    <input type="file" id="logoImage" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="previewImage(this)">
+                    <div id="previewContainer" class="hidden mb-4"></div>
+                    <div id="uploadUI">
+                        <i class="fas fa-cloud-upload-alt text-3xl text-zinc-600 mb-3"></i>
+                        <p class="text-zinc-500 text-sm font-medium">진단받을 이미지를 올려주세요</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4 px-2 py-4">
+                <input type="checkbox" id="privacyAgree" required class="mt-1 w-6 h-6 rounded accent-[#00BBAC] cursor-pointer">
+                <label for="privacyAgree" class="text-[18px] text-zinc-300 font-medium leading-relaxed cursor-pointer select-none">
+                    (필수) 개인정보 수집 및 이용에 동의합니다.
                 </label>
             </div>
-        </section>
-        
-        <div class="h-10"></div>
-    </main>
 
-    <!-- 하단 통합형 셀렉바 (정보+금액+신청버튼) -->
-    <div id="floating-bar" class="floating-selection fixed bottom-0 left-0 w-full z-[120]">
-        <!-- 상단 정보 영역 -->
-        <div class="max-w-xl mx-auto px-7 pt-7 pb-4 flex justify-between items-end border-b border-white/5">
-            <div class="flex flex-col gap-1">
-                <div class="flex items-center gap-2 mb-1">
-                    <div class="w-2 h-2 rounded-full bg-[#00BBAC] animate-pulse"></div>
-                    <span class="text-[12px] text-[#00BBAC] font-black tracking-widest uppercase">신청 대기 중</span>
+            <div class="pt-4 relative">
+                <div class="benefit-bubble">
+                    🎁 무료진단 상담 받으신 후, 인쇄 발주파일 PDF제작 의뢰하신 분들 중<br>시안 당일 최종 확정 시<br class="md:hidden"> 비용의 7.7% 할인 적용!
                 </div>
-                <span id="float-type-name" class="text-[26px] font-black text-white leading-tight">유형을 선택해 주세요</span>
+                <button type="submit" id="submitBtn" class="w-full py-8 accent-bg text-black font-[950] text-2xl rounded-[32px] shadow-[0_20px_50px_rgba(0,187,172,0.3)] active:scale-[0.98] transition-transform">
+                    무료진단 신청하기
+                </button>
             </div>
-            <div class="text-right">
-                <div class="flex flex-col items-end">
-                    <span id="float-original-price" class="text-[20px] font-mono font-medium line-through leading-none mb-1.5" style="color: #f17f93;">₩0</span>
-                    <span class="text-[32px] font-mono font-black text-[#00BBAC] leading-none tracking-tighter">₩0</span>
+        </form>
+    </div>
+
+    <div id="successModal" class="fixed inset-0 bg-black/98 backdrop-blur-2xl hidden flex-col items-center justify-center p-6 z-[6000]">
+        <div class="text-center space-y-8 animate-in fade-in zoom-in duration-500 max-w-sm w-full">
+            <div class="text-[#00BBAC] text-7xl mb-4"><i class="fas fa-check-circle"></i></div>
+            <div class="space-y-4">
+                <h3 class="text-3xl font-[950]">진단 신청 완료!</h3>
+                <div class="bg-white/5 border border-white/10 p-6 rounded-3xl text-left space-y-3">
+                    <div class="flex justify-between items-center pb-2 border-b border-white/5">
+                        <span class="text-zinc-500 text-xs font-bold uppercase tracking-widest">Name</span>
+                        <span id="resName" class="text-[#00BBAC] font-black text-lg">-</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-zinc-500 text-xs font-bold uppercase tracking-widest">Email</span>
+                        <span id="resEmail" class="text-white text-sm font-bold">-</span>
+                    </div>
                 </div>
+                <p class="text-zinc-400 font-bold leading-relaxed pt-2">벡터씨가 보내주신 내용 확인해서<br>입력하신 메일로 회신해 드릴게요!</p>
             </div>
-        </div>
-        
-        <!-- 하단 버튼 영역 -->
-        <div class="max-w-xl mx-auto px-6 py-5">
-            <button onclick="handleSubmit()" id="submit-btn" class="active-scale w-full py-6 bg-white text-black rounded-[28px] font-[950] text-[20px] flex items-center justify-center gap-3 hover:bg-[#00BBAC] hover:text-white transition-all shadow-xl">
-                벡터씨, 무료진단 신청할게
-            </button>
-            <p class="text-[12px] text-zinc-600 text-center font-bold mt-4 opacity-60">접수 후 오픈챗으로 연결됩니다.</p>
+            <a href="https://open.kakao.com/o/sJ6b67" target="_blank" class="block w-full py-6 bg-[#00BBAC] text-black font-[950] text-xl rounded-2xl shadow-2xl hover:bg-[#00d4c3] transition-all text-center">벡터씨 오픈챗으로 문의하기</a>
         </div>
     </div>
 
     <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzxWNIqXURxPV_DhEAXNNVaqcGynetJskiqA9m3fAzXiLqrCEQ6l2XtzFEwyhwQv_c-/exec";
-        const OPEN_CHAT_URL = "https://open.kakao.com/o/s154Q5ui";
-        
-        let selectedType = null;
+        // 새로 배포하신 URL로 업데이트되었습니다.
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbziBbL-ZRTAMXriOaFwXzCuVJSu39wbJVzI4h6Gayrk9W1wuwJiryRwVPMMvR3_u5ug/exec"; 
+        let selectedLogoType = "";
+        let fileData = null;
 
-        const logoTypes = [
-            { 
-                name: '워드마크형', 
-                desc: '텍스트 중심 디자인', 
-                price: 49000,
-                icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>` 
-            },
-            { 
-                name: '심볼/결합형', 
-                desc: '그래픽+텍스트 결합', 
-                price: 79000,
-                icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4M8 12h8"/></svg>`
-            },
-            { 
-                name: '캐릭터/일러', 
-                desc: '복잡한 캐릭터 형태', 
-                price: 99000,
-                icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/><path d="M18 10a6 6 0 0 1-12 0"/><path d="M12 16v6"/></svg>`
-            },
-            { 
-                name: '캘리그라피', 
-                desc: '손글씨 및 붓터치', 
-                price: 79000,
-                icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>`
-            }
-        ];
-
-        // 입력 시 실시간으로 에러 상태 해제
-        function checkInput(el) {
-            if (el.type === 'checkbox') {
-                if (el.checked) document.getElementById('privacy-label').classList.remove('input-error');
-            } else {
-                if (el.value.trim() !== "") el.classList.remove('input-error');
-            }
+        function selectType(element, typeName) {
+            document.querySelectorAll('.type-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+            selectedLogoType = typeName;
+            document.getElementById('selectedLogoType').value = typeName;
         }
 
-        function updateDate() {
-            const now = new Date();
-            const dateStr = now.getFullYear() + "." + (now.getMonth() + 1).toString().padStart(2, '0') + "." + now.getDate().toString().padStart(2, '0') + " " + now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-            document.getElementById('top-date').innerText = dateStr;
-        }
-
-        function updateFloating() {
-            const nameInput = document.getElementById('userName').value;
-            const floatTypeName = document.getElementById('float-type-name');
-            const floatPrice = document.getElementById('float-original-price');
-            const floatBar = document.getElementById('floating-bar');
-
-            if (nameInput.trim() !== "" || selectedType !== null) {
-                floatBar.classList.add('active');
-            } else {
-                floatBar.classList.remove('active');
-            }
-            
-            if (selectedType) {
-                floatTypeName.innerText = selectedType.name;
-                floatTypeName.classList.remove('text-zinc-600');
-                floatPrice.innerText = "₩" + selectedType.price.toLocaleString();
-            } else {
-                floatTypeName.innerText = "유형을 선택해 주세요";
-                floatTypeName.classList.add('text-zinc-600');
-                floatPrice.innerText = "₩0";
-            }
-        }
-
-        window.onload = () => {
-            updateDate();
-            setInterval(updateDate, 60000);
-
-            const grid = document.getElementById('type-grid');
-            logoTypes.forEach((t, index) => {
-                const btn = document.createElement('button');
-                btn.id = 'type-' + index;
-                btn.className = "active-scale p-8 rounded-[36px] border-2 border-white/10 bg-white/[0.03] flex flex-col items-center text-center transition-all hover:border-white/30 group";
-                btn.onclick = () => {
-                    selectedType = t;
-                    document.querySelectorAll('#type-grid button').forEach(b => b.classList.remove('selected-card'));
-                    btn.classList.add('selected-card');
-                    updateFloating();
+        function previewImage(input) {
+            const container = document.getElementById('previewContainer');
+            const uploadUI = document.getElementById('uploadUI');
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const reader = new FileReader();
+                reader.onload = e => {
+                    container.innerHTML = `<img src="${e.target.result}" class="max-h-48 mx-auto rounded-xl border border-white/10 shadow-xl">`;
+                    container.classList.remove('hidden');
+                    uploadUI.classList.add('hidden');
+                    fileData = {
+                        base64: e.target.result.split(',')[1],
+                        mimeType: file.type,
+                        fileName: file.name
+                    };
                 };
-                btn.innerHTML = `
-                    <div class="mb-6 text-zinc-600 group-hover:text-[#00BBAC] transition-colors scale-110">${t.icon}</div>
-                    <h4 class="font-bold text-white text-[20px] mb-2 leading-tight">${t.name}</h4>
-                    <p class="text-[14px] text-zinc-500 font-semibold leading-snug">${t.desc}</p>
-                `;
-                grid.appendChild(btn);
-            });
-        };
-
-        async function handleSubmit() {
-            const nameEl = document.getElementById('userName');
-            const phoneEl = document.getElementById('userPhone');
-            const emailEl = document.getElementById('userEmail');
-            const agreeEl = document.getElementById('agreePrivacy');
-            const privacyLabel = document.getElementById('privacy-label');
-
-            let hasError = false;
-
-            // 검증 및 강렬한 에러 스타일 적용
-            if (!nameEl.value.trim()) { nameEl.classList.add('input-error'); hasError = true; }
-            if (!phoneEl.value.trim()) { phoneEl.classList.add('input-error'); hasError = true; }
-            if (!emailEl.value.trim()) { emailEl.classList.add('input-error'); hasError = true; }
-            if (!agreeEl.checked) { privacyLabel.classList.add('input-error'); hasError = true; }
-            
-            if (!selectedType) {
-                alert("로고 형태를 먼저 선택해 주세요.");
-                window.scrollTo({ top: document.getElementById('type-grid').offsetTop - 200, behavior: 'smooth' });
-                return;
+                reader.readAsDataURL(file);
             }
+        }
 
-            if (hasError) {
-                // 진동 효과와 유사한 시각적 효과를 위해 잠시 스크롤 이동
-                nameEl.focus();
-                return;
-            }
+        async function handleVectorSubmit(e) {
+            e.preventDefault();
+            if (!selectedLogoType) { alert("진단할 이미지 형태를 선택해주세요!"); return; }
 
-            const btn = document.getElementById('submit-btn');
-            btn.innerText = "데이터 전송 중...";
-            btn.disabled = true;
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            const phone = document.getElementById('userPhone').value;
 
-            const params = new URLSearchParams();
-            params.append('timestamp', new Date().toLocaleString());
-            params.append('userName', nameEl.value);
-            params.append('userPhone', phoneEl.value);
-            params.append('userEmail', emailEl.value);
-            params.append('logoType', selectedType.name);
-            params.append('difficulty', 'Free_v2.5');
-            params.append('price', '0');
-            params.append('source', 'Blog_Promotion_Free');
+            document.getElementById('loading').style.display = 'flex';
+            document.getElementById('submitBtn').disabled = true;
+
+            const payload = {
+                userName: name,
+                userPhone: phone,
+                userEmail: email,
+                logoType: selectedLogoType,
+                timestamp: new Date().toLocaleString('ko-KR'),
+                fileData: fileData ? fileData.base64 : null,
+                mimeType: fileData ? fileData.mimeType : null,
+                fileName: fileData ? fileData.fileName : null,
+                source: "Web_V2.5_PRO"
+            };
 
             try {
-                await fetch(SCRIPT_URL + "?" + params.toString(), {
+                // 앱스크립트에서 인식하기 가장 안전한 text/plain 방식으로 페이로드를 전송합니다.
+                await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors'
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(payload)
                 });
-                
-                document.getElementById('floating-bar').style.display = 'none';
-                document.getElementById('main-content').innerHTML = `
-                    <div class="bg-white/5 border-2 border-[#00BBAC]/40 p-10 rounded-[40px] text-center space-y-8 animate-in fade-in zoom-in duration-500">
-                        <div class="text-[#00BBAC] font-[950] text-[32px]">신청 완료!</div>
-                        <div class="text-left bg-black/60 p-8 rounded-3xl border border-white/10 space-y-4">
-                            <p class="text-[13px] text-[#00BBAC] font-black uppercase tracking-[0.2em]">Summary</p>
-                            <p class="text-[22px] text-white font-black">${nameEl.value} 님</p>
-                            <p class="text-[20px] text-white font-bold">${selectedType.name}</p>
-                        </div>
-                        <p class="text-zinc-400 text-[18px] leading-relaxed font-bold">마지막 단계: 오픈챗에서<br/><span class="text-white underline decoration-[#00BBAC] underline-offset-8">이미지 파일</span>을 보내주세요.</p>
-                        <a href="${OPEN_CHAT_URL}" target="_blank" class="active-scale block w-full py-8 bg-[#00BBAC] text-black font-[950] text-[24px] rounded-3xl shadow-2xl">이미지 보내기 (오픈챗)</a>
-                    </div>
-                `;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } catch (e) {
-                btn.innerText = "오류 발생 - 재시도";
-                btn.disabled = false;
+
+                // 전송 성공 처리
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('resName').innerText = name;
+                    document.getElementById('resEmail').innerText = email;
+                    document.getElementById('main-container').classList.add('hidden');
+                    document.getElementById('successModal').classList.remove('hidden');
+                    document.getElementById('successModal').classList.add('flex');
+                }, 1500);
+
+            } catch (err) {
+                console.error("Submission error:", err);
+                alert("현재 전송이 원활하지 않습니다. 잠시 후 다시 시도해 주세요.");
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('submitBtn').disabled = false;
             }
         }
     </script>
