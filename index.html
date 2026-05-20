@@ -6,13 +6,11 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-06LPWZ6RLL');
 </script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <title>JPHIC UNIVERSE | 브랜드 자산을 완성하는 솔루션</title>
 
 <link rel="icon" type="image/png" href="favicon-uv.png">
@@ -20,7 +18,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="JPHIC UNIVERSE | 브랜드 자산을 완성하는 솔루션">
-<meta property="og:description" content="무한히 활용 가능한 브랜드 자산으로. 데이터 분석부터 벡터 자산화까지.">
+<meta property="og:description" content="무한히 활용 가능한 brand 자산으로. 데이터 분석부터 벡터 자산화까지.">
 <meta property="og:image" content="og-universe.jpg">
 <meta property="og:url" content="https://jphic.co.kr">
 <meta property="og:site_name" content="JPHIC UNIVERSE">
@@ -30,129 +28,70 @@
 
 <style>
 :root {
-  --bg: #0B0E14; 
-  --text-main: #F8FAFC; 
-  --text-sub: #94A3B8;
-  --border: rgba(255, 255, 255, 0.05);
-  
-  --c-core: #737DFE;   
-  --c-logo: #3b82f6;   
-  --c-pdf: #ea580c;    
-  --c-motion: #9868d8; 
-  --c-agency: #8E9AAF; 
-  --c-kern: #8ADE20;   
+  --bg: #0B0E14; --text-main: #F8FAFC; --text-sub: #94A3B8; --border: rgba(255, 255, 255, 0.05);
+  --c-core: #737DFE; --c-logo: #3b82f6; --c-pdf: #ea580c; --c-motion: #9868d8; --c-agency: #8E9AAF; --c-kern: #8ADE20;   
 }
-
-/* 텍스트 드래그 및 복사 방지 */
-* { 
-  margin: 0; padding: 0; box-sizing: border-box; 
-  -webkit-user-select: none !important;
-  user-select: none !important;
-  -webkit-user-drag: none !important;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-user-select: none !important; user-select: none !important; -webkit-user-drag: none !important; }
 html, body { max-width: 100vw; min-height: 100vh; overflow-x: hidden; background: var(--bg); font-family: 'Pretendard', sans-serif; color: var(--text-main); line-height: 1.6; word-break: keep-all; scroll-behavior: smooth; }
-
-/* 배경 레이아웃 */
 .universe-bg { position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(circle at 50% 0%, rgba(115, 125, 254, 0.05) 0%, transparent 60%), linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 100% 100%, 60px 60px, 60px 60px; pointer-events: none;}
 .event-horizon { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotateX(65deg); width: 100vw; height: 100vw; min-width: 1000px; min-height: 1000px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.03); box-shadow: 0 0 150px rgba(115, 125, 254, 0.02), inset 0 0 100px rgba(255,255,255,0.01); z-index: 0; pointer-events: none; animation: spinHole 60s linear infinite; }
 @keyframes spinHole { 100% { transform: translate(-50%, -50%) rotateX(65deg) rotateZ(360deg); } }
-
-/* 상단 네비게이션 */
 .nav-header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; z-index: 1000; }
 .logo { font-size: 1.2rem; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: -0.5px; }
 .top-cta-group { display: flex; gap: 10px; }
 .top-btn { padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; background: rgba(255,255,255,0.05); color: #fff; backdrop-filter: blur(10px); }
 .top-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); background: rgba(255,255,255,0.1); border-color: #fff; }
-
-/* 히어로 슬라이더 */
 .hero-slider { position: relative; width: 100%; height: 85vh; overflow: hidden; z-index: 10; display: flex; align-items: center; }
 .hero-track { position: relative; width: 100%; height: 100%; }
-.hero-slide { 
-  position: absolute; inset: 0; width: 100%; height: 100%; 
-  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 10%;
-  opacity: 0; transform: translateY(-15px); transition: opacity 0.8s ease, transform 0.8s ease; pointer-events: none;
-}
+.hero-slide { position: absolute; inset: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 10%; opacity: 0; transform: translateY(-15px); transition: opacity 0.8s ease, transform 0.8s ease; pointer-events: none; }
 .hero-slide.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
-
 .hero-tag { display: inline-block; padding: 6px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 50px; font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 25px; color: var(--text-sub); }
 .hero-slide h1 { font-size: clamp(1.8rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.3; margin-bottom: 35px; color: #fff; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-
-.hero-go-btn { 
-  padding: 16px 32px; border-radius: 50px; background: rgba(255,255,255,0.05); color: #fff; 
-  text-decoration: none; font-weight: 800; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.2); 
-  transition: 0.3s; display: flex; align-items: center; gap: 10px; cursor: pointer;
-}
-
-/* 컬러별 호버 효과 */
+.hero-go-btn { padding: 16px 32px; border-radius: 50px; background: rgba(255,255,255,0.05); color: #fff; text-decoration: none; font-weight: 800; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.2); transition: 0.3s; display: flex; align-items: center; gap: 10px; cursor: pointer; }
 .c1 .hero-go-btn:hover, .c4 .hero-go-btn:hover, .c7 .hero-go-btn:hover, .c10 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-core); border-color: var(--c-core); }
 .c2 .hero-go-btn:hover, .c9 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-logo); border-color: var(--c-logo); }
 .c3 .hero-go-btn:hover, .c8 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-pdf); border-color: var(--c-pdf); }
 .c5 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-motion); border-color: var(--c-motion); }
 .c6 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-agency); border-color: var(--c-agency); }
 .c11 .hero-go-btn:hover { box-shadow: 0 0 20px var(--c-kern); border-color: var(--c-kern); }
-
 .hero-slide.c1 h1 span, .hero-slide.c4 h1 span, .hero-slide.c7 h1 span, .hero-slide.c10 h1 span { color: var(--c-core); }
 .hero-slide.c2 h1 span, .hero-slide.c9 h1 span { color: var(--c-logo); }
 .hero-slide.c3 h1 span, .hero-slide.c8 h1 span { color: var(--c-pdf); }
 .hero-slide.c5 h1 span { color: var(--c-motion); }
 .hero-slide.c6 h1 span { color: var(--c-agency); }
 .hero-slide.c11 h1 span { color: var(--c-kern); }
-
 .slider-dots { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 20; }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: 0.3s; }
 .dot.active { background: #fff; width: 24px; border-radius: 10px; }
-
 .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; transition: 0.3s; }
 .nav-arrow:hover { background: #fff; color: #000; }
 .prev { left: 30px; } .next { right: 30px; }
-
-/* 서비스 카드 그리드 */
 .hub-wrapper { padding: 80px 5% 120px; position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; }
 .hub-grid { display: flex; flex-direction: column; align-items: center; gap: 30px; width: 100%; }
-.hub-card { 
-  width: 100%; max-width: 720px; border: 1px solid rgba(255,255,255,0.03); 
-  border-radius: 28px; padding: 45px 55px; text-decoration: none; 
-  display: flex; align-items: center; justify-content: space-between; 
-  position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.4); 
-  transition: 0.5s; scroll-margin-top: 100px; overflow: hidden;
-}
-
+.hub-card { width: 100%; max-width: 720px; border: 1px solid rgba(255,255,255,0.03); border-radius: 28px; padding: 45px 55px; text-decoration: none; display: flex; align-items: center; justify-content: space-between; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.4); transition: 0.5s; overflow: hidden; }
 .c-core { --theme: var(--c-core); --glow: rgba(115, 125, 254, 0.3); background: #131720; }
 .c-logo { --theme: var(--c-logo); --glow: rgba(59, 130, 246, 0.3); background: #151924; }
 .c-pdf { --theme: var(--c-pdf); --glow: rgba(234, 88, 12, 0.3); background: #131720; }
 .c-motion { --theme: var(--c-motion); --glow: rgba(152, 104, 216, 0.3); background: #151924; }
 .c-agency { --theme: var(--c-agency); --glow: rgba(142, 154, 175, 0.2); background: #131720; }
 .c-kern { --theme: var(--c-kern); --glow: rgba(138, 222, 32, 0.3); background: #151924; }
-
 .c-info { width: 75%; display: flex; flex-direction: column; z-index: 2; }
 .c-step { font-size: 0.85rem; font-weight: 900; color: var(--theme); margin-bottom: 12px; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
-.beta-tag { background: var(--theme); color: #000; font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; vertical-align: middle; }
 .c-title { font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
 .c-subtitle { font-size: 1.1rem; color: var(--theme); font-weight: 800; margin-bottom: 20px; }
 .c-desc { font-size: 1rem; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 30px; }
 .c-link { color: var(--theme); font-weight: 800; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
-
-.c-icon { 
-  font-size: 5.5rem; color: var(--theme); opacity: 0.8; 
-  transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
-  filter: drop-shadow(0 0 15px var(--theme)); 
-  z-index: 1;
-}
-
+.c-icon { font-size: 5.5rem; color: var(--theme); opacity: 0.8; transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); filter: drop-shadow(0 0 15px var(--theme)); z-index: 1; }
 @media (hover: hover) {
   .hub-card:hover { transform: translateY(-10px); border-color: var(--theme); box-shadow: 0 0 40px var(--glow); }
   .hub-card:hover .c-icon { transform: scale(1.1) rotate(5deg); opacity: 1; }
   .hub-card:hover .c-link { transform: translateX(5px); }
 }
-
 @media (max-width: 768px) {
-  .nav-arrow { display: none; }
-  .hub-wrapper { padding-top: 60px; }
-  .hub-card { padding: 35px; flex-direction: column; align-items: flex-start; scroll-margin-top: 80px; }
+  .nav-arrow { display: none; } .hub-wrapper { padding-top: 60px; }
+  .hub-card { padding: 35px; flex-direction: column; align-items: flex-start; }
   .c-icon { position: absolute; top: 30px; right: 30px; font-size: 3.5rem; }
-  .top-btn { padding: 8px 12px; font-size: 0.7rem; }
-  .c-info { width: 100%; }
+  .top-btn { padding: 8px 12px; font-size: 0.7rem; } .c-info { width: 100%; }
 }
 </style>
 </head>
@@ -180,7 +119,7 @@ html, body { max-width: 100vw; min-height: 100vh; overflow-x: hidden; background
   <div class="hero-track" id="heroTrack">
     <div class="hero-slide active c1">
       <div class="hero-tag">CORE STEP</div>
-      <h1>생성형 AI로 뽑은 로고,<br><span>왜 내 브랜드 자산이 되지 못할까요?</span></h1>
+      <h1>생성형 AI로 뽑은 로고,<br><span>왜 내 브랜드 자산을 완성하지 못할까요?</span></h1>
       <div class="hero-go-btn" onclick="window.open('/core', '_blank')">솔루션 확인하기 <i class="fa-solid fa-arrow-right"></i></div>
     </div>
     <div class="hero-slide c2">
@@ -224,7 +163,7 @@ html, body { max-width: 100vw; min-height: 100vh; overflow-x: hidden; background
       <div class="hero-go-btn" onclick="window.open('/logo', '_blank')">지금 실행하기 <i class="fa-solid fa-arrow-right"></i></div>
     </div>
     <div class="hero-slide c11">
-      <div class="hero-tag">INVOICE</div>
+      <div class="hero-tag">INVOICE SYSTEM</div>
       <h1>인보이스 관리를 직관적이고 빠르게.<br><span>제이픽의 미스터벡터 청구서 시스템.</span></h1>
       <div class="hero-go-btn" onclick="window.open('/invoice', '_blank')">청구서 확인하기 <i class="fa-solid fa-arrow-right"></i></div>
     </div>
@@ -310,8 +249,7 @@ html, body { max-width: 100vw; min-height: 100vh; overflow-x: hidden; background
 <script>
 const slides = document.querySelectorAll('.hero-slide');
 const dotsContainer = document.getElementById('dots');
-let index = 0;
-let autoPlay;
+let index = 0; let autoPlay;
 
 slides.forEach((_, i) => {
   const dot = document.createElement('div');
@@ -323,39 +261,19 @@ slides.forEach((_, i) => {
 const dots = document.querySelectorAll('.dot');
 
 function updateSlider() {
-  slides.forEach((s, i) => {
-    s.classList.toggle('active', i === index);
-  });
+  slides.forEach((s, i) => { s.classList.toggle('active', i === index); });
   dots.forEach((d, i) => d.classList.toggle('active', i === index));
 }
-
 function moveSlide(dir) {
   index += dir;
   if(index >= slides.length) index = 0;
   if(index < 0) index = slides.length - 1;
   updateSlider();
 }
-
-function manualMove(dir) {
-  stopAutoPlay();
-  moveSlide(dir);
-  startAutoPlay();
-}
-
-function goToSlide(i) {
-  stopAutoPlay();
-  index = i;
-  updateSlider();
-  startAutoPlay();
-}
-
-function startAutoPlay() {
-  autoPlay = setInterval(() => moveSlide(1), 4000); 
-}
-
-function stopAutoPlay() {
-  clearInterval(autoPlay);
-}
+function manualMove(dir) { stopAutoPlay(); moveSlide(dir); startAutoPlay(); }
+function goToSlide(i) { stopAutoPlay(); index = i; updateSlider(); startAutoPlay(); }
+function startAutoPlay() { autoPlay = setInterval(() => moveSlide(1), 4000); }
+function stopAutoPlay() { clearInterval(autoPlay); }
 
 function copyEmail(email) {
   navigator.clipboard.writeText(email).then(() => {
@@ -366,10 +284,7 @@ function copyEmail(email) {
     setTimeout(() => toast.remove(), 2000);
   });
 }
-
-// 시작
 startAutoPlay();
 </script>
-
 </body>
 </html>
