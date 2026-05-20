@@ -7,6 +7,6 @@
     { "source": "/pdf", "destination": "/pdf/index.html" },
     { "source": "/motion", "destination": "/motion/index.html" },
     { "source": "/agency", "destination": "/agency/index.html" },
-    { "source": "/kernalign", "destination": "/kernalign/index.html" }
+    { "source": "/invoice", "destination": "/invoice_MrVector/index.html" }
   ]
 }
