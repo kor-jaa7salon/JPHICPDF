@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-06LPWZ6RLL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-06LPWZ6RLL');
+</script>
+
 <!-- SEO Meta -->
 <title>제이픽 JPHIC PDF | 현장 인쇄 사고 0%, 마스터 발주 파일 세팅</title>
 <meta name="description" content="코엑스·킨텍스 전시 부스, 팝업스토어, 매장 사이니지부터 패키지까지. 인쇄소 반려 파일 완벽 수정, 여백/칼선 세팅 및 미디어 확장(영상 제작)까지 JPHIC이 완벽하게 세팅합니다.">
@@ -53,7 +62,7 @@ body { font-family: 'Pretendard', sans-serif; color: var(--text-main); line-heig
 .marquee-content { display: flex; white-space: nowrap; animation: jphic-marquee 40s linear infinite; width: max-content; }
 .marquee-group { display: flex; align-items: center; }
 .m-text { color: var(--text-sub); font-size: 14px; font-weight: 500; margin-right: 15px; flex-shrink: 0; }
-.m-link { color: var(--mc); font-size: 12px; font-weight: 600; text-decoration: underline; margin-right: 80px; cursor: pointer; flex-shrink: 0; }
+.m-link { color: var(--mc); font-size: 12px; font-weight: 600; text-decoration: underline; margin-right: 80px; cursor: pointer; flex-shrink: 0; display: inline-block; }
 @keyframes jphic-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* NAV */
@@ -307,19 +316,19 @@ footer { background: #000; color: var(--text-dim); padding: 60px 5%; font-size: 
     <div class="marquee-content" onmouseover="this.style.animationPlayState='paused'" onmouseout="this.style.animationPlayState='running'">
       <div class="marquee-group">
         <span class="m-text">"디자인은 예쁜데, 인쇄소에서 여백(블리드)이 부족하대요."</span>
-        <span class="m-link" onclick="openModal()">인쇄 가이드 맞춤 세팅하기 →</span>
+        <a class="m-link" href="/event" target="_blank" rel="noopener">인쇄 가이드 맞춤 세팅하기 →</a>
         <span class="m-text">"CMYK 파일로 변환해서 달라는데 그게 뭔가요?"</span>
-        <span class="m-link" onclick="openModal()">마스터 발주 파일 만들기 →</span>
+        <a class="m-link" href="/event" target="_blank" rel="noopener">마스터 발주 파일 만들기 →</a>
         <span class="m-text">"기껏 만든 디자인, 디지털 사이니지용 영상으로도 쓸 수 있나요?"</span>
-        <span class="m-link" onclick="openModal()">미디어 확장 & 영상 제작 →</span>
+        <a class="m-link" href="/event" target="_blank" rel="noopener">미디어 확장 & 영상 제작 →</a>
       </div>
       <div class="marquee-group">
         <span class="m-text">"디자인은 예쁜데, 인쇄소에서 여백(블리드)이 부족하대요."</span>
-        <span class="m-link" onclick="openModal()">인쇄 가이드 맞춤 세팅하기 →</span>
+        <a class="m-link" href="/event" target="_blank" rel="noopener">인쇄 가이드 맞춤 세팅하기 →</a>
         <span class="m-text">"CMYK 파일로 변환해서 달라는데 그게 뭔가요?"</span>
-        <span class="m-link" onclick="openModal()">마스터 발주 파일 만들기 →</span>
+        <a class="m-link" href="/event" target="_blank" rel="noopener">마스터 발주 파일 만들기 →</a>
         <span class="m-text">"기껏 만든 디자인, 디지털 사이니지용 영상으로도 쓸 수 있나요?"</span>
-        <span class="m-link" onclick="openModal()">미디어 확장 & 영상 제작 →</span>
+        <a class="m-link" href="/event" target="_blank" rel="noopener">미디어 확장 & 영상 제작 →</a>
       </div>
     </div>
   </div>
