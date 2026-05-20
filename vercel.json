@@ -2,11 +2,11 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/core", "destination": "/core" },
-    { "source": "/logo", "destination": "/logo" },
-    { "source": "/pdf", "destination": "/pdf" },
-    { "source": "/motion", "destination": "/motion" },
-    { "source": "/agency", "destination": "/agency" },
-    { "source": "/kernalign", "destination": "/kern" }
+    { "source": "/core", "destination": "/core/index.html" },
+    { "source": "/logo", "destination": "/logo/index.html" },
+    { "source": "/pdf", "destination": "/pdf/index.html" },
+    { "source": "/motion", "destination": "/motion/index.html" },
+    { "source": "/agency", "destination": "/agency/index.html" },
+    { "source": "/kernalign", "destination": "/kernalign/index.html" }
   ]
 }
