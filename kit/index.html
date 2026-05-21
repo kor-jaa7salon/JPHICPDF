@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>칼선 자동화 — JPHIC KIT</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0f;--surface:#13131c;--surface2:#1a1a26;--border:#22223a;
+  --accent:#00BBAC;--accent-dim:rgba(0,187,172,0.12);--accent-glow:rgba(0,187,172,0.35);
+  --text:#eeeef4;--text-sub:#9898b0;--text-dim:#55556a;
+  --red:#ff4466;--yellow:#f5c542;--radius:14px;
+  --font:'Pretendard',-apple-system,sans-serif;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:400;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+header{width:100%;padding:18px 40px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.logo{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:3px}
+.logo-sep{color:var(--border);margin:0 2px}
+.logo-sub{font-size:13px;font-weight:500;color:var(--text-sub)}
+.version{margin-left:auto;font-size:11px;font-weight:500;color:var(--text-dim);letter-spacing:1px}
+main{width:100%;max-width:800px;padding:36px 20px 60px;display:flex;flex-direction:column;gap:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.card-label{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:18px}
+#drop-zone{border:2px dashed var(--border);border-radius:10px;padding:44px 24px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+#drop-zone:hover,#drop-zone.drag-over{border-color:var(--accent);background:var(--accent-dim)}
+#drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer}
+#drop-zone .icon{font-size:28px;margin-bottom:10px}
+#drop-zone .main-text{font-size:16px;font-weight:600;margin-bottom:6px}
+#drop-zone .sub-text{font-size:13px;font-weight:400;color:var(--text-sub)}
+#file-preview{display:none;align-items:center;gap:14px;padding:14px 16px;background:var(--accent-dim);border-radius:10px;border:1px solid var(--accent)}
+#file-preview img{width:52px;height:52px;object-fit:cover;border-radius:6px}
+#file-preview .info{flex:1}
+#file-preview .name{font-size:14px;font-weight:600}
+#file-preview .size{font-size:12px;color:var(--text-sub);margin-top:2px}
+#file-preview .remove-btn{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:18px;padding:4px}
+#file-preview .remove-btn:hover{color:var(--red)}
+.info-badge{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(245,197,66,0.08);border:1px solid rgba(245,197,66,0.2);border-radius:8px;font-size:12px;font-weight:500;color:var(--yellow);margin-top:12px}
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:560px){.options-grid{grid-template-columns:1fr}}
+.opt-label{display:block;font-size:12px;font-weight:600;color:var(--text-sub);margin-bottom:10px;letter-spacing:.5px;text-transform:uppercase}
+.mode-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mode-btn{padding:13px 10px;border:1px solid var(--border);border-radius:9px;background:transparent;color:var(--text-sub);font-size:13px;font-weight:500;font-family:var(--font);cursor:pointer;transition:all .15s;text-align:center;line-height:1.5}
+.mode-btn .mode-desc{font-size:11px;font-weight:400;opacity:.6;display:block}
+.mode-btn:hover{border-color:var(--accent);color:var(--text)}
+.mode-btn.active{border-color:var(--accent);background:var(--accent-dim);color:var(--accent)}
+.slider-row{display:flex;align-items:center;gap:12px}
+input[type=range]{flex:1;height:4px;-webkit-appearance:none;background:var(--border);border-radius:2px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:pointer}
+.slider-val{font-size:13px;font-weight:700;color:var(--accent);min-width:42px;text-align:right}
+.check-row{display:flex;align-items:flex-start;gap:10px;cursor:pointer}
+.check-box{width:20px;height:20px;border:1.5px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;margin-top:1px}
+.check-box.checked{background:var(--accent);border-color:var(--accent)}
+.check-box .check-icon{display:none;color:#000;font-size:12px;font-weight:700}
+.check-box.checked .check-icon{display:block}
+.check-label{font-size:14px;font-weight:600}
+.check-desc{font-size:12px;font-weight:400;color:var(--text-sub);margin-top:2px}
+#run-btn{width:100%;padding:17px;background:var(--accent);color:#000;border:none;border-radius:var(--radius);font-size:16px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .2s;letter-spacing:.5px}
+#run-btn:hover{filter:brightness(1.08);box-shadow:0 0 24px var(--accent-glow)}
+#run-btn:disabled{background:var(--border);color:var(--text-dim);cursor:not-allowed;box-shadow:none}
+#status-card{display:none}
+.progress-steps{display:flex;flex-direction:column;gap:12px}
+.step{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:500;color:var(--text-dim);transition:color .3s}
+.step.active{color:var(--text)}.step.done{color:var(--accent)}
+.step-dot{width:8px;height:8px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background .3s}
+.step.active .step-dot{background:var(--accent);animation:pulse 1s infinite}
+.step.done .step-dot{background:var(--accent)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+#result-card{display:none}
+.result-preview{width:100%;max-height:340px;object-fit:contain;border-radius:8px;margin-bottom:16px;background:repeating-conic-gradient(#1c1c28 0% 25%,#13131c 0% 50%) 0 0/14px 14px}
+.download-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.dl-btn{padding:13px 8px;border:1px solid var(--border);border-radius:9px;background:transparent;color:var(--text);font-size:12px;font-weight:500;font-family:var(--font);cursor:pointer;transition:all .15s;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px}
+.dl-btn:hover{border-color:var(--accent);background:var(--accent-dim);color:var(--accent)}
+.dl-btn .ext{font-size:15px;font-weight:700}
+.reset-btn{width:100%;padding:13px;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--text-sub);font-size:14px;font-weight:500;font-family:var(--font);cursor:pointer;margin-top:12px;transition:all .15s}
+.reset-btn:hover{border-color:var(--text-sub);color:var(--text)}
+#jphic-card{display:none}
+.jphic-inner{background:linear-gradient(135deg,rgba(0,187,172,0.08),rgba(0,187,172,0.03));border:1px solid rgba(0,187,172,0.25);border-radius:var(--radius);padding:24px}
+.jphic-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px}
+.jphic-sub{font-size:13px;font-weight:400;color:var(--text-sub);margin-bottom:20px;line-height:1.6}
+.need-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.need-item{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;color:var(--text-sub);padding:10px 14px;background:var(--surface2);border-radius:8px;border:1px solid var(--border)}
+.need-icon{font-size:15px}
+.jphic-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn-pdf{padding:14px;border-radius:10px;background:var(--accent);color:#000;font-size:14px;font-weight:700;font-family:var(--font);border:none;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s}
+.btn-pdf:hover{filter:brightness(1.08)}
+.btn-chat{padding:14px;border-radius:10px;background:#FEE500;color:#000;font-size:14px;font-weight:700;font-family:var(--font);border:none;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s}
+.btn-chat:hover{filter:brightness(.95)}
+.error-msg{background:rgba(255,68,102,0.08);border:1px solid rgba(255,68,102,0.25);border-radius:10px;padding:13px 16px;font-size:14px;font-weight:500;color:var(--red);display:none}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">JPHIC</span>
+  <span class="logo-sep">/</span>
+  <span class="logo-sub">칼선 자동화</span>
+  <span class="version">v1.5 · 2026-05-19</span>
+</header>
+<main>
+  <div class="card" id="upload-card">
+    <div class="card-label">01 / 파일 업로드</div>
+    <div id="drop-zone">
+      <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp">
+      <div class="icon">📂</div>
+      <div class="main-text">JPG · PNG · WEBP 드래그 또는 클릭</div>
+      <div class="sub-text">배경 없는 PNG 업로드 시 더 정확한 칼선이 생성됩니다</div>
+    </div>
+    <div id="file-preview">
+      <img id="preview-thumb" src="" alt="">
+      <div class="info">
+        <div class="name" id="preview-name"></div>
+        <div class="size" id="preview-size"></div>
+      </div>
+      <button class="remove-btn" id="remove-file">✕</button>
+    </div>
+    <div class="info-badge">💡 JPG는 자동 배경제거 · PNG(투명배경)는 배경제거 없이 바로 칼선 생성</div>
+  </div>
+<br>
+  <div class="card">
+    <div class="card-label">02 / 처리 옵션</div>
+    <div class="options-grid">
+      <div class="option-group" style="grid-column:1/-1">
+        <span class="opt-label">칼선 모드</span>
+        <div class="mode-toggle">
+          <button class="mode-btn active" data-mode="white_border">흰 테두리 너비 설정<span class="mode-desc">배경따라 칼선 생성</span></button>
+          <button class="mode-btn" data-mode="bg_bleed">인쇄 여백 빼주기<span class="mode-desc">배경색 더 여유주기</span></button>
+        </div>
+      </div>
+      <div class="option-group" id="border-group">
+        <span class="opt-label">흰 테두리 두께 너비 설정</span>
+        <div class="slider-row">
+          <input type="range" id="border-mm" min="1" max="10" step="0.5" value="3">
+          <span class="slider-val" id="border-val">3mm</span>
+        </div>
+      </div>
+      <div class="option-group">
+        <span class="opt-label">인쇄 여백 Bleed 설정</span>
+        <div class="slider-row">
+          <input type="range" id="bleed-mm" min="1" max="10" step="0.5" value="3">
+          <span class="slider-val" id="bleed-val">3mm</span>
+        </div>
+      </div>
+      <div class="option-group" style="grid-column:1/-1">
+        <span class="opt-label">Path 단순화</span>
+        <div class="slider-row">
+          <input type="range" id="simplify" min="0" max="5" step="0.5" value="1">
+          <span class="slider-val" id="simplify-val">1px</span>
+        </div>
+        <div style="font-size:12px;font-weight:400;color:var(--text-dim);margin-top:6px">0 = 원본 유지 · 1~2 = 적당 · 3+ = 많이 단순화</div><br><br>
+      </div>
+
+      <div class="option-group">
+        <span class="opt-label">업스케일</span>
+        <label class="check-row" onclick="toggleCheck('upscale')">
+          <div class="check-box checked" id="check-upscale"><span class="check-icon">✓</span></div>
+          <div><div class="check-label">저해상도 자동 업스케일</div><div class="check-desc">AI 생성 이미지 권장</div></div>
+        </label>
+      </div>
+
+      <div class="option-group">
+        <span class="opt-label">스탠딩 옵션</span>
+        <label class="check-row" onclick="toggleCheck('flat-bottom')">
+          <div class="check-box" id="check-flat-bottom"><span class="check-icon">✓</span></div>
+          <div><div class="check-label">바닥면 평탄화</div><div class="check-desc">스탠딩 굿즈용 직선 바닥</div></div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="error-msg" id="error-msg"></div>
+  <button id="run-btn" disabled>칼선 생성하기</button>
+<br>
+  <div class="card" id="status-card">
+    <div class="card-label">처리 중</div>
+    <div class="progress-steps">
+      <div class="step" id="step-upload"><div class="step-dot"></div>파일 업로드</div>
+      <div class="step" id="step-upscale"><div class="step-dot"></div>업스케일</div>
+      <div class="step" id="step-remove"><div class="step-dot"></div>배경 제거</div>
+      <div class="step" id="step-cutline"><div class="step-dot"></div>칼선 추출</div>
+      <div class="step" id="step-export"><div class="step-dot"></div>PDF · SVG 출력</div>
+    </div>
+  </div>
+
+  <div class="card" id="result-card">
+    <div class="card-label">03 / 결과물</div>
+    <img class="result-preview" id="result-preview" src="" alt="결과">
+    <div class="download-grid" id="download-grid"></div>
+    <button class="reset-btn" onclick="resetAll()">↩ 새 이미지 작업하기</button>
+  </div>
+
+  <div id="jphic-card">
+    <div class="jphic-inner">
+      <div class="jphic-title">제이픽, 도와줘!!</div>
+      <div class="jphic-sub">완성도가 더 필요한 작업이 있다면 제이픽의 오픈챗으로 문의해보세요</div>
+      <div class="need-list">
+        <div class="need-item"><span class="need-icon">✂️</span>누끼가 정확하지 않아 - 재작업이 필요한 경우</div>
+        <div class="need-item"><span class="need-icon">📐</span>리사이징 및 인쇄 레이아웃 - 세팅이 필요한 경우</div>
+        <div class="need-item"><span class="need-icon">🎨</span>저해상도 이미지 - 벡터화 변환이 필요한 경우</div>
+        <div class="need-item"><span class="need-icon">🖨️</span>인쇄 여백·배경색 - 정밀 조정이 필요한 경우</div>
+      </div>
+      <div class="jphic-btns">
+        <a class="btn-pdf" href="https://jphic.co.kr/pdf" target="_blank">📄 jphic.co.kr/pdf 서비스 보기</a>
+        <a class="btn-chat" href="https://open.kakao.com/o/sLyIquni" target="_blank">💬 제이픽의 오픈챗</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+const API='';let selectedFile=null,currentMode='white_border',jobId=null;
+const fileInput=document.getElementById('file-input');
+const dropZone=document.getElementById('drop-zone');
+const filePreview=document.getElementById('file-preview');
+fileInput.addEventListener('change',e=>handleFile(e.target.files[0]));
+dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('drag-over')});
+dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop',e=>{e.preventDefault();dropZone.classList.remove('drag-over');if(e.dataTransfer.files[0])handleFile(e.dataTransfer.files[0])});
+document.getElementById('remove-file').addEventListener('click',e=>{e.stopPropagation();resetFile()});
+function handleFile(file){
+  if(!file)return;selectedFile=file;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    document.getElementById('preview-thumb').src=ev.target.result;
+    document.getElementById('preview-name').textContent=file.name;
+    document.getElementById('preview-size').textContent=(file.size/1024).toFixed(0)+' KB';
+    dropZone.style.display='none';filePreview.style.display='flex';
+    document.getElementById('run-btn').disabled=false;
+  };
+  reader.readAsDataURL(file);
+}
+function resetFile(){selectedFile=null;fileInput.value='';dropZone.style.display='block';filePreview.style.display='none';document.getElementById('run-btn').disabled=true}
+document.querySelectorAll('.mode-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');currentMode=btn.dataset.mode;
+    document.getElementById('border-group').style.opacity=currentMode==='white_border'?'1':'0.3';
+  });
+});
+['border','bleed'].forEach(id=>{
+  const el=document.getElementById(id+'-mm'),val=document.getElementById(id+'-val');
+  el.addEventListener('input',()=>val.textContent=el.value+'mm');
+});
+document.getElementById('simplify').addEventListener('input',function(){document.getElementById('simplify-val').textContent=this.value+'px'});
+function toggleCheck(id){document.getElementById('check-'+id).classList.toggle('checked')}
+function isChecked(id){return document.getElementById('check-'+id).classList.contains('checked')}
+const steps=['upload','upscale','remove','cutline','export'];
+function setStep(idx){steps.forEach((s,i)=>{const el=document.getElementById('step-'+s);el.classList.remove('active','done');if(i<idx)el.classList.add('done');else if(i===idx)el.classList.add('active')})}
+document.getElementById('run-btn').addEventListener('click',async()=>{
+  if(!selectedFile)return;hideError();
+  document.getElementById('run-btn').disabled=true;
+  document.getElementById('status-card').style.display='block';
+  document.getElementById('result-card').style.display='none';
+  document.getElementById('jphic-card').style.display='none';
+  setStep(0);
+  const fd=new FormData();
+  fd.append('file',selectedFile);fd.append('mode',currentMode);
+  fd.append('border_mm',document.getElementById('border-mm').value);
+  fd.append('bleed_mm',document.getElementById('bleed-mm').value);
+  fd.append('flat_bottom',isChecked('flat-bottom'));
+  fd.append('upscale',isChecked('upscale'));
+  fd.append('simplify',document.getElementById('simplify').value);
+  setStep(1);await delay(300);setStep(2);
+  try{
+    const res=await fetch('/api/process',{method:'POST',body:fd});
+    const data=await res.json();
+    if(data.error){showError(data.error);return}
+    setStep(3);await delay(300);setStep(4);await delay(300);
+    jobId=data.job_id;showResult(jobId,data.files);
+  }catch(e){showError('서버 연결 실패 — 백엔드가 실행 중인지 확인해주세요')}
+});
+function showResult(jobId,files){
+  document.getElementById('status-card').style.display='none';
+  document.getElementById('result-card').style.display='block';
+  document.getElementById('jphic-card').style.display='block';
+  const pf=files.find(f=>f.endsWith('.png'));
+  if(pf)document.getElementById('result-preview').src='/api/download/'+jobId+'/'+pf;
+  const grid=document.getElementById('download-grid');grid.innerHTML='';
+  const labels={'cutline.svg':['SVG','칼선레이어 포함'],'print.svg':['SVG','칼선레이어 없음'],'cutline.pdf':['PDF','칼선 M100'],'preview.png':['PNG','배경투명파일']};
+  files.forEach(f=>{
+    const[ext,desc]=labels[f]||[f.split('.').pop().toUpperCase(),''];
+    const a=document.createElement('a');a.className='dl-btn';
+    a.href='/api/download/'+jobId+'/'+f;a.download=f;
+    a.innerHTML='<span class="ext">.'+ext.toLowerCase()+'</span><span>'+desc+'</span>';
+    grid.appendChild(a);
+  });
+}
+function resetAll(){resetFile();['status-card','result-card','jphic-card'].forEach(id=>document.getElementById(id).style.display='none');hideError()}
+function showError(msg){const el=document.getElementById('error-msg');el.textContent='오류: '+msg;el.style.display='block';document.getElementById('status-card').style.display='none';document.getElementById('run-btn').disabled=false}
+function hideError(){document.getElementById('error-msg').style.display='none'}
+function delay(ms){return new Promise(r=>setTimeout(r,ms))}
+</script>
+</body>
+</html>
