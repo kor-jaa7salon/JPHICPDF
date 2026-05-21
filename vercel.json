@@ -1,10 +1,13 @@
 {
+  "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
     { "source": "/core", "destination": "/core/index.html" },
     { "source": "/logo", "destination": "/logo/index.html" },
     { "source": "/pdf", "destination": "/pdf/index.html" },
     { "source": "/motion", "destination": "/motion/index.html" },
-    { "source": "/agency", "destination": "/agency/index.html" }
+    { "source": "/agency", "destination": "/agency/index.html" },
+    { "source": "/event", "destination": "/event/index.html" },
+    { "source": "/kit", "destination": "/kit/index.html" }
   ]
 }
