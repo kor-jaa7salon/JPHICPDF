@@ -1,1 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>벡터씨의 AI 생성 이미지 진단 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap');
+        
+        :root {
+            --c-core: #00BBAC;
+            --c-bg: #0f172a;
+            --c-card: rgba(255, 255, 255, 0.05);
+        }
 
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--c-bg);
+            color: #e2e8f0;
+            line-height: 1.7;
+            word-break: keep-all;
+            font-size: 17px;
+        }
+
+        .glass-card {
+            background: var(--c-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00BBAC 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 상태바 애니메이션 */
+        @keyframes progress-load {
+            from { width: 0%; }
+            to { width: var(--p-width); }
+        }
+        .animate-progress {
+            animation: progress-load 1.5s ease-out forwards;
+        }
+
+        /* 쿠폰 레이싱 SVG 보더 (굵기 50% 축소 및 속도 20% 증가) */
+        .coupon-border {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .racing-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .racing-rect {
+            fill: none;
+            stroke: var(--c-core);
+            /* 대시 굵기 50% 축소 (기존 3 -> 1.5) */
+            stroke-width: 1.5;
+            stroke-dasharray: 6 4;
+            stroke-linecap: round;
+            /* 속도 20% 증가 (기존 1s -> 0.8s) */
+            animation: stroke-move 0.8s linear infinite;
+        }
+
+        @keyframes stroke-move {
+            to {
+                stroke-dashoffset: -10;
+            }
+        }
+
+        /* CTA 버튼 그라데이션 모션 */
+        .cta-button {
+            background: linear-gradient(-45deg, #00BBAC, #008f83, #3b82f6, #00BBAC);
+            background-size: 400% 400%;
+            animation: gradient-move 3s ease infinite;
+        }
+        @keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+        .faq-item.active i {
+            transform: rotate(180deg);
+        }
+    </style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-06LPWZ6RLL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-06LPWZ6RLL');
+</script>
+</head>
+<body class="pb-20">
+
+    <div class="max-w-2xl mx-auto px-6 pt-12">
+        
+        <header class="text-center mb-12">
+            <div class="inline-block px-4 py-1 rounded-full bg-[#00BBAC]/10 text-[#00BBAC] text-sm font-bold mb-4">
+                AI 이미지 무료 진단 결과
+            </div>
+            <h1 class="text-4xl font-extrabold tracking-tight">
+                <span id="user-name">사용자</span>님,<br>
+                <span class="gradient-text">보내주신 AI가 만든 이미지<br>인쇄로 쓸 수 있는지 알려드릴게요!</span>
+            </h1>
+        </header>
+
+        <!-- 진단 리포트 메인 섹션 -->
+        <div class="space-y-6">
+            
+            <!-- [SECTION 1] 이미지 업로드 및 상태바 유지 -->
+            <div class="glass-card p-6">
+                <p class="text-sm font-bold text-gray-400 mb-4 uppercase tracking-widest">진단 이미지 상태</p>
+                <div class="w-full h-48 bg-black/20 rounded-xl mb-6 flex items-center justify-center border-2 border-dashed border-white/10 overflow-hidden" id="upload-zone">
+                    <span class="text-gray-500 text-sm">진단한 이미지가 여기에 표시됩니다</span>
+                </div>
+
+<p class="text-base text-gray-500 mb-6 px-1">
+        <i class="fa-solid fa-circle-info mr-1"></i> 
+        알려드려요! 현재 리포트에 표시된 원본 이미지는 보안 정책에 따라 진단일로부터 7일간만 보관된 후 삭제될 예정이에요. 이후에는 리포트 내 이미지 확인이 어려울 수 있으니 참고해 주세요!
+    </p>
+
+                <!-- 상태바 (픽셀상태 자동화) -->
+                <div class="space-y-4">
+                    <div class="flex justify-between text-sm font-bold px-1">
+                        <span class="text-red-500">인쇄비가 아까워요</span>
+                        <span class="text-yellow-500">멀리서 볼 때 괜찮은 정도</span>
+                        <span class="text-[#00BBAC]">탁월</span>
+                    </div>
+                    <div class="w-full h-4 bg-white/5 rounded-full overflow-hidden relative">
+                        <div class="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-[#00BBAC] animate-progress" style="--p-width: 65%;"></div>
+                    </div>
+                </div>
+            </div>
+<br>
+            <!-- [SECTION 2] 문제 제기 -->
+            <div class="glass-card p-6 border-[#00BBAC]/30">
+                <h3 class="text-lg font-bold mb-4 flex items-center">
+                    <i class="fa-solid fa-circle-exclamation text-yellow-500 mr-2"></i> 벡터씨가 찾은 이슈 <br>
+                </h3>
+                <div id="issue-container" class="space-y-3">
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                        <p class="font-bold text-[#00BBAC] mb-1">🔍 낮은 해상도와 픽셀 깨짐</p><br>
+                        <p class="text-m text-gray-400">이미지가 작은 점(픽셀)으로 이루어져 있어, 조금만 키워도 계단 현상이 나타나고 흐릿해지는 상태예요. AI가 만든 이미지는 대부분 웹용(72dpi)으로 생성돼요. 하지만 인쇄물은 그보다 4배 이상 선명해야 하거든요. 지금 상태는 '돋보기로 본 모자이크'와 같아서 매끄러운 인쇄가 어렵답니다.</p>
+                    
+                    
+                                    <!-- 더 자세히 보기 (블로그 링크) -->
+                <a href="https://blog.naver.com/jphichan/224286856286" target="_blank" class="mt-4 flex items-center justify-center w-full py-3 bg-white/5 rounded-xl text-sm font-medium hover:bg-white/30 transition-all">
+                    <i class="fa-solid fa-link mr-2"></i> 왜 깨지는지 더 자세히 알아보기 (벡터씨 네이버블로그)
+                </a>
+            </div>
+                          </div>
+                </div>
+<br>
+
+
+            <!-- [SECTION 3] 스페셜 오퍼 쿠폰 (SVG 굵기 및 속도 최적화) -->
+            <div class="coupon-border p-8 text-center bg-gradient-to-br from-[#00BBAC]/10 to-blue-950/40 rounded-2xl">
+                <!-- SVG 애니메이션 테두리 -->
+                <svg class="racing-svg">
+                    <rect x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)" rx="23" class="racing-rect" />
+                </svg>
+
+                <div class="relative z-10">
+                    <br>
+                    <p class="text-sm font-bold text-[#00BBAC] mb-2">시안 전달 후 당일 최종 파일 확정 시</p>
+                
+                    <h2 class="text-6xl font-black mb-4 gradient-text">7.7% OFF</h2>
+                    <div class="inline-block bg-white/10 px-6 py-2 rounded-lg border border-white/20 mb-4">
+                                           <span class="text-xs text-gray-400 block mb-1 uppercase">Coupon Code</span>
+                        <span class="font-mono text-xl tracking-widest font-bold">VECTOR77</span>
+                    </div>
+                    <p class="text-sm text-gray-400">파일진단 무료신청하신 분들께 드리는 쿠폰입니다. 결제할 때 사용하세요.</p>
+                    <br>
+                </div>
+            </div>
+<br>
+            <!-- [SECTION 4] CTA -->
+            <a href="https://open.kakao.com/o/s154Q5ui" target="_blank" class="cta-button flex items-center justify-center w-full py-8 rounded-2xl text-white font-black text-xl shadow-xl shadow-[#00BBAC]/20">
+                벡터씨 도와줘! 벡터 제작문의하기 오픈챗연결→
+            </a>
+<br>
+            <!-- [SECTION 5] 후기 -->
+            <div class="pt-10">
+                <h3 class="text-xl font-bold mb-6 text-center">벡터씨를 만난 분들의 이야기</h3>
+                <div class="grid grid-cols-1 gap-4 text-left">
+                    <div class="glass-card p-5">
+                        <div class="flex text-yellow-400 mb-2">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-m text-gray-300 font-bold mb-1">"디자인은 1도 모르는데 벡터씨가 너무 쉽게 설명해 줘서 바로 해결했어요!"</p>
+                        <p class="text-sm text-gray-500">- AI 로고 제작 사용자 A님</p>
+                    </div>
+                    <div class="glass-card p-5">
+                        <div class="flex text-yellow-400 mb-2">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-m text-gray-300 font-bold mb-1">"인쇄소에서 계속 거절당했는데, 벡터씨 진단 리포트 한 장으로 모든 게 이해됐네요."</p>
+                        <p class="text-sm text-gray-500">- 소상공인 B님</p>
+                    </div>
+                </div>
+            </div>
+<br>
+            <!-- [SECTION 6] FAQ -->
+            <div class="pt-10">
+                                <h3 class="text-xl font-bold mb-6 text-center">더 궁금하실 것 같아서</h3>
+
+                <div class="space-y-3">
+                    <div class="faq-item glass-card overflow-hidden cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="p-4 flex justify-between items-center bg-white/5">
+                            <span class="text-m font-bold">Q. 벡터로 바꾸면 뭐가 좋아지나요?</span>
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                        </div>
+                        <div class="faq-answer px-4 bg-white/2">
+                            <div class="py-4 text-sm text-gray-400">
+                                빌딩만큼 키워도 선이 칼날처럼 선명해져요. 인쇄소에서 절대 거절당하지 않는 '무적 파일'이 되는 셈이죠!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item glass-card overflow-hidden cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="p-4 flex justify-between items-center bg-white/5">
+                            <span class="text-m font-bold">Q. 진단은 무료인데 왜 결제가 필요한가요?</span>
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                        </div>
+                        <div class="faq-answer px-4 bg-white/2">
+                            <div class="py-4 text-sm text-gray-400">
+                                진단은 벡터씨의 재능기부예요! 하지만 실제 파일을 인쇄 가능하게 다시 그리는 과정은 고도의 수작업이 들어가기 때문에 유료 서비스로 진행된답니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<br>
+            <!-- [SECTION 7] 최종 하단 CTA -->
+            <div class="py-12 text-center">
+                <h2 class="text-2xl font-black mb-6">벡터씨와 벡터 이야기 이어서 해볼까요?</h2>
+                <a href="https://open.kakao.com/o/s154Q5ui" class="inline-flex items-center gap-2 text-[#00BBAC] font-bold border-b-2 border-[#00BBAC] pb-1 hover:text-white hover:border-white transition-all">
+                   브랜드 자산 키우기 상담 시작하기 <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="text-center py-10 border-t border-white/5">
+            <p class="text-xs text-gray-600 font-bold">© JPHIC | 브랜드 자산을 완성하는 솔루션</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function toggleFaq(el) {
+            el.classList.toggle('active');
+        }
+
+        const issueData = [
+            { title: "낮은 해상도와 픽셀 깨짐", desc: "이미지가 작은 점으로 이루어져 있어 계단 현상이 나타납니다." },
+            { title: "비트맵 텍스트 뭉개짐", desc: "글자가 선이 아닌 픽셀이라 인쇄 시 가독성이 현저히 떨어집니다." },
+            { title: "색상 프로필 불일치 (RGB)", desc: "웹용 색상이라 실제 인쇄 시 색이 탁해질 수 있습니다." },
+            { title: "배경 분리 불가", desc: "배경과 로고가 합쳐져 있어 투명 배경 사용이 불가능합니다." }
+        ];
+    </script>
+</body>
+</html>
