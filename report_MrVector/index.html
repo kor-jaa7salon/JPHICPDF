@@ -1,3 +1,4 @@
+<!-- 260522 1630 | report_MrVector/index.html | doGet URL 연결 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -155,6 +156,12 @@
                         <div class="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-[#00BBAC] animate-progress" style="--p-width: 65%;"></div>
                     </div>
                 </div>
+
+                <!-- 벡터씨의 한 줄 평 (한줄평 있을 때만 표시) -->
+                <div id="one-line-comment-box" class="mt-6 p-4 bg-[#00BBAC]/5 border-l-4 border-[#00BBAC] rounded-r-xl" style="display:none;">
+                    <p class="text-sm text-gray-400 mb-1">💬 벡터씨의 한 줄 평</p>
+                    <p id="one-line-comment" class="text-base text-white italic"></p>
+                </div>
             </div>
 <br>
             <!-- [SECTION 2] 문제 제기 -->
@@ -277,12 +284,140 @@
             el.classList.toggle('active');
         }
 
-        const issueData = [
-            { title: "낮은 해상도와 픽셀 깨짐", desc: "이미지가 작은 점으로 이루어져 있어 계단 현상이 나타납니다." },
-            { title: "비트맵 텍스트 뭉개짐", desc: "글자가 선이 아닌 픽셀이라 인쇄 시 가독성이 현저히 떨어집니다." },
-            { title: "색상 프로필 불일치 (RGB)", desc: "웹용 색상이라 실제 인쇄 시 색이 탁해질 수 있습니다." },
-            { title: "배경 분리 불가", desc: "배경과 로고가 합쳐져 있어 투명 배경 사용이 불가능합니다." }
-        ];
+        // ============================================================
+        // 동적 리포트 렌더링
+        // ============================================================
+
+        // ⚠️ 아래 URL은 리포트 Apps Script "웹앱 배포" 후 발급받은 URL로 교체!
+        const REPORT_API_URL = "https://script.google.com/macros/s/AKfycbz7ip6pj2Z98CeUKGnYn1Qctb7ZmkY-0mTfO8y3HpqTGUBcabWFqt4qzUPAgg7q7TZK/exec";
+
+        // 8개 이슈 풀세트
+        const ISSUE_FULLSET = {
+            1: {
+                title: "계단 현상 (외곽선 깨짐)",
+                desc: "AI로 만든 이미지의 곡선이 매끄럽지 못하고 계단처럼 울퉁불퉁하게 보여요. 비트맵 픽셀 격자의 한계 때문에 사선·곡선이 깨져 보이는 현상이랍니다. 명함이나 사인보드에 인쇄하면 그대로 노출돼요.",
+                blog: "https://blog.naver.com/jphichan/224293127438"
+            },
+            2: {
+                title: "색상 번짐 (경계 흐림)",
+                desc: "색과 색이 만나는 가장자리가 또렷하지 않고 안개처럼 번지는 현상이에요. 화면에선 부드럽게 보이지만 인쇄하면 색이 둔탁하고 깔끔하지 않게 나옵니다. JPG 압축 과정에서 더 심해질 수 있어요.",
+                blog: "https://blog.naver.com/jphichan/224293190191"
+            },
+            3: {
+                title: "심볼 왜곡 (도형 뭉개짐)",
+                desc: "가까이서 보면 또렷한데, 멀리서 보거나 인쇄하면 작은 도형이 형태를 잃고 뭉그러져요. 특히 점·별·작은 아이콘이 위험합니다. 작은 도형일수록 표현에 쓸 수 있는 픽셀 개수가 적어지거든요.",
+                blog: "https://blog.naver.com/jphichan/224293263194"
+            },
+            4: {
+                title: "텍스트 가독성 저하",
+                desc: "글자가 실제 폰트가 아니라 비트맵 이미지로 들어가 있어요. 글자 사이 간격이 무너지고 획이 뭉칩니다. 한글 받침이 특히 잘 깨져요. 명함이나 사인 보드에 인쇄하면 무슨 글자인지 알아보기 어려워집니다.",
+                blog: "https://blog.naver.com/jphichan/224293345472"
+            },
+            5: {
+                title: "배경 분리 불가 (누끼 안 됨)",
+                desc: "투명도를 지원하지 않는 JPG 포맷이거나, 배경과 로고 색이 안티앨리어싱으로 섞여 있어 누끼 작업이 불가능한 상태예요. 다른 디자인에 얹으려 하면 흰 사각형 배경이 그대로 따라옵니다.",
+                blog: "https://blog.naver.com/jphichan/224293345538"
+            },
+            6: {
+                title: "저해상도 (전체 화질 저하)",
+                desc: "AI가 만든 기본 출력은 보통 512×512 또는 1024×1024 픽셀이에요. 화면용으로는 충분하지만 인쇄용 300dpi 기준엔 턱없이 부족합니다. 명함만 해도 1050×600 픽셀이 필요해요.",
+                blog: "https://blog.naver.com/jphichan/224293345590"
+            },
+            7: {
+                title: "그라데이션 오류 (밴딩)",
+                desc: "색이 자연스럽게 흘러야 하는데 마치 등고선처럼 단계가 보이는 현상. 비트맵이 표현할 수 있는 색 단계가 제한적이거나, 압축 과정에서 중간 색이 손실되어 생깁니다. 특히 어두운 색에서 밝은 색으로 가는 그라데이션이 잘 깨져요.",
+                blog: "https://blog.naver.com/jphichan/224293345663"
+            },
+            8: {
+                title: "얇은 선 유실",
+                desc: "모니터에선 정교했던 얇은 선들이 인쇄에선 흔적도 없이 사라질 수 있어요. 인쇄기는 0.25pt(약 0.09mm) 이하의 선을 표현할 수 없거든요. AI는 화면 표현을 우선으로 디자인하기 때문에 인쇄 한계를 고려하지 않습니다.",
+                blog: "https://blog.naver.com/jphichan/224293345713"
+            }
+        };
+
+        // URL에서 ?id= 파싱
+        const params = new URLSearchParams(window.location.search);
+        const reportId = params.get('id');
+
+        if (!reportId) {
+            showError("리포트 ID가 없습니다. 이메일로 받으신 링크를 다시 확인해주세요.");
+        } else {
+            fetch(`${REPORT_API_URL}?id=${encodeURIComponent(reportId)}`)
+                .then(res => res.json())
+                .then(json => {
+                    if (json.status === "ok") {
+                        renderReport(json.data);
+                    } else {
+                        showError(json.message || "해당 리포트를 찾을 수 없습니다.");
+                    }
+                })
+                .catch(err => {
+                    showError("데이터를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.");
+                    console.error(err);
+                });
+        }
+
+        function renderReport(data) {
+            // 1) 사용자명
+            document.getElementById('user-name').textContent = data.고객명 || "사용자";
+
+            // 2) 진단 이미지
+            if (data.이미지URL) {
+                const zone = document.getElementById('upload-zone');
+                zone.innerHTML = `<img src="${data.이미지URL}" alt="진단 이미지" class="w-full h-full object-contain rounded-xl">`;
+                zone.classList.remove('border-dashed');
+            }
+
+            // 3) 진단 점수 (상태바)
+            const score = parseInt(data.진단점수) || 0;
+            const bar = document.querySelector('.animate-progress');
+            if (bar) bar.style.setProperty('--p-width', `${score}%`);
+
+            // 4) 한 줄 평
+            if (data.한줄평) {
+                document.getElementById('one-line-comment').textContent = `"${data.한줄평}"`;
+                document.getElementById('one-line-comment-box').style.display = 'block';
+            }
+
+            // 5) 이슈 카드 동적 생성
+            const issueIds = String(data.이슈ID)
+                .split(',')
+                .map(s => parseInt(s.trim()))
+                .filter(n => !isNaN(n) && ISSUE_FULLSET[n]);
+
+            const container = document.getElementById('issue-container');
+            if (container && issueIds.length > 0) {
+                container.innerHTML = issueIds.map(id => {
+                    const issue = ISSUE_FULLSET[id];
+                    return `
+                        <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                            <p class="font-bold text-[#00BBAC] mb-1">🔍 ${issue.title}</p><br>
+                            <p class="text-m text-gray-400">${issue.desc}</p>
+                            <a href="${issue.blog}" target="_blank" class="mt-4 flex items-center justify-center w-full py-3 bg-white/5 rounded-xl text-sm font-medium hover:bg-white/30 transition-all">
+                                <i class="fa-solid fa-link mr-2"></i> 왜 그런지 더 자세히 알아보기 (벡터씨 네이버블로그)
+                            </a>
+                        </div>
+                    `;
+                }).join('');
+            } else if (container) {
+                container.innerHTML = `<p class="text-gray-500 text-center py-6">진단된 이슈가 없습니다.</p>`;
+            }
+
+            // 6) 페이지 타이틀에 고객명 반영 (브라우저 탭)
+            document.title = `${data.고객명}님의 진단 리포트 | 벡터씨`;
+        }
+
+        function showError(msg) {
+            const container = document.querySelector('.max-w-2xl');
+            container.innerHTML = `
+                <div class="text-center py-20">
+                    <div class="text-6xl mb-6">😅</div>
+                    <h2 class="text-2xl font-bold text-white mb-4">${msg}</h2>
+                    <p class="text-gray-400 mb-8">문의: info@jphic.co.kr</p>
+                    <a href="https://jphic.co.kr" class="inline-block px-6 py-3 bg-[#00BBAC] text-black font-bold rounded-xl">홈으로</a>
+                </div>
+            `;
+        }
     </script>
 </body>
 </html>
