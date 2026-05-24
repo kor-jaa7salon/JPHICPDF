@@ -1,4 +1,4 @@
-<!-- 260524 1545 | report_MrVector/index.html | 상태바 v2 (파일완성도 상단·원형 인디케이터·7일안내 우측배치) -->
+<!-- 260524 1610 | report_MrVector/index.html | 상태바 v3 (인디케이터=진행바내부 우측끝, 칼선스타일 청록+흰테두리) -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -156,15 +156,17 @@
                         <span>멀리서 볼 때 괜찮은 정도</span>
                         <span>탁월</span>
                     </div>
-                    <!-- 상태바: 그라데이션 + 구분선 3개 + 원형 인디케이터 -->
+                    <!-- 상태바: 그라데이션 + 구분선 3개 + 원형 인디케이터(진행바 우측 끝, 칼선 스타일) -->
                     <div class="relative w-full h-4 bg-white/5 rounded-full">
-                        <div class="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-[#00BBAC] animate-progress rounded-full" style="--p-width: 65%;"></div>
+                        <!-- 진행 바 (그라데이션) + 내부 우측 끝에 인디케이터 -->
+                        <div class="relative h-full bg-gradient-to-r from-red-500 via-yellow-500 to-[#00BBAC] animate-progress rounded-full" style="--p-width: 65%;">
+                            <!-- 원형 인디케이터: 청록색 + 흰 테두리 (칼선 페이지와 통일) -->
+                            <div id="score-indicator" class="absolute w-5 h-5 rounded-full" style="top:50%; right:0; margin-top:-10px; margin-right:-10px; background:#00BBAC; border:2px solid #ffffff; box-shadow:0 2px 6px rgba(0,0,0,0.4);"></div>
+                        </div>
                         <!-- 구분선 3개 (25%, 50%, 75%) -->
                         <div class="absolute top-0 left-1/4 w-px h-full bg-white/25"></div>
                         <div class="absolute top-0 left-1/2 w-px h-full bg-white/25"></div>
                         <div class="absolute top-0 left-3/4 w-px h-full bg-white/25"></div>
-                        <!-- 원형 인디케이터 -->
-                        <div id="score-indicator" class="absolute w-6 h-6 bg-white rounded-full border-2 border-gray-200" style="top:-4px; left:65%; transform:translateX(-50%); box-shadow:0 0 12px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.4); transition:left 1.5s ease-out;"></div>
                     </div>
                 </div>
 
@@ -379,12 +381,11 @@
                 zone.classList.remove('border-dashed');
             }
 
-            // 3) 진단 점수 (상태바 + 인디케이터 + 파일완성도 텍스트)
+            // 3) 진단 점수 (상태바 + 파일완성도 텍스트)
+            // 인디케이터는 진행바 내부 우측 끝에 박혀있어 별도 위치 설정 불필요
             const score = parseInt(data.진단점수) || 0;
             const bar = document.querySelector('.animate-progress');
             if (bar) bar.style.setProperty('--p-width', `${score}%`);
-            const indicator = document.getElementById('score-indicator');
-            if (indicator) indicator.style.left = `${score}%`;
             const text = document.getElementById('completion-text');
             if (text) text.textContent = `파일 완성도 ${score}%`;
 
