@@ -312,6 +312,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyKq109r0TCEBfkw2QEFf1myONi5SxCvL6meiUVEU1wyMJN5ePjja5QhsjrfJH1gzOi/exec';
 let selectedFile=null, currentMode='white_border', openAcc=null;
 const doneSet=new Set();
+const sVals={'border-mm':3,'bleed-mm':3,'simplify':1};
 
 const STEPS_DEF=[
   {
@@ -342,18 +343,18 @@ const STEPS_DEF=[
       </div>
       <span class="opt-label">흰 테두리 두께</span>
       <div class="slider-row">
-        <input type="range" id="border-mm" min="1" max="10" step="0.5" value="3" oninput="document.getElementById('border-val').textContent=this.value+'mm'">
-        <span class="slider-val" id="border-val">3mm</span>
+        <input type="range" id="border-mm" min="0" max="10" step="0.5" value="${sVals['border-mm']}" oninput="sVals['border-mm']=parseFloat(this.value);document.getElementById('border-val').textContent=this.value+'mm'">
+        <span class="slider-val" id="border-val">${sVals['border-mm']}mm</span>
       </div>
       <span class="opt-label">인쇄 여백 Bleed</span>
       <div class="slider-row">
-        <input type="range" id="bleed-mm" min="1" max="10" step="0.5" value="3" oninput="document.getElementById('bleed-val').textContent=this.value+'mm'">
-        <span class="slider-val" id="bleed-val">3mm</span>
+        <input type="range" id="bleed-mm" min="1" max="10" step="0.5" value="${sVals['bleed-mm']}" oninput="sVals['bleed-mm']=parseFloat(this.value);document.getElementById('bleed-val').textContent=this.value+'mm'">
+        <span class="slider-val" id="bleed-val">${sVals['bleed-mm']}mm</span>
       </div>
       <span class="opt-label">Path 단순화</span>
       <div class="slider-row" style="margin-bottom:8px">
-        <input type="range" id="simplify" min="0" max="5" step="0.5" value="1" oninput="document.getElementById('simplify-val').textContent=this.value+'px'">
-        <span class="slider-val" id="simplify-val">1px</span>
+        <input type="range" id="simplify" min="0" max="5" step="0.5" value="${sVals['simplify']}" oninput="sVals['simplify']=parseFloat(this.value);document.getElementById('simplify-val').textContent=this.value+'px'">
+        <span class="slider-val" id="simplify-val">${sVals['simplify']}px</span>
       </div>
       <div style="font-size:14px;color:var(--text-dim);margin-bottom:20px">0 = 원본 유지 · 1~2 = 적당 · 3+ = 많이 단순화</div>
       <label class="check-row" onclick="toggleCheck('flat-bottom')">
@@ -449,11 +450,11 @@ document.getElementById('run-btn').addEventListener('click',async()=>{
   const fd=new FormData();
   fd.append('file',selectedFile);
   fd.append('mode',currentMode);
-  fd.append('border_mm',document.getElementById('border-mm')?.value||3);
-  fd.append('bleed_mm',document.getElementById('bleed-mm')?.value||3);
+  fd.append('border_mm', sVals['border-mm']);
+  fd.append('bleed_mm', sVals['bleed-mm']);
   fd.append('flat_bottom',isChecked('flat-bottom'));
   fd.append('upscale',isChecked('upscale'));
-  fd.append('simplify',document.getElementById('simplify')?.value||1);
+  fd.append('simplify', sVals['simplify']);
   setStep(1); await delay(300); setStep(2);
   try{
     const res=await fetch('https://jphic-kit-api.onrender.com/process',{method:'POST',body:fd});
