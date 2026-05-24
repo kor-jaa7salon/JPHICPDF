@@ -1,4 +1,4 @@
-<!-- 260524 1530 | report_MrVector/index.html | 상태바 직관 UX 개선 (인디케이터·구분선·파일완성도) + Before/After 이미지 + 에러시 오픈챗 -->
+<!-- 260524 1545 | report_MrVector/index.html | 상태바 v2 (파일완성도 상단·원형 인디케이터·7일안내 우측배치) -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -133,38 +133,39 @@
         <!-- 진단 리포트 메인 섹션 -->
         <div class="space-y-6">
             
-            <!-- [SECTION 1] 이미지 업로드 및 상태바 유지 -->
+            <!-- [SECTION 1] 이미지 업로드 및 상태바 -->
             <div class="glass-card p-6">
-                <p class="text-sm font-bold text-gray-400 mb-4 uppercase tracking-widest">진단 이미지 상태</p>
+                <!-- 헤더: 진단 이미지 상태 라벨 + 7일 안내 좌우 배치 -->
+                <div class="flex justify-between items-start mb-4 gap-3">
+                    <p class="text-sm font-bold text-gray-400 uppercase tracking-widest shrink-0">진단 이미지 상태</p>
+                    <p class="text-xs text-gray-500 text-right leading-relaxed">
+                        <i class="fa-solid fa-circle-info mr-1"></i> 원본 이미지는 진단일로부터 7일간만 보관 후 자동 삭제됩니다.
+                    </p>
+                </div>
                 <div class="w-full h-48 bg-black/20 rounded-xl mb-6 flex items-center justify-center border-2 border-dashed border-white/10 overflow-hidden" id="upload-zone">
                     <span class="text-gray-500 text-sm">진단한 이미지가 여기에 표시됩니다</span>
                 </div>
 
-<p class="text-base text-gray-500 mb-6 px-1">
-        <i class="fa-solid fa-circle-info mr-1"></i> 
-        알려드려요! 현재 리포트에 표시된 원본 이미지는 보안 정책에 따라 진단일로부터 7일간만 보관된 후 삭제될 예정이에요. 이후에는 리포트 내 이미지 확인이 어려울 수 있으니 참고해 주세요!
-    </p>
-
-                <!-- 상태바 (직관 UX: 라벨 통일톤 + 구분선 + 인디케이터 + 파일완성도) -->
-                <div class="space-y-4">
+                <!-- 상태바 (직관 UX: 파일완성도 상단 강조 + 원형 인디케이터 + 구분선) -->
+                <div class="space-y-3">
+                    <!-- 파일 완성도: 상단 강조 (크게, 흰색) -->
+                    <p id="completion-text" class="text-center text-2xl font-bold text-white">파일 완성도 65%</p>
                     <!-- 3단계 라벨: 흰색 60%, 볼드 해제 -->
                     <div class="flex justify-between text-sm text-white/60 px-1">
                         <span>인쇄비가 아까워요</span>
                         <span>멀리서 볼 때 괜찮은 정도</span>
                         <span>탁월</span>
                     </div>
-                    <!-- 상태바: 그라데이션 + 구분선 3개 + 현재위치 인디케이터 -->
+                    <!-- 상태바: 그라데이션 + 구분선 3개 + 원형 인디케이터 -->
                     <div class="relative w-full h-4 bg-white/5 rounded-full">
                         <div class="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-[#00BBAC] animate-progress rounded-full" style="--p-width: 65%;"></div>
                         <!-- 구분선 3개 (25%, 50%, 75%) -->
                         <div class="absolute top-0 left-1/4 w-px h-full bg-white/25"></div>
                         <div class="absolute top-0 left-1/2 w-px h-full bg-white/25"></div>
                         <div class="absolute top-0 left-3/4 w-px h-full bg-white/25"></div>
-                        <!-- 현재위치 인디케이터 (세로줄) -->
-                        <div id="score-indicator" class="absolute -top-1 w-[3px] h-6 bg-white rounded-sm" style="left:65%; transform:translateX(-50%); box-shadow:0 0 6px rgba(255,255,255,0.6); transition:left 1.5s ease-out;"></div>
+                        <!-- 원형 인디케이터 -->
+                        <div id="score-indicator" class="absolute w-6 h-6 bg-white rounded-full border-2 border-gray-200" style="top:-4px; left:65%; transform:translateX(-50%); box-shadow:0 0 12px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.4); transition:left 1.5s ease-out;"></div>
                     </div>
-                    <!-- 파일 완성도 텍스트: 흰색 60%, 볼드 해제 -->
-                    <p id="completion-text" class="text-center text-sm text-white/60 mt-3">파일 완성도 65%</p>
                 </div>
 
                 <!-- 벡터씨의 한 줄 평 (한줄평 있을 때만 표시) -->
