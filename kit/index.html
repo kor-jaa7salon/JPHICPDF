@@ -31,13 +31,19 @@ header{width:100%;padding:18px 40px;border-bottom:1px solid var(--border);displa
 .logo-accent{color:var(--accent)}
 .version{margin-left:auto;font-size:11px;font-weight:500;color:var(--text-dim);letter-spacing:1px}
 
-.kit-hero{width:100%;max-width:800px;padding:40px 20px 0;text-align:center}
-.kit-hero-title{font-size:24px;font-weight:800;color:var(--text);margin-bottom:10px;letter-spacing:-.02em}
-.kit-hero-sub{font-size:16px;color:var(--text-sub);margin-bottom:24px}
-.kit-steps-row{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
-.kit-step{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--text-sub);background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 18px}
-.kit-step span{font-size:13px}
-.kit-arrow{color:var(--text-dim);font-size:18px}
+.kit-hero{width:100%;max-width:800px;padding:40px 20px 0}
+.kit-hero-letter{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px 36px;line-height:1.85}
+.kit-hero-from{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.kit-hero-letter p{font-size:16px;color:var(--text-sub);margin-bottom:16px}
+.kit-hero-letter p strong{color:var(--text);font-weight:600}
+.kit-hero-sig{font-size:15px;font-weight:700;color:var(--text);margin-top:8px}
+.kit-how{margin-top:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 36px}
+.kit-how-title{font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:20px}
+.kit-how-steps{display:flex;flex-direction:column;gap:18px}
+.kit-how-step{display:flex;align-items:flex-start;gap:16px}
+.kit-how-num{width:28px;height:28px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);font-size:13px;font-weight:700;color:var(--text-sub);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.kit-how-label{font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px}
+.kit-how-desc{font-size:15px;color:var(--text-sub);line-height:1.65}
 
 main{width:100%;max-width:800px;padding:36px 20px 80px;display:flex;flex-direction:column;gap:20px}
 
@@ -186,16 +192,54 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   <span class="version">v2.0 · 2026-05-24</span>
 </header>
 <section class="kit-hero">
-  <div class="kit-hero-title">이미지 올리면, 인쇄 파일로 자동 변환</div>
-  <div class="kit-hero-sub">업로드 → 자동 진단 → 처리 선택 → 다운로드</div>
-  <div class="kit-steps-row">
-    <div class="kit-step">📤<span>업로드</span></div>
-    <div class="kit-arrow">→</div>
-    <div class="kit-step">🔍<span>자동 진단</span></div>
-    <div class="kit-arrow">→</div>
-    <div class="kit-step">⚙️<span>처리 선택</span></div>
-    <div class="kit-arrow">→</div>
-    <div class="kit-step">📥<span>다운로드</span></div>
+  <div class="kit-hero-letter">
+    <div class="kit-hero-from">벡터씨의 실험실 노트</div>
+    <p>
+      디자인 파일을 받아보면 화면에선 예쁜데, 막상 인쇄하려면 해상도가 낮거나 배경이 안 지워져 있거나, 칼선이 없어서 다시 작업해야 하는 경우가 너무 많았어요.
+    </p>
+    <p>
+      그래서 직접 만들었어요. 이미지를 올리면 <strong>인쇄에 필요한 처리를 자동으로</strong> 해주는 툴이에요.<br>
+      완벽하진 않아요. 설정값에 따라 결과가 달라지고, 케이스마다 한계도 있어요.<br>
+      그래도 작업 단계를 줄여보자는 마음으로, 실험적으로 무료로 공개합니다.
+    </p>
+    <p>
+      써보시고 후기 한 줄 남겨주시면, 그게 다음 버전 개발에 직접 반영돼요.
+    </p>
+    <div class="kit-hero-sig">— 벡터씨</div>
+  </div>
+
+  <div class="kit-how">
+    <div class="kit-how-title">이렇게 사용하세요</div>
+    <div class="kit-how-steps">
+      <div class="kit-how-step">
+        <div class="kit-how-num">1</div>
+        <div class="kit-how-text">
+          <div class="kit-how-label">이미지 업로드</div>
+          <div class="kit-how-desc">JPG · PNG · WEBP 파일을 올려주세요. PNG 투명배경이면 배경 제거 단계를 건너뛸 수 있어요.</div>
+        </div>
+      </div>
+      <div class="kit-how-step">
+        <div class="kit-how-num">2</div>
+        <div class="kit-how-text">
+          <div class="kit-how-label">자동 진단</div>
+          <div class="kit-how-desc">해상도, 컬러모드, 배경 유무를 자동으로 분석해요. 권장 처리 항목이 표시됩니다.</div>
+        </div>
+      </div>
+      <div class="kit-how-step">
+        <div class="kit-how-num">3</div>
+        <div class="kit-how-text">
+          <div class="kit-how-label">처리 선택</div>
+          <div class="kit-how-desc">필요한 단계만 확인하거나 건너뛰세요. 테두리 두께, 단순화 강도 등을 직접 조정할 수 있어요.</div>
+        </div>
+      </div>
+      <div class="kit-how-step">
+        <div class="kit-how-num">4</div>
+        <div class="kit-how-text">
+          <div class="kit-how-label">다운로드</div>
+          <div class="kit-how-desc">칼선 포함 SVG와 투명배경 PNG로 저장해요. 인쇄소 제출, 굿즈 납품 등 바로 활용 가능해요.</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 <main>
