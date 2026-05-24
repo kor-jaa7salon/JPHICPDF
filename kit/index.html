@@ -471,9 +471,9 @@ function showResult(jobId,files){
   document.getElementById('review-card').style.display='block';
   const pf=files.find(f=>f.endsWith('.png'));
   if(pf)document.getElementById('result-preview').src='https://jphic-kit-api.onrender.com/download/'+jobId+'/'+pf;
-  const labels={'cutline.svg':['SVG','칼선레이어'],'print.svg':['SVG','칼선없음'],'cutline.pdf':['PDF','칼선 M100'],'preview.png':['PNG','투명배경']};
+  const labels={'cutline.svg':['SVG','칼선레이어'],'preview.png':['PNG','투명배경']};
   const grid=document.getElementById('download-grid'); grid.innerHTML='';
-  files.forEach(f=>{
+  files.filter(f=>f==='cutline.svg'||f==='preview.png').forEach(f=>{
     const[ext,desc]=labels[f]||[f.split('.').pop().toUpperCase(),''];
     const a=document.createElement('a'); a.className='dl-btn';
     a.href='https://jphic-kit-api.onrender.com/download/'+jobId+'/'+f; a.download=f;
