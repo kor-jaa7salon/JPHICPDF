@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/api/:path*", "destination": "https://jphic-kit-api.onrender.com/:path*" },
     { "source": "/core", "destination": "/core/index.html" },
     { "source": "/logo", "destination": "/logo/index.html" },
     { "source": "/pdf", "destination": "/pdf/index.html" },
