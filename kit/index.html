@@ -143,8 +143,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 .jphic-inner{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
 .jphic-title{font-size:20px;font-weight:700;margin-bottom:8px}
 .jphic-sub{font-size:16px;color:var(--text-sub);margin-bottom:24px;line-height:1.7}
-.need-list{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
-.need-item{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:500;color:var(--text-sub);padding:14px 18px;background:var(--surface);border-radius:10px;border:1px solid var(--border)}
+.need-list{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:24px;display:flex;flex-direction:column;gap:10px}
+.need-item{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:400;color:var(--text-sub)}
 .jphic-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .btn-pdf{padding:16px;border-radius:10px;background:var(--accent);color:#000;font-size:16px;font-weight:700;font-family:var(--font);border:none;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn-chat{padding:16px;border-radius:10px;background:#FEE500;color:#000;font-size:16px;font-weight:700;font-family:var(--font);border:none;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px}
@@ -258,10 +258,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       <div class="download-grid" id="download-grid"></div>
       <button class="reset-btn" onclick="resetAll()">↩ 새 이미지 작업하기</button>
     </div>
-<br>
+
     <div id="jphic-card">
       <div class="jphic-inner">
-        <div class="jphic-title">제이픽, 도와줘!!</div>
+        <div class="jphic-title">벡터씨, 도와줘!</div>
         <div class="jphic-sub">자동화로 해결이 안 된다면? 제이픽의 디자인 라인으로 직접 의뢰하세요.</div>
         <div class="need-list">
           <div class="need-item">✂️&ensp;누끼가 정확하지 않아 — 재작업이 필요한 경우</div>
@@ -275,7 +275,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
         </div>
       </div>
     </div>
-<br>
+
     <div class="card" id="review-card">
       <div class="card-label">후기</div>
       <div class="dl-badge">📥 누적 다운로드 <span class="dl-num" id="dl-count">1,284</span>회</div>
@@ -294,7 +294,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
         <button class="rv-tag" onclick="toggleTag(this)">납품용</button>
         <button class="rv-tag" onclick="toggleTag(this)">개인작업</button>
       </div>
-      <br>
       <div class="rv-lbl">벡터씨에게 바라는 점</div>
       <div class="char-wrap">
         <textarea id="rv-msg" maxlength="30" placeholder="30자 이내로 자유롭게" oninput="onRvInput()"></textarea>
