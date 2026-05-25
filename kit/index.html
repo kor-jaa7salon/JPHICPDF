@@ -186,10 +186,28 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 .toast{display:none;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;font-size:16px;font-weight:600;color:var(--accent);text-align:center;margin-top:12px}
 .toast.show{display:block}
 .rv-link-masked{font-size:13px;color:#aaa;margin-top:6px;font-family:monospace}
-.rv-link-row{display:flex;gap:10px;align-items:center;margin-bottom:16px}
+.rv-read-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 28px;margin-top:0}
+.rv-read-title{font-size:15px;font-weight:700;color:var(--text);letter-spacing:.3px}
+.dl-badge-dark{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:13px;color:var(--text-sub)}
+.dl-num-dark{font-weight:700;color:var(--text)}
+.rv-read-section .rv-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
+.rv-read-section .rv-stars{color:var(--yellow)}
+.rv-read-section .rv-pill{background:rgba(255,255,255,0.06);color:var(--text-sub);border:1px solid var(--border)}
+.rv-read-section .rv-date{color:var(--text-dim)}
+.rv-read-section .rv-text{color:var(--text-sub)}
+.rv-read-section .rv-link-masked{color:var(--text-dim)}
+.rv-link-row{display:flex;gap:10px;align-items:stretch;margin-bottom:16px}
+.rv-link-row input{flex:2;border:1px solid #ddd;border-radius:10px;padding:13px 16px;font-size:15px;font-family:var(--font);color:#111;background:#f9f9f9;outline:none}
+.rv-link-row .btn-rv{flex:1;min-width:0;white-space:nowrap}
+.rv-read-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px}
+.rv-read-title{font-size:15px;font-weight:700;color:var(--text)}
+.dl-badge-dark{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:13px;color:var(--text-sub)}
+.dl-num-dark{font-weight:700;color:var(--text)}
 .rv-list{display:flex;flex-direction:column;gap:12px}
 .rv-card{background:#f7f7f7;border:1px solid #e5e5e5;border-radius:10px;padding:18px 20px}
-.rv-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.rv-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rv-comment{font-size:14px;color:var(--text-sub);flex:1}
+.rv-link-masked{font-size:13px;color:var(--text-dim);font-family:monospace}
 .rv-stars{font-size:15px;color:var(--yellow);letter-spacing:1px}
 .rv-pill{font-size:13px;padding:3px 10px;border-radius:20px;background:#eee;color:#555;border:1px solid #ddd}
 .rv-date{font-size:13px;color:#999;margin-left:auto}
@@ -354,15 +372,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       </div>
       <div class="rv-lbl">홈페이지 · SNS · 이메일 <span style="font-weight:400;font-size:12px;color:#999">(선택동의 - 다음 칼선보정 제작요청 시 7.7% 할인)</span></div>
       <div class="rv-link-row">
-        <input type="text" id="rv-link" placeholder="https://instagram.com/yourhandle 또는 이메일" style="flex:1;border:1px solid #ddd;border-radius:10px;padding:13px 16px;font-size:15px;font-family:var(--font);color:#111;background:#f9f9f9;outline:none">
+        <input type="text" id="rv-link" placeholder="https://instagram.com/yourhandle 또는 이메일">
         <button class="btn-rv" id="rv-submit" onclick="submitReview()" disabled>후기 남기기</button>
       </div>
       <div class="toast" id="rv-toast">소중한 후기 감사해요 ☺</div>
-      <div class="rv-divider"></div>
-<br>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-        <div class="rv-lbl" style="margin-bottom:0">최근 후기</div>
-        <div class="dl-badge" style="margin-bottom:0">📥 누적 다운로드 <span class="dl-num" id="dl-count">1,284</span>회</div>
+    </div>
+
+    <div class="rv-read-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div class="rv-read-title">최근 후기</div>
+        <div class="dl-badge-dark">🎫 할인적용 <span class="dl-num-dark" id="dl-count">385</span>회</div>
       </div>
       <div class="rv-list" id="rv-list"></div>
     </div>
@@ -565,17 +584,21 @@ function delay(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
 let starVal=0, selTag='';
 const SAMPLES=[
-  {star:5,tag:'납품용',text:'칼선 자동으로 뽑히니 시간 절반 줄었어요',date:'2025.05.22'},
-  {star:4,tag:'인쇄물',text:'CMYK 변환 미리보기 있어서 믿음직해요',date:'2025.05.21'},
-  {star:5,tag:'SNS',text:'배경삭제 퀄이 생각보다 괜찮네요',date:'2025.05.20'},
+  {star:5,tag:'납품용',text:'칼선 자동으로 뽑히니 시간 절반 줄었어요',date:'2025.05.22',link:'jan****@****.com'},
+  {star:4,tag:'인쇄물',text:'CMYK 변환 미리보기 있어서 믿음직해요',date:'2025.05.21',link:'@insta****'},
+  {star:5,tag:'SNS',text:'배경삭제 퀄이 생각보다 괜찮네요',date:'2025.05.20',link:''},
 ];
 function starStr(n){return'★'.repeat(n)+'☆'.repeat(5-n)}
 function renderReviews(list){
   document.getElementById('rv-list').innerHTML=list.map(r=>`
     <div class="rv-card">
-      <div class="rv-top"><span class="rv-stars">${starStr(r.star)}</span><span class="rv-pill">${r.tag}</span><span class="rv-date">${r.date}</span></div>
-      <div class="rv-text">${r.text}</div>
-      ${r.link?`<div class="rv-link-masked">${maskLink(r.link)}</div>`:''}
+      <div class="rv-top">
+        <span class="rv-stars">${starStr(r.star)}</span>
+        <span class="rv-pill">${r.tag}</span>
+        ${r.text?`<span class="rv-comment">${r.text}</span>`:''}
+        ${r.link?`<span class="rv-link-masked">${maskLink(r.link)}</span>`:''}
+        <span class="rv-date">${r.date}</span>
+      </div>
     </div>`).join('');
 }
 function setStar(v){ starVal=v; document.querySelectorAll('.star').forEach(s=>s.classList.toggle('on',parseInt(s.dataset.v)<=v)); checkRv(); }
