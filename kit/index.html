@@ -1,4 +1,4 @@
-<!-- 260525 1200 -->
+<!-- 260525 1400 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -185,7 +185,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 .btn-rv:disabled{background:var(--border);color:var(--text-dim);cursor:not-allowed}
 .toast{display:none;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;font-size:16px;font-weight:600;color:var(--accent);text-align:center;margin-top:12px}
 .toast.show{display:block}
-.rv-divider{border:none;border-top:1px solid var(--border);margin:24px 0}
+.rv-link-masked{font-size:13px;color:#aaa;margin-top:6px;font-family:monospace}
+.rv-link-row{display:flex;gap:10px;align-items:center;margin-bottom:16px}
 .rv-list{display:flex;flex-direction:column;gap:12px}
 .rv-card{background:#f7f7f7;border:1px solid #e5e5e5;border-radius:10px;padding:18px 20px}
 .rv-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
@@ -205,13 +206,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   <div class="kit-hero-letter">
     <div class="kit-hero-headline">AI로 생성한 이미지를<br><span class="kit-hero-hl">진짜 쓸 수 있는 파일로.</span></div>
     <p>벡터씨가 쓰는 칼선툴을 모두에게 오픈했어요.<br>회원가입 없이 무기한 무료 사용 가능합니다. 버튼만 누르면 돼요.</p>
-    <p class="kit-note">API 호출 제한으로 대기하실 수 있어요. 이미지에 따라 결과가 다르고, 완성도가 필요하다면 벡터씨에게 의뢰하시면 됩니다 🙂</p>
+    <p class="kit-note">API 호출 제한으로 대기하실 수 있어요. 이미지에 따라 결과가 다르고, 케이스마다 완성도도 다르지만, <br>저한테는 시간이 절약되는 고마운 툴입니다.<br>
+완성도있게 다듬기는 벡터씨에게 의뢰하시면 좋겠네요 하핫-🙂</p>
     <div class="kit-hero-event">
       <div class="kit-event-label">🎁 베타 참여 이벤트</div>
-      <div class="kit-event-desc">제이픽 칼선생성키트를 사용해보시고 <strong>작품과 개선할 점을 후기로 남겨주세요.</strong><br>추첨하여 <strong>할인쿠폰을 발송</strong>합니다.</div>
+      <div class="kit-event-desc">벡터씨 칼선 키트를 사용해 보시고 <strong>후기와 SNS계정을 남겨주세요</strong><br>다음 칼선 보완 제작 요청 시 <strong>제작비 7.7% 할인 </strong>적용해드립니다.</div>
     </div>
-    <div class="kit-hero-sig">— 벡터씨</div>
-  </div>
 
   <div class="kit-how">
     <div class="kit-how-title">이렇게 사용하세요</div>
@@ -324,15 +324,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
           <div class="need-item">🖨️&ensp;인쇄 여백·배경색 — 정밀 조정이 필요한 경우</div>
         </div>
         <div class="jphic-btns">
-          <a class="btn-pdf" href="https://jphic.co.kr/pdf" target="_blank">📄 서비스 보기</a>
-          <a class="btn-chat" href="https://open.kakao.com/o/s154Q5ui" target="_blank">💬 오픈챗 문의</a>
+          <a class="btn-pdf" href="https://jphic.co.kr/pdf" target="_blank">📄 인쇄 발주파일 제작 서비스 안내</a>
+          <a class="btn-chat" href="https://open.kakao.com/o/s154Q5ui" target="_blank">💬 벡터씨 오픈챗 문의하기</a>
         </div>
       </div>
     </div>
 
     <div class="card" id="review-card" style="background:#fff;color:#111;border-color:#e0e0e0">
       <div class="card-label">후기</div>
-      <div class="dl-badge">📥 누적 다운로드 <span class="dl-num" id="dl-count">1,284</span>회</div>
       <div class="rv-lbl">이번 작업 어떠셨나요?</div>
       <div class="stars-row" id="stars-row">
         <span class="star" data-v="1" onclick="setStar(1)">★</span>
@@ -348,15 +347,23 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
         <button class="rv-tag" onclick="toggleTag(this)">납품용</button>
         <button class="rv-tag" onclick="toggleTag(this)">개인작업</button>
       </div>
-      <div class="rv-lbl">벡터씨에게 바라는 점</div>
+      <div class="rv-lbl">'벡터씨'라고 남겨주시면, 다음 칼선 보완 제작 요청 시 7.7% 할인 적용해드립니다.</div>
       <div class="char-wrap">
         <textarea id="rv-msg" maxlength="30" placeholder="30자 이내로 자유롭게" oninput="onRvInput()"></textarea>
         <span class="char-count" id="rv-cc">0 / 30</span>
       </div>
-      <button class="btn-rv" id="rv-submit" onclick="submitReview()" disabled>후기 남기기</button>
+      <div class="rv-lbl">홈페이지 · SNS · 이메일 <span style="font-weight:400;font-size:12px;color:#999">(선택동의 - 다음 칼선보정 제작요청 시 7.7% 할인)</span></div>
+      <div class="rv-link-row">
+        <input type="text" id="rv-link" placeholder="https://instagram.com/yourhandle 또는 이메일" style="flex:1;border:1px solid #ddd;border-radius:10px;padding:13px 16px;font-size:15px;font-family:var(--font);color:#111;background:#f9f9f9;outline:none">
+        <button class="btn-rv" id="rv-submit" onclick="submitReview()" disabled>후기 남기기</button>
+      </div>
       <div class="toast" id="rv-toast">소중한 후기 감사해요 ☺</div>
       <div class="rv-divider"></div>
-      <div class="rv-lbl">최근 후기</div>
+<br>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div class="rv-lbl" style="margin-bottom:0">최근 후기</div>
+        <div class="dl-badge" style="margin-bottom:0">📥 누적 다운로드 <span class="dl-num" id="dl-count">1,284</span>회</div>
+      </div>
       <div class="rv-list" id="rv-list"></div>
     </div>
   </div>
@@ -526,8 +533,12 @@ function showResult(jobId,files){
   document.getElementById('result-card').style.display='block';
   document.getElementById('jphic-card').style.display='block';
   document.getElementById('review-card').style.display='block';
-  // 자동진단/작업설정 접기
-  document.querySelectorAll('#diag-section .card').forEach(c=>{ c.classList.add('collapsed'); });
+  // 자동진단/작업설정만 접기 (review-card 제외)
+  ['자동 진단','작업 설정'].forEach(label=>{
+    document.querySelectorAll('#diag-section .card-label').forEach(el=>{
+      if(el.textContent===label) el.closest('.card').classList.add('collapsed');
+    });
+  });
   const pf=files.find(f=>f.endsWith('.png'));
   if(pf)document.getElementById('result-preview').src='https://jphic-kit-api.onrender.com/download/'+jobId+'/'+pf;
   const labels={'cutline.svg':['📥 .SVG','칼선레이어'],'preview.png':['📥 .PNG','투명배경']};
@@ -564,22 +575,32 @@ function renderReviews(list){
     <div class="rv-card">
       <div class="rv-top"><span class="rv-stars">${starStr(r.star)}</span><span class="rv-pill">${r.tag}</span><span class="rv-date">${r.date}</span></div>
       <div class="rv-text">${r.text}</div>
+      ${r.link?`<div class="rv-link-masked">${maskLink(r.link)}</div>`:''}
     </div>`).join('');
 }
 function setStar(v){ starVal=v; document.querySelectorAll('.star').forEach(s=>s.classList.toggle('on',parseInt(s.dataset.v)<=v)); checkRv(); }
 function toggleTag(el){ document.querySelectorAll('#tag-row .rv-tag').forEach(t=>t.classList.remove('on')); el.classList.add('on'); selTag=el.textContent; checkRv(); }
 function onRvInput(){ const v=document.getElementById('rv-msg').value.length; const cc=document.getElementById('rv-cc'); cc.textContent=v+' / 30'; cc.classList.toggle('over',v>=30); checkRv(); }
 function checkRv(){ document.getElementById('rv-submit').disabled=!(starVal&&selTag&&document.getElementById('rv-msg').value.trim()); }
+function maskLink(link){
+  if(!link||link.length<4) return link;
+  return link.slice(0,4)+'*'.repeat(Math.min(link.length-4,6));
+}
+
 function submitReview(){
   const msg=document.getElementById('rv-msg').value.trim();
+  const link=document.getElementById('rv-link').value.trim();
   const now=new Date();
   const d=`${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
-  SAMPLES.unshift({star:starVal,tag:selTag,text:msg,date:d});
+  SAMPLES.unshift({star:starVal,tag:selTag,text:msg,date:d,link:link});
   renderReviews(SAMPLES);
-  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:d,tool:'kit-image',star:starVal,tag:selTag,comment:msg})}).catch(()=>{});
+  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({date:d,tool:'kit-image',star:starVal,tag:selTag,comment:msg,link:link})
+  }).catch(()=>{});
   document.getElementById('rv-submit').disabled=true;
   document.getElementById('rv-toast').classList.add('show');
   document.getElementById('rv-msg').value=''; document.getElementById('rv-cc').textContent='0 / 30';
+  document.getElementById('rv-link').value='';
   starVal=0; selTag='';
   document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));
   document.querySelectorAll('#tag-row .rv-tag').forEach(t=>t.classList.remove('on'));
