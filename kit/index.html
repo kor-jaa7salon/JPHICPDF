@@ -1,4 +1,4 @@
-<!-- 260524 2130 -->
+<!-- 260525 1030 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -90,6 +90,7 @@ main{width:100%;max-width:800px;padding:36px 20px 80px;display:flex;flex-directi
 .acc.open .acc-num{background:var(--surface2);border-color:#44446a;color:var(--text)}
 .acc.done .acc-num{background:var(--accent);border-color:var(--accent);color:#000;font-size:15px}
 .acc-title{flex:1;font-size:18px;font-weight:600;color:var(--text)}
+.acc:not(.open):not(.done) .acc-hd{opacity:0.4}
 .acc-right{display:flex;align-items:center;gap:10px}
 .acc-status{font-size:14px;color:var(--text-sub)}
 .acc.done .acc-status{color:var(--accent)}
@@ -138,11 +139,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 .step.done .step-dot{background:var(--accent)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .result-preview{width:100%;max-height:360px;object-fit:contain;border-radius:10px;margin-bottom:20px;background:repeating-conic-gradient(#1c1c28 0% 25%,#13131c 0% 50%) 0 0/14px 14px}
-.download-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.dl-btn{padding:16px 8px;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--text);font-size:14px;font-weight:500;font-family:var(--font);cursor:pointer;transition:all .15s;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:6px}
-.dl-btn:hover{border-color:var(--accent);background:var(--accent-dim);color:var(--accent)}
-.dl-btn .ext{font-size:17px;font-weight:700}
-.reset-btn{width:100%;padding:16px;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--text-sub);font-size:16px;font-weight:500;font-family:var(--font);cursor:pointer;margin-top:14px;transition:all .15s}
+.result-actions{display:flex;gap:10px;margin-top:0;flex-wrap:wrap}
+.dl-btn{flex:1;min-width:120px;padding:16px 12px;border-radius:10px;background:#fff;color:#000;font-size:15px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .15s;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;border:none}
+.dl-btn:hover{background:var(--accent);color:#000}
+.reset-btn{flex:1;min-width:120px;padding:16px;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--text-sub);font-size:15px;font-weight:500;font-family:var(--font);cursor:pointer;transition:all .15s}
 .reset-btn:hover{border-color:#44446a;color:var(--text)}
 
 /* JPHIC CTA */
@@ -299,8 +299,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     <div class="card" id="result-card">
       <div class="card-label">결과물</div>
       <img class="result-preview" id="result-preview" src="" alt="결과">
-      <div class="download-grid" id="download-grid"></div>
-      <button class="reset-btn" onclick="resetAll()">↩ 새 이미지 작업하기</button>
+      <div class="result-actions" id="download-grid">
+        <button class="reset-btn" onclick="resetAll()">↩ 새 이미지</button>
+      </div>
     </div>
 
     <div id="jphic-card">
@@ -356,15 +357,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyKq109r0TCEBfkw2QEFf1myONi5SxCvL6meiUVEU1wyMJN5ePjja5QhsjrfJH1gzOi/exec';
 let selectedFile=null, currentMode='white_border', openAcc=null;
 const doneSet=new Set();
-const sVals={'border-mm':3,'bleed-mm':3,'simplify':1};
+const sVals={'border-mm':0,'bleed-mm':2};
 
 const STEPS_DEF=[
   {
-    id:'cmyk',title:'인쇄용 색상으로 변환',rec:true,
+    id:'cmyk',title:'인쇄용 색상으로 변환',rec:true,btnLabel:'CMYK로 변환',
     body:()=>`<div class="acc-desc">현재 RGB 파일입니다. 인쇄 시 색상 차이가 발생할 수 있어요.<br>칼선 생성 시 CMYK 자동 변환이 적용됩니다.</div>`
   },
   {
-    id:'upscale',title:'이미지 선명하게 키우기',rec:true,
+    id:'upscale',title:'이미지 선명하게 키우기',rec:true,btnLabel:'업스케일하기',
     body:()=>`
       <div class="acc-desc">저해상도 이미지가 감지됐어요. AI 업스케일을 적용하면 인쇄 품질이 향상됩니다.</div>
       <label class="check-row" onclick="toggleCheck('upscale')">
@@ -373,37 +374,26 @@ const STEPS_DEF=[
       </label>`
   },
   {
-    id:'bg',title:'배경 지우기',rec:false,
+    id:'bg',title:'배경 지우기',rec:false,btnLabel:'배경삭제',
     body:()=>`<div class="acc-desc">배경이 감지됐어요. JPG는 자동 배경 제거, PNG 투명배경은 이 단계를 건너뛰어도 됩니다.</div>`
   },
   {
-    id:'cutline',title:'테두리 자동 생성',rec:true,
+    id:'cutline',title:'테두리 자동 생성',rec:true,btnLabel:'칼선생성',
     body:()=>`
-      <div class="acc-desc">칼선 모드와 세부 옵션을 설정하세요.</div>
-      <span class="opt-label">칼선 모드</span>
-      <div class="mode-toggle">
-        <button class="mode-btn active" data-mode="white_border" onclick="setMode(this)">흰 테두리 너비 설정<span class="mode-desc">배경따라 칼선 생성</span></button>
-        <button class="mode-btn" data-mode="bg_bleed" onclick="setMode(this)">인쇄 여백 빼주기<span class="mode-desc">배경색 더 여유주기</span></button>
+      <div class="acc-desc">옵션 선택 없이 실행하면 이미지 외곽 그대로 칼선이 생성됩니다.</div>
+      <label class="check-row" onclick="toggleWhiteBorder()">
+        <div class="check-box" id="check-white-border"><span class="check-icon">✓</span></div>
+        <div><div class="check-label">이미지에 흰 테두리 넣기</div><div class="check-desc">굿즈·스티커 등 이미지 바깥에 흰 여백 추가</div></div>
+      </label>
+      <div id="border-slider" style="display:none;margin-bottom:12px">
+        <div class="slider-row">
+          <input type="range" id="border-mm" min="5" max="50" step="1" value="${sVals['border-mm']||5}" oninput="sVals['border-mm']=parseFloat(this.value);document.getElementById('border-val').textContent=this.value+'mm'">
+          <span class="slider-val" id="border-val">${sVals['border-mm']||5}mm</span>
+        </div>
       </div>
-      <span class="opt-label">흰 테두리 두께</span>
-      <div class="slider-row">
-        <input type="range" id="border-mm" min="0" max="10" step="0.5" value="${sVals['border-mm']}" oninput="sVals['border-mm']=parseFloat(this.value);document.getElementById('border-val').textContent=this.value+'mm'">
-        <span class="slider-val" id="border-val">${sVals['border-mm']}mm</span>
-      </div>
-      <span class="opt-label">인쇄 여백 Bleed</span>
-      <div class="slider-row">
-        <input type="range" id="bleed-mm" min="1" max="10" step="0.5" value="${sVals['bleed-mm']}" oninput="sVals['bleed-mm']=parseFloat(this.value);document.getElementById('bleed-val').textContent=this.value+'mm'">
-        <span class="slider-val" id="bleed-val">${sVals['bleed-mm']}mm</span>
-      </div>
-      <span class="opt-label">Path 단순화</span>
-      <div class="slider-row" style="margin-bottom:8px">
-        <input type="range" id="simplify" min="0" max="5" step="0.5" value="${sVals['simplify']}" oninput="sVals['simplify']=parseFloat(this.value);document.getElementById('simplify-val').textContent=this.value+'px'">
-        <span class="slider-val" id="simplify-val">${sVals['simplify']}px</span>
-      </div>
-      <div style="font-size:14px;color:var(--text-dim);margin-bottom:20px">0 = 원본 유지 · 1~2 = 적당 · 3+ = 많이 단순화</div>
       <label class="check-row" onclick="toggleCheck('flat-bottom')">
         <div class="check-box" id="check-flat-bottom"><span class="check-icon">✓</span></div>
-        <div><div class="check-label">바닥면 평탄화</div><div class="check-desc">스탠딩 굿즈용 직선 바닥</div></div>
+        <div><div class="check-label">바닥면 평탄화</div><div class="check-desc">등신대 지지대 부분을 평평하게</div></div>
       </label>`
   }
 ];
@@ -457,7 +447,7 @@ function renderAcc(){
         <div class="acc-num">${isDone?'✓':STEPS_DEF.indexOf(s)+1}</div>
         <div class="acc-title">${s.title}</div>
         <div class="acc-right">
-          <span class="acc-status">${isDone?'완료':s.rec?'<span class="badge-rec">권장</span>':'<span class="badge-opt">선택</span>'}</span>
+          <span class="acc-status">${isDone?'실행':s.rec?'<span class="badge-rec">권장</span>':'<span class="badge-opt">선택</span>'}</span>
           <span class="chevron">▾</span>
         </div>
       </div>
@@ -465,7 +455,7 @@ function renderAcc(){
         ${s.body()}
         <div class="acc-actions">
           ${isDone ? `<button class="btn-skip" onclick="undoAcc('${s.id}')">취소하기</button>` : `<button class="btn-skip" onclick="skipAcc('${s.id}')">건너뛰기</button>`}
-          <button class="btn-apply" onclick="doneAcc('${s.id}')">${isDone?'다시 확인':'확인'}</button>
+          <button class="btn-apply" onclick="doneAcc('${s.id}')">${isDone?'다시 실행':s.btnLabel}</button>
         </div>
       </div>
     </div>`;
@@ -477,6 +467,14 @@ function doneAcc(id){ doneSet.add(id); const idx=STEPS_DEF.findIndex(s=>s.id===i
 function undoAcc(id){ doneSet.delete(id); openAcc=id; renderAcc(); }
 function skipAcc(id){ const idx=STEPS_DEF.findIndex(s=>s.id===id); const next=STEPS_DEF[idx+1]; openAcc=next?next.id:null; renderAcc(); }
 function setMode(btn){ document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentMode=btn.dataset.mode; }
+function toggleWhiteBorder(){
+  const cb=document.getElementById('check-white-border');
+  cb.classList.toggle('checked');
+  const slider=document.getElementById('border-slider');
+  const on=cb.classList.contains('checked');
+  slider.style.display=on?'block':'none';
+  sVals['border-mm']=on?(sVals['border-mm']||5):0;
+}
 function toggleCheck(id){ document.getElementById('check-'+id).classList.toggle('checked'); }
 function isChecked(id){ const el=document.getElementById('check-'+id); return el&&el.classList.contains('checked'); }
 
@@ -498,7 +496,7 @@ document.getElementById('run-btn').addEventListener('click',async()=>{
   fd.append('bleed_mm', sVals['bleed-mm']);
   fd.append('flat_bottom',isChecked('flat-bottom'));
   fd.append('upscale',isChecked('upscale'));
-  fd.append('simplify', sVals['simplify']);
+  fd.append('simplify', 1.0);
   setStep(1); await delay(300); setStep(2);
   try{
     const res=await fetch('https://jphic-kit-api.onrender.com/process',{method:'POST',body:fd});
@@ -516,15 +514,19 @@ function showResult(jobId,files){
   document.getElementById('review-card').style.display='block';
   const pf=files.find(f=>f.endsWith('.png'));
   if(pf)document.getElementById('result-preview').src='https://jphic-kit-api.onrender.com/download/'+jobId+'/'+pf;
-  const labels={'cutline.svg':['SVG','칼선레이어'],'preview.png':['PNG','투명배경']};
-  const grid=document.getElementById('download-grid'); grid.innerHTML='';
+  const labels={'cutline.svg':['📥 .SVG','칼선레이어'],'preview.png':['📥 .PNG','투명배경']};
+  const grid=document.getElementById('download-grid');
+  const resetBtn=grid.querySelector('.reset-btn');
+  grid.innerHTML='';
   files.filter(f=>f==='cutline.svg'||f==='preview.png').forEach(f=>{
-    const[ext,desc]=labels[f]||[f.split('.').pop().toUpperCase(),''];
+    const[label,desc]=labels[f]||['📥 '+f.split('.').pop().toUpperCase(),''];
     const a=document.createElement('a'); a.className='dl-btn';
     a.href='https://jphic-kit-api.onrender.com/download/'+jobId+'/'+f; a.download=f;
-    a.innerHTML=`<span class="ext">.${ext.toLowerCase()}</span><span>${desc}</span>`;
+    a.innerHTML=`<span style="font-weight:800">${label}</span><span style="font-size:13px;opacity:.7">${desc}</span>`;
     grid.appendChild(a);
   });
+  const rb=document.createElement('button'); rb.className='reset-btn'; rb.onclick=resetAll; rb.textContent='↩ 새 이미지';
+  grid.appendChild(rb);
   renderReviews(SAMPLES);
 }
 
