@@ -311,7 +311,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
 
     <div class="error-msg" id="error-msg"></div>
-    <button id="run-btn" disabled>칼선 생성하기</button>
+    <button id="run-btn" disabled>선택 완료</button>
 
     <div class="card" id="status-card">
       <div class="card-label">처리 중</div>
@@ -418,10 +418,10 @@ const STEPS_DEF=[
   {
     id:'cutline',title:'칼선 옵션',rec:true,btnLabel:'칼선생성',
     body:()=>`
-      <div class="acc-desc">옵션 선택 없이 실행하면 이미지 외곽 그대로 칼선이 생성됩니다.</div>
+      <div class="acc-desc">[옵션없는 기본설정] 이미지 외곽 그대로 칼선이 생성</div>
       <label class="check-row" onclick="toggleWhiteBorder()">
         <div class="check-box" id="check-white-border"><span class="check-icon">✓</span></div>
-        <div><div class="check-label">이미지에 흰 테두리 넣기</div><div class="check-desc">굿즈·스티커 등 이미지 바깥에 흰 여백 추가</div></div>
+        <div><div class="check-label">옵셋 설정 : 이미지에 흰 테두리 사이즈 (~50mm)</div><div class="check-desc">굿즈·스티커 등 이미지 바깥에 흰 여백 추가</div></div>
       </label>
       <div id="border-slider" style="display:none;margin-bottom:12px">
         <div class="slider-row">
@@ -431,7 +431,7 @@ const STEPS_DEF=[
       </div>
       <label class="check-row" onclick="toggleCheck('flat-bottom')">
         <div class="check-box" id="check-flat-bottom"><span class="check-icon">✓</span></div>
-        <div><div class="check-label">바닥면 평탄화</div><div class="check-desc">등신대 지지대 부분을 평평하게</div></div>
+        <div><div class="check-label">바닥면 평탄화</div><div class="check-desc">등신대 지지대 바닥 부분을 평평하게</div></div>
       </label>`
   }
 ];
