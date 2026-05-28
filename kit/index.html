@@ -1,4 +1,4 @@
-<!-- 260525 1400 -->
+<!-- 260528 1900 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -319,7 +319,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
         <div class="step" id="step-upscale"><div class="step-dot"></div>업스케일</div>
         <div class="step" id="step-remove"><div class="step-dot"></div>배경 제거</div>
         <div class="step" id="step-cutline"><div class="step-dot"></div>칼선 추출</div>
-        <div class="step" id="step-export"><div class="step-dot"></div>PDF · SVG 출력</div>
+        <div class="step" id="step-export"><div class="step-dot"></div>SVG · PNG 출력</div>
       </div>
     </div>
 
@@ -573,7 +573,7 @@ function showResult(jobId,files){
   });
   const rb=document.createElement('button'); rb.className='reset-btn'; rb.onclick=resetAll; rb.textContent='↩ 새 이미지';
   grid.appendChild(rb);
-  renderReviews(SAMPLES);
+  loadReviews();
 }
 
 function resetAll(){ resetFile(); ['status-card','result-card','jphic-card','review-card'].forEach(id=>document.getElementById(id).style.display='none'); hideError(); doneSet.clear(); openAcc=null; document.getElementById('diag-section').style.display='none'; document.getElementById('run-btn').style.display='none'; }
@@ -583,12 +583,24 @@ function hideError(){ document.getElementById('error-msg').style.display='none';
 function delay(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
 let starVal=0, selTag='';
-const SAMPLES=[
+let SAMPLES=[
   {star:5,tag:'납품용',text:'칼선 자동으로 뽑히니 시간 절반 줄었어요',date:'2025.05.22',link:'jan****@****.com'},
   {star:4,tag:'인쇄물',text:'CMYK 변환 미리보기 있어서 믿음직해요',date:'2025.05.21',link:'@insta****'},
   {star:5,tag:'SNS',text:'배경삭제 퀄이 생각보다 괜찮네요',date:'2025.05.20',link:''},
 ];
 function starStr(n){return'★'.repeat(n)+'☆'.repeat(5-n)}
+function loadReviews(){
+  var cb='__rv'+Date.now();
+  window[cb]=function(list){
+    if(list&&list.length){ SAMPLES=list; }
+    renderReviews(SAMPLES);
+    delete window[cb];
+  };
+  var s=document.createElement('script');
+  s.src=SCRIPT_URL+'?callback='+cb+'&t='+Date.now();
+  s.onerror=function(){ renderReviews(SAMPLES); };
+  document.body.appendChild(s);
+}
 function renderReviews(list){
   document.getElementById('rv-list').innerHTML=list.map(r=>`
     <div class="rv-card">
@@ -617,7 +629,7 @@ function submitReview(){
   const d=`${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
   SAMPLES.unshift({star:starVal,tag:selTag,text:msg,date:d,link:link});
   renderReviews(SAMPLES);
-  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},
     body:JSON.stringify({date:d,tool:'kit-image',star:starVal,tag:selTag,comment:msg,link:link})
   }).catch(()=>{});
   document.getElementById('rv-submit').disabled=true;
