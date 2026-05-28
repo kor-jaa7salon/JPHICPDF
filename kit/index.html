@@ -1,4 +1,4 @@
-<!-- 260528 1900 -->
+<!-- 260528 1915 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -592,7 +592,7 @@ function starStr(n){return'★'.repeat(n)+'☆'.repeat(5-n)}
 function loadReviews(){
   var cb='__rv'+Date.now();
   window[cb]=function(list){
-    if(list&&list.length){ SAMPLES=list; }
+    if(list&&list.length){ SAMPLES=list.map(function(r){return {star:r.star,tag:r.tag,text:r.comment,date:r.date,link:r.link};}); }
     renderReviews(SAMPLES);
     delete window[cb];
   };
