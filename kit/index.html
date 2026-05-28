@@ -1,4 +1,4 @@
-<!-- 260529 1200 -->
+<!-- 260529 1230 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -579,6 +579,7 @@ function showResult(jobId,files){
   grid.appendChild(rb);
   renderReviews(SAMPLES);
   logStat('gen'); bumpStat('gen');
+  setTimeout(function(){ document.getElementById('result-card').scrollIntoView({behavior:'smooth',block:'start'}); }, 150);
 }
 
 function resetAll(){ resetFile(); ['status-card','result-card','jphic-card','review-card'].forEach(id=>document.getElementById(id).style.display='none'); hideError(); doneSet.clear(); openAcc=null; document.getElementById('diag-section').style.display='none'; document.getElementById('run-btn').style.display='none'; }
