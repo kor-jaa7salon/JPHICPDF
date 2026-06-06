@@ -198,7 +198,9 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
 .sample-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); gap:12px; }
 .sample-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; cursor:pointer; transition:all 0.2s; }
 .sample-card:hover { border-color:var(--border-glow); transform:translateY(-2px); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
-.sample-thumb { aspect-ratio:4/3; background:rgba(255,255,255,0.02); display:flex; align-items:center; justify-content:center; font-size:36px; border-bottom:1px solid var(--border); }
+.sample-thumb { aspect-ratio:4/3; background:rgba(255,255,255,0.02); display:flex; align-items:center; justify-content:center; font-size:36px; border-bottom:1px solid var(--border); overflow:hidden; }
+.sample-thumb img { width:100%; height:100%; object-fit:cover; transition:transform 0.3s ease; }
+.sample-card:hover .sample-thumb img { transform:scale(1.04); }
 .sample-info { padding:14px 16px; }
 .sample-name { font-size:0.9rem; font-weight:700; margin-bottom:4px; }
 .sample-type { font-size:0.8rem; color:var(--text-dim); font-weight:500; }
@@ -360,12 +362,30 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   <h2>AI 이미지, 만들었으면<br><em>제대로 써야 브랜드 자산이 됩니다.</em></h2>
   <div class="section-sub">벡터화·칼선·목업까지 — 출력, 스티커, 굿즈에 바로 쓸 수 있는 파일로 변환해드립니다.</div>
   <div class="sample-grid">
-    <div class="sample-card"><div class="sample-thumb">🎨</div><div class="sample-info"><div class="sample-name">인쇄용 색상 변환</div><div class="sample-type">RGB → CMYK 근사 · PNG</div></div></div>
-    <div class="sample-card"><div class="sample-thumb">✨</div><div class="sample-info"><div class="sample-name">해상도 업스케일</div><div class="sample-type">4× 고해상도 · PNG</div></div></div>
-    <div class="sample-card"><div class="sample-thumb">🔲</div><div class="sample-info"><div class="sample-name">배경 제거</div><div class="sample-type">투명 배경 · PNG</div></div></div>
-    <div class="sample-card"><div class="sample-thumb">📐</div><div class="sample-info"><div class="sample-name">벡터화</div><div class="sample-type">확대해도 깨지지 않는 · SVG</div></div></div>
-    <div class="sample-card"><div class="sample-thumb">✂️</div><div class="sample-info"><div class="sample-name">칼선</div><div class="sample-type">스티커·굿즈 인쇄용 · SVG</div></div></div>
-    <div class="sample-card"><div class="sample-thumb">🖼️</div><div class="sample-info"><div class="sample-name">목업</div><div class="sample-type">내 배경으로 합성 · PNG</div></div></div>
+    <div class="sample-card">
+      <div class="sample-thumb"><img src="/img/kit/sample_cmyk.png" alt="인쇄용 색상 변환 샘플"></div>
+      <div class="sample-info"><div class="sample-name">인쇄용 색상 변환</div><div class="sample-type">RGB → CMYK 근사 · PNG</div></div>
+    </div>
+    <div class="sample-card">
+      <div class="sample-thumb"><img src="/img/kit/sample_upscale.png" alt="해상도 업스케일 샘플"></div>
+      <div class="sample-info"><div class="sample-name">해상도 업스케일</div><div class="sample-type">4× 고해상도 · PNG</div></div>
+    </div>
+    <div class="sample-card">
+      <div class="sample-thumb"><img src="/img/kit/sample_removebg.png" alt="배경 제거 샘플"></div>
+      <div class="sample-info"><div class="sample-name">배경 제거</div><div class="sample-type">투명 배경 · PNG</div></div>
+    </div>
+    <div class="sample-card">
+      <div class="sample-thumb"><img src="/img/kit/sample_vector.png" alt="벡터화 샘플"></div>
+      <div class="sample-info"><div class="sample-name">벡터화</div><div class="sample-type">확대해도 깨지지 않는 · SVG</div></div>
+    </div>
+    <div class="sample-card">
+      <div class="sample-thumb"><img src="/img/kit/sample_cutline.png" alt="칼선 샘플"></div>
+      <div class="sample-info"><div class="sample-name">칼선 기본 · 옵셋</div><div class="sample-type">스티커·굿즈 인쇄용 · SVG</div></div>
+    </div>
+    <div class="sample-card">
+      <div class="sample-thumb"><img src="/img/kit/sample_mockup.png" alt="목업 샘플"></div>
+      <div class="sample-info"><div class="sample-name">목업</div><div class="sample-type">내 배경으로 합성 · PNG</div></div>
+    </div>
   </div>
 </div>
 
@@ -468,7 +488,13 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     else count.textContent = n > 0 ? `${n}개 옵션 선택됨 · 1회 처리` : '옵션을 선택하세요';
   }
 
-  function handleGenerate() {
+  const API_URL = 'https://jphic-kit-api.onrender.com';
+  // Google Sheets 로깅 Apps Script URL (배포 후 교체)
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx6WVoy3DqUSWbvLD8HcWuZNSpb4urh2pSqvBxNMTU6Gl0npymonosRNwMxtwCddklg/exec';
+
+  let resultFiles = {}; // 생성 결과 base64 파일 저장
+
+  async function handleGenerate() {
     if (!uploadedFile) return;
     if (isProcessing) {
       document.getElementById('queueNotice').classList.add('show');
@@ -476,24 +502,113 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
       return;
     }
     if (selectedOptions.size === 0) return;
-    isProcessing = true; isGenerated = false;
+
+    isProcessing = true; isGenerated = false; resultFiles = {};
     document.getElementById('dlBtn').disabled = true;
     document.getElementById('processing').classList.add('show');
-    // TODO: processor.py API 호출 (1회)
-    setTimeout(() => {
-      document.getElementById('processing').classList.remove('show');
-      isProcessing = false; isGenerated = true;
+
+    try {
+      const fd = new FormData();
+      fd.append('file', uploadedFile);
+
+      // 옵션 매핑
+      fd.append('do_color',     selectedOptions.has('color')    ? 'true' : 'false');
+      fd.append('do_upscale',   selectedOptions.has('upscale')  ? 'true' : 'false');
+      fd.append('do_removebg',  selectedOptions.has('removebg') ? 'true' : 'false');
+      fd.append('do_vectorize', selectedOptions.has('vectorize')? 'true' : 'false');
+      fd.append('flat_bottom',  selectedOptions.has('flatten')  ? 'true' : 'false');
+      fd.append('do_mockup',    selectedOptions.has('mockup')   ? 'true' : 'false');
+
+      // 칼선
+      const cl = selectedOptions.get('cutline') || 'none';
+      fd.append('cutline', cl);
+      if (cl === 'offset') {
+        fd.append('offset_mm', document.getElementById('offsetSlider').value);
+      }
+
+      // 목업 배경
+      if (bgFile) fd.append('mockup_bg', bgFile);
+
+      const res = await fetch(`${API_URL}/process`, { method: 'POST', body: fd });
+      if (!res.ok) throw new Error(`서버 오류 ${res.status}`);
+      const data = await res.json();
+
+      if (data.error) throw new Error(data.error);
+
+      // 미리보기 업데이트
+      if (data.preview) {
+        document.getElementById('previewImg').src = 'data:image/png;base64,' + data.preview;
+        document.getElementById('uploadZone').style.display = 'none';
+        document.getElementById('previewArea').classList.add('active');
+      }
+
+      resultFiles = data.files || {};
+      isGenerated = true;
       document.getElementById('dlBtn').disabled = false;
-      // TODO: Google Sheets 로깅
-    }, 2500);
+
+      // Google Sheets 로깅
+      _logToSheets({
+        options: [...selectedOptions.keys()].join(','),
+        filename: uploadedFile.name,
+        downloaded: false
+      });
+
+    } catch (err) {
+      alert('처리 중 오류가 발생했습니다: ' + err.message);
+    } finally {
+      document.getElementById('processing').classList.remove('show');
+      isProcessing = false;
+    }
   }
 
   function handleDownload() {
     if (!isGenerated) return;
+
+    // 우선순위: cutline_svg → result_png → preview
+    const preferOrder = ['cutline_svg', 'print_svg', 'vector_svg', 'mockup_png', 'result_png'];
+    let b64 = null, ext = 'png', fname = 'jphickit_result';
+
+    for (const key of preferOrder) {
+      if (resultFiles[key]) {
+        b64 = resultFiles[key];
+        ext = key.endsWith('svg') ? 'svg' : key.endsWith('pdf') ? 'pdf' : 'png';
+        fname = `jphickit_${key.replace('_', '.')}`;
+        break;
+      }
+    }
+
+    // fallback: 미리보기 이미지
+    if (!b64) {
+      const a = document.createElement('a');
+      a.href = document.getElementById('previewImg').src;
+      a.download = 'jphickit_result.png';
+      a.click();
+      return;
+    }
+
     const a = document.createElement('a');
-    a.href = document.getElementById('previewImg').src;
-    a.download = 'jphickit_result.png';
+    a.href = `data:application/${ext};base64,${b64}`;
+    a.download = fname;
     a.click();
+
+    // 다운로드 로깅
+    _logToSheets({
+      options: [...selectedOptions.keys()].join(','),
+      filename: uploadedFile.name,
+      downloaded: true
+    });
+  }
+
+  function _logToSheets(data) {
+    if (!SHEETS_URL.includes('YOUR_APPS_SCRIPT_ID')) return;
+    const params = new URLSearchParams({
+      action: 'kit_log',
+      ts: new Date().toISOString(),
+      options: data.options || '',
+      filename: data.filename || '',
+      downloaded: data.downloaded ? '1' : '0',
+    });
+    fetch(`${SHEETS_URL}?${params}`).catch(() => {});
   }
 
   const cArea = document.getElementById('canvasArea');
