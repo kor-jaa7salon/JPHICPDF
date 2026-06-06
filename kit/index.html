@@ -488,7 +488,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     else count.textContent = n > 0 ? `${n}개 옵션 선택됨 · 1회 처리` : '옵션을 선택하세요';
   }
 
-  const API_URL = 'https://jphic-kit-api.onrender.com';
+  const API_URL = ''; // Vercel /api 프록시 사용 (vercel.json rewrite)
   // Google Sheets 로깅 Apps Script URL (배포 후 교체)
   const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx6WVoy3DqUSWbvLD8HcWuZNSpb4urh2pSqvBxNMTU6Gl0npymonosRNwMxtwCddklg/exec';
 
@@ -600,7 +600,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   }
 
   function _logToSheets(data) {
-    if (!SHEETS_URL.includes('YOUR_APPS_SCRIPT_ID')) return;
+    if (SHEETS_URL.includes('YOUR_APPS_SCRIPT_ID')) return;
     const params = new URLSearchParams({
       action: 'kit_log',
       ts: new Date().toISOString(),
