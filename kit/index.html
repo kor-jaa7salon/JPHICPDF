@@ -146,6 +146,7 @@ input,textarea { -webkit-user-select:text!important; user-select:text!important;
 @keyframes mascotSpin { to { transform:rotate(360deg); } }
 
 .processing-label { font-size:0.9rem; color:var(--text-sub); font-weight:600; letter-spacing:0.02em; }
+.processing-sub { font-size:0.78rem; color:var(--text-dim); margin-top:4px; }
 .processing-dots::after {
   content:''; animation:dots 1.2s steps(3,end) infinite;
 }
@@ -261,7 +262,8 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
             <div class="mascot-orbit"><div class="mascot-dot"></div></div>
             <div class="mascot-circle">✦</div>
           </div>
-          <div class="processing-label">처리 중<span class="processing-dots"></span></div>
+          <div class="processing-label" id="processingLabel">처리 중<span class="processing-dots"></span></div>
+        <div class="processing-sub" id="processingSub"></div>
         </div>
         <div class="queue-notice" id="queueNotice">⏳ 다른 작업 처리 중입니다. 잠시 후 자동으로 시작됩니다.</div>
       </div>
@@ -488,7 +490,10 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     else count.textContent = n > 0 ? `${n}개 옵션 선택됨 · 1회 처리` : '옵션을 선택하세요';
   }
 
-  const API_URL = ''; // Vercel /api 프록시 사용 (vercel.json rewrite)
+  const API_URL = 'https://jphic-kit-api.onrender.com'; // Render 직접 호출
+
+  // 페이지 로드 시 Render 웨이크업 ping (콜드스타트 방지)
+  fetch(API_URL + '/health').catch(() => {});
   // Google Sheets 로깅 Apps Script URL (배포 후 교체)
   const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx6WVoy3DqUSWbvLD8HcWuZNSpb4urh2pSqvBxNMTU6Gl0npymonosRNwMxtwCddklg/exec';
 
@@ -506,6 +511,12 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     isProcessing = true; isGenerated = false; resultFiles = {};
     document.getElementById('dlBtn').disabled = true;
     document.getElementById('processing').classList.add('show');
+    document.getElementById('processingSub').textContent = '';
+
+    // 10초 후 콜드스타트 안내
+    const coldTimer = setTimeout(() => {
+      document.getElementById('processingSub').textContent = '서버 시작 중... 최대 1분 소요될 수 있어요';
+    }, 10000);
 
     try {
       const fd = new FormData();
@@ -556,6 +567,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     } catch (err) {
       alert('처리 중 오류가 발생했습니다: ' + err.message);
     } finally {
+      clearTimeout(coldTimer);
       document.getElementById('processing').classList.remove('show');
       isProcessing = false;
     }
