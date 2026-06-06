@@ -1,676 +1,518 @@
-<!-- 260529 1230 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>이미지 자동화 — JPHIC KIT</title>
-<link rel="icon" type="image/png" href="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/eace0701-7599-4250-a434-ca12ab82c8ad_rw_600.png?h=a38fe5bb62f91b555b14c6a722d27962">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-06LPWZ6RLL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-06LPWZ6RLL');
-</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!-- SEO -->
+<title>JPHIC KIT — AI 생성 이미지를 진짜 쓸 수 있는 파일로</title>
+<meta name="description" content="AI로 만든 이미지를 벡터화·칼선·배경제거·목업까지. 스티커·굿즈·인쇄에 바로 쓸 수 있는 파일로 변환해드립니다. 베타 기간 무료.">
+<meta name="keywords" content="AI이미지 벡터화, 칼선 자동화, 배경 제거, 굿즈 인쇄, 스티커 칼선, JPHIC KIT, 제이픽">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="JPHIC KIT — AI 이미지를 진짜 쓸 수 있는 파일로">
+<meta property="og:description" content="벡터화·칼선·배경제거·목업. 베타 기간 전 기능 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jphic.co.kr/kit">
+<link rel="canonical" href="https://jphic.co.kr/kit">
+
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0a0a0f;--surface:#13131c;--surface2:#1a1a26;--border:#22223a;
-  --accent:#00BBAC;--accent-dim:rgba(0,187,172,0.10);--accent-glow:rgba(0,187,172,0.35);
-  --text:#eeeef4;--text-sub:#9898b0;--text-dim:#55556a;
-  --red:#ff4466;--yellow:#f5c542;
-  --radius:14px;--font:'Pretendard',-apple-system,sans-serif;
+:root {
+  --mc: #00BBAC;
+  --mc-hover: #00E5D2;
+  --mc-light: rgba(0,187,172,0.15);
+  --bg: #090a0c;
+  --card: #121318;
+  --card-hover: #1a1c23;
+  --panel: rgba(18,19,24,0.8);
+  --text-main: #F8FAFC;
+  --text-sub: #94A3B8;
+  --text-dim: #64748B;
+  --border: rgba(255,255,255,0.08);
+  --border-glow: rgba(0,187,172,0.3);
+  --radius: 12px;
+  --radius-sm: 8px;
 }
-body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:400;min-height:100vh;display:flex;flex-direction:column;align-items:center;font-size:17px;user-select:none;-webkit-user-select:none}
-header{width:100%;padding:18px 40px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.logo{font-size:1.1rem;font-weight:900;color:#fff;text-decoration:none}
-.logo-accent{color:var(--accent)}
-.version{margin-left:auto;font-size:11px;font-weight:500;color:var(--text-dim);letter-spacing:1px}
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { max-width:100vw; overflow-x:hidden; scroll-behavior:smooth; background:var(--bg); }
+body { font-family:'Pretendard',sans-serif; color:var(--text-main); line-height:1.6; word-break:keep-all; font-size:16px; }
+* { -webkit-user-select:none!important; user-select:none!important; -webkit-user-drag:none!important; }
+input,textarea { -webkit-user-select:text!important; user-select:text!important; }
 
-.kit-hero{width:100%;max-width:800px;padding:40px 20px 0}
-.kit-hero-letter{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px 36px;line-height:1.85}
-.kit-hero-from{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
-.kit-hero-headline{font-size:26px;font-weight:900;color:var(--text);line-height:1.3;margin-bottom:18px;letter-spacing:-.02em}
-.kit-hero-hl{color:var(--accent)}
-.kit-note{font-size:14px;color:var(--text-dim);margin-top:-8px}
-.kit-hero-letter p{font-size:16px;color:var(--text-sub);margin-bottom:16px}
-.kit-hero-letter p strong{color:var(--text);font-weight:600}
-.kit-hero-sig{font-size:15px;font-weight:700;color:var(--text);margin-top:16px}
-.kit-hero-event{background:rgba(0,187,172,0.08);border:1px solid rgba(0,187,172,0.25);border-radius:10px;padding:18px 20px;margin:16px 0}
-.kit-event-label{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px}
-.kit-event-desc{font-size:15px;color:var(--text-sub);line-height:1.7}
-.kit-event-desc strong{color:var(--text)}
-.kit-how{margin-top:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 36px}
-.kit-how-title{font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:20px}
-.kit-how-steps{display:flex;flex-direction:column;gap:18px}
-.kit-how-step{display:flex;align-items:flex-start;gap:16px}
-.kit-how-num{width:28px;height:28px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);font-size:13px;font-weight:700;color:var(--text-sub);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.kit-how-label{font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px}
-.kit-how-desc{font-size:15px;color:var(--text-sub);line-height:1.65}
+/* NAV */
+.nav { position:fixed; top:0; width:100%; z-index:10000; height:70px; background-color:rgba(9,10,12,0.85); backdrop-filter:blur(12px); display:flex; justify-content:space-between; align-items:center; padding:0 5%; border-bottom:1px solid var(--border); }
+.logo { font-size:1.1rem; font-weight:900; color:#fff; text-decoration:none; }
+.logo span { color:var(--mc); }
+.nav-links { display:flex; gap:32px; position:absolute; left:50%; transform:translateX(-50%); }
+.nav-links a { color:var(--text-sub); text-decoration:none; font-size:0.9rem; font-weight:600; transition:.2s; }
+.nav-links a:hover { color:#fff; }
+.nav-right { display:flex; align-items:center; gap:12px; }
+.nav-login { background:none; border:1px solid var(--border); color:var(--text-sub); font-size:0.85rem; font-weight:600; font-family:inherit; padding:8px 18px; border-radius:50px; cursor:not-allowed; }
+.nav-beta { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); color:#fff; font-size:0.875rem; font-weight:700; padding:8px 20px; border-radius:50px; pointer-events:none; }
+.hamburger { display:none; background:transparent; border:none; color:#fff; font-size:1.6rem; cursor:pointer; }
+@media (max-width:1050px) {
+  .hamburger { display:block; }
+  .nav-links { display:flex; flex-direction:column; position:absolute; top:70px; left:0; transform:none; width:100%; background:var(--card); border-bottom:1px solid var(--border); padding:0; gap:0; max-height:0; overflow:hidden; transition:max-height 0.4s ease; align-items:center; z-index:9990; }
+  .nav-links.active { max-height:500px; padding-bottom:10px; }
+  .nav-links a { font-size:1rem; width:100%; text-align:center; padding:16px 0; border-bottom:1px solid var(--border); }
+}
 
-main{width:100%;max-width:800px;padding:36px 20px 80px;display:flex;flex-direction:column;gap:20px}
+/* GRID BG */
+.grid-bg { position:fixed; inset:0; background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px); background-size:60px 60px; z-index:-1; opacity:0.3; pointer-events:none; }
 
-/* 카드 */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
-.card-label{font-size:13px;font-weight:700;letter-spacing:1.5px;color:var(--text-dim);text-transform:uppercase;margin-bottom:20px}
+/* HERO */
+.hero-kit { padding:120px 5% 32px; max-width:1300px; margin:0 auto; }
+.hero-label { display:inline-block; font-size:0.8rem; font-weight:900; letter-spacing:0.1em; color:var(--mc); margin-bottom:14px; padding:5px 14px; background:var(--mc-light); border-radius:50px; border:1px solid var(--border-glow); text-transform:uppercase; }
+.hero-kit h1 { font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:900; line-height:1.25; letter-spacing:-0.03em; margin-bottom:10px; }
+.hero-kit h1 em { color:var(--mc); font-style:normal; }
+.hero-sub { font-size:0.95rem; color:var(--text-sub); font-weight:500; }
 
-/* 업로드 */
-#drop-zone{border:2px dashed var(--border);border-radius:10px;padding:52px 24px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
-#drop-zone:hover,#drop-zone.drag-over{border-color:var(--accent);background:var(--accent-dim)}
-#drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer}
-#drop-zone .icon{font-size:32px;margin-bottom:12px}
-#drop-zone .main-text{font-size:20px;font-weight:600;margin-bottom:8px}
-#drop-zone .sub-text{font-size:16px;color:var(--text-sub)}
-#file-preview{display:none;align-items:center;gap:16px;padding:16px 18px;background:var(--surface2);border-radius:10px;border:1px solid var(--border)}
-#file-preview img{width:56px;height:56px;object-fit:cover;border-radius:8px}
-#file-preview .info{flex:1}
-#file-preview .fname{font-size:16px;font-weight:600}
-#file-preview .fsize{font-size:14px;color:var(--text-sub);margin-top:4px}
-#file-preview .remove-btn{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:20px;padding:4px}
-#file-preview .remove-btn:hover{color:var(--red)}
+/* WORKSPACE */
+.workspace { max-width:1300px; margin:0 auto; padding:0 5% 60px; display:grid; grid-template-columns:1fr 300px; gap:16px; }
 
-/* 진단 */
-#diag-section{display:none}
-.diag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.diag-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:18px}
-.diag-lbl{font-size:13px;font-weight:600;color:var(--text-dim);letter-spacing:.3px;text-transform:uppercase;margin-bottom:8px}
-.diag-val{font-size:17px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
-.badge-warn{display:inline-block;font-size:13px;font-weight:700;padding:4px 10px;border-radius:20px;background:rgba(245,197,66,0.12);color:var(--yellow);border:1px solid rgba(245,197,66,0.3)}
-.badge-ok{display:inline-block;font-size:13px;font-weight:700;padding:4px 10px;border-radius:20px;background:rgba(0,187,172,0.10);color:var(--accent);border:1px solid rgba(0,187,172,0.25)}
-.badge-err{display:inline-block;font-size:13px;font-weight:700;padding:4px 10px;border-radius:20px;background:rgba(255,68,102,0.10);color:var(--red);border:1px solid rgba(255,68,102,0.25)}
-.badge-rec{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:10px;background:rgba(245,197,66,0.10);color:var(--yellow);border:1px solid rgba(245,197,66,0.25)}
-.badge-opt{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:10px;background:rgba(152,152,176,0.10);color:var(--text-sub);border:1px solid rgba(152,152,176,0.2)}
+/* CANVAS PANEL */
+.canvas-panel { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:visible; position:relative; }
 
-/* 아코디언 */
-.acc-list{display:flex;flex-direction:column;gap:10px}
-.acc{border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s}
-.acc.open{border-color:#333350}
-.acc.done{border-color:#2a2a40}
-.acc-hd{display:flex;align-items:center;gap:14px;padding:20px 22px;cursor:pointer;background:var(--surface);transition:background .15s;user-select:none}
-.acc-hd:hover{background:var(--surface2)}
-.acc.open .acc-hd{background:rgba(255,255,255,0.04)}
-.acc-num{width:32px;height:32px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--text-sub);flex-shrink:0;transition:all .2s}
-.acc.open .acc-num{background:var(--surface2);border-color:#44446a;color:var(--text)}
-.acc.done .acc-num{background:var(--accent);border-color:var(--accent);color:#000;font-size:15px}
-.acc-title{flex:1;font-size:18px;font-weight:600;color:var(--text)}
-.acc:not(.open):not(.done) .acc-hd{opacity:0.4}
-.acc-right{display:flex;align-items:center;gap:10px}
-.acc-status{font-size:14px;color:var(--text-sub)}
-.acc.done .acc-status{color:var(--accent)}
-.chevron{font-size:18px;color:var(--text-dim);transition:transform .2s}
-.acc.open .chevron{transform:rotate(180deg)}
-.acc-bd{display:none;padding:0 22px 22px;background:var(--surface);border-top:1px solid var(--border)}
-.acc.open .acc-bd{display:block;background:rgba(255,255,255,0.05)}
-.acc-desc{font-size:16px;color:var(--text-sub);line-height:1.75;padding:16px 0 18px}
-.card.collapsed{max-height:52px;overflow:hidden;opacity:0.35;cursor:pointer;transition:all .3s}
-.card.collapsed:hover{opacity:0.6}
-.card.collapsed::after{content:'▾ 펼치기';display:block;text-align:center;font-size:12px;color:var(--text-dim);padding-bottom:8px}
+/* 글로우 — 패널 아래 외부에 퍼지는 그림자 */
+.canvas-glow {
+  position:absolute;
+  bottom:-30px; left:10%; right:10%;
+  height:60px;
+  background:radial-gradient(ellipse at center, rgba(0,187,172,0.5) 0%, rgba(0,187,172,0.2) 40%, transparent 70%);
+  filter:blur(20px);
+  pointer-events:none;
+  z-index:0;
+  border-radius:50%;
+}
 
-/* 옵션 */
-.opt-label{display:block;font-size:13px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px}
-.mode-toggle{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-.mode-btn{padding:16px 12px;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--text-sub);font-size:15px;font-weight:500;font-family:var(--font);cursor:pointer;transition:all .15s;text-align:center;line-height:1.5}
-.mode-btn .mode-desc{font-size:13px;font-weight:400;opacity:.6;display:block;margin-top:3px}
-.mode-btn:hover{border-color:#44446a;color:var(--text)}
-.mode-btn.active{border-color:var(--accent);background:var(--accent-dim);color:var(--accent)}
-.slider-row{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-input[type=range]{flex:1;height:4px;-webkit-appearance:none;background:var(--border);border-radius:2px;outline:none}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--accent);cursor:pointer}
-.slider-val{font-size:16px;font-weight:700;color:var(--text);min-width:48px;text-align:right}
-.check-row{display:flex;align-items:flex-start;gap:12px;cursor:pointer;margin-bottom:14px}
-.check-box{width:22px;height:22px;border:2px solid #44446a;border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;margin-top:2px;background:var(--surface2)}
-.check-box.checked{background:var(--accent);border-color:var(--accent)}
-.check-icon{display:none;color:#000;font-size:13px;font-weight:700}
-.check-box.checked .check-icon{display:block}
-.check-label{font-size:17px;font-weight:600}
-.check-desc{font-size:15px;color:var(--text-sub);margin-top:3px}
-.acc-actions{display:flex;gap:10px;margin-top:8px;justify-content:flex-end}
-.btn-apply{padding:13px 28px;background:var(--accent);color:#000;border:none;border-radius:10px;font-size:16px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .15s;min-width:120px}
-.btn-apply:hover{filter:brightness(1.08)}
-.btn-skip{padding:13px 28px;background:transparent;border:1px solid var(--border);border-radius:10px;font-size:16px;font-weight:500;font-family:var(--font);color:var(--text-sub);cursor:pointer;transition:all .15s;min-width:120px}
-.btn-skip:hover{border-color:#44446a;color:var(--text)}
+.canvas-inner { border-radius:var(--radius); overflow:hidden; position:relative; z-index:1; }
 
-/* 실행 버튼 */
-#run-btn{width:100%;padding:20px;background:var(--accent);color:#000;border:none;border-radius:var(--radius);font-size:19px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .2s;letter-spacing:.3px;display:none}
-#run-btn:hover{filter:brightness(1.08);box-shadow:0 0 28px var(--accent-glow)}
-#run-btn:disabled{background:var(--border);color:var(--text-dim);cursor:not-allowed;box-shadow:none}
+.canvas-toolbar { display:flex; align-items:center; justify-content:flex-end; gap:10px; padding:12px 16px; border-bottom:1px solid var(--border); background:rgba(18,19,24,0.9); }
+.toolbar-dl-btn { background:var(--mc); color:#000; border:none; font-family:inherit; font-size:0.875rem; font-weight:800; padding:8px 18px; border-radius:50px; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; gap:6px; }
+.toolbar-dl-btn:hover { background:var(--mc-hover); box-shadow:0 4px 15px var(--border-glow); }
+.toolbar-dl-btn:disabled { background:rgba(255,255,255,0.06); color:var(--text-dim); border:1px solid var(--border); cursor:not-allowed; box-shadow:none; }
+.canvas-reset-btn { background:none; border:1px solid var(--border); color:var(--text-sub); font-size:0.85rem; font-weight:600; font-family:inherit; padding:8px 16px; border-radius:50px; cursor:pointer; transition:all 0.2s; }
+.canvas-reset-btn:hover { border-color:var(--text-sub); color:#fff; }
 
-/* 처리/결과 */
-#status-card,#result-card,#jphic-card,#review-card{display:none}
-.progress-steps{display:flex;flex-direction:column;gap:14px}
-.step{display:flex;align-items:center;gap:14px;font-size:16px;font-weight:500;color:var(--text-dim);transition:color .3s}
-.step.active{color:var(--text)}.step.done{color:var(--accent)}
-.step-dot{width:9px;height:9px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background .3s}
-.step.active .step-dot{background:var(--accent);animation:pulse 1s infinite}
-.step.done .step-dot{background:var(--accent)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.result-preview{width:100%;max-height:360px;object-fit:contain;border-radius:10px;margin-bottom:20px;background:repeating-conic-gradient(#1c1c28 0% 25%,#13131c 0% 50%) 0 0/14px 14px}
-.result-actions{display:flex;gap:10px;margin-top:0;flex-wrap:wrap}
-.dl-btn{flex:1;min-width:120px;padding:16px 12px;border-radius:10px;background:#fff;color:#000;font-size:15px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .15s;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;border:none}
-.dl-btn:hover{background:var(--accent);color:#000}
-.reset-btn{flex:1;min-width:120px;padding:16px;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--text-sub);font-size:15px;font-weight:500;font-family:var(--font);cursor:pointer;transition:all .15s}
-.reset-btn:hover{border-color:#44446a;color:var(--text)}
+.canvas-area { min-height:480px; display:flex; align-items:center; justify-content:center; position:relative; background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px); background-size:24px 24px; }
+.upload-zone { display:flex; flex-direction:column; align-items:center; gap:18px; padding:52px 48px; border:2px dashed rgba(255,255,255,0.12); border-radius:var(--radius); cursor:pointer; transition:all 0.2s; text-align:center; }
+.upload-zone:hover { border-color:var(--mc); background:var(--mc-light); }
+.upload-icon { width:60px; height:60px; background:rgba(255,255,255,0.05); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:26px; border:1px solid var(--border); }
+.upload-btn { background:var(--mc); color:#000; border:none; font-family:inherit; font-size:1rem; font-weight:800; padding:12px 32px; border-radius:50px; cursor:pointer; transition:all 0.2s; }
+.upload-btn:hover { background:var(--mc-hover); box-shadow:0 4px 15px var(--border-glow); }
+.upload-hint { font-size:0.85rem; color:var(--text-dim); }
 
-/* JPHIC CTA */
-.jphic-inner{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
-.jphic-title{font-size:20px;font-weight:700;margin-bottom:8px}
-.jphic-sub{font-size:16px;color:var(--text-sub);margin-bottom:24px;line-height:1.7}
-.need-list{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:24px;display:flex;flex-direction:column;gap:10px}
-.need-item{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:400;color:var(--text-sub)}
-.jphic-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.btn-pdf{padding:16px;border-radius:10px;background:var(--accent);color:#000;font-size:16px;font-weight:700;font-family:var(--font);border:none;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px}
-.btn-chat{padding:16px;border-radius:10px;background:#FEE500;color:#000;font-size:16px;font-weight:700;font-family:var(--font);border:none;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px}
+.preview-area { display:none; width:100%; min-height:480px; align-items:center; justify-content:center; position:relative; }
+.preview-area.active { display:flex; }
+.preview-img { max-width:88%; max-height:440px; object-fit:contain; border-radius:8px; }
 
-/* 리뷰 */
-.rv-lbl{font-size:14px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:#555;margin-bottom:12px}
-.dl-badge{display:inline-flex;align-items:center;gap:8px;background:#f5f5f5;border:1px solid #ddd;border-radius:10px;padding:8px 16px;font-size:15px;color:#555;margin-bottom:20px}
-.dl-num{font-weight:700;color:var(--text);font-size:17px}
-.stars-row{display:flex;gap:8px;margin-bottom:16px}
-.star{font-size:30px;cursor:pointer;color:#ccc;transition:color .1s,transform .1s;line-height:1}
-.star.on{color:var(--yellow)}
-.star:hover{transform:scale(1.15)}
-.tag-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
-.rv-tag{font-size:15px;padding:7px 16px;border-radius:20px;border:1px solid #ddd;cursor:pointer;color:#555;background:transparent;transition:all .15s;font-family:var(--font)}
-.rv-tag.on{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
-.char-wrap{position:relative;margin-bottom:16px}
-.char-wrap textarea{width:100%;box-sizing:border-box;resize:none;border-radius:10px;border:1px solid #ddd;padding:14px 16px;font-size:16px;font-family:var(--font);color:#111;background:#f9f9f9;line-height:1.5;height:80px}
-.char-wrap textarea:focus{outline:none;border-color:#44446a}
-.char-count{position:absolute;bottom:10px;right:14px;font-size:13px;color:var(--text-dim)}
-.char-count.over{color:var(--red)}
-.btn-rv{width:100%;padding:16px;background:var(--accent);color:#000;border:none;border-radius:10px;font-size:17px;font-weight:700;font-family:var(--font);cursor:pointer}
-.btn-rv:disabled{background:var(--border);color:var(--text-dim);cursor:not-allowed}
-.toast{display:none;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;font-size:16px;font-weight:600;color:var(--accent);text-align:center;margin-top:12px}
-.toast.show{display:block}
-.rv-link-masked{font-size:13px;color:#aaa;margin-top:6px;font-family:monospace}
-.rv-read-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 28px;margin-top:0}
-.rv-read-title{font-size:15px;font-weight:700;color:var(--text);letter-spacing:.3px}
-.dl-badge-dark{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:13px;color:var(--text-sub)}
-.dl-num-dark{font-weight:700;color:var(--text)}
-.rv-read-section .rv-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
-.rv-read-section .rv-stars{color:var(--yellow)}
-.rv-read-section .rv-pill{background:rgba(255,255,255,0.06);color:var(--text-sub);border:1px solid var(--border)}
-.rv-read-section .rv-date{color:var(--text-dim)}
-.rv-read-section .rv-text{color:var(--text-sub)}
-.rv-read-section .rv-link-masked{color:var(--text-dim)}
-.rv-link-row{display:flex;gap:10px;align-items:stretch;margin-bottom:16px}
-.rv-link-row input{flex:2;border:1px solid #ddd;border-radius:10px;padding:13px 16px;font-size:15px;font-family:var(--font);color:#111;background:#f9f9f9;outline:none}
-.rv-link-row .btn-rv{flex:1;min-width:0;white-space:nowrap}
-.rv-read-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px}
-.rv-read-title{font-size:15px;font-weight:700;color:var(--text)}
-.dl-badge-dark{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:13px;color:var(--text-sub)}
-.dl-num-dark{font-weight:700;color:var(--text)}
-.rv-list{display:flex;flex-direction:column;gap:12px}
-.rv-card{background:#f7f7f7;border:1px solid #e5e5e5;border-radius:10px;padding:18px 20px}
-.rv-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.rv-comment{font-size:14px;color:var(--text-sub);flex:1}
-.rv-link-masked{font-size:13px;color:var(--text-dim);font-family:monospace}
-.rv-stars{font-size:15px;color:var(--yellow);letter-spacing:1px}
-.rv-pill{font-size:13px;padding:3px 10px;border-radius:20px;background:#eee;color:#555;border:1px solid #ddd}
-.rv-date{font-size:13px;color:#999;margin-left:auto}
-.rv-text{font-size:16px;color:var(--text-sub);line-height:1.65}
-.error-msg{background:rgba(255,68,102,0.08);border:1px solid rgba(255,68,102,0.25);border-radius:10px;padding:16px 18px;font-size:16px;font-weight:500;color:var(--red);display:none}
+.queue-notice { display:none; position:absolute; bottom:24px; left:50%; transform:translateX(-50%); background:rgba(0,187,172,0.12); border:1px solid var(--mc); color:var(--mc); font-size:0.85rem; font-weight:500; padding:9px 20px; border-radius:50px; white-space:nowrap; z-index:10; }
+.queue-notice.show { display:block; }
+
+/* 처리 중 오버레이 — 귀여운 스피너 */
+.processing { display:none; position:absolute; inset:0; background:rgba(9,10,12,0.82); align-items:center; justify-content:center; flex-direction:column; gap:20px; backdrop-filter:blur(6px); z-index:5; }
+.processing.show { display:flex; }
+.processing-mascot {
+  width:72px; height:72px; position:relative;
+  animation:mascotBounce 1.2s ease-in-out infinite;
+}
+.mascot-circle {
+  width:72px; height:72px; border-radius:50%;
+  background:linear-gradient(135deg, var(--mc) 0%, #0284c7 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-size:32px;
+  box-shadow:0 0 0 0 rgba(0,187,172,0.5);
+  animation:mascotPulse 1.2s ease-in-out infinite;
+}
+.mascot-orbit {
+  position:absolute; top:-6px; left:-6px; right:-6px; bottom:-6px;
+  border:2px dashed rgba(0,187,172,0.4);
+  border-radius:50%;
+  animation:mascotSpin 2s linear infinite;
+}
+.mascot-dot {
+  position:absolute; width:8px; height:8px; border-radius:50%;
+  background:var(--mc); top:0; left:50%; transform:translateX(-50%);
+}
+@keyframes mascotBounce {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-8px); }
+}
+@keyframes mascotPulse {
+  0%,100% { box-shadow:0 0 0 0 rgba(0,187,172,0.5); }
+  50% { box-shadow:0 0 0 14px rgba(0,187,172,0); }
+}
+@keyframes mascotSpin { to { transform:rotate(360deg); } }
+
+.processing-label { font-size:0.9rem; color:var(--text-sub); font-weight:600; letter-spacing:0.02em; }
+.processing-dots::after {
+  content:''; animation:dots 1.2s steps(3,end) infinite;
+}
+@keyframes dots {
+  0% { content:''; }
+  33% { content:'.'; }
+  66% { content:'..'; }
+  100% { content:'...'; }
+}
+
+/* OPTIONS */
+.options-panel { display:flex; flex-direction:column; gap:10px; }
+.option-group { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.option-group-header { padding:11px 14px 9px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.02); }
+.group-label { font-size:0.75rem; font-weight:900; letter-spacing:0.08em; color:var(--text-dim); text-transform:uppercase; }
+.group-free { font-size:0.7rem; font-weight:700; color:var(--mc); background:var(--mc-light); padding:3px 9px; border-radius:50px; border:1px solid var(--border-glow); }
+.group-beta { font-size:0.7rem; font-weight:700; color:#fff; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); padding:3px 9px; border-radius:50px; }
+.option-tags { padding:10px; display:flex; flex-direction:column; gap:4px; }
+.tag-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:var(--radius-sm); border:1px solid transparent; cursor:pointer; transition:all 0.15s; font-size:0.95rem; font-weight:600; color:var(--text-sub); user-select:none!important; }
+.tag-item:hover { background:rgba(255,255,255,0.04); color:var(--text-main); }
+.tag-item.active { background:var(--mc-light); border-color:var(--border-glow); color:var(--mc); }
+.tag-check { width:17px; height:17px; min-width:17px; border:1.5px solid rgba(255,255,255,0.2); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:10px; transition:all 0.15s; color:transparent; }
+.tag-item.active .tag-check { background:var(--mc); border-color:var(--mc); color:#000; font-weight:900; }
+.tag-hash { color:var(--mc); margin-right:2px; }
+.tag-arrow { font-size:10px; color:var(--text-dim); margin-left:auto; }
+.accordion-body { display:none; padding:12px 14px 16px; border-top:1px solid var(--border); background:rgba(0,0,0,0.25); }
+.accordion-body.open { display:block; }
+.slider-label { display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-sub); margin-bottom:10px; font-weight:500; }
+.slider-label span { color:var(--mc); font-weight:700; }
+input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-user-select:text!important; user-select:text!important; }
+.slider-range-hint { display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-dim); margin-top:6px; }
+.mockup-upload { display:none; padding:10px; border-top:1px solid var(--border); }
+.mockup-upload.open { display:block; }
+.mockup-upload-zone { border:1px dashed rgba(255,255,255,0.12); border-radius:var(--radius-sm); padding:14px; text-align:center; cursor:pointer; font-size:0.875rem; color:var(--text-sub); transition:all 0.15s; }
+.mockup-upload-zone:hover { border-color:var(--mc); color:var(--text-main); }
+
+/* 생성하기 */
+.generate-wrap { padding:4px 0 0; }
+.generate-btn { width:100%; padding:15px; background:var(--mc); color:#000; border:none; border-radius:var(--radius-sm); font-family:inherit; font-size:1rem; font-weight:900; cursor:pointer; transition:all 0.2s; letter-spacing:-0.01em; }
+.generate-btn:hover { background:var(--mc-hover); box-shadow:0 4px 20px var(--border-glow); }
+.generate-btn:disabled { background:rgba(255,255,255,0.05); color:var(--text-dim); border:1px solid var(--border); cursor:not-allowed; box-shadow:none; }
+.generate-count { font-size:0.8rem; color:var(--text-dim); text-align:center; padding-top:7px; font-weight:500; }
+
+/* SAMPLE */
+.section { max-width:1300px; margin:0 auto; padding:60px 5% 80px; border-top:1px solid var(--border); }
+.section-label { display:inline-block; font-size:0.8rem; font-weight:900; letter-spacing:0.1em; color:var(--mc); margin-bottom:14px; padding:5px 14px; background:var(--mc-light); border-radius:50px; border:1px solid var(--border-glow); text-transform:uppercase; }
+.section h2 { font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900; letter-spacing:-0.03em; margin-bottom:10px; line-height:1.3; }
+.section h2 em { color:var(--mc); font-style:normal; }
+.section-sub { font-size:0.95rem; color:var(--text-sub); margin-bottom:32px; line-height:1.7; font-weight:500; }
+.sample-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); gap:12px; }
+.sample-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; cursor:pointer; transition:all 0.2s; }
+.sample-card:hover { border-color:var(--border-glow); transform:translateY(-2px); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
+.sample-thumb { aspect-ratio:4/3; background:rgba(255,255,255,0.02); display:flex; align-items:center; justify-content:center; font-size:36px; border-bottom:1px solid var(--border); }
+.sample-info { padding:14px 16px; }
+.sample-name { font-size:0.9rem; font-weight:700; margin-bottom:4px; }
+.sample-type { font-size:0.8rem; color:var(--text-dim); font-weight:500; }
+
+/* FOOTER */
+footer { border-top:1px solid var(--border); padding:28px 5%; text-align:center; font-size:0.85rem; color:var(--text-dim); }
+footer a { color:var(--mc); text-decoration:none; font-weight:600; }
 </style>
 </head>
 <body>
-<header>
-  <a href="/kit" class="logo">JPHIC <span class="logo-accent">KIT</span></a>
-  <span class="version">v2.0 · 2026-05-24</span>
-</header>
-<section class="kit-hero">
-  <div class="kit-hero-letter">
-    <div class="kit-hero-headline">AI로 생성한 이미지를<br><span class="kit-hero-hl">진짜 쓸 수 있는 파일로.</span></div>
-    <p>벡터씨가 쓰는 칼선툴을 모두에게 오픈했어요.<br>회원가입 없이 무기한 무료 사용 가능합니다. 버튼만 누르면 돼요.</p>
-    <p class="kit-note">API 호출 제한으로 대기하실 수 있어요. 이미지에 따라 결과가 다르고, 케이스마다 완성도도 다르지만, <br>저한테는 시간이 절약되는 고마운 툴입니다.<br>
-완성도있게 다듬기는 벡터씨에게 의뢰하시면 좋겠네요 하핫-🙂</p>
-    <div class="kit-hero-event">
-      <div class="kit-event-label">🎁 베타 참여 이벤트</div>
-      <div class="kit-event-desc">벡터씨 칼선 키트를 사용해 보시고 <strong>후기와 SNS계정을 남겨주세요</strong><br>다음 칼선 보완 제작 요청 시 <strong>제작비 7.7% 할인 </strong>적용해드립니다.</div>
-    </div>
+<div class="grid-bg"></div>
 
-  <div class="kit-how">
-    <div class="kit-how-title">이렇게 사용하세요</div>
-    <div class="kit-how-steps">
-      <div class="kit-how-step">
-        <div class="kit-how-num">1</div>
-        <div class="kit-how-text">
-          <div class="kit-how-label">이미지 업로드</div>
-          <div class="kit-how-desc">JPG · PNG · WEBP 파일을 올려주세요. PNG 투명배경이면 배경 제거 단계를 건너뛸 수 있어요.</div>
-        </div>
+<nav class="nav">
+  <a class="logo" href="https://jphic.co.kr">JPHIC <span>KIT</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#guide">사용 가이드</a>
+    <a href="#pricing">요금제</a>
+    <a href="https://open.kakao.com/o/s154Q5ui" target="_blank">오픈챗 문의</a>
+  </div>
+  <div class="nav-right">
+    <button class="nav-login">로그인</button>
+    <span class="nav-beta">🎉 베타 무료</span>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')">
+    <i class="fas fa-bars"></i>
+  </button>
+</nav>
+
+<div class="hero-kit">
+  <div class="hero-label">브랜드 자산 늘리기</div>
+  <h1>AI 생성 이미지를<br><em>진짜 쓸 수 있는 파일로.</em></h1>
+  <div class="hero-sub">업로드 → 옵션 선택 → 생성 → 다운로드 · 베타 기간 전 기능 무료</div>
+</div>
+
+<div class="workspace">
+
+  <!-- 캔버스 (overflow:visible 래퍼 + 내부 클립 분리) -->
+  <div class="canvas-panel">
+    <div class="canvas-glow"></div>
+    <div class="canvas-inner">
+      <div class="canvas-toolbar">
+        <button class="toolbar-dl-btn" id="dlBtn" onclick="handleDownload()" disabled>
+          <i class="fas fa-download"></i> 다운로드
+        </button>
+        <button class="canvas-reset-btn" onclick="resetCanvas()">초기화</button>
       </div>
-      <div class="kit-how-step">
-        <div class="kit-how-num">2</div>
-        <div class="kit-how-text">
-          <div class="kit-how-label">자동 진단</div>
-          <div class="kit-how-desc">해상도, 컬러모드, 배경 유무를 자동으로 분석해요. 권장 처리 항목이 표시됩니다.</div>
+      <div class="canvas-area" id="canvasArea">
+        <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+          <div class="upload-icon">🖼️</div>
+          <button class="upload-btn" onclick="event.stopPropagation();document.getElementById('fileInput').click()">Upload Image</button>
+          <div class="upload-hint">또는 이미지를 드롭하세요 · JPG, PNG, SVG</div>
         </div>
-      </div>
-      <div class="kit-how-step">
-        <div class="kit-how-num">3</div>
-        <div class="kit-how-text">
-          <div class="kit-how-label">처리 선택</div>
-          <div class="kit-how-desc">필요한 단계만 확인하거나 건너뛰세요. 테두리 두께, 단순화 강도 등을 직접 조정할 수 있어요.</div>
+        <div class="preview-area" id="previewArea">
+          <img class="preview-img" id="previewImg" alt="">
         </div>
-      </div>
-      <div class="kit-how-step">
-        <div class="kit-how-num">4</div>
-        <div class="kit-how-text">
-          <div class="kit-how-label">다운로드</div>
-          <div class="kit-how-desc">칼선 포함 SVG와 투명배경 PNG로 저장해요. 인쇄소 제출, 굿즈 납품 등 바로 활용 가능해요.</div>
+        <div class="processing" id="processing">
+          <div class="processing-mascot">
+            <div class="mascot-orbit"><div class="mascot-dot"></div></div>
+            <div class="mascot-circle">✦</div>
+          </div>
+          <div class="processing-label">처리 중<span class="processing-dots"></span></div>
         </div>
+        <div class="queue-notice" id="queueNotice">⏳ 다른 작업 처리 중입니다. 잠시 후 자동으로 시작됩니다.</div>
       </div>
     </div>
   </div>
-</section>
-<main>
 
-  <div class="card" id="upload-card">
-    <div class="card-label">이미지 업로드</div>
-    <div class="live-stat" style="font-size:13px;color:var(--accent);font-weight:600;margin:-10px 0 16px">🔧 지금까지 <span id="gen-count">—</span>개의 칼선이 생성됐어요</div>
-    <div id="drop-zone">
-      <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp">
-      <div class="icon">📂</div>
-      <div class="main-text">JPG · PNG · WEBP 드래그 또는 클릭</div>
-      <div class="sub-text">배경 없는 PNG 업로드 시 더 정확한 칼선이 생성됩니다</div>
-    </div>
-    <div id="file-preview">
-      <img id="preview-thumb" src="" alt="">
-      <div class="info">
-        <div class="fname" id="preview-name"></div>
-        <div class="fsize" id="preview-size"></div>
+  <div class="options-panel">
+
+    <div class="option-group">
+      <div class="option-group-header">
+        <span class="group-label">기본 처리</span>
+        <span class="group-free">FREE</span>
       </div>
-      <button class="remove-btn" id="remove-file">✕</button>
+      <div class="option-tags">
+        <div class="tag-item active" id="tag-color" onclick="toggleTag(this,'color')">
+          <div class="tag-check">✓</div><span><span class="tag-hash">#</span>인쇄용 색상 변환</span>
+        </div>
+        <div class="tag-item active" id="tag-upscale" onclick="toggleTag(this,'upscale')">
+          <div class="tag-check">✓</div><span><span class="tag-hash">#</span>해상도 업스케일</span>
+        </div>
+        <div class="tag-item active" id="tag-removebg" onclick="toggleTag(this,'removebg')">
+          <div class="tag-check">✓</div><span><span class="tag-hash">#</span>배경 지우기</span>
+        </div>
+      </div>
     </div>
+
+    <div class="option-group">
+      <div class="option-group-header">
+        <span class="group-label">벡터화</span>
+        <span class="group-beta">베타 무료</span>
+      </div>
+      <div class="option-tags">
+        <div class="tag-item" id="tag-vectorize" onclick="toggleTag(this,'vectorize')">
+          <div class="tag-check">✓</div><span><span class="tag-hash">#</span>벡터화</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-group">
+      <div class="option-group-header">
+        <span class="group-label">칼선</span>
+        <span class="group-beta">베타 무료</span>
+      </div>
+      <div class="option-tags">
+        <div class="tag-item" id="cutlineBasicTag" onclick="selectCutline('basic')">
+          <div class="tag-check">✓</div><span><span class="tag-hash">#</span>칼선 기본</span>
+        </div>
+        <div>
+          <div class="tag-item" id="cutlineOffsetTag" onclick="selectCutline('offset')">
+            <div class="tag-check">✓</div><span><span class="tag-hash">#</span>칼선 옵셋</span>
+            <span class="tag-arrow" id="offsetArrow">▶</span>
+          </div>
+          <div class="accordion-body" id="offsetAccordion">
+            <div class="slider-label">옵셋 너비 <span id="offsetVal">5</span> mm</div>
+            <input type="range" min="1" max="50" value="5" id="offsetSlider"
+              oninput="document.getElementById('offsetVal').textContent=this.value;">
+            <div class="slider-range-hint"><span>1mm</span><span>50mm</span></div>
+          </div>
+        </div>
+        <div class="tag-item" id="tag-flatten" onclick="toggleTag(this,'flatten')">
+          <div class="tag-check">✓</div><span><span class="tag-hash">#</span>칼선 등신대 바닥 평평하게</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-group">
+      <div class="option-group-header">
+        <span class="group-label">목업</span>
+        <span class="group-beta">베타 무료</span>
+      </div>
+      <div class="option-tags">
+        <div class="tag-item" id="mockupTag" onclick="toggleMockup(this)">
+          <div class="tag-check">✓</div><span><span class="tag-hash">#</span>목업 (배경 교체)</span>
+          <span class="tag-arrow" id="mockupArrow">▶</span>
+        </div>
+      </div>
+      <div class="mockup-upload" id="mockupUpload">
+        <div class="mockup-upload-zone" onclick="document.getElementById('bgInput').click()">
+          🌅 배경 이미지 업로드<br>
+          <span style="font-size:0.78rem;color:var(--text-dim)">JPG, PNG</span>
+        </div>
+        <input type="file" id="bgInput" accept="image/*" style="display:none" onchange="handleBgUpload(event)">
+      </div>
+    </div>
+
+    <div class="generate-wrap">
+      <button class="generate-btn" id="generateBtn" onclick="handleGenerate()" disabled>생성하기</button>
+      <div class="generate-count" id="generateCount">이미지를 업로드하세요</div>
+    </div>
+
   </div>
+</div>
 
-  <div id="diag-section">
-    <div class="card">
-      <div class="card-label">자동 진단</div>
-      <div class="diag-grid">
-        <div class="diag-card">
-          <div class="diag-lbl">해상도</div>
-          <div class="diag-val" id="d-res">—</div>
-        </div>
-        <div class="diag-card">
-          <div class="diag-lbl">컬러모드</div>
-          <div class="diag-val" id="d-color">—</div>
-        </div>
-        <div class="diag-card">
-          <div class="diag-lbl">배경</div>
-          <div class="diag-val" id="d-bg">—</div>
-        </div>
-      </div>
-    </div>
+<input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleUpload(event)">
 
-    <div class="card">
-      <div class="card-label">작업 설정</div>
-      <div class="acc-list" id="acc-list"></div>
-    </div>
-
-    <div class="error-msg" id="error-msg"></div>
-    <button id="run-btn" disabled>선택 완료</button>
-
-    <div class="card" id="status-card">
-      <div class="card-label">처리 중</div>
-      <div class="progress-steps">
-        <div class="step" id="step-upload"><div class="step-dot"></div>파일 업로드</div>
-        <div class="step" id="step-upscale"><div class="step-dot"></div>업스케일</div>
-        <div class="step" id="step-remove"><div class="step-dot"></div>배경 제거</div>
-        <div class="step" id="step-cutline"><div class="step-dot"></div>칼선 추출</div>
-        <div class="step" id="step-export"><div class="step-dot"></div>SVG · PNG 출력</div>
-      </div>
-    </div>
-
-    <div class="card" id="result-card">
-      <div class="card-label">결과물</div>
-      <div class="live-stat" style="font-size:13px;color:var(--accent);font-weight:600;margin:-10px 0 16px">📥 누적 <span id="dl-count-r">—</span>회 다운로드됐어요</div>
-      <img class="result-preview" id="result-preview" src="" alt="결과">
-      <div class="result-actions" id="download-grid">
-        <button class="reset-btn" onclick="resetAll()">↩ 새 이미지</button>
-      </div>
-    </div>
-
-    <div id="jphic-card">
-      <div class="jphic-inner">
-        <div class="jphic-title">벡터씨, 도와줘!</div>
-        <div class="jphic-sub">자동화로 해결이 안 된다면? 제이픽의 디자인 라인으로 직접 의뢰하세요.</div>
-        <div class="need-list">
-          <div class="need-item">✂️&ensp;누끼가 정확하지 않아 — 재작업이 필요한 경우</div>
-          <div class="need-item">📐&ensp;리사이징 및 인쇄 레이아웃 — 세팅이 필요한 경우</div>
-          <div class="need-item">🎨&ensp;저해상도 이미지 — 벡터화 변환이 필요한 경우</div>
-          <div class="need-item">🖨️&ensp;인쇄 여백·배경색 — 정밀 조정이 필요한 경우</div>
-        </div>
-        <div class="jphic-btns">
-          <a class="btn-pdf" href="https://jphic.co.kr/pdf" target="_blank">📄 인쇄 발주파일 제작 서비스 안내</a>
-          <a class="btn-chat" href="https://open.kakao.com/o/s154Q5ui" target="_blank">💬 벡터씨 오픈챗 문의하기</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card" id="review-card" style="background:#fff;color:#111;border-color:#e0e0e0">
-      <div class="card-label">후기</div>
-      <div class="rv-lbl">이번 작업 어떠셨나요?</div>
-      <div class="stars-row" id="stars-row">
-        <span class="star" data-v="1" onclick="setStar(1)">★</span>
-        <span class="star" data-v="2" onclick="setStar(2)">★</span>
-        <span class="star" data-v="3" onclick="setStar(3)">★</span>
-        <span class="star" data-v="4" onclick="setStar(4)">★</span>
-        <span class="star" data-v="5" onclick="setStar(5)">★</span>
-      </div>
-      <div class="rv-lbl">용도</div>
-      <div class="tag-row" id="tag-row">
-        <button class="rv-tag" onclick="toggleTag(this)">인쇄물</button>
-        <button class="rv-tag" onclick="toggleTag(this)">SNS</button>
-        <button class="rv-tag" onclick="toggleTag(this)">납품용</button>
-        <button class="rv-tag" onclick="toggleTag(this)">개인작업</button>
-      </div>
-      <div class="rv-lbl">'벡터씨'라고 남겨주시면, 다음 칼선 보완 제작 요청 시 7.7% 할인 적용해드립니다.</div>
-      <div class="char-wrap">
-        <textarea id="rv-msg" maxlength="30" placeholder="30자 이내로 자유롭게" oninput="onRvInput()"></textarea>
-        <span class="char-count" id="rv-cc">0 / 30</span>
-      </div>
-      <div class="rv-lbl">홈페이지 · SNS · 이메일 <span style="font-weight:400;font-size:12px;color:#999">(선택동의 - 다음 칼선보정 제작요청 시 7.7% 할인)</span></div>
-      <div class="rv-link-row">
-        <input type="text" id="rv-link" placeholder="https://instagram.com/yourhandle 또는 이메일">
-        <button class="btn-rv" id="rv-submit" onclick="submitReview()" disabled>후기 남기기</button>
-      </div>
-      <div class="toast" id="rv-toast">소중한 후기 감사해요 ☺</div>
-    </div>
-
-    <div class="rv-read-section">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-        <div class="rv-read-title">최근 후기</div>
-        <div class="dl-badge-dark">✍️ 후기 <span class="dl-num-dark" id="rv-count">—</span>개</div>
-      </div>
-      <div style="font-size:12px;color:#999;margin-bottom:16px">'벡터씨' 후기 남기면 벡터씨 제작 의뢰 시 7.7% 할인</div>
-      <div class="rv-list" id="rv-list"></div>
-    </div>
+<div class="section" id="guide">
+  <div class="section-label">결과물 샘플</div>
+  <h2>AI 이미지, 만들었으면<br><em>제대로 써야 브랜드 자산이 됩니다.</em></h2>
+  <div class="section-sub">벡터화·칼선·목업까지 — 출력, 스티커, 굿즈에 바로 쓸 수 있는 파일로 변환해드립니다.</div>
+  <div class="sample-grid">
+    <div class="sample-card"><div class="sample-thumb">🎨</div><div class="sample-info"><div class="sample-name">인쇄용 색상 변환</div><div class="sample-type">RGB → CMYK 근사 · PNG</div></div></div>
+    <div class="sample-card"><div class="sample-thumb">✨</div><div class="sample-info"><div class="sample-name">해상도 업스케일</div><div class="sample-type">4× 고해상도 · PNG</div></div></div>
+    <div class="sample-card"><div class="sample-thumb">🔲</div><div class="sample-info"><div class="sample-name">배경 제거</div><div class="sample-type">투명 배경 · PNG</div></div></div>
+    <div class="sample-card"><div class="sample-thumb">📐</div><div class="sample-info"><div class="sample-name">벡터화</div><div class="sample-type">확대해도 깨지지 않는 · SVG</div></div></div>
+    <div class="sample-card"><div class="sample-thumb">✂️</div><div class="sample-info"><div class="sample-name">칼선</div><div class="sample-type">스티커·굿즈 인쇄용 · SVG</div></div></div>
+    <div class="sample-card"><div class="sample-thumb">🖼️</div><div class="sample-info"><div class="sample-name">목업</div><div class="sample-type">내 배경으로 합성 · PNG</div></div></div>
   </div>
+</div>
 
-</main>
+<footer>
+  <div style="margin-bottom:8px">
+    <a href="https://jphic.co.kr">JPHIC</a> &nbsp;·&nbsp;
+    <a href="https://open.kakao.com/o/s154Q5ui" target="_blank">오픈챗 문의</a>
+  </div>
+  © 2026 JPHIC. 베타 서비스 운영 중.
+</footer>
+
 <script>
-const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyKq109r0TCEBfkw2QEFf1myONi5SxCvL6meiUVEU1wyMJN5ePjja5QhsjrfJH1gzOi/exec';
-let selectedFile=null, currentMode='white_border', openAcc=null;
-const doneSet=new Set();
-const sVals={'border-mm':0,'bleed-mm':2};
+  let isProcessing = false;
+  let isGenerated = false;
+  let uploadedFile = null;
+  let bgFile = null;
+  let cutlineMode = null;
+  let mockupOpen = false;
+  const selectedOptions = new Map([['color',true],['upscale',true],['removebg',true]]);
 
-const STEPS_DEF=[
-  {
-    id:'cmyk',title:'인쇄용 색상으로 변환',rec:true,btnLabel:'CMYK로 변환',
-    body:()=>`<div class="acc-desc">현재 RGB 파일입니다. 인쇄 시 색상 차이가 발생할 수 있어요.<br>칼선 생성 시 CMYK 자동 변환이 적용됩니다.</div>`
-  },
-  {
-    id:'upscale',title:'이미지 선명하게 키우기',rec:true,btnLabel:'업스케일하기',
-    body:()=>`
-      <div class="acc-desc">저해상도 이미지가 감지됐어요. AI 업스케일을 적용하면 인쇄 품질이 향상됩니다.</div>
-      <label class="check-row" onclick="toggleCheck('upscale')">
-        <div class="check-box checked" id="check-upscale"><span class="check-icon">✓</span></div>
-        <div><div class="check-label">저해상도 자동 업스케일</div><div class="check-desc">AI 생성 이미지 권장</div></div>
-      </label>`
-  },
-  {
-    id:'bg',title:'배경 지우기',rec:false,btnLabel:'배경삭제',
-    body:()=>`<div class="acc-desc">배경이 감지됐어요. JPG는 자동 배경 제거, PNG 투명배경은 이 단계를 건너뛰어도 됩니다.</div>`
-  },
-  {
-    id:'cutline',title:'칼선 옵션',rec:true,btnLabel:'선택완료',
-    body:()=>`
-      <div class="acc-desc">[기본] 옵션 선택 없을 시, 이미지 외곽 그대로 칼선 생성</div>
-      <label class="check-row" onclick="toggleWhiteBorder()">
-        <div class="check-box" id="check-white-border"><span class="check-icon">✓</span></div>
-        <div><div class="check-label">옵셋 설정 : 이미지에 흰 테두리 사이즈 (~50mm)</div><div class="check-desc">굿즈·스티커 등 이미지 바깥에 흰 여백 추가</div></div>
-      </label>
-      <div id="border-slider" style="display:none;margin-bottom:12px">
-        <div class="slider-row">
-          <input type="range" id="border-mm" min="0" max="50" step="1" value="${sVals['border-mm']||5}" oninput="sVals['border-mm']=parseFloat(this.value);document.getElementById('border-val').textContent=this.value+'mm'">
-          <span class="slider-val" id="border-val">${sVals['border-mm']||5}mm</span>
-        </div>
-      </div>
-      <label class="check-row" onclick="toggleCheck('flat-bottom')">
-        <div class="check-box" id="check-flat-bottom"><span class="check-icon">✓</span></div>
-        <div><div class="check-label">바닥면 평탄화</div><div class="check-desc">등신대 지지대 바닥 부분을 평평하게</div></div>
-      </label>`
+  function handleUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    uploadedFile = file;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      document.getElementById('previewImg').src = ev.target.result;
+      document.getElementById('uploadZone').style.display = 'none';
+      document.getElementById('previewArea').classList.add('active');
+      updateGenerateBtn();
+    };
+    reader.readAsDataURL(file);
   }
-];
 
-const fileInput=document.getElementById('file-input');
-const dropZone=document.getElementById('drop-zone');
-fileInput.addEventListener('change',e=>handleFile(e.target.files[0]));
-dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('drag-over')});
-dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('drag-over'));
-dropZone.addEventListener('drop',e=>{e.preventDefault();dropZone.classList.remove('drag-over');if(e.dataTransfer.files[0])handleFile(e.dataTransfer.files[0])});
-document.getElementById('remove-file').addEventListener('click',e=>{e.stopPropagation();resetFile()});
+  function resetCanvas() {
+    uploadedFile = null; isGenerated = false;
+    document.getElementById('previewImg').src = '';
+    document.getElementById('uploadZone').style.display = 'flex';
+    document.getElementById('previewArea').classList.remove('active');
+    document.getElementById('dlBtn').disabled = true;
+    document.querySelectorAll('.tag-item').forEach(t => t.classList.remove('active'));
+    ['tag-color','tag-upscale','tag-removebg'].forEach(id => document.getElementById(id).classList.add('active'));
+    selectedOptions.clear();
+    selectedOptions.set('color',true); selectedOptions.set('upscale',true); selectedOptions.set('removebg',true);
+    cutlineMode = null;
+    document.getElementById('offsetAccordion').classList.remove('open');
+    document.getElementById('offsetArrow').textContent = '▶';
+    if (mockupOpen) { mockupOpen=false; document.getElementById('mockupUpload').classList.remove('open'); document.getElementById('mockupArrow').textContent='▶'; document.getElementById('mockupTag').classList.remove('active'); }
+    updateGenerateBtn();
+  }
 
-function handleFile(file){
-  if(!file)return; selectedFile=file;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    document.getElementById('preview-thumb').src=ev.target.result;
-    document.getElementById('preview-name').textContent=file.name;
-    document.getElementById('preview-size').textContent=(file.size/1024).toFixed(0)+' KB';
-    dropZone.style.display='none';
-    document.getElementById('file-preview').style.display='flex';
-    runDiag(file);
-  };
-  reader.readAsDataURL(file);
-}
+  function toggleTag(el, type) {
+    const isActive = el.classList.toggle('active');
+    isActive ? selectedOptions.set(type,true) : selectedOptions.delete(type);
+    updateGenerateBtn();
+  }
 
-function runDiag(file){
-  document.getElementById('diag-section').style.display='block';
-  const isJpg=file.type==='image/jpeg';
-  const isSmall=file.size<200000;
-  document.getElementById('d-res').innerHTML=isSmall
-    ?'<span class="badge-warn">저해상도</span>'
-    :'<span class="badge-ok">적합</span>';
-  document.getElementById('d-color').innerHTML='<span class="badge-err">RGB</span>';
-  document.getElementById('d-bg').innerHTML=isJpg
-    ?'<span class="badge-warn">감지됨</span>'
-    :'<span class="badge-ok">투명</span>';
-  STEPS_DEF[1].rec=isSmall;
-  STEPS_DEF[2].rec=isJpg;
-  openAcc='cmyk';
-  renderAcc();
-  document.getElementById('run-btn').style.display='block';
-  document.getElementById('run-btn').disabled=false;
-}
-
-function renderAcc(){
-  document.getElementById('acc-list').innerHTML=STEPS_DEF.map(s=>{
-    const isDone=doneSet.has(s.id), isOpen=openAcc===s.id;
-    return`<div class="acc ${isDone?'done':''} ${isOpen?'open':''}" id="acc-${s.id}">
-      <div class="acc-hd" onclick="toggleAcc('${s.id}')">
-        <div class="acc-num">${isDone?'✓':STEPS_DEF.indexOf(s)+1}</div>
-        <div class="acc-title">${s.title}</div>
-        <div class="acc-right">
-          <span class="acc-status">${isDone?'실행':s.rec?'<span class="badge-rec">권장</span>':'<span class="badge-opt">선택</span>'}</span>
-          <span class="chevron">▾</span>
-        </div>
-      </div>
-      <div class="acc-bd">
-        ${s.body()}
-        <div class="acc-actions">
-          ${isDone ? `<button class="btn-skip" onclick="undoAcc('${s.id}')">취소하기</button>` : `<button class="btn-skip" onclick="skipAcc('${s.id}')">건너뛰기</button>`}
-          <button class="btn-apply" onclick="doneAcc('${s.id}')">${isDone?'다시 실행':s.btnLabel}</button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function toggleAcc(id){ openAcc=openAcc===id?null:id; renderAcc(); }
-// 접힌 카드 클릭시 펼치기
-document.addEventListener('click', function(e){
-  const card = e.target.closest('.card.collapsed');
-  if(card){ card.classList.remove('collapsed'); }
-});
-function doneAcc(id){ doneSet.add(id); const idx=STEPS_DEF.findIndex(s=>s.id===id); const next=STEPS_DEF[idx+1]; openAcc=next?next.id:null; renderAcc(); }
-function undoAcc(id){ doneSet.delete(id); openAcc=id; renderAcc(); }
-function skipAcc(id){ const idx=STEPS_DEF.findIndex(s=>s.id===id); const next=STEPS_DEF[idx+1]; openAcc=next?next.id:null; renderAcc(); }
-function setMode(btn){ document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentMode=btn.dataset.mode; }
-function toggleWhiteBorder(){
-  const cb=document.getElementById('check-white-border');
-  cb.classList.toggle('checked');
-  const slider=document.getElementById('border-slider');
-  const on=cb.classList.contains('checked');
-  slider.style.display=on?'block':'none';
-  sVals['border-mm']=on?(sVals['border-mm']||5):0;
-}
-function toggleCheck(id){ document.getElementById('check-'+id).classList.toggle('checked'); }
-function isChecked(id){ const el=document.getElementById('check-'+id); return el&&el.classList.contains('checked'); }
-
-const pSteps=['upload','upscale','remove','cutline','export'];
-function setStep(idx){ pSteps.forEach((s,i)=>{ const el=document.getElementById('step-'+s); el.classList.remove('active','done'); if(i<idx)el.classList.add('done'); else if(i===idx)el.classList.add('active'); }); }
-
-document.getElementById('run-btn').addEventListener('click',async()=>{
-  if(!selectedFile)return; hideError();
-  document.getElementById('run-btn').disabled=true;
-  document.getElementById('status-card').style.display='block';
-  document.getElementById('result-card').style.display='none';
-  document.getElementById('jphic-card').style.display='none';
-  document.getElementById('review-card').style.display='none';
-  setStep(0);
-  const fd=new FormData();
-  fd.append('file',selectedFile);
-  fd.append('mode',currentMode);
-  fd.append('border_mm', sVals['border-mm']);
-  fd.append('bleed_mm', sVals['bleed-mm']);
-  fd.append('flat_bottom',isChecked('flat-bottom'));
-  fd.append('upscale',isChecked('upscale'));
-  fd.append('simplify', 1.0);
-  setStep(1); await delay(300); setStep(2);
-  try{
-    const res=await fetch('https://jphic-kit-api.onrender.com/process',{method:'POST',body:fd});
-    const data=await res.json();
-    if(data.error){showError(data.error);return}
-    setStep(3); await delay(300); setStep(4); await delay(300);
-    showResult(data.job_id,data.files);
-  }catch(e){showError('서버 연결 실패 — 백엔드가 실행 중인지 확인해주세요')}
-});
-
-function showResult(jobId,files){
-  document.getElementById('status-card').style.display='none';
-  document.getElementById('result-card').style.display='block';
-  document.getElementById('jphic-card').style.display='block';
-  document.getElementById('review-card').style.display='block';
-  // 자동진단/작업설정만 접기 (review-card 제외)
-  ['자동 진단','작업 설정'].forEach(label=>{
-    document.querySelectorAll('#diag-section .card-label').forEach(el=>{
-      if(el.textContent===label) el.closest('.card').classList.add('collapsed');
-    });
-  });
-  const pf=files.find(f=>f.endsWith('.png'));
-  if(pf)document.getElementById('result-preview').src='https://jphic-kit-api.onrender.com/download/'+jobId+'/'+pf;
-  const labels={'cutline.svg':['📥 .SVG','칼선레이어'],'preview.png':['📥 .PNG','투명배경']};
-  const grid=document.getElementById('download-grid');
-  const resetBtn=grid.querySelector('.reset-btn');
-  grid.innerHTML='';
-  files.filter(f=>f==='cutline.svg'||f==='preview.png').forEach(f=>{
-    const[label,desc]=labels[f]||['📥 '+f.split('.').pop().toUpperCase(),''];
-    const a=document.createElement('a'); a.className='dl-btn';
-    a.href='https://jphic-kit-api.onrender.com/download/'+jobId+'/'+f; a.download=f;
-    a.addEventListener('click',function(){ logStat('dl'); bumpStat('dl'); });
-    a.innerHTML=`<span style="font-weight:800">${label}</span><span style="font-size:13px;opacity:.7">${desc}</span>`;
-    grid.appendChild(a);
-  });
-  const rb=document.createElement('button'); rb.className='reset-btn'; rb.onclick=resetAll; rb.textContent='↩ 새 이미지';
-  grid.appendChild(rb);
-  renderReviews(SAMPLES);
-  logStat('gen'); bumpStat('gen');
-  setTimeout(function(){ document.getElementById('result-card').scrollIntoView({behavior:'smooth',block:'start'}); }, 150);
-}
-
-function resetAll(){ resetFile(); ['status-card','result-card','jphic-card','review-card'].forEach(id=>document.getElementById(id).style.display='none'); hideError(); doneSet.clear(); openAcc=null; document.getElementById('diag-section').style.display='none'; document.getElementById('run-btn').style.display='none'; }
-function resetFile(){ selectedFile=null; fileInput.value=''; dropZone.style.display='block'; document.getElementById('file-preview').style.display='none'; }
-function showError(msg){ const el=document.getElementById('error-msg'); el.textContent='오류: '+msg; el.style.display='block'; document.getElementById('status-card').style.display='none'; document.getElementById('run-btn').disabled=false; }
-function hideError(){ document.getElementById('error-msg').style.display='none'; }
-function delay(ms){ return new Promise(r=>setTimeout(r,ms)); }
-
-let starVal=0, selTag='';
-let SAMPLES=[
-  {star:5,tag:'납품용',text:'칼선 자동으로 뽑히니 시간 절반 줄었어요',date:'2025.05.22',link:'jan****@****.com'},
-  {star:4,tag:'인쇄물',text:'CMYK 변환 미리보기 있어서 믿음직해요',date:'2025.05.21',link:'@insta****'},
-  {star:5,tag:'SNS',text:'배경삭제 퀄이 생각보다 괜찮네요',date:'2025.05.20',link:''},
-];
-function starStr(n){return'★'.repeat(n)+'☆'.repeat(5-n)}
-
-// ── 라이브 카운터 ──────────────────────────────
-// BASE = 정직한 시작 오프셋. 그동안 실제 사용량 추정치로 바꿔 (0이면 지금부터 카운트)
-const STAT_BASE={gen:0, dl:0, rv:0};
-let statNum={gen:0, dl:0, rv:0};
-function paintStats(){
-  var g=document.getElementById('gen-count'); if(g) g.textContent=statNum.gen.toLocaleString();
-  var d=document.getElementById('dl-count-r'); if(d) d.textContent=statNum.dl.toLocaleString();
-  var r=document.getElementById('rv-count'); if(r) r.textContent=statNum.rv.toLocaleString();
-}
-function setStat(k,v){ statNum[k]=STAT_BASE[k]+(parseInt(v,10)||0); paintStats(); }
-function bumpStat(k){ statNum[k]+=1; paintStats(); }
-function logStat(type){
-  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},
-    body:JSON.stringify({type:type})}).catch(()=>{});
-}
-
-function loadStats(){
-  var cb='__rv'+Date.now();
-  window[cb]=function(d){
-    d=d||{};
-    if(d.reviews&&d.reviews.length){
-      SAMPLES=d.reviews.map(function(r){return {star:r.star,tag:r.tag,text:r.comment,date:r.date,link:r.link};});
+  function selectCutline(mode) {
+    if (cutlineMode === mode) {
+      cutlineMode = null;
+      document.getElementById('cutlineBasicTag').classList.remove('active');
+      document.getElementById('cutlineOffsetTag').classList.remove('active');
+      document.getElementById('offsetAccordion').classList.remove('open');
+      document.getElementById('offsetArrow').textContent = '▶';
+      selectedOptions.delete('cutline');
+    } else {
+      cutlineMode = mode;
+      const isBasic = mode==='basic';
+      document.getElementById('cutlineBasicTag').classList.toggle('active', isBasic);
+      document.getElementById('cutlineOffsetTag').classList.toggle('active', !isBasic);
+      document.getElementById('offsetAccordion').classList.toggle('open', !isBasic);
+      document.getElementById('offsetArrow').textContent = !isBasic ? '▼' : '▶';
+      selectedOptions.set('cutline', mode);
     }
-    renderReviews(SAMPLES);
-    setStat('gen', d.gen);
-    setStat('dl', d.dl);
-    setStat('rv', d.reviewCount!=null ? d.reviewCount : (d.reviews?d.reviews.length:0));
-    delete window[cb];
-  };
-  var s=document.createElement('script');
-  s.src=SCRIPT_URL+'?callback='+cb+'&t='+Date.now();
-  s.onerror=function(){ renderReviews(SAMPLES); };
-  document.body.appendChild(s);
-}
-function renderReviews(list){
-  document.getElementById('rv-list').innerHTML=list.map(r=>`
-    <div class="rv-card">
-      <div class="rv-top">
-        <span class="rv-stars">${starStr(r.star)}</span>
-        <span class="rv-pill">${r.tag}</span>
-        ${r.text?`<span class="rv-comment">${r.text}</span>`:''}
-        ${r.link?`<span class="rv-link-masked">${maskLink(r.link)}</span>`:''}
-        <span class="rv-date">${r.date}</span>
-      </div>
-    </div>`).join('');
-}
-function setStar(v){ starVal=v; document.querySelectorAll('.star').forEach(s=>s.classList.toggle('on',parseInt(s.dataset.v)<=v)); checkRv(); }
-function toggleTag(el){ document.querySelectorAll('#tag-row .rv-tag').forEach(t=>t.classList.remove('on')); el.classList.add('on'); selTag=el.textContent; checkRv(); }
-function onRvInput(){ const v=document.getElementById('rv-msg').value.length; const cc=document.getElementById('rv-cc'); cc.textContent=v+' / 30'; cc.classList.toggle('over',v>=30); checkRv(); }
-function checkRv(){ document.getElementById('rv-submit').disabled=!(starVal&&selTag&&document.getElementById('rv-msg').value.trim()); }
-function maskLink(link){
-  if(!link||link.length<4) return link;
-  return link.slice(0,4)+'*'.repeat(Math.min(link.length-4,6));
-}
+    updateGenerateBtn();
+  }
 
-function submitReview(){
-  const msg=document.getElementById('rv-msg').value.trim();
-  const link=document.getElementById('rv-link').value.trim();
-  const now=new Date();
-  const d=`${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
-  SAMPLES.unshift({star:starVal,tag:selTag,text:msg,date:d,link:link});
-  renderReviews(SAMPLES);
-  bumpStat('rv');
-  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},
-    body:JSON.stringify({date:d,tool:'kit-image',star:starVal,tag:selTag,comment:msg,link:link})
-  }).catch(()=>{});
-  document.getElementById('rv-submit').disabled=true;
-  document.getElementById('rv-toast').classList.add('show');
-  document.getElementById('rv-msg').value=''; document.getElementById('rv-cc').textContent='0 / 30';
-  document.getElementById('rv-link').value='';
-  starVal=0; selTag='';
-  document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));
-  document.querySelectorAll('#tag-row .rv-tag').forEach(t=>t.classList.remove('on'));
-}
-loadStats();  // 페이지 진입 시 카운터·후기 로드
+  function toggleMockup(el) {
+    mockupOpen = !mockupOpen;
+    document.getElementById('mockupUpload').classList.toggle('open', mockupOpen);
+    document.getElementById('mockupArrow').textContent = mockupOpen ? '▼' : '▶';
+    el.classList.toggle('active', mockupOpen);
+    if (!mockupOpen) selectedOptions.delete('mockup');
+    updateGenerateBtn();
+  }
+
+  function handleBgUpload(e) {
+    bgFile = e.target.files[0];
+    if (bgFile) selectedOptions.set('mockup',true);
+    updateGenerateBtn();
+  }
+
+  function updateGenerateBtn() {
+    const btn = document.getElementById('generateBtn');
+    const count = document.getElementById('generateCount');
+    const n = selectedOptions.size;
+    const hasFile = !!uploadedFile;
+    btn.disabled = !hasFile;
+    if (!hasFile) count.textContent = '이미지를 업로드하세요';
+    else count.textContent = n > 0 ? `${n}개 옵션 선택됨 · 1회 처리` : '옵션을 선택하세요';
+  }
+
+  function handleGenerate() {
+    if (!uploadedFile) return;
+    if (isProcessing) {
+      document.getElementById('queueNotice').classList.add('show');
+      setTimeout(() => document.getElementById('queueNotice').classList.remove('show'), 3000);
+      return;
+    }
+    if (selectedOptions.size === 0) return;
+    isProcessing = true; isGenerated = false;
+    document.getElementById('dlBtn').disabled = true;
+    document.getElementById('processing').classList.add('show');
+    // TODO: processor.py API 호출 (1회)
+    setTimeout(() => {
+      document.getElementById('processing').classList.remove('show');
+      isProcessing = false; isGenerated = true;
+      document.getElementById('dlBtn').disabled = false;
+      // TODO: Google Sheets 로깅
+    }, 2500);
+  }
+
+  function handleDownload() {
+    if (!isGenerated) return;
+    const a = document.createElement('a');
+    a.href = document.getElementById('previewImg').src;
+    a.download = 'jphickit_result.png';
+    a.click();
+  }
+
+  const cArea = document.getElementById('canvasArea');
+  cArea.addEventListener('dragover', e => e.preventDefault());
+  cArea.addEventListener('drop', e => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) {
+      uploadedFile = file;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        document.getElementById('previewImg').src = ev.target.result;
+        document.getElementById('uploadZone').style.display = 'none';
+        document.getElementById('previewArea').classList.add('active');
+        updateGenerateBtn();
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 </script>
 </body>
 </html>
