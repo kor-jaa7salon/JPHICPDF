@@ -107,9 +107,10 @@ input,textarea { -webkit-user-select:text!important; user-select:text!important;
 .upload-hint { font-size:0.85rem; color:var(--text-dim); }
 .upload-conditions { font-size:0.78rem; color:var(--text-dim); margin-top:4px; line-height:1.6; opacity:0.7; }
 
-.preview-area { display:none; width:100%; min-height:480px; align-items:center; justify-content:center; position:relative; }
+.preview-area { display:none; width:100%; min-height:480px; align-items:center; justify-content:center; position:relative; background:#e8e8ec; border-radius:var(--radius); }
 .preview-area.active { display:flex; }
 .preview-img { max-width:88%; max-height:440px; object-fit:contain; border-radius:8px; }
+.cutline-overlay { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; }
 
 .queue-notice { display:none; position:absolute; bottom:24px; left:50%; transform:translateX(-50%); background:rgba(0,187,172,0.12); border:1px solid var(--mc); color:var(--mc); font-size:0.85rem; font-weight:500; padding:9px 20px; border-radius:50px; white-space:nowrap; z-index:10; }
 .queue-notice.show { display:block; }
@@ -192,7 +193,7 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
 .generate-btn { width:100%; padding:15px; background:var(--mc) !important; color:#000 !important; border:none; border-radius:var(--radius-sm); font-family:inherit; font-size:1rem; font-weight:900; cursor:pointer; transition:all 0.2s; letter-spacing:-0.01em; display:flex; align-items:center; justify-content:center; gap:10px; }
 .generate-btn:hover { background:var(--mc-hover) !important; box-shadow:0 4px 20px var(--border-glow); }
 .generate-btn:disabled { background:rgba(255,255,255,0.05) !important; color:var(--text-dim) !important; border:1px solid var(--border); cursor:not-allowed; box-shadow:none; }
-.token-badge { font-size:0.72rem; font-weight:700; background:rgba(0,0,0,0.25); color:#000; padding:2px 8px; border-radius:20px; letter-spacing:0; }
+.token-badge { font-size:0.72rem; font-weight:800; background:rgba(0,0,0,0.35); color:#fff; padding:2px 8px; border-radius:20px; letter-spacing:0; border:1px solid rgba(255,255,255,0.4); }
 .generate-count { font-size:0.8rem; color:var(--text-dim); text-align:center; padding-top:7px; font-weight:500; }
 
 /* 견적 CTA — 흰 배경 + 대시 이동 모션 */
@@ -213,7 +214,8 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
   background-size: 12px 2px, 12px 2px, 2px 12px, 2px 12px;
   background-position: 0 0, 0 100%, 0 0, 100% 0;
   background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-  animation: borderDash 1.8s linear infinite;
+  animation: borderDash 12s linear infinite;
+  border-radius: 18px;
 }
 .invoice-cta:hover { box-shadow:0 2px 16px rgba(0,187,172,0.25); }
 .invoice-cta-icon { font-size:1.3rem; color:var(--mc); flex-shrink:0; }
@@ -349,6 +351,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
         </div>
         <div class="preview-area" id="previewArea">
           <img class="preview-img" id="previewImg" alt="">
+          <svg class="cutline-overlay" id="cutlineOverlay" style="display:none"></svg>
         </div>
         <div class="queue-notice" id="queueNotice">⏳ 다른 작업 처리 중입니다. 잠시 후 자동으로 시작됩니다.</div>
       </div>
@@ -410,8 +413,8 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     <a href="https://jphic.co.kr/invoice" target="_blank" class="invoice-cta">
       <div class="invoice-cta-icon">✦</div>
       <div>
-        <div class="invoice-cta-title">벡터화 · 목업이 필요하신가요?</div>
-        <div class="invoice-cta-sub">예상견적으로 의뢰 신청 →</div>
+        <div class="invoice-cta-title">전문 디자인 작업이 필요하신가요?</div>
+        <div class="invoice-cta-sub">제작 의뢰하러 가기 →</div>
       </div>
     </a>
 
@@ -515,6 +518,8 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   function resetCanvas() {
     uploadedFile = null; isGenerated = false;
     document.getElementById('previewImg').src = '';
+    const ov = document.getElementById('cutlineOverlay');
+    if (ov) { ov.innerHTML = ''; ov.style.display = 'none'; }
     document.getElementById('uploadZone').style.display = 'flex';
     document.getElementById('previewArea').classList.remove('active');
     document.getElementById('dlBtn').disabled = true;
@@ -707,7 +712,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
         if (cl === 'offset') fd.append('offset_mm', document.getElementById('offsetSlider').value);
 
         const res = await fetch(`${API_URL}/process`, { method: 'POST', body: fd });
-        console.log('[KIT] 서버 응답 status:', res.status);
+        // 서버 응답 확인
         if (!res.ok) throw new Error(`서버 오류 ${res.status}`);
         const data = await res.json();
         if (data.error) throw new Error(data.error);
@@ -718,6 +723,30 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
           document.getElementById('previewArea').classList.add('active');
         }
         resultFiles = data.files || {};
+
+        // 칼선 미리보기 오버레이
+        if (resultFiles.cutline_svg) {
+          const svgStr = atob(resultFiles.cutline_svg);
+          const parser = new DOMParser();
+          const svgDoc = parser.parseFromString(svgStr, 'image/svg+xml');
+          const srcSvg = svgDoc.documentElement;
+          const vb = srcSvg.getAttribute('viewBox') || `0 0 ${srcSvg.getAttribute('width')} ${srcSvg.getAttribute('height')}`;
+          const overlay = document.getElementById('cutlineOverlay');
+          // 칼선 path만 추출 (이미지 레이어 제외)
+          const paths = srcSvg.querySelectorAll('path[stroke="#FF00FF"], path[fill="none"]');
+          overlay.innerHTML = '';
+          overlay.setAttribute('viewBox', vb);
+          overlay.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+          paths.forEach(p => {
+            const np = p.cloneNode(true);
+            np.setAttribute('stroke', '#00BBAC');
+            np.setAttribute('stroke-width', '2');
+            np.setAttribute('fill', 'none');
+            np.setAttribute('vector-effect', 'non-scaling-stroke');
+            overlay.appendChild(np);
+          });
+          overlay.style.display = 'block';
+        }
       }
 
       isGenerated = true;
