@@ -343,9 +343,6 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
         <div class="tag-item active" id="tag-color" onclick="toggleTag(this,'color')">
           <div class="tag-check">✓</div><span><span class="tag-hash">#</span>인쇄용 색상 변환</span>
         </div>
-        <div class="tag-item active" id="tag-upscale" onclick="toggleTag(this,'upscale')">
-          <div class="tag-check">✓</div><span><span class="tag-hash">#</span>해상도 업스케일</span>
-        </div>
         <div class="tag-item active" id="tag-removebg" onclick="toggleTag(this,'removebg')">
           <div class="tag-check">✓</div><span><span class="tag-hash">#</span>배경 지우기</span>
         </div>
@@ -481,7 +478,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   let bgFile = null;
   let cutlineMode = null;
   let mockupOpen = false;
-  const selectedOptions = new Map([['color',true],['upscale',true],['removebg',true]]);
+  const selectedOptions = new Map([['color',true],['removebg',true]]);
 
   function handleUpload(e) {
     const file = e.target.files[0];
@@ -504,9 +501,9 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     document.getElementById('previewArea').classList.remove('active');
     document.getElementById('dlBtn').disabled = true;
     document.querySelectorAll('.tag-item').forEach(t => t.classList.remove('active'));
-    ['tag-color','tag-upscale','tag-removebg'].forEach(id => document.getElementById(id).classList.add('active'));
+    ['tag-color','tag-removebg'].forEach(id => document.getElementById(id).classList.add('active'));
     selectedOptions.clear();
-    selectedOptions.set('color',true); selectedOptions.set('upscale',true); selectedOptions.set('removebg',true);
+    selectedOptions.set('color',true); selectedOptions.set('removebg',true);
     cutlineMode = null;
     document.getElementById('offsetAccordion').classList.remove('open');
     document.getElementById('offsetArrow').textContent = '▶';
@@ -599,7 +596,6 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
 
       // 옵션 매핑
       fd.append('do_color',     selectedOptions.has('color')    ? 'true' : 'false');
-      fd.append('do_upscale',   selectedOptions.has('upscale')  ? 'true' : 'false');
       fd.append('do_removebg',  selectedOptions.has('removebg') ? 'true' : 'false');
       fd.append('do_vectorize', selectedOptions.has('vectorize')? 'true' : 'false');
       fd.append('flat_bottom',  selectedOptions.has('flatten')  ? 'true' : 'false');
@@ -702,7 +698,6 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   const BEFORE = '/img/kit/__sample_before.png';
   const samples = [
     { name:'인쇄용 색상 변환', type:'RGB → CMYK 근사 · PNG',      after:'/img/kit/__sample_cmyk.png' },
-    { name:'해상도 업스케일',  type:'4× 고해상도 · PNG',            after:'/img/kit/__sample_upscale.png' },
     { name:'배경 제거',        type:'투명 배경 · PNG',               after:'/img/kit/__sample_removebg.png' },
     { name:'벡터화',           type:'확대해도 깨지지 않는 · SVG',    after:'/img/kit/__sample_vector.png' },
     { name:'칼선 기본',        type:'스티커·굿즈 인쇄용 · SVG',      after:'/img/kit/__sample_cutline.png' },
