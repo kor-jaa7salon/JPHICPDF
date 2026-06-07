@@ -352,7 +352,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     <div class="option-group">
       <div class="option-group-header">
         <span class="group-label">벡터화</span>
-        <span class="group-beta">베타 무료</span>
+        <span class="group-beta">베타기간 무료</span>
       </div>
       <div class="option-tags">
         <div class="tag-item" id="tag-vectorize" onclick="toggleTag(this,'vectorize')">
@@ -364,7 +364,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     <div class="option-group">
       <div class="option-group-header">
         <span class="group-label">칼선</span>
-        <span class="group-beta">베타 무료</span>
+        <span class="group-beta">베타기간 무료</span>
       </div>
       <div class="option-tags">
         <div class="tag-item" id="cutlineBasicTag" onclick="selectCutline('basic')">
@@ -391,7 +391,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     <div class="option-group">
       <div class="option-group-header">
         <span class="group-label">목업</span>
-        <span class="group-beta">베타 무료</span>
+        <span class="group-beta">베타기간 무료</span>
       </div>
       <div class="option-tags">
         <div class="tag-item" id="mockupTag" onclick="toggleMockup(this)">
@@ -410,7 +410,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
 
     <div class="generate-wrap">
       <button class="generate-btn" id="generateBtn" onclick="handleGenerate()" disabled>
-        생성하기 <span class="token-badge" id="tokenBadge">베타 무료</span>
+        생성하기 <span class="token-badge" id="tokenBadge">베타기간 무료</span>
       </button>
       <div class="generate-count" id="generateCount">이미지를 업로드하세요</div>
     </div>
@@ -562,14 +562,39 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     else count.textContent = n > 0 ? `${n}개 옵션 선택됨 · 1회 처리` : '옵션을 선택하세요';
   }
 
-  const API_URL = 'https://jphic-kit-api.onrender.com'; // Render 직접 호출
-
-  // 페이지 로드 시 Render 웨이크업 ping (콜드스타트 방지)
+  const API_URL = 'https://jphic-kit-api.onrender.com';
   fetch(API_URL + '/health').catch(() => {});
-  // Google Sheets 로깅 Apps Script URL (배포 후 교체)
   const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx6WVoy3DqUSWbvLD8HcWuZNSpb4urh2pSqvBxNMTU6Gl0npymonosRNwMxtwCddklg/exec';
 
-  let resultFiles = {}; // 생성 결과 base64 파일 저장
+  let resultFiles = {};
+  let removedBgBlob = null; // 브라우저 배경제거 결과 저장
+
+  // @imgly/background-removal 동적 로드
+  let imglyModule = null;
+  async function loadImgly() {
+    if (imglyModule) return imglyModule;
+    const mod = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/+esm');
+    imglyModule = mod;
+    return mod;
+  }
+  // 페이지 로드 시 미리 로드
+  loadImgly().catch(() => {});
+
+  // 브라우저에서 배경제거
+  async function removeBgInBrowser(file) {
+    const { removeBackground } = await loadImgly();
+    document.getElementById('processingSub').textContent = '배경 제거 중 (브라우저 처리)...';
+    const blob = await removeBackground(file, {
+      publicPath: 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/',
+      progress: (key, current, total) => {
+        if (total > 0) {
+          const pct = Math.round(current / total * 100);
+          document.getElementById('processingSub').textContent = `배경 제거 중... ${pct}%`;
+        }
+      }
+    });
+    return blob; // 투명 PNG blob
+  }
 
   async function handleGenerate() {
     if (!uploadedFile) return;
@@ -580,60 +605,73 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     }
     if (selectedOptions.size === 0) return;
 
-    isProcessing = true; isGenerated = false; resultFiles = {};
+    isProcessing = true; isGenerated = false; resultFiles = {}; removedBgBlob = null;
     document.getElementById('dlBtn').disabled = true;
     document.getElementById('processing').classList.add('show');
     document.getElementById('processingSub').textContent = '';
 
-    // 10초 후 콜드스타트 안내
     const coldTimer = setTimeout(() => {
-      document.getElementById('processingSub').textContent = '서버 시작 중... 최대 1분 소요될 수 있어요';
+      if (document.getElementById('processingSub').textContent === '')
+        document.getElementById('processingSub').textContent = '서버 시작 중... 최대 1분 소요될 수 있어요';
     }, 10000);
 
     try {
-      const fd = new FormData();
-      fd.append('file', uploadedFile);
+      let fileToSend = uploadedFile;
 
-      // 옵션 매핑
-      fd.append('do_color',     selectedOptions.has('color')    ? 'true' : 'false');
-      fd.append('do_removebg',  selectedOptions.has('removebg') ? 'true' : 'false');
-      fd.append('do_vectorize', selectedOptions.has('vectorize')? 'true' : 'false');
-      fd.append('flat_bottom',  selectedOptions.has('flatten')  ? 'true' : 'false');
-      fd.append('do_mockup',    selectedOptions.has('mockup')   ? 'true' : 'false');
-
-      // 칼선
-      const cl = selectedOptions.get('cutline') || 'none';
-      fd.append('cutline', cl);
-      if (cl === 'offset') {
-        fd.append('offset_mm', document.getElementById('offsetSlider').value);
+      // ── 배경제거: 브라우저에서 처리 ──────────────────────
+      if (selectedOptions.has('removebg')) {
+        try {
+          const bgBlob = await removeBgInBrowser(uploadedFile);
+          removedBgBlob = bgBlob;
+          // 미리보기 즉시 업데이트
+          const previewUrl = URL.createObjectURL(bgBlob);
+          document.getElementById('previewImg').src = previewUrl;
+          document.getElementById('uploadZone').style.display = 'none';
+          document.getElementById('previewArea').classList.add('active');
+          // 서버 전송용 파일 교체 (투명PNG)
+          fileToSend = new File([bgBlob], 'removed_bg.png', { type: 'image/png' });
+        } catch (e) {
+          console.warn('브라우저 배경제거 실패, 원본 전송:', e);
+        }
       }
 
-      // 목업 배경
-      if (bgFile) fd.append('mockup_bg', bgFile);
+      // ── 서버 처리가 필요한 옵션만 있을 때 API 호출 ──────
+      const needsServer = selectedOptions.has('color') ||
+                          selectedOptions.has('vectorize') ||
+                          selectedOptions.has('cutline') ||
+                          selectedOptions.has('flatten') ||
+                          selectedOptions.has('mockup');
 
-      const res = await fetch(`${API_URL}/process`, { method: 'POST', body: fd });
-      if (!res.ok) throw new Error(`서버 오류 ${res.status}`);
-      const data = await res.json();
+      if (needsServer) {
+        document.getElementById('processingSub').textContent = '서버 처리 중...';
+        const fd = new FormData();
+        fd.append('file', fileToSend);
+        fd.append('do_color',     selectedOptions.has('color')     ? 'true' : 'false');
+        fd.append('do_removebg',  'false'); // 브라우저에서 이미 처리
+        fd.append('do_vectorize', selectedOptions.has('vectorize') ? 'true' : 'false');
+        fd.append('flat_bottom',  selectedOptions.has('flatten')   ? 'true' : 'false');
+        fd.append('do_mockup',    selectedOptions.has('mockup')    ? 'true' : 'false');
+        const cl = selectedOptions.get('cutline') || 'none';
+        fd.append('cutline', cl);
+        if (cl === 'offset') fd.append('offset_mm', document.getElementById('offsetSlider').value);
+        if (bgFile) fd.append('mockup_bg', bgFile);
 
-      if (data.error) throw new Error(data.error);
+        const res = await fetch(`${API_URL}/process`, { method: 'POST', body: fd });
+        if (!res.ok) throw new Error(`서버 오류 ${res.status}`);
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
 
-      // 미리보기 업데이트
-      if (data.preview) {
-        document.getElementById('previewImg').src = 'data:image/png;base64,' + data.preview;
-        document.getElementById('uploadZone').style.display = 'none';
-        document.getElementById('previewArea').classList.add('active');
+        if (data.preview) {
+          document.getElementById('previewImg').src = 'data:image/png;base64,' + data.preview;
+          document.getElementById('uploadZone').style.display = 'none';
+          document.getElementById('previewArea').classList.add('active');
+        }
+        resultFiles = data.files || {};
       }
 
-      resultFiles = data.files || {};
       isGenerated = true;
       document.getElementById('dlBtn').disabled = false;
-
-      // Google Sheets 로깅
-      _logToSheets({
-        options: [...selectedOptions.keys()].join(','),
-        filename: uploadedFile.name,
-        downloaded: false
-      });
+      _logToSheets({ options: [...selectedOptions.keys()].join(','), filename: uploadedFile.name, downloaded: false });
 
     } catch (err) {
       alert('처리 중 오류가 발생했습니다: ' + err.message);
@@ -647,20 +685,26 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   function handleDownload() {
     if (!isGenerated) return;
 
-    // 우선순위: cutline_svg → result_png → preview
+    // 배경제거만 한 경우 → blob 직접 다운로드
+    if (removedBgBlob && Object.keys(resultFiles).length === 0) {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(removedBgBlob);
+      a.download = 'jphickit_removebg.png';
+      a.click();
+      _logToSheets({ options: [...selectedOptions.keys()].join(','), filename: uploadedFile.name, downloaded: true });
+      return;
+    }
+
     const preferOrder = ['cutline_svg', 'print_svg', 'vector_svg', 'mockup_png', 'result_png'];
     let b64 = null, ext = 'png', fname = 'jphickit_result';
-
     for (const key of preferOrder) {
       if (resultFiles[key]) {
         b64 = resultFiles[key];
         ext = key.endsWith('svg') ? 'svg' : key.endsWith('pdf') ? 'pdf' : 'png';
-        fname = `jphickit_${key.replace('_', '.')}`;
+        fname = `jphickit_${key.replace('_','.')}`;
         break;
       }
     }
-
-    // fallback: 미리보기 이미지
     if (!b64) {
       const a = document.createElement('a');
       a.href = document.getElementById('previewImg').src;
@@ -668,18 +712,11 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
       a.click();
       return;
     }
-
     const a = document.createElement('a');
     a.href = `data:application/${ext};base64,${b64}`;
     a.download = fname;
     a.click();
-
-    // 다운로드 로깅
-    _logToSheets({
-      options: [...selectedOptions.keys()].join(','),
-      filename: uploadedFile.name,
-      downloaded: true
-    });
+    _logToSheets({ options: [...selectedOptions.keys()].join(','), filename: uploadedFile.name, downloaded: true });
   }
 
   function _logToSheets(data) {
@@ -697,12 +734,12 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   // ── 샘플 비포/애프터 슬라이더 ─────────────────────────────
   const BEFORE = '/img/kit/__sample_before.png';
   const samples = [
-    { name:'인쇄용 색상 변환', type:'RGB → CMYK 근사 · PNG',      after:'/img/kit/__sample_cmyk.png' },
+    { name:'인쇄용 색상 변환', type:'RGB → CMYK · PNG',      after:'/img/kit/__sample_cmyk.png' },
     { name:'배경 제거',        type:'투명 배경 · PNG',               after:'/img/kit/__sample_removebg.png' },
     { name:'벡터화',           type:'확대해도 깨지지 않는 · SVG',    after:'/img/kit/__sample_vector.png' },
     { name:'칼선 기본',        type:'스티커·굿즈 인쇄용 · SVG',      after:'/img/kit/__sample_cutline.png' },
     { name:'칼선 옵셋',        type:'흰 테두리 오프셋 · SVG',        after:'/img/kit/__sample_offset.png' },
-    { name:'칼선 바닥 평평',   type:'등신대 스탠딩 · SVG',           after:'/img/kit/__sample_pop.png' },
+    { name:'칼선 바닥 평평',   type:'등신대 스탠딩용 · SVG',           after:'/img/kit/__sample_pop.png' },
     { name:'목업',             type:'내 배경으로 합성 · PNG',        after:'/img/kit/__sample_mockup.png' },
   ];
 
