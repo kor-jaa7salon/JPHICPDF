@@ -114,6 +114,7 @@ input,textarea { -webkit-user-select:text!important; user-select:text!important;
   border-radius:var(--radius); }
 .preview-area.active { display:flex; }
 .preview-img { max-width:88%; max-height:440px; object-fit:contain; border-radius:8px; flex-shrink:0; }
+.preview-img-wrap { position:relative; display:inline-flex; align-items:center; justify-content:center; }
 .cutline-overlay { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; }
 
 .queue-notice { display:none; position:absolute; bottom:24px; left:50%; transform:translateX(-50%); background:rgba(0,187,172,0.12); border:1px solid var(--mc); color:var(--mc); font-size:0.85rem; font-weight:500; padding:9px 20px; border-radius:50px; white-space:nowrap; z-index:10; }
@@ -218,8 +219,9 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
 .sample-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:all 0.2s; cursor:pointer; }
 .sample-card:hover { border-color:var(--border-glow); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
 
-.sample-title { padding:16px 20px 10px; font-size:1.15rem; font-weight:800; color:var(--text-main); border-bottom:1px solid var(--border); }
-.sample-title span { color:var(--mc); margin-right:6px; }
+.sample-title { padding:16px 20px 10px; font-size:1.15rem; font-weight:800; color:var(--text-main); border-bottom:1px solid var(--border); display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+.sample-title span { color:var(--mc); margin-right:2px; }
+.sample-type-inline { font-size:0.8rem; color:var(--text-dim); font-weight:500; }
 
 /* 비포/애프터 슬라이더 */
 .ba-wrap { position:relative; width:100%; aspect-ratio:660/480; overflow:hidden; cursor:ew-resize; user-select:none!important; background:#000; }
@@ -227,8 +229,8 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
 .ba-after { position:absolute; inset:0; }
 .ba-after img { width:100%; height:100%; object-fit:cover; display:block; }
 /* 비포: clip만 변화, 이미지는 항상 전체 크기 유지 */
-.ba-before { position:absolute; inset:0; overflow:hidden; }
-.ba-before img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; display:block; }
+.ba-before { position:absolute; top:0; left:0; bottom:0; overflow:hidden; }
+.ba-before img { position:absolute; top:0; left:0; height:100%; object-fit:cover; display:block; width:var(--ba-full-w,100%); max-width:none; }
 .ba-divider { position:absolute; top:0; bottom:0; width:2px; background:rgba(255,255,255,0.9); cursor:ew-resize; z-index:3; }
 .ba-handle {
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
@@ -325,8 +327,10 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
           <div class="upload-conditions">JPG · PNG · SVG · 최대 2MB<br>흰색 배경 이미지 권장</div>
         </div>
         <div class="preview-area" id="previewArea">
-          <img class="preview-img" id="previewImg" alt="">
-          <svg class="cutline-overlay" id="cutlineOverlay" style="display:none"></svg>
+          <div class="preview-img-wrap" id="previewImgWrap">
+            <img class="preview-img" id="previewImg" alt="">
+            <svg class="cutline-overlay" id="cutlineOverlay" style="display:none"></svg>
+          </div>
         </div>
         <div class="queue-notice" id="queueNotice">⏳ 다른 작업 처리 중입니다. 잠시 후 자동으로 시작됩니다.</div>
       </div>
@@ -736,13 +740,13 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     } catch (err) {
       console.error('[JPHIC KIT 오류]', err);
       // Artifacts CSP 차단 시에도 dlBtn 활성화 유지
+      document.getElementById('dlBtn').disabled = false;
     } finally {
       clearTimeout(coldTimer);
-      // 오류 시에도 다운로드 버튼은 업로드 파일 있으면 활성화
       if (uploadedFile) {
+        isGenerated = true;
         document.getElementById('dlBtn').disabled = false;
       }
-      // 최소 1.5초 표시 보장 (콜드스타트 인식용)
       const elapsed = Date.now() - _startTime;
       const wait = Math.max(0, 1500 - elapsed);
       setTimeout(() => {
@@ -818,19 +822,13 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     const card = document.createElement('div');
     card.className = 'sample-card';
     card.innerHTML = `
-      <div class="sample-title"><span>#</span>${s.name}</div>
+      <div class="sample-title"><span>#</span>${s.name} <span class="sample-type-inline">${s.type}</span></div>
       <div class="ba-wrap" data-pos="50">
         <div class="ba-after"><img src="${s.after}" alt="${s.name} 후"></div>
         <div class="ba-before" style="width:50%"><img style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;" src="${BEFORE}" alt="원본"></div>
         <div class="ba-divider" style="left:50%">
           <div class="ba-handle">‹ ›</div>
         </div>
-        <span class="ba-label-before">원본</span>
-        <span class="ba-label-after">${s.name}</span>
-      </div>
-      <div class="sample-info">
-        <div class="sample-name">${s.name}</div>
-        <div class="sample-type">${s.type}</div>
       </div>`;
     grid.appendChild(card);
   });
@@ -846,6 +844,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
       let pct = Math.min(Math.max((x - rect.left) / rect.width * 100, 2), 98);
       before.style.width = pct + '%';
       divider.style.left = pct + '%';
+      wrap.style.setProperty('--ba-full-w', wrap.offsetWidth + 'px');
     }
 
     wrap.addEventListener('mousedown', e => { dragging = true; setPos(e.clientX); });
