@@ -376,10 +376,10 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 @media (max-width:560px){.form-grid{grid-template-columns:1fr}}
 .field{display:flex;flex-direction:column;gap:5px}
 .field.full{grid-column:1/-1}
-.field label{font-size:13px;color:var(--ink-mute);font-weight:500;letter-spacing:.02em}
+.field label{font-size:12px;color:var(--ink-mute);font-weight:500;letter-spacing:.02em}
 .field label .req{color:var(--danger);margin-left:2px}
 .field label .auto-marker{
-  font-size:11px;color:var(--accent-deep);font-weight:600;
+  font-size:9px;color:var(--accent-deep);font-weight:600;
   background:var(--accent-soft);padding:1px 6px;border-radius:2px;
   margin-left:4px;animation:fadeIn .3s ease;
 }
@@ -595,10 +595,9 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
     <div class="notes-area">
       <textarea id="notes" placeholder="글 작성"></textarea>
       <div style="background:#F4F6F8;border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;font-size:12.5px;color:var(--ink-mute);line-height:1.7;">
-        <strong style="color:var(--ink);font-size:12px;letter-spacing:.05em;">✦ JPHIC KIT 고급 작업 의뢰 가능</strong><br>
+        <strong style="color:var(--ink);font-size:14px;letter-spacing:.05em;">✦ JPHIC KIT 고급 작업 의뢰 가능</strong><br>
         · <strong style="color:var(--ink-soft)">벡터화</strong> — 컬러 이미지 트레이싱, AI 일러스트 SVG 변환, 다중 색상 레이어 분리<br>
         · <strong style="color:var(--ink-soft)">목업</strong> — 제품·굿즈 배경 합성, 브랜드 목업 시트 제작, 다중 배경 변형<br>
-        <span style="color:var(--ink-faint)">해당 작업 의뢰 시 요청사항에 작업 종류와 수량을 명시해 주세요.</span>
       </div>
     </div>
   </section>
@@ -648,8 +647,8 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 
       <div class="form-grid">
         <div class="field">
-          <label>회사명 / 이름 <span class="req">*</span></label>
-          <input type="text" id="name" placeholder="홍길동 / OO상사">
+          <label>담당자명 <span class="req">*</span></label>
+          <input type="text" id="name" placeholder="이름">
         </div>
         <div class="field">
           <label>연락처 <span class="req">*</span></label>
@@ -664,20 +663,20 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
           <input type="text" id="bizNo" placeholder="000-00-00000">
         </div>
         <div class="field">
-          <label>대표자 성명 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
-          <input type="text" id="representative" placeholder="대표자 이름">
+          <label>대표자 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
+          <input type="text" id="representative" placeholder="대표자">
         </div>
         <div class="field">
-          <label>사업장 주소 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
-          <input type="text" id="address" placeholder="사업장 소재지 주소">
+          <label>사업장 소재지 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
+          <input type="text" id="address" placeholder="주소 ">
         </div>
         <div class="field">
           <label>업태</label>
-          <input type="text" id="businessType" placeholder="예: 서비스업">
+          <input type="text" id="businessType" placeholder="업태">
         </div>
         <div class="field">
           <label>종목 (업종)</label>
-          <input type="text" id="item" placeholder="예: 디자인·브랜딩">
+          <input type="text" id="item" placeholder="종목">
         </div>
       </div>
     </div>
@@ -693,31 +692,6 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
     <div class="meta-row">
       <div>견적번호<span class="v" id="docNo">—</span></div>
       <div>작성일자<span class="v" id="docDate">—</span></div>
-    </div>
-
-    <div class="parties">
-      <div class="party">
-        <div class="party-label">공급자 (SUPPLIER)</div>
-        <div class="party-row"><span class="k">상호</span><span class="v">제이픽유니버스</span></div>
-        <div class="party-row"><span class="k">대표자</span><span class="v">김진혁</span></div>
-        <div class="party-row"><span class="k">사업자</span><span class="v">제이픽유니버스</span></div>
-        <div class="party-row"><span class="k">주소</span><span class="v">서울 강동구 양재대로 31</span></div>
-        <div class="party-row"><span class="k">업태</span><span class="v">기술서비스업</span></div>
-        <div class="party-row"><span class="k">종목</span><span class="v">전문디자인업·시각디자인</span></div>
-        <div class="party-row"><span class="k">웹사이트</span><span class="v">jphic.co.kr</span></div>
-        <div class="party-row"><span class="k">이메일</span><span class="v">info@jphic.co.kr</span></div>
-      </div>
-      <div class="party">
-        <div class="party-label">공급받는자 (CLIENT)</div>
-        <div class="party-row"><span class="k">상호</span><span class="v empty" id="pName">미입력</span></div>
-        <div class="party-row"><span class="k">대표자</span><span class="v empty" id="pRep">미입력</span></div>
-        <div class="party-row"><span class="k">사업자</span><span class="v empty" id="pBiz">미입력</span></div>
-        <div class="party-row"><span class="k">주소</span><span class="v empty" id="pAddr">미입력</span></div>
-        <div class="party-row"><span class="k">업태</span><span class="v empty" id="pBizType">미입력</span></div>
-        <div class="party-row"><span class="k">종목</span><span class="v empty" id="pItem">미입력</span></div>
-        <div class="party-row"><span class="k">연락처</span><span class="v empty" id="pPhone">미입력</span></div>
-        <div class="party-row"><span class="k">이메일</span><span class="v empty" id="pEmail">미입력</span></div>
-      </div>
     </div>
 
     <table class="items">
@@ -763,7 +737,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
   <div class="submit-area">
     <button class="submit" id="submitBtn" disabled>작업 요청 보내기</button>
     <div class="submit-hint">
-      회사명/이름 · 연락처 · 이메일 입력 후 활성화 · 영업일 1일 이내 회신
+      담당자명 · 연락처 · 이메일 입력 후 버튼 활성화 · 영업일 1일 이내 회신
     </div>
   </div>
 
