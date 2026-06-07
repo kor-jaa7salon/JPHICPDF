@@ -64,7 +64,7 @@ input,textarea { -webkit-user-select:text!important; user-select:text!important;
 }
 .nav-tooltip-wrap:hover .nav-tooltip { display:block; }
 .nav-right { display:flex; align-items:center; gap:12px; }
-.nav-login { background:none; border:1px solid var(--border); color:var(--text-sub); font-size:0.85rem; font-weight:600; font-family:inherit; padding:8px 18px; border-radius:50px; cursor:not-allowed; }
+.nav-login { background:none; border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.2); font-size:0.85rem; font-weight:600; font-family:inherit; padding:8px 18px; border-radius:50px; cursor:not-allowed; }
 .nav-beta { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); color:#fff; font-size:0.875rem; font-weight:700; padding:8px 20px; border-radius:50px; pointer-events:none; }
 .hamburger { display:none; background:transparent; border:none; color:#fff; font-size:1.6rem; cursor:pointer; }
 @media (max-width:1050px) {
@@ -317,17 +317,13 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
 <nav class="nav">
   <a class="logo" href="https://jphic.co.kr">JPHIC <span>KIT</span></a>
   <div class="nav-links" id="navLinks">
-    <a href="#guide">사용 가이드</a>
-    <a href="#pricing">요금제</a>
-    <span class="nav-tooltip-wrap">
-      <a href="https://jphic.co.kr/invoice" target="_blank" style="color:var(--mc);font-weight:700;">작업 의뢰</a>
-      <span class="nav-tooltip">벡터화 · 목업 · 브랜드 디자인 가능</span>
-    </span>
-    <a href="https://open.kakao.com/o/s154Q5ui" target="_blank">오픈챗 문의</a>
+    <a href="#guide">Samples</a>
+    <a href="#pricing" style="color:rgba(255,255,255,0.25);cursor:not-allowed;pointer-events:none;" title="준비 중">Pricing <span style="font-size:0.6rem;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:4px;vertical-align:middle;letter-spacing:0.05em;">BETA</span></a>
+
+
   </div>
   <div class="nav-right">
-    <button class="nav-login">로그인</button>
-    <span class="nav-beta">🎉 베타기간 무료</span>
+    <a href="https://jphic.co.kr/invoice" target="_blank" style="font-size:0.875rem;font-weight:700;padding:9px 22px;border-radius:50px;background:#fff;color:#0b1114;text-decoration:none;">벡터파일은 벡터씨에게!</a>
   </div>
   <button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')">
     <i class="fas fa-bars"></i>
