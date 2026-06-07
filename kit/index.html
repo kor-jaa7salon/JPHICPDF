@@ -93,6 +93,8 @@ input,textarea { -webkit-user-select:text!important; user-select:text!important;
 .toolbar-dl-btn { background:var(--mc); color:#000; border:none; font-family:inherit; font-size:0.875rem; font-weight:800; padding:8px 18px; border-radius:50px; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; gap:6px; }
 .toolbar-dl-btn:hover { background:var(--mc-hover); box-shadow:0 4px 15px var(--border-glow); }
 .toolbar-dl-btn:disabled { background:rgba(255,255,255,0.06); color:var(--text-dim); border:1px solid var(--border); cursor:not-allowed; box-shadow:none; }
+@keyframes dlPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
+.toolbar-dl-btn.pulse { animation:dlPulse 0.5s ease-in-out 3; }
 .canvas-reset-btn { background:none; border:1px solid var(--border); color:var(--text-sub); font-size:0.85rem; font-weight:600; font-family:inherit; padding:8px 16px; border-radius:50px; cursor:pointer; transition:all 0.2s; }
 .canvas-reset-btn:hover { border-color:var(--text-sub); color:#fff; }
 
@@ -193,11 +195,29 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
 .token-badge { font-size:0.72rem; font-weight:700; background:rgba(0,0,0,0.25); color:#000; padding:2px 8px; border-radius:20px; letter-spacing:0; }
 .generate-count { font-size:0.8rem; color:var(--text-dim); text-align:center; padding-top:7px; font-weight:500; }
 
-/* 견적 CTA */
-.invoice-cta { display:flex; align-items:center; gap:12px; background:rgba(0,187,172,0.08); border:1px solid var(--border-glow); border-radius:var(--radius-sm); padding:14px 16px; text-decoration:none; transition:all 0.2s; margin-top:4px; }
-.invoice-cta:hover { background:rgba(0,187,172,0.15); border-color:var(--mc); }
+/* 견적 CTA — 흰 배경 + 대시 이동 모션 */
+@keyframes borderDash {
+  to { background-position: 200% 0, -200% 100%, 0 200%, 100% -200%; }
+}
+.invoice-cta {
+  display:flex; align-items:center; gap:12px;
+  background:#ffffff; border-radius:var(--radius-sm);
+  padding:14px 16px; text-decoration:none;
+  transition:background 0.2s, box-shadow 0.2s;
+  margin-top:4px;
+  background-image:
+    linear-gradient(90deg, var(--mc) 50%, transparent 50%),
+    linear-gradient(90deg, var(--mc) 50%, transparent 50%),
+    linear-gradient(0deg,  var(--mc) 50%, transparent 50%),
+    linear-gradient(0deg,  var(--mc) 50%, transparent 50%);
+  background-size: 12px 2px, 12px 2px, 2px 12px, 2px 12px;
+  background-position: 0 0, 0 100%, 0 0, 100% 0;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  animation: borderDash 1.8s linear infinite;
+}
+.invoice-cta:hover { box-shadow:0 2px 16px rgba(0,187,172,0.25); }
 .invoice-cta-icon { font-size:1.3rem; color:var(--mc); flex-shrink:0; }
-.invoice-cta-title { font-size:0.88rem; font-weight:700; color:var(--text-main); margin-bottom:2px; }
+.invoice-cta-title { font-size:0.88rem; font-weight:700; color:#111; margin-bottom:2px; }
 .invoice-cta-sub { font-size:0.78rem; color:var(--mc); font-weight:600; }
 
 /* SAMPLE */
@@ -702,6 +722,10 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
 
       isGenerated = true;
       document.getElementById('dlBtn').disabled = false;
+      const dlBtn = document.getElementById('dlBtn');
+      dlBtn.classList.remove('pulse');
+      void dlBtn.offsetWidth; // reflow
+      dlBtn.classList.add('pulse');
       _logToSheets({ options: [...selectedOptions.keys()].join(','), filename: uploadedFile.name, downloaded: false });
 
     } catch (err) {
