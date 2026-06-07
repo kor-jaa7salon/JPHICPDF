@@ -207,16 +207,21 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
 .sample-type { font-size:0.8rem; color:var(--text-dim); font-weight:500; }
 
 /* SAMPLE SLIDER */
-.sample-grid { display:grid; grid-template-columns:1fr; gap:20px; }
-.sample-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:all 0.2s; }
+.sample-grid { display:grid; grid-template-columns:1fr; gap:32px; }
+.sample-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:all 0.2s; max-width:660px; margin:0 auto; width:100%; }
 .sample-card:hover { border-color:var(--border-glow); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
 
+.sample-title { padding:16px 20px 10px; font-size:1.15rem; font-weight:800; color:var(--text-main); border-bottom:1px solid var(--border); }
+.sample-title span { color:var(--mc); margin-right:6px; }
+
 /* 비포/애프터 슬라이더 */
-.ba-wrap { position:relative; aspect-ratio:660/480; overflow:hidden; cursor:ew-resize; user-select:none!important; }
+.ba-wrap { position:relative; width:100%; aspect-ratio:660/480; overflow:hidden; cursor:ew-resize; user-select:none!important; background:#000; }
+/* 애프터: 전체 고정 */
 .ba-after { position:absolute; inset:0; }
 .ba-after img { width:100%; height:100%; object-fit:cover; display:block; }
+/* 비포: clip만 변화, 이미지는 항상 전체 크기 유지 */
 .ba-before { position:absolute; inset:0; overflow:hidden; }
-.ba-before img { width:100%; height:100%; object-fit:cover; display:block; }
+.ba-before img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; display:block; }
 .ba-divider { position:absolute; top:0; bottom:0; width:2px; background:rgba(255,255,255,0.9); cursor:ew-resize; z-index:3; }
 .ba-handle {
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
@@ -226,7 +231,6 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
   font-size:10px; color:#000; font-weight:900;
   box-shadow:0 2px 8px rgba(0,0,0,0.5);
 }
-/* 레이블 — 상단 배치, 반투명 블러 배경 */
 .ba-label-before, .ba-label-after {
   position:absolute; top:10px; font-size:12px; font-weight:700;
   padding:4px 10px; border-radius:20px; z-index:4; pointer-events:none;
@@ -235,9 +239,9 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
 .ba-label-before { left:10px; background:rgba(0,0,0,0.55); color:#fff; border:1px solid rgba(255,255,255,0.15); }
 .ba-label-after  { right:10px; background:rgba(0,187,172,0.75); color:#000; border:1px solid rgba(0,187,172,0.4); }
 
-.sample-info { padding:16px 20px; }
-.sample-name { font-size:1.05rem; font-weight:700; margin-bottom:4px; }
-.sample-type { font-size:0.9rem; color:var(--text-dim); font-weight:500; }
+.sample-info { padding:12px 20px 16px; }
+.sample-name { font-size:0.95rem; font-weight:600; margin-bottom:3px; color:var(--text-sub); }
+.sample-type { font-size:0.85rem; color:var(--text-dim); font-weight:500; }
 
 @media (max-width:768px) {
   .hero-kit { padding:90px 5% 20px; }
@@ -658,6 +662,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     const card = document.createElement('div');
     card.className = 'sample-card';
     card.innerHTML = `
+      <div class="sample-title"><span>#</span>${s.name}</div>
       <div class="ba-wrap" data-pos="50">
         <div class="ba-after"><img src="${s.after}" alt="${s.name} 후"></div>
         <div class="ba-before" style="width:50%"><img src="${BEFORE}" alt="원본"></div>
