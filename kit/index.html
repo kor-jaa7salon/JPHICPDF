@@ -193,6 +193,13 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
 .token-badge { font-size:0.72rem; font-weight:700; background:rgba(0,0,0,0.25); color:#000; padding:2px 8px; border-radius:20px; letter-spacing:0; }
 .generate-count { font-size:0.8rem; color:var(--text-dim); text-align:center; padding-top:7px; font-weight:500; }
 
+/* 견적 CTA */
+.invoice-cta { display:flex; align-items:center; gap:12px; background:rgba(0,187,172,0.08); border:1px solid var(--border-glow); border-radius:var(--radius-sm); padding:14px 16px; text-decoration:none; transition:all 0.2s; margin-top:4px; }
+.invoice-cta:hover { background:rgba(0,187,172,0.15); border-color:var(--mc); }
+.invoice-cta-icon { font-size:1.3rem; color:var(--mc); flex-shrink:0; }
+.invoice-cta-title { font-size:0.88rem; font-weight:700; color:var(--text-main); margin-bottom:2px; }
+.invoice-cta-sub { font-size:0.78rem; color:var(--mc); font-weight:600; }
+
 /* SAMPLE */
 .section { max-width:1300px; margin:0 auto; padding:60px 5% 80px; border-top:1px solid var(--border); }
 .section-label { display:block; width:fit-content; margin:0 auto 14px; font-size:0.8rem; font-weight:900; letter-spacing:0.1em; color:var(--mc); padding:5px 14px; background:var(--mc-light); border-radius:50px; border:1px solid var(--border-glow); text-transform:uppercase; text-align:center; }
@@ -283,6 +290,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   <div class="nav-links" id="navLinks">
     <a href="#guide">사용 가이드</a>
     <a href="#pricing">요금제</a>
+    <a href="https://jphic.co.kr/invoice" target="_blank" style="color:var(--mc);font-weight:700;">예상견적</a>
     <a href="https://open.kakao.com/o/s154Q5ui" target="_blank">오픈챗 문의</a>
   </div>
   <div class="nav-right">
@@ -346,18 +354,6 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
 
     <div class="option-group">
       <div class="option-group-header">
-        <span class="group-label">벡터화</span>
-        <span class="group-beta">베타 무료</span>
-      </div>
-      <div class="option-tags">
-        <div class="tag-item" id="tag-vectorize" onclick="toggleTag(this,'vectorize')">
-          <div class="tag-check">✓</div><span><span class="tag-hash">#</span>벡터화</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="option-group">
-      <div class="option-group-header">
         <span class="group-label">칼선</span>
         <span class="group-beta">베타 무료</span>
       </div>
@@ -383,32 +379,21 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
       </div>
     </div>
 
-    <div class="option-group">
-      <div class="option-group-header">
-        <span class="group-label">목업</span>
-        <span class="group-beta">베타 무료</span>
-      </div>
-      <div class="option-tags">
-        <div class="tag-item" id="mockupTag" onclick="toggleMockup(this)">
-          <div class="tag-check">✓</div><span><span class="tag-hash">#</span>목업 (배경 교체)</span>
-          <span class="tag-arrow" id="mockupArrow">▶</span>
-        </div>
-      </div>
-      <div class="mockup-upload" id="mockupUpload">
-        <div class="mockup-upload-zone" onclick="document.getElementById('bgInput').click()">
-          🌅 배경 이미지 업로드<br>
-          <span style="font-size:0.78rem;color:var(--text-dim)">JPG, PNG</span>
-        </div>
-        <input type="file" id="bgInput" accept="image/*" style="display:none" onchange="handleBgUpload(event)">
-      </div>
-    </div>
-
     <div class="generate-wrap">
       <button class="generate-btn" id="generateBtn" onclick="handleGenerate()" disabled>
         생성하기 <span class="token-badge" id="tokenBadge">베타 무료</span>
       </button>
       <div class="generate-count" id="generateCount">이미지를 업로드하세요</div>
     </div>
+
+    <!-- 벡터화·목업 견적 CTA -->
+    <a href="https://jphic.co.kr/invoice" target="_blank" class="invoice-cta">
+      <div class="invoice-cta-icon">✦</div>
+      <div>
+        <div class="invoice-cta-title">벡터화 · 목업이 필요하신가요?</div>
+        <div class="invoice-cta-sub">예상견적으로 의뢰 신청 →</div>
+      </div>
+    </a>
 
   </div>
 </div>
@@ -438,6 +423,14 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   <div class="rv d1">
     <h2>JPHIC UNIVERSE</h2>
     <p>AI 이미지 파일 준비됐나요?<br>이제 브랜드 자산으로 완성할 차례입니다.</p><br>
+    <div style="margin-bottom:32px;">
+      <a href="https://jphic.co.kr/invoice" target="_blank"
+         style="display:inline-flex;align-items:center;gap:10px;background:rgba(0,187,172,0.15);border:1.5px solid var(--mc);color:#fff;text-decoration:none;padding:14px 28px;border-radius:50px;font-size:1rem;font-weight:700;transition:all 0.2s;"
+         onmouseover="this.style.background='rgba(0,187,172,0.3)'"
+         onmouseout="this.style.background='rgba(0,187,172,0.15)'">
+        ✦ 벡터화·목업·전문 디자인 의뢰 → 예상견적 바로가기
+      </a>
+    </div>
     <div class="uni-flow">
       <div class="uni-card current rv d1">
         <span class="uni-step">지금 여기</span>
@@ -470,6 +463,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   <span style="font-size:1rem;font-weight:900;color:#fff;letter-spacing:0.04em;">JPHIC <span style="color:var(--mc)">KIT</span></span><br><br>
   <div style="margin-bottom:8px">
     <a href="https://jphic.co.kr">JPHIC</a> &nbsp;·&nbsp;
+    <a href="https://jphic.co.kr/invoice" target="_blank">예상견적 의뢰</a> &nbsp;·&nbsp;
     <a href="https://open.kakao.com/o/s154Q5ui" target="_blank">오픈챗 문의</a>
   </div>
   © 2026 JPHIC. All Rights Reserved.
@@ -518,6 +512,10 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   function toggleTag(el, type) {
     const isActive = el.classList.toggle('active');
     isActive ? selectedOptions.set(type,true) : selectedOptions.delete(type);
+    // 바닥 평평: 칼선 없으면 자동으로 기본 칼선 활성화
+    if (type === 'flatten' && isActive && !cutlineMode) {
+      selectCutline('basic');
+    }
     updateGenerateBtn();
   }
 
@@ -552,7 +550,12 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
 
   function handleBgUpload(e) {
     bgFile = e.target.files[0];
-    if (bgFile) selectedOptions.set('mockup',true);
+    if (bgFile) {
+      selectedOptions.set('mockup', true);
+      // 업로드 zone 텍스트 업데이트
+      const zone = document.querySelector('.mockup-upload-zone');
+      if (zone) zone.innerHTML = `✅ ${bgFile.name}<br><span style="font-size:0.78rem;color:var(--text-dim)">클릭하여 변경</span>`;
+    }
     updateGenerateBtn();
   }
 
@@ -667,24 +670,21 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
 
       // ── 서버 처리가 필요한 옵션만 있을 때 API 호출 ──────
       const needsServer = selectedOptions.has('color') ||
-                          selectedOptions.has('vectorize') ||
                           selectedOptions.has('cutline') ||
-                          selectedOptions.has('flatten') ||
-                          selectedOptions.has('mockup');
+                          selectedOptions.has('flatten');
 
       if (needsServer) {
         document.getElementById('processingSub').textContent = '서버 처리 중...';
         const fd = new FormData();
         fd.append('file', fileToSend);
-        fd.append('do_color',     selectedOptions.has('color')     ? 'true' : 'false');
-        fd.append('do_removebg',  'false'); // 브라우저에서 이미 처리
-        fd.append('do_vectorize', selectedOptions.has('vectorize') ? 'true' : 'false');
-        fd.append('flat_bottom',  selectedOptions.has('flatten')   ? 'true' : 'false');
-        fd.append('do_mockup',    selectedOptions.has('mockup')    ? 'true' : 'false');
+        fd.append('do_color',    selectedOptions.has('color')   ? 'true' : 'false');
+        fd.append('do_removebg', 'false');
+        fd.append('do_vectorize','false');
+        fd.append('do_mockup',   'false');
+        fd.append('flat_bottom', selectedOptions.has('flatten') ? 'true' : 'false');
         const cl = selectedOptions.get('cutline') || 'none';
         fd.append('cutline', cl);
         if (cl === 'offset') fd.append('offset_mm', document.getElementById('offsetSlider').value);
-        if (bgFile) fd.append('mockup_bg', bgFile);
 
         const res = await fetch(`${API_URL}/process`, { method: 'POST', body: fd });
         console.log('[KIT] 서버 응답 status:', res.status);
@@ -773,7 +773,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   const samples = [
     { name:'인쇄용 색상 변환', type:'RGB → CMYK 근사 · PNG',      after:'/img/kit/__sample_cmyk.png' },
     { name:'배경 제거',        type:'투명 배경 · PNG',               after:'/img/kit/__sample_removebg.png' },
-    { name:'벡터화',           type:'확대해도 깨지지 않는 · SVG',    after:'/img/kit/__sample_vector.png' },
+    { name:'벡터화',           type:'외곽 path 추출 · SVG (칼선 기반)',    after:'/img/kit/__sample_vector.png' },
     { name:'칼선 기본',        type:'스티커·굿즈 인쇄용 · SVG',      after:'/img/kit/__sample_cutline.png' },
     { name:'칼선 옵셋',        type:'흰 테두리 오프셋 · SVG',        after:'/img/kit/__sample_offset.png' },
     { name:'칼선 바닥 평평',   type:'등신대 스탠딩 · SVG',           after:'/img/kit/__sample_pop.png' },
