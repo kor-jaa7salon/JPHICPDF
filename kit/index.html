@@ -107,51 +107,32 @@ input,textarea { -webkit-user-select:text!important; user-select:text!important;
 .upload-hint { font-size:0.85rem; color:var(--text-dim); }
 .upload-conditions { font-size:0.78rem; color:var(--text-dim); margin-top:4px; line-height:1.6; opacity:0.7; }
 
-.preview-area { display:none; width:100%; min-height:480px; align-items:center; justify-content:center; position:relative; background:#e8e8ec; border-radius:var(--radius); }
+.preview-area { display:none; width:100%; min-height:480px; align-items:center; justify-content:center; position:relative;
+  background-color:#d0d0d8;
+  background-image: linear-gradient(45deg,#b8b8c4 25%,transparent 25%),linear-gradient(-45deg,#b8b8c4 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#b8b8c4 75%),linear-gradient(-45deg,transparent 75%,#b8b8c4 75%);
+  background-size:20px 20px; background-position:0 0,0 10px,10px -10px,-10px 0;
+  border-radius:var(--radius); }
 .preview-area.active { display:flex; }
-.preview-img { max-width:88%; max-height:440px; object-fit:contain; border-radius:8px; }
+.preview-img { max-width:88%; max-height:440px; object-fit:contain; border-radius:8px; flex-shrink:0; }
 .cutline-overlay { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; }
 
 .queue-notice { display:none; position:absolute; bottom:24px; left:50%; transform:translateX(-50%); background:rgba(0,187,172,0.12); border:1px solid var(--mc); color:var(--mc); font-size:0.85rem; font-weight:500; padding:9px 20px; border-radius:50px; white-space:nowrap; z-index:10; }
 .queue-notice.show { display:block; }
 
 /* 처리 중 오버레이 */
-.processing { display:none; position:fixed; inset:0; background:rgba(9,10,12,0.82); align-items:center; justify-content:center; flex-direction:column; gap:20px; backdrop-filter:blur(6px); z-index:99999; }
+.processing { display:none; position:fixed; inset:0; background:rgba(9,10,12,0.82); align-items:center; justify-content:center; flex-direction:column; gap:16px; backdrop-filter:blur(6px); z-index:99999; }
 .processing.show { display:flex; }
-.processing-mascot {
-  width:72px; height:72px; position:relative;
-  animation:mascotBounce 1.2s ease-in-out infinite;
+.processing-ring {
+  width:64px; height:64px; position:relative;
 }
-.mascot-circle {
-  width:72px; height:72px; border-radius:50%;
-  background:linear-gradient(135deg, var(--mc) 0%, #0284c7 100%);
-  display:flex; align-items:center; justify-content:center;
-  font-size:32px;
-  box-shadow:0 0 0 0 rgba(0,187,172,0.5);
-  animation:mascotPulse 1.2s ease-in-out infinite;
+.processing-ring svg {
+  width:64px; height:64px;
+  animation:ringRotate 1.4s linear infinite;
+  transform-origin:center;
 }
-.mascot-orbit {
-  position:absolute; top:-6px; left:-6px; right:-6px; bottom:-6px;
-  border:2px dashed rgba(0,187,172,0.4);
-  border-radius:50%;
-  animation:mascotSpin 2s linear infinite;
-}
-.mascot-dot {
-  position:absolute; width:8px; height:8px; border-radius:50%;
-  background:var(--mc); top:0; left:50%; transform:translateX(-50%);
-}
-@keyframes mascotBounce {
-  0%,100% { transform:translateY(0); }
-  50% { transform:translateY(-8px); }
-}
-@keyframes mascotPulse {
-  0%,100% { box-shadow:0 0 0 0 rgba(0,187,172,0.5); }
-  50% { box-shadow:0 0 0 14px rgba(0,187,172,0); }
-}
-@keyframes mascotSpin { to { transform:rotate(360deg); } }
-
+@keyframes ringRotate { to { transform:rotate(360deg); } }
 .processing-label { font-size:0.9rem; color:var(--text-sub); font-weight:600; letter-spacing:0.02em; }
-.processing-sub { font-size:0.78rem; color:var(--text-dim); margin-top:4px; }
+.processing-sub { display:none; }
 .processing-dots::after {
   content:''; animation:dots 1.2s steps(3,end) infinite;
 }
@@ -197,30 +178,24 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
 .generate-count { font-size:0.8rem; color:var(--text-dim); text-align:center; padding-top:7px; font-weight:500; }
 
 /* 견적 CTA — 흰 배경 + 대시 이동 모션 */
-@keyframes borderDash {
-  to { background-position: 200% 0, -200% 100%, 0 200%, 100% -200%; }
+@keyframes ctaShimmer {
+  0%,100% { border-color: rgba(0,187,172,0.5); }
+  50% { border-color: rgba(0,187,172,1); }
 }
 .invoice-cta {
-  display:flex; align-items:center; gap:12px;
-  background:#ffffff; border-radius:var(--radius-sm);
-  padding:14px 16px; text-decoration:none;
-  transition:background 0.2s, box-shadow 0.2s;
-  margin-top:4px;
-  background-image:
-    linear-gradient(90deg, var(--mc) 50%, transparent 50%),
-    linear-gradient(90deg, var(--mc) 50%, transparent 50%),
-    linear-gradient(0deg,  var(--mc) 50%, transparent 50%),
-    linear-gradient(0deg,  var(--mc) 50%, transparent 50%);
-  background-size: 12px 2px, 12px 2px, 2px 12px, 2px 12px;
-  background-position: 0 0, 0 100%, 0 0, 100% 0;
-  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-  animation: borderDash 12s linear infinite;
+  display:flex; flex-direction:column; align-items:flex-start; gap:4px;
+  background:#ffffff;
+  border: 2px solid rgba(0,187,172,0.6);
   border-radius: 18px;
+  padding:14px 18px; text-decoration:none;
+  transition:box-shadow 0.2s;
+  margin-top:4px;
+  animation: ctaShimmer 2.5s ease-in-out infinite;
 }
-.invoice-cta:hover { box-shadow:0 2px 16px rgba(0,187,172,0.25); }
+.invoice-cta:hover { box-shadow:0 2px 16px rgba(0,187,172,0.3); }
 .invoice-cta-icon { font-size:1.3rem; color:var(--mc); flex-shrink:0; }
-.invoice-cta-title { font-size:0.88rem; font-weight:700; color:#111; margin-bottom:2px; }
-.invoice-cta-sub { font-size:0.78rem; color:var(--mc); font-weight:600; }
+.invoice-cta-title { font-size:1rem; font-weight:800; color:#111; margin-bottom:3px; }
+.invoice-cta-sub { font-size:0.88rem; color:var(--mc); font-weight:700; }
 
 /* SAMPLE */
 .section { max-width:1300px; margin:0 auto; padding:60px 5% 80px; border-top:1px solid var(--border); }
@@ -228,10 +203,10 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
 .section h2 { font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900; letter-spacing:-0.03em; margin-bottom:10px; line-height:1.3; text-align:center; }
 .section h2 em { color:var(--mc); font-style:normal; }
 .section-sub { font-size:0.95rem; color:var(--text-sub); margin-bottom:32px; line-height:1.7; font-weight:500; text-align:center; }
-.sample-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); gap:12px; }
+.sample-grid { display:grid; grid-template-columns:1fr; justify-content:center; gap:48px; max-width:600px; margin:0 auto; }
 .sample-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; cursor:pointer; transition:all 0.2s; }
 .sample-card:hover { border-color:var(--border-glow); transform:translateY(-2px); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
-.sample-thumb { aspect-ratio:4/3; background:rgba(255,255,255,0.02); display:flex; align-items:center; justify-content:center; font-size:36px; border-bottom:1px solid var(--border); overflow:hidden; }
+.sample-thumb { aspect-ratio:495/360; width:100%; background:rgba(255,255,255,0.02); display:flex; align-items:center; justify-content:center; font-size:36px; border-bottom:1px solid var(--border); overflow:hidden; }
 .sample-thumb img { width:100%; height:100%; object-fit:cover; transition:transform 0.3s ease; }
 .sample-card:hover .sample-thumb img { transform:scale(1.04); }
 .sample-info { padding:14px 16px; }
@@ -239,8 +214,8 @@ input[type=range] { width:100%; accent-color:var(--mc); cursor:pointer; -webkit-
 .sample-type { font-size:0.8rem; color:var(--text-dim); font-weight:500; }
 
 /* SAMPLE SLIDER */
-.sample-grid { display:grid; grid-template-columns:1fr; gap:32px; }
-.sample-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:all 0.2s; max-width:660px; margin:0 auto; width:100%; }
+.sample-grid { display:grid; grid-template-columns:1fr; justify-content:center; gap:48px; max-width:600px; margin:0 auto; }
+.sample-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:all 0.2s; cursor:pointer; }
 .sample-card:hover { border-color:var(--border-glow); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
 
 .sample-title { padding:16px 20px 10px; font-size:1.15rem; font-weight:800; color:var(--text-main); border-bottom:1px solid var(--border); }
@@ -411,10 +386,10 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
 
     <!-- 벡터화·목업 견적 CTA -->
     <a href="https://jphic.co.kr/invoice" target="_blank" class="invoice-cta">
-      <div class="invoice-cta-icon">✦</div>
+
       <div>
-        <div class="invoice-cta-title">전문 디자인 작업이 필요하신가요?</div>
-        <div class="invoice-cta-sub">제작 의뢰하러 가기 →</div>
+        <div class="invoice-cta-sub" style="margin-bottom:4px;">제작 의뢰하러가기 →</div>
+        <div class="invoice-cta-title">벡터화, 목업 등 전문 디자인 작업이 필요하신가요?</div>
       </div>
     </a>
 
@@ -422,11 +397,14 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
 </div>
 
 <div class="processing" id="processing">
-  <div class="processing-mascot">
-    <div class="mascot-orbit"><div class="mascot-dot"></div></div>
-    <div class="mascot-circle">✦</div>
+  <div class="processing-ring">
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="32" r="26" stroke="rgba(0,187,172,0.15)" stroke-width="4"/>
+      <circle cx="32" cy="32" r="26" stroke="var(--mc)" stroke-width="4"
+        stroke-linecap="round" stroke-dasharray="40 124"/>
+    </svg>
   </div>
-  <div class="processing-label" id="processingLabel">처리 중<span class="processing-dots"></span></div>
+  <div class="processing-label" id="processingLabel">처리 중</div>
   <div class="processing-sub" id="processingSub"></div>
 </div>
 
@@ -501,7 +479,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
   let mockupOpen = false;
   const selectedOptions = new Map([['color',true],['removebg',true]]);
 
-  function handleUpload(e) {
+  window.handleUpload = function handleUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
     uploadedFile = file;
@@ -534,7 +512,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     updateGenerateBtn();
   }
 
-  function toggleTag(el, type) {
+  window.toggleTag = function toggleTag(el, type) {
     const isActive = el.classList.toggle('active');
     isActive ? selectedOptions.set(type,true) : selectedOptions.delete(type);
     // 바닥 평평: 칼선 없으면 자동으로 기본 칼선 활성화
@@ -544,7 +522,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     updateGenerateBtn();
   }
 
-  function selectCutline(mode) {
+  window.selectCutline = function selectCutline(mode) {
     if (cutlineMode === mode) {
       cutlineMode = null;
       document.getElementById('cutlineBasicTag').classList.remove('active');
@@ -564,7 +542,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     updateGenerateBtn();
   }
 
-  function toggleMockup(el) {
+  window.toggleMockup = function toggleMockup(el) {
     mockupOpen = !mockupOpen;
     document.getElementById('mockupUpload').classList.toggle('open', mockupOpen);
     document.getElementById('mockupArrow').textContent = mockupOpen ? '▼' : '▶';
@@ -603,7 +581,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
 
   // Canvas + BFS floodFill 기반 브라우저 배경제거
   async function removeBgInBrowser(file) {
-    document.getElementById('processingSub').textContent = '배경 제거 중...';
+    
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -653,7 +631,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     });
   }
 
-  async function handleGenerate() {
+  window.handleGenerate = async function handleGenerate() {
     if (!uploadedFile) return;
     if (isProcessing) {
       document.getElementById('queueNotice').classList.add('show');
@@ -666,12 +644,9 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     const _startTime = Date.now();
     document.getElementById('dlBtn').disabled = true;
     document.getElementById('processing').classList.add('show');
-    document.getElementById('processingSub').textContent = '';
+    
 
-    const coldTimer = setTimeout(() => {
-      if (document.getElementById('processingSub').textContent === '')
-        document.getElementById('processingSub').textContent = '서버 시작 중... 최대 1분 소요될 수 있어요';
-    }, 10000);
+    const coldTimer = setTimeout(() => {}, 10000);
 
     try {
       let fileToSend = uploadedFile;
@@ -699,7 +674,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
                           selectedOptions.has('flatten');
 
       if (needsServer) {
-        document.getElementById('processingSub').textContent = '서버 처리 중...';
+        
         const fd = new FormData();
         fd.append('file', fileToSend);
         fd.append('do_color',    selectedOptions.has('color')   ? 'true' : 'false');
@@ -717,8 +692,9 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
         const data = await res.json();
         if (data.error) throw new Error(data.error);
 
-        if (data.preview) {
-          document.getElementById('previewImg').src = 'data:image/png;base64,' + data.preview;
+        const previewB64 = data.preview || (data.files && data.files.result_png);
+        if (previewB64) {
+          document.getElementById('previewImg').src = 'data:image/png;base64,' + previewB64;
           document.getElementById('uploadZone').style.display = 'none';
           document.getElementById('previewArea').classList.add('active');
         }
@@ -759,9 +735,13 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
 
     } catch (err) {
       console.error('[JPHIC KIT 오류]', err);
-      alert('처리 중 오류가 발생했습니다: ' + err.message);
+      // Artifacts CSP 차단 시에도 dlBtn 활성화 유지
     } finally {
       clearTimeout(coldTimer);
+      // 오류 시에도 다운로드 버튼은 업로드 파일 있으면 활성화
+      if (uploadedFile) {
+        document.getElementById('dlBtn').disabled = false;
+      }
       // 최소 1.5초 표시 보장 (콜드스타트 인식용)
       const elapsed = Date.now() - _startTime;
       const wait = Math.max(0, 1500 - elapsed);
@@ -772,7 +752,7 @@ footer a { color:var(--mc); text-decoration:none; font-weight:600; }
     }
   }
 
-  function handleDownload() {
+  window.handleDownload = function handleDownload() {
     if (!isGenerated) return;
 
     // 배경제거만 한 경우 → blob 직접 다운로드
