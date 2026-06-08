@@ -1351,8 +1351,11 @@ $('submitBtn').addEventListener('click', async () => {
   $('submitBtn').disabled = true;
   $('submitBtn').textContent = '전송 중...';
 
-  const supply = state.selectedPrice;
-  const vat = Math.round(supply * 0.1);
+  // VAT 포함 기준: 표시가격 = 합계금액, 공급가액·부가세 역산
+  const isQuoteReq = state.selectedTier === 'VISION';
+  const grand  = isQuoteReq ? 0 : state.selectedPrice;
+  const supply = isQuoteReq ? 0 : Math.round(grand / 1.1);
+  const vat    = isQuoteReq ? 0 : grand - supply;
 
   const finalAddress = $('address').value.trim();
 
@@ -1360,9 +1363,10 @@ $('submitBtn').addEventListener('click', async () => {
     timestamp: new Date().toISOString(),
     docNo: state.docNo,
     tier: state.selectedTier,
-    estimatedPrice: supply, 
-    vat: vat, 
-    grandTotal: supply + vat,
+    estimatedPrice: supply,
+    vat: vat,
+    grandTotal: grand,
+    isQuoteRequest: isQuoteReq,
     detectedTier: state.detectedTier, 
     detectedScore: state.detectedScore,
     fileCount: state.files.length,
