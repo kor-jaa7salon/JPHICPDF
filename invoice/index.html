@@ -1377,7 +1377,7 @@ $('submitBtn').addEventListener('click', async () => {
     totalSize: state.files.reduce((s,f) => s+f.size, 0),
     fileNames: state.files.map(f => f.name).join(' | '),
     fileTypes: [...new Set(state.files.map(f => extOf(f.name)))].join(','),
-    bizCompanyName: $('name').value.trim(),
+    companyName: $('companyName').value.trim(),
     representative: $('representative').value.trim(),
     phone: $('phone').value.trim(),
     email: $('email').value.trim(),
