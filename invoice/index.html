@@ -752,8 +752,8 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
           <input type="email" id="email" placeholder="email@example.com">
         </div>
         <div class="field">
-          <label>사업자명 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
-          <input type="text" id="companyName" placeholder="(주)OO상사">
+          <label>회사명 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
+          <input type="text" id="companyName" placeholder="회사명">
         </div>
         <div class="field">
           <label>사업자등록번호 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
@@ -963,7 +963,7 @@ function validateRequiredFields() {
   });
 
   // localStorage 입력값 기억
-  const saveFields = ['name','phone','email','bizNo','representative','address','businessType','item'];
+  const saveFields = ['name','companyName','phone','email','bizNo','representative','address','businessType','item'];
   saveFields.forEach(function(id) {
     const el = $(id);
     if (!el) return;
