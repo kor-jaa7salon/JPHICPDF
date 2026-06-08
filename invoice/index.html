@@ -67,7 +67,7 @@ body{
 }
 .topbar-inner{
   max-width:880px;margin:0 auto;
-  padding:12px 16px;
+  padding:12px 16px 12px 0;
   display:flex;align-items:center;justify-content:space-between;gap:12px;
 }
 .topbar .logo{
@@ -121,6 +121,15 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 }
 .discount-banner strong{font-weight:700}
 .discount-banner .desc{color:var(--warn-ink);opacity:.85;font-size:14px;margin-top:2px}
+
+.event-cta{
+  margin-top:10px;padding:10px 14px;
+  background:var(--card-soft);border:1px solid var(--rule);
+  border-radius:var(--r-md);
+  font-size:13.5px;color:var(--ink-mute);text-align:left;
+}
+.event-cta a{color:var(--accent-deep);font-weight:600;text-decoration:none}
+.event-cta a:hover{text-decoration:underline}
 
 /* ============ STEPS ============ */
 .step{
@@ -245,6 +254,36 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 
 /* ============ REQUEST NOTES ============ */
 .notes-area{display:flex;flex-direction:column;gap:12px}
+
+.sub-field{margin-bottom:18px}
+.sub-field:last-child{margin-bottom:0}
+.sub-label{
+  display:block;font-size:13px;font-weight:600;
+  color:var(--ink-soft);margin-bottom:8px;letter-spacing:.02em;
+}
+.deadline-row{
+  display:flex;flex-wrap:wrap;gap:8px;
+}
+.dl-opt{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;
+  background:var(--card-soft);border:1px solid var(--border);
+  border-radius:999px;cursor:pointer;
+  font-size:13.5px;color:var(--ink-soft);
+  transition:.15s;
+}
+.dl-opt:hover{border-color:var(--accent);color:var(--accent-deep)}
+.dl-opt input[type="radio"]{
+  width:14px;height:14px;accent-color:var(--accent);margin:0;cursor:pointer;
+}
+.dl-opt:has(input:checked){
+  background:var(--accent-soft);border-color:var(--accent);color:var(--accent-deep);font-weight:600;
+}
+.dl-opt.dl-date{padding:4px 8px 4px 12px}
+.dl-opt.dl-date input[type="date"]{
+  border:none;background:transparent;font-family:inherit;font-size:13.5px;
+  color:var(--ink-soft);padding:4px 0;cursor:pointer;outline:none;min-width:140px;
+}
 .notes-area textarea{
   background:var(--accent-soft);border:1.5px solid var(--accent);
   font-family:inherit;font-size:15px;color:var(--ink);
@@ -289,8 +328,8 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ============ TIER ============ */
-.tiers{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-@media (min-width:720px){.tiers{grid-template-columns:repeat(4,1fr)}}
+.tiers{display:grid;grid-template-columns:1fr;gap:10px}
+@media (min-width:720px){.tiers{grid-template-columns:repeat(3,1fr)}}
 .tier{
   position:relative;
   background:var(--card-soft);border:1.5px solid var(--border);
@@ -306,6 +345,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 .tier .nm{font-size:13px;font-weight:700;letter-spacing:.15em;color:var(--ink);display:flex;align-items:center}
 .tier .pr{font-size:18px;font-weight:700;margin-top:6px;font-variant-numeric:tabular-nums;color:var(--ink)}
 .tier .pr-sub{font-size:13px;color:var(--ink-mute);font-weight:400}
+.tier .vat-note{font-size:11px;color:var(--ink-faint);font-weight:400}
 .tier .ds{font-size:13px;color:var(--ink-mute);margin-top:6px;line-height:1.45;font-weight:400}
 .tier .rec{
   position:absolute;top:-8px;right:10px;
@@ -597,7 +637,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 
   <header>
     <h1>작업 의뢰하기</h1>
-    <p class="h-sub">요청할 파일과 벡터화·목업·브랜드 디자인 등 요청사항을 올려주세요.</p>
+    <p class="h-sub">벡터씨 KIT으로 해결 안 되는 작업, 전문가에게 맡겨주세요.</p>
 
     <div class="discount-banner">
       <div class="ico">⚡</div>
@@ -605,6 +645,10 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
         <strong>시안 전달 후 '당일 최종안 확정 시' 7.7% 할인</strong>
         <div class="desc">최종 견적이 내려가는 가장 좋은 방법입니다.</div>
       </div>
+    </div>
+
+    <div class="event-cta">
+      인쇄 전 파일 점검 (해상도·재단·CMYK·outline)이 필요하시면 → <a href="/event" target="_blank">발주파일 무료 진단 신청</a>
     </div>
   </header>
 
@@ -627,14 +671,32 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
   <section class="step" id="step2">
     <div class="step-head">
       <span class="step-num">02</span>
-      <div class="step-title">요청사항 <span style="font-size:13px;color:var(--ink-mute);font-weight:400;letter-spacing:0">· 제작방향· 마감일· 참고자료· 링크· 발주처· 특이사항 등</span></div>
+      <div class="step-title">요청사항 <span style="font-size:13px;color:var(--ink-mute);font-weight:400;letter-spacing:0">· 마감일과 전달내용을 입력해주세요</span></div>
     </div>
-    <div class="notes-area">
-      <textarea id="notes" placeholder="글 작성"></textarea>
-      <div style="background:#F4F6F8;border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;font-size:12.5px;color:var(--ink-mute);line-height:1.7;">
-        <strong style="color:var(--ink);font-size:14px;letter-spacing:.05em;">✦ JPHIC KIT 고급 작업 의뢰 가능</strong><br>
-        · <strong style="color:var(--ink-soft)">벡터화</strong> — 컬러 이미지 트레이싱, AI 일러스트 SVG 변환, 다중 색상 레이어 분리<br>
-        · <strong style="color:var(--ink-soft)">목업</strong> — 제품·굿즈 배경 합성, 브랜드 목업 시트 제작, 다중 배경 변형<br>
+
+    <div class="sub-field">
+      <label class="sub-label">최종 마감일</label>
+      <div class="deadline-row">
+        <label class="dl-opt"><input type="radio" name="deadline" value="1일 이내"><span>1일 이내</span></label>
+        <label class="dl-opt"><input type="radio" name="deadline" value="2일 이내"><span>2일 이내</span></label>
+        <label class="dl-opt"><input type="radio" name="deadline" value="3일 이내"><span>3일 이내</span></label>
+        <label class="dl-opt"><input type="radio" name="deadline" value="이번 주"><span>이번 주</span></label>
+        <label class="dl-opt dl-date">
+          <input type="radio" name="deadline" value="__date__" id="dlDateRadio">
+          <input type="date" id="dlDateInput">
+        </label>
+      </div>
+    </div>
+
+    <div class="sub-field">
+      <label class="sub-label">전달내용</label>
+      <div class="notes-area">
+        <textarea id="notes" placeholder="제작방향· 참고자료· 링크· 발주처· 특이사항 등"></textarea>
+        <div style="background:#F4F6F8;border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;font-size:12.5px;color:var(--ink-mute);line-height:1.7;">
+          <strong style="color:var(--ink);font-size:14px;letter-spacing:.05em;">✦ JPHIC KIT 고급 작업 의뢰 가능</strong><br>
+          · <strong style="color:var(--ink-soft)">벡터화</strong> — 컬러 이미지 트레이싱, AI 일러스트 SVG 변환, 다중 색상 레이어 분리<br>
+          · <strong style="color:var(--ink-soft)">목업</strong> — 제품·굿즈 배경 합성, 브랜드 목업 시트 제작, 다중 배경 변형<br>
+        </div>
       </div>
     </div>
   </section>
@@ -646,28 +708,22 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 
     </div>
     <div class="tiers" id="tiers">
-      <label class="tier" data-tier="DIAGNOSIS" data-price="0">
-        <input type="radio" name="tier" value="DIAGNOSIS">
-        <div class="nm">발주진단 <span style="background:var(--accent);color:#fff;font-size:9px;padding:2px 5px;border-radius:3px;margin-left:4px;letter-spacing:.05em">EVENT 무료</span></div>
-        <div class="pr"><span style="text-decoration:line-through;color:var(--ink-faint);font-size:13px;font-weight:400;margin-right:6px">30,000원</span><strong style="color:var(--accent-deep)">0원</strong></div>
-        <div class="ds">인쇄 전 파일 점검 (해상도·재단·CMYK·outline)</div>
-      </label>
-      <label class="tier" data-tier="LITE" data-price="99000">
+      <label class="tier" data-tier="LITE" data-price="49000">
         <input type="radio" name="tier" value="LITE">
         <div class="nm">LITE</div>
-        <div class="pr">99,000<span class="pr-sub">원~</span></div>
+        <div class="pr">49,000<span class="pr-sub">원~ <span class="vat-note">(VAT 포함)</span></span></div>
         <div class="ds">AI로 생성한 이미지를 진짜 쓸 수 있는 파일로 제작 (수정 2회)</div>
       </label>
-      <label class="tier" data-tier="STANDARD" data-price="450000">
+      <label class="tier" data-tier="STANDARD" data-price="99000">
         <input type="radio" name="tier" value="STANDARD">
         <div class="nm">STANDARD</div>
-        <div class="pr">450,000<span class="pr-sub">원~</span></div>
+        <div class="pr">99,000<span class="pr-sub">원~ <span class="vat-note">(VAT 포함)</span></span></div>
         <div class="ds">레이아웃 재설계·다중 컴포지션 (3~5종, 수정 2회)</div>
       </label>
-      <label class="tier" data-tier="VISION" data-price="1200000">
+      <label class="tier" data-tier="VISION" data-price="0">
         <input type="radio" name="tier" value="VISION">
         <div class="nm">VISION</div>
-        <div class="pr">1,200,000<span class="pr-sub">원~</span></div>
+        <div class="pr"><span style="font-size:18px">견적문의</span></div>
         <div class="ds">브랜드 통합 디자인 · <strong>수정 횟수 제한 없음</strong></div>
       </label>
     </div>
@@ -755,6 +811,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 
     <div class="totals">
       <div class="totals-box">
+        <div class="row" id="deadlineRow" style="display:none"><span class="k">최종 마감일</span><span class="v" id="deadlineAmt">—</span></div>
         <div class="row"><span class="k">공급가액</span><span class="v" id="supplyAmt">0원</span></div>
         <div class="row"><span class="k">부가세 (10%)</span><span class="v" id="vatAmt">0원</span></div>
         <div class="row grand"><span class="k">합계금액</span><span class="v" id="grandAmt">0원</span></div>
@@ -772,7 +829,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
         <li><strong>수정 범위 안내</strong>: 최초 요청한 원고와 다른 원고로 진행하실 경우 새 견적이 필요합니다.</li>
         <li><strong>시안 중단 시 청구</strong>: 시안 작업 도중 중단하시는 경우 예상견적의 <strong>50%</strong>가 시안비로 청구됩니다.</li>
         <li>VISION 등급은 <strong>수정 횟수 제한이 없습니다</strong>.</li>
-        <li>모든 금액은 부가가치세 별도 기준이며 합계에 10%가 가산되었습니다.</li>
+        <li>모든 금액은 <strong>부가가치세 포함 기준</strong>입니다. 합계금액 그대로 결제되며 사업자 고객은 공급가액·부가세 별도 확인 가능합니다.</li>
         <li>본 문서는 세금계산서가 아니며, 정식 계산서 첨부용 명세서로 활용 가능합니다.</li>
       </ul>
     </div>
@@ -813,6 +870,7 @@ const state = {
   detectedScore: 0,
   selectedTier: null,
   selectedPrice: 0,
+  deadline: '',
   notesImage: null,
   notesOcrText: '',
   cardImage: null,
@@ -820,7 +878,6 @@ const state = {
   bizLicImage: null,
   bizLicOcrText: '',
   docNo: '',
-  // OCR 원본 추출 트래킹 주소
   cardAddress: '',
   bizAddress: ''
 };
@@ -915,6 +972,25 @@ function validateRequiredFields() {
   const printBtn = $('printBtn');
   if (printBtn) printBtn.addEventListener('click', () => {
     window.print();
+  });
+
+  // 최종 마감일 라디오 + 날짜 입력
+  document.querySelectorAll('input[name="deadline"]').forEach(r => {
+    r.addEventListener('change', () => {
+      if (r.value === '__date__') {
+        const d = $('dlDateInput').value;
+        state.deadline = d ? `날짜 지정: ${d}` : '';
+      } else {
+        state.deadline = r.value;
+      }
+      updateDocument();
+    });
+  });
+  const dlDateInput = $('dlDateInput');
+  if (dlDateInput) dlDateInput.addEventListener('change', () => {
+    $('dlDateRadio').checked = true;
+    state.deadline = dlDateInput.value ? `날짜 지정: ${dlDateInput.value}` : '';
+    updateDocument();
   });
 
 })();
@@ -1038,21 +1114,11 @@ function selectTier(tierName, manual) {
 
 function autoSelectTier() {
   const notesText = ($('notes').value + ' ' + state.notesOcrText).toLowerCase();
-  const printKeywords = ['진단','인쇄','출력','발주','입고','검수','파일확인','파일 확인'];
-  const isPrintCheck = printKeywords.some(k => notesText.includes(k));
   const textLength = ($('notes').value + state.notesOcrText).length;
 
   if (state.files.length === 0 && textLength === 0) {
     state.detectedTier = null;
     updateRec();
-    return;
-  }
-
-  if (isPrintCheck && state.files.length <= 3) {
-    state.detectedTier = 'DIAGNOSIS';
-    state.detectedScore = 0;
-    updateRec();
-    if (!state.selectedTier) selectTier('DIAGNOSIS', false);
     return;
   }
 
@@ -1068,7 +1134,7 @@ function autoSelectTier() {
   state.detectedScore = score;
   state.detectedTier = score < 8 ? 'LITE' : score < 25 ? 'STANDARD' : 'VISION';
   updateRec();
-  if (!state.selectedTier || state.selectedTier === 'DIAGNOSIS') {
+  if (!state.selectedTier) {
     selectTier(state.detectedTier, false);
   }
 }
@@ -1183,8 +1249,12 @@ function updateDocument() {
   setParty('pEmail', $('email').value);
 
   const body = $('itemsBody');
+  const isQuoteRequest = state.selectedTier === 'VISION';
   if (state.selectedTier) {
     const desc = tierDescription(state.selectedTier);
+    const supplyVal = isQuoteRequest ? 0 : Math.round(state.selectedPrice / 1.1);
+    const unitCell = isQuoteRequest ? '견적문의' : supplyVal.toLocaleString();
+    const amtCell  = isQuoteRequest ? '견적문의' : supplyVal.toLocaleString();
     body.innerHTML = `
       <tr>
         <td class="col-no">1</td>
@@ -1193,20 +1263,37 @@ function updateDocument() {
           <div class="col-spec">${desc}</div>
         </td>
         <td class="col-qty">1</td>
-        <td class="col-unit">${state.selectedPrice.toLocaleString()}</td>
-        <td class="col-amt">${state.selectedPrice.toLocaleString()}</td>
+        <td class="col-unit">${unitCell}</td>
+        <td class="col-amt">${amtCell}</td>
       </tr>`;
   } else {
     body.innerHTML = `<tr class="empty"><td colspan="5">요청내용이 표시됩니다</td></tr>`;
   }
 
-  const supply = state.selectedPrice;
-  const vat = Math.round(supply * 0.1);
-  const grand = supply + vat;
-  $('supplyAmt').textContent = supply.toLocaleString() + '원';
-  $('vatAmt').textContent = vat.toLocaleString() + '원';
-  $('grandAmt').textContent = grand.toLocaleString() + '원';
-  $('amountWords').textContent = grand > 0 ? `일금 ${koreanAmount(grand)}원정 (₩${grand.toLocaleString()})` : '';
+  if (isQuoteRequest) {
+    $('supplyAmt').textContent = '견적문의';
+    $('vatAmt').textContent = '—';
+    $('grandAmt').textContent = '견적문의';
+    $('amountWords').textContent = '담당자가 별도 안내드립니다';
+  } else {
+    // 부가세 포함 기준: 표시가격 = 합계, 공급가액·부가세 역산
+    const grand = state.selectedPrice;
+    const supply = Math.round(grand / 1.1);
+    const vat = grand - supply;
+    $('supplyAmt').textContent = supply.toLocaleString() + '원';
+    $('vatAmt').textContent = vat.toLocaleString() + '원';
+    $('grandAmt').textContent = grand.toLocaleString() + '원';
+    $('amountWords').textContent = grand > 0 ? `일금 ${koreanAmount(grand)}원정 (₩${grand.toLocaleString()})` : '';
+  }
+
+  // 최종 마감일 표시
+  const dlRow = $('deadlineRow');
+  if (state.deadline) {
+    dlRow.style.display = '';
+    $('deadlineAmt').textContent = state.deadline;
+  } else {
+    dlRow.style.display = 'none';
+  }
 
   // 필수 3개 입력 여부로 버튼 실시간 활성화
   const isReady = ['name','phone','email'].every(id => $(id) && $(id).value.trim());
@@ -1228,7 +1315,6 @@ function setParty(id, val) {
 
 function tierLabel(t) {
   return {
-    DIAGNOSIS: '발주진단 — 인쇄 전 파일 점검',
     LITE: '디자인 작업 — LITE 난이도',
     STANDARD: '디자인 작업 — STANDARD 난이도',
     VISION: '디자인 작업 — VISION 난이도',
@@ -1236,7 +1322,6 @@ function tierLabel(t) {
 }
 function tierDescription(t) {
   return {
-    DIAGNOSIS: '인쇄 발주 전 파일 점검 (해상도·재단·CMYK·폰트 outline 등). EVENT 이용 시 무료.',
     LITE: 'AI로 생성한 이미지를 진짜 쓸 수 있는 파일로 제작 (수정 2회)',
     STANDARD: '레이아웃 재설계·다중 컴포지션 (3~5종, 수정 2회)',
     VISION: 'CORE 철학 정의 + 다중 매체 통합 (수정 횟수 제한 없음)',
@@ -1294,6 +1379,7 @@ $('submitBtn').addEventListener('click', async () => {
     item: $('item').value.trim(),
     name: $('name').value.trim(),
     notes: $('notes').value.trim(),
+    deadline: state.deadline || '',
     cardOcrText: '',
     bizLicOcrText: '',
     notesOcrText: '',
