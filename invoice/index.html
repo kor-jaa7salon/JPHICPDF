@@ -1,3 +1,4 @@
+<!-- 260609 1645 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -519,7 +520,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 .party-row .v.empty{color:var(--ink-faint);font-weight:400;font-style:italic}
 
 .items{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px}
-.items thead Th{
+.items thead th{
   background:var(--card-deep);
   border-top:1.5px solid var(--ink);
   border-bottom:1.5px solid var(--ink);
@@ -693,7 +694,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
       <div class="notes-area">
         <textarea id="notes" placeholder="제작방향· 참고자료· 링크· 발주처· 특이사항 등"></textarea>
         <div style="background:#F4F6F8;border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;font-size:12.5px;color:var(--ink-mute);line-height:1.7;">
-          <strong style="color:var(--ink);font-size:14px;letter-spacing:.05em;">✦ JPHIC KIT 고급 작업 의뢰 가능</strong><br>
+          <strong style="color:var(--ink);font-size:14px;letter-spacing:.05em;">✦ JPHIC KIT 칼선 보완 작업 의뢰 가능</strong><br>
           · <strong style="color:var(--ink-soft)">벡터화</strong> — 컬러 이미지 트레이싱, AI 일러스트 SVG 변환, 다중 색상 레이어 분리<br>
           · <strong style="color:var(--ink-soft)">목업</strong> — 제품·굿즈 배경 합성, 브랜드 목업 시트 제작, 다중 배경 변형<br>
         </div>
@@ -708,23 +709,23 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 
     </div>
     <div class="tiers" id="tiers">
-      <label class="tier" data-tier="LITE" data-price="49000">
-        <input type="radio" name="tier" value="LITE">
-        <div class="nm">LITE</div>
+      <label class="tier" data-tier="Cutting line + Vector" data-price="49000">
+        <input type="radio" name="tier" value="Cutting line + Vector">
+        <div class="nm">Cutting line + Vector</div>
         <div class="pr">49,000<span class="pr-sub">원~ <span class="vat-note">(VAT 포함)</span></span></div>
-        <div class="ds">AI로 생성한 이미지를 진짜 쓸 수 있는 파일로 제작 (수정 2회)</div>
+        <div class="ds">AI로 생성한 이미지를 벡터화 파일로 <br>(수정2회)</div>
       </label>
-      <label class="tier" data-tier="STANDARD" data-price="99000">
-        <input type="radio" name="tier" value="STANDARD">
-        <div class="nm">STANDARD</div>
-        <div class="pr">99,000<span class="pr-sub">원~ <span class="vat-note">(VAT 포함)</span></span></div>
-        <div class="ds">레이아웃 재설계·다중 컴포지션 (3~5종, 수정 2회)</div>
+      <label class="tier" data-tier="for PRINT" data-price="69000">
+        <input type="radio" name="tier" value="for PRINT">
+        <div class="nm">for PRINT</div>
+        <div class="pr">69,000<span class="pr-sub">원~ <span class="vat-note">(VAT 포함)</span></span></div>
+        <div class="ds">리사이징·레이아웃·목업·다중 컴포지션<br>(수정2회)</div>
       </label>
-      <label class="tier" data-tier="VISION" data-price="0">
-        <input type="radio" name="tier" value="VISION">
-        <div class="nm">VISION</div>
+      <label class="tier" data-tier="for Branding" data-price="0">
+        <input type="radio" name="tier" value="for Branding">
+        <div class="nm">for Branding</div>
         <div class="pr"><span style="font-size:18px">견적문의</span></div>
-        <div class="ds">브랜드 통합 디자인 · <strong>수정 횟수 제한 없음</strong></div>
+        <div class="ds">브랜드 통합 디자인 · <strong>기초 자산화</strong></div>
       </label>
     </div>
   </section>
@@ -832,7 +833,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
         <li><strong>당일 확정 시 7.7% 할인</strong> 적용 가능</li>
         <li><strong>수정 범위 안내</strong>: 최초 요청한 원고와 다른 원고로 진행하실 경우 새 견적이 필요합니다.</li>
         <li><strong>시안 중단 시 청구</strong>: 시안 작업 도중 중단하시는 경우 예상견적의 <strong>50%</strong>가 시안비로 청구됩니다.</li>
-        <li>VISION 등급은 <strong>수정 횟수 제한이 없습니다</strong>.</li>
+        <li>for Branding 등급은 <strong>수정 횟수 제한이 없습니다</strong>.</li>
         <li>모든 금액은 <strong>부가가치세 포함 기준</strong>입니다. 합계금액 그대로 결제되며 사업자 고객은 공급가액·부가세 별도 확인 가능합니다.</li>
         <li>본 문서는 세금계산서가 아니며, 정식 계산서 첨부용 명세서로 활용 가능합니다.</li>
       </ul>
@@ -850,10 +851,6 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
   <footer class="page-footer">
     <div class="ft-brand">JPHIC UNIVERSE</div>
     <div class="ft-line">
-      <a href="https://jphic.co.kr" target="_blank">jphic.co.kr</a>
-      <span class="sep">·</span>
-      <a href="mailto:info@jphic.co.kr">info@jphic.co.kr</a>
-      <span class="sep">·</span>
       <a href="https://open.kakao.com/o/sLyIquni" target="_blank">오픈챗 문의</a>
     </div>
   </footer>
@@ -893,13 +890,11 @@ function validateRequiredFields() {
   const fields = ['name', 'phone', 'email'];
   let isValid = true;
 
-  // 전체 입력 필드 테두리 기본값 복원
   document.querySelectorAll('.field input').forEach(el => {
     el.style.border = '';
     el.style.backgroundColor = '';
   });
 
-  // 필수 필드만 미입력 시 빨간 테두리
   fields.forEach(id => {
     const el = $(id);
     if (!el) return;
@@ -927,7 +922,6 @@ function validateRequiredFields() {
   $('docDate').textContent = `${d.getFullYear()}. ${pad(d.getMonth()+1)}. ${pad(d.getDate())}.`;
   state.docNo = docNo;
 
-  // 인터랙션 리스너 및 무결성 실시간 연동 바인딩
   const ids = ['name', 'phone', 'email', 'bizNo', 'representative', 'address', 'businessType', 'item', 'notes'];
   ids.forEach(id => {
     const el = $(id);
@@ -936,11 +930,9 @@ function validateRequiredFields() {
         if ($('m-' + id)) $('m-' + id).style.display = 'none';
         updateDocument();
       });
-      // blur 검증 제거 — 버튼 클릭 시에만 검증
     }
   });
 
-  // 연락처 자동 포맷
   const phoneEl = $('phone');
   if (phoneEl) phoneEl.addEventListener('input', function() {
     let v = this.value.replace(/[^0-9]/g, '');
@@ -954,7 +946,6 @@ function validateRequiredFields() {
     this.value = v;
   });
 
-  // 사업자등록번호 자동 포맷
   const bizNoEl = $('bizNo');
   if (bizNoEl) bizNoEl.addEventListener('input', function() {
     let v = this.value.replace(/[^0-9]/g, '');
@@ -962,7 +953,6 @@ function validateRequiredFields() {
     this.value = v;
   });
 
-  // localStorage 입력값 기억
   const saveFields = ['name','companyName','phone','email','bizNo','representative','address','businessType','item'];
   saveFields.forEach(function(id) {
     const el = $(id);
@@ -972,13 +962,11 @@ function validateRequiredFields() {
     el.addEventListener('change', function() { localStorage.setItem('jphic_' + id, el.value); });
   });
 
-  // 인쇄/PDF 저장 버튼
   const printBtn = $('printBtn');
   if (printBtn) printBtn.addEventListener('click', () => {
     window.print();
   });
 
-  // 최종 마감일 라디오 + 날짜 입력
   document.querySelectorAll('input[name="deadline"]').forEach(r => {
     r.addEventListener('change', () => {
       if (r.value === '__date__') {
@@ -1018,7 +1006,6 @@ setupDrop($('drop1'), $('fileInput'), async (files) => {
     if (state.files.length >= MAX_FILES) { toast(`최대 ${MAX_FILES}개까지 업로드 가능합니다`, true); break; }
     if (f.size > MAX_FILE_SIZE) { toast(`${f.name}: 50MB 초과`, true); continue; }
     state.files.push(f);
-    // Drive 업로드용 base64 변환
     const dataUrl = await fileToDataUrl(f);
     const b64 = dataUrl.split(',')[1];
     if (!state.filesBase64) state.filesBase64 = [];
@@ -1106,7 +1093,7 @@ function selectTier(tierName, manual) {
   const tierEl = document.querySelector(`.tier[data-tier="${tierName}"]`);
   if (tierEl) {
     state.selectedTier = tierName;
-    state.selectedPrice = parseInt(tierEl.dataset.price, 10);
+    state.selectedPrice = parseInt(String(tierEl.dataset.price).replace(/,/g,''), 10) || 0;
     $('step3').classList.add('done');
     if (!manual) {
       const badge = $('badge3');
@@ -1136,7 +1123,7 @@ function autoSelectTier() {
   });
   score = Math.round(score);
   state.detectedScore = score;
-  state.detectedTier = score < 8 ? 'LITE' : score < 25 ? 'STANDARD' : 'VISION';
+  state.detectedTier = score < 8 ? 'Cutting line + Vector' : score < 25 ? 'for PRINT' : 'for Branding';
   updateRec();
   if (!state.selectedTier) {
     selectTier(state.detectedTier, false);
@@ -1155,8 +1142,6 @@ function updateRec() {
   });
 }
 
-
-
 function parseBusinessCard(text) {
   const phone = text.match(/0?1[0-9][-. ]?\d{3,4}[-. ]?\d{4}/) || text.match(/0\d{1,2}[-. ]\d{3,4}[-. ]\d{4}/);
   const email = text.match(/[\w.+-]+@[\w-]+\.[\w.-]+/);
@@ -1164,10 +1149,7 @@ function parseBusinessCard(text) {
   const company = lines.find(l => /\(주\)|주식회사|\(유\)|유한회사|\(사\)|사단법인/.test(l));
   const person = lines.find(l => /^[가-힣\s]{2,6}$/.test(l) && l.replace(/\s/g,'').length >= 2);
   const name = company || person || lines[0] || '';
-  
-  // 주소 간이 패턴 매칭 (명함 내부 주소 파싱 대응)
   const addrMatch = text.match(/(?:서울시|서울지직|경기도|인천시|부산시|대구시|대전시|광주시|울산시|세종시|충북|충남|전북|전남|경북|경남|제주).+?[로길번지]\s*[0-9-]+/);
-
   return {
     name: name.replace(/\s+/g,' ').trim(),
     phone: phone?.[0]?.replace(/[. ]/g,'-'),
@@ -1191,20 +1173,17 @@ function parseBusinessLicense(text) {
   };
 }
 
-// 명함-사업자 주소 정밀 상호 판별 연산 로직
 function processAddressMatching() {
   const addrEl = $('address');
   if (!addrEl) return;
-
   if (state.cardAddress && state.bizAddress) {
     const cleanCard = state.cardAddress.replace(/\s+/g, '').trim();
     const cleanBiz = state.bizAddress.replace(/\s+/g, '').trim();
-    
     if (cleanCard === cleanBiz) {
       addrEl.value = state.bizAddress;
       $('m-address').style.display = 'inline-block';
     } else {
-      addrEl.value = ''; // 상이할 시 무결성을 위해 공란 전환 명시
+      addrEl.value = '';
       if ($('m-address')) $('m-address').style.display = 'none';
     }
   } else {
@@ -1253,7 +1232,7 @@ function updateDocument() {
   setParty('pEmail', $('email').value);
 
   const body = $('itemsBody');
-  const isQuoteRequest = state.selectedTier === 'VISION';
+  const isQuoteRequest = state.selectedTier === 'for Branding';
   if (state.selectedTier) {
     const desc = tierDescription(state.selectedTier);
     const supplyVal = isQuoteRequest ? 0 : Math.round(state.selectedPrice / 1.1);
@@ -1280,7 +1259,6 @@ function updateDocument() {
     $('grandAmt').textContent = '견적문의';
     $('amountWords').textContent = '담당자가 별도 안내드립니다';
   } else {
-    // 부가세 포함 기준: 표시가격 = 합계, 공급가액·부가세 역산
     const grand = state.selectedPrice;
     const supply = Math.round(grand / 1.1);
     const vat = grand - supply;
@@ -1290,7 +1268,6 @@ function updateDocument() {
     $('amountWords').textContent = grand > 0 ? `일금 ${koreanAmount(grand)}원정 (₩${grand.toLocaleString()})` : '';
   }
 
-  // 최종 마감일 표시
   const dlRow = $('deadlineRow');
   if (state.deadline) {
     dlRow.style.display = '';
@@ -1299,7 +1276,6 @@ function updateDocument() {
     dlRow.style.display = 'none';
   }
 
-  // 필수 3개 입력 여부로 버튼 실시간 활성화
   const isReady = ['name','phone','email'].every(id => $(id) && $(id).value.trim());
   const btn = $('submitBtn');
   if (btn) {
@@ -1319,23 +1295,22 @@ function setParty(id, val) {
 
 function tierLabel(t) {
   return {
-    LITE: '디자인 작업 — LITE 난이도',
-    STANDARD: '디자인 작업 — STANDARD 난이도',
-    VISION: '디자인 작업 — VISION 난이도',
+    'Cutting line + Vector': '디자인 작업 — Cutting line + Vector 난이도',
+    'for PRINT': '디자인 작업 — for PRINT 난이도',
+    'for Branding': '디자인 작업 — for Branding 난이도',
   }[t] || '';
 }
 function tierDescription(t) {
   return {
-    LITE: 'AI로 생성한 이미지를 진짜 쓸 수 있는 파일로 제작 (수정 2회)',
-    STANDARD: '레이아웃 재설계·다중 컴포지션 (3~5종, 수정 2회)',
-    VISION: 'CORE 철학 정의 + 다중 매체 통합 (수정 횟수 제한 없음)',
+    'Cutting line + Vector': 'AI로 생성한 이미지를 벡터화 파일로 <br>(수정2회) · 칼선/벡터 완성 후 출력 PDF 주문 연결',
+    'for PRINT': '리사이징·레이아웃·목업·다중 컴포지션<br>(수정2회) · 인쇄용 PDF 출고',
+    'for Branding': 'CORE 철학 정의 + 다중 매체 통합 (기초 자산화)',
   }[t] || '';
 }
 
 /* ============ SUBMIT ============ */
 $('submitBtn').addEventListener('click', async () => {
   if ($('submitBtn').disabled) {
-    // 빈 필드 표시 후 첫번째 빈 필드로 스크롤
     const fields = ['name','phone','email'];
     let first = null;
     fields.forEach(id => {
@@ -1348,15 +1323,14 @@ $('submitBtn').addEventListener('click', async () => {
       }
     });
     if (first) { first.scrollIntoView({behavior:'smooth',block:'center'}); first.focus(); }
-    toast('필수 항목(회사명/이름·연락처·이메일)을 입력해 주세요.', true);
+    toast('필수 항목(이름·연락처·이메일)을 입력해 주세요.', true);
     return;
   }
 
   $('submitBtn').disabled = true;
   $('submitBtn').textContent = '전송 중...';
 
-  // VAT 포함 기준: 표시가격 = 합계금액, 공급가액·부가세 역산
-  const isQuoteReq = state.selectedTier === 'VISION';
+  const isQuoteReq = state.selectedTier === 'for Branding';
   const grand  = isQuoteReq ? 0 : state.selectedPrice;
   const supply = isQuoteReq ? 0 : Math.round(grand / 1.1);
   const vat    = isQuoteReq ? 0 : grand - supply;
@@ -1456,7 +1430,6 @@ function koreanAmount(n){
   return n.toLocaleString();
 }
 
-// 초기 견적서 비어있는 상태 표시 및 유효성 초기 체크
 updateDocument();
 </script>
 
