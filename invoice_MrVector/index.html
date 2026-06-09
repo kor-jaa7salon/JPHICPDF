@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<!-- 260523 1200 -->
-<!-- v2.6 새 배포 URL 적용 -->
-
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -98,7 +95,7 @@
 
     <div id="loading" class="loading-overlay">
         <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#00BBAC] mb-4"></div>
-        <p class="font-bold text-[#00BBAC]" id="loadingText">벡터씨에게 전달하고 있어요. 잠시만요.</p>
+        <p class="font-bold text-[#00BBAC]">벡터씨에게 전달하고 있어요. 잠시만요.</p>
     </div>
 
     <div class="max-w-xl mx-auto px-6 py-12 md:py-20" id="main-container">
@@ -206,6 +203,7 @@
     </div>
 
     <script>
+        // 새로 배포하신 URL로 업데이트되었습니다.
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwfyZdA94dEu0cPvO_fzG-UdVFn-IbA07zPiu7oxUP5GTq-dlhdF6H073bQZnso1o0/exec";
         let selectedLogoType = "";
         let fileData = null;
@@ -227,7 +225,6 @@
                     container.innerHTML = `<img src="${e.target.result}" class="max-h-48 mx-auto rounded-xl border border-white/10 shadow-xl">`;
                     container.classList.remove('hidden');
                     uploadUI.classList.add('hidden');
-                    
                     fileData = {
                         base64: e.target.result.split(',')[1],
                         mimeType: file.type,
@@ -241,7 +238,6 @@
         async function handleVectorSubmit(e) {
             e.preventDefault();
             if (!selectedLogoType) { alert("진단할 이미지 형태를 선택해주세요!"); return; }
-            if (!fileData) { alert("진단받을 이미지 파일을 첨부해주세요!"); return; }
 
             const name = document.getElementById('userName').value;
             const email = document.getElementById('userEmail').value;
@@ -255,36 +251,35 @@
                 userPhone: phone,
                 userEmail: email,
                 logoType: selectedLogoType,
-                timestamp: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
+                timestamp: new Date().toLocaleString('ko-KR'),
                 fileData: fileData ? fileData.base64 : null,
                 mimeType: fileData ? fileData.mimeType : null,
                 fileName: fileData ? fileData.fileName : null,
-                source: "Web_V2.6_STABLE"
+                source: "Web_V2.5_PRO"
             };
 
             try {
-                // [교정 핵심] mode: 'no-cors' 제거 및 Content-Type을 application/x-www-form-urlencoded 구조로 변경하여 데이터 무결성 확보
-                const response = await fetch(SCRIPT_URL, {
+                // 앱스크립트에서 인식하기 가장 안전한 text/plain 방식으로 페이로드를 전송합니다.
+                await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify(payload)
                 });
 
-                // 리디렉션 처리 및 에러 캐칭을 위한 응답값 확인
-                if (!response.ok) {
-                    throw new Error(`네트워크 응답이 올바르지 않습니다. (상태코드: ${response.status})`);
-                }
-
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('resName').innerText = name;
-                document.getElementById('resEmail').innerText = email;
-                document.getElementById('main-container').classList.add('hidden');
-                document.getElementById('successModal').classList.remove('hidden');
-                document.getElementById('successModal').classList.add('flex');
+                // 전송 성공 처리
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('resName').innerText = name;
+                    document.getElementById('resEmail').innerText = email;
+                    document.getElementById('main-container').classList.add('hidden');
+                    document.getElementById('successModal').classList.remove('hidden');
+                    document.getElementById('successModal').classList.add('flex');
+                }, 1500);
 
             } catch (err) {
                 console.error("Submission error:", err);
-                alert("전송 중 오류가 발생했습니다. 데이터 전송 및 리포트 승계 상태를 다시 한번 확인해 주세요.");
+                alert("현재 전송이 원활하지 않습니다. 잠시 후 다시 시도해 주세요.");
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('submitBtn').disabled = false;
             }
