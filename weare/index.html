@@ -75,13 +75,13 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-cont
 /* ===== 매체별 비쥬얼 그래픽 차별화 ===== */
 .media-section{max-width:1200px;margin:0 auto;padding:120px 32px}
 .media-section h2{font-size:clamp(30px,4vw,46px);font-weight:800;margin-bottom:24px;color:#FFFFFF}
-.strengths{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:64px}
-.strengths li{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:15.5px;font-weight:600;color:var(--txt);display:flex;align-items:center;gap:10px}
-.strengths li::before{content:'✓';flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:rgba(0,187,172,.15);color:var(--teal);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.strengths{list-style:none;display:flex;flex-wrap:wrap;gap:14px;margin-bottom:128px}
+.strengths li{border:1px solid var(--line);border-radius:999px;padding:12px 22px;font-size:15.5px;font-weight:600;color:var(--txt)}
+.strengths li::before{content:'#';color:var(--teal);font-weight:800;margin-right:6px}
 .media-section>p{color:var(--sub);margin-bottom:56px;font-size:16.5px}
 .media-cat{margin-bottom:72px}
 .cat-head{display:flex;align-items:center;gap:16px;margin-bottom:24px}
-.cat-head h3{font-size:24px;font-weight:800;letter-spacing:.08em;color:#FFFFFF}
+.cat-head h3{font-size:31px;font-weight:800;letter-spacing:.08em;color:var(--teal)}
 .cat-head .rule{flex:1;height:1px;background:var(--line)}
 .media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
 .media-card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .2s}
@@ -150,7 +150,7 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
 
 <!-- HERO -->
 <section class="hero">
-  <div class="eyebrow">JPHIC PROCESS — ONE PAGE</div>
+  <div class="eyebrow">JAYPIC PROCESS — ONE PAGE</div>
   <h1>제이픽과 일하면<br><em>모든게 편해집니다!</em></h1>
   <p>알아서 챙겨주니까! 거친 스케치 한 장에서 대형 현장 설치까지, 6단계 공정 라인이 알아서 움직입니다.</p>
   <div class="scroll-hint"><span class="bar"></span>SCROLL — 공정 라인 진입</div>
@@ -166,7 +166,7 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
           <span class="step-num">01</span>
           <div class="step-title">요청 주문<small>CLIENT INPUT</small></div>
         </div>
-        <div class="step-img"><img src="img/step01.jpg" alt="요청 주문 — 고객 원본 자료" data-group="steps"></div>
+        <div class="step-img"><img src="/weare/img/step01.jpg" alt="요청 주문 — 고객 원본 자료" data-group="steps"></div>
         <div class="step-copy"><strong>비정형의 아이디어를 마주하는 시작점</strong>고객의 거친 스케치, 낮은 해상도의 이미지, 혹은 텍스트로만 존재하던 요구사항을 정밀하게 분석합니다. 해결해야 할 기술적 문제(픽셀 손상, 칼선 누락 등)를 진단하고 프로젝트의 방향성을 수립합니다.</div>
       </article>
 
@@ -175,7 +175,7 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
           <span class="step-num">02</span>
           <div class="step-title">준비 기초<small>IDEA SKETCH</small></div>
         </div>
-        <div class="step-img"><img src="img/step02.jpg" alt="준비 기초 — 아이디어 스케치" data-group="steps"></div>
+        <div class="step-img"><img src="/weare/img/step02.jpg" alt="준비 기초 — 아이디어 스케치" data-group="steps"></div>
         <div class="step-copy"><strong>기술과 직관의 협업, 컨셉 고도화</strong>기초 기획을 바탕으로 구조적인 형태를 설계합니다. 생성형 AI와의 고도화된 프롬프트 협업 및 정밀한 스케치를 통해, 아이디어가 실제 그래픽 자산으로 구현될 수 있도록 뼈대를 구축합니다.</div>
       </article>
 
@@ -184,7 +184,7 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
           <span class="step-num">03</span>
           <div class="step-title">그래픽 자산화<small>VECTORIZING &amp; ASSET</small></div>
         </div>
-        <div class="step-img"><img src="img/step03.jpg" alt="그래픽 자산화 — 벡터 패스 작업" data-group="steps"></div>
+        <div class="step-img"><img src="/weare/img/step03.jpg" alt="그래픽 자산화 — 벡터 패스 작업" data-group="steps"></div>
         <div class="step-copy"><strong>무한 확대 가능한 고해상도 벡터화</strong>비트맵 이미지를 완벽한 벡터(Vector) 데이터로 전환합니다. 선과 면의 완성도를 극대화하고, 인쇄 및 제작 시 오차를 방지할 수 있도록 완벽한 정밀도의 마스터 파일을 생성합니다.</div>
       </article>
 
@@ -193,7 +193,7 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
           <span class="step-num">04</span>
           <div class="step-title">레이아웃 &amp; 리사이징<small>OPTIMIZATION &amp; RESIZING</small></div>
         </div>
-        <div class="step-img"><img src="img/step04.jpg" alt="레이아웃 &amp; 리사이징 — 멀티 레이아웃" data-group="steps"></div>
+        <div class="step-img"><img src="/weare/img/step04.jpg" alt="레이아웃 &amp; 리사이징 — 멀티 레이아웃" data-group="steps"></div>
         <div class="step-copy"><strong>매체별 스케일업 및 인쇄 최적화</strong>용도에 맞춘 최적의 규격화 작업을 진행합니다. 스티커를 위한 화이트 테두리 및 칼선(Die-cut) 생성부터 대형 실사 출력을 위한 스케일업까지, 제작 공정에 즉시 투입 가능한 최종 출력 데이터를 완성합니다.</div>
       </article>
 
@@ -202,7 +202,7 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
           <span class="step-num">05</span>
           <div class="step-title">2D 이미지의 모션화<small>MOTION GRAPHICS</small></div>
         </div>
-        <div class="step-img"><img src="img/step05.jpg" alt="2D 모션화 — 모션 그래픽 프리뷰" data-group="steps"></div>
+        <div class="step-img"><img src="/weare/img/step05.jpg" alt="2D 모션화 — 모션 그래픽 프리뷰" data-group="steps"></div>
         <div class="step-copy"><strong>정적 자산에 생동감을 더하는 미디어 확장</strong>완성된 2D 벡터 자산을 웹과 모바일 환경에서 가장 주목도 높은 형태로 변환합니다. 웹페이지 도입부(Hero section)나 상세페이지의 구매 전환율을 높이기 위해 캐릭터와 타이포그래피에 자연스러운 움직임을 부여합니다.</div>
       </article>
 
@@ -211,7 +211,7 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
           <span class="step-num">06</span>
           <div class="step-title">현장 설치<small>FINAL APPLICATION</small></div>
         </div>
-        <div class="step-img"><img src="img/step06.jpg" alt="현장 설치 — 최종 구현" data-group="steps"></div>
+        <div class="step-img"><img src="/weare/img/step06.jpg" alt="현장 설치 — 최종 구현" data-group="steps"></div>
         <div class="step-copy"><strong>공간을 채우는 완벽한 최종 구현</strong>가상의 데이터가 오프라인 물리 공간에 정확한 스케일로 구현된 최종 결과물입니다. 철저한 Pre-press 최적화를 거쳤기 때문에, 현장 대형 출력에서도 왜곡이나 흐려짐 없이 압도적인 시각적 선명도를 유지합니다.</div>
       </article>
 
@@ -224,10 +224,10 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
 <section class="media-section">
   <h2>매체별 비주얼 그래픽 차별화</h2>
   <ul class="strengths">
-    <li>문제 해결이 빠른 소통</li>
-    <li>완성도 높은 결과물</li>
-    <li>유명 발주처의 사양 스펙 보유</li>
-    <li>AI로 생성한 이미지를 진짜 쓸 수 있는 파일로</li>
+    <li>문제해결이_빠른_소통</li>
+    <li>완성도_높은_결과물</li>
+    <li>유명_발주처의_사양스펙_보유</li>
+    <li>AI생성_이미지를_진짜_쓸수있는_파일로</li>
   </ul>
 
   <div class="media-cat">
@@ -236,9 +236,9 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
       <div class="media-card">
         <div class="gallery" data-gal="web1">
           <div class="slides">
-            <img src="img/web1_1.jpg" alt="웹 모션 1">
-            <img src="img/web1_2.jpg" alt="웹 모션 2">
-            <img src="img/web1_3.jpg" alt="웹 모션 3">
+            <img src="/weare/img/web1_1.jpg" alt="웹 모션 1">
+            <img src="/weare/img/web1_2.jpg" alt="웹 모션 2">
+            <img src="/weare/img/web1_3.jpg" alt="웹 모션 3">
           </div>
           <button class="gal-btn prev" aria-label="이전">&#10094;</button>
           <button class="gal-btn next" aria-label="다음">&#10095;</button>
@@ -249,9 +249,9 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
       <div class="media-card">
         <div class="gallery" data-gal="web2">
           <div class="slides">
-            <img src="img/web2_1.jpg" alt="SNS 콘텐츠 1">
-            <img src="img/web2_2.jpg" alt="SNS 콘텐츠 2">
-            <img src="img/web2_3.jpg" alt="SNS 콘텐츠 3">
+            <img src="/weare/img/web2_1.jpg" alt="SNS 콘텐츠 1">
+            <img src="/weare/img/web2_2.jpg" alt="SNS 콘텐츠 2">
+            <img src="/weare/img/web2_3.jpg" alt="SNS 콘텐츠 3">
           </div>
           <button class="gal-btn prev" aria-label="이전">&#10094;</button>
           <button class="gal-btn next" aria-label="다음">&#10095;</button>
@@ -262,9 +262,9 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
       <div class="media-card">
         <div class="gallery" data-gal="web3">
           <div class="slides">
-            <img src="img/web3_1.jpg" alt="상세페이지 1">
-            <img src="img/web3_2.jpg" alt="상세페이지 2">
-            <img src="img/web3_3.jpg" alt="상세페이지 3">
+            <img src="/weare/img/web3_1.jpg" alt="상세페이지 1">
+            <img src="/weare/img/web3_2.jpg" alt="상세페이지 2">
+            <img src="/weare/img/web3_3.jpg" alt="상세페이지 3">
           </div>
           <button class="gal-btn prev" aria-label="이전">&#10094;</button>
           <button class="gal-btn next" aria-label="다음">&#10095;</button>
@@ -281,9 +281,9 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
       <div class="media-card">
         <div class="gallery" data-gal="print1">
           <div class="slides">
-            <img src="img/print1_1.jpg" alt="굿즈 스티커 1">
-            <img src="img/print1_2.jpg" alt="굿즈 스티커 2">
-            <img src="img/print1_3.jpg" alt="굿즈 스티커 3">
+            <img src="/weare/img/print1_1.jpg" alt="굿즈 스티커 1">
+            <img src="/weare/img/print1_2.jpg" alt="굿즈 스티커 2">
+            <img src="/weare/img/print1_3.jpg" alt="굿즈 스티커 3">
           </div>
           <button class="gal-btn prev" aria-label="이전">&#10094;</button>
           <button class="gal-btn next" aria-label="다음">&#10095;</button>
@@ -294,9 +294,9 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
       <div class="media-card">
         <div class="gallery" data-gal="print2">
           <div class="slides">
-            <img src="img/print2_1.jpg" alt="등신대 1">
-            <img src="img/print2_2.jpg" alt="등신대 2">
-            <img src="img/print2_3.jpg" alt="등신대 3">
+            <img src="/weare/img/print2_1.jpg" alt="등신대 1">
+            <img src="/weare/img/print2_2.jpg" alt="등신대 2">
+            <img src="/weare/img/print2_3.jpg" alt="등신대 3">
           </div>
           <button class="gal-btn prev" aria-label="이전">&#10094;</button>
           <button class="gal-btn next" aria-label="다음">&#10095;</button>
@@ -307,9 +307,9 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
       <div class="media-card">
         <div class="gallery" data-gal="print3">
           <div class="slides">
-            <img src="img/print3_1.jpg" alt="대형 실사 출력 1">
-            <img src="img/print3_2.jpg" alt="대형 실사 출력 2">
-            <img src="img/print3_3.jpg" alt="대형 실사 출력 3">
+            <img src="/weare/img/print3_1.jpg" alt="대형 실사 출력 1">
+            <img src="/weare/img/print3_2.jpg" alt="대형 실사 출력 2">
+            <img src="/weare/img/print3_3.jpg" alt="대형 실사 출력 3">
           </div>
           <button class="gal-btn prev" aria-label="이전">&#10094;</button>
           <button class="gal-btn next" aria-label="다음">&#10095;</button>
@@ -328,7 +328,7 @@ footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64
   <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="cta-btn">카톡오픈챗으로 제작요청하기</a>
 </section>
 
-<footer>© JPHIC · 한주영 · info@jphic.co.kr</footer>
+<footer>© JAYPIC · 한주영 · info@jphic.co.kr</footer>
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox">
