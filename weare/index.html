@@ -1,0 +1,447 @@
+<!-- 260612 2100 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>제이픽 PROCESS — 비정형 아이디어에서 현장 구현까지</title>
+<meta name="description" content="제이픽 6단계 제작 공정 — 요청 주문부터 현장 설치까지, 매체별 비쥬얼 그래픽 차별화.">
+<meta property="og:title" content="제이픽 PROCESS">
+<meta property="og:description" content="제이픽과 일하면 모든게 편해집니다! 알아서 챙겨주니까!">
+<meta property="og:image" content="https://jphic.co.kr/og-image.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-06LPWZ6RLL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-06LPWZ6RLL');
+</script>
+<style>
+:root{
+  --bg:#030712;
+  --bg2:#0B1220;
+  --line:#1E293B;
+  --txt:#E2E8F0;
+  --sub:#94A3B8;
+  --teal:#00BBAC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--txt);font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;line-height:1.6;font-size:16px}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ===== Header ===== */
+header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 32px;background:rgba(3,7,18,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:21px;letter-spacing:.04em;color:#FFFFFF}
+.logo small{display:block;font-size:14px;font-weight:500;color:#FFFFFF;letter-spacing:.02em}
+.cta-btn{background:var(--teal);color:#030712;font-weight:700;font-size:15.5px;padding:10px 20px;border-radius:8px;transition:.2s}
+.cta-btn:hover{filter:brightness(1.15)}
+
+/* ===== Hero ===== */
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:140px 32px 80px;max-width:1200px;margin:0 auto}
+.eyebrow{color:var(--teal);font-weight:700;font-size:14.5px;letter-spacing:.25em;margin-bottom:20px}
+.hero h1{font-size:clamp(38px,6vw,74px);font-weight:800;line-height:1.15;letter-spacing:-.02em;color:#FFFFFF}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero p{margin-top:24px;color:var(--sub);font-size:clamp(16.5px,1.8vw,20px);max-width:600px}
+.scroll-hint{margin-top:56px;display:flex;align-items:center;gap:12px;color:var(--sub);font-size:14.5px;letter-spacing:.15em}
+.scroll-hint .bar{width:48px;height:1px;background:var(--teal);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* ===== 공정 라인 ===== */
+.line-section{position:relative}
+.line-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden}
+.line-track{display:flex;gap:80px;padding:0 8vw;will-change:transform}
+.step{flex:0 0 min(78vw,640px);background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:32px;opacity:.35;transform:translateY(16px);transition:opacity .5s,transform .5s}
+.step.active{opacity:1;transform:translateY(0)}
+.step-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+.step-num{font-size:42px;font-weight:800;color:var(--teal);letter-spacing:-.03em}
+.step-title{font-size:clamp(19.5px,2.2vw,26px);font-weight:800}
+.step-title small{display:block;color:var(--sub);font-weight:500;font-size:14.5px;letter-spacing:.08em;margin-top:2px}
+.step-img{margin:20px 0;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:var(--bg);cursor:zoom-in}
+.step-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.step-img:hover img{transform:scale(1.03)}
+.step-copy{color:var(--sub);font-size:16px}
+.step-copy strong{display:block;color:var(--txt);font-size:17px;margin-bottom:6px}
+
+.progress{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:5}
+.progress i{width:28px;height:2px;background:var(--line);transition:.3s}
+.progress i.on{background:var(--teal)}
+
+/* ===== 매체별 비쥬얼 그래픽 차별화 ===== */
+.media-section{max-width:1200px;margin:0 auto;padding:120px 32px}
+.media-section h2{font-size:clamp(30px,4vw,46px);font-weight:800;margin-bottom:24px;color:#FFFFFF}
+.strengths{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:64px}
+.strengths li{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:15.5px;font-weight:600;color:var(--txt);display:flex;align-items:center;gap:10px}
+.strengths li::before{content:'✓';flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:rgba(0,187,172,.15);color:var(--teal);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.media-section>p{color:var(--sub);margin-bottom:56px;font-size:16.5px}
+.media-cat{margin-bottom:72px}
+.cat-head{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.cat-head h3{font-size:24px;font-weight:800;letter-spacing:.08em;color:#FFFFFF}
+.cat-head .rule{flex:1;height:1px;background:var(--line)}
+.media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.media-card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .2s}
+.media-card:hover{border-color:var(--teal)}
+.media-card .info{padding:18px 20px}
+.media-card .info b{font-size:16.5px}
+.media-card .info span{display:block;color:var(--sub);font-size:14.5px;margin-top:4px}
+
+/* 롤링 갤러리 */
+.gallery{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--bg)}
+.gallery .slides{display:flex;height:100%;transition:transform .45s ease}
+.gallery .slides img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+.gal-btn{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(3,7,18,.7);color:var(--txt);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;z-index:2}
+.gal-btn:hover{background:var(--teal);color:#030712;border-color:var(--teal)}
+.gal-btn.prev{left:10px}
+.gal-btn.next{right:10px}
+.gal-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2}
+.gal-dots i{width:7px;height:7px;border-radius:50%;background:rgba(226,232,240,.35);transition:.2s}
+.gal-dots i.on{background:var(--teal)}
+
+/* ===== Lightbox ===== */
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(3,7,18,.92);display:none;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lb-img{width:min(930px,92vw);max-height:88vh;object-fit:contain;border-radius:10px}
+.lb-btn{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid var(--line);background:rgba(11,18,32,.85);color:var(--txt);font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+.lb-btn:hover{background:var(--teal);color:#030712;border-color:var(--teal)}
+.lb-btn.prev{left:max(16px,calc(50% - 465px - 80px))}
+.lb-btn.next{right:max(16px,calc(50% - 465px - 80px))}
+.lb-close{position:absolute;top:24px;right:24px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(11,18,32,.85);color:var(--txt);font-size:20px;cursor:pointer;transition:.2s}
+.lb-close:hover{background:var(--teal);color:#030712}
+.lb-count{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:var(--sub);font-size:14.5px;letter-spacing:.1em}
+
+/* ===== Footer CTA ===== */
+.final{max-width:1200px;margin:0 auto;padding:0 32px 140px;text-align:center}
+.final h2{font-size:clamp(26px,3.5vw,42px);font-weight:800;margin-bottom:16px;color:#FFFFFF}
+.final p{color:var(--sub);margin-bottom:36px;font-size:16.5px}
+.final .cta-btn{font-size:17.5px;padding:16px 36px;border-radius:10px}
+footer{border-top:1px solid var(--line);padding:32px;text-align:center;color:#64748B;font-size:14px}
+
+/* ===== Mobile ===== */
+@media (max-width:768px){
+  header{padding:16px 20px}
+  .hero{padding:120px 20px 60px}
+  .line-section{height:auto!important}
+  .line-sticky{position:static;height:auto;overflow:visible;display:block;padding:40px 20px}
+  .line-track{flex-direction:column;padding:0;gap:40px;transform:none!important}
+  .step{flex:none;width:100%}
+  .progress{display:none}
+  .media-section,.final{padding-left:20px;padding-right:20px}
+  .lb-btn.prev{left:10px}
+  .lb-btn.next{right:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .step{opacity:1;transform:none;transition:none}
+  .scroll-hint .bar{animation:none}
+  .gallery .slides{transition:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">제이픽<small>한주영</small></div>
+  <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="cta-btn">카톡오픈챗 연결</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">JPHIC PROCESS — ONE PAGE</div>
+  <h1>제이픽과 일하면<br><em>모든게 편해집니다!</em></h1>
+  <p>알아서 챙겨주니까! 거친 스케치 한 장에서 대형 현장 설치까지, 6단계 공정 라인이 알아서 움직입니다.</p>
+  <div class="scroll-hint"><span class="bar"></span>SCROLL — 공정 라인 진입</div>
+</section>
+
+<!-- 공정 라인: 6 STEPS -->
+<section class="line-section" id="lineSection">
+  <div class="line-sticky">
+    <div class="line-track" id="lineTrack">
+
+      <article class="step">
+        <div class="step-head">
+          <span class="step-num">01</span>
+          <div class="step-title">요청 주문<small>CLIENT INPUT</small></div>
+        </div>
+        <div class="step-img"><img src="img/step01.jpg" alt="요청 주문 — 고객 원본 자료" data-group="steps"></div>
+        <div class="step-copy"><strong>비정형의 아이디어를 마주하는 시작점</strong>고객의 거친 스케치, 낮은 해상도의 이미지, 혹은 텍스트로만 존재하던 요구사항을 정밀하게 분석합니다. 해결해야 할 기술적 문제(픽셀 손상, 칼선 누락 등)를 진단하고 프로젝트의 방향성을 수립합니다.</div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <span class="step-num">02</span>
+          <div class="step-title">준비 기초<small>IDEA SKETCH</small></div>
+        </div>
+        <div class="step-img"><img src="img/step02.jpg" alt="준비 기초 — 아이디어 스케치" data-group="steps"></div>
+        <div class="step-copy"><strong>기술과 직관의 협업, 컨셉 고도화</strong>기초 기획을 바탕으로 구조적인 형태를 설계합니다. 생성형 AI와의 고도화된 프롬프트 협업 및 정밀한 스케치를 통해, 아이디어가 실제 그래픽 자산으로 구현될 수 있도록 뼈대를 구축합니다.</div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <span class="step-num">03</span>
+          <div class="step-title">그래픽 자산화<small>VECTORIZING &amp; ASSET</small></div>
+        </div>
+        <div class="step-img"><img src="img/step03.jpg" alt="그래픽 자산화 — 벡터 패스 작업" data-group="steps"></div>
+        <div class="step-copy"><strong>무한 확대 가능한 고해상도 벡터화</strong>비트맵 이미지를 완벽한 벡터(Vector) 데이터로 전환합니다. 선과 면의 완성도를 극대화하고, 인쇄 및 제작 시 오차를 방지할 수 있도록 완벽한 정밀도의 마스터 파일을 생성합니다.</div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <span class="step-num">04</span>
+          <div class="step-title">레이아웃 &amp; 리사이징<small>OPTIMIZATION &amp; RESIZING</small></div>
+        </div>
+        <div class="step-img"><img src="img/step04.jpg" alt="레이아웃 &amp; 리사이징 — 멀티 레이아웃" data-group="steps"></div>
+        <div class="step-copy"><strong>매체별 스케일업 및 인쇄 최적화</strong>용도에 맞춘 최적의 규격화 작업을 진행합니다. 스티커를 위한 화이트 테두리 및 칼선(Die-cut) 생성부터 대형 실사 출력을 위한 스케일업까지, 제작 공정에 즉시 투입 가능한 최종 출력 데이터를 완성합니다.</div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <span class="step-num">05</span>
+          <div class="step-title">2D 이미지의 모션화<small>MOTION GRAPHICS</small></div>
+        </div>
+        <div class="step-img"><img src="img/step05.jpg" alt="2D 모션화 — 모션 그래픽 프리뷰" data-group="steps"></div>
+        <div class="step-copy"><strong>정적 자산에 생동감을 더하는 미디어 확장</strong>완성된 2D 벡터 자산을 웹과 모바일 환경에서 가장 주목도 높은 형태로 변환합니다. 웹페이지 도입부(Hero section)나 상세페이지의 구매 전환율을 높이기 위해 캐릭터와 타이포그래피에 자연스러운 움직임을 부여합니다.</div>
+      </article>
+
+      <article class="step">
+        <div class="step-head">
+          <span class="step-num">06</span>
+          <div class="step-title">현장 설치<small>FINAL APPLICATION</small></div>
+        </div>
+        <div class="step-img"><img src="img/step06.jpg" alt="현장 설치 — 최종 구현" data-group="steps"></div>
+        <div class="step-copy"><strong>공간을 채우는 완벽한 최종 구현</strong>가상의 데이터가 오프라인 물리 공간에 정확한 스케일로 구현된 최종 결과물입니다. 철저한 Pre-press 최적화를 거쳤기 때문에, 현장 대형 출력에서도 왜곡이나 흐려짐 없이 압도적인 시각적 선명도를 유지합니다.</div>
+      </article>
+
+    </div>
+    <div class="progress" id="progress"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+</section>
+
+<!-- 매체별 비쥬얼 그래픽 차별화 -->
+<section class="media-section">
+  <h2>매체별 비주얼 그래픽 차별화</h2>
+  <ul class="strengths">
+    <li>문제 해결이 빠른 소통</li>
+    <li>완성도 높은 결과물</li>
+    <li>유명 발주처의 사양 스펙 보유</li>
+    <li>AI로 생성한 이미지를 진짜 쓸 수 있는 파일로</li>
+  </ul>
+
+  <div class="media-cat">
+    <div class="cat-head"><h3>Web</h3><div class="rule"></div></div>
+    <div class="media-grid">
+      <div class="media-card">
+        <div class="gallery" data-gal="web1">
+          <div class="slides">
+            <img src="img/web1_1.jpg" alt="웹 모션 1">
+            <img src="img/web1_2.jpg" alt="웹 모션 2">
+            <img src="img/web1_3.jpg" alt="웹 모션 3">
+          </div>
+          <button class="gal-btn prev" aria-label="이전">&#10094;</button>
+          <button class="gal-btn next" aria-label="다음">&#10095;</button>
+          <div class="gal-dots"><i class="on"></i><i></i><i></i></div>
+        </div>
+        <div class="info"><b>웹 모션</b><span>logo 넣은 인트로·아웃트로, 웹포스터에 모션효과</span></div>
+      </div>
+      <div class="media-card">
+        <div class="gallery" data-gal="web2">
+          <div class="slides">
+            <img src="img/web2_1.jpg" alt="SNS 콘텐츠 1">
+            <img src="img/web2_2.jpg" alt="SNS 콘텐츠 2">
+            <img src="img/web2_3.jpg" alt="SNS 콘텐츠 3">
+          </div>
+          <button class="gal-btn prev" aria-label="이전">&#10094;</button>
+          <button class="gal-btn next" aria-label="다음">&#10095;</button>
+          <div class="gal-dots"><i class="on"></i><i></i><i></i></div>
+        </div>
+        <div class="info"><b>SNS 콘텐츠</b><span>인스타그램 피드 · 스토리 규격 최적화</span></div>
+      </div>
+      <div class="media-card">
+        <div class="gallery" data-gal="web3">
+          <div class="slides">
+            <img src="img/web3_1.jpg" alt="상세페이지 1">
+            <img src="img/web3_2.jpg" alt="상세페이지 2">
+            <img src="img/web3_3.jpg" alt="상세페이지 3">
+          </div>
+          <button class="gal-btn prev" aria-label="이전">&#10094;</button>
+          <button class="gal-btn next" aria-label="다음">&#10095;</button>
+          <div class="gal-dots"><i class="on"></i><i></i><i></i></div>
+        </div>
+        <div class="info"><b>상세페이지</b><span>구매 전환 중심 키비주얼 · 모션 삽입</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="media-cat">
+    <div class="cat-head"><h3>Print</h3><div class="rule"></div></div>
+    <div class="media-grid">
+      <div class="media-card">
+        <div class="gallery" data-gal="print1">
+          <div class="slides">
+            <img src="img/print1_1.jpg" alt="굿즈 스티커 1">
+            <img src="img/print1_2.jpg" alt="굿즈 스티커 2">
+            <img src="img/print1_3.jpg" alt="굿즈 스티커 3">
+          </div>
+          <button class="gal-btn prev" aria-label="이전">&#10094;</button>
+          <button class="gal-btn next" aria-label="다음">&#10095;</button>
+          <div class="gal-dots"><i class="on"></i><i></i><i></i></div>
+        </div>
+        <div class="info"><b>굿즈 스티커</b><span>화이트 테두리 · Die-cut 칼선 데이터</span></div>
+      </div>
+      <div class="media-card">
+        <div class="gallery" data-gal="print2">
+          <div class="slides">
+            <img src="img/print2_1.jpg" alt="등신대 1">
+            <img src="img/print2_2.jpg" alt="등신대 2">
+            <img src="img/print2_3.jpg" alt="등신대 3">
+          </div>
+          <button class="gal-btn prev" aria-label="이전">&#10094;</button>
+          <button class="gal-btn next" aria-label="다음">&#10095;</button>
+          <div class="gal-dots"><i class="on"></i><i></i><i></i></div>
+        </div>
+        <div class="info"><b>등신대</b><span>전시·행사 공간 실측 스케일 설치물</span></div>
+      </div>
+      <div class="media-card">
+        <div class="gallery" data-gal="print3">
+          <div class="slides">
+            <img src="img/print3_1.jpg" alt="대형 실사 출력 1">
+            <img src="img/print3_2.jpg" alt="대형 실사 출력 2">
+            <img src="img/print3_3.jpg" alt="대형 실사 출력 3">
+          </div>
+          <button class="gal-btn prev" aria-label="이전">&#10094;</button>
+          <button class="gal-btn next" aria-label="다음">&#10095;</button>
+          <div class="gal-dots"><i class="on"></i><i></i><i></i></div>
+        </div>
+        <div class="info"><b>대형 실사 출력</b><span>1500×2000mm급 Pre-press 최적화 출력</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <h2>스케치 한 장이면 충분합니다</h2>
+  <p>지금 가진 파일 그대로 보내주세요. 진단부터 현장 구현까지, 공정 라인이 움직입니다.</p>
+  <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="cta-btn">카톡오픈챗으로 제작요청하기</a>
+</section>
+
+<footer>© JPHIC · 한주영 · info@jphic.co.kr</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="닫기">&#10005;</button>
+  <button class="lb-btn prev" aria-label="이전">&#10094;</button>
+  <img class="lb-img" id="lbImg" src="" alt="확대 이미지">
+  <button class="lb-btn next" aria-label="다음">&#10095;</button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<script>
+(function(){
+  /* ===== 공정 라인 스크롤 ===== */
+  const section=document.getElementById('lineSection');
+  const track=document.getElementById('lineTrack');
+  const steps=track.querySelectorAll('.step');
+  const dots=document.querySelectorAll('#progress i');
+  const mq=window.matchMedia('(max-width:768px)');
+  const reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  function setHeight(){
+    if(mq.matches){section.style.height='auto';return;}
+    const scrollW=track.scrollWidth-window.innerWidth;
+    section.style.height=(scrollW+window.innerHeight)+'px';
+  }
+  function onScroll(){
+    if(mq.matches){
+      steps.forEach(s=>{
+        const r=s.getBoundingClientRect();
+        if(r.top<window.innerHeight*0.85)s.classList.add('active');
+      });
+      return;
+    }
+    const rect=section.getBoundingClientRect();
+    const total=section.offsetHeight-window.innerHeight;
+    const progress=Math.min(Math.max(-rect.top/total,0),1);
+    const scrollW=track.scrollWidth-window.innerWidth;
+    if(!reduced)track.style.transform='translateX('+(-progress*scrollW)+'px)';
+    const idx=Math.min(Math.floor(progress*steps.length),steps.length-1);
+    steps.forEach((s,i)=>s.classList.toggle('active',i<=idx));
+    dots.forEach((d,i)=>d.classList.toggle('on',i<=idx));
+  }
+  setHeight();
+  window.addEventListener('load',()=>{setHeight();onScroll();});
+  window.addEventListener('resize',()=>{setHeight();onScroll();});
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  /* ===== 롤링 갤러리 (자동롤링 + 좌우버튼 + loop) ===== */
+  const galleries={};
+  document.querySelectorAll('.gallery').forEach(gal=>{
+    const id=gal.dataset.gal;
+    const slides=gal.querySelector('.slides');
+    const imgs=slides.querySelectorAll('img');
+    const dotsEl=gal.querySelectorAll('.gal-dots i');
+    let cur=0,timer;
+    function go(n){
+      cur=(n+imgs.length)%imgs.length; /* loop */
+      slides.style.transform='translateX('+(-cur*100)+'%)';
+      dotsEl.forEach((d,i)=>d.classList.toggle('on',i===cur));
+    }
+    function auto(){clearInterval(timer);timer=setInterval(()=>go(cur+1),3500);}
+    gal.querySelector('.prev').addEventListener('click',e=>{e.stopPropagation();go(cur-1);auto();});
+    gal.querySelector('.next').addEventListener('click',e=>{e.stopPropagation();go(cur+1);auto();});
+    if(!reduced)auto();
+    galleries[id]={imgs:Array.from(imgs),get cur(){return cur},go};
+  });
+
+  /* ===== Lightbox (확대 930px, 좌우 loop) ===== */
+  const lb=document.getElementById('lightbox');
+  const lbImg=document.getElementById('lbImg');
+  const lbCount=document.getElementById('lbCount');
+  let lbList=[],lbIdx=0;
+
+  function lbShow(i){
+    lbIdx=(i+lbList.length)%lbList.length; /* loop */
+    lbImg.src=lbList[lbIdx].src;
+    lbImg.alt=lbList[lbIdx].alt;
+    lbCount.textContent=(lbIdx+1)+' / '+lbList.length;
+  }
+  function lbOpen(list,start){
+    lbList=list;lbShow(start);
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function lbClose(){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  /* 갤러리 이미지 클릭 → 해당 갤러리 3장 묶음 */
+  Object.values(galleries).forEach(g=>{
+    g.imgs.forEach((img,i)=>{
+      img.addEventListener('click',()=>lbOpen(g.imgs,i));
+    });
+  });
+  /* 공정 라인 이미지 클릭 → step01~06 묶음 */
+  const stepImgs=Array.from(document.querySelectorAll('img[data-group="steps"]'));
+  stepImgs.forEach((img,i)=>{
+    img.parentElement.addEventListener('click',()=>lbOpen(stepImgs,i));
+  });
+
+  lb.querySelector('.lb-btn.prev').addEventListener('click',e=>{e.stopPropagation();lbShow(lbIdx-1);});
+  lb.querySelector('.lb-btn.next').addEventListener('click',e=>{e.stopPropagation();lbShow(lbIdx+1);});
+  lb.querySelector('.lb-close').addEventListener('click',lbClose);
+  lb.addEventListener('click',e=>{if(e.target===lb)lbClose();});
+  document.addEventListener('keydown',e=>{
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')lbClose();
+    if(e.key==='ArrowLeft')lbShow(lbIdx-1);
+    if(e.key==='ArrowRight')lbShow(lbIdx+1);
+  });
+})();
+</script>
+</body>
+</html>
