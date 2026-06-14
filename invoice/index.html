@@ -1,1437 +1,1207 @@
-<!-- 260612 1010  lite 금액조정 19,000 -->
+<!-- 260614 1530 / mod_01 디자인·퍼블 적용 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JPHIC | 예상견적</title>
-<meta name="description" content="JPHIC 예상견적">
-<link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>JPHIC PDF | 전시 백월·배너·등신대·포토존 인쇄파일 템플릿 제작 대행 </title>
+<meta name="description" content="템플릿 번호 고르고, 워딩만 전달하면 발주파일 완성. 전시월·배너·등신대·포토존·POP·전광판 등 사전 시뮬레이션 소통. 관공서·기업 홍보팀·에이전시 전문 제이픽.">
+<meta name="keywords" content="전시 백월 템플릿, 배너 인쇄파일, 등신대 제작, 포토존 파일, 글자 스카시, 행사 명찰, POP 인쇄, 칼선 세팅, 현수막, 인쇄파일 대행, 블리드 세팅, CMYK 변환, 성원애드피아, 레드프린팅, JPHIC, 제이픽">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://jphic.co.kr/pdf">
+<meta property="og:type" content="website">
+<meta property="og:title" content="전시 백월·배너·등신대·포토존 인쇄파일 템플릿 | JPHIC PDF">
+<meta property="og:description" content="템플릿 번호 고르고, 워딩만 전달하면 발주파일 완성. 전시 박람회 부스 대형실사출력 디자인 제이픽.">
+<meta property="og:image" content="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/a769350a-fb08-4da5-97ca-7aa4078d5a96_rw_1200.jpg?h=a1498ea868a29eede46b3db70e8414d1">
+<meta property="og:url" content="https://jphic.co.kr/pdf">
+<link rel="icon" type="image/png" href="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/693c2f61-56a5-4a19-822a-d2a66197d9f7_rw_600.png?h=b2f511503f7670e14ea334c4bbfbb61c">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-06LPWZ6RLL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-06LPWZ6RLL');
-</script>
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-06LPWZ6RLL');</script>
 <style>
+/* ===== mod_01 기준 변수 ===== */
 :root{
-  --bg:#E8EBEE;
-  --card:#FFFFFF;
-  --card-soft:#F4F6F8;
-  --card-deep:#DEE3E8;
-  --border:#D5DAE0;
-  --border-strong:#B8BFC8;
-  --rule:#C9CFD6;
-  --rule-soft:#E2E6EA;
-  --ink:#0B0E14;
-  --ink-soft:#3A414D;
-  --ink-mute:#6A7280;
-  --ink-faint:#A3AAB5;
-  --accent:#00BBAC;
-  --accent-deep:#007A70;
-  --accent-soft:rgba(0,187,172,.12);
-  --accent-glow:rgba(0,187,172,.25);
-  --warn:#B8860B;
-  --warn-bg:#FFF6D9;
-  --warn-border:#F0D87C;
-  --warn-ink:#6B5400;
-  --danger:#C7372F;
-  --r-lg:12px;
-  --r-md:8px;
-  --r-sm:4px;
+  --bg:#030712;
+  --bg2:#0B1220;
+  --line:#1E293B;
+  --txt:#E2E8F0;
+  --sub:#94A3B8;
+  --mc:#EA580C;       /* PDF 포인트색 */
+  --mc-light:rgba(234,88,12,0.1);
+  --mc-glow:rgba(234,88,12,0.25);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100%}
-body{
-  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,sans-serif !important;
-  background:var(--bg);
-  color:var(--ink);
+*{margin:0;padding:0;box-sizing:border-box;-webkit-user-select:none!important;user-select:none!important;}
+html{scroll-behavior:smooth;}
+html,body{overflow-x:clip;max-width:100vw;}
+/* mod_01: 본문 최소 14px */
+body{background:var(--bg);color:var(--txt);font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;line-height:1.6;font-size:16px;word-break:keep-all;}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+
+/* ===== NAV — mod_01 좌상단 로고·우상단 버튼 통일 ===== */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 32px;height:68px;
+  background:rgba(3,7,18,.05);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.04);
+  transition:background .3s,border-color .3s;
+}
+header.scrolled{
+  background:rgba(3,7,18,.95);
+  border-bottom-color:var(--line);
+}
+.logo{font-weight:900;font-size:18px;letter-spacing:.02em;color:#fff;}
+.logo span{color:var(--mc);}
+
+/* 가운데 메뉴 */
+.nav-center{
+  position:absolute;left:50%;transform:translateX(-50%);
+  display:flex;gap:32px;align-items:center;
+}
+.nav-center a{font-size:14px;font-weight:600;color:var(--sub);transition:.2s;}
+.nav-center a:hover{color:#fff;}
+
+/* 우상단 버튼 3개 */
+.nav-right{display:flex;gap:8px;align-items:center;}
+.nav-btn{
+  padding:8px 16px;border-radius:6px;font-size:14px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:.2s;border:1px solid var(--line);
+  background:transparent;color:var(--txt);white-space:nowrap;
+}
+.nav-btn:hover{border-color:var(--mc);color:#fff;}
+.nav-btn.primary{background:var(--mc);border-color:var(--mc);color:#fff;}
+.nav-btn.primary:hover{box-shadow:0 0 16px var(--mc-glow);}
+
+/* ===== HERO — CSS 배경 이미지 (크롤링은 h1 텍스트로) ===== */
+.hero{
+  min-height:100vh;width:100%;
+  position:relative;overflow:hidden;
+  background:
+    linear-gradient(to bottom, rgba(3,7,18,0) 0%, rgba(3,7,18,0) 40%, rgba(3,7,18,1) 100%),
+    url('/img/pdf/hero-bg.webp') center center/cover no-repeat;
+  background-color:var(--bg);
+}
+
+/* 캔버스 직선 모션 */
+#lineCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+
+/* 히어로 텍스트 — 절대좌표 배치 */
+.hero-tag-line{
+  position:absolute;top:110px;left:50%;transform:translateX(-50%);
+  font-size:14px;font-weight:700;color:rgba(255,255,255,.55);
+  letter-spacing:1.5px;white-space:nowrap;z-index:3;
+}
+.hero-sub-line{
+  position:absolute;top:580px;left:50%;transform:translateX(-50%);
+  font-size:clamp(16px,2vw,16px);font-weight:800;color:rgba(255,255,255,.9);
+  white-space:nowrap;z-index:3;letter-spacing:-.01em;
+}
+.hero-cta-wrap{
+  position:absolute;top:690px;left:50%;transform:translateX(-50%);
+  display:flex;gap:14px;align-items:center;z-index:3;white-space:nowrap;
+}
+.hero-inner{position:relative;z-index:2;}
+
+/* [SEO] h1 — 작게, 키워드 포함 */
+.hero h1{
+  font-size:14px;font-weight:700;color:var(--sub);
+  letter-spacing:1px;margin-bottom:36px;opacity:.7;
   line-height:1.6;
-  font-size:17px;
-  font-weight:400;
-  -webkit-font-smoothing:antialiased;
-  font-feature-settings:"ss01","tnum";
-  padding:64px 16px 80px;
-}
-.page{max-width:880px;margin:0 auto}
-
-/* ============ TOP BAR ============ */
-.topbar{
-  position:fixed;top:0;left:0;right:0;z-index:50;
-  background:rgba(232,235,238,.85);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--border);
-}
-.topbar-inner{
-  max-width:880px;margin:0 auto;
-  padding:12px 16px 12px 0;
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-}
-.topbar .logo{
-  font-family:'Pretendard',sans-serif;
-  font-size:15px;font-weight:700;letter-spacing:.02em;
-  color:var(--ink);text-decoration:none;
-  display:inline-flex;align-items:center;gap:7px;
-}
-.topbar .logo .universe{
-  font-weight:500;color:var(--ink-mute);
-  letter-spacing:.14em;font-size:13px;
-}
-.topbar-actions{display:flex;gap:8px}
-.btn{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:13px;font-weight:500;
-  padding:8px 14px;border-radius:var(--r-md);
-  text-decoration:none;cursor:pointer;
-  transition:.15s;border:1px solid transparent;
-  font-family:inherit;
-}
-.btn-chat{background:var(--accent);color:#fff}
-.btn-chat:hover{background:var(--accent-deep)}
-.btn-email{background:var(--card);color:var(--ink);border-color:var(--border)}
-.btn-email:hover{background:var(--card-soft);border-color:var(--border-strong)}
-
-/* ============ HEADER ============ */
-header{margin-bottom:32px}
-.h-eyebrow{
-  display:inline-block;
-  font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--accent-deep);
-  padding:4px 10px;border:1px solid var(--accent);
-  background:var(--accent-soft);
-  border-radius:var(--r-sm);margin-bottom:14px;
-}
-h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color:var(--ink)}
-.h-sub{font-size:17px;color:var(--ink-mute);font-weight:400}
-
-.discount-banner{
-  margin-top:18px;
-  background:linear-gradient(90deg,var(--warn-bg),#FFFBEC);
-  border:1px solid var(--warn-border);
-  border-radius:var(--r-md);
-  padding:14px 18px;
-  display:flex;align-items:center;gap:12px;
-  font-size:16px;color:var(--warn-ink);
-}
-.discount-banner .ico{
-  font-size:22px;flex-shrink:0;
-}
-.discount-banner strong{font-weight:700}
-.discount-banner .desc{color:var(--warn-ink);opacity:.85;font-size:14px;margin-top:2px}
-
-.event-cta{
-  margin-top:10px;padding:10px 14px;
-  background:var(--card-soft);border:1px solid var(--rule);
-  border-radius:var(--r-md);
-  font-size:13.5px;color:var(--ink-mute);text-align:left;
-}
-.event-cta a{color:var(--accent-deep);font-weight:600;text-decoration:none}
-.event-cta a:hover{text-decoration:underline}
-
-/* ============ STEPS ============ */
-.step{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--r-lg);
-  padding:24px 26px;
-  margin-bottom:16px;
-  transition:.2s;
-}
-.step.done{border-color:var(--accent)}
-.step-head{
-  display:flex;align-items:center;gap:12px;
-  margin-bottom:18px;padding-bottom:14px;
-  border-bottom:1px solid var(--rule-soft);
-}
-.step-num{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:32px;height:32px;border-radius:50%;
-  background:var(--card-soft);color:var(--ink-mute);
-  font-size:14px;font-weight:600;
-  border:1px solid var(--border);transition:.2s;
-}
-.step.done .step-num{background:var(--accent);color:#fff;border-color:var(--accent)}
-.step-title{
-  font-size:19px;font-weight:600;color:var(--ink);
-  letter-spacing:-.01em;flex:1;
-}
-.auto-badge{
-  display:none;align-items:center;gap:5px;
-  font-size:12px;font-weight:500;letter-spacing:.04em;
-  color:var(--accent-deep);background:var(--accent-soft);
-  padding:5px 10px;border-radius:var(--r-sm);
-}
-.auto-badge.show{display:inline-flex;animation:fadeIn .25s ease}
-.auto-badge .dot{
-  width:6px;height:6px;border-radius:50%;background:var(--accent);
-}
-.auto-badge.analyzing .dot{animation:pulse 1s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
-
-/* ============ DROPZONE ============ */
-.drop{
-  display:block;
-  border:1.5px dashed var(--border-strong);
-  background:var(--card-soft);
-  padding:24px;border-radius:var(--r-md);
-  cursor:pointer;text-align:center;
-  transition:.15s;
-}
-.drop:hover,.drop.over{
-  border-color:var(--accent);background:var(--accent-soft);
-}
-.drop input{
-  position:absolute;width:1px;height:1px;
-  opacity:0;overflow:hidden;
-  clip:rect(0,0,0,0);white-space:nowrap;border:0;padding:0;margin:-1px;
-}
-.drop-icon{font-size:26px;margin-bottom:6px;color:var(--ink-mute)}
-.drop-title{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:3px}
-.drop-hint{font-size:13px;color:var(--ink-mute)}
-
-.files{margin-top:12px;display:flex;flex-direction:column;gap:6px}
-
-/* Step 1: file tile grid */
-.file-grid{
-  display:flex;gap:10px;flex-wrap:wrap;
-}
-.file-tile{
-  position:relative;width:120px;height:120px;
-  background:var(--card-soft);border:1px solid var(--border);
-  border-radius:var(--r-md);overflow:hidden;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  transition:.15s;
-}
-.file-tile.drop-tile{
-  border:1.5px dashed var(--accent);cursor:pointer;background:var(--accent-soft);
-}
-.file-tile.drop-tile:hover{border-color:var(--accent);background:var(--card)}
-.file-tile.drop-tile .plus{font-size:28px;font-weight:300;color:var(--accent);line-height:1;margin-bottom:6px}
-.file-tile.drop-tile .lbl{font-size:12px;color:var(--accent);font-weight:600}
-.file-tile input{
-  position:absolute;width:1px;height:1px;opacity:0;
-  clip:rect(0,0,0,0);
-}
-.file-tile img{width:100%;height:100%;object-fit:cover;display:block}
-.file-tile .ext-badge{
-  font-size:14px;font-weight:700;color:var(--ink-soft);
-  background:var(--card-deep);padding:6px 10px;border-radius:4px;
-  margin-bottom:4px;
-}
-.file-tile .fname{
-  position:absolute;bottom:0;left:0;right:0;
-  background:rgba(0,0,0,.65);color:#fff;
-  font-size:10px;padding:3px 6px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center;
-}
-.file-tile .x{
-  position:absolute;top:4px;right:4px;
-  width:22px;height:22px;
-  background:rgba(0,0,0,.55);color:#fff;
-  border:none;border-radius:50%;cursor:pointer;
-  font-size:14px;line-height:1;padding:0;
-  display:flex;align-items:center;justify-content:center;
-}
-.file-tile .x:hover{background:var(--danger)}
-.file-item{
-  display:flex;align-items:center;gap:10px;
-  font-size:14px;padding:10px 14px;
-  background:var(--card-soft);border:1px solid var(--rule-soft);
-  border-radius:var(--r-md);
-  animation:fadeIn .25s ease;
-}
-.file-item .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.file-item .sz{color:var(--ink-mute);font-size:13px;font-variant-numeric:tabular-nums}
-.file-remove{
-  background:none;border:none;color:var(--ink-mute);
-  cursor:pointer;font-size:20px;line-height:1;padding:0 4px;
-}
-.file-remove:hover{color:var(--danger)}
-
-/* ============ REQUEST NOTES ============ */
-.notes-area{display:flex;flex-direction:column;gap:12px}
-
-.sub-field{margin-bottom:18px}
-.sub-field:last-child{margin-bottom:0}
-.sub-label{
-  display:block;font-size:13px;font-weight:600;
-  color:var(--ink-soft);margin-bottom:8px;letter-spacing:.02em;
-}
-.deadline-row{
-  display:flex;flex-wrap:wrap;gap:8px;
-}
-.dl-opt{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 14px;
-  background:var(--card-soft);border:1px solid var(--border);
-  border-radius:999px;cursor:pointer;
-  font-size:13.5px;color:var(--ink-soft);
-  transition:.15s;
-}
-.dl-opt:hover{border-color:var(--accent);color:var(--accent-deep)}
-.dl-opt input[type="radio"]{
-  width:14px;height:14px;accent-color:var(--accent);margin:0;cursor:pointer;
-}
-.dl-opt:has(input:checked){
-  background:var(--accent-soft);border-color:var(--accent);color:var(--accent-deep);font-weight:600;
-}
-.dl-opt.dl-date{padding:4px 8px 4px 12px}
-.dl-opt.dl-date input[type="date"]{
-  border:none;background:transparent;font-family:inherit;font-size:13.5px;
-  color:var(--ink-soft);padding:4px 0;cursor:pointer;outline:none;min-width:140px;
-}
-.notes-area textarea{
-  background:var(--accent-soft);border:1.5px solid var(--accent);
-  font-family:inherit;font-size:15px;color:var(--ink);
-  padding:12px 14px;border-radius:var(--r-md);
-  resize:vertical;min-height:90px;
-  transition:.12s;line-height:1.55;
-}
-.notes-area textarea:focus{
-  outline:none;border-color:var(--accent);background:var(--card);
-  box-shadow:0 0 0 3px rgba(0,187,172,0.12);
 }
 
-.ocr-area{
-  display:grid;grid-template-columns:140px 1fr;gap:12px;
-  align-items:start;
-}
-@media (max-width:560px){.ocr-area{grid-template-columns:1fr}}
-.ocr-thumb{
-  background:var(--card-soft);border:1px solid var(--border);
-  border-radius:var(--r-md);overflow:hidden;
-  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
-  position:relative;
-}
-.ocr-thumb img{width:100%;height:100%;object-fit:cover}
-.ocr-text{
-  font-size:13px;color:var(--ink-soft);line-height:1.6;
-  background:var(--accent-soft);
-  border-left:3px solid var(--accent);
-  padding:10px 14px;border-radius:0 var(--r-sm) var(--r-sm) 0;
-  white-space:pre-wrap;
-}
-.ocr-loading{
-  font-size:12px;color:var(--accent-deep);
-  display:flex;align-items:center;gap:8px;
-}
-.spinner{
-  width:14px;height:14px;
-  border:2px solid var(--accent-soft);
-  border-top-color:var(--accent);
-  border-radius:50%;animation:spin .8s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
+/* 감성 카피 */
+.hero-big{font-size:clamp(4rem,11vw,9rem);font-weight:900;line-height:1;letter-spacing:-.04em;color:#fff;display:block;}
+.hero-mid{font-size:clamp(1.8rem,4.5vw,3.5rem);font-weight:900;color:var(--mc);display:block;margin:12px 0 24px;letter-spacing:-.02em;}
+.hero-small{font-size:clamp(14px,1.6vw,18px);color:var(--sub);display:block;margin-bottom:12px;line-height:1.9;}
+.hero-copy{font-size:clamp(14px,1.3vw,16px);color:rgba(255,255,255,.5);max-width:560px;margin:0 auto 52px;line-height:2;}
 
-/* ============ TIER ============ */
-.tiers{display:grid;grid-template-columns:1fr;gap:10px}
-@media (min-width:720px){.tiers{grid-template-columns:repeat(3,1fr)}}
-.tier{
-  position:relative;
-  background:var(--card-soft);border:1.5px solid var(--border);
-  border-radius:var(--r-md);padding:16px 14px;cursor:pointer;
-  transition:.15s;
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{
+  padding:16px 32px;border-radius:8px;background:var(--mc);color:#fff;
+  font-size:15px;font-weight:800;border:none;cursor:pointer;
+  font-family:inherit;transition:.3s;display:inline-flex;align-items:center;gap:8px;
 }
-.tier:hover{border-color:var(--ink-mute);background:var(--card)}
-.tier input{position:absolute;opacity:0;pointer-events:none}
-.tier.selected{
-  border-color:var(--accent);background:var(--accent-soft);
-  box-shadow:0 0 0 1px var(--accent),0 4px 16px var(--accent-glow);
+.btn-primary:hover{box-shadow:0 0 24px var(--mc-glow);transform:translateY(-2px);}
+.btn-outline{
+  padding:16px 32px;border-radius:8px;background:transparent;color:#fff;
+  font-size:15px;font-weight:700;border:1px solid var(--line);
+  cursor:pointer;font-family:inherit;transition:.3s;
 }
-.tier .nm{font-size:13px;font-weight:700;letter-spacing:.15em;color:var(--ink);display:flex;align-items:center}
-.tier .pr{font-size:18px;font-weight:700;margin-top:6px;font-variant-numeric:tabular-nums;color:var(--ink)}
-.tier .pr-sub{font-size:13px;color:var(--ink-mute);font-weight:400}
-.tier .vat-note{font-size:11px;color:var(--ink-faint);font-weight:400}
-.tier .ds{font-size:13px;color:var(--ink-mute);margin-top:6px;line-height:1.45;font-weight:400}
-.tier .rec{
-  position:absolute;top:-8px;right:10px;
-  background:var(--accent);color:#fff;
-  font-size:11px;font-weight:600;letter-spacing:.1em;
-  padding:3px 8px;border-radius:var(--r-sm);
-  animation:fadeIn .3s ease;
-}
+.btn-outline:hover{border-color:rgba(255,255,255,.4);}
 
-/* ============ CLIENT INFO ============ */
-.client-area{display:flex;flex-direction:column;gap:14px}
-.doc-uploads{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
-@media (max-width:560px){.doc-uploads{grid-template-columns:1fr}}
-.doc-upload-label{
-  display:flex;align-items:baseline;gap:8px;margin-bottom:8px;flex-wrap:wrap;
-  font-size:14px;font-weight:600;color:var(--ink);
+/* ===== 3단계 흐름 ===== */
+.flow{padding:72px 5%;background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.flow-grid{display:grid;grid-template-columns:repeat(3,1fr);max-width:860px;margin:0 auto;position:relative;}
+.flow-grid::before{
+  content:'';position:absolute;top:32px;
+  left:calc(16.66% + 20px);right:calc(16.66% + 20px);
+  height:1px;background:linear-gradient(to right,var(--mc),rgba(234,88,12,.15));
 }
-.doc-upload-label .hint{font-size:12px;font-weight:400;color:var(--ink-mute)}
-.doc-upload-label .opt{font-size:12px;font-weight:400;color:var(--ink-faint)}
+.flow-item{text-align:center;padding:0 24px;position:relative;z-index:1;}
+.flow-num{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--mc);color:#fff;
+  font-size:1.4rem;font-weight:900;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 16px;
+}
+.flow-item:not(:first-child) .flow-num{background:var(--bg2);border:1px solid var(--line);color:var(--sub);}
+.flow-title{font-size:16px;font-weight:900;color:#fff;margin-bottom:8px;}
+.flow-desc{font-size:14px;color:var(--sub);line-height:1.7;}
 
-/* compact: 업로드 전엔 작은 + 박스만, 업로드 후엔 큰 미리보기로 확장 */
-.upload-slot{display:inline-block;vertical-align:top}
-.upload-slot .drop-square{
-  width:120px;height:120px;
-  padding:14px;border-radius:var(--r-md);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:var(--card-soft);border:1.5px dashed var(--border-strong);
-  cursor:pointer;transition:.2s;text-align:center;
-}
-.upload-slot .drop-square:hover{border-color:var(--accent);background:var(--accent-soft)}
-.upload-slot .drop-square .plus{font-size:28px;font-weight:300;color:var(--ink-mute);line-height:1;margin-bottom:6px}
-.upload-slot .drop-square .lbl{font-size:12px;color:var(--ink-mute);font-weight:500}
-.upload-slot.has-image .drop-square{
-  width:280px;height:180px;
-  border-style:solid;border-color:var(--border);
-  padding:0;overflow:hidden;
-}
-.upload-slot.has-image .drop-square .plus,
-.upload-slot.has-image .drop-square .lbl{display:none}
-.upload-slot .drop-square img{display:none}
-.upload-slot.has-image .drop-square img{
-  display:block;width:100%;height:100%;object-fit:contain;background:#fff;
-}
-.ocr-raw{
-  margin-top:8px;font-size:12px;color:var(--ink-soft);
-  background:var(--accent-soft);border-left:2px solid var(--accent);
-  padding:8px 10px;border-radius:0 4px 4px 0;
-  max-height:120px;overflow-y:auto;
-  white-space:pre-wrap;word-break:break-all;
-  display:none;
-}
-.ocr-raw.show{display:block;animation:fadeIn .3s ease}
-.ocr-raw .label{font-size:10px;font-weight:700;color:var(--accent-deep);letter-spacing:.1em;margin-bottom:4px}
+/* ===== 갤러리 ===== */
+.gallery-sec{padding:80px 5% 100px;}
+.sec-label{font-size:12px;font-weight:900;color:var(--mc);letter-spacing:2px;margin-bottom:10px;}
+.sec-title{font-size:clamp(22px,3vw,34px);font-weight:900;color:#fff;margin-bottom:12px;}
+.sec-desc{font-size:15px;color:var(--sub);margin-bottom:48px;}
 
-/* Refresh button */
-.header-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
-.btn-refresh{
-  background:transparent;border:1px solid var(--border-strong);
-  color:var(--ink-soft);font-family:inherit;
-  font-size:12px;font-weight:500;letter-spacing:.02em;
-  padding:6px 12px;border-radius:var(--r-md);cursor:pointer;
-  transition:.15s;display:inline-flex;align-items:center;gap:5px;
+/* 탭 */
+.tab-wrap{display:flex;justify-content:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.tab-btn{
+  padding:10px 28px;border-radius:6px;border:1px solid var(--line);
+  background:transparent;color:var(--sub);font-size:14px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:.2s;
 }
-.btn-refresh:hover{background:var(--card-deep);color:var(--ink);border-color:var(--ink-mute)}
-.btn-refresh .ico{display:inline-block;transition:transform .4s}
-.btn-refresh:hover .ico{transform:rotate(180deg)}
+.tab-btn.active{background:var(--mc);border-color:var(--mc);color:#fff;}
+.tab-btn:hover:not(.active){border-color:rgba(255,255,255,.3);color:#fff;}
 
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media (max-width:560px){.form-grid{grid-template-columns:1fr}}
-.field{display:flex;flex-direction:column;gap:5px}
-.field.full{grid-column:1/-1}
-.field label{font-size:12px;color:var(--ink-mute);font-weight:500;letter-spacing:.02em}
-.field label .req{color:var(--danger);margin-left:2px}
-.field label .auto-marker{
-  font-size:9px;color:var(--accent-deep);font-weight:600;
-  background:var(--accent-soft);padding:1px 6px;border-radius:2px;
-  margin-left:4px;animation:fadeIn .3s ease;
+/* 인쇄 안내 */
+.print-notice{
+  display:none;max-width:700px;margin:0 auto 28px;
+  background:rgba(234,88,12,.06);border:1px solid rgba(234,88,12,.2);
+  border-radius:8px;padding:14px 20px;font-size:14px;color:var(--sub);
+  text-align:center;line-height:1.8;
 }
-.field input{
-  background:var(--card-soft);border:1px solid var(--border);
-  font-family:inherit;font-size:15px;color:var(--ink);
-  padding:11px 13px;border-radius:var(--r-md);
-  transition:.12s;
-}
-.field input:focus{outline:none;border-color:var(--accent);background:var(--card)}
-.field input.auto-filled{
-  background:var(--accent-soft);border-color:var(--accent);
-  animation:autofill 1s ease;
-}
-@keyframes autofill{0%{background:var(--card)}50%{background:#A5F5EC}100%{background:var(--accent-soft)}}
+.print-notice.show{display:block;}
+.print-notice strong{color:var(--mc);}
 
-/* ============ PAPER (견적서) ============ */
-.paper{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--r-lg);
-  padding:48px 52px;margin-top:16px;
-  box-shadow:0 1px 0 rgba(0,0,0,.02),0 8px 24px -16px rgba(0,0,0,.12);
+/* 카테고리 필터 */
+.cat-filter{display:flex;justify-content:center;gap:8px;margin-bottom:48px;flex-wrap:wrap;}
+.cat-btn{
+  padding:7px 18px;border-radius:6px;border:1px solid var(--line);
+  background:transparent;color:var(--sub);font-size:13px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:.2s;
 }
-@media (max-width:560px){.paper{padding:32px 24px}}
+.cat-btn.active{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.25);color:#fff;}
+.cat-btn:hover:not(.active){color:#fff;}
 
-.disclaimer{
-  background:var(--warn-bg);
-  border:1px solid var(--warn-border);
-  color:var(--warn-ink);
-  font-size:13px;line-height:1.6;
-  padding:12px 16px;border-radius:var(--r-md);
-  margin-bottom:32px;
+/* 카드 그리드 — 갭 2배 */
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:48px 40px;   /* 세로 48px, 가로 40px */
+  max-width:1080px;margin:0 auto;
 }
-.disclaimer strong{font-weight:700}
+.t-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;transition:.35s;
+  cursor:pointer;display:none;
+}
+.t-card.show{display:block;}
+.t-card:hover{border-color:var(--mc);transform:translateY(-6px);box-shadow:0 20px 40px rgba(234,88,12,.12);}
 
-/* 견적서 상단 인쇄 버튼 */
-.paper-actions{
-  display:flex;justify-content:flex-end;
-  margin:-4px 0 18px;
-}
-.paper-btn{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 14px;border-radius:8px;
-  background:var(--card-soft);color:var(--ink-soft);
-  border:1px solid var(--border);
-  font-size:13px;font-weight:500;cursor:pointer;
-  transition:.15s;font-family:inherit;
-}
-.paper-btn:hover{
-  background:var(--accent);color:#fff;border-color:var(--accent);
-}
-.paper-btn svg{flex-shrink:0}
+.card-img{width:100%;aspect-ratio:3/2;overflow:hidden;background:#0a0b0e;position:relative;}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+.t-card:hover .card-img img{transform:scale(1.05);}
+.card-img img[src*="placeholder"]{filter:brightness(.4);}
 
-.doc-head{
-  text-align:center;padding-bottom:24px;
-  border-bottom:2px solid var(--ink);margin-bottom:28px;
+.card-code{
+  position:absolute;top:12px;left:12px;
+  background:rgba(3,7,18,.88);backdrop-filter:blur(6px);
+  border:1px solid var(--line);border-radius:4px;
+  padding:4px 10px;font-size:12px;font-weight:900;color:var(--mc);letter-spacing:1px;
 }
-.doc-title{
-  font-size:36px;font-weight:700;
-  letter-spacing:.5em;text-indent:.5em;color:var(--ink);
+.card-body{padding:24px 20px;}
+.card-cat{font-size:12px;font-weight:900;color:var(--mc);letter-spacing:1px;margin-bottom:6px;}
+.card-title{font-size:16px;font-weight:900;color:#fff;margin-bottom:8px;line-height:1.4;}
+.card-desc{font-size:14px;color:var(--sub);line-height:1.7;margin-bottom:20px;}
+.card-order{
+  width:100%;padding:12px;border-radius:6px;
+  background:transparent;border:1px solid var(--line);
+  color:#fff;font-size:14px;font-weight:800;
+  cursor:pointer;font-family:inherit;transition:.3s;text-align:center;
 }
-.doc-sub{
-  font-size:12px;color:var(--ink-mute);
-  letter-spacing:.2em;margin-top:6px;font-weight:500;
+.card-order:hover{background:var(--mc);border-color:var(--mc);}
+
+/* 빈 상태 */
+.empty-state{display:none;text-align:center;padding:60px;color:var(--sub);grid-column:1/-1;font-size:14px;}
+.empty-state.show{display:block;}
+
+/* ===== UNIVERSE 5단계 — weare 공정 라인 UI ===== */
+.universe-sec{position:relative;background:var(--bg);}
+.universe-sec .sec-header{padding:100px 5% 60px;border-top:1px solid var(--line);}
+
+/* weare 공정 라인 그대로 이식 */
+.proc-section{position:relative;}
+.proc-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;}
+.proc-track{display:flex;gap:80px;padding:0 8vw;will-change:transform;}
+.proc-step{
+  flex:0 0 min(78vw,640px);
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:16px;padding:32px;
+  opacity:.3;transform:translateY(16px);
+  transition:opacity .5s,transform .5s;
+}
+.proc-step.active{opacity:1;transform:translateY(0);}
+.proc-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;}
+.proc-num{font-size:42px;font-weight:900;letter-spacing:-.03em;line-height:1;}
+.proc-title{font-size:clamp(18px,2.2vw,26px);font-weight:800;}
+.proc-title small{display:block;color:var(--sub);font-weight:500;font-size:14px;letter-spacing:.08em;margin-top:2px;}
+.proc-img{
+  margin:20px 0;aspect-ratio:16/10;
+  border-radius:12px;overflow:hidden;background:var(--bg);
+}
+.proc-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s;}
+.proc-img:hover img{transform:scale(1.03);}
+.proc-copy{color:var(--sub);font-size:15px;line-height:1.7;}
+.proc-copy strong{display:block;color:var(--txt);font-size:16px;margin-bottom:6px;}
+
+.proc-progress{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;gap:10px;z-index:5;
+}
+.proc-progress i{width:28px;height:2px;background:var(--line);transition:.3s;display:block;}
+.proc-progress i.on{background:var(--mc);}
+
+/* 모바일 */
+@media(max-width:768px){
+  .proc-section{height:auto!important;}
+  .proc-sticky{position:static;height:auto;overflow:visible;display:block;padding:40px 20px;}
+  .proc-track{flex-direction:column;padding:0;gap:32px;transform:none!important;}
+  .proc-step{flex:none;width:100%;opacity:1;transform:none;}
+  .proc-progress{display:none;}
 }
 
-.meta-row{
-  display:flex;justify-content:space-between;
-  font-size:13px;color:var(--ink-soft);
-  margin-bottom:24px;letter-spacing:.02em;font-weight:500;
+/* ===== CTA ===== */
+.cta-sec{
+  padding:100px 5%;text-align:center;
+  background:linear-gradient(135deg,#0f172a 0%,#1a0a04 50%,#0f172a 100%);
+  border-top:1px solid var(--line);
 }
-.meta-row .v{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink);margin-left:4px}
+.cta-sec h2{font-size:clamp(22px,3.5vw,40px);font-weight:900;color:#fff;margin-bottom:16px;line-height:1.35;}
+.cta-sec p{color:var(--sub);font-size:15px;margin-bottom:36px;line-height:1.9;}
 
-.parties{
-  display:grid;grid-template-columns:1fr 1fr;
-  border:1px solid var(--ink);border-radius:var(--r-md);
-  overflow:hidden;margin-bottom:24px;
+footer{
+  border-top:1px solid var(--line);
+  padding:32px;text-align:center;color:#64748B;font-size:14px;
 }
-@media (max-width:560px){.parties{grid-template-columns:1fr}}
-.party{padding:14px 16px}
-.party + .party{border-left:1px solid var(--ink)}
-@media (max-width:560px){.party + .party{border-left:none;border-top:1px solid var(--ink)}}
-.party-label{
-  font-size:11px;letter-spacing:.18em;font-weight:700;
-  color:var(--ink);background:var(--card-deep);
-  padding:6px 10px;margin:-14px -16px 12px;
-  border-bottom:1px solid var(--ink);
-}
-.party-row{
-  display:grid;grid-template-columns:64px 1fr;
-  font-size:14px;padding:4px 0;align-items:start;
-}
-.party-row .k{color:var(--ink-mute);font-size:13px;padding-top:1px;font-weight:500}
-.party-row .v{color:var(--ink);min-height:20px;word-break:break-all;font-weight:500}
-.party-row .v.empty{color:var(--ink-faint);font-weight:400;font-style:italic}
+.f-logo{font-size:15px;font-weight:900;color:#fff;display:block;margin-bottom:8px;}
+.f-logo span{color:var(--mc);}
 
-.items{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px}
-.items thead th{
-  background:var(--card-deep);
-  border-top:1.5px solid var(--ink);
-  border-bottom:1.5px solid var(--ink);
-  padding:10px;font-size:12px;font-weight:700;letter-spacing:.06em;
-  text-align:center;color:var(--ink);
-}
-.items tbody td{padding:12px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
-.items .col-no{width:40px;text-align:center;color:var(--ink-mute);font-variant-numeric:tabular-nums}
-.items .col-spec{color:var(--ink-soft);font-size:13px;margin-top:3px;font-weight:400}
-.items .col-qty{width:55px;text-align:center;font-variant-numeric:tabular-nums}
-.items .col-unit,.items .col-amt{width:130px;text-align:right;font-variant-numeric:tabular-nums}
-.items .col-amt{font-weight:600}
-.items tr.empty td{color:var(--ink-faint);text-align:center;padding:28px;font-weight:400}
+/* 스크롤 애니 */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
 
-.totals{display:flex;justify-content:flex-end;margin-bottom:8px}
-.totals-box{
-  min-width:320px;
-  border-top:1.5px solid var(--ink);border-bottom:2.5px solid var(--ink);
-}
-.totals-box .row{
-  display:flex;justify-content:space-between;
-  padding:8px 0;font-size:14px;
-  border-bottom:1px solid var(--rule);
-}
-.totals-box .row:last-child{border-bottom:none}
-.totals-box .row .k{color:var(--ink-soft);padding-left:14px;font-weight:500}
-.totals-box .row .v{font-variant-numeric:tabular-nums;padding-right:4px;font-weight:600}
-.totals-box .row.grand{font-size:17px;font-weight:700;padding:12px 0}
-.totals-box .row.grand .k{color:var(--ink)}
-.totals-box .row.grand .v{color:var(--accent-deep);font-size:20px}
+/* 모달 */
+.modal{position:fixed;inset:0;background:rgba(3,7,18,.92);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(10px);}
+.modal.open{display:flex;}
+.modal-box{background:#0f1218;width:100%;max-width:520px;border-radius:16px;border:1px solid var(--line);overflow:hidden;max-height:90vh;display:flex;flex-direction:column;}
+.modal-body{padding:28px;overflow-y:auto;position:relative;}
+.modal-close{position:absolute;top:14px;right:18px;font-size:1.5rem;color:var(--sub);cursor:pointer;}
+.modal-title{font-size:18px;font-weight:900;color:#fff;margin-bottom:6px;}
+.modal-sub{font-size:14px;color:var(--sub);margin-bottom:20px;}
+.selected-code{display:inline-block;padding:5px 14px;background:var(--mc-light);border:1px solid rgba(234,88,12,.3);border-radius:4px;font-size:12px;font-weight:900;color:var(--mc);margin-bottom:16px;letter-spacing:1px;}
+.f-label{display:block;font-size:14px;font-weight:700;color:#fff;margin-bottom:8px;}
+.f-input,.f-textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.3);color:#fff;font-family:inherit;font-size:14px;margin-bottom:16px;transition:.2s;}
+.f-input:focus,.f-textarea:focus{outline:none;border-color:var(--mc);}
+.f-textarea{resize:none;}
+.print-warn{background:rgba(234,88,12,.07);border:1px solid rgba(234,88,12,.2);border-radius:8px;padding:12px 16px;font-size:14px;color:var(--sub);margin-bottom:16px;display:none;line-height:1.8;}
+.print-warn.show{display:block;}
+.print-warn strong{color:var(--mc);}
+.submit-btn{width:100%;padding:15px;border-radius:8px;background:var(--mc);color:#fff;font-size:15px;font-weight:900;border:none;cursor:pointer;font-family:inherit;transition:.3s;}
+.submit-btn:hover{box-shadow:0 0 20px var(--mc-glow);}
+.result-box{display:none;margin-top:16px;}
+.copy-area{background:rgba(0,0,0,.4);color:#e2e8f0;padding:14px;border-radius:8px;font-size:14px;line-height:1.7;white-space:pre-wrap;margin-bottom:12px;border:1px solid var(--line);max-height:150px;overflow-y:auto;}
+.result-btns{display:flex;flex-direction:column;gap:10px;}
+.copy-btn{padding:13px;border-radius:8px;background:#1e293b;color:#fff;font-size:14px;font-weight:800;border:none;cursor:pointer;font-family:inherit;}
+.kakao-btn{padding:13px;border-radius:8px;background:var(--mc);color:#fff;font-size:14px;font-weight:800;text-align:center;display:block;}
 
-.amount-words{
-  font-size:13px;color:var(--ink-mute);
-  margin-bottom:28px;text-align:right;font-weight:500;min-height:16px;
-}
+/* 체크박스 태그 */
+.ctag{display:inline-block;padding:7px 14px;border-radius:6px;border:1px solid var(--line);background:rgba(0,0,0,.2);font-size:13px;font-weight:700;color:var(--sub);cursor:pointer;transition:.2s;}
+.mc-cb:checked+.ctag{background:var(--mc);color:#fff;border-color:var(--mc);}
 
-.notes-block{border-top:1px solid var(--rule);padding-top:18px;margin-bottom:24px}
-.notes-block-title{
-  font-size:13px;letter-spacing:.18em;font-weight:700;
-  color:var(--ink);margin-bottom:10px;
+/* 모바일 */
+@media(max-width:1024px){.uni-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:768px){
+  .card-grid{grid-template-columns:1fr 1fr;gap:28px 20px;}
+  .flow-grid{grid-template-columns:1fr;gap:24px;}
+  .flow-grid::before{display:none;}
+  .nav-center{display:none;}
+  .uni-grid{grid-template-columns:repeat(2,1fr);}
+  header{padding:0 20px;}
 }
-.notes-block ul{list-style:none;font-size:13.5px;color:var(--ink-soft);line-height:1.8}
-.notes-block li{padding-left:14px;position:relative;font-weight:400}
-.notes-block li::before{content:'·';position:absolute;left:4px;color:var(--ink);font-weight:700}
-.notes-block li strong{font-weight:600;color:var(--ink)}
-
-/* ============ SUBMIT ============ */
-.submit-area{
-  margin-top:16px;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r-lg);
-  padding:24px 26px;text-align:center;
-}
-.submit{
-  background:var(--ink);color:#fff;border:none;
-  padding:16px 56px;border-radius:var(--r-md);
-  font-size:15px;font-weight:600;font-family:inherit;
-  letter-spacing:.08em;cursor:pointer;transition:.15s;
-}
-.submit:hover{background:var(--accent-deep)}
-.submit:disabled{background:var(--ink-faint);cursor:not-allowed}
-.submit-hint{font-size:12px;color:var(--ink-mute);margin-top:10px;font-weight:400}
-.submit-hint a{color:var(--accent-deep);text-decoration:none;font-weight:500}
-
-/* 푸터 */
-.page-footer{
-  margin-top:40px;padding:24px 16px 32px;
-  text-align:center;border-top:1px solid var(--rule-soft);
-}
-.page-footer .ft-brand{
-  font-size:14px;font-weight:700;letter-spacing:.08em;
-  color:var(--ink);margin-bottom:10px;
-}
-.page-footer .ft-line{font-size:13.5px;color:var(--ink-soft);line-height:1.8}
-.page-footer .ft-line a{color:var(--ink-soft);text-decoration:none}
-.page-footer .ft-line a:hover{color:var(--accent);text-decoration:underline}
-.page-footer .ft-line .sep{margin:0 8px;color:var(--border-strong)}
-@media (max-width:520px){
-  .page-footer .ft-line .sep{display:block;height:4px;margin:2px 0}
-  .page-footer .ft-line{font-size:13px}
-}
-
-.toast{
-  position:fixed;bottom:24px;left:50%;
-  transform:translateX(-50%) translateY(20px);
-  background:var(--ink);color:#fff;
-  padding:12px 24px;border-radius:var(--r-md);
-  font-size:13px;opacity:0;transition:.25s;
-  pointer-events:none;z-index:100;letter-spacing:.04em;font-weight:500;
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast.error{background:var(--danger)}
-
-@media print{
-  body{background:#fff;padding:0;color:#000}
-  .topbar,.step,.discount-banner,.submit-area,.toast,header,.page-footer,.paper-actions{display:none !important}
-  .paper{box-shadow:none;border:none;padding:20mm 18mm}
-  @page{size:A4;margin:0}
+@media(max-width:480px){
+  .card-grid{grid-template-columns:1fr;gap:24px;}
+  .nav-right .nav-btn:not(.primary){display:none;}
 }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="topbar-inner">
-    <a href="/" class="logo">JPHIC <span class="universe">UNIVERSE</span></a>
-    <div class="topbar-actions">
-      <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="btn btn-chat">오픈챗 문의</a>
-      <button class="btn-refresh" id="btnRefresh" type="button"><span class="ico">↻</span> 초기화</button>
+<!-- ===== HEADER ===== -->
+<header>
+  <a href="https://jphic.co.kr" class="logo">JPHIC <span>PDF</span></a>
+
+  <nav class="nav-center">
+    <a href="#how">템플릿 주문방법</a>
+    <a href="#gallery">템플릿 갤러리</a>
+    <a href="#universe">디자인 제작 과정</a>
+    <a href="https://jphic.co.kr/invoice">작업의뢰 및 예상견적</a>
+  </nav>
+
+  <div class="nav-right">
+    <button onclick="openModal(null)" class="nav-btn">디자인 요청</button>
+    <button onclick="location.href='https://jphic.co.kr/invoice'" class="nav-btn">디자인 견적</button>
+    <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="nav-btn primary"><i class="fa-solid fa-comment"></i> 오픈챗</a>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="heroSection">
+  <!-- 직선 모션 캔버스 -->
+  <canvas id="lineCanvas"></canvas>
+
+  <!-- [SEO] h1 크롤링용 숨김 -->
+  <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">전시 백월 템플릿, 배너 인쇄파일, 등신대 제작, 포토존 파일, 글자 스카시, 행사 명찰, POP 인쇄, 칼선 세팅, 현수막, 인쇄파일 대행, 블리드 세팅, CMYK 변환, 성원애드피아, 레드프린팅, JPHIC, 제이픽</h1>
+
+  <!-- 상단 190px: 태그라인 -->
+  <p class="hero-tag-line">컨퍼런스 전시 행사 디자인전문 &nbsp;—&nbsp; 웹 · 인쇄물 · 모션</p>
+
+  <!-- 상단 650px: 서브카피 -->
+  <p class="hero-sub-line">대보지 않아도 제이픽이 알아서 다 해줌</p><br>
+
+  <!-- 상단 724px: CTA 버튼 -->
+  <div class="hero-cta-wrap">
+    <div style="position:relative;">
+      <div style="position:absolute;top:-36px;left:50%;transform:translateX(-50%);background:#fff;color:#030712;font-size:12px;font-weight:800;padding:5px 13px;border-radius:20px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.35);">설치 목업 궁금하다면?<span style="position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:7px solid #fff;"></span></div>
+      <button onclick="openModal(null,null,null,true)" class="btn-primary"><i class="fa-solid fa-cube"></i> 목업 시뮬 요청하기</button>
+    </div>
+    <button onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})" class="btn-outline"><i class="fa-solid fa-grid-2"></i> 템플릿 고르기</button>
+    <a href="https://jphic.co.kr/invoice" class="btn-outline">견적·발주 →</a>
+  </div>
+</section>
+
+<!-- ===== 3단계 ===== -->
+<section class="flow rv" id="how">
+  <div class="flow-grid">
+    <div class="flow-item">
+      <div class="flow-num">1</div>
+      <div class="flow-title">고르고</div>
+      <p class="flow-desc">갤러리에서 템플릿 번호 선택.<br>웹 또는 인쇄 카테고리 필터.</p>
+    </div>
+    <div class="flow-item">
+      <div class="flow-num">2</div>
+      <div class="flow-title">컨펌하고</div>
+      <p class="flow-desc">워딩·색상·사이즈 수정 요청.<br>사전 시뮬레이션으로 현장 확인.</p>
+    </div>
+    <div class="flow-item">
+      <div class="flow-num">3</div>
+      <div class="flow-title">보내기</div>
+      <p class="flow-desc">블리드·CMYK 완벽 세팅 후<br>발주 파일 납품.</p>
     </div>
   </div>
-</div>
+</section>
 
-<div class="page">
+<!-- ===== 갤러리 ===== -->
+<section class="gallery-sec" id="gallery">
+  <div style="text-align:center;" class="rv">
+    <p class="sec-label">TEMPLATE GALLERY</p>
+    <h2 class="sec-title">템플릿 고르기</h2>
+    <p class="sec-desc">번호를 고르고 invoice 페이지에서 주문하거나 오픈챗으로 알려주세요.<br>워딩만 바꿔서 발주파일로 만들어드립니다.</p>
+  </div>
 
-  <header>
-    <h1>작업 의뢰하기 및 예상견적</h1>
-    <p class="h-sub">벡터씨 KIT으로 해결 안 되는 작업, 전문가에게 맡겨주세요.</p>
+  <div class="tab-wrap rv">
+    <button class="tab-btn active" onclick="switchTab('all',this)">전체</button>
+    <button class="tab-btn" onclick="switchTab('print',this)">인쇄 PRINT</button>
+    <button class="tab-btn" onclick="switchTab('web',this)">웹 WEB</button>
+  </div>
 
-    <div class="discount-banner">
-      <div class="ico">⚡</div>
-      <div>
-        <strong>시안 전달 후 '당일 최종안 확정 시' 7.7% 할인</strong>
-        <div class="desc">최종 견적이 내려가는 가장 좋은 방법입니다.</div>
+  <div class="print-notice" id="printNotice">
+    <strong>⚠️ 인쇄 템플릿 안내</strong><br>
+    발주처(인쇄소) 사양에 따라 파일 구조가 달라집니다.<br>
+    템플릿 번호와 함께 <strong>발주처를 반드시 알려주세요.</strong>
+  </div>
+
+  <div class="cat-filter rv" id="catFilter">
+    <button class="cat-btn active" onclick="filterCat('all',this)">전체</button>
+    <button class="cat-btn print-only" onclick="filterCat('bw',this)">백월</button>
+    <button class="cat-btn print-only" onclick="filterCat('bn',this)">배너</button>
+    <button class="cat-btn print-only" onclick="filterCat('es',this)">등신대</button>
+    <button class="cat-btn print-only" onclick="filterCat('pz',this)">포토존</button>
+    <button class="cat-btn print-only" onclick="filterCat('pp',this)">POP</button>
+    <button class="cat-btn print-only" onclick="filterCat('cl',this)">칼선</button>
+    <button class="cat-btn print-only" onclick="filterCat('id',this)">명찰·사원증</button>
+    <button class="cat-btn print-only" onclick="filterCat('gs',this)">그래픽 시트지</button>
+    <button class="cat-btn web-only" onclick="filterCat('sn',this)">SNS</button>
+    <button class="cat-btn web-only" onclick="filterCat('sa',this)">사이니지</button>
+    <button class="cat-btn web-only" onclick="filterCat('wbn',this)">웹배너</button>
+  </div>
+
+  <div class="card-grid" id="cardGrid">
+
+    <!-- ===== 인쇄 · 백월 ===== -->
+    <div class="t-card show" data-tab="print" data-cat="bw">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/35cc2191-f003-4699-82ce-36dd2920c809_rw_1920.jpg?h=cc508dcce6e3176609666ac0abe7ad68" alt="전시부스 백월 인쇄파일 템플릿 PRT-BW-001">
+        <span class="card-code">PRT-BW-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 백월</div>
+        <div class="card-title">전시 부스 대형 백월 — 라이트</div>
+        <p class="card-desc">코엑스·킨텍스 전시 부스. 패널 분할·블리드 세팅 완료. 밝은 배경 계열.</p>
+        <button class="card-order" onclick="openModal('PRT-BW-001','print','전시 부스 대형 백월 — 라이트')">이 번호로 주문하기</button>
       </div>
     </div>
 
-    <div class="event-cta">
-      인쇄 전 파일 점검 (해상도·재단·CMYK·outline)이 필요하시면 → <a href="/event" target="_blank">발주파일 무료 진단 신청</a>
+    <div class="t-card show" data-tab="print" data-cat="bw">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/367ebb80-2c18-428a-98c0-6726eb9669d0_rw_1920.png?h=105abc6ecbcc87e3344f7a3dea934178" alt="전시 백월 다크 테마 PRT-BW-002">
+        <span class="card-code">PRT-BW-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 백월</div>
+        <div class="card-title">전시 백월 — 다크 테마</div>
+        <p class="card-desc">다크 배경 전시 부스 백월. 고채도 컬러 브랜드 적합.</p>
+        <button class="card-order" onclick="openModal('PRT-BW-002','print','전시 백월 — 다크 테마')">이 번호로 주문하기</button>
+      </div>
     </div>
-  </header>
 
-  <section class="step" id="step1">
-    <div class="step-head">
-      <span class="step-num">01</span>
-      <div class="step-title">참고 파일 업로드 <span style="font-size:13px;color:var(--ink-mute);font-weight:400;letter-spacing:0">· 최대 5개</span></div>
-      <span class="auto-badge" id="badge1"><span class="dot"></span>분석 대기</span>
+    <div class="t-card show" data-tab="print" data-cat="bw">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/2c6bac7d-0716-4ad2-8602-5eb0f50ac168_rw_1920.jpg?h=ae85f097dd0560de50a0e9a3b781c59b" alt="콘텐츠 부스 백월 PRT-BW-003">
+        <span class="card-code">PRT-BW-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 백월</div>
+        <div class="card-title">콘텐츠 부스 백월 — 풀컬러</div>
+        <p class="card-desc">브랜드 키비주얼 중심 풀컬러 백월. 포토존 겸용 가능.</p>
+        <button class="card-order" onclick="openModal('PRT-BW-003','print','콘텐츠 부스 백월 — 풀컬러')">이 번호로 주문하기</button>
+      </div>
     </div>
-    <div class="file-grid" id="fileGrid">
-      <label class="file-tile drop-tile" id="drop1">
-        <input type="file" id="fileInput" multiple accept=".pdf,.ai,.psd,.png,.jpg,.jpeg,.svg,.zip">
-        <div class="plus">+</div>
-        <div class="lbl">파일 추가</div>
-      </label>
+
+    <!-- ===== 인쇄 · 배너 ===== -->
+    <div class="t-card show" data-tab="print" data-cat="bn">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/5747be95-b4d4-433a-a35a-d2a7239b9d02_rw_600.png?h=81a86b8fed54f327f6cc7d96422e3e02" alt="행사 X배너 스탠드 PRT-BN-001">
+        <span class="card-code">PRT-BN-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 배너</div>
+        <div class="card-title">행사용 X배너 스탠드</div>
+        <p class="card-desc">실내 행사 X배너. 타공 여백·블리드 세팅 완료.</p>
+        <button class="card-order" onclick="openModal('PRT-BN-001','print','행사용 X배너 스탠드')">이 번호로 주문하기</button>
+      </div>
     </div>
-    <div class="drop-hint" style="margin-top:8px">PDF · AI · PNG · JPG · SVG / 개당 최대 5MB / 파일 추가 전달 필요할 경우, 상단 버튼에 오픈챗 문의가 빠릅니다.</div>
+
+    <div class="t-card show" data-tab="print" data-cat="bn">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/ce7f1dbe-be64-4e47-a35b-27641583760f_rw_1200.png?h=519ccbc99a33d117a0391694f17ba6d0" alt="야외 현수막 PRT-BN-002">
+        <span class="card-code">PRT-BN-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 배너</div>
+        <div class="card-title">야외 현수막</div>
+        <p class="card-desc">옥외 현수막. 아일렛 위치 여백 포함 납품.</p>
+        <button class="card-order" onclick="openModal('PRT-BN-002','print','야외 현수막')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="bn">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/a4869734-b56d-4f46-bdac-af19ce8fd2bc_rw_1200.jpg?h=a0bec65a6cdd0c2c7f3a1f7a79744de2" alt="롤업 배너 PRT-BN-003">
+        <span class="card-code">PRT-BN-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 배너</div>
+        <div class="card-title">롤업 배너 — 전시·행사용</div>
+        <p class="card-desc">전시·행사 롤업 배너. 하단 여백 확보, 폴딩 여유분 포함.</p>
+        <button class="card-order" onclick="openModal('PRT-BN-003','print','롤업 배너 — 전시·행사용')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 인쇄 · 포토존 ===== -->
+    <div class="t-card show" data-tab="print" data-cat="pz">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/5a0f8696-a2ee-456a-bae0-2b8a67b27ed2_rw_1920.jpg?h=626f2843df0c4a311e435ff5f49662c4" alt="행사 포토존 포토월 PRT-PZ-001">
+        <span class="card-code">PRT-PZ-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 포토존</div>
+        <div class="card-title">행사 포토존·포토월</div>
+        <p class="card-desc">트러스 프레임 규격 맞춤. 업스케일 고해상도 납품.</p>
+        <button class="card-order" onclick="openModal('PRT-PZ-001','print','행사 포토존·포토월')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="pz">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/c6bbb969-eb9c-4635-9b33-8f97a916b128_rw_1200.png?h=e819f33fcc391a9b7b8b4156b319ab69" alt="대형 포토존 풀배경 PRT-PZ-002">
+        <span class="card-code">PRT-PZ-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 포토존</div>
+        <div class="card-title">대형 포토존 — 풀배경</div>
+        <p class="card-desc">넓은 포토월 전체 배경. 고해상도 실사 출력 최적화.</p>
+        <button class="card-order" onclick="openModal('PRT-PZ-002','print','대형 포토존 — 풀배경')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="pz">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/b12ce5e2-78ba-4330-a0d1-ef8c8fcb7b0c_rw_1200.png?h=895b062f23e0db55d2bcb6149140bba7" alt="팝업스토어 포토존 PRT-PZ-003">
+        <span class="card-code">PRT-PZ-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 포토존</div>
+        <div class="card-title">팝업스토어 포토존</div>
+        <p class="card-desc">팝업 내부 포토존. 브랜드 로고·해시태그 영역 포함.</p>
+        <button class="card-order" onclick="openModal('PRT-PZ-003','print','팝업스토어 포토존')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 인쇄 · 칼선 ===== -->
+    <div class="t-card show" data-tab="print" data-cat="cl">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/3c6651a7-c0e4-42e7-8afb-5eac52696d03_rw_600.png?h=b40293ca934e3fdd135827c533ca1399" alt="칼선 등신대 PRT-CL-001">
+        <span class="card-code">PRT-CL-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 칼선</div>
+        <div class="card-title">등신대 칼선 — 인물형</div>
+        <p class="card-desc">포맥스 등신대. 칼선(도무송) 레이어 분리, 안전영역 내 인물 배치.</p>
+        <button class="card-order" onclick="openModal('PRT-CL-001','print','등신대 칼선 — 인물형')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="cl">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/2220a569-c1d4-4dd5-9723-a102f5b4303e_rw_1200.png?h=bb6c96f61aff20ed8f27a74dcbfaf255" alt="칼선 POP 스탠드 PRT-CL-002">
+        <span class="card-code">PRT-CL-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 칼선</div>
+        <div class="card-title">POP 스탠드 칼선</div>
+        <p class="card-desc">매장 POP 스탠드. 외곽 칼선·화이트 레이어 분리 납품.</p>
+        <button class="card-order" onclick="openModal('PRT-CL-002','print','POP 스탠드 칼선')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="cl">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/c93fb799-e002-4c2f-9c06-9373f74a2db4_rw_600.png?h=1786577b20361430cc3c32ea72eea826" alt="스티커 칼선 PRT-CL-003">
+        <span class="card-code">PRT-CL-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 칼선</div>
+        <div class="card-title">스티커·라벨 칼선</div>
+        <p class="card-desc">스티커 외곽 칼선. 화이트 테두리·도무송 레이어 완벽 분리.</p>
+        <button class="card-order" onclick="openModal('PRT-CL-003','print','스티커·라벨 칼선')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 인쇄 · 명찰 ===== -->
+    <div class="t-card show" data-tab="print" data-cat="id">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/7f9413b7-1b50-4c60-bf17-923fda10ccb5_rw_1200.png?h=8121f11210781ed56c292f2eb771a979" alt="대량 사원증 명찰 PRT-ID-001">
+        <span class="card-code">PRT-ID-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 명찰·사원증</div>
+        <div class="card-title">대량 사원증·명찰</div>
+        <p class="card-desc">엑셀 명단 기반 자동 치환. 100명~ 대량 일괄 납품.</p>
+        <button class="card-order" onclick="openModal('PRT-ID-001','print','대량 사원증·명찰')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="id">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/6169e7d8-cd83-4627-93c9-1210045c7976_rw_1920.png?h=be9e3853f97ddf072eb9df390554aef5" alt="행사 명찰 학생증 PRT-ID-002">
+        <span class="card-code">PRT-ID-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 명찰·사원증</div>
+        <div class="card-title">행사 명찰·학생증</div>
+        <p class="card-desc">행사·컨퍼런스 대량 명찰. 목걸이 타공 여백 포함.</p>
+        <button class="card-order" onclick="openModal('PRT-ID-002','print','행사 명찰·학생증')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="id">
+      <div class="card-img">
+        <img src="/img/pdf/id-badge-003.webp" alt="VIP 네임택 PRT-ID-003" onerror="this.style.background='#1a2030';this.alt='PRT-ID-003 준비중';">
+        <span class="card-code">PRT-ID-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 명찰·사원증</div>
+        <div class="card-title">VIP 네임택 — 고급형</div>
+        <p class="card-desc">컨퍼런스·VIP용 고급 네임택. 별색·금박 레이어 옵션 포함.</p>
+        <button class="card-order" onclick="openModal('PRT-ID-003','print','VIP 네임택 — 고급형')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 인쇄 · 그래픽 시트지 ===== -->
+    <div class="t-card show" data-tab="print" data-cat="gs">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/3c6651a7-c0e4-42e7-8afb-5eac52696d03_rw_600.png?h=b40293ca934e3fdd135827c533ca1399" alt="매장 쇼윈도 래핑 PRT-GS-001">
+        <span class="card-code">PRT-GS-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 그래픽 시트지</div>
+        <div class="card-title">매장 쇼윈도·공간 래핑</div>
+        <p class="card-desc">칼선 레이어 분리·색상 보정 완료. 쇼윈도·엘리베이터 래핑.</p>
+        <button class="card-order" onclick="openModal('PRT-GS-001','print','매장 쇼윈도·공간 래핑')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="gs">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/2220a569-c1d4-4dd5-9723-a102f5b4303e_rw_1200.png?h=bb6c96f61aff20ed8f27a74dcbfaf255" alt="공간 래핑 와이드 PRT-GS-002">
+        <span class="card-code">PRT-GS-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 그래픽 시트지</div>
+        <div class="card-title">공간 래핑 — 와이드</div>
+        <p class="card-desc">넓은 벽면 래핑. 이음선 최소화 분할 납품.</p>
+        <button class="card-order" onclick="openModal('PRT-GS-002','print','공간 래핑 — 와이드')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="gs">
+      <div class="card-img">
+        <img src="/img/pdf/gs-floor-003.webp" alt="바닥 시트지 PRT-GS-003" onerror="this.style.background='#1a2030';">
+        <span class="card-code">PRT-GS-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 그래픽 시트지</div>
+        <div class="card-title">바닥 사인 시트지</div>
+        <p class="card-desc">바닥 유도선·포토존 바닥 그래픽. 미끄럼 방지 라미 옵션 안내.</p>
+        <button class="card-order" onclick="openModal('PRT-GS-003','print','바닥 사인 시트지')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 인쇄 · POP ===== -->
+    <div class="t-card show" data-tab="print" data-cat="pp">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/c93fb799-e002-4c2f-9c06-9373f74a2db4_rw_600.png?h=1786577b20361430cc3c32ea72eea826" alt="팝업스토어 POP 패키지 PRT-PP-001">
+        <span class="card-code">PRT-PP-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · POP</div>
+        <div class="card-title">팝업스토어 POP 패키지</div>
+        <p class="card-desc">팝업 전체 POP 일괄 세팅. 내부 안내·가격표 포함.</p>
+        <button class="card-order" onclick="openModal('PRT-PP-001','print','팝업스토어 POP 패키지')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="pp">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/a4869734-b56d-4f46-bdac-af19ce8fd2bc_rw_1200.jpg?h=a0bec65a6cdd0c2c7f3a1f7a79744de2" alt="매장 안내 POP PRT-PP-002">
+        <span class="card-code">PRT-PP-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · POP</div>
+        <div class="card-title">매장 안내 POP 스탠드</div>
+        <p class="card-desc">A4·A3 카운터 POP. 가격표·메뉴판 겸용 구조.</p>
+        <button class="card-order" onclick="openModal('PRT-PP-002','print','매장 안내 POP 스탠드')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="pp">
+      <div class="card-img">
+        <img src="/img/pdf/pop-hanging-003.webp" alt="천장 행잉 POP PRT-PP-003" onerror="this.style.background='#1a2030';">
+        <span class="card-code">PRT-PP-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · POP</div>
+        <div class="card-title">천장 행잉 POP</div>
+        <p class="card-desc">매장·전시 천장 행잉용 양면 POP. 고리 여백·블리드 세팅.</p>
+        <button class="card-order" onclick="openModal('PRT-PP-003','print','천장 행잉 POP')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 웹 · 사이니지 ===== -->
+    <div class="t-card show" data-tab="web" data-cat="sa">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/e6b01407-213b-4ab0-a0ae-49068586a4b5_rw_1200.png?h=80f826ef06be3dd4f6a4b98698a178d3" alt="매장 안내 디지털 사이니지 WEB-SA-001">
+        <span class="card-code">WEB-SA-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">웹 · 사이니지</div>
+        <div class="card-title">매장 안내 디지털 사이니지</div>
+        <p class="card-desc">매장 전광판·메뉴판용 루프 영상. 인쇄 디자인 → 모션 확장.</p>
+        <button class="card-order" onclick="openModal('WEB-SA-001','web','매장 안내 디지털 사이니지')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="web" data-cat="sa">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/a4869734-b56d-4f46-bdac-af19ce8fd2bc_rw_1200.jpg?h=a0bec65a6cdd0c2c7f3a1f7a79744de2" alt="전시 부스 사이니지 WEB-SA-002">
+        <span class="card-code">WEB-SA-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">웹 · 사이니지</div>
+        <div class="card-title">전시 부스 사이니지 영상</div>
+        <p class="card-desc">부스 내 모니터 루프 영상. 브랜드 키비주얼 모션화.</p>
+        <button class="card-order" onclick="openModal('WEB-SA-002','web','전시 부스 사이니지 영상')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="web" data-cat="sa">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/2c6bac7d-0716-4ad2-8602-5eb0f50ac168_rw_1920.jpg?h=ae85f097dd0560de50a0e9a3b781c59b" alt="키오스크 사이니지 WEB-SA-003">
+        <span class="card-code">WEB-SA-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">웹 · 사이니지</div>
+        <div class="card-title">키오스크·세로형 사이니지</div>
+        <p class="card-desc">9:16 세로형 키오스크 영상. 행사 안내·브랜드 루프 모션.</p>
+        <button class="card-order" onclick="openModal('WEB-SA-003','web','키오스크·세로형 사이니지')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 웹 · SNS ===== -->
+    <div class="t-card show" data-tab="web" data-cat="sn">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/35cc2191-f003-4699-82ce-36dd2920c809_rw_1920.jpg?h=cc508dcce6e3176609666ac0abe7ad68" alt="인스타그램 피드 카드뉴스 WEB-SN-001">
+        <span class="card-code">WEB-SN-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">웹 · SNS</div>
+        <div class="card-title">인스타그램 피드 카드뉴스</div>
+        <p class="card-desc">1:1 정사각 피드 카드뉴스. 인쇄 디자인 → SNS 리사이징.</p>
+        <button class="card-order" onclick="openModal('WEB-SN-001','web','인스타그램 피드 카드뉴스')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="web" data-cat="sn">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/5747be95-b4d4-433a-a35a-d2a7239b9d02_rw_600.png?h=81a86b8fed54f327f6cc7d96422e3e02" alt="인스타그램 스토리 WEB-SN-002">
+        <span class="card-code">WEB-SN-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">웹 · SNS</div>
+        <div class="card-title">인스타그램 스토리·릴스 커버</div>
+        <p class="card-desc">9:16 스토리 규격. 행사·프로모션 안내용 스토리 배너.</p>
+        <button class="card-order" onclick="openModal('WEB-SN-002','web','인스타그램 스토리·릴스 커버')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="web" data-cat="sn">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/367ebb80-2c18-428a-98c0-6726eb9669d0_rw_1920.png?h=105abc6ecbcc87e3344f7a3dea934178" alt="카카오 채널 배너 WEB-SN-003">
+        <span class="card-code">WEB-SN-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">웹 · SNS</div>
+        <div class="card-title">카카오 채널·배너</div>
+        <p class="card-desc">카카오 채널 커버·배너. 브랜드 컬러 적용 규격 맞춤 납품.</p>
+        <button class="card-order" onclick="openModal('WEB-SN-003','web','카카오 채널·배너')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="empty-state" id="emptyState">
+      <i class="fa-solid fa-inbox" style="font-size:2.5rem;margin-bottom:16px;display:block;color:var(--line);"></i>
+      해당 카테고리 템플릿 준비 중입니다.
+    </div>
+  </div>
+</section>
+
+<!-- ===== UNIVERSE 5단계 — weare 공정 라인 UI ===== -->
+<section class="universe-sec" id="universe">
+  <div class="sec-header rv" style="text-align:center;">
+    <p class="sec-label">JPHIC UNIVERSE — 5 STEP</p>
+    <h2 class="sec-title">요청부터 현장까지, 5단계 공정</h2>
+    <p class="sec-desc">스케치 한 장에서 대형 현장 설치 목업까지.<br>각 단계 전문 공정이 순서대로 움직입니다. — <span style="color:var(--mc);font-weight:700;">스크롤하며 확인하세요</span></p>
+  </div>
+
+  <section class="proc-section" id="procSection">
+    <div class="proc-sticky">
+      <div class="proc-track" id="procTrack">
+
+        <article class="proc-step">
+          <div class="proc-head">
+            <span class="proc-num" style="color:#00BBAC;">01</span>
+            <div class="proc-title">아이디어 다듬기<small>CORE · AI PROMPT & RETOUCHING</small></div>
+          </div>
+          <div class="proc-img">
+            <img src="/weare/img/step01.jpg" alt="CORE — 요청 주문, AI 프롬프트 교정, 디자인 리터칭">
+          </div>
+          <div class="proc-copy">
+            <strong>비정형의 아이디어를 마주하는 시작점</strong>
+            고객의 다듬지 않은 스케치, 낮은 해상도 이미지, 생성형 AI 결과물을 정밀 분석. 전문 프롬프트 교정과 디자인 리터칭으로 브랜드 초안을 완성합니다. 해결해야 할 기술적 문제를 진단하고 방향성을 수립하는 시작점.
+            <br><br><a href="https://jphic.co.kr/core" style="color:#00BBAC;font-weight:800;font-size:14px;">CORE 서비스 보기 →</a>
+          </div>
+        </article>
+
+        <article class="proc-step">
+          <div class="proc-head">
+            <span class="proc-num" style="color:#3B82F6;">02</span>
+            <div class="proc-title">진짜 자산 만들기<small>LOGO · VECTORIZING & ASSET</small></div>
+          </div>
+          <div class="proc-img">
+            <img src="/weare/img/step03.jpg" alt="LOGO — 벡터 자산화, 펜툴 정밀 복원">
+          </div>
+          <div class="proc-copy">
+            <strong>무한 확대 가능한 고해상도 벡터화</strong>
+            픽셀 이미지를 수동 펜툴로 정밀 복원. 무한 확대 가능한 일러스트레이터 원본(.ai) 벡터 파일로 자산화합니다. 선과 면의 완성도를 극대화하고 인쇄·제작 시 오차를 원천 차단.
+            <br><br><a href="https://jphic.co.kr/logo" style="color:#3B82F6;font-weight:800;font-size:14px;">LOGO 서비스 보기 →</a>
+          </div>
+        </article>
+
+        <article class="proc-step" style="border-color:var(--mc);background:rgba(234,88,12,0.04);">
+          <div class="proc-head">
+            <span class="proc-num" style="color:#EA580C;">03</span>
+            <div class="proc-title">레이아웃 & 리사이징<small>PDF · TEMPLATE & PRINT FILE ← 현재 페이지</small></div>
+          </div>
+          <div class="proc-img">
+            <img src="/weare/img/step04.jpg" alt="PDF — 인쇄파일 세팅, 블리드, 칼선, CMYK">
+          </div>
+          <div class="proc-copy">
+            <strong>긴지 짧은지, 목업으로 현장 미리보기</strong>
+            템플릿 고르고 워딩만 수정하면 발주파일 완성. 블리드·칼선·CMYK 완벽 세팅. 사전 목업 시뮬레이션 소통으로 현장에서 당황하지 않도록 끝까지 궁금증을 해결합니다.
+            <br><br><a href="#gallery" style="color:#EA580C;font-weight:800;font-size:14px;">템플릿 갤러리 보기 →</a>
+          </div>
+        </article>
+
+        <article class="proc-step">
+          <div class="proc-head">
+            <span class="proc-num" style="color:#9868D8;">04</span>
+            <div class="proc-title">모션 미디어<small>MOTION · MOTION GRAPHICS & VIDEO</small></div>
+          </div>
+          <div class="proc-img">
+            <video src="/weare/img/step05.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+          </div>
+          <div class="proc-copy">
+            <strong>정적 자산에 생동감을 더하는 미디어 확장</strong>
+            완성된 2D 인쇄 자산을 디지털 사이니지·SNS 영상으로 확장. 웹·모바일·매장 전광판에서 가장 주목도 높은 형태로 변환합니다. 인쇄 파일 하나로 오프라인과 온라인을 동시에.
+            <br><br><a href="https://jphic.co.kr/motion" style="color:#9868D8;font-weight:800;font-size:14px;">MOTION 서비스 보기 →</a>
+          </div>
+        </article>
+
+        <article class="proc-step">
+          <div class="proc-head">
+            <span class="proc-num" style="color:#CBD5E1;">05</span>
+            <div class="proc-title">계속 써먹기<small>AGENCY · RESIZING & MANAGEMENT</small></div>
+          </div>
+          <div class="proc-img">
+            <img src="/weare/img/step06.jpg" alt="AGENCY — 기초 자산 활용 유지 관리 고도화">
+          </div>
+          <div class="proc-copy">
+            <strong>공간을 채우는 완벽한 최종 구현</strong>
+            완성된 브랜드 자산을 무한 리사이징해 온·오프라인 어디든 꺼내 씁니다. 오래가는 브랜드를 함께 관리하는 전담 디자인 파트너. 스케치 한 장이 브랜드 자산으로 이어지는 5단계 공정의 완성.
+            <br><br><a href="https://jphic.co.kr/agency" style="color:#CBD5E1;font-weight:800;font-size:14px;">AGENCY 서비스 보기 →</a>
+          </div>
+        </article>
+
+      </div>
+      <div class="proc-progress" id="procProgress">
+        <i></i><i></i><i></i><i></i><i></i>
+      </div>
+    </div>
   </section>
+</section>
 
-  <section class="step" id="step2">
-    <div class="step-head">
-      <span class="step-num">02</span>
-      <div class="step-title">요청사항 <span style="font-size:13px;color:var(--ink-mute);font-weight:400;letter-spacing:0">· 마감일과 전달내용을 입력해주세요</span></div>
-    </div>
+<!-- ===== CTA ===== -->
+<section class="cta-sec rv">
+  <h2>원하는 템플릿이 없으신가요?<br>디자인 주문도 가능합니다</h2>
+  <p>템플릿 커스텀 또는 처음부터 새로 만드는 디자인 주문은<br>문의서 작성하고, 오픈챗으로 요청해주세요.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://jphic.co.kr/invoice" class="btn-primary"><i class="fa-solid fa-file-invoice"></i> 견적·발주 바로가기</a>
+    <button onclick="openModal(null)" class="btn-outline">디자인 요청 →</button>
+  </div>
+</section>
 
-    <div class="sub-field">
-      <label class="sub-label">최종 마감일</label>
-      <div class="deadline-row">
-        <label class="dl-opt"><input type="radio" name="deadline" value="1일 이내"><span>1일 이내</span></label>
-        <label class="dl-opt"><input type="radio" name="deadline" value="2일 이내"><span>2일 이내</span></label>
-        <label class="dl-opt"><input type="radio" name="deadline" value="3일 이내"><span>3일 이내</span></label>
-        <label class="dl-opt"><input type="radio" name="deadline" value="이번 주"><span>이번 주</span></label>
-        <label class="dl-opt dl-date">
-          <input type="radio" name="deadline" value="__date__" id="dlDateRadio">
-          <input type="date" id="dlDateInput">
+<footer>
+  <span class="f-logo">JPHIC <span>PDF</span></span>
+  © 2026 JPHIC UNIVERSE. 전시 백월·배너·등신대·포토존·칼선 인쇄파일 템플릿 제작 대행.
+</footer>
+
+<!-- ===== 주문 모달 ===== -->
+<div class="modal" id="orderModal">
+  <div class="modal-box">
+    <div class="modal-body">
+      <div class="modal-close" onclick="closeModal()">×</div>
+      <div class="modal-title">디자인 요청하기</div>
+      <p class="modal-sub">번호 확인 후 오픈챗으로 자료 파일과 함께 보내주세요.</p>
+
+      <div id="selectedCode" class="selected-code" style="display:none;"></div>
+
+      <div class="print-warn" id="printWarn">
+        <strong>⚠️ 인쇄 템플릿 선택됨</strong><br>
+        발주처(인쇄소) 사양에 따라 파일 구조가 달라집니다.<br>
+        아래에 <strong>발주처를 반드시 입력</strong>해주세요.
+      </div>
+
+      <label class="f-label">성함 / 연락처</label>
+      <div style="display:flex;gap:8px;margin-bottom:16px;">
+        <input id="m-name" type="text" placeholder="성함" class="f-input" style="margin:0;flex:1;">
+        <input id="m-phone" type="text" placeholder="010-0000-0000" class="f-input" style="margin:0;flex:2;">
+      </div>
+
+      <label class="f-label">발주처(인쇄소)</label>
+      <input id="m-printer" type="text" placeholder="예: 성원애드피아, 레드프린팅, 비즈하우스, 미정" class="f-input">
+
+      <label class="f-label">추가 서비스 선택</label>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+        <label style="cursor:pointer;display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;transition:.2s;" id="mockupLabel">
+          <input type="checkbox" id="m-mockup" style="margin-top:2px;accent-color:var(--mc);width:16px;height:16px;flex-shrink:0;" onchange="toggleMockup()">
+          <div>
+            <div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:3px;">🖼 설치 목업 시뮬레이션 요청</div>
+            <div style="font-size:13px;color:var(--sub);line-height:1.6;">실제 현장 공간에 설치했을 때 어떻게 보이는지 미리 확인. 사이즈·비율·색감 검토 후 발주 진행.</div>
+          </div>
         </label>
       </div>
-    </div>
 
-    <div class="sub-field">
-      <label class="sub-label">전달내용</label>
-      <div class="notes-area">
-        <textarea id="notes" placeholder="제작방향· 참고자료· 링크· 발주처· 특이사항 등"></textarea>
-        <div style="background:#F4F6F8;border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;font-size:12.5px;color:var(--ink-mute);line-height:1.7;">
-          <strong style="color:var(--ink);font-size:14px;letter-spacing:.05em;">✦ JPHIC KIT 칼선 보완 작업 의뢰 가능</strong><br>
-          · <strong style="color:var(--ink-soft)">벡터화</strong> — 컬러 이미지 트레이싱, AI 일러스트 SVG 변환, 다중 색상 레이어 분리<br>
-          · <strong style="color:var(--ink-soft)">목업</strong> — 제품·굿즈 배경 합성, 브랜드 목업 시트 제작, 다중 배경 변형<br>
+      <label class="f-label">워딩 수정 내용 / 추가 요청</label>
+      <textarea id="m-memo" class="f-textarea" rows="3" placeholder="바꿀 텍스트, 색상, 사이즈, 납기일 등"></textarea>
+
+      <button class="submit-btn" id="submitBtn" onclick="submitOrder()">요청 접수하기</button>
+
+      <div class="result-box" id="resultBox">
+        <p style="font-size:14px;color:var(--sub);margin-bottom:12px;">아래 내용을 복사해서 오픈챗에 원본 파일과 함께 보내주세요.</p>
+        <div class="copy-area" id="copyArea"></div>
+        <div class="result-btns">
+          <button class="copy-btn" onclick="copyResult()">내용 복사하기</button>
+          <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="kakao-btn"><i class="fa-solid fa-comment"></i> 오픈챗으로 디자인 요청하기</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="step" id="step3">
-    <div class="step-head">
-      <span class="step-num">03</span>
-      <div class="step-title">작업 내용 선택 <span style="font-size:13px;color:var(--ink-mute);font-weight:400;letter-spacing:0">· 예상 금액, 최종 견적 시 달라집니다</span></div>
-
-    </div>
-    <div class="tiers" id="tiers">
-      <label class="tier" data-tier="Cutting line + Vector" data-price="19900">
-        <input type="radio" name="tier" value="Cutting line + Vector">
-        <div class="nm">Cutting line + Vector</div>
-        <div class="pr">19,900<span class="pr-sub">원~ <span class="vat-note">(VAT 포함)</span></span></div>
-        <div class="ds">AI로 생성한 이미지를 벡터화 파일로 <br>(수정2회)</div>
-      </label>
-      <label class="tier" data-tier="for PRINT" data-price="69000">
-        <input type="radio" name="tier" value="for PRINT">
-        <div class="nm">for PRINT</div>
-        <div class="pr">69,000<span class="pr-sub">원~ <span class="vat-note">(VAT 포함)</span></span></div>
-        <div class="ds">리사이징·레이아웃·목업·다중 컴포지션<br>(수정2회)</div>
-      </label>
-      <label class="tier" data-tier="for Branding" data-price="0">
-        <input type="radio" name="tier" value="for Branding">
-        <div class="nm">for Branding</div>
-        <div class="pr"><span style="font-size:18px">견적문의</span></div>
-        <div class="ds">브랜드 통합 디자인 · <strong>기초 자산화</strong></div>
-      </label>
-    </div>
-  </section>
-
-  <section class="step" id="step4">
-    <div class="step-head">
-      <span class="step-num">04</span>
-      <div class="step-title">연락처 <span style="font-size:13px;color:var(--ink-mute);font-weight:400;letter-spacing:0">· (*) 필수 항목 입력</span></div>
-    </div>
-    <div class="client-area">
-
-
-
-      <div class="form-grid">
-        <div class="field">
-          <label>담당자명 <span class="req">*</span></label>
-          <input type="text" id="name" placeholder="이름">
-        </div>
-        <div class="field">
-          <label>연락처 <span class="req">*</span></label>
-          <input type="tel" id="phone" placeholder="010-0000-0000">
-        </div>
-        <div class="field full">
-          <label>이메일 <span class="req">*</span></label>
-          <input type="email" id="email" placeholder="email@example.com">
-        </div>
-        <div class="field">
-          <label>회사명 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
-          <input type="text" id="companyName" placeholder="회사명">
-        </div>
-        <div class="field">
-          <label>사업자등록번호 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
-          <input type="text" id="bizNo" placeholder="000-00-00000">
-        </div>
-        <div class="field">
-          <label>대표자 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
-          <input type="text" id="representative" placeholder="대표자">
-        </div>
-        <div class="field full">
-          <label>사업장 소재지 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
-          <input type="text" id="address" placeholder="주소">
-        </div>
-        <div class="field">
-          <label>업태 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
-          <input type="text" id="businessType" placeholder="업태">
-        </div>
-        <div class="field">
-          <label>종목 (업종) <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
-          <input type="text" id="item" placeholder="종목">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="paper">
-
-    <div class="paper-actions">
-      <button type="button" class="paper-btn" id="printBtn" title="인쇄 / PDF 저장">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        인쇄 / PDF 저장
-      </button>
-    </div>
-
-    <div class="doc-head">
-      <div class="doc-title">예상견적서</div>
-      <div class="doc-sub">제이픽유니버스 (www.jphic.co.kr)</div>
-    </div>
-
-    <div class="meta-row">
-      <div>견적번호<span class="v" id="docNo">—</span></div>
-      <div>작성일자<span class="v" id="docDate">—</span></div>
-    </div>
-
-    <table class="items">
-      <thead>
-        <tr>
-          <th class="col-no">No.</th>
-          <th>품목</th>
-          <th class="col-qty">수량</th>
-          <th class="col-unit">단가(원)</th>
-          <th class="col-amt">금액(원)</th>
-        </tr>
-      </thead>
-      <tbody id="itemsBody">
-        <tr class="empty"><td colspan="5"></td></tr>
-      </tbody>
-    </table>
-
-    <div class="totals">
-      <div class="totals-box">
-        <div class="row" id="deadlineRow" style="display:none"><span class="k">최종 마감일</span><span class="v" id="deadlineAmt">—</span></div>
-        <div class="row"><span class="k">공급가액</span><span class="v" id="supplyAmt">0원</span></div>
-        <div class="row"><span class="k">부가세 (10%)</span><span class="v" id="vatAmt">0원</span></div>
-        <div class="row grand"><span class="k">합계금액</span><span class="v" id="grandAmt">0원</span></div>
-      </div>
-    </div>
-    <div class="amount-words" id="amountWords"></div>
-
-    <div class="notes-block">
-      <div class="notes-block-title">(NOTES) 제이픽유니버스에서 알려드립니다. </div>
-      <ul>
-        <li>문의는 <strong>카카오톡 오픈챗(@제이픽유니버스)과 이메일 (info@jphic.co.kr)</strong>로 연락주세요.</li>
-        <li>본 견적은 업로드된 파일·요청사항을 기반으로 자동 산출된 <strong>예상견적</strong>입니다. 실제 견적은 작업 범위 협의 후 정식 견적서가 발행됩니다.</li>
-        <li>견적 유효기간: 작성일로부터 <strong>5일</strong></li>
-        <li><strong>당일 확정 시 7.7% 할인</strong> 적용 가능</li>
-        <li><strong>수정 범위 안내</strong>: 최초 요청한 원고와 다른 원고로 진행하실 경우 새 견적이 필요합니다.</li>
-        <li><strong>시안 중단 시 청구</strong>: 시안 작업 도중 중단하시는 경우 예상견적의 <strong>50%</strong>가 시안비로 청구됩니다.</li>
-        <li>for Branding 등급은 <strong>수정 횟수 제한이 없습니다</strong>.</li>
-        <li>모든 금액은 <strong>부가가치세 포함 기준</strong>입니다. 합계금액 그대로 결제되며 사업자 고객은 공급가액·부가세 별도 확인 가능합니다.</li>
-        <li>본 문서는 세금계산서가 아니며, 정식 계산서 첨부용 명세서로 활용 가능합니다.</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="submit-area">
-    <button class="submit" id="submitBtn" disabled>작업 요청 보내기</button>
-    <div class="submit-hint">
-      예상견적서를 이메일로 보내드립니다. 영업일 1일 이내 회신드립니다. 감사합니다.
     </div>
   </div>
-
-  <footer class="page-footer">
-    <div class="ft-brand">JPHIC UNIVERSE</div>
-    <div class="ft-line">
-      <a href="https://open.kakao.com/o/sLyIquni" target="_blank">오픈챗 문의</a>
-    </div>
-  </footer>
-
 </div>
 
-<div class="toast" id="toast"></div>
-
 <script>
-/* ============ CONFIG ============ */
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFCElq8GrQo6wOBB2kKFC0YkAlfUbCHVA9TrbmbCMJEWP99hAIwbM4_XY4VRHIt4Vw/exec';
-const MAX_FILE_SIZE = 50 * 1024 * 1024;
+let currentTab='all', currentCat='all', selCode=null, selType=null;
 
-const state = {
-  files: [],
-  filesBase64: [],
-  detectedTier: null,
-  detectedScore: 0,
-  selectedTier: null,
-  selectedPrice: 0,
-  deadline: '',
-  notesImage: null,
-  notesOcrText: '',
-  cardImage: null,
-  cardOcrText: '',
-  bizLicImage: null,
-  bizLicOcrText: '',
-  docNo: '',
-  cardAddress: '',
-  bizAddress: ''
-};
-
-const $ = (id) => document.getElementById(id);
-
-/* ============ FORM INTEGRITY VALIDATION ============ */
-function validateRequiredFields() {
-  const fields = ['name', 'phone', 'email'];
-  let isValid = true;
-
-  document.querySelectorAll('.field input').forEach(el => {
-    el.style.border = '';
-    el.style.backgroundColor = '';
+function switchTab(tab,el){
+  currentTab=tab; currentCat='all';
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('printNotice').classList.toggle('show',tab==='print');
+  document.querySelectorAll('.cat-btn').forEach(b=>{
+    if(b.classList.contains('print-only')) b.style.display=(tab==='web')?'none':'';
+    if(b.classList.contains('web-only')) b.style.display=(tab==='print')?'none':'';
   });
-
-  fields.forEach(id => {
-    const el = $(id);
-    if (!el) return;
-    if (!el.value.trim()) {
-      el.style.border = '2px solid #FF4D4D';
-      el.style.backgroundColor = '#FFF5F5';
-      isValid = false;
-    }
-  });
-
-  const submitBtn = $('submitBtn');
-  if (submitBtn) {
-    submitBtn.disabled = !isValid;
-    submitBtn.style.opacity = isValid ? '1' : '0.4';
-    submitBtn.style.cursor = isValid ? 'pointer' : 'not-allowed';
-  }
-  return isValid;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.cat-btn').classList.add('active');
+  renderCards();
 }
 
-/* ============ INIT META ============ */
-(function initMeta(){
-  const d = new Date();
-  const docNo = `JPHIC-${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}-${Math.floor(Math.random()*9000+1000)}`;
-  $('docNo').textContent = docNo;
-  $('docDate').textContent = `${d.getFullYear()}. ${pad(d.getMonth()+1)}. ${pad(d.getDate())}.`;
-  state.docNo = docNo;
+function filterCat(cat,el){
+  currentCat=cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderCards();
+}
 
-  const ids = ['name', 'phone', 'email', 'bizNo', 'representative', 'address', 'businessType', 'item', 'notes'];
-  ids.forEach(id => {
-    const el = $(id);
-    if (el) {
-      el.addEventListener('input', () => {
-        if ($('m-' + id)) $('m-' + id).style.display = 'none';
-        updateDocument();
-      });
-    }
+function renderCards(){
+  const cards=document.querySelectorAll('.t-card');
+  let v=0;
+  cards.forEach(c=>{
+    const tm=currentTab==='all'||c.dataset.tab===currentTab;
+    const cm=currentCat==='all'||c.dataset.cat===currentCat;
+    c.classList.toggle('show',tm&&cm);
+    if(tm&&cm)v++;
   });
+  document.getElementById('emptyState').classList.toggle('show',v===0);
+}
 
-  const phoneEl = $('phone');
-  if (phoneEl) phoneEl.addEventListener('input', function() {
-    let v = this.value.replace(/[^0-9]/g, '');
-    if (v.startsWith('02')) {
-      v = v.length <= 9 ? v.replace(/^(02)([0-9]{1,3})([0-9]{0,4})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;})
-                        : v.replace(/^(02)([0-9]{4})([0-9]{0,4})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;});
-    } else {
-      v = v.length <= 10 ? v.replace(/^([0-9]{3})([0-9]{1,3})([0-9]{0,4})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;})
-                         : v.replace(/^([0-9]{3})([0-9]{4})([0-9]{0,4})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;});
-    }
-    this.value = v;
-  });
+function openModal(code,type,title,mockup=false){
+  selCode=code; selType=type;
+  const el=document.getElementById('selectedCode');
+  if(code){el.style.display='inline-block';el.textContent=code+(title?' · '+title:'');}
+  else{el.style.display='none';}
+  document.getElementById('printWarn').classList.toggle('show',type==='print');
+  document.getElementById('resultBox').style.display='none';
+  document.getElementById('m-mockup').checked=mockup;
+  toggleMockup();
 
-  const bizNoEl = $('bizNo');
-  if (bizNoEl) bizNoEl.addEventListener('input', function() {
-    let v = this.value.replace(/[^0-9]/g, '');
-    v = v.replace(/^([0-9]{3})([0-9]{1,2})([0-9]{0,5})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;});
-    this.value = v;
-  });
+  // localStorage 저장값 복원 (반복입력 방지)
+  const saved=JSON.parse(localStorage.getItem('jphic_modal')||'{}');
+  document.getElementById('m-name').value=saved.name||'';
+  document.getElementById('m-phone').value=saved.phone||'';
+  document.getElementById('m-printer').value=saved.printer||'';
+  document.getElementById('m-memo').value=''; // 메모는 매번 새로
 
-  const saveFields = ['name','companyName','phone','email','bizNo','representative','address','businessType','item'];
-  saveFields.forEach(function(id) {
-    const el = $(id);
-    if (!el) return;
-    const saved = localStorage.getItem('jphic_' + id);
-    if (saved) { el.value = saved; updateDocument(); }
-    el.addEventListener('change', function() { localStorage.setItem('jphic_' + id, el.value); });
-  });
+  // 폼 요소 복원 (이전 접수 후 숨김 상태 복구)
+  document.querySelectorAll('.modal-body .f-label,.modal-body .f-input,.modal-body .f-textarea,#submitBtn').forEach(el=>el.style.display='');
+  document.querySelectorAll('.modal-body div[style*="display:none"]').forEach(el=>el.style.removeProperty('display'));
+  document.getElementById('selectedCode').style.display=code?'inline-block':'none';
+  document.querySelector('.modal-sub').textContent='번호 확인 후 오픈챗으로 원본 파일과 함께 보내주세요.';
 
-  const printBtn = $('printBtn');
-  if (printBtn) printBtn.addEventListener('click', () => {
-    window.print();
-  });
+  document.getElementById('orderModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
 
-  document.querySelectorAll('input[name="deadline"]').forEach(r => {
-    r.addEventListener('change', () => {
-      if (r.value === '__date__') {
-        const d = $('dlDateInput').value;
-        state.deadline = d ? `날짜 지정: ${d}` : '';
-      } else {
-        state.deadline = r.value;
-      }
-      updateDocument();
+function toggleMockup(){
+  const checked=document.getElementById('m-mockup').checked;
+  document.getElementById('mockupLabel').style.borderColor=checked?'var(--mc)':'var(--line)';
+  document.getElementById('mockupLabel').style.background=checked?'var(--mc-light)':'transparent';
+}
+function closeModal(){
+  document.getElementById('orderModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('orderModal').addEventListener('click',e=>{if(e.target===document.getElementById('orderModal'))closeModal();});
+
+async function submitOrder(){
+  const name=document.getElementById('m-name').value||'미입력';
+  const phone=document.getElementById('m-phone').value||'미입력';
+  const printer=document.getElementById('m-printer').value||'미정';
+  const memo=document.getElementById('m-memo').value||'없음';
+  const mockup=document.getElementById('m-mockup').checked;
+  const code=selCode||'직접 문의';
+
+  // 성함·연락처·발주처 저장 (다음 방문 시 자동 복원)
+  localStorage.setItem('jphic_modal',JSON.stringify({name,phone,printer}));
+  const txt=`📋 JPHIC PDF 디자인 요청\n템플릿 번호: ${code}\n성함: ${name}\n연락처: ${phone}\n발주처: ${printer}\n설치 목업 시뮬: ${mockup?'✅ 요청':'없음'}\n요청사항: ${memo}\n\n※ 원본 파일을 오픈챗에 함께 올려주세요!`;
+  document.getElementById('copyArea').textContent=txt;
+
+  // 입력폼 숨기고 결과만 표시
+  document.getElementById('selectedCode').style.display='none';
+  document.getElementById('printWarn').classList.remove('show');
+  document.querySelectorAll('.modal-body .f-label, .modal-body .f-input, .modal-body .f-textarea, #submitBtn').forEach(el=>el.style.display='none');
+  document.querySelectorAll('.modal-body div[style*="flex"]').forEach(el=>el.style.display='none');
+  document.getElementById('resultBox').style.display='block';
+  document.querySelector('.modal-sub').textContent='접수 완료. 아래 내용을 복사해서 오픈챗에 보내주세요.';
+
+  try{
+    await fetch('https://script.google.com/macros/s/AKfycbzC2AzSg-3y2hRQnVOqpVzWCapcVTuIsPIN5Z-nrrnMSMzUS10TOclaVAyBz7qJVIEZ/exec',{
+      method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({site:'JPHIC PDF',name,phone,brand:printer,need:`템플릿: ${code}`,memo})
     });
-  });
-  const dlDateInput = $('dlDateInput');
-  if (dlDateInput) dlDateInput.addEventListener('change', () => {
-    $('dlDateRadio').checked = true;
-    state.deadline = dlDateInput.value ? `날짜 지정: ${dlDateInput.value}` : '';
-    updateDocument();
-  });
+  }catch(e){}
+}
+function copyResult(){
+  const t=document.getElementById('copyArea').textContent;
+  navigator.clipboard.writeText(t).catch(()=>{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);});
+}
 
+// 헤더 스크롤 블러
+window.addEventListener('scroll',()=>{
+  document.querySelector('header').classList.toggle('scrolled',window.scrollY>40);
+},{passive:true});
+
+// ===== 직선 모션 캔버스 — 메인카피 주위 집중 =====
+(function(){
+  const cv=document.getElementById('lineCanvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  let W,H,lines=[];
+
+  function resize(){
+    W=cv.width=cv.offsetWidth;
+    H=cv.height=cv.offsetHeight;
+  }
+
+  // 메인카피 영역: 상단 150~580px 사이에 집중
+  // 좌우 바깥에서 진입, 글자 근처에서 길어졌다 사라짐
+  function mkLine(){
+    const focusY = 150 + Math.random() * 430; // 카피 높이 밴드
+    const spread = Math.random() > 0.6;        // 40%는 전체 분산
+    const y = spread ? Math.random() * H : focusY;
+    const maxLen = spread ? 40 + Math.random() * 120 : 80 + Math.random() * 320;
+    const speed = 0.5 + Math.random() * 1.4;
+    const dir = Math.random() > 0.5 ? 1 : -1;
+    const x = dir === 1 ? -maxLen : W + maxLen;
+    const op = spread ? 0.04 + Math.random() * 0.08 : 0.1 + Math.random() * 0.22;
+    const thick = 0.4 + Math.random() * (spread ? 0.6 : 1.4);
+    const isOrange = Math.random() > 0.72;
+    const color = isOrange
+      ? `rgba(234,88,12,${op})`
+      : `rgba(255,255,255,${op})`;
+    const life = 0;
+    const maxLife = 70 + Math.random() * 140;
+    // 길어졌다 짧아지는 효과: currentLen 0 → maxLen → 0
+    return {x, y, maxLen, speed, dir, color, thick, life, maxLife, currentLen: 0};
+  }
+
+  for(let i = 0; i < 32; i++){
+    const l = mkLine();
+    l.life = Math.random() * l.maxLife;
+    lines.push(l);
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    if(lines.length < 32) lines.push(mkLine());
+
+    lines = lines.filter(l => {
+      l.life++;
+      l.x += l.speed * l.dir;
+
+      const prog = l.life / l.maxLife;
+      // 길이: 0→max→0 (sin 곡선)
+      const lenFade = Math.sin(prog * Math.PI);
+      const drawLen = l.maxLen * lenFade;
+      // 투명도: fade in/out
+      const opFade = prog < .12 ? prog / .12 : prog > .78 ? (1 - prog) / .22 : 1;
+
+      ctx.save();
+      ctx.globalAlpha = opFade;
+      ctx.strokeStyle = l.color;
+      ctx.lineWidth = l.thick;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(l.x, l.y);
+      ctx.lineTo(l.x + drawLen * l.dir, l.y);
+      ctx.stroke();
+      ctx.restore();
+
+      return l.life < l.maxLife;
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('resize', resize, {passive: true});
+  draw();
 })();
 
-/* ============ DROPZONE HELPER ============ */
-function setupDrop(dropEl, inputEl, onFiles) {
-  ['dragenter','dragover'].forEach(e => dropEl.addEventListener(e, ev => {
-    ev.preventDefault(); ev.stopPropagation(); dropEl.classList.add('over');
-  }));
-  ['dragleave','drop'].forEach(e => dropEl.addEventListener(e, ev => {
-    ev.preventDefault(); ev.stopPropagation(); dropEl.classList.remove('over');
-  }));
-  dropEl.addEventListener('drop', e => onFiles(e.dataTransfer.files));
-  inputEl.addEventListener('change', e => onFiles(e.target.files));
-}
+// 스크롤 애니
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
-/* ============ STEP 1: PARTICIPANT FILES ============ */
-const MAX_FILES = 5;
-setupDrop($('drop1'), $('fileInput'), async (files) => {
-  for (const f of files) {
-    if (state.files.length >= MAX_FILES) { toast(`최대 ${MAX_FILES}개까지 업로드 가능합니다`, true); break; }
-    if (f.size > MAX_FILE_SIZE) { toast(`${f.name}: 50MB 초과`, true); continue; }
-    state.files.push(f);
-    const dataUrl = await fileToDataUrl(f);
-    const b64 = dataUrl.split(',')[1];
-    if (!state.filesBase64) state.filesBase64 = [];
-    state.filesBase64.push({ name: f.name, type: f.type, data: b64 });
+// ===== weare 공정 라인 스크롤 (그대로 이식) =====
+(function(){
+  const section=document.getElementById('procSection');
+  const track=document.getElementById('procTrack');
+  if(!section||!track)return;
+  const steps=track.querySelectorAll('.proc-step');
+  const dots=document.querySelectorAll('#procProgress i');
+  const mq=window.matchMedia('(max-width:768px)');
+  const reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  function setHeight(){
+    if(mq.matches){section.style.height='auto';return;}
+    const scrollW=track.scrollWidth-window.innerWidth;
+    section.style.height=(scrollW+window.innerHeight)+'px';
   }
-  renderFiles();
-  analyzeFiles();
-});
-
-function renderFiles() {
-  const grid = $('fileGrid');
-  grid.querySelectorAll('.file-tile:not(.drop-tile)').forEach(t => t.remove());
-  state.files.forEach((f, i) => {
-    const isImg = /^image\//i.test(f.type);
-    const tile = document.createElement('div');
-    tile.className = 'file-tile';
-    if (isImg) {
-      const img = document.createElement('img');
-      img.alt = '';
-      img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block';
-      const reader = new FileReader();
-      reader.onload = e => { img.src = e.target.result; };
-      reader.readAsDataURL(f);
-      const fname = document.createElement('div');
-      fname.className = 'fname';
-      fname.textContent = f.name;
-      const btn = document.createElement('button');
-      btn.className = 'x';
-      btn.textContent = '×';
-      btn.onclick = () => removeFile(i);
-      tile.appendChild(img);
-      tile.appendChild(fname);
-      tile.appendChild(btn);
-    } else {
-      const ext = extOf(f.name).toUpperCase() || 'FILE';
-      tile.innerHTML = `<div class="ext-badge">${escapeHtml(ext)}</div><div class="fname">${escapeHtml(f.name)}</div><button class="x" onclick="removeFile(${i})">×</button>`;
+  function onScroll(){
+    if(mq.matches){
+      steps.forEach(s=>{
+        const r=s.getBoundingClientRect();
+        if(r.top<window.innerHeight*.85)s.classList.add('active');
+      });
+      return;
     }
-    grid.appendChild(tile);
-  });
-  $('drop1').style.display = state.files.length >= MAX_FILES ? 'none' : 'flex';
-}
-window.removeFile = (i) => {
-  state.files.splice(i, 1);
-  if (state.filesBase64) state.filesBase64.splice(i, 1);
-  renderFiles();
-  analyzeFiles();
-};
-
-function analyzeFiles() {
-  const badge = $('badge1');
-  if (state.files.length === 0) {
-    badge.classList.remove('show','analyzing');
-    $('step1').classList.remove('done');
-    autoSelectTier();
-    return;
+    const rect=section.getBoundingClientRect();
+    const total=section.offsetHeight-window.innerHeight;
+    const progress=Math.min(Math.max(-rect.top/total,0),1);
+    const scrollW=track.scrollWidth-window.innerWidth;
+    if(!reduced)track.style.transform='translateX('+(-progress*scrollW)+'px)';
+    const idx=Math.min(Math.floor(progress*steps.length),steps.length-1);
+    steps.forEach((s,i)=>s.classList.toggle('active',i<=idx));
+    dots.forEach((d,i)=>d.classList.toggle('on',i<=idx));
   }
-  badge.classList.add('show','analyzing');
-  badge.querySelector('.dot').nextSibling.textContent = ' 분석 중...';
-  setTimeout(() => {
-    $('step1').classList.add('done');
-    badge.classList.remove('analyzing');
-    badge.querySelector('.dot').nextSibling.textContent = ` ${state.files.length}개 분석 완료`;
-    autoSelectTier();
-  }, 600);
-}
-
-/* ============ STEP 2: NOTES ============ */
-$('notes').addEventListener('input', () => {
-  autoSelectTier();
-  updateDocument();
-});
-
-/* ============ STEP 3: TIER ============ */
-document.querySelectorAll('.tier').forEach(el => {
-  el.addEventListener('click', () => {
-    selectTier(el.dataset.tier, true);
-  });
-});
-
-function selectTier(tierName, manual) {
-  document.querySelectorAll('.tier').forEach(t => {
-    t.classList.toggle('selected', t.dataset.tier === tierName);
-    if (t.dataset.tier === tierName) t.querySelector('input').checked = true;
-  });
-  const tierEl = document.querySelector(`.tier[data-tier="${tierName}"]`);
-  if (tierEl) {
-    state.selectedTier = tierName;
-    state.selectedPrice = parseInt(String(tierEl.dataset.price).replace(/,/g,''), 10) || 0;
-    $('step3').classList.add('done');
-    if (!manual) {
-      const badge = $('badge3');
-      if (badge) { badge.classList.add('show'); badge.querySelector('.dot').nextSibling.textContent = ` ${tierName} 자동 추천`; }
-    }
-    updateDocument();
-  }
-}
-
-function autoSelectTier() {
-  const notesText = ($('notes').value + ' ' + state.notesOcrText).toLowerCase();
-  const textLength = ($('notes').value + state.notesOcrText).length;
-
-  if (state.files.length === 0 && textLength === 0) {
-    state.detectedTier = null;
-    updateRec();
-    return;
-  }
-
-  const totalSize = state.files.reduce((s,f) => s+f.size, 0);
-  const totalMB = totalSize / 1024 / 1024;
-  const types = [...new Set(state.files.map(f => extOf(f.name)))];
-  let score = state.files.length * 1.5 + totalMB * 0.5 + textLength * 0.02;
-  types.forEach(t => {
-    if (t === 'ai' || t === 'psd') score += 5;
-    if (t === 'zip') score += 3;
-  });
-  score = Math.round(score);
-  state.detectedScore = score;
-  state.detectedTier = score < 8 ? 'Cutting line + Vector' : score < 25 ? 'for PRINT' : 'for Branding';
-  updateRec();
-  if (!state.selectedTier) {
-    selectTier(state.detectedTier, false);
-  }
-}
-
-function updateRec() {
-  document.querySelectorAll('.tier').forEach(el => {
-    const existing = el.querySelector('.rec');
-    if (existing) existing.remove();
-    if (el.dataset.tier === state.detectedTier) {
-      const span = document.createElement('span');
-      span.className = 'rec'; span.textContent = '추천';
-      el.appendChild(span);
-    }
-  });
-}
-
-function parseBusinessCard(text) {
-  const phone = text.match(/0?1[0-9][-. ]?\d{3,4}[-. ]?\d{4}/) || text.match(/0\d{1,2}[-. ]\d{3,4}[-. ]\d{4}/);
-  const email = text.match(/[\w.+-]+@[\w-]+\.[\w.-]+/);
-  const lines = text.split('\n').map(l => l.trim()).filter(l => l && l.length > 1 && l.length < 50);
-  const company = lines.find(l => /\(주\)|주식회사|\(유\)|유한회사|\(사\)|사단법인/.test(l));
-  const person = lines.find(l => /^[가-힣\s]{2,6}$/.test(l) && l.replace(/\s/g,'').length >= 2);
-  const name = company || person || lines[0] || '';
-  const addrMatch = text.match(/(?:서울시|서울지직|경기도|인천시|부산시|대구시|대전시|광주시|울산시|세종시|충북|충남|전북|전남|경북|경남|제주).+?[로길번지]\s*[0-9-]+/);
-  return {
-    name: name.replace(/\s+/g,' ').trim(),
-    phone: phone?.[0]?.replace(/[. ]/g,'-'),
-    email: email?.[0],
-    address: addrMatch ? addrMatch[0].trim() : ''
-  };
-}
-
-function parseBusinessLicense(text) {
-  const grab = (re) => {
-    const m = text.match(re);
-    return m?.[1]?.trim().replace(/\s{2,}/g,' ');
-  };
-  return {
-    name: grab(/상\s*호\s*\(?[법인명]*\)?\s*[:：]\s*([^\n]+)/),
-    representative: grab(/(?:대\s*표\s*자|성\s*명)\s*[:：]\s*([^\n,]+)/),
-    bizNo: (text.match(/(\d{3}\s*-\s*\d{2}\s*-\s*\d{5})/)?.[1] || '').replace(/\s/g,''),
-    address: grab(/(?:사업장\s*소재지|소\s*재\s*지|주\s*소)\s*[:：]\s*([^\n]+)/),
-    businessType: grab(/업\s*태\s*[:：]?\s*([^\n종]+?)(?=종|$)/),
-    item: grab(/종\s*목\s*[:：]?\s*([^\n]+)/),
-  };
-}
-
-function processAddressMatching() {
-  const addrEl = $('address');
-  if (!addrEl) return;
-  if (state.cardAddress && state.bizAddress) {
-    const cleanCard = state.cardAddress.replace(/\s+/g, '').trim();
-    const cleanBiz = state.bizAddress.replace(/\s+/g, '').trim();
-    if (cleanCard === cleanBiz) {
-      addrEl.value = state.bizAddress;
-      $('m-address').style.display = 'inline-block';
-    } else {
-      addrEl.value = '';
-      if ($('m-address')) $('m-address').style.display = 'none';
-    }
-  } else {
-    const fallbackAddr = state.bizAddress || state.cardAddress || '';
-    if (fallbackAddr) {
-      addrEl.value = fallbackAddr;
-      $('m-address').style.display = 'inline-block';
-    }
-  }
-  updateDocument();
-}
-
-function autoFill(data) {
-  ['name','phone','email','bizNo','representative','businessType','item'].forEach(key => {
-    if (!data[key]) return;
-    const el = $(key);
-    if (!el || el.value.trim()) return; 
-    el.value = data[key];
-    el.classList.add('auto-filled');
-    if ($('m-' + key)) $('m-' + key).style.display = 'inline-block';
-    setTimeout(() => el.classList.remove('auto-filled'), 1500);
-  });
-  updateDocument();
-}
-
-/* ============ OCR (Tesseract.js 동적 로드) ============ */
-let _tesseractMod = null;
-async function ocrImage(file) {
-  if (!_tesseractMod) {
-    _tesseractMod = await import('https://cdn.jsdelivr.net/npm/tesseract.js@5/+esm');
-  }
-  const T = _tesseractMod.default || _tesseractMod;
-  const result = await T.recognize(file, 'kor+eng', { logger: () => {} });
-  return result.data.text;
-}
-
-/* ============ DOCUMENT UPDATE ============ */
-function updateDocument() {
-  setParty('pName', $('name').value);
-  setParty('pRep', $('representative').value);
-  setParty('pBiz', $('bizNo').value);
-  setParty('pAddr', $('address').value);
-  setParty('pBizType', $('businessType').value);
-  setParty('pItem', $('item').value);
-  setParty('pPhone', $('phone').value);
-  setParty('pEmail', $('email').value);
-
-  const body = $('itemsBody');
-  const isQuoteRequest = state.selectedTier === 'for Branding';
-  if (state.selectedTier) {
-    const desc = tierDescription(state.selectedTier);
-    const supplyVal = isQuoteRequest ? 0 : Math.round(state.selectedPrice / 1.1);
-    const unitCell = isQuoteRequest ? '견적문의' : supplyVal.toLocaleString();
-    const amtCell  = isQuoteRequest ? '견적문의' : supplyVal.toLocaleString();
-    body.innerHTML = `
-      <tr>
-        <td class="col-no">1</td>
-        <td>
-          <div><strong>${tierLabel(state.selectedTier)}</strong></div>
-          <div class="col-spec">${desc}</div>
-        </td>
-        <td class="col-qty">1</td>
-        <td class="col-unit">${unitCell}</td>
-        <td class="col-amt">${amtCell}</td>
-      </tr>`;
-  } else {
-    body.innerHTML = `<tr class="empty"><td colspan="5">요청내용이 표시됩니다</td></tr>`;
-  }
-
-  if (isQuoteRequest) {
-    $('supplyAmt').textContent = '견적문의';
-    $('vatAmt').textContent = '—';
-    $('grandAmt').textContent = '견적문의';
-    $('amountWords').textContent = '담당자가 별도 안내드립니다';
-  } else {
-    const grand = state.selectedPrice;
-    const supply = Math.round(grand / 1.1);
-    const vat = grand - supply;
-    $('supplyAmt').textContent = supply.toLocaleString() + '원';
-    $('vatAmt').textContent = vat.toLocaleString() + '원';
-    $('grandAmt').textContent = grand.toLocaleString() + '원';
-    $('amountWords').textContent = grand > 0 ? `일금 ${koreanAmount(grand)}원정 (₩${grand.toLocaleString()})` : '';
-  }
-
-  const dlRow = $('deadlineRow');
-  if (state.deadline) {
-    dlRow.style.display = '';
-    $('deadlineAmt').textContent = state.deadline;
-  } else {
-    dlRow.style.display = 'none';
-  }
-
-  const isReady = ['name','phone','email'].every(id => $(id) && $(id).value.trim());
-  const btn = $('submitBtn');
-  if (btn) {
-    btn.disabled = !isReady;
-    btn.style.opacity = isReady ? '1' : '0.4';
-    btn.style.cursor = isReady ? 'pointer' : 'not-allowed';
-  }
-}
-
-function setParty(id, val) {
-  const el = $(id);
-  if (!el) return;
-  const v = (val || '').trim();
-  el.textContent = v || '미입력';
-  el.classList.toggle('empty', !v);
-}
-
-function tierLabel(t) {
-  return {
-    'Cutting line + Vector': '디자인 작업 — Cutting line + Vector 난이도',
-    'for PRINT': '디자인 작업 — for PRINT 난이도',
-    'for Branding': '디자인 작업 — for Branding 난이도',
-  }[t] || '';
-}
-function tierDescription(t) {
-  return {
-    'Cutting line + Vector': 'AI로 생성한 이미지를 벡터화 파일로 <br>(수정2회) · 칼선/벡터 완성 후 출력 PDF 주문 연결',
-    'for PRINT': '리사이징·레이아웃·목업·다중 컴포지션<br>(수정2회) · 인쇄용 PDF 출고',
-    'for Branding': 'CORE 철학 정의 + 다중 매체 통합 (기초 자산화)',
-  }[t] || '';
-}
-
-/* ============ SUBMIT ============ */
-$('submitBtn').addEventListener('click', async () => {
-  if ($('submitBtn').disabled) {
-    const fields = ['name','phone','email'];
-    let first = null;
-    fields.forEach(id => {
-      const el = $(id);
-      if (!el) return;
-      if (!el.value.trim()) {
-        el.style.border = '2px solid #FF4D4D';
-        el.style.backgroundColor = '#FFF5F5';
-        if (!first) first = el;
-      }
-    });
-    if (first) { first.scrollIntoView({behavior:'smooth',block:'center'}); first.focus(); }
-    toast('필수 항목(이름·연락처·이메일)을 입력해 주세요.', true);
-    return;
-  }
-
-  $('submitBtn').disabled = true;
-  $('submitBtn').textContent = '전송 중...';
-
-  const isQuoteReq = state.selectedTier === 'for Branding';
-  const grand  = isQuoteReq ? 0 : state.selectedPrice;
-  const supply = isQuoteReq ? 0 : Math.round(grand / 1.1);
-  const vat    = isQuoteReq ? 0 : grand - supply;
-
-  const finalAddress = $('address').value.trim();
-
-  const payload = {
-    timestamp: new Date().toISOString(),
-    docNo: state.docNo,
-    tier: state.selectedTier,
-    estimatedPrice: supply,
-    vat: vat,
-    grandTotal: grand,
-    isQuoteRequest: isQuoteReq,
-    detectedTier: state.detectedTier, 
-    detectedScore: state.detectedScore,
-    fileCount: state.files.length,
-    totalSize: state.files.reduce((s,f) => s+f.size, 0),
-    fileNames: state.files.map(f => f.name).join(' | '),
-    fileTypes: [...new Set(state.files.map(f => extOf(f.name)))].join(','),
-    companyName: $('companyName').value.trim(),
-    representative: $('representative').value.trim(),
-    phone: $('phone').value.trim(),
-    email: $('email').value.trim(),
-    bizNo: $('bizNo').value.trim(),
-    address: finalAddress,
-    businessType: $('businessType').value.trim(),
-    item: $('item').value.trim(),
-    name: $('name').value.trim(),
-    notes: $('notes').value.trim(),
-    deadline: state.deadline || '',
-    cardOcrText: '',
-    bizLicOcrText: '',
-    notesOcrText: '',
-    referrer: document.referrer || 'direct',
-    filesBase64: state.filesBase64 || [],
-  };
-
-  try {
-    await fetch(SCRIPT_URL, {
-      method:'POST',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body: JSON.stringify(payload),
-      mode: 'no-cors',
-    });
-    gtag('event','quote_submit',{tier:payload.tier,price:payload.estimatedPrice});
-    toast('견적 요청이 전송되었습니다. 곧 연락드릴게요.');
-    setTimeout(() => location.reload(), 2400);
-  } catch (err) {
-    toast('전송 실패. 잠시 후 다시 시도해주세요.', true);
-    validateRequiredFields();
-    $('submitBtn').disabled = false;
-    $('submitBtn').textContent = '작업 요청 보내기';
-  }
-});
-
-/* ============ REFRESH ============ */
-$('btnRefresh').addEventListener('click', () => {
-  if (confirm('모든 입력 내용을 초기화하시겠습니까?')) {
-    location.reload();
-  }
-});
-
-/* ============ UTIL ============ */
-function pad(n){return String(n).padStart(2,'0')}
-function fmtSize(b){
-  if (b<1024) return b+'B';
-  if (b<1048576) return (b/1024).toFixed(1)+'KB';
-  return (b/1048576).toFixed(1)+'MB';
-}
-function extOf(name){return (name.split('.').pop()||'').toLowerCase()}
-function escapeHtml(s){
-  return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-function fileToDataUrl(file) {
-  return new Promise((res, rej) => {
-    const r = new FileReader();
-    r.onload = () => res(r.result);
-    r.onerror = rej;
-    r.readAsDataURL(file);
-  });
-}
-function toast(msg, isErr){
-  const t = $('toast');
-  t.textContent = msg;
-  t.classList.toggle('error', !!isErr);
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2600);
-}
-function koreanAmount(n){
-  if (n >= 100000000) return `${(n/100000000).toFixed(1).replace(/\.0$/,'')}억`;
-  if (n >= 10000) {
-    const man = Math.floor(n/10000);
-    const cheon = Math.floor((n%10000)/1000);
-    return cheon ? `${man}만${cheon}천` : `${man}만`;
-  }
-  return n.toLocaleString();
-}
-
-updateDocument();
+  setHeight();
+  window.addEventListener('load',()=>{setHeight();onScroll();});
+  window.addEventListener('resize',()=>{setHeight();onScroll();});
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
 </script>
-
 </body>
 </html>
