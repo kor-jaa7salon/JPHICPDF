@@ -4,14 +4,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>전시 백월·배너·등신대·포토존 인쇄파일 템플릿 제작 대행 | JPHIC PDF</title>
-<meta name="description" content="템플릿 번호 고르고, 워딩만 수정하면 발주파일 완성. 전시 백월·배너·등신대·포토존·POP 인쇄파일 사전 시뮬레이션 소통. 관공서·기업 홍보팀·에이전시 전문 제이픽.">
-<meta name="keywords" content="전시 백월 템플릿, 배너 인쇄파일, 등신대 제작, 포토존 파일, POP 인쇄, 칼선 세팅, 현수막 파일, 인쇄파일 대행, 블리드 세팅, CMYK 변환, 성원애드피아, 레드프린팅, JPHIC">
+<title>JPHIC PDF | 전시 백월·배너·등신대·포토존 인쇄파일 템플릿 제작 대행 </title>
+<meta name="description" content="템플릿 번호 고르고, 워딩만 전달하면 발주파일 완성. 전시월·배너·등신대·포토존·POP·전광판 등 사전 시뮬레이션 소통. 관공서·기업 홍보팀·에이전시 전문 제이픽.">
+<meta name="keywords" content="전시 백월 템플릿, 배너 인쇄파일, 등신대 제작, 포토존 파일, 글자 스카시, 행사 명찰, POP 인쇄, 칼선 세팅, 현수막, 인쇄파일 대행, 블리드 세팅, CMYK 변환, 성원애드피아, 레드프린팅, JPHIC, 제이픽">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://jphic.co.kr/pdf">
 <meta property="og:type" content="website">
 <meta property="og:title" content="전시 백월·배너·등신대·포토존 인쇄파일 템플릿 | JPHIC PDF">
-<meta property="og:description" content="템플릿 번호 고르고, 워딩만 수정하면 발주파일 완성. 사전 시뮬레이션 소통 전문 제이픽.">
+<meta property="og:description" content="템플릿 번호 고르고, 워딩만 전달하면 발주파일 완성. 전시 박람회 부스 대형실사출력 디자인 제이픽.">
 <meta property="og:image" content="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/a769350a-fb08-4da5-97ca-7aa4078d5a96_rw_1200.jpg?h=a1498ea868a29eede46b3db70e8414d1">
 <meta property="og:url" content="https://jphic.co.kr/pdf">
 <link rel="icon" type="image/png" href="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/693c2f61-56a5-4a19-822a-d2a66197d9f7_rw_600.png?h=b2f511503f7670e14ea334c4bbfbb61c">
@@ -44,8 +44,13 @@ header{
   position:fixed;top:0;left:0;right:0;z-index:1000;
   display:flex;justify-content:space-between;align-items:center;
   padding:0 32px;height:68px;
-  background:rgba(3,7,18,.92);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
+  background:rgba(3,7,18,.05);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.04);
+  transition:background .3s,border-color .3s;
+}
+header.scrolled{
+  background:rgba(3,7,18,.95);
+  border-bottom-color:var(--line);
 }
 .logo{font-weight:900;font-size:18px;letter-spacing:.02em;color:#fff;}
 .logo span{color:var(--mc);}
@@ -71,25 +76,33 @@ header{
 
 /* ===== HERO — CSS 배경 이미지 (크롤링은 h1 텍스트로) ===== */
 .hero{
-  min-height:100vh;
-  display:flex;flex-direction:column;justify-content:flex-start;align-items:center;
-  text-align:center;padding:800px 5% 80px;
+  min-height:100vh;width:100%;
   position:relative;overflow:hidden;
   background:
-    linear-gradient(to bottom, rgba(3,7,18,0.2) 0%, rgba(3,7,18,0.55) 55%, rgba(3,7,18,1) 100%),
+    linear-gradient(to bottom, rgba(3,7,18,0.15) 0%, rgba(3,7,18,0.5) 55%, rgba(3,7,18,1) 100%),
     url('/img/pdf/hero-bg.webp') center center/cover no-repeat;
   background-color:var(--bg);
 }
-/* 이미지 없을 때 fallback 글로우 */
-.hero::before{
-  content:'';position:absolute;top:20%;left:20%;
-  width:600px;height:600px;background:var(--mc);border-radius:50%;
-  filter:blur(130px);opacity:0.07;pointer-events:none;
-  animation:aura 7s ease-in-out infinite alternate;
-}
-@keyframes aura{0%{opacity:.05;transform:scale(1);}100%{opacity:.1;transform:scale(1.3);}}
 
-.hero-inner{position:relative;z-index:2;max-width:900px;}
+/* 캔버스 직선 모션 */
+#lineCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+
+/* 히어로 텍스트 — 절대좌표 배치 */
+.hero-tag-line{
+  position:absolute;top:190px;left:50%;transform:translateX(-50%);
+  font-size:14px;font-weight:700;color:rgba(255,255,255,.55);
+  letter-spacing:1.5px;white-space:nowrap;z-index:3;
+}
+.hero-sub-line{
+  position:absolute;top:650px;left:50%;transform:translateX(-50%);
+  font-size:clamp(16px,2vw,16px);font-weight:800;color:rgba(255,255,255,.9);
+  white-space:nowrap;z-index:3;letter-spacing:-.01em;
+}
+.hero-cta-wrap{
+  position:absolute;top:754px;left:50%;transform:translateX(-50%);
+  display:flex;gap:14px;align-items:center;z-index:3;white-space:nowrap;
+}
+.hero-inner{position:relative;z-index:2;}
 
 /* [SEO] h1 — 작게, 키워드 포함 */
 .hero h1{
@@ -346,32 +359,27 @@ footer{
 </header>
 
 <!-- ===== HERO ===== -->
-<section class="hero">
-  <div class="hero-inner">
-    <!-- [SEO] h1 — 크롤링용, 시각적으로 숨김 (텍스트는 배경 이미지에 포함) -->
-    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">전시 백월 · 배너 · 등신대 · 포토존 · POP · 칼선 인쇄파일 템플릿 제작 대행 · 사전 시뮬레이션 소통 전문 제이픽. 대보지 않아도 제이픽이 알아서 다 해줌.</h1>
+<section class="hero" id="heroSection">
+  <!-- 직선 모션 캔버스 -->
+  <canvas id="lineCanvas"></canvas>
 
-    <div class="hero-btns rv d3">
-      <!-- 말풍선 뱃지 -->
-      <div style="position:relative;display:inline-block;">
-        <div style="
-          position:absolute;top:-38px;left:50%;transform:translateX(-50%);
-          background:#fff;color:#030712;
-          font-size:12px;font-weight:800;
-          padding:6px 14px;border-radius:20px;white-space:nowrap;
-          box-shadow:0 4px 16px rgba(0,0,0,.3);
-        ">설치 목업 궁금하다면?
-          <span style="position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid #fff;"></span>
-        </div>
-        <button onclick="openModal(null,null,null,true)" class="btn-primary">
-          <i class="fa-solid fa-cube"></i> 목업 시뮬 요청하기
-        </button>
-      </div>
-      <button onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})" class="btn-outline">
-        <i class="fa-solid fa-grid-2"></i> 템플릿 고르기
-      </button>
-      <a href="https://jphic.co.kr/invoice" class="btn-outline">견적·발주 →</a>
+  <!-- [SEO] h1 크롤링용 숨김 -->
+  <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">전시 백월 템플릿, 배너 인쇄파일, 등신대 제작, 포토존 파일, 글자 스카시, 행사 명찰, POP 인쇄, 칼선 세팅, 현수막, 인쇄파일 대행, 블리드 세팅, CMYK 변환, 성원애드피아, 레드프린팅, JPHIC, 제이픽</h1>
+
+  <!-- 상단 190px: 태그라인 -->
+  <p class="hero-tag-line">컨퍼런스 전시 행사 디자인전문 &nbsp;—&nbsp; 웹 · 인쇄물 · 모션</p>
+
+  <!-- 상단 650px: 서브카피 -->
+  <p class="hero-sub-line">대보지 않아도 제이픽이 알아서 다 해줌</p><br>
+
+  <!-- 상단 724px: CTA 버튼 -->
+  <div class="hero-cta-wrap">
+    <div style="position:relative;">
+      <div style="position:absolute;top:-36px;left:50%;transform:translateX(-50%);background:#fff;color:#030712;font-size:12px;font-weight:800;padding:5px 13px;border-radius:20px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.35);">설치 목업 궁금하다면?<span style="position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:7px solid #fff;"></span></div>
+      <button onclick="openModal(null,null,null,true)" class="btn-primary"><i class="fa-solid fa-cube"></i> 목업 시뮬 요청하기</button>
     </div>
+    <button onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})" class="btn-outline"><i class="fa-solid fa-grid-2"></i> 템플릿 고르기</button>
+    <a href="https://jphic.co.kr/invoice" class="btn-outline">견적·발주 →</a>
   </div>
 </section>
 
@@ -385,12 +393,12 @@ footer{
     </div>
     <div class="flow-item">
       <div class="flow-num">2</div>
-      <div class="flow-title">맞추고</div>
+      <div class="flow-title">컨펌하고</div>
       <p class="flow-desc">워딩·색상·사이즈 수정 요청.<br>사전 시뮬레이션으로 현장 확인.</p>
     </div>
     <div class="flow-item">
       <div class="flow-num">3</div>
-      <div class="flow-title">찍는다</div>
+      <div class="flow-title">보내기</div>
       <p class="flow-desc">블리드·CMYK 완벽 세팅 후<br>발주 파일 납품.</p>
     </div>
   </div>
@@ -406,8 +414,8 @@ footer{
 
   <div class="tab-wrap rv">
     <button class="tab-btn active" onclick="switchTab('all',this)">전체</button>
-    <button class="tab-btn" onclick="switchTab('print',this)">인쇄</button>
-    <button class="tab-btn" onclick="switchTab('web',this)">웹</button>
+    <button class="tab-btn" onclick="switchTab('print',this)">인쇄 PRINT</button>
+    <button class="tab-btn" onclick="switchTab('web',this)">웹 WEB</button>
   </div>
 
   <div class="print-notice" id="printNotice">
@@ -805,7 +813,7 @@ footer{
   <div class="sec-header rv">
     <p class="sec-label">JPHIC UNIVERSE — 5 STEP</p>
     <h2 class="sec-title">요청부터 현장까지, 5단계 공정</h2>
-    <p class="sec-desc">거친 스케치 한 장에서 대형 현장 설치까지.<br>각 단계 전문 공정이 순서대로 움직입니다. — <span style="color:var(--mc);font-weight:700;">스크롤하며 확인하세요</span></p>
+    <p class="sec-desc">스케치 한 장에서 대형 현장 설치 목업까지.<br>각 단계 전문 공정이 순서대로 움직입니다. — <span style="color:var(--mc);font-weight:700;">스크롤하며 확인하세요</span></p>
   </div>
 
   <section class="proc-section" id="procSection">
@@ -822,7 +830,7 @@ footer{
           </div>
           <div class="proc-copy">
             <strong>비정형의 아이디어를 마주하는 시작점</strong>
-            고객의 거친 스케치, 낮은 해상도 이미지, 생성형 AI 결과물을 정밀 분석. 전문 프롬프트 교정과 디자인 리터칭으로 브랜드 초안을 완성합니다. 해결해야 할 기술적 문제를 진단하고 방향성을 수립하는 시작점.
+            고객의 다듬지 않은 스케치, 낮은 해상도 이미지, 생성형 AI 결과물을 정밀 분석. 전문 프롬프트 교정과 디자인 리터칭으로 브랜드 초안을 완성합니다. 해결해야 할 기술적 문제를 진단하고 방향성을 수립하는 시작점.
             <br><br><a href="https://jphic.co.kr/core" style="color:#00BBAC;font-weight:800;font-size:14px;">CORE 서비스 보기 →</a>
           </div>
         </article>
@@ -845,14 +853,14 @@ footer{
         <article class="proc-step" style="border-color:var(--mc);background:rgba(234,88,12,0.04);">
           <div class="proc-head">
             <span class="proc-num" style="color:#EA580C;">03</span>
-            <div class="proc-title">현장 인쇄 사고 0%<small>PDF · TEMPLATE & PRINT FILE ← 현재 페이지</small></div>
+            <div class="proc-title">레이아웃 & 리사이징<small>PDF · TEMPLATE & PRINT FILE ← 현재 페이지</small></div>
           </div>
           <div class="proc-img">
             <img src="/weare/img/step04.jpg" alt="PDF — 인쇄파일 세팅, 블리드, 칼선, CMYK">
           </div>
           <div class="proc-copy">
-            <strong>긴지 짧은지, 대보고 찍는다</strong>
-            템플릿 고르고 워딩만 수정하면 발주파일 완성. 블리드·칼선·CMYK 완벽 세팅. 사전 시뮬레이션 소통으로 현장에서 당황하지 않도록 끝까지 궁금증을 해결합니다.
+            <strong>긴지 짧은지, 목업으로 현장 미리보기</strong>
+            템플릿 고르고 워딩만 수정하면 발주파일 완성. 블리드·칼선·CMYK 완벽 세팅. 사전 목업 시뮬레이션 소통으로 현장에서 당황하지 않도록 끝까지 궁금증을 해결합니다.
             <br><br><a href="#gallery" style="color:#EA580C;font-weight:800;font-size:14px;">템플릿 갤러리 보기 →</a>
           </div>
         </article>
@@ -860,7 +868,7 @@ footer{
         <article class="proc-step">
           <div class="proc-head">
             <span class="proc-num" style="color:#9868D8;">04</span>
-            <div class="proc-title">움직이는 무기<small>MOTION · MOTION GRAPHICS & VIDEO</small></div>
+            <div class="proc-title">모션 미디어<small>MOTION · MOTION GRAPHICS & VIDEO</small></div>
           </div>
           <div class="proc-img">
             <video src="/weare/img/step05.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>
@@ -878,11 +886,11 @@ footer{
             <div class="proc-title">계속 써먹기<small>AGENCY · RESIZING & MANAGEMENT</small></div>
           </div>
           <div class="proc-img">
-            <img src="/weare/img/step06.jpg" alt="AGENCY — 현장 설치, 전담 파트너, 무한 리사이징">
+            <img src="/weare/img/step06.jpg" alt="AGENCY — 기초 자산 활용 유지 관리 고도화">
           </div>
           <div class="proc-copy">
             <strong>공간을 채우는 완벽한 최종 구현</strong>
-            완성된 브랜드 자산을 무한 리사이징해 온·오프라인 어디든 꺼내 씁니다. 오래가는 브랜드를 함께 관리하는 전담 디자인 파트너. 스케치 한 장이 현장 설치까지 이어지는 5단계 공정의 완성.
+            완성된 브랜드 자산을 무한 리사이징해 온·오프라인 어디든 꺼내 씁니다. 오래가는 브랜드를 함께 관리하는 전담 디자인 파트너. 스케치 한 장이 브랜드 자산으로 이어지는 5단계 공정의 완성.
             <br><br><a href="https://jphic.co.kr/agency" style="color:#CBD5E1;font-weight:800;font-size:14px;">AGENCY 서비스 보기 →</a>
           </div>
         </article>
@@ -898,7 +906,7 @@ footer{
 <!-- ===== CTA ===== -->
 <section class="cta-sec rv">
   <h2>원하는 템플릿이 없으신가요?<br>디자인 주문도 가능합니다</h2>
-  <p>템플릿 커스텀 또는 처음부터 새로 만드는 디자인 주문은<br>오픈챗으로 요청해주세요. 사전 시뮬레이션 소통 후 제작합니다.</p>
+  <p>템플릿 커스텀 또는 처음부터 새로 만드는 디자인 주문은<br>문의서 작성하고, 오픈챗으로 요청해주세요.</p>
   <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
     <a href="https://jphic.co.kr/invoice" class="btn-primary"><i class="fa-solid fa-file-invoice"></i> 견적·발주 바로가기</a>
     <button onclick="openModal(null)" class="btn-outline">디자인 요청 →</button>
@@ -916,7 +924,7 @@ footer{
     <div class="modal-body">
       <div class="modal-close" onclick="closeModal()">×</div>
       <div class="modal-title">디자인 요청하기</div>
-      <p class="modal-sub">번호 확인 후 오픈챗으로 원본 파일과 함께 보내주세요.</p>
+      <p class="modal-sub">번호 확인 후 오픈챗으로 자료 파일과 함께 보내주세요.</p>
 
       <div id="selectedCode" class="selected-code" style="display:none;"></div>
 
@@ -1056,6 +1064,80 @@ function copyResult(){
   const t=document.getElementById('copyArea').textContent;
   navigator.clipboard.writeText(t).catch(()=>{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);});
 }
+
+// 헤더 스크롤 블러
+window.addEventListener('scroll',()=>{
+  document.querySelector('header').classList.toggle('scrolled',window.scrollY>40);
+},{passive:true});
+
+// ===== 직선 모션 캔버스 =====
+(function(){
+  const cv=document.getElementById('lineCanvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  let W,H,lines=[];
+
+  function resize(){
+    W=cv.width=cv.offsetWidth;
+    H=cv.height=cv.offsetHeight;
+  }
+
+  function mkLine(){
+    const y=Math.random()*H;
+    const len=60+Math.random()*300;   // 길이 60~360px
+    const speed=0.4+Math.random()*1.2; // 속도
+    const dir=Math.random()>.5?1:-1;   // 좌→우 or 우→좌
+    const x=dir===1?-len:W+len;
+    const op=0.08+Math.random()*0.18;  // 투명도
+    const thick=0.5+Math.random()*1.2; // 두께
+    const color=Math.random()>.7
+      ?`rgba(234,88,12,${op})`         // 오렌지 30%
+      :`rgba(255,255,255,${op})`;       // 흰색 70%
+    return{x,y,len,speed,dir,color,thick,life:0,maxLife:80+Math.random()*120};
+  }
+
+  // 초기 라인 분산 생성
+  for(let i=0;i<28;i++){
+    const l=mkLine();
+    l.life=Math.random()*l.maxLife; // 랜덤 위상
+    lines.push(l);
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+
+    // 라인 보충
+    if(lines.length<28) lines.push(mkLine());
+
+    lines=lines.filter(l=>{
+      l.life++;
+      l.x+=l.speed*l.dir;
+
+      // fade in / out
+      const prog=l.life/l.maxLife;
+      const fade=prog<.15?prog/.15:prog>.75?(1-prog)/.25:1;
+
+      ctx.save();
+      ctx.globalAlpha=fade;
+      ctx.strokeStyle=l.color;
+      ctx.lineWidth=l.thick;
+      ctx.lineCap='round';
+      ctx.beginPath();
+      ctx.moveTo(l.x,l.y);
+      ctx.lineTo(l.x+l.len*l.dir,l.y);
+      ctx.stroke();
+      ctx.restore();
+
+      return l.life<l.maxLife;
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('resize',resize,{passive:true});
+  draw();
+})();
 
 // 스크롤 애니
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
