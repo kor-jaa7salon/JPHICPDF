@@ -1,871 +1,1104 @@
+<!-- 260614 1530 / mod_01 디자인·퍼블 적용 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<!-- SEO Meta -->
-<title>제이픽 JPHIC PDF | 현장 인쇄 사고 0%, 마스터 발주 파일 세팅</title>
-<meta name="description" content="코엑스·킨텍스 전시 부스, 팝업스토어, 매장 사이니지부터 패키지까지. 인쇄소 반려 파일 완벽 수정, 여백/칼선 세팅 및 미디어 확장(영상 제작)까지 JPHIC이 완벽하게 세팅합니다.">
-<meta name="keywords" content="발주파일 제작, 부스 현수막, 인쇄 여백, 블리드 세팅, 사이니지 영상, 패키지 인쇄, CMYK 변환, 성원애드피아 반려, 인쇄 사고 방지, JPHIC, 제이픽">
+<title>전시 백월·배너·등신대·포토존 인쇄파일 템플릿 제작 대행 | JPHIC PDF</title>
+<meta name="description" content="템플릿 번호 고르고, 워딩만 수정하면 발주파일 완성. 전시 백월·배너·등신대·포토존·POP 인쇄파일 사전 시뮬레이션 소통. 관공서·기업 홍보팀·에이전시 전문 제이픽.">
+<meta name="keywords" content="전시 백월 템플릿, 배너 인쇄파일, 등신대 제작, 포토존 파일, POP 인쇄, 칼선 세팅, 현수막 파일, 인쇄파일 대행, 블리드 세팅, CMYK 변환, 성원애드피아, 레드프린팅, JPHIC">
 <meta name="robots" content="index, follow">
-
-<!-- Favicon & OG Image -->
-<link rel="icon" type="image/png" href="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/693c2f61-56a5-4a19-822a-d2a66197d9f7_rw_600.png?h=b2f511503f7670e14ea334c4bbfbb61c">
+<link rel="canonical" href="https://jphic.co.kr/pdf">
+<meta property="og:type" content="website">
+<meta property="og:title" content="전시 백월·배너·등신대·포토존 인쇄파일 템플릿 | JPHIC PDF">
+<meta property="og:description" content="템플릿 번호 고르고, 워딩만 수정하면 발주파일 완성. 사전 시뮬레이션 소통 전문 제이픽.">
 <meta property="og:image" content="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/a769350a-fb08-4da5-97ca-7aa4078d5a96_rw_1200.jpg?h=a1498ea868a29eede46b3db70e8414d1">
-<meta property="og:title" content="제이픽 JPHIC PDF | 혹시 지금, 발주파일 인쇄소에 넘겨도 괜찮은 거 맞나요?">
-
-<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<meta property="og:url" content="https://jphic.co.kr/pdf">
+<link rel="icon" type="image/png" href="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/693c2f61-56a5-4a19-822a-d2a66197d9f7_rw_600.png?h=b2f511503f7670e14ea334c4bbfbb61c">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-/* JPHIC PDF Theme Variables (Premium Deep Orange/Coral Harmony) */
-:root {
-  --mc: #d98066; /* Muted Coral/Orange */
-  --mc-hover: #c46d53; 
-  --mc-light: rgba(217, 128, 102, 0.15);
-  --grad-main: linear-gradient(135deg, #e69680 0%, #d98066 100%); 
-  --canva-grad: linear-gradient(135deg, #d98066 0%, #c45367 100%); 
-  
-  --bg: #090a0c; 
-  --bg-alt: #161a22; /* 숨 쉴 틈: 섹션 교차용 배경색 */
-  --card: #121318; 
-  --card-hover: #1a1c23;
-  --panel: rgba(18, 19, 24, 0.8); 
-  
-  --text-main: #F8FAFC;
-  --text-sub: #94A3B8;
-  --text-dim: #64748B;
-  
-  --border: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(217, 128, 102, 0.3);
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { max-width: 100vw; overflow-x: hidden; scroll-behavior: smooth; background: var(--bg); }
-body { font-family: 'Pretendard', sans-serif; color: var(--text-main); line-height: 1.6; word-break: keep-all;}
-
-/* Background Grid Pattern */
-.grid-bg { position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; opacity: 0.3; pointer-events: none;}
-
-/* Marquee Banner */
-.jphic-marquee-wrapper { background-color: var(--card); width: 100%; overflow: hidden; position: fixed; top: 70px; z-index: 9999; height: 44px; display: flex; align-items: center; border-bottom: 1px solid var(--border);}
-.jphic-marquee-container { width: 100%; max-width: 1400px; margin: 0 auto; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
-.marquee-content { display: flex; white-space: nowrap; animation: jphic-marquee 40s linear infinite; width: max-content; }
-.marquee-group { display: flex; align-items: center; }
-.m-text { color: var(--text-sub); font-size: 14px; font-weight: 500; margin-right: 15px; flex-shrink: 0; }
-.m-link { color: var(--mc); font-size: 12px; font-weight: 600; text-decoration: underline; margin-right: 80px; cursor: pointer; flex-shrink: 0; display: inline-block; }
-@keyframes jphic-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-/* NAV */
-.nav { position: fixed; top: 0; width: 100%; z-index: 10000; height: 70px; background-color: rgba(9, 10, 12, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; border-bottom: 1px solid var(--border); }
-.logo { font-size: 1.1rem; font-weight: 900; color: #fff; text-decoration: none; }
-.logo span { color: var(--mc); }
-.nav-links { display: flex; gap: 40px; position: absolute; left: 50%; transform: translateX(-50%); }
-.nav-links a { color: var(--text-sub); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: .2s; }
-.nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-.nav-cta { background: var(--text-main); color: var(--bg); padding: 10px 24px; border-radius: 50px; font-weight: 800; font-size: 14px; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; font-family: inherit;}
-.nav-cta:hover { background: var(--mc); color: #fff; box-shadow: 0 4px 15px var(--border-glow);}
-
-/* Hamburger */
-.hamburger { display: none; background: transparent; border: none; color: #fff; font-size: 1.6rem; cursor: pointer; transition: 0.3s; }
-@media (max-width: 1050px) { 
-  .hamburger { display: block; }
-  .nav-links { display: flex; flex-direction: column; position: absolute; top: 70px; left: 0; transform: none; width: 100%; background: var(--card); border-bottom: 1px solid var(--border); padding: 0; gap: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; align-items: center; z-index: 9990;}
-  .nav-links.active { max-height: 500px; padding-bottom: 10px; }
-  .nav-links a { font-size: 1.05rem; width: 100%; text-align: center; padding: 16px 0; border-bottom: 1px solid var(--border); margin: 0; color: #fff;}
-}
-
-/* Sections Base (간격 대폭 확보 180px) */
-section[id] { scroll-margin-top: 70px; }
-.sec { padding: 180px 5%; position: relative; border-top: none;}
-.sec-hd { text-align: center; margin-bottom: 60px; }
-.sec-hd .label { display: inline-block; font-size: 0.85rem; font-weight: 900; letter-spacing: 0.1em; color: var(--mc); margin-bottom: 16px; padding: 6px 16px; background: var(--mc-light); border-radius: 50px; border: 1px solid var(--border-glow);}
-.sec-hd h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; letter-spacing: -0.04em; color: var(--text-main); line-height: 1.35; margin-bottom: 16px; }
-.sec-hd p { font-size: clamp(1rem, 2vw, 1.1rem); color: var(--text-sub); line-height: 1.7; font-weight: 500;}
-
-/* Alternate Background Colors */
-.bg-alt { background: var(--bg-alt); }
-.bg-base { background: var(--bg); }
-
-/* Scroll Animation */
-.rv { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-.rv.on { opacity: 1; transform: translateY(0); }
-.d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; }
-
-/* 1. HERO SECTION */
-.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 160px 5% 60px; position: relative; overflow: hidden; background: var(--bg); }
-.hero::before { content: ''; position: absolute; top: 10%; left: 30%; width: 400px; height: 400px; background: var(--mc); border-radius: 80%; filter: blur(80px); z-index: 0; opacity: 0.15; pointer-events: none; animation: auraRandomPulse1 4s ease-in-out infinite alternate; }
-.hero::after { content: ''; position: absolute; bottom: 10%; right: 90%; width: 400px; height: 400px; background: #e11d48; border-radius: 50%; filter: blur(120px); z-index: 0; opacity: 0.1; pointer-events: none; animation: auraRandomPulse2 5s ease-in-out infinite alternate; }
-
-@keyframes auraRandomPulse1 { 0% { transform: scale(1); opacity: 0.15; } 100% { transform: scale(1.3); opacity: 0.08; } }
-@keyframes auraRandomPulse2 { 0% { transform: scale(1); opacity: 0.1; } 100% { transform: scale(1.5); opacity: 0.18; } }
-
-.hero-inner { position: relative; z-index: 3; max-width: 900px; width: 100%; display: flex; flex-direction: column; align-items: center;}
-.hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--panel); border: 1px solid var(--border); padding: 8px 20px; border-radius: 50px; font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 24px; }
-.hero h1 { font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.25; letter-spacing: -0.03em; margin-bottom: 24px; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.4);}
-.hero h1 .hl { background: var(--canva-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero-sub { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--text-sub); margin-bottom: 40px; line-height: 1.7; font-weight: 500; }
-
-.btn-primary { padding: 20px 44px; border-radius: 50px; background: var(--grad-main); color: #fff; font-size: clamp(1.1rem, 2vw, 1.25rem); font-weight: 900; text-decoration: none; transition: .3s; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px var(--border-glow); border: none; cursor: pointer; margin-bottom: 20px;}
-.btn-primary:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(217, 128, 102, 0.5); }
-
-/* Hero Chat Bubbles */
-.hero-chat-area { width: 100%; max-width: 780px; height: 170px; margin: 0 auto 30px; position: relative; pointer-events: none; overflow: hidden; mask-image: linear-gradient(to bottom, transparent, black 10%, black 55%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);}
-.bubble-seq { position: absolute; left: 50%; transform: translateX(-50%); background: var(--card); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); padding: 16px 28px; border-radius: 50px; font-size: 1.05rem; font-weight: 600; box-shadow: 0 15px 40px rgba(0,0,0,0.4); opacity: 0; white-space: nowrap; animation: floatBubble 24s infinite; }
-@media (max-width: 768px) { .bubble-seq { font-size: 0.85rem; white-space: normal; text-align: center; width: 90%; border-radius: 20px; padding: 14px 20px;} }
-
-@keyframes floatBubble { 0% { opacity: 0; bottom: -30px; transform: translateX(-50%) scale(0.8); } 5% { opacity: 1; bottom: 30px; transform: translateX(-50%) scale(1); } 15% { opacity: 1; bottom: 30px; transform: translateX(-50%) scale(1); } 20% { opacity: 1; bottom: 100px; transform: translateX(-50%) scale(0.68); } 30% { opacity: 1; bottom: 100px; transform: translateX(-50%) scale(0.68); } 40% { opacity: 0; bottom: 240px; transform: translateX(-50%) scale(0.4); } 100% { opacity: 0; bottom: 240px; transform: translateX(-50%) scale(0.9); } }
-.bs-1 { animation-delay: 0s; } .bs-2 { animation-delay: 3s; } .bs-3 { animation-delay: 6s; } .bs-4 { animation-delay: 9s; } .bs-5 { animation-delay: 12s; } .bs-6 { animation-delay: 15s; } .bs-7 { animation-delay: 18s; } .bs-8 { animation-delay: 21s; }
-
-.story-box { background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-left: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 40px; text-align: left; box-shadow: 0 30px 60px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 30px; max-width: 860px; margin: 0 auto; position: relative;}
-.story-box::before { content: 'Client Message'; position: absolute; top: -14px; left: 40px; background: var(--card); border: 1px solid var(--border); color: var(--text-sub); font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; letter-spacing: 1px;}
-@media (max-width: 768px) { .story-box { flex-direction: column; text-align: center; } .story-box::before { left: 50%; transform: translateX(-50%); } }
-.story-icon { font-size: 3.5rem; color: var(--text-dim); }
-.story-text h3 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.4;}
-.story-text p { font-size: 1rem; color: var(--text-sub); line-height: 1.6;}
-.story-text strong { color: var(--mc); }
-
-/* --- CARD HOVER MASTER EFFECTS --- */
-.hover-card-fx { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; z-index: 1; }
-.hover-card-fx:hover { transform: translateY(-12px) scale(1.02); border-color: var(--mc); box-shadow: 0 20px 40px rgba(217, 128, 102, 0.15); background: var(--card-hover); z-index: 10; }
-
-/* 2. PAIN POINTS */
-.pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto;}
-@media (max-width: 900px) { .pain-grid { grid-template-columns: 1fr; max-width: 600px;} }
-.pain-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: left; }
-.pain-icon { font-size: 2.5rem; color: var(--text-dim); margin-bottom: 20px; transition: 0.3s;}
-.pain-card:hover .pain-icon { color: var(--mc); transform: scale(1.1); }
-.pain-card h3 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 16px; line-height: 1.4;}
-.pain-card p { font-size: 1rem; color: var(--text-sub); line-height: 1.6;}
-
-/* 3. PRINT CATEGORIES (1행 3칸, 2줄 확장 레이아웃) */
-.category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
-@media (max-width: 900px) { .category-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .category-grid { grid-template-columns: 1fr; } }
-.cat-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px 30px; text-align: center; }
-.cat-icon { font-size: 2.5rem; color: var(--text-dim); margin-bottom: 20px; transition: 0.3s; }
-.cat-card:hover .cat-icon { color: var(--mc); transform: scale(1.1); }
-.cat-card h4 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 12px; }
-.cat-card p { font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; margin: 0; word-break: keep-all; }
-
-/* 4. SERVICES VISUAL */
-.svc-wrap { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;}
-.svc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: stretch; background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; transition: 0.3s;}
-.svc-row:nth-child(even) .svc-text { order: 2; }
-.svc-row:nth-child(even) .svc-visual { order: 1; }
-.svc-text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start;}
-.svc-num { font-size: 3rem; font-weight: 900; color: var(--border); line-height: 1; font-family: monospace; margin-bottom: 16px; transition: 0.3s;}
-.svc-row:hover .svc-num { color: var(--mc); opacity: 0.5;}
-.svc-text h3 { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 16px;}
-.svc-text p { font-size: 1.05rem; color: var(--text-sub); line-height: 1.7;}
-.svc-tag { display: inline-block; padding: 6px 14px; background: var(--mc-light); color: var(--mc); border-radius: 50px; font-size: 0.85rem; font-weight: 700; margin-top: 20px; border: 1px solid var(--border-glow);}
-
-.svc-visual { background: #0c0d12; border: 1px solid var(--border); border-radius: 16px; height: 100%; min-height: 280px; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; box-shadow: inset 0 0 40px rgba(0,0,0,0.5); transition: 0.3s;}
-.svc-row:hover .svc-visual { border-color: var(--mc-light); }
-
-/* 시각화 모형 커스텀 (PDF 전용) */
-.mock-bleed { width: 140px; height: 80px; background: #fff; border: 2px dashed #f00; position: relative; display: flex; align-items: center; justify-content: center;}
-.mock-bleed::before { content: '안전 영역'; position: absolute; width: 120px; height: 60px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: #000; font-weight: 800;}
-.mock-bleed::after { content: '여백(Bleed)'; position: absolute; top: -25px; color: #f00; font-size: 0.8rem; font-weight: bold;}
-
-.mock-cmyk { display: flex; gap: 10px; }
-.c-drop { width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); }
-.c-drop:nth-child(1) { background: #00ffff; }
-.c-drop:nth-child(2) { background: #ff00ff; }
-.c-drop:nth-child(3) { background: #ffff00; }
-.c-drop:nth-child(4) { background: #000000; }
-.svc-row:hover .c-drop { animation: bounceDrop 0.5s alternate infinite; }
-@keyframes bounceDrop { 0% { transform: rotate(-45deg) scale(1); } 100% { transform: rotate(-45deg) scale(1.2); } }
-
-.mock-media { display: flex; align-items: flex-end; gap: 10px; }
-.m-dev1 { width: 80px; height: 120px; border: 2px solid var(--text-dim); border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 2rem; color: var(--mc); transition: 0.3s;}
-.m-dev2 { width: 140px; height: 90px; border: 2px solid var(--text-dim); border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 2rem; color: var(--mc); transition: 0.3s;}
-.svc-row:hover .m-dev1, .svc-row:hover .m-dev2 { border-color: var(--mc); box-shadow: 0 0 15px var(--border-glow); color: #fff;}
-
-@media (max-width: 900px) {
-  .svc-row { grid-template-columns: 1fr; gap: 30px; text-align: center; padding: 30px; }
-  .svc-text { align-items: center; }
-  .svc-row:nth-child(even) .svc-text { order: 1; }
-  .svc-row:nth-child(even) .svc-visual { order: 2; height: auto; min-height: 250px; }
-}
-
-/* 5. HOW TO (Process) */
-.how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; position: relative;}
-@media (max-width: 900px) { .how-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .how-grid { grid-template-columns: 1fr; } }
-.step-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: left; position: relative; z-index: 2; transition: 0.3s;}
-.step-card:hover { border-color: var(--mc); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(217, 128, 102, 0.15); background: var(--card-hover);}
-.step-num { font-size: 3.5rem; font-weight: 900; color: rgba(255,255,255,0.05); position: absolute; top: 20px; right: 24px; line-height: 1; transition: 0.3s;}
-.step-card:hover .step-num { color: rgba(217, 128, 102, 0.15); }
-.step-card h4 { font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 12px; position: relative; z-index: 2;}
-.step-card p { font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; word-break: keep-all; margin: 0; position: relative; z-index: 2;}
-.step-card.final { border-color: var(--mc); background: rgba(217, 128, 102, 0.05); }
-.step-card.final .step-num { color: var(--mc); opacity: 0.2;}
-
-/* 6. REVIEWS */
-.review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;}
-@media (max-width: 900px) { .review-grid { grid-template-columns: 1fr; } }
-.review-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px 30px; display: flex; flex-direction: column; gap: 16px; text-align: left;}
-.stars { color: var(--mc); font-size: 1rem; letter-spacing: 2px; }
-.r-quote { font-size: 1rem; color: var(--text-main); line-height: 1.6; font-weight: 500; flex-grow: 1; word-break: keep-all; }
-.r-client { font-size: 0.85rem; color: var(--text-sub); border-top: 1px solid var(--border); padding-top: 16px; }
-.r-client strong { color: var(--mc); display: block; margin-bottom: 4px; font-size: 0.9rem;}
-
-/* 7. PRICING */
-.price-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 900px; margin: 0 auto;}
-@media (max-width: 768px) { .price-grid-2 { grid-template-columns: 1fr; } }
-.price-card-2 { background: var(--card); border: 2px solid var(--border); border-radius: 24px; padding: 40px 30px; text-align: left; display: flex; flex-direction: column; }
-.price-card-2.featured { border-color: var(--mc); background: rgba(217, 128, 102, 0.05); transform: none; }
-.price-card-2 .p-title { font-size: 1.6rem; font-weight: 900; color: #fff; margin-bottom: 16px; text-align: center;}
-.price-card-2 .p-desc { font-size: 1.05rem; color: var(--text-sub); margin-bottom: 30px; line-height: 1.6; word-break: keep-all; text-align: center;}
-
-/* 리스트 속성 (미포함 텍스트, 중앙선 삭제 / Dim 처리만 유지 / flex-grow로 하단 버튼 위치 통일) */
-.p-list { list-style: none !important; padding-left: 0 !important; margin-bottom: 30px; text-align: left; flex-grow: 1; }
-.p-list li { list-style-type: none !important; font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; color: #94A3B8; }
-.p-list li i { font-size: 0.85rem; margin-top: 4px; flex-shrink: 0; color: var(--mc); }
-.p-list li.dim { color: rgba(255,255,255,0.4); }
-.p-list li.dim i { color: rgba(255,255,255,0.3); }
-
-.price-card-2 .p-btn { display: inline-block; width: 100%; padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; font-weight: 800; font-size: 1.05rem; text-decoration: none; transition: 0.3s; cursor: pointer; font-family: inherit; text-align: center;}
-.price-card-2.featured .p-btn { background: var(--grad-main); border-color: transparent; color: #fff; box-shadow: 0 10px 20px var(--border-glow);}
-.price-card-2 .p-btn:hover { background: var(--mc-hover); color: #fff; border-color: var(--mc-hover);}
-
-/* 8. FINAL CTA & UNIVERSE */
-.final-cta { text-align: center; padding: 150px 5% 120px; position: relative; overflow: hidden; background: linear-gradient(70deg, #0f172a, #d98066, #0f172a, #a85842, #0f172a); background-size: 400% 400%; animation: auroraContinuous 15s ease-in-out infinite; border-bottom: 1px solid rgba(255,255,255,0.1);}
-@keyframes auroraContinuous { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-.final-cta h2 { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 24px; line-height: 1.3; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.5);}
-.final-cta p { color: rgba(255,255,255,0.9); font-size: 1.1rem; }
-
-.uni-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1200px; margin: 60px auto 0; position: relative; z-index: 2;}
-@media (max-width: 900px) { .uni-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
-@media (max-width: 600px) { .uni-grid { grid-template-columns: 1fr; } }
-.uni-card { background: rgba(17,17,17,0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 30px 20px; text-decoration: none; transition: 0.3s; display: block; position: relative; text-align: left;}
-.uni-card:hover { border-color: rgba(255,255,255,0.4); background: rgba(0,0,0,0.4); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3);}
-/* 현재 페이지(PDF) 하이라이트 */
-.uni-card.current { border-color: var(--mc); background: rgba(217, 128, 102, 0.2); box-shadow: 0 0 30px rgba(217, 128, 102, 0.2); }
-.uni-card.current::before { content: '현재 단계'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--mc); color: #fff; font-size: 0.75rem; font-weight: 900; padding: 4px 12px; border-radius: 20px; }
-.uni-step { font-size: 0.75rem; color: rgba(255,255,255,0.6); font-weight: 800; letter-spacing: 1px; display: block; margin-bottom: 8px;}
-.uni-title { font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 8px;}
-.uni-title span { color: rgba(255,255,255,0.5); transition: 0.3s; }
-.uni-card.c-core:hover .uni-title span { color: #00BBAC; } 
-.uni-card.c-logo:hover .uni-title span { color: #3b82f6; } 
-.uni-card.c-pdf .uni-title span { color: #d98066; } /* PDF active color */
-.uni-card.c-agency:hover .uni-title span { color: #cbd5e1; } 
-.uni-desc { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.5;}
-
-/* Modal Form */
-.modal-overlay { position: fixed; inset: 0; background: rgba(10, 12, 15, 0.85); z-index: 100000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.3s; backdrop-filter: blur(8px); padding: 20px;}
-.modal-overlay.active { opacity: 1; pointer-events: auto; }
-.modal-box { background: var(--bg); width: 100%; max-width: 600px; border-radius: 20px; border: 1px solid var(--border); overflow: hidden; max-height: 90vh; display: flex; flex-direction: column; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.6);}
-.modal-close { position: absolute; top: 14px; right: 20px; font-size: 1.8rem; color: var(--text-sub); cursor: pointer; z-index: 10; line-height: 1; transition: 0.2s;}
-.modal-close:hover { color: #fff; }
-.modal-body { padding: 30px; overflow-y: auto; flex: 1; }
-.modal-header { text-align: center; margin-bottom: 30px; }
-.modal-header h2 { font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
-.modal-header p { font-size: 0.95rem; color: var(--text-sub); }
-
-.f-group { margin-bottom: 24px; }
-.f-label { display: block; font-family: 'Pretendard', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
-.f-input, .f-textarea { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 12px; font-family: 'Pretendard', sans-serif; font-size: 1rem; background: rgba(0,0,0,0.2); color: #fff; transition: 0.2s;}
-.f-input:focus, .f-textarea:focus { outline: none; border-color: var(--mc); background: rgba(217, 128, 102, 0.05); }
-
-.f-options { display: flex; flex-direction: column; gap: 10px; }
-.option-card { display: flex; flex-direction: column; padding: 16px; border: 1px solid var(--border); border-radius: 12px; cursor: pointer; background: var(--card); transition: 0.2s; }
-.option-card:hover { border-color: #555; }
-.option-card strong { font-family: 'Pretendard', sans-serif; font-size: 1rem; color: #fff; margin-bottom: 4px; font-weight: 800;}
-.option-card span { font-family: 'Pretendard', sans-serif; font-size: 0.9rem; color: var(--text-sub); line-height: 1.4;}
-.f-radio { display: none; }
-.f-radio:checked + .option-card { border-color: var(--mc); background: var(--mc-light); }
-
-.check-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.check-btn { font-family: 'Pretendard', sans-serif; display: inline-block; padding: 8px 16px; border: 1px solid var(--border); border-radius: 50px; cursor: pointer; font-size: 0.95rem; color: var(--text-sub); transition: 0.2s; background: rgba(0,0,0,0.2);}
-.f-check { display: none; }
-.f-check:checked + .check-btn { background: var(--mc); color: #fff; border-color: var(--mc); }
-
-.btn-submit-modal { display: block; width: 100%; padding: 18px; border-radius: 12px; background: var(--mc); color: #fff; font-size: 1.1rem; font-family: 'Pretendard', sans-serif; font-weight: 900; border: none; cursor: pointer; transition: 0.3s; text-align: center;}
-.btn-submit-modal:disabled { opacity: 0.5; cursor: not-allowed; }
-.btn-submit-modal:not(:disabled):hover { opacity: 0.9; box-shadow: 0 4px 15px rgba(217, 128, 102, 0.3); }
-
-.copy-box { background: rgba(0,0,0,0.5); color: #e2e8f0; padding: 20px; border-radius: 12px; font-family: 'Pretendard', sans-serif; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; margin-bottom: 20px; border: 1px solid var(--border); height: 180px; overflow-y: auto;}
-
-.form-step { display: none; animation: fadeIn 0.4s ease; }
-.form-step.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Footer */
-footer { background: #000; color: var(--text-dim); padding: 60px 5%; font-size: 0.85rem; text-align: center;}
-.f-logo { font-size: 1.2rem; font-weight: 900; color: #fff; display: block; margin-bottom: 16px; }
-.f-logo span { color: var(--mc); }
-</style>
-
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-06LPWZ6RLL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-06LPWZ6RLL');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-06LPWZ6RLL');</script>
+<style>
+/* ===== mod_01 기준 변수 ===== */
+:root{
+  --bg:#030712;
+  --bg2:#0B1220;
+  --line:#1E293B;
+  --txt:#E2E8F0;
+  --sub:#94A3B8;
+  --mc:#EA580C;       /* PDF 포인트색 */
+  --mc-light:rgba(234,88,12,0.1);
+  --mc-glow:rgba(234,88,12,0.25);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-user-select:none!important;user-select:none!important;}
+html{scroll-behavior:smooth;}
+html,body{overflow-x:clip;max-width:100vw;}
+/* mod_01: 본문 최소 14px */
+body{background:var(--bg);color:var(--txt);font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;line-height:1.6;font-size:16px;word-break:keep-all;}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+
+/* ===== NAV — mod_01 좌상단 로고·우상단 버튼 통일 ===== */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 32px;height:68px;
+  background:rgba(3,7,18,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.logo{font-weight:900;font-size:18px;letter-spacing:.02em;color:#fff;}
+.logo span{color:var(--mc);}
+
+/* 가운데 메뉴 */
+.nav-center{
+  position:absolute;left:50%;transform:translateX(-50%);
+  display:flex;gap:32px;align-items:center;
+}
+.nav-center a{font-size:14px;font-weight:600;color:var(--sub);transition:.2s;}
+.nav-center a:hover{color:#fff;}
+
+/* 우상단 버튼 3개 */
+.nav-right{display:flex;gap:8px;align-items:center;}
+.nav-btn{
+  padding:8px 16px;border-radius:6px;font-size:14px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:.2s;border:1px solid var(--line);
+  background:transparent;color:var(--txt);white-space:nowrap;
+}
+.nav-btn:hover{border-color:var(--mc);color:#fff;}
+.nav-btn.primary{background:var(--mc);border-color:var(--mc);color:#fff;}
+.nav-btn.primary:hover{box-shadow:0 0 16px var(--mc-glow);}
+
+/* ===== HERO — CSS 배경 이미지 (크롤링은 h1 텍스트로) ===== */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:flex-start;align-items:center;
+  text-align:center;padding:800px 5% 80px;
+  position:relative;overflow:hidden;
+  background:
+    linear-gradient(to bottom, rgba(3,7,18,0.2) 0%, rgba(3,7,18,0.55) 55%, rgba(3,7,18,1) 100%),
+    url('/img/pdf/hero-bg.webp') center center/cover no-repeat;
+  background-color:var(--bg);
+}
+/* 이미지 없을 때 fallback 글로우 */
+.hero::before{
+  content:'';position:absolute;top:20%;left:20%;
+  width:600px;height:600px;background:var(--mc);border-radius:50%;
+  filter:blur(130px);opacity:0.07;pointer-events:none;
+  animation:aura 7s ease-in-out infinite alternate;
+}
+@keyframes aura{0%{opacity:.05;transform:scale(1);}100%{opacity:.1;transform:scale(1.3);}}
+
+.hero-inner{position:relative;z-index:2;max-width:900px;}
+
+/* [SEO] h1 — 작게, 키워드 포함 */
+.hero h1{
+  font-size:14px;font-weight:700;color:var(--sub);
+  letter-spacing:1px;margin-bottom:36px;opacity:.7;
+  line-height:1.6;
+}
+
+/* 감성 카피 */
+.hero-big{font-size:clamp(4rem,11vw,9rem);font-weight:900;line-height:1;letter-spacing:-.04em;color:#fff;display:block;}
+.hero-mid{font-size:clamp(1.8rem,4.5vw,3.5rem);font-weight:900;color:var(--mc);display:block;margin:12px 0 24px;letter-spacing:-.02em;}
+.hero-small{font-size:clamp(14px,1.6vw,18px);color:var(--sub);display:block;margin-bottom:12px;line-height:1.9;}
+.hero-copy{font-size:clamp(14px,1.3vw,16px);color:rgba(255,255,255,.5);max-width:560px;margin:0 auto 52px;line-height:2;}
+
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{
+  padding:16px 32px;border-radius:8px;background:var(--mc);color:#fff;
+  font-size:15px;font-weight:800;border:none;cursor:pointer;
+  font-family:inherit;transition:.3s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{box-shadow:0 0 24px var(--mc-glow);transform:translateY(-2px);}
+.btn-outline{
+  padding:16px 32px;border-radius:8px;background:transparent;color:#fff;
+  font-size:15px;font-weight:700;border:1px solid var(--line);
+  cursor:pointer;font-family:inherit;transition:.3s;
+}
+.btn-outline:hover{border-color:rgba(255,255,255,.4);}
+
+/* ===== 3단계 흐름 ===== */
+.flow{padding:72px 5%;background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.flow-grid{display:grid;grid-template-columns:repeat(3,1fr);max-width:860px;margin:0 auto;position:relative;}
+.flow-grid::before{
+  content:'';position:absolute;top:32px;
+  left:calc(16.66% + 20px);right:calc(16.66% + 20px);
+  height:1px;background:linear-gradient(to right,var(--mc),rgba(234,88,12,.15));
+}
+.flow-item{text-align:center;padding:0 24px;position:relative;z-index:1;}
+.flow-num{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--mc);color:#fff;
+  font-size:1.4rem;font-weight:900;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 16px;
+}
+.flow-item:not(:first-child) .flow-num{background:var(--bg2);border:1px solid var(--line);color:var(--sub);}
+.flow-title{font-size:16px;font-weight:900;color:#fff;margin-bottom:8px;}
+.flow-desc{font-size:14px;color:var(--sub);line-height:1.7;}
+
+/* ===== 갤러리 ===== */
+.gallery-sec{padding:80px 5% 100px;}
+.sec-label{font-size:12px;font-weight:900;color:var(--mc);letter-spacing:2px;margin-bottom:10px;}
+.sec-title{font-size:clamp(22px,3vw,34px);font-weight:900;color:#fff;margin-bottom:12px;}
+.sec-desc{font-size:15px;color:var(--sub);margin-bottom:48px;}
+
+/* 탭 */
+.tab-wrap{display:flex;justify-content:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.tab-btn{
+  padding:10px 28px;border-radius:6px;border:1px solid var(--line);
+  background:transparent;color:var(--sub);font-size:14px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:.2s;
+}
+.tab-btn.active{background:var(--mc);border-color:var(--mc);color:#fff;}
+.tab-btn:hover:not(.active){border-color:rgba(255,255,255,.3);color:#fff;}
+
+/* 인쇄 안내 */
+.print-notice{
+  display:none;max-width:700px;margin:0 auto 28px;
+  background:rgba(234,88,12,.06);border:1px solid rgba(234,88,12,.2);
+  border-radius:8px;padding:14px 20px;font-size:14px;color:var(--sub);
+  text-align:center;line-height:1.8;
+}
+.print-notice.show{display:block;}
+.print-notice strong{color:var(--mc);}
+
+/* 카테고리 필터 */
+.cat-filter{display:flex;justify-content:center;gap:8px;margin-bottom:48px;flex-wrap:wrap;}
+.cat-btn{
+  padding:7px 18px;border-radius:6px;border:1px solid var(--line);
+  background:transparent;color:var(--sub);font-size:13px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:.2s;
+}
+.cat-btn.active{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.25);color:#fff;}
+.cat-btn:hover:not(.active){color:#fff;}
+
+/* 카드 그리드 — 갭 2배 */
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:48px 40px;   /* 세로 48px, 가로 40px */
+  max-width:1080px;margin:0 auto;
+}
+.t-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;transition:.35s;
+  cursor:pointer;display:none;
+}
+.t-card.show{display:block;}
+.t-card:hover{border-color:var(--mc);transform:translateY(-6px);box-shadow:0 20px 40px rgba(234,88,12,.12);}
+
+.card-img{width:100%;aspect-ratio:3/2;overflow:hidden;background:#0a0b0e;position:relative;}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+.t-card:hover .card-img img{transform:scale(1.05);}
+.card-img img[src*="placeholder"]{filter:brightness(.4);}
+
+.card-code{
+  position:absolute;top:12px;left:12px;
+  background:rgba(3,7,18,.88);backdrop-filter:blur(6px);
+  border:1px solid var(--line);border-radius:4px;
+  padding:4px 10px;font-size:12px;font-weight:900;color:var(--mc);letter-spacing:1px;
+}
+.card-body{padding:24px 20px;}
+.card-cat{font-size:12px;font-weight:900;color:var(--mc);letter-spacing:1px;margin-bottom:6px;}
+.card-title{font-size:16px;font-weight:900;color:#fff;margin-bottom:8px;line-height:1.4;}
+.card-desc{font-size:14px;color:var(--sub);line-height:1.7;margin-bottom:20px;}
+.card-order{
+  width:100%;padding:12px;border-radius:6px;
+  background:transparent;border:1px solid var(--line);
+  color:#fff;font-size:14px;font-weight:800;
+  cursor:pointer;font-family:inherit;transition:.3s;text-align:center;
+}
+.card-order:hover{background:var(--mc);border-color:var(--mc);}
+
+/* 빈 상태 */
+.empty-state{display:none;text-align:center;padding:60px;color:var(--sub);grid-column:1/-1;font-size:14px;}
+.empty-state.show{display:block;}
+
+/* ===== UNIVERSE 5단계 — weare 공정 라인 UI ===== */
+.universe-sec{position:relative;background:var(--bg);}
+.universe-sec .sec-header{padding:100px 5% 60px;border-top:1px solid var(--line);}
+
+/* weare 공정 라인 그대로 이식 */
+.proc-section{position:relative;}
+.proc-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;}
+.proc-track{display:flex;gap:80px;padding:0 8vw;will-change:transform;}
+.proc-step{
+  flex:0 0 min(78vw,640px);
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:16px;padding:32px;
+  opacity:.3;transform:translateY(16px);
+  transition:opacity .5s,transform .5s;
+}
+.proc-step.active{opacity:1;transform:translateY(0);}
+.proc-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;}
+.proc-num{font-size:42px;font-weight:900;letter-spacing:-.03em;line-height:1;}
+.proc-title{font-size:clamp(18px,2.2vw,26px);font-weight:800;}
+.proc-title small{display:block;color:var(--sub);font-weight:500;font-size:14px;letter-spacing:.08em;margin-top:2px;}
+.proc-img{
+  margin:20px 0;aspect-ratio:16/10;
+  border-radius:12px;overflow:hidden;background:var(--bg);
+}
+.proc-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s;}
+.proc-img:hover img{transform:scale(1.03);}
+.proc-copy{color:var(--sub);font-size:15px;line-height:1.7;}
+.proc-copy strong{display:block;color:var(--txt);font-size:16px;margin-bottom:6px;}
+
+.proc-progress{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;gap:10px;z-index:5;
+}
+.proc-progress i{width:28px;height:2px;background:var(--line);transition:.3s;display:block;}
+.proc-progress i.on{background:var(--mc);}
+
+/* 모바일 */
+@media(max-width:768px){
+  .proc-section{height:auto!important;}
+  .proc-sticky{position:static;height:auto;overflow:visible;display:block;padding:40px 20px;}
+  .proc-track{flex-direction:column;padding:0;gap:32px;transform:none!important;}
+  .proc-step{flex:none;width:100%;opacity:1;transform:none;}
+  .proc-progress{display:none;}
+}
+
+/* ===== CTA ===== */
+.cta-sec{
+  padding:100px 5%;text-align:center;
+  background:linear-gradient(135deg,#0f172a 0%,#1a0a04 50%,#0f172a 100%);
+  border-top:1px solid var(--line);
+}
+.cta-sec h2{font-size:clamp(22px,3.5vw,40px);font-weight:900;color:#fff;margin-bottom:16px;line-height:1.35;}
+.cta-sec p{color:var(--sub);font-size:15px;margin-bottom:36px;line-height:1.9;}
+
+footer{
+  border-top:1px solid var(--line);
+  padding:32px;text-align:center;color:#64748B;font-size:14px;
+}
+.f-logo{font-size:15px;font-weight:900;color:#fff;display:block;margin-bottom:8px;}
+.f-logo span{color:var(--mc);}
+
+/* 스크롤 애니 */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+
+/* 모달 */
+.modal{position:fixed;inset:0;background:rgba(3,7,18,.92);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(10px);}
+.modal.open{display:flex;}
+.modal-box{background:#0f1218;width:100%;max-width:520px;border-radius:16px;border:1px solid var(--line);overflow:hidden;max-height:90vh;display:flex;flex-direction:column;}
+.modal-body{padding:28px;overflow-y:auto;position:relative;}
+.modal-close{position:absolute;top:14px;right:18px;font-size:1.5rem;color:var(--sub);cursor:pointer;}
+.modal-title{font-size:18px;font-weight:900;color:#fff;margin-bottom:6px;}
+.modal-sub{font-size:14px;color:var(--sub);margin-bottom:20px;}
+.selected-code{display:inline-block;padding:5px 14px;background:var(--mc-light);border:1px solid rgba(234,88,12,.3);border-radius:4px;font-size:12px;font-weight:900;color:var(--mc);margin-bottom:16px;letter-spacing:1px;}
+.f-label{display:block;font-size:14px;font-weight:700;color:#fff;margin-bottom:8px;}
+.f-input,.f-textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.3);color:#fff;font-family:inherit;font-size:14px;margin-bottom:16px;transition:.2s;}
+.f-input:focus,.f-textarea:focus{outline:none;border-color:var(--mc);}
+.f-textarea{resize:none;}
+.print-warn{background:rgba(234,88,12,.07);border:1px solid rgba(234,88,12,.2);border-radius:8px;padding:12px 16px;font-size:14px;color:var(--sub);margin-bottom:16px;display:none;line-height:1.8;}
+.print-warn.show{display:block;}
+.print-warn strong{color:var(--mc);}
+.submit-btn{width:100%;padding:15px;border-radius:8px;background:var(--mc);color:#fff;font-size:15px;font-weight:900;border:none;cursor:pointer;font-family:inherit;transition:.3s;}
+.submit-btn:hover{box-shadow:0 0 20px var(--mc-glow);}
+.result-box{display:none;margin-top:16px;}
+.copy-area{background:rgba(0,0,0,.4);color:#e2e8f0;padding:14px;border-radius:8px;font-size:14px;line-height:1.7;white-space:pre-wrap;margin-bottom:12px;border:1px solid var(--line);max-height:150px;overflow-y:auto;}
+.result-btns{display:flex;flex-direction:column;gap:10px;}
+.copy-btn{padding:13px;border-radius:8px;background:#1e293b;color:#fff;font-size:14px;font-weight:800;border:none;cursor:pointer;font-family:inherit;}
+.kakao-btn{padding:13px;border-radius:8px;background:var(--mc);color:#fff;font-size:14px;font-weight:800;text-align:center;display:block;}
+
+/* 체크박스 태그 */
+.ctag{display:inline-block;padding:7px 14px;border-radius:6px;border:1px solid var(--line);background:rgba(0,0,0,.2);font-size:13px;font-weight:700;color:var(--sub);cursor:pointer;transition:.2s;}
+.mc-cb:checked+.ctag{background:var(--mc);color:#fff;border-color:var(--mc);}
+
+/* 모바일 */
+@media(max-width:1024px){.uni-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:768px){
+  .card-grid{grid-template-columns:1fr 1fr;gap:28px 20px;}
+  .flow-grid{grid-template-columns:1fr;gap:24px;}
+  .flow-grid::before{display:none;}
+  .nav-center{display:none;}
+  .uni-grid{grid-template-columns:repeat(2,1fr);}
+  header{padding:0 20px;}
+}
+@media(max-width:480px){
+  .card-grid{grid-template-columns:1fr;gap:24px;}
+  .nav-right .nav-btn:not(.primary){display:none;}
+}
+</style>
 </head>
 <body>
-<div class="grid-bg"></div>
 
-<!-- Marquee -->
-<div class="jphic-marquee-wrapper">
-  <div class="jphic-marquee-container">
-    <div class="marquee-content" onmouseover="this.style.animationPlayState='paused'" onmouseout="this.style.animationPlayState='running'">
-      <div class="marquee-group">
-        <span class="m-text">"디자인은 예쁜데, 인쇄소에서 여백(블리드)이 부족하대요."</span>
-        <a class="m-link" href="/event" target="_blank" rel="noopener">인쇄 가이드 맞춤 세팅하기 →</a>
-        <span class="m-text">"CMYK 파일로 변환해서 달라는데 그게 뭔가요?"</span>
-        <a class="m-link" href="/event" target="_blank" rel="noopener">마스터 발주 파일 만들기 →</a>
-        <span class="m-text">"기껏 만든 디자인, 디지털 사이니지용 영상으로도 쓸 수 있나요?"</span>
-        <a class="m-link" href="/event" target="_blank" rel="noopener">미디어 확장 & 영상 제작 →</a>
-      </div>
-      <div class="marquee-group">
-        <span class="m-text">"디자인은 예쁜데, 인쇄소에서 여백(블리드)이 부족하대요."</span>
-        <a class="m-link" href="/event" target="_blank" rel="noopener">인쇄 가이드 맞춤 세팅하기 →</a>
-        <span class="m-text">"CMYK 파일로 변환해서 달라는데 그게 뭔가요?"</span>
-        <a class="m-link" href="/event" target="_blank" rel="noopener">마스터 발주 파일 만들기 →</a>
-        <span class="m-text">"기껏 만든 디자인, 디지털 사이니지용 영상으로도 쓸 수 있나요?"</span>
-        <a class="m-link" href="/event" target="_blank" rel="noopener">미디어 확장 & 영상 제작 →</a>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- ===== HEADER ===== -->
+<header>
+  <a href="https://jphic.co.kr" class="logo">JPHIC <span>PDF</span></a>
 
-<!-- Nav -->
-<nav class="nav">
-  <a href="#" class="logo">JPHIC <span>PDF</span></a>
-  <div class="nav-links" id="navLinks">
-    <a href="#pain" onclick="closeMobileMenu()">우리의 고민</a>
-    <a href="#categories" onclick="closeMobileMenu()">인쇄 카테고리</a>
-    <a href="#services-visual" onclick="closeMobileMenu()">마스터 솔루션</a>
-    <a href="#how" onclick="closeMobileMenu()">워크플로우</a>
-    <a href="#pricing" onclick="closeMobileMenu()">서비스 플랜</a>
-  </div>
-  <div style="display:flex; align-items:center; gap:16px;">
-    <button onclick="openModal()" class="nav-cta">제이픽, 발주 파일 세팅해줘!</button>
-    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
-  </div>
-</nav>
+  <nav class="nav-center">
+    <a href="#gallery">템플릿 갤러리</a>
+    <a href="#how">주문 방법</a>
+    <a href="#universe">서비스 공정</a>
+    <a href="https://jphic.co.kr/invoice">견적·발주</a>
+  </nav>
 
-<!-- 1. HERO -->
-<section class="hero" id="hero">
+  <div class="nav-right">
+    <button onclick="location.href='https://jphic.co.kr/invoice'" class="nav-btn">템플릿 주문</button>
+    <button onclick="openModal(null)" class="nav-btn">디자인 요청</button>
+    <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="nav-btn primary"><i class="fa-solid fa-comment"></i> 오픈챗</a>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
   <div class="hero-inner">
-    <div class="hero-tag rv d1" style="margin-top: 40px;"><i class="fa-solid fa-file-pdf" style="color: #fff;"></i> Master Print & Media Extension</div>
-    <h1 class="rv d1">혹시 지금, 발주파일 인쇄소에<br><span class="hl">그냥 넘겨도 괜찮은 거 맞나요?</span></h1>
-    <p class="hero-sub rv d2">여백, 재단선, CMYK 변환부터 플랫폼별 미디어 확장(영상 제작)까지.<br>어느 인쇄소에 넘겨도 단번에 통과되는 <b>현장 사고 0% 마스터 파일</b>을 세팅합니다.</p>
+    <!-- [SEO] h1 — 크롤링용, 시각적으로 숨김 (텍스트는 배경 이미지에 포함) -->
+    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">전시 백월 · 배너 · 등신대 · 포토존 · POP · 칼선 인쇄파일 템플릿 제작 대행 · 사전 시뮬레이션 소통 전문 제이픽. 대보지 않아도 제이픽이 알아서 다 해줌.</h1>
 
-    <!-- Chat Bubbles -->
-    <div class="hero-chat-area rv d3">
-      <div class="bubble-seq bs-1">인쇄소에서 여백(블리드) 3mm를 주라는데 무슨 말이죠?</div>
-      <div class="bubble-seq bs-2">성원애드피아 가이드라인에 맞춰서 템플릿을 잡아주세요</div>
-      <div class="bubble-seq bs-3">CMYK로 변환해오라는데 색이 칙칙해지는 건 어떡하나요?</div>
-      <div class="bubble-seq bs-4">현수막 사이즈로 그렸는데 간판 비율로 바꿔야 한대요</div>
-      <div class="bubble-seq bs-5">완성된 디자인으로 백화점 전광판에 띄울 영상도 필요해요</div>
-      <div class="bubble-seq bs-6">칼선 레이어와 디자인 레이어를 분리해서 달라네요</div>
-      <div class="bubble-seq bs-7">이 디자인 그대로 인스타 피드용 사이즈로 리사이징 해주세요!</div>
-      <div class="bubble-seq bs-8">상세페이지 만든 거 고화질 전단지로 뽑고 싶어요</div>
-    </div>
-
-    <div class="hero-actions rv d3">
-      <button onclick="openModal()" class="btn-primary"><i class="fa-solid fa-file-pdf"></i> 제이픽, 우리 브랜드 발주 파일 세팅해줘!</button>
-    </div>
-    <br><br><br>
-
-    <!-- Story Box -->
-    <div class="story-box rv d3">
-      <div class="story-icon"><i class="fa-regular fa-comment-dots"></i></div>
-      <div class="story-text">
-        <h3>"디자인이 끝났다고 방심하면 안 되는 이유"</h3>
-        <p>기껏 예쁘게 만든 디자인을 그대로 인쇄소에 넘겼다가 가장자리가 짤리거나, 원하던 색상이 탁하게 나와 속상하셨던 적 있으시죠?<br>인쇄 사고를 막기 위해서는 기계가 인식할 수 있는 <strong>재단선, 안전 여백(Bleed), CMYK 컬러 프로파일이 완벽하게 적용된 최종 PDF 마스터 파일</strong> 세팅이 필수입니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 2. PAIN POINTS -> 배경 교차 1 -->
-<section class="sec bg-alt hover-card-fx" id="pain" style="overflow:visible; border-radius:0; border:none; z-index:auto; background:var(--bg-alt);">
-  <div class="sec-hd rv">
-    <div class="label">Problem</div>
-    <h2>지금, 이런 고민하고 계시죠?</h2>
-    <p>가장 많이 겪는 인쇄 현장의 답답한 순간들.</p>
-  </div>
-  <div class="pain-grid">
-    <div class="pain-card hover-card-fx rv d1">
-      <i class="fa-solid fa-circle-exclamation pain-icon"></i>
-      <h3>끊임없는 인쇄소의 반려</h3>
-      <p>"디자인을 보냈더니 여백이 없다, 폰트 아웃라인이 안 깨졌다, 레이어가 안 나눠져 있다며 계속 반려를 당해 며칠째 발주를 못 하고 있어요."</p>
-    </div>
-    <div class="pain-card hover-card-fx rv d2">
-      <i class="fa-solid fa-scissors pain-icon"></i>
-      <h3>현장 인쇄 사고 (짤림/색상)</h3>
-      <p>"막상 물건을 받아보니 핵심 로고가 테두리에 짤려 있거나, 화면에서 보던 쨍한 컬러가 칙칙한 색으로 죽어서 나와서 다 폐기해야 했어요."</p>
-    </div>
-    <div class="pain-card hover-card-fx rv d3">
-      <i class="fa-solid fa-photo-film pain-icon"></i>
-      <h3>다양한 플랫폼 확장의 한계</h3>
-      <p>"명함용으로 만든 이 예쁜 디자인을 매장 내 모니터 영상(사이니지)이나 인스타 배너로도 쓰고 싶은데 다시 백지에서 만들려니 막막해요."</p>
-    </div>
-  </div>
-</section>
-
-<!-- 3. PRINT CATEGORIES (1행 3칸, 2줄 확장 레이아웃) -> 배경 교차 2 -->
-<section class="sec bg-base" id="categories">
-  <div class="sec-hd rv">
-    <div class="label">Categories</div>
-    <h2>JPHIC 편집파일 적용 가능 분야</h2>
-    <p>제이픽은 아래와 같은 다양한 실물 제작물 및 미디어 확장을 완벽하게 세팅합니다.</p>
-  </div>
-  <div class="category-grid rv d1">
-    <div class="cat-card hover-card-fx">
-      <i class="fa-solid fa-map-location-dot cat-icon"></i>
-      <h4>대형 전시·부스 백월</h4>
-      <p>코엑스/킨텍스 등 대형 전시 부스의<br>원장 패널 분할 및 재단선 세팅</p>
-    </div>
-    <div class="cat-card hover-card-fx">
-      <i class="fa-solid fa-id-badge cat-icon"></i>
-      <h4>사원증·명찰 대량 인쇄</h4>
-      <p>템플릿 디자인을 기반으로<br>이름/직급 등 대량 데이터 바리에이션</p>
-    </div>
-    <div class="cat-card hover-card-fx">
-      <i class="fa-regular fa-file-powerpoint cat-icon"></i>
-      <h4>상세페이지 오프라인화</h4>
-      <p>기존 온라인 쇼핑몰용 이미지를<br>고해상도 전단지·PPT 용도로 재편집</p>
-    </div>
-    <div class="cat-card hover-card-fx">
-      <i class="fa-solid fa-box-open cat-icon"></i>
-      <h4>패키지·단상자</h4>
-      <p>복잡한 박스 전개도(도무송 칼선) 안착 및<br>화이트/별색(Pantone) 레이어 세팅</p>
-    </div>
-    <div class="cat-card hover-card-fx">
-      <i class="fa-solid fa-flag cat-icon"></i>
-      <h4>배너·현수막</h4>
-      <p>실내외 X배너 및 현수막 타공(아일렛)<br>위치 여백 확보 및 블리드 세팅</p>
-    </div>
-    <div class="cat-card hover-card-fx">
-      <i class="fa-solid fa-photo-film cat-icon"></i>
-      <h4>디지털 사이니지 (영상)</h4>
-      <p>완성된 인쇄 디자인을 매장 전광판,<br>메뉴판용 모션 영상 매체로 확장</p>
-    </div>
-  </div>
-</section>
-
-<!-- 4. SERVICES VISUAL -> 배경 교차 3 -->
-<section class="sec bg-alt" id="services-visual">
-  <div class="sec-hd rv">
-    <div class="label">Solution</div>
-    <h2>제이픽 PDF는 무엇을 해주나요?</h2>
-    <p>디자인을 실물로, 나아가 영상 미디어로 완벽하게 확장합니다.</p>
-  </div>
-  <div class="svc-wrap">
-    <div class="svc-row hover-card-fx rv d1">
-      <div class="svc-text">
-        <div class="svc-num">01</div>
-        <h3>가이드 준수 마스터 세팅 (Bleed/Trim)</h3>
-        <p>성원애드피아 등 대형 인쇄소의 까다로운 템플릿 규격에 맞춰 안전 영역, 재단선, 여백(Bleed)을 1mm의 오차도 없이 완벽하게 세팅합니다.</p>
-        <span class="svc-tag">#인쇄사고_원천차단</span>
-      </div>
-      <div class="svc-visual">
-        <div class="mock-bleed"></div>
-      </div>
-    </div>
-    <div class="svc-row hover-card-fx rv d2">
-      <div class="svc-text">
-        <div class="svc-num">02</div>
-        <h3>해상도 복원 및 컬러 교정 (CMYK)</h3>
-        <p>화면용(RGB) 디자인을 인쇄용 잉크(CMYK)로 변환 시 발생하는 색상 탁해짐 현상을 최소화하고, 해상도가 깨지지 않게 아웃라인 처리를 완료합니다.</p>
-        <span class="svc-tag">#컬러복원</span>
-      </div>
-      <div class="svc-visual">
-        <div class="mock-cmyk">
-          <div class="c-drop"></div><div class="c-drop"></div><div class="c-drop"></div><div class="c-drop"></div>
+    <div class="hero-btns rv d3">
+      <!-- 말풍선 뱃지 -->
+      <div style="position:relative;display:inline-block;">
+        <div style="
+          position:absolute;top:-38px;left:50%;transform:translateX(-50%);
+          background:#fff;color:#030712;
+          font-size:12px;font-weight:800;
+          padding:6px 14px;border-radius:20px;white-space:nowrap;
+          box-shadow:0 4px 16px rgba(0,0,0,.3);
+        ">설치 목업 궁금하다면?
+          <span style="position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid #fff;"></span>
         </div>
+        <button onclick="openModal(null,null,null,true)" class="btn-primary">
+          <i class="fa-solid fa-cube"></i> 목업 시뮬 요청하기
+        </button>
       </div>
-    </div>
-    <div class="svc-row hover-card-fx rv d3">
-      <div class="svc-text">
-        <div class="svc-num">03</div>
-        <h3>미디어 확장 (리사이징 & 영상 제작)</h3>
-        <p>세팅된 마스터 레이아웃을 바탕으로, 인스타/웹배너 등 플랫폼별 규격에 맞게 리사이징 하거나 매장 디지털 사이니지용 모션(영상) 그래픽으로 확장 제작합니다.</p>
-        <span class="svc-tag">#원소스_멀티유즈</span>
-      </div>
-      <div class="svc-visual">
-        <div class="mock-media">
-          <div class="m-dev1"><i class="fa-solid fa-mobile-screen"></i></div>
-          <div class="m-dev2"><i class="fa-solid fa-display"></i></div>
-        </div>
-      </div>
+      <button onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})" class="btn-outline">
+        <i class="fa-solid fa-grid-2"></i> 템플릿 고르기
+      </button>
+      <a href="https://jphic.co.kr/invoice" class="btn-outline">견적·발주 →</a>
     </div>
   </div>
 </section>
 
-<!-- 5. HOW TO (Process) -> 배경 교차 4 -->
-<section class="sec bg-base" id="how">
-  <div class="sec-hd rv">
-    <div class="label">Work Flow</div>
-    <h2>제이픽 발주 세팅 워크플로우</h2>
-    <p>디자인 원본만 주세요. 나머지는 제이픽이 알아서 합니다.</p>
-  </div>
-  <div class="how-grid rv d1">
-    <div class="step-card hover-card-fx">
-      <div class="step-num">01</div>
-      <h4>디자인 원본 및 규격 전달</h4>
-      <p>확정된 디자인 원본 파일(AI, PSD 등)과 인쇄하실 발주처의 템플릿(규격) 정보를 제이픽에 전달해 주세요.</p>
+<!-- ===== 3단계 ===== -->
+<section class="flow rv" id="how">
+  <div class="flow-grid">
+    <div class="flow-item">
+      <div class="flow-num">1</div>
+      <div class="flow-title">고르고</div>
+      <p class="flow-desc">갤러리에서 템플릿 번호 선택.<br>웹 또는 인쇄 카테고리 필터.</p>
     </div>
-    <div class="step-card hover-card-fx">
-      <div class="step-num">02</div>
-      <h4>발주 가이드 분석 및 세팅</h4>
-      <p>칼선, 여백, 아웃라인, 해상도 등 인쇄소에서 반려되는 모든 요소를 점검하고 재단선에 맞춰 디자인을 재배치합니다.</p>
+    <div class="flow-item">
+      <div class="flow-num">2</div>
+      <div class="flow-title">맞추고</div>
+      <p class="flow-desc">워딩·색상·사이즈 수정 요청.<br>사전 시뮬레이션으로 현장 확인.</p>
     </div>
-    <div class="step-card hover-card-fx">
-      <div class="step-num">03</div>
-      <h4>미디어 확장 (선택 시)</h4>
-      <p>동일한 레이아웃을 활용해 웹 배너, SNS 썸네일로 리사이징 하거나 전광판용 모션 영상으로 추가 가공합니다.</p>
-    </div>
-    <div class="step-card final hover-card-fx">
-      <div class="step-num">04</div>
-      <h4>최종 마스터 PDF 납품</h4>
-      <p>어느 인쇄소에 던져도 100% 한 번에 통과되는 완벽한 고해상도 마스터 발주 파일(PDF)을 제공합니다.</p>
+    <div class="flow-item">
+      <div class="flow-num">3</div>
+      <div class="flow-title">찍는다</div>
+      <p class="flow-desc">블리드·CMYK 완벽 세팅 후<br>발주 파일 납품.</p>
     </div>
   </div>
 </section>
 
-<!-- 6. REVIEWS -> 배경 교차 5 -->
-<section class="sec bg-alt" id="reviews">
-  <div class="sec-hd rv">
-    <div class="label">Reviews</div>
-    <h2>파트너스 리얼 후기</h2>
-    <p>제이픽의 마스터 세팅으로 인쇄 스트레스에서 벗어난 브랜드들.</p>
+<!-- ===== 갤러리 ===== -->
+<section class="gallery-sec" id="gallery">
+  <div style="text-align:center;" class="rv">
+    <p class="sec-label">TEMPLATE GALLERY</p>
+    <h2 class="sec-title">템플릿 고르기</h2>
+    <p class="sec-desc">번호를 고르고 invoice 페이지에서 주문하거나 오픈챗으로 알려주세요.<br>워딩만 바꿔서 발주파일로 만들어드립니다.</p>
   </div>
-  <div class="review-grid">
-    <div class="review-card hover-card-fx rv d1">
-      <div class="stars">★★★★★</div>
-      <div class="r-quote">"전시 부스 백월을 직접 디자인했는데, 인쇄소에서 블리드가 없다고 자꾸 반려해서 울 뻔했어요. 제이픽에 맡겼더니 템플릿에 딱 맞춰주셔서 무사히 전시 끝냈습니다!"</div>
-      <div class="r-client">
-        <strong>[마스터 발주 파일] 이용</strong>
-        스타트업 전시 기획자
+
+  <div class="tab-wrap rv">
+    <button class="tab-btn active" onclick="switchTab('all',this)">전체</button>
+    <button class="tab-btn" onclick="switchTab('print',this)">인쇄</button>
+    <button class="tab-btn" onclick="switchTab('web',this)">웹</button>
+  </div>
+
+  <div class="print-notice" id="printNotice">
+    <strong>⚠️ 인쇄 템플릿 안내</strong><br>
+    발주처(인쇄소) 사양에 따라 파일 구조가 달라집니다.<br>
+    템플릿 번호와 함께 <strong>발주처를 반드시 알려주세요.</strong>
+  </div>
+
+  <div class="cat-filter rv" id="catFilter">
+    <button class="cat-btn active" onclick="filterCat('all',this)">전체</button>
+    <button class="cat-btn print-only" onclick="filterCat('bw',this)">백월</button>
+    <button class="cat-btn print-only" onclick="filterCat('bn',this)">배너</button>
+    <button class="cat-btn print-only" onclick="filterCat('es',this)">등신대</button>
+    <button class="cat-btn print-only" onclick="filterCat('pz',this)">포토존</button>
+    <button class="cat-btn print-only" onclick="filterCat('pp',this)">POP</button>
+    <button class="cat-btn print-only" onclick="filterCat('cl',this)">칼선</button>
+    <button class="cat-btn print-only" onclick="filterCat('id',this)">명찰·사원증</button>
+    <button class="cat-btn print-only" onclick="filterCat('gs',this)">그래픽 시트지</button>
+    <button class="cat-btn web-only" onclick="filterCat('sn',this)">SNS</button>
+    <button class="cat-btn web-only" onclick="filterCat('sa',this)">사이니지</button>
+    <button class="cat-btn web-only" onclick="filterCat('wbn',this)">웹배너</button>
+  </div>
+
+  <div class="card-grid" id="cardGrid">
+
+    <!-- ===== 인쇄 · 백월 ===== -->
+    <div class="t-card show" data-tab="print" data-cat="bw">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/35cc2191-f003-4699-82ce-36dd2920c809_rw_1920.jpg?h=cc508dcce6e3176609666ac0abe7ad68" alt="전시부스 백월 인쇄파일 템플릿 PRT-BW-001">
+        <span class="card-code">PRT-BW-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 백월</div>
+        <div class="card-title">전시 부스 대형 백월 — 라이트</div>
+        <p class="card-desc">코엑스·킨텍스 전시 부스. 패널 분할·블리드 세팅 완료. 밝은 배경 계열.</p>
+        <button class="card-order" onclick="openModal('PRT-BW-001','print','전시 부스 대형 백월 — 라이트')">이 번호로 주문하기</button>
       </div>
     </div>
-    <div class="review-card hover-card-fx rv d2">
-      <div class="stars">★★★★★</div>
-      <div class="r-quote">"기존 상세페이지로 만들었던 긴 이미지를 전단지 사이즈에 맞게 고해상도로 재편집해 주셨어요. 온라인 소스를 오프라인으로 100% 활용할 수 있게 되었습니다."</div>
-      <div class="r-client">
-        <strong>[오프라인 재편집] 이용</strong>
-        뷰티 커머스 마케터
+
+    <div class="t-card show" data-tab="print" data-cat="bw">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/367ebb80-2c18-428a-98c0-6726eb9669d0_rw_1920.png?h=105abc6ecbcc87e3344f7a3dea934178" alt="전시 백월 다크 테마 PRT-BW-002">
+        <span class="card-code">PRT-BW-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 백월</div>
+        <div class="card-title">전시 백월 — 다크 테마</div>
+        <p class="card-desc">다크 배경 전시 부스 백월. 고채도 컬러 브랜드 적합.</p>
+        <button class="card-order" onclick="openModal('PRT-BW-002','print','전시 백월 — 다크 테마')">이 번호로 주문하기</button>
       </div>
     </div>
-    <div class="review-card hover-card-fx rv d3">
-      <div class="stars">★★★★★</div>
-      <div class="r-quote">"직원 100명 사원증을 만들어야 했는데, 엑셀 명단만 드렸더니 이름과 직급을 완벽하게 치환해서 대량 인쇄 파일로 세팅해 주셨어요. 진짜 업무가 확 줄었습니다."</div>
-      <div class="r-client">
-        <strong>[대량 바리에이션] 이용</strong>
-        중소기업 인사 담당자
+
+    <div class="t-card show" data-tab="print" data-cat="bw">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/2c6bac7d-0716-4ad2-8602-5eb0f50ac168_rw_1920.jpg?h=ae85f097dd0560de50a0e9a3b781c59b" alt="콘텐츠 부스 백월 PRT-BW-003">
+        <span class="card-code">PRT-BW-003</span>
       </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 백월</div>
+        <div class="card-title">콘텐츠 부스 백월 — 풀컬러</div>
+        <p class="card-desc">브랜드 키비주얼 중심 풀컬러 백월. 포토존 겸용 가능.</p>
+        <button class="card-order" onclick="openModal('PRT-BW-003','print','콘텐츠 부스 백월 — 풀컬러')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 인쇄 · 배너 ===== -->
+    <div class="t-card show" data-tab="print" data-cat="bn">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/5747be95-b4d4-433a-a35a-d2a7239b9d02_rw_600.png?h=81a86b8fed54f327f6cc7d96422e3e02" alt="행사 X배너 스탠드 PRT-BN-001">
+        <span class="card-code">PRT-BN-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 배너</div>
+        <div class="card-title">행사용 X배너 스탠드</div>
+        <p class="card-desc">실내 행사 X배너. 타공 여백·블리드 세팅 완료.</p>
+        <button class="card-order" onclick="openModal('PRT-BN-001','print','행사용 X배너 스탠드')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="bn">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/ce7f1dbe-be64-4e47-a35b-27641583760f_rw_1200.png?h=519ccbc99a33d117a0391694f17ba6d0" alt="야외 현수막 PRT-BN-002">
+        <span class="card-code">PRT-BN-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 배너</div>
+        <div class="card-title">야외 현수막</div>
+        <p class="card-desc">옥외 현수막. 아일렛 위치 여백 포함 납품.</p>
+        <button class="card-order" onclick="openModal('PRT-BN-002','print','야외 현수막')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="bn">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/a4869734-b56d-4f46-bdac-af19ce8fd2bc_rw_1200.jpg?h=a0bec65a6cdd0c2c7f3a1f7a79744de2" alt="롤업 배너 PRT-BN-003">
+        <span class="card-code">PRT-BN-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 배너</div>
+        <div class="card-title">롤업 배너 — 전시·행사용</div>
+        <p class="card-desc">전시·행사 롤업 배너. 하단 여백 확보, 폴딩 여유분 포함.</p>
+        <button class="card-order" onclick="openModal('PRT-BN-003','print','롤업 배너 — 전시·행사용')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 인쇄 · 포토존 ===== -->
+    <div class="t-card show" data-tab="print" data-cat="pz">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/5a0f8696-a2ee-456a-bae0-2b8a67b27ed2_rw_1920.jpg?h=626f2843df0c4a311e435ff5f49662c4" alt="행사 포토존 포토월 PRT-PZ-001">
+        <span class="card-code">PRT-PZ-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 포토존</div>
+        <div class="card-title">행사 포토존·포토월</div>
+        <p class="card-desc">트러스 프레임 규격 맞춤. 업스케일 고해상도 납품.</p>
+        <button class="card-order" onclick="openModal('PRT-PZ-001','print','행사 포토존·포토월')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="pz">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/c6bbb969-eb9c-4635-9b33-8f97a916b128_rw_1200.png?h=e819f33fcc391a9b7b8b4156b319ab69" alt="대형 포토존 풀배경 PRT-PZ-002">
+        <span class="card-code">PRT-PZ-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 포토존</div>
+        <div class="card-title">대형 포토존 — 풀배경</div>
+        <p class="card-desc">넓은 포토월 전체 배경. 고해상도 실사 출력 최적화.</p>
+        <button class="card-order" onclick="openModal('PRT-PZ-002','print','대형 포토존 — 풀배경')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="pz">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/b12ce5e2-78ba-4330-a0d1-ef8c8fcb7b0c_rw_1200.png?h=895b062f23e0db55d2bcb6149140bba7" alt="팝업스토어 포토존 PRT-PZ-003">
+        <span class="card-code">PRT-PZ-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 포토존</div>
+        <div class="card-title">팝업스토어 포토존</div>
+        <p class="card-desc">팝업 내부 포토존. 브랜드 로고·해시태그 영역 포함.</p>
+        <button class="card-order" onclick="openModal('PRT-PZ-003','print','팝업스토어 포토존')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 인쇄 · 칼선 ===== -->
+    <div class="t-card show" data-tab="print" data-cat="cl">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/3c6651a7-c0e4-42e7-8afb-5eac52696d03_rw_600.png?h=b40293ca934e3fdd135827c533ca1399" alt="칼선 등신대 PRT-CL-001">
+        <span class="card-code">PRT-CL-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 칼선</div>
+        <div class="card-title">등신대 칼선 — 인물형</div>
+        <p class="card-desc">포맥스 등신대. 칼선(도무송) 레이어 분리, 안전영역 내 인물 배치.</p>
+        <button class="card-order" onclick="openModal('PRT-CL-001','print','등신대 칼선 — 인물형')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="cl">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/2220a569-c1d4-4dd5-9723-a102f5b4303e_rw_1200.png?h=bb6c96f61aff20ed8f27a74dcbfaf255" alt="칼선 POP 스탠드 PRT-CL-002">
+        <span class="card-code">PRT-CL-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 칼선</div>
+        <div class="card-title">POP 스탠드 칼선</div>
+        <p class="card-desc">매장 POP 스탠드. 외곽 칼선·화이트 레이어 분리 납품.</p>
+        <button class="card-order" onclick="openModal('PRT-CL-002','print','POP 스탠드 칼선')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="cl">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/c93fb799-e002-4c2f-9c06-9373f74a2db4_rw_600.png?h=1786577b20361430cc3c32ea72eea826" alt="스티커 칼선 PRT-CL-003">
+        <span class="card-code">PRT-CL-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 칼선</div>
+        <div class="card-title">스티커·라벨 칼선</div>
+        <p class="card-desc">스티커 외곽 칼선. 화이트 테두리·도무송 레이어 완벽 분리.</p>
+        <button class="card-order" onclick="openModal('PRT-CL-003','print','스티커·라벨 칼선')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 인쇄 · 명찰 ===== -->
+    <div class="t-card show" data-tab="print" data-cat="id">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/7f9413b7-1b50-4c60-bf17-923fda10ccb5_rw_1200.png?h=8121f11210781ed56c292f2eb771a979" alt="대량 사원증 명찰 PRT-ID-001">
+        <span class="card-code">PRT-ID-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 명찰·사원증</div>
+        <div class="card-title">대량 사원증·명찰</div>
+        <p class="card-desc">엑셀 명단 기반 자동 치환. 100명~ 대량 일괄 납품.</p>
+        <button class="card-order" onclick="openModal('PRT-ID-001','print','대량 사원증·명찰')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="id">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/6169e7d8-cd83-4627-93c9-1210045c7976_rw_1920.png?h=be9e3853f97ddf072eb9df390554aef5" alt="행사 명찰 학생증 PRT-ID-002">
+        <span class="card-code">PRT-ID-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 명찰·사원증</div>
+        <div class="card-title">행사 명찰·학생증</div>
+        <p class="card-desc">행사·컨퍼런스 대량 명찰. 목걸이 타공 여백 포함.</p>
+        <button class="card-order" onclick="openModal('PRT-ID-002','print','행사 명찰·학생증')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="id">
+      <div class="card-img">
+        <img src="/img/pdf/id-badge-003.webp" alt="VIP 네임택 PRT-ID-003" onerror="this.style.background='#1a2030';this.alt='PRT-ID-003 준비중';">
+        <span class="card-code">PRT-ID-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 명찰·사원증</div>
+        <div class="card-title">VIP 네임택 — 고급형</div>
+        <p class="card-desc">컨퍼런스·VIP용 고급 네임택. 별색·금박 레이어 옵션 포함.</p>
+        <button class="card-order" onclick="openModal('PRT-ID-003','print','VIP 네임택 — 고급형')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 인쇄 · 그래픽 시트지 ===== -->
+    <div class="t-card show" data-tab="print" data-cat="gs">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/3c6651a7-c0e4-42e7-8afb-5eac52696d03_rw_600.png?h=b40293ca934e3fdd135827c533ca1399" alt="매장 쇼윈도 래핑 PRT-GS-001">
+        <span class="card-code">PRT-GS-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 그래픽 시트지</div>
+        <div class="card-title">매장 쇼윈도·공간 래핑</div>
+        <p class="card-desc">칼선 레이어 분리·색상 보정 완료. 쇼윈도·엘리베이터 래핑.</p>
+        <button class="card-order" onclick="openModal('PRT-GS-001','print','매장 쇼윈도·공간 래핑')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="gs">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/2220a569-c1d4-4dd5-9723-a102f5b4303e_rw_1200.png?h=bb6c96f61aff20ed8f27a74dcbfaf255" alt="공간 래핑 와이드 PRT-GS-002">
+        <span class="card-code">PRT-GS-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 그래픽 시트지</div>
+        <div class="card-title">공간 래핑 — 와이드</div>
+        <p class="card-desc">넓은 벽면 래핑. 이음선 최소화 분할 납품.</p>
+        <button class="card-order" onclick="openModal('PRT-GS-002','print','공간 래핑 — 와이드')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="gs">
+      <div class="card-img">
+        <img src="/img/pdf/gs-floor-003.webp" alt="바닥 시트지 PRT-GS-003" onerror="this.style.background='#1a2030';">
+        <span class="card-code">PRT-GS-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · 그래픽 시트지</div>
+        <div class="card-title">바닥 사인 시트지</div>
+        <p class="card-desc">바닥 유도선·포토존 바닥 그래픽. 미끄럼 방지 라미 옵션 안내.</p>
+        <button class="card-order" onclick="openModal('PRT-GS-003','print','바닥 사인 시트지')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 인쇄 · POP ===== -->
+    <div class="t-card show" data-tab="print" data-cat="pp">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/c93fb799-e002-4c2f-9c06-9373f74a2db4_rw_600.png?h=1786577b20361430cc3c32ea72eea826" alt="팝업스토어 POP 패키지 PRT-PP-001">
+        <span class="card-code">PRT-PP-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · POP</div>
+        <div class="card-title">팝업스토어 POP 패키지</div>
+        <p class="card-desc">팝업 전체 POP 일괄 세팅. 내부 안내·가격표 포함.</p>
+        <button class="card-order" onclick="openModal('PRT-PP-001','print','팝업스토어 POP 패키지')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="pp">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/a4869734-b56d-4f46-bdac-af19ce8fd2bc_rw_1200.jpg?h=a0bec65a6cdd0c2c7f3a1f7a79744de2" alt="매장 안내 POP PRT-PP-002">
+        <span class="card-code">PRT-PP-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · POP</div>
+        <div class="card-title">매장 안내 POP 스탠드</div>
+        <p class="card-desc">A4·A3 카운터 POP. 가격표·메뉴판 겸용 구조.</p>
+        <button class="card-order" onclick="openModal('PRT-PP-002','print','매장 안내 POP 스탠드')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="print" data-cat="pp">
+      <div class="card-img">
+        <img src="/img/pdf/pop-hanging-003.webp" alt="천장 행잉 POP PRT-PP-003" onerror="this.style.background='#1a2030';">
+        <span class="card-code">PRT-PP-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">인쇄 · POP</div>
+        <div class="card-title">천장 행잉 POP</div>
+        <p class="card-desc">매장·전시 천장 행잉용 양면 POP. 고리 여백·블리드 세팅.</p>
+        <button class="card-order" onclick="openModal('PRT-PP-003','print','천장 행잉 POP')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 웹 · 사이니지 ===== -->
+    <div class="t-card show" data-tab="web" data-cat="sa">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/e6b01407-213b-4ab0-a0ae-49068586a4b5_rw_1200.png?h=80f826ef06be3dd4f6a4b98698a178d3" alt="매장 안내 디지털 사이니지 WEB-SA-001">
+        <span class="card-code">WEB-SA-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">웹 · 사이니지</div>
+        <div class="card-title">매장 안내 디지털 사이니지</div>
+        <p class="card-desc">매장 전광판·메뉴판용 루프 영상. 인쇄 디자인 → 모션 확장.</p>
+        <button class="card-order" onclick="openModal('WEB-SA-001','web','매장 안내 디지털 사이니지')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="web" data-cat="sa">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/a4869734-b56d-4f46-bdac-af19ce8fd2bc_rw_1200.jpg?h=a0bec65a6cdd0c2c7f3a1f7a79744de2" alt="전시 부스 사이니지 WEB-SA-002">
+        <span class="card-code">WEB-SA-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">웹 · 사이니지</div>
+        <div class="card-title">전시 부스 사이니지 영상</div>
+        <p class="card-desc">부스 내 모니터 루프 영상. 브랜드 키비주얼 모션화.</p>
+        <button class="card-order" onclick="openModal('WEB-SA-002','web','전시 부스 사이니지 영상')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="web" data-cat="sa">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/2c6bac7d-0716-4ad2-8602-5eb0f50ac168_rw_1920.jpg?h=ae85f097dd0560de50a0e9a3b781c59b" alt="키오스크 사이니지 WEB-SA-003">
+        <span class="card-code">WEB-SA-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">웹 · 사이니지</div>
+        <div class="card-title">키오스크·세로형 사이니지</div>
+        <p class="card-desc">9:16 세로형 키오스크 영상. 행사 안내·브랜드 루프 모션.</p>
+        <button class="card-order" onclick="openModal('WEB-SA-003','web','키오스크·세로형 사이니지')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <!-- ===== 웹 · SNS ===== -->
+    <div class="t-card show" data-tab="web" data-cat="sn">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/35cc2191-f003-4699-82ce-36dd2920c809_rw_1920.jpg?h=cc508dcce6e3176609666ac0abe7ad68" alt="인스타그램 피드 카드뉴스 WEB-SN-001">
+        <span class="card-code">WEB-SN-001</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">웹 · SNS</div>
+        <div class="card-title">인스타그램 피드 카드뉴스</div>
+        <p class="card-desc">1:1 정사각 피드 카드뉴스. 인쇄 디자인 → SNS 리사이징.</p>
+        <button class="card-order" onclick="openModal('WEB-SN-001','web','인스타그램 피드 카드뉴스')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="web" data-cat="sn">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/5747be95-b4d4-433a-a35a-d2a7239b9d02_rw_600.png?h=81a86b8fed54f327f6cc7d96422e3e02" alt="인스타그램 스토리 WEB-SN-002">
+        <span class="card-code">WEB-SN-002</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">웹 · SNS</div>
+        <div class="card-title">인스타그램 스토리·릴스 커버</div>
+        <p class="card-desc">9:16 스토리 규격. 행사·프로모션 안내용 스토리 배너.</p>
+        <button class="card-order" onclick="openModal('WEB-SN-002','web','인스타그램 스토리·릴스 커버')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="t-card show" data-tab="web" data-cat="sn">
+      <div class="card-img">
+        <img src="https://cdn.myportfolio.com/1d9d5185-cd9d-4dab-beb8-0834b46e2373/367ebb80-2c18-428a-98c0-6726eb9669d0_rw_1920.png?h=105abc6ecbcc87e3344f7a3dea934178" alt="카카오 채널 배너 WEB-SN-003">
+        <span class="card-code">WEB-SN-003</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">웹 · SNS</div>
+        <div class="card-title">카카오 채널·배너</div>
+        <p class="card-desc">카카오 채널 커버·배너. 브랜드 컬러 적용 규격 맞춤 납품.</p>
+        <button class="card-order" onclick="openModal('WEB-SN-003','web','카카오 채널·배너')">이 번호로 주문하기</button>
+      </div>
+    </div>
+
+    <div class="empty-state" id="emptyState">
+      <i class="fa-solid fa-inbox" style="font-size:2.5rem;margin-bottom:16px;display:block;color:var(--line);"></i>
+      해당 카테고리 템플릿 준비 중입니다.
     </div>
   </div>
 </section>
 
-<!-- 7. PRICING (2 Cards) -> 배경 교차 6 -->
-<section class="sec bg-base" id="pricing">
-  <div class="sec-hd rv">
-    <div class="label">Pricing</div>
-    <h2>발주 및 확장 세팅 플랜</h2>
-    <p>단순 인쇄용 세팅부터 디지털 사이니지 영상 확장까지 선택하세요.</p>
+<!-- ===== UNIVERSE 5단계 — weare 공정 라인 UI ===== -->
+<section class="universe-sec" id="universe">
+  <div class="sec-header rv">
+    <p class="sec-label">JPHIC UNIVERSE — 5 STEP</p>
+    <h2 class="sec-title">요청부터 현장까지, 5단계 공정</h2>
+    <p class="sec-desc">거친 스케치 한 장에서 대형 현장 설치까지.<br>각 단계 전문 공정이 순서대로 움직입니다. — <span style="color:var(--mc);font-weight:700;">스크롤하며 확인하세요</span></p>
   </div>
-  <div class="price-grid-2">
-    <!-- 플랜 1 -->
-    <div class="price-card-2 hover-card-fx rv d1">
-      <h3 class="p-title">마스터 발주 파일 세팅</h3>
-      <p class="p-desc">디자인이 완료된 원본을 인쇄소(성원애드피아 등) 가이드라인에 맞춰 여백/칼선/컬러를 점검하고 완벽한 인쇄용 PDF로 세팅합니다.</p>
-      <ul class="p-list">
-        <li><i class="fa-solid fa-check"></i> <span>안전 영역 및 재단선(Bleed) 세팅</span></li>
-        <li><i class="fa-solid fa-check"></i> <span>인쇄 전용 CMYK 컬러 프로파일 교정</span></li>
-        <li><i class="fa-solid fa-check"></i> <span>저해상도 이미지 고품질 복원</span></li>
-        <li><i class="fa-solid fa-check"></i> <span>아웃라인 및 레이어 완벽 정리 (PDF 납품)</span></li>
-        <li class="dim"><i></i> <span>대량 데이터 바리에이션 세팅</span></li>
-        <li class="dim"><i></i> <span>미디어 확장 및 영상 제작</span></li>
-      </ul>
-      <a onclick="openModalWithService('마스터 발주 파일 세팅')" class="p-btn">제이픽, 마스터 발주 파일 세팅해줘!</a>
-    </div>
-    <!-- 플랜 2 -->
-    <div class="price-card-2 featured hover-card-fx rv d2">
-      <h3 class="p-title">미디어 확장 & 대량 바리에이션</h3>
-      <p class="p-desc">마스터 인쇄 파일 세팅은 기본! 완성된 디자인 레이아웃을 대량 데이터로 교체하거나 매장 전광판용 모션 영상으로 확장 제작합니다.</p>
-      <ul class="p-list">
-        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">마스터 발주 파일 세팅 전체 포함</span></li>
-        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">명찰/사원증 등 대량 데이터 바리에이션 세팅</span></li>
-        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">온라인 상세페이지 오프라인 인쇄용 재편집</span></li>
-        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">SNS/웹배너 레이아웃 리사이징</span></li>
-        <li><i class="fa-solid fa-check" style="color:var(--text-main);"></i> <span style="color:var(--text-main);">디지털 사이니지(전광판)용 영상/모션 제작</span></li>
-      </ul>
-      <a onclick="openModalWithService('미디어 확장 및 영상 제작')" class="p-btn">제이픽, 미디어 확장/대량 세팅해줘!</a>
-    </div>
-  </div>
-</section>
 
-<!-- 8. FINAL CTA & UNIVERSE -->
-<section class="sec final-cta">
-  <div class="rv d1">
-    <h2>JPHIC UNIVERSE</h2>
-    <p>단순한 파일 변환을 넘어,<br>브랜드 자산을 무한하게 활용하고 관리하세요.</p><br>
-    
-    <div class="uni-grid rv d2">
-      <a href="https://jphic.co.kr/core" target="_blank" class="uni-card c-core">
-        <span class="uni-step">STEP 1. 아이디어 다듬기</span>
-        <h3 class="uni-title">JPHIC <span>CORE</span></h3>
-        <p class="uni-desc">AI 프롬프트 교정 및<br>디자인 디테일 리터칭</p>
-      </a>
-      <a href="https://jphic.co.kr/logo" target="_blank" class="uni-card c-logo">
-        <span class="uni-step">STEP 2. 진짜 파일 만들기</span>
-        <h3 class="uni-title">JPHIC <span>LOGO</span></h3>
-        <p class="uni-desc">깨지는 이미지를 무한 확대<br>벡터(AI) 파일로 기초 자산화</p>
-      </a>
-      <div class="uni-card c-pdf current">
-        <span class="uni-step">STEP 3. 현장 인쇄 사고 0%</span>
-        <h3 class="uni-title">JPHIC <span>PDF</span></h3>
-        <p class="uni-desc">간판, 현수막, 부스 제작을 위한<br>마스터 발주 파일 세팅</p>
+  <section class="proc-section" id="procSection">
+    <div class="proc-sticky">
+      <div class="proc-track" id="procTrack">
+
+        <article class="proc-step">
+          <div class="proc-head">
+            <span class="proc-num" style="color:#00BBAC;">01</span>
+            <div class="proc-title">아이디어 다듬기<small>CORE · AI PROMPT & RETOUCHING</small></div>
+          </div>
+          <div class="proc-img">
+            <img src="/weare/img/step01.jpg" alt="CORE — 요청 주문, AI 프롬프트 교정, 디자인 리터칭">
+          </div>
+          <div class="proc-copy">
+            <strong>비정형의 아이디어를 마주하는 시작점</strong>
+            고객의 거친 스케치, 낮은 해상도 이미지, 생성형 AI 결과물을 정밀 분석. 전문 프롬프트 교정과 디자인 리터칭으로 브랜드 초안을 완성합니다. 해결해야 할 기술적 문제를 진단하고 방향성을 수립하는 시작점.
+            <br><br><a href="https://jphic.co.kr/core" style="color:#00BBAC;font-weight:800;font-size:14px;">CORE 서비스 보기 →</a>
+          </div>
+        </article>
+
+        <article class="proc-step">
+          <div class="proc-head">
+            <span class="proc-num" style="color:#3B82F6;">02</span>
+            <div class="proc-title">진짜 자산 만들기<small>LOGO · VECTORIZING & ASSET</small></div>
+          </div>
+          <div class="proc-img">
+            <img src="/weare/img/step03.jpg" alt="LOGO — 벡터 자산화, 펜툴 정밀 복원">
+          </div>
+          <div class="proc-copy">
+            <strong>무한 확대 가능한 고해상도 벡터화</strong>
+            픽셀 이미지를 수동 펜툴로 정밀 복원. 무한 확대 가능한 일러스트레이터 원본(.ai) 벡터 파일로 자산화합니다. 선과 면의 완성도를 극대화하고 인쇄·제작 시 오차를 원천 차단.
+            <br><br><a href="https://jphic.co.kr/logo" style="color:#3B82F6;font-weight:800;font-size:14px;">LOGO 서비스 보기 →</a>
+          </div>
+        </article>
+
+        <article class="proc-step" style="border-color:var(--mc);background:rgba(234,88,12,0.04);">
+          <div class="proc-head">
+            <span class="proc-num" style="color:#EA580C;">03</span>
+            <div class="proc-title">현장 인쇄 사고 0%<small>PDF · TEMPLATE & PRINT FILE ← 현재 페이지</small></div>
+          </div>
+          <div class="proc-img">
+            <img src="/weare/img/step04.jpg" alt="PDF — 인쇄파일 세팅, 블리드, 칼선, CMYK">
+          </div>
+          <div class="proc-copy">
+            <strong>긴지 짧은지, 대보고 찍는다</strong>
+            템플릿 고르고 워딩만 수정하면 발주파일 완성. 블리드·칼선·CMYK 완벽 세팅. 사전 시뮬레이션 소통으로 현장에서 당황하지 않도록 끝까지 궁금증을 해결합니다.
+            <br><br><a href="#gallery" style="color:#EA580C;font-weight:800;font-size:14px;">템플릿 갤러리 보기 →</a>
+          </div>
+        </article>
+
+        <article class="proc-step">
+          <div class="proc-head">
+            <span class="proc-num" style="color:#9868D8;">04</span>
+            <div class="proc-title">움직이는 무기<small>MOTION · MOTION GRAPHICS & VIDEO</small></div>
+          </div>
+          <div class="proc-img">
+            <video src="/weare/img/step05.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+          </div>
+          <div class="proc-copy">
+            <strong>정적 자산에 생동감을 더하는 미디어 확장</strong>
+            완성된 2D 인쇄 자산을 디지털 사이니지·SNS 영상으로 확장. 웹·모바일·매장 전광판에서 가장 주목도 높은 형태로 변환합니다. 인쇄 파일 하나로 오프라인과 온라인을 동시에.
+            <br><br><a href="https://jphic.co.kr/motion" style="color:#9868D8;font-weight:800;font-size:14px;">MOTION 서비스 보기 →</a>
+          </div>
+        </article>
+
+        <article class="proc-step">
+          <div class="proc-head">
+            <span class="proc-num" style="color:#CBD5E1;">05</span>
+            <div class="proc-title">계속 써먹기<small>AGENCY · RESIZING & MANAGEMENT</small></div>
+          </div>
+          <div class="proc-img">
+            <img src="/weare/img/step06.jpg" alt="AGENCY — 현장 설치, 전담 파트너, 무한 리사이징">
+          </div>
+          <div class="proc-copy">
+            <strong>공간을 채우는 완벽한 최종 구현</strong>
+            완성된 브랜드 자산을 무한 리사이징해 온·오프라인 어디든 꺼내 씁니다. 오래가는 브랜드를 함께 관리하는 전담 디자인 파트너. 스케치 한 장이 현장 설치까지 이어지는 5단계 공정의 완성.
+            <br><br><a href="https://jphic.co.kr/agency" style="color:#CBD5E1;font-weight:800;font-size:14px;">AGENCY 서비스 보기 →</a>
+          </div>
+        </article>
+
       </div>
-      <a href="https://jphic.co.kr/agency" target="_blank" class="uni-card c-agency">
-        <span class="uni-step">STEP 4. 계속 써먹기</span>
-        <h3 class="uni-title">JPHIC <span>AGENCY</span></h3>
-        <p class="uni-desc">전담 디자인 파트너 매칭<br>SNS/배너 무한 베리에이션</p>
-      </a>
+      <div class="proc-progress" id="procProgress">
+        <i></i><i></i><i></i><i></i><i></i>
+      </div>
     </div>
+  </section>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-sec rv">
+  <h2>원하는 템플릿이 없으신가요?<br>디자인 주문도 가능합니다</h2>
+  <p>템플릿 커스텀 또는 처음부터 새로 만드는 디자인 주문은<br>오픈챗으로 요청해주세요. 사전 시뮬레이션 소통 후 제작합니다.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://jphic.co.kr/invoice" class="btn-primary"><i class="fa-solid fa-file-invoice"></i> 견적·발주 바로가기</a>
+    <button onclick="openModal(null)" class="btn-outline">디자인 요청 →</button>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <span class="f-logo">JPHIC <span>PDF</span></span>
-  © 2026 JPHIC. All Rights Reserved. 마스터 발주 세팅 및 미디어 확장 에이전시
+  © 2026 JPHIC UNIVERSE. 전시 백월·배너·등신대·포토존·칼선 인쇄파일 템플릿 제작 대행.
 </footer>
 
-<!-- MODAL FORM -->
-<div class="modal-overlay" id="orderModal" onclick="closeModal(event)">
+<!-- ===== 주문 모달 ===== -->
+<div class="modal" id="orderModal">
   <div class="modal-box">
-    <div class="modal-close" onclick="closeModalDirect()">&times;</div>
-
     <div class="modal-body">
-      <!-- Step 1 -->
-      <div class="form-step active" id="step1">
-        <div class="modal-header">
-          <h2>어떤 작업을 원하시나요?</h2>
-          <p>현장 인쇄 반려 0%, 완벽한 발주 세팅을 도와드립니다.</p>
-        </div>
-        <div class="f-group">
-          <div class="f-options">
-            <input type="radio" name="track" id="trA" value="마스터 발주 파일 세팅" class="f-radio" checked>
-            <label for="trA" class="option-card">
-              <strong>🖨️ 마스터 발주 파일 세팅 (단순 인쇄용)</strong>
-              <span>인쇄소 가이드(여백, 칼선, CMYK)에 맞춰 오류 없는 완벽한 PDF 파일을 세팅합니다.</span>
-            </label>
-            <input type="radio" name="track" id="trB" value="미디어 확장 및 대량 바리에이션" class="f-radio">
-            <label for="trB" class="option-card">
-              <strong>🎬 미디어 확장 및 대량 바리에이션</strong>
-              <span>명단 대량 인쇄, 온라인의 오프라인 재편집, 사이니지 모션 영상 등을 추가 제작합니다.</span>
-            </label>
-            <input type="radio" name="track" id="trC" value="장기 전담 디자인 케어" class="f-radio">
-            <label for="trC" class="option-card">
-              <strong>🤝 장기 전담 디자인 파트너 → <a href="https://jphic.co.kr/agency" target="_blank" style="color:var(--mc);">JPHIC AGENCY</a></strong>
-              <span>한 번의 세팅이 아니라, 지속적인 브랜드 디자인 관리(리사이징/베리에이션)가 필요합니다.</span>
-            </label>
-          </div>
-        </div>
-        <button class="btn-submit-modal" onclick="nextStep(2)">상세 정보 입력하기 <i class="fa-solid fa-arrow-right" style="margin-left:8px;"></i></button>
+      <div class="modal-close" onclick="closeModal()">×</div>
+      <div class="modal-title">디자인 요청하기</div>
+      <p class="modal-sub">번호 확인 후 오픈챗으로 원본 파일과 함께 보내주세요.</p>
+
+      <div id="selectedCode" class="selected-code" style="display:none;"></div>
+
+      <div class="print-warn" id="printWarn">
+        <strong>⚠️ 인쇄 템플릿 선택됨</strong><br>
+        발주처(인쇄소) 사양에 따라 파일 구조가 달라집니다.<br>
+        아래에 <strong>발주처를 반드시 입력</strong>해주세요.
       </div>
 
-      <!-- Step 2 -->
-      <div class="form-step" id="step2">
-        <div class="modal-header">
-          <h2>조금만 더 알려주세요</h2>
-          <p>담당자가 인쇄 가이드를 확인하고 빠르게 세팅을 도와드립니다.</p>
-        </div>
-        <div class="f-group">
-          <label class="f-label">기본 정보 (Name / 연락처)</label>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="req-name" class="f-input" placeholder="성함" style="flex: 1;">
-            <input type="text" id="req-phone" class="f-input" placeholder="010-0000-0000" style="flex: 2;">
-          </div>
-        </div>
-        <div class="f-group">
-          <label class="f-label">제작하실 인쇄 카테고리 (복수 선택)</label>
-          <div class="check-tags">
-            <input type="checkbox" name="problem" id="p1" value="대형 전시/부스 백월" class="f-check">
-            <label for="p1" class="check-btn">대형 전시/백월</label>
-            <input type="checkbox" name="problem" id="p2" value="배너/현수막" class="f-check">
-            <label for="p2" class="check-btn">배너/현수막</label>
-            <input type="checkbox" name="problem" id="p3" value="패키지/단상자" class="f-check">
-            <label for="p3" class="check-btn">패키지/단상자</label>
-            <input type="checkbox" name="problem" id="p4" value="사원증 대량/명함" class="f-check">
-            <label for="p4" class="check-btn">사원증 대량/명함</label>
-            <input type="checkbox" name="problem" id="p5" value="상세페이지 오프라인화" class="f-check">
-            <label for="p5" class="check-btn">상세페이지 오프라인화</label>
-            <input type="checkbox" name="problem" id="p6" value="디지털 사이니지(영상)" class="f-check">
-            <label for="p6" class="check-btn">사이니지(영상)</label>
-          </div>
-        </div>
-        <div class="f-group">
-          <label class="f-label">이용하실 발주처(인쇄소) 이름</label>
-          <input type="text" id="req-use" class="f-input" placeholder="예: 성원애드피아, 레드프린팅, 코엑스 지정업체 등">
-        </div>
-        <div class="f-group">
-          <label class="f-label">추가 요청사항</label>
-          <textarea id="req-memo" class="f-textarea" placeholder="인쇄소에서 반려당한 사유가 있거나, 영상 제작 시 원하는 움직임이 있다면 적어주세요." rows="3"></textarea>
-        </div>
-        <div style="display:flex; gap:10px;">
-          <button class="btn-submit-modal" style="background:#1e293b; flex:1; box-shadow:none;" onclick="nextStep(1)">이전</button>
-          <button id="btn-submit" class="btn-submit-modal" style="flex:2;" onclick="submitFormToSheet()">제이픽, 이대로 파일 세팅해줘!</button>
-        </div>
+      <label class="f-label">성함 / 연락처</label>
+      <div style="display:flex;gap:8px;margin-bottom:16px;">
+        <input id="m-name" type="text" placeholder="성함" class="f-input" style="margin:0;flex:1;">
+        <input id="m-phone" type="text" placeholder="010-0000-0000" class="f-input" style="margin:0;flex:2;">
       </div>
 
-      <!-- Step 3 (접수 완료 + 복사 박스) -->
-      <div class="form-step" id="step3">
-        <div class="modal-header">
-          <h2 style="color: var(--mc);">신청이 구글 시트에 접수되었습니다! 🎉</h2>
-          <p>아래 내용을 복사해서 <b style="color:#fff;">오픈챗</b>에 원본 파일과 함께 남겨주시면 세팅이 시작됩니다.</p>
-        </div>
-        
-        <div class="copy-box" id="copyTextResult"></div>
-        
-        <div style="display:flex; flex-direction: column; gap:12px;">
-          <button class="btn-submit-modal" style="background:#1e293b; font-size:1rem; padding:14px; box-shadow:none;" onclick="copyToClipboard(this)"><i class="fa-regular fa-copy" style="margin-right:8px;"></i> 요약 내용 복사하기</button>
-          <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="btn-submit-modal" style="text-decoration:none;"><i class="fa-solid fa-comment" style="margin-right:8px;"></i> JPHIC PDF 오픈챗 열기</a>
-        </div>
+      <label class="f-label">발주처(인쇄소)</label>
+      <input id="m-printer" type="text" placeholder="예: 성원애드피아, 레드프린팅, 비즈하우스, 미정" class="f-input">
+
+      <label class="f-label">추가 서비스 선택</label>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+        <label style="cursor:pointer;display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;transition:.2s;" id="mockupLabel">
+          <input type="checkbox" id="m-mockup" style="margin-top:2px;accent-color:var(--mc);width:16px;height:16px;flex-shrink:0;" onchange="toggleMockup()">
+          <div>
+            <div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:3px;">🖼 설치 목업 시뮬레이션 요청</div>
+            <div style="font-size:13px;color:var(--sub);line-height:1.6;">실제 현장 공간에 설치했을 때 어떻게 보이는지 미리 확인. 사이즈·비율·색감 검토 후 발주 진행.</div>
+          </div>
+        </label>
       </div>
 
+      <label class="f-label">워딩 수정 내용 / 추가 요청</label>
+      <textarea id="m-memo" class="f-textarea" rows="3" placeholder="바꿀 텍스트, 색상, 사이즈, 납기일 등"></textarea>
+
+      <button class="submit-btn" id="submitBtn" onclick="submitOrder()">요청 접수하기</button>
+
+      <div class="result-box" id="resultBox">
+        <p style="font-size:14px;color:var(--sub);margin-bottom:12px;">아래 내용을 복사해서 오픈챗에 원본 파일과 함께 보내주세요.</p>
+        <div class="copy-area" id="copyArea"></div>
+        <div class="result-btns">
+          <button class="copy-btn" onclick="copyResult()">내용 복사하기</button>
+          <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="kakao-btn"><i class="fa-solid fa-comment"></i> 오픈챗으로 디자인 요청하기</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-const navAnchors = document.querySelectorAll('.nav-links a');
-navAnchors.forEach(anchor => {
-  anchor.addEventListener('click', function() {
-    navAnchors.forEach(a => a.classList.remove('active'));
-    this.classList.add('active');
+let currentTab='all', currentCat='all', selCode=null, selType=null;
+
+function switchTab(tab,el){
+  currentTab=tab; currentCat='all';
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('printNotice').classList.toggle('show',tab==='print');
+  document.querySelectorAll('.cat-btn').forEach(b=>{
+    if(b.classList.contains('print-only')) b.style.display=(tab==='web')?'none':'';
+    if(b.classList.contains('web-only')) b.style.display=(tab==='print')?'none':'';
   });
-});
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.cat-btn').classList.add('active');
+  renderCards();
+}
 
-const obs = new IntersectionObserver(es => {
-  es.forEach(e => { 
-    if(e.isIntersecting) e.target.classList.add('on'); 
-    else e.target.classList.remove('on');
+function filterCat(cat,el){
+  currentCat=cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderCards();
+}
+
+function renderCards(){
+  const cards=document.querySelectorAll('.t-card');
+  let v=0;
+  cards.forEach(c=>{
+    const tm=currentTab==='all'||c.dataset.tab===currentTab;
+    const cm=currentCat==='all'||c.dataset.cat===currentCat;
+    c.classList.toggle('show',tm&&cm);
+    if(tm&&cm)v++;
   });
-}, { threshold: 0.05, rootMargin: "0px 0px -50px 0px" });
-document.querySelectorAll('.rv').forEach(el => obs.observe(el));
-
-function toggleMobileMenu() {
-  const navLinks = document.getElementById('navLinks');
-  navLinks.classList.toggle('active');
-}
-function closeMobileMenu() {
-  document.getElementById('navLinks').classList.remove('active');
+  document.getElementById('emptyState').classList.toggle('show',v===0);
 }
 
-const modal = document.getElementById('orderModal');
-
-function openModal() {
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-  resetStep();
+function openModal(code,type,title,mockup=false){
+  selCode=code; selType=type;
+  const el=document.getElementById('selectedCode');
+  if(code){el.style.display='inline-block';el.textContent=code+(title?' · '+title:'');}
+  else{el.style.display='none';}
+  document.getElementById('printWarn').classList.toggle('show',type==='print');
+  document.getElementById('resultBox').style.display='none';
+  document.getElementById('m-mockup').checked=mockup;
+  toggleMockup();
+  ['m-name','m-phone','m-printer','m-memo'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('orderModal').classList.add('open');
+  document.body.style.overflow='hidden';
 }
 
-function openModalWithService(serviceName) {
-  openModal();
-  if(serviceName === '마스터 발주 파일 세팅') document.getElementById('trA').checked = true;
-  else if(serviceName === '미디어 확장 및 영상 제작') document.getElementById('trB').checked = true;
+function toggleMockup(){
+  const checked=document.getElementById('m-mockup').checked;
+  document.getElementById('mockupLabel').style.borderColor=checked?'var(--mc)':'var(--line)';
+  document.getElementById('mockupLabel').style.background=checked?'var(--mc-light)':'transparent';
 }
-
-function closeModal(e) {
-  if(e.target === modal) closeModalDirect();
+function closeModal(){
+  document.getElementById('orderModal').classList.remove('open');
+  document.body.style.overflow='';
+  // 폼 복원
+  document.querySelectorAll('.modal-body .f-label, .modal-body .f-input, .modal-body .f-textarea, #submitBtn').forEach(el=>el.style.display='');
+  document.querySelectorAll('.modal-body div[style*="display:none"]').forEach(el=>el.style.display='');
 }
+document.getElementById('orderModal').addEventListener('click',e=>{if(e.target===document.getElementById('orderModal'))closeModal();});
 
-function closeModalDirect() {
-  modal.classList.remove('active');
-  document.body.style.overflow = '';
-}
+async function submitOrder(){
+  const name=document.getElementById('m-name').value||'미입력';
+  const phone=document.getElementById('m-phone').value||'미입력';
+  const printer=document.getElementById('m-printer').value||'미정';
+  const memo=document.getElementById('m-memo').value||'없음';
+  const mockup=document.getElementById('m-mockup').checked;
+  const code=selCode||'직접 문의';
+  const txt=`📋 JPHIC PDF 디자인 요청\n템플릿 번호: ${code}\n성함: ${name}\n연락처: ${phone}\n발주처: ${printer}\n설치 목업 시뮬: ${mockup?'✅ 요청':'없음'}\n요청사항: ${memo}\n\n※ 원본 파일을 오픈챗에 함께 올려주세요!`;
+  document.getElementById('copyArea').textContent=txt;
 
-function resetStep() {
-  document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-  document.getElementById('step1').classList.add('active');
-  document.getElementById('req-name').value = '';
-  document.getElementById('req-phone').value = '';
-  document.getElementById('req-use').value = '';
-  document.getElementById('req-memo').value = '';
-  document.querySelectorAll('input[name="problem"]').forEach(el => el.checked = false);
-}
+  // 입력폼 숨기고 결과만 표시
+  document.getElementById('selectedCode').style.display='none';
+  document.getElementById('printWarn').classList.remove('show');
+  document.querySelectorAll('.modal-body .f-label, .modal-body .f-input, .modal-body .f-textarea, #submitBtn').forEach(el=>el.style.display='none');
+  document.querySelectorAll('.modal-body div[style*="flex"]').forEach(el=>el.style.display='none');
+  document.getElementById('resultBox').style.display='block';
+  document.querySelector('.modal-sub').textContent='접수 완료. 아래 내용을 복사해서 오픈챗에 보내주세요.';
 
-function nextStep(step) {
-  document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-  document.getElementById('step' + step).classList.add('active');
-}
-
-async function submitFormToSheet() {
-  const btn = document.getElementById('btn-submit');
-  btn.innerText = "구글로 접수 중...";
-  btn.disabled = true;
-
-  const track = document.querySelector('input[name="track"]:checked').value;
-  const name = document.getElementById('req-name').value || '미입력';
-  const phone = document.getElementById('req-phone').value || '미입력';
-  const problems = Array.from(document.querySelectorAll('input[name="problem"]:checked')).map(el => el.value);
-  const problemText = problems.length > 0 ? problems.join(', ') : '없음';
-  const use = document.getElementById('req-use').value || '미입력';
-  const memo = document.getElementById('req-memo').value || '없음';
-
-  // PDF 사이트에서 유입되었음을 구글 시트에 알리기 위한 꼬리표
-  const payload = {
-    site: "JPHIC PDF",
-    name: name,
-    phone: phone,
-    brand: use, 
-    need: `서비스: ${track} / 카테고리: ${problemText}`,
-    memo: memo
-  };
-
-  const result = `📋 JPHIC PDF 세팅 신청서\n____________________________\n■ 신청 서비스: ${track}\n■ 신청자명: ${name}\n■ 연락처: ${phone}\n■ 인쇄 카테고리: ${problemText}\n■ 발주처(인쇄소): ${use}\n■ 추가 메모: ${memo}\n____________________________\n※ 작성하신 내용과 디자인 원본 파일을 오픈챗에 올려주세요!`;
-  document.getElementById('copyTextResult').innerText = result;
-
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzC2AzSg-3y2hRQnVOqpVzWCapcVTuIsPIN5Z-nrrnMSMzUS10TOclaVAyBz7qJVIEZ/exec";
-
-  try {
-    await fetch(SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" }, 
-      body: JSON.stringify(payload)
+  try{
+    await fetch('https://script.google.com/macros/s/AKfycbzC2AzSg-3y2hRQnVOqpVzWCapcVTuIsPIN5Z-nrrnMSMzUS10TOclaVAyBz7qJVIEZ/exec',{
+      method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({site:'JPHIC PDF',name,phone,brand:printer,need:`템플릿: ${code}`,memo})
     });
-    nextStep(3); 
-  } catch (error) {
-    console.error('Error!', error);
-    nextStep(3); 
-  } finally {
-    btn.innerText = "제이픽, 이대로 파일 세팅해줘!";
-    btn.disabled = false;
-  }
+  }catch(e){}
+}
+function copyResult(){
+  const t=document.getElementById('copyArea').textContent;
+  navigator.clipboard.writeText(t).catch(()=>{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);});
 }
 
-function copyToClipboard(btn) {
-  const text = document.getElementById('copyTextResult').innerText;
-  const textArea = document.createElement("textarea");
-  textArea.value = text;
-  document.body.appendChild(textArea);
-  textArea.select();
-  try {
-    document.execCommand('copy');
-    const originalHtml = btn.innerHTML;
-    btn.innerHTML = "<i class='fa-solid fa-check' style='margin-right:8px;'></i> 복사 완료!";
-    btn.style.background = "var(--mc)";
-    setTimeout(() => {
-      btn.innerHTML = originalHtml;
-      btn.style.background = "#1e293b"; 
-    }, 2000);
-  } catch (err) {
-    console.error('복사 실패');
+// 스크롤 애니
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// ===== weare 공정 라인 스크롤 (그대로 이식) =====
+(function(){
+  const section=document.getElementById('procSection');
+  const track=document.getElementById('procTrack');
+  if(!section||!track)return;
+  const steps=track.querySelectorAll('.proc-step');
+  const dots=document.querySelectorAll('#procProgress i');
+  const mq=window.matchMedia('(max-width:768px)');
+  const reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  function setHeight(){
+    if(mq.matches){section.style.height='auto';return;}
+    const scrollW=track.scrollWidth-window.innerWidth;
+    section.style.height=(scrollW+window.innerHeight)+'px';
   }
-  document.body.removeChild(textArea);
-}
+  function onScroll(){
+    if(mq.matches){
+      steps.forEach(s=>{
+        const r=s.getBoundingClientRect();
+        if(r.top<window.innerHeight*.85)s.classList.add('active');
+      });
+      return;
+    }
+    const rect=section.getBoundingClientRect();
+    const total=section.offsetHeight-window.innerHeight;
+    const progress=Math.min(Math.max(-rect.top/total,0),1);
+    const scrollW=track.scrollWidth-window.innerWidth;
+    if(!reduced)track.style.transform='translateX('+(-progress*scrollW)+'px)';
+    const idx=Math.min(Math.floor(progress*steps.length),steps.length-1);
+    steps.forEach((s,i)=>s.classList.toggle('active',i<=idx));
+    dots.forEach((d,i)=>d.classList.toggle('on',i<=idx));
+  }
+  setHeight();
+  window.addEventListener('load',()=>{setHeight();onScroll();});
+  window.addEventListener('resize',()=>{setHeight();onScroll();});
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
 </script>
 </body>
 </html>
