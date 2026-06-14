@@ -79,7 +79,7 @@ header.scrolled{
   min-height:100vh;width:100%;
   position:relative;overflow:hidden;
   background:
-    linear-gradient(to bottom, rgba(3,7,18,0.15) 0%, rgba(3,7,18,0.5) 55%, rgba(3,7,18,1) 100%),
+    linear-gradient(to bottom, rgba(3,7,18,0) 0%, rgba(3,7,18,0) 40%, rgba(3,7,18,1) 100%),
     url('/img/pdf/hero-bg.webp') center center/cover no-repeat;
   background-color:var(--bg);
 }
@@ -89,7 +89,7 @@ header.scrolled{
 
 /* 히어로 텍스트 — 절대좌표 배치 */
 .hero-tag-line{
-  position:absolute;top:190px;left:50%;transform:translateX(-50%);
+  position:absolute;top:130px;left:50%;transform:translateX(-50%);
   font-size:14px;font-weight:700;color:rgba(255,255,255,.55);
   letter-spacing:1.5px;white-space:nowrap;z-index:3;
 }
@@ -810,7 +810,7 @@ footer{
 
 <!-- ===== UNIVERSE 5단계 — weare 공정 라인 UI ===== -->
 <section class="universe-sec" id="universe">
-  <div class="sec-header rv">
+  <div class="sec-header rv" style="text-align:center;">
     <p class="sec-label">JPHIC UNIVERSE — 5 STEP</p>
     <h2 class="sec-title">요청부터 현장까지, 5단계 공정</h2>
     <p class="sec-desc">스케치 한 장에서 대형 현장 설치 목업까지.<br>각 단계 전문 공정이 순서대로 움직입니다. — <span style="color:var(--mc);font-weight:700;">스크롤하며 확인하세요</span></p>
@@ -1016,7 +1016,20 @@ function openModal(code,type,title,mockup=false){
   document.getElementById('resultBox').style.display='none';
   document.getElementById('m-mockup').checked=mockup;
   toggleMockup();
-  ['m-name','m-phone','m-printer','m-memo'].forEach(id=>document.getElementById(id).value='');
+
+  // localStorage 저장값 복원 (반복입력 방지)
+  const saved=JSON.parse(localStorage.getItem('jphic_modal')||'{}');
+  document.getElementById('m-name').value=saved.name||'';
+  document.getElementById('m-phone').value=saved.phone||'';
+  document.getElementById('m-printer').value=saved.printer||'';
+  document.getElementById('m-memo').value=''; // 메모는 매번 새로
+
+  // 폼 요소 복원 (이전 접수 후 숨김 상태 복구)
+  document.querySelectorAll('.modal-body .f-label,.modal-body .f-input,.modal-body .f-textarea,#submitBtn').forEach(el=>el.style.display='');
+  document.querySelectorAll('.modal-body div[style*="display:none"]').forEach(el=>el.style.removeProperty('display'));
+  document.getElementById('selectedCode').style.display=code?'inline-block':'none';
+  document.querySelector('.modal-sub').textContent='번호 확인 후 오픈챗으로 원본 파일과 함께 보내주세요.';
+
   document.getElementById('orderModal').classList.add('open');
   document.body.style.overflow='hidden';
 }
@@ -1029,9 +1042,6 @@ function toggleMockup(){
 function closeModal(){
   document.getElementById('orderModal').classList.remove('open');
   document.body.style.overflow='';
-  // 폼 복원
-  document.querySelectorAll('.modal-body .f-label, .modal-body .f-input, .modal-body .f-textarea, #submitBtn').forEach(el=>el.style.display='');
-  document.querySelectorAll('.modal-body div[style*="display:none"]').forEach(el=>el.style.display='');
 }
 document.getElementById('orderModal').addEventListener('click',e=>{if(e.target===document.getElementById('orderModal'))closeModal();});
 
@@ -1042,6 +1052,9 @@ async function submitOrder(){
   const memo=document.getElementById('m-memo').value||'없음';
   const mockup=document.getElementById('m-mockup').checked;
   const code=selCode||'직접 문의';
+
+  // 성함·연락처·발주처 저장 (다음 방문 시 자동 복원)
+  localStorage.setItem('jphic_modal',JSON.stringify({name,phone,printer}));
   const txt=`📋 JPHIC PDF 디자인 요청\n템플릿 번호: ${code}\n성함: ${name}\n연락처: ${phone}\n발주처: ${printer}\n설치 목업 시뮬: ${mockup?'✅ 요청':'없음'}\n요청사항: ${memo}\n\n※ 원본 파일을 오픈챗에 함께 올려주세요!`;
   document.getElementById('copyArea').textContent=txt;
 
@@ -1070,7 +1083,7 @@ window.addEventListener('scroll',()=>{
   document.querySelector('header').classList.toggle('scrolled',window.scrollY>40);
 },{passive:true});
 
-// ===== 직선 모션 캔버스 =====
+// ===== 직선 모션 캔버스 — 메인카피 주위 집중 =====
 (function(){
   const cv=document.getElementById('lineCanvas');
   if(!cv)return;
@@ -1082,60 +1095,68 @@ window.addEventListener('scroll',()=>{
     H=cv.height=cv.offsetHeight;
   }
 
+  // 메인카피 영역: 상단 150~580px 사이에 집중
+  // 좌우 바깥에서 진입, 글자 근처에서 길어졌다 사라짐
   function mkLine(){
-    const y=Math.random()*H;
-    const len=60+Math.random()*300;   // 길이 60~360px
-    const speed=0.4+Math.random()*1.2; // 속도
-    const dir=Math.random()>.5?1:-1;   // 좌→우 or 우→좌
-    const x=dir===1?-len:W+len;
-    const op=0.08+Math.random()*0.18;  // 투명도
-    const thick=0.5+Math.random()*1.2; // 두께
-    const color=Math.random()>.7
-      ?`rgba(234,88,12,${op})`         // 오렌지 30%
-      :`rgba(255,255,255,${op})`;       // 흰색 70%
-    return{x,y,len,speed,dir,color,thick,life:0,maxLife:80+Math.random()*120};
+    const focusY = 150 + Math.random() * 430; // 카피 높이 밴드
+    const spread = Math.random() > 0.6;        // 40%는 전체 분산
+    const y = spread ? Math.random() * H : focusY;
+    const maxLen = spread ? 40 + Math.random() * 120 : 80 + Math.random() * 320;
+    const speed = 0.5 + Math.random() * 1.4;
+    const dir = Math.random() > 0.5 ? 1 : -1;
+    const x = dir === 1 ? -maxLen : W + maxLen;
+    const op = spread ? 0.04 + Math.random() * 0.08 : 0.1 + Math.random() * 0.22;
+    const thick = 0.4 + Math.random() * (spread ? 0.6 : 1.4);
+    const isOrange = Math.random() > 0.72;
+    const color = isOrange
+      ? `rgba(234,88,12,${op})`
+      : `rgba(255,255,255,${op})`;
+    const life = 0;
+    const maxLife = 70 + Math.random() * 140;
+    // 길어졌다 짧아지는 효과: currentLen 0 → maxLen → 0
+    return {x, y, maxLen, speed, dir, color, thick, life, maxLife, currentLen: 0};
   }
 
-  // 초기 라인 분산 생성
-  for(let i=0;i<28;i++){
-    const l=mkLine();
-    l.life=Math.random()*l.maxLife; // 랜덤 위상
+  for(let i = 0; i < 32; i++){
+    const l = mkLine();
+    l.life = Math.random() * l.maxLife;
     lines.push(l);
   }
 
   function draw(){
-    ctx.clearRect(0,0,W,H);
+    ctx.clearRect(0, 0, W, H);
+    if(lines.length < 32) lines.push(mkLine());
 
-    // 라인 보충
-    if(lines.length<28) lines.push(mkLine());
-
-    lines=lines.filter(l=>{
+    lines = lines.filter(l => {
       l.life++;
-      l.x+=l.speed*l.dir;
+      l.x += l.speed * l.dir;
 
-      // fade in / out
-      const prog=l.life/l.maxLife;
-      const fade=prog<.15?prog/.15:prog>.75?(1-prog)/.25:1;
+      const prog = l.life / l.maxLife;
+      // 길이: 0→max→0 (sin 곡선)
+      const lenFade = Math.sin(prog * Math.PI);
+      const drawLen = l.maxLen * lenFade;
+      // 투명도: fade in/out
+      const opFade = prog < .12 ? prog / .12 : prog > .78 ? (1 - prog) / .22 : 1;
 
       ctx.save();
-      ctx.globalAlpha=fade;
-      ctx.strokeStyle=l.color;
-      ctx.lineWidth=l.thick;
-      ctx.lineCap='round';
+      ctx.globalAlpha = opFade;
+      ctx.strokeStyle = l.color;
+      ctx.lineWidth = l.thick;
+      ctx.lineCap = 'round';
       ctx.beginPath();
-      ctx.moveTo(l.x,l.y);
-      ctx.lineTo(l.x+l.len*l.dir,l.y);
+      ctx.moveTo(l.x, l.y);
+      ctx.lineTo(l.x + drawLen * l.dir, l.y);
       ctx.stroke();
       ctx.restore();
 
-      return l.life<l.maxLife;
+      return l.life < l.maxLife;
     });
 
     requestAnimationFrame(draw);
   }
 
   resize();
-  window.addEventListener('resize',resize,{passive:true});
+  window.addEventListener('resize', resize, {passive: true});
   draw();
 })();
 
