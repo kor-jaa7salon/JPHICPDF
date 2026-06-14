@@ -84,8 +84,8 @@ header.scrolled{
   background-color:var(--bg);
 }
 
-/* 캔버스 직선 모션 */
-#lineCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+/* 캔버스 사각형 모션 */
+#rectCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;}
 
 /* 히어로 텍스트 — 절대좌표 배치 */
 .hero-tag-line{
@@ -94,12 +94,12 @@ header.scrolled{
   letter-spacing:1.5px;white-space:nowrap;z-index:3;
 }
 .hero-sub-line{
-  position:absolute;top:575px;left:50%;transform:translateX(-50%);
+  position:absolute;top:580px;left:50%;transform:translateX(-50%);
   font-size:clamp(16px,2vw,16px);font-weight:800;color:rgba(255,255,255,.9);
   white-space:nowrap;z-index:3;letter-spacing:-.01em;
 }
 .hero-cta-wrap{
-  position:absolute;top:754px;left:50%;transform:translateX(-50%);
+  position:absolute;top:690px;left:50%;transform:translateX(-50%);
   display:flex;gap:14px;align-items:center;z-index:3;white-space:nowrap;
 }
 .hero-inner{position:relative;z-index:2;}
@@ -345,15 +345,15 @@ footer{
   <a href="https://jphic.co.kr" class="logo">JPHIC <span>PDF</span></a>
 
   <nav class="nav-center">
+    <a href="#how">템플릿 주문방법</a>
     <a href="#gallery">템플릿 갤러리</a>
-    <a href="#how">주문 방법</a>
-    <a href="#universe">서비스 공정</a>
-    <a href="https://jphic.co.kr/invoice">견적·발주</a>
+    <a href="#universe">디자인 제작 과정</a>
+    <a href="https://jphic.co.kr/invoice">작업의뢰 및 예상견적</a>
   </nav>
 
   <div class="nav-right">
-    <button onclick="location.href='https://jphic.co.kr/invoice'" class="nav-btn">템플릿 주문</button>
     <button onclick="openModal(null)" class="nav-btn">디자인 요청</button>
+    <button onclick="location.href='https://jphic.co.kr/invoice'" class="nav-btn">디자인 견적</button>
     <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="nav-btn primary"><i class="fa-solid fa-comment"></i> 오픈챗</a>
   </div>
 </header>
@@ -361,7 +361,7 @@ footer{
 <!-- ===== HERO ===== -->
 <section class="hero" id="heroSection">
   <!-- 직선 모션 캔버스 -->
-  <canvas id="lineCanvas"></canvas>
+  <canvas id="rectCanvas"></canvas>
 
   <!-- [SEO] h1 크롤링용 숨김 -->
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">전시 백월 템플릿, 배너 인쇄파일, 등신대 제작, 포토존 파일, 글자 스카시, 행사 명찰, POP 인쇄, 칼선 세팅, 현수막, 인쇄파일 대행, 블리드 세팅, CMYK 변환, 성원애드피아, 레드프린팅, JPHIC, 제이픽</h1>
@@ -908,8 +908,8 @@ footer{
   <h2>원하는 템플릿이 없으신가요?<br>디자인 주문도 가능합니다</h2>
   <p>템플릿 커스텀 또는 처음부터 새로 만드는 디자인 주문은<br>문의서 작성하고, 오픈챗으로 요청해주세요.</p>
   <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-    <a href="https://jphic.co.kr/invoice" class="btn-primary"><i class="fa-solid fa-file-invoice"></i> 견적·발주 바로가기</a>
-    <button onclick="openModal(null)" class="btn-outline">디자인 요청 →</button>
+    <button onclick="openModal(null)" class="btn-primary"><i class="fa-solid fa-comment"></i> 디자인 요청</button>
+    <a href="https://jphic.co.kr/invoice" class="btn-outline"><i class="fa-solid fa-file-invoice"></i> 예상견적 서비스</a>
   </div>
 </section>
 
@@ -1078,85 +1078,84 @@ function copyResult(){
   navigator.clipboard.writeText(t).catch(()=>{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);});
 }
 
-// 헤더 스크롤 블러
-window.addEventListener('scroll',()=>{
-  document.querySelector('header').classList.toggle('scrolled',window.scrollY>40);
-},{passive:true});
+// 헤더 스크롤 블러 — 최초 로드 시 적용 + 스크롤 유지
+function updateHeader(){
+  document.querySelector('header').classList.toggle('scrolled', window.scrollY > 10);
+}
+updateHeader();
+window.addEventListener('scroll', updateHeader, {passive:true});
 
-// ===== 직선 모션 캔버스 — 메인카피 주위 집중 =====
+// ===== 사각형 스케일업다운 디졸브 모션 =====
 (function(){
-  const cv=document.getElementById('lineCanvas');
+  const cv=document.getElementById('rectCanvas');
   if(!cv)return;
   const ctx=cv.getContext('2d');
-  let W,H,lines=[];
+  let W,H,rects=[];
 
   function resize(){
     W=cv.width=cv.offsetWidth;
     H=cv.height=cv.offsetHeight;
   }
 
-  // 메인카피 영역: 상단 150~580px 사이에 집중
-  // 좌우 바깥에서 진입, 글자 근처에서 길어졌다 사라짐
-  function mkLine(){
-    const focusY = 150 + Math.random() * 430; // 카피 높이 밴드
-    const spread = Math.random() > 0.6;        // 40%는 전체 분산
-    const y = spread ? Math.random() * H : focusY;
-    const maxLen = spread ? 40 + Math.random() * 120 : 80 + Math.random() * 320;
-    const speed = 0.5 + Math.random() * 1.4;
-    const dir = Math.random() > 0.5 ? 1 : -1;
-    const x = dir === 1 ? -maxLen : W + maxLen;
-    const op = spread ? 0.04 + Math.random() * 0.08 : 0.1 + Math.random() * 0.22;
-    const thick = 0.4 + Math.random() * (spread ? 0.6 : 1.4);
-    const isOrange = Math.random() > 0.72;
-    const color = isOrange
-      ? `rgba(234,88,12,${op})`
-      : `rgba(255,255,255,${op})`;
-    const life = 0;
-    const maxLife = 70 + Math.random() * 140;
-    // 길어졌다 짧아지는 효과: currentLen 0 → maxLen → 0
-    return {x, y, maxLen, speed, dir, color, thick, life, maxLife, currentLen: 0};
+  // 대지 종횡비 사각형 (16:9, 3:4, 1:1, 9:16 등 혼합)
+  const ratios=[
+    [16,9],[9,16],[3,4],[4,3],[1,1],[2,3],[3,2]
+  ];
+
+  function mkRect(){
+    const r=ratios[Math.floor(Math.random()*ratios.length)];
+    const baseW=40+Math.random()*120;
+    const rw=baseW;
+    const rh=baseW*(r[1]/r[0]);
+    const x=Math.random()*W;
+    const y=Math.random()*(H*.75)+H*.05; // 히어로 카피 영역 집중
+    const isOrange=Math.random()>.6;
+    const op=0.12+Math.random()*0.28;
+    const color=isOrange?`rgba(234,88,12,${op})`:`rgba(255,255,255,${op*0.5})`;
+    const maxLife=90+Math.random()*150;
+    const peakScale=0.7+Math.random()*1.4; // 최대 스케일 (0.7~2.1x)
+    return{x,y,rw,rh,color,life:0,maxLife,peakScale,rot:(Math.random()-.5)*.3};
   }
 
-  for(let i = 0; i < 32; i++){
-    const l = mkLine();
-    l.life = Math.random() * l.maxLife;
-    lines.push(l);
+  for(let i=0;i<18;i++){
+    const r=mkRect();
+    r.life=Math.random()*r.maxLife;
+    rects.push(r);
   }
 
   function draw(){
-    ctx.clearRect(0, 0, W, H);
-    if(lines.length < 32) lines.push(mkLine());
+    ctx.clearRect(0,0,W,H);
+    if(rects.length<18) rects.push(mkRect());
 
-    lines = lines.filter(l => {
-      l.life++;
-      l.x += l.speed * l.dir;
-
-      const prog = l.life / l.maxLife;
-      // 길이: 0→max→0 (sin 곡선)
-      const lenFade = Math.sin(prog * Math.PI);
-      const drawLen = l.maxLen * lenFade;
-      // 투명도: fade in/out
-      const opFade = prog < .12 ? prog / .12 : prog > .78 ? (1 - prog) / .22 : 1;
+    rects=rects.filter(r=>{
+      r.life++;
+      const prog=r.life/r.maxLife;
+      // 스케일: 0 → peak → 0 (sin 곡선)
+      const scale=r.peakScale*Math.sin(prog*Math.PI);
+      // 투명도: fade in → 유지 → fade out
+      const alpha=prog<.15?prog/.15:prog>.7?(1-prog)/.3:1;
 
       ctx.save();
-      ctx.globalAlpha = opFade;
-      ctx.strokeStyle = l.color;
-      ctx.lineWidth = l.thick;
-      ctx.lineCap = 'round';
-      ctx.beginPath();
-      ctx.moveTo(l.x, l.y);
-      ctx.lineTo(l.x + drawLen * l.dir, l.y);
-      ctx.stroke();
+      ctx.globalAlpha=alpha;
+      ctx.translate(r.x,r.y);
+      ctx.rotate(r.rot);
+      ctx.strokeStyle=r.color;
+      ctx.lineWidth=1.2;
+      ctx.strokeRect(
+        -r.rw*scale/2,
+        -r.rh*scale/2,
+        r.rw*scale,
+        r.rh*scale
+      );
       ctx.restore();
-
-      return l.life < l.maxLife;
+      return r.life<r.maxLife;
     });
 
     requestAnimationFrame(draw);
   }
 
   resize();
-  window.addEventListener('resize', resize, {passive: true});
+  window.addEventListener('resize',resize,{passive:true});
   draw();
 })();
 
