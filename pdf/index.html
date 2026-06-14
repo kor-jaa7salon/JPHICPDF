@@ -85,7 +85,7 @@ header.scrolled{
 }
 
 /* 캔버스 사각형 모션 */
-#rectCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1.4;pointer-events:none;}
+#rectCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;}
 
 /* 히어로 텍스트 — 절대좌표 배치 */
 .hero-tag-line{
@@ -353,7 +353,7 @@ footer{
 
   <div class="nav-right">
     <button onclick="openModal(null)" class="nav-btn">디자인 요청</button>
-    <button onclick="location.href='https://jphic.co.kr/invoice'" class="nav-btn">예상견적</button>
+    <button onclick="location.href='https://jphic.co.kr/invoice'" class="nav-btn">디자인 견적</button>
     <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="nav-btn primary"><i class="fa-solid fa-comment"></i> 오픈챗</a>
   </div>
 </header>
@@ -379,7 +379,7 @@ footer{
       <button onclick="openModal(null,null,null,true)" class="btn-primary"><i class="fa-solid fa-cube"></i> 목업 시뮬 요청하기</button>
     </div>
     <button onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})" class="btn-outline"><i class="fa-solid fa-grid-2"></i> 템플릿 고르기</button>
-    <a href="https://jphic.co.kr/invoice" class="btn-outline">예상견적 →</a>
+    <a href="https://jphic.co.kr/invoice" class="btn-outline">견적·발주 →</a>
   </div>
 </section>
 
@@ -924,42 +924,46 @@ footer{
     <div class="modal-body">
       <div class="modal-close" onclick="closeModal()">×</div>
       <div class="modal-title">디자인 요청하기</div>
-      <p class="modal-sub">번호 확인 후 오픈챗으로 자료 파일과 함께 보내주세요.</p>
+      <p class="modal-sub" id="modalSub">번호 확인 후 오픈챗으로 자료 파일과 함께 보내주세요.</p>
 
-      <div id="selectedCode" class="selected-code" style="display:none;"></div>
+      <!-- ===== 입력 뷰 ===== -->
+      <div id="inputView">
+        <div id="selectedCode" class="selected-code" style="display:none;"></div>
 
-      <div class="print-warn" id="printWarn">
-        <strong>⚠️ 인쇄 템플릿 선택됨</strong><br>
-        발주처(인쇄소) 사양에 따라 파일 구조가 달라집니다.<br>
-        아래에 <strong>발주처를 반드시 입력</strong>해주세요.
+        <div class="print-warn" id="printWarn">
+          <strong>⚠️ 인쇄 템플릿 선택됨</strong><br>
+          발주처(인쇄소) 사양에 따라 파일 구조가 달라집니다.<br>
+          아래에 <strong>발주처를 반드시 입력</strong>해주세요.
+        </div>
+
+        <label class="f-label">성함 / 연락처</label>
+        <div style="display:flex;gap:8px;margin-bottom:16px;">
+          <input id="m-name" type="text" placeholder="성함" class="f-input" style="margin:0;flex:1;">
+          <input id="m-phone" type="text" placeholder="010-0000-0000" class="f-input" style="margin:0;flex:2;">
+        </div>
+
+        <label class="f-label">발주처(인쇄소)</label>
+        <input id="m-printer" type="text" placeholder="예: 성원애드피아, 레드프린팅, 비즈하우스, 미정" class="f-input">
+
+        <label class="f-label">추가 서비스 선택</label>
+        <div style="margin-bottom:16px;">
+          <label style="cursor:pointer;display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;transition:.2s;" id="mockupLabel">
+            <input type="checkbox" id="m-mockup" style="margin-top:2px;accent-color:var(--mc);width:16px;height:16px;flex-shrink:0;" onchange="toggleMockup()">
+            <div>
+              <div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:3px;">🖼 설치 목업 시뮬레이션 요청</div>
+              <div style="font-size:13px;color:var(--sub);line-height:1.6;">실제 현장 공간에 설치했을 때 어떻게 보이는지 미리 확인. 사이즈·비율·색감 검토 후 발주 진행.</div>
+            </div>
+          </label>
+        </div>
+
+        <label class="f-label">워딩 수정 내용 / 추가 요청</label>
+        <textarea id="m-memo" class="f-textarea" rows="3" placeholder="바꿀 텍스트, 색상, 사이즈, 납기일 등"></textarea>
+
+        <button class="submit-btn" onclick="submitOrder()">요청 접수하기</button>
       </div>
 
-      <label class="f-label">성함 / 연락처</label>
-      <div style="display:flex;gap:8px;margin-bottom:16px;">
-        <input id="m-name" type="text" placeholder="성함" class="f-input" style="margin:0;flex:1;">
-        <input id="m-phone" type="text" placeholder="010-0000-0000" class="f-input" style="margin:0;flex:2;">
-      </div>
-
-      <label class="f-label">발주처(인쇄소)</label>
-      <input id="m-printer" type="text" placeholder="예: 성원애드피아, 레드프린팅, 비즈하우스, 미정" class="f-input">
-
-      <label class="f-label">추가 서비스 선택</label>
-      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
-        <label style="cursor:pointer;display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;transition:.2s;" id="mockupLabel">
-          <input type="checkbox" id="m-mockup" style="margin-top:2px;accent-color:var(--mc);width:16px;height:16px;flex-shrink:0;" onchange="toggleMockup()">
-          <div>
-            <div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:3px;">🖼 설치 목업 시뮬레이션 요청</div>
-            <div style="font-size:13px;color:var(--sub);line-height:1.6;">실제 현장 공간에 설치했을 때 어떻게 보이는지 미리 확인. 사이즈·비율·색감 검토 후 발주 진행.</div>
-          </div>
-        </label>
-      </div>
-
-      <label class="f-label">워딩 수정 내용 / 추가 요청</label>
-      <textarea id="m-memo" class="f-textarea" rows="3" placeholder="바꿀 텍스트, 색상, 사이즈, 납기일 등"></textarea>
-
-      <button class="submit-btn" id="submitBtn" onclick="submitOrder()">요청 접수하기</button>
-
-      <div class="result-box" id="resultBox">
+      <!-- ===== 결과 뷰 ===== -->
+      <div id="resultView" style="display:none;">
         <p style="font-size:14px;color:var(--sub);margin-bottom:12px;">아래 내용을 복사해서 오픈챗에 원본 파일과 함께 보내주세요.</p>
         <div class="copy-area" id="copyArea"></div>
         <div class="result-btns">
@@ -967,6 +971,7 @@ footer{
           <a href="https://open.kakao.com/o/sLyIquni" target="_blank" class="kakao-btn"><i class="fa-solid fa-comment"></i> 오픈챗으로 디자인 요청하기</a>
         </div>
       </div>
+
     </div>
   </div>
 </div>
@@ -1007,44 +1012,38 @@ function renderCards(){
   document.getElementById('emptyState').classList.toggle('show',v===0);
 }
 
-function openModal(code,type,title,mockup=false){
+
+function openModal(code, type, title, mockup=false){
   selCode=code; selType=type;
-  const el=document.getElementById('selectedCode');
-  if(code){el.style.display='inline-block';el.textContent=code+(title?' · '+title:'');}
-  else{el.style.display='none';}
+  document.getElementById('inputView').style.display='block';
+  document.getElementById('resultView').style.display='none';
+  document.getElementById('modalSub').textContent='번호 확인 후 오픈챗으로 자료 파일과 함께 보내주세요.';
+  const codeEl=document.getElementById('selectedCode');
+  if(code){codeEl.style.display='inline-block';codeEl.textContent=code+(title?' · '+title:'');}
+  else{codeEl.style.display='none';}
   document.getElementById('printWarn').classList.toggle('show',type==='print');
-  document.getElementById('resultBox').style.display='none';
   document.getElementById('m-mockup').checked=mockup;
   toggleMockup();
-
-  // localStorage 저장값 복원 (반복입력 방지)
   const saved=JSON.parse(localStorage.getItem('jphic_modal')||'{}');
   document.getElementById('m-name').value=saved.name||'';
   document.getElementById('m-phone').value=saved.phone||'';
   document.getElementById('m-printer').value=saved.printer||'';
-  document.getElementById('m-memo').value=''; // 메모는 매번 새로
-
-  // 폼 요소 복원 (이전 접수 후 숨김 상태 복구)
-  document.querySelectorAll('.modal-body .f-label,.modal-body .f-input,.modal-body .f-textarea,#submitBtn').forEach(el=>el.style.display='');
-  document.querySelectorAll('.modal-body div[style*="display:none"]').forEach(el=>el.style.removeProperty('display'));
-  document.getElementById('selectedCode').style.display=code?'inline-block':'none';
-  document.querySelector('.modal-sub').textContent='번호 확인 후 오픈챗으로 원본 파일과 함께 보내주세요.';
-
+  document.getElementById('m-memo').value='';
   document.getElementById('orderModal').classList.add('open');
   document.body.style.overflow='hidden';
 }
-
 function toggleMockup(){
-  const checked=document.getElementById('m-mockup').checked;
-  document.getElementById('mockupLabel').style.borderColor=checked?'var(--mc)':'var(--line)';
-  document.getElementById('mockupLabel').style.background=checked?'var(--mc-light)':'transparent';
+  const c=document.getElementById('m-mockup').checked;
+  document.getElementById('mockupLabel').style.borderColor=c?'var(--mc)':'var(--line)';
+  document.getElementById('mockupLabel').style.background=c?'var(--mc-light)':'transparent';
 }
 function closeModal(){
   document.getElementById('orderModal').classList.remove('open');
   document.body.style.overflow='';
 }
-document.getElementById('orderModal').addEventListener('click',e=>{if(e.target===document.getElementById('orderModal'))closeModal();});
-
+document.getElementById('orderModal').addEventListener('click',e=>{
+  if(e.target===document.getElementById('orderModal'))closeModal();
+});
 async function submitOrder(){
   const name=document.getElementById('m-name').value||'미입력';
   const phone=document.getElementById('m-phone').value||'미입력';
@@ -1052,20 +1051,12 @@ async function submitOrder(){
   const memo=document.getElementById('m-memo').value||'없음';
   const mockup=document.getElementById('m-mockup').checked;
   const code=selCode||'직접 문의';
-
-  // 성함·연락처·발주처 저장 (다음 방문 시 자동 복원)
   localStorage.setItem('jphic_modal',JSON.stringify({name,phone,printer}));
   const txt=`📋 JPHIC PDF 디자인 요청\n템플릿 번호: ${code}\n성함: ${name}\n연락처: ${phone}\n발주처: ${printer}\n설치 목업 시뮬: ${mockup?'✅ 요청':'없음'}\n요청사항: ${memo}\n\n※ 원본 파일을 오픈챗에 함께 올려주세요!`;
   document.getElementById('copyArea').textContent=txt;
-
-  // 입력폼 숨기고 결과만 표시
-  document.getElementById('selectedCode').style.display='none';
-  document.getElementById('printWarn').classList.remove('show');
-  document.querySelectorAll('.modal-body .f-label, .modal-body .f-input, .modal-body .f-textarea, #submitBtn').forEach(el=>el.style.display='none');
-  document.querySelectorAll('.modal-body div[style*="flex"]').forEach(el=>el.style.display='none');
-  document.getElementById('resultBox').style.display='block';
-  document.querySelector('.modal-sub').textContent='접수 완료. 아래 내용을 복사해서 오픈챗에 보내주세요.';
-
+  document.getElementById('inputView').style.display='none';
+  document.getElementById('resultView').style.display='block';
+  document.getElementById('modalSub').textContent='접수 완료. 아래 내용을 복사해서 오픈챗에 보내주세요.';
   try{
     await fetch('https://script.google.com/macros/s/AKfycbzC2AzSg-3y2hRQnVOqpVzWCapcVTuIsPIN5Z-nrrnMSMzUS10TOclaVAyBz7qJVIEZ/exec',{
       method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
@@ -1075,7 +1066,11 @@ async function submitOrder(){
 }
 function copyResult(){
   const t=document.getElementById('copyArea').textContent;
-  navigator.clipboard.writeText(t).catch(()=>{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);});
+  navigator.clipboard.writeText(t).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=t;
+    document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+  });
 }
 
 // 헤더 스크롤 블러 — 최초 로드 시 적용 + 스크롤 유지
