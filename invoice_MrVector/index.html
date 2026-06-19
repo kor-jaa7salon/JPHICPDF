@@ -238,10 +238,16 @@
         async function handleVectorSubmit(e) {
             e.preventDefault();
             if (!selectedLogoType) { alert("진단할 이미지 형태를 선택해주세요!"); return; }
+                        if (!document.getElementById('privacyAgree')?.checked) {
+              alert("개인정보 수집·이용 동의가 필요합니다.");
+              return;
+            }
 
             const name = document.getElementById('userName').value;
             const email = document.getElementById('userEmail').value;
             const phone = document.getElementById('userPhone').value;
+            const privacyConsent = document.getElementById('privacyAgree')?.checked || false;
+const marketingConsent = document.getElementById('marketingConsent')?.checked || false;
 
             document.getElementById('loading').style.display = 'flex';
             document.getElementById('submitBtn').disabled = true;
@@ -255,8 +261,10 @@
                 fileData: fileData ? fileData.base64 : null,
                 mimeType: fileData ? fileData.mimeType : null,
                 fileName: fileData ? fileData.fileName : null,
-                source: "Web_V2.5_PRO"
-            };
+                source: "Web_V2.5_PRO",
+                privacyConsent: privacyConsent,
+                marketingConsent: marketingConsent
+          };
 
             try {
                 // 앱스크립트에서 인식하기 가장 안전한 text/plain 방식으로 페이로드를 전송합니다.
