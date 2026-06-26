@@ -1,4 +1,4 @@
-<!-- 260609 1645 -->
+<!-- 260620 1530 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -344,6 +344,11 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
   box-shadow:0 0 0 1px var(--accent),0 4px 16px var(--accent-glow);
 }
 .tier .nm{font-size:13px;font-weight:700;letter-spacing:.15em;color:var(--ink);display:flex;align-items:center}
+.tier .t-name{font-size:15.5px;font-weight:700;color:var(--ink);line-height:1.35}
+.tier .t-ea{display:block;font-size:12px;font-weight:500;color:var(--ink-mute);margin-top:3px}
+.tier .t-en{font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--ink-mute);margin-top:8px;text-transform:uppercase}
+.tier .t-price{font-size:14px;font-weight:700;color:var(--accent-deep);margin-top:6px}
+.tier .t-price span{font-size:11px;font-weight:400;color:var(--ink-faint)}
 .tier .pr{font-size:18px;font-weight:700;margin-top:6px;font-variant-numeric:tabular-nums;color:var(--ink)}
 .tier .pr-sub{font-size:13px;color:var(--ink-mute);font-weight:400}
 .tier .vat-note{font-size:11px;color:var(--ink-faint);font-weight:400}
@@ -358,6 +363,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 
 /* ============ CLIENT INFO ============ */
 .client-area{display:flex;flex-direction:column;gap:14px}
+.receipt-area{display:flex;flex-direction:column;gap:14px}
 .doc-uploads{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
 @media (max-width:560px){.doc-uploads{grid-template-columns:1fr}}
 .doc-upload-label{
@@ -390,6 +396,13 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 .upload-slot.has-image .drop-square img{
   display:block;width:100%;height:100%;object-fit:contain;background:#fff;
 }
+/* PDF 첨부: 미리보기 대신 파일 표시 */
+.upload-slot.has-file .drop-square{
+  border-style:solid;border-color:var(--accent);background:var(--accent-soft);
+}
+.upload-slot.has-file .drop-square .plus{color:var(--accent);font-size:20px;font-weight:700}
+.upload-slot.has-file .drop-square .lbl{color:var(--accent-deep);font-weight:600;
+  word-break:break-all;line-height:1.3;}
 .ocr-raw{
   margin-top:8px;font-size:12px;color:var(--ink-soft);
   background:var(--accent-soft);border-left:2px solid var(--accent);
@@ -416,6 +429,42 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media (max-width:560px){.form-grid{grid-template-columns:1fr}}
+.form-grid.grid-3{grid-template-columns:repeat(3,1fr)}
+@media (max-width:560px){.form-grid.grid-3{grid-template-columns:1fr}}
+
+/* 영수증 발행 2카드 */
+.receipt-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.receipt-cards{grid-template-columns:1fr}}
+.receipt-card{
+  position:relative;background:var(--card-soft);
+  border:1.5px solid var(--border);border-radius:var(--r-md);
+  padding:18px 18px 16px;cursor:pointer;transition:.15s;
+  display:flex;flex-direction:column;gap:12px;
+}
+.receipt-card:hover{border-color:var(--ink-mute);background:var(--card)}
+.receipt-card.selected{
+  border-color:var(--accent);background:var(--accent-soft);
+  box-shadow:0 0 0 1px var(--accent),0 4px 16px var(--accent-glow);
+}
+.rc-head{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--ink)}
+.rc-radio{
+  width:18px;height:18px;border-radius:50%;flex-shrink:0;
+  border:2px solid var(--border-strong);transition:.15s;
+}
+.receipt-card.selected .rc-radio{
+  border-color:var(--accent);
+  background:radial-gradient(circle,var(--accent) 42%,transparent 46%);
+}
+.rc-input{
+  width:100%;background:var(--card);border:1px solid var(--border);
+  font-family:inherit;font-size:15px;color:var(--ink);
+  padding:11px 13px;border-radius:var(--r-md);transition:.12s;
+}
+.rc-input:focus{outline:none;border-color:var(--accent)}
+.rc-input:disabled{background:var(--card-deep);opacity:.45;cursor:not-allowed}
+.rc-hint{font-size:11.5px;color:var(--ink-mute);line-height:1.4}
+.rc-later{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);cursor:pointer;margin-top:-4px}
+.rc-later input{width:14px;height:14px;accent-color:var(--accent);cursor:pointer}
 .field{display:flex;flex-direction:column;gap:5px}
 .field.full{grid-column:1/-1}
 .field label{font-size:12px;color:var(--ink-mute);font-weight:500;letter-spacing:.02em}
@@ -585,6 +634,22 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 .submit-hint{font-size:12px;color:var(--ink-mute);margin-top:10px;font-weight:400}
 .submit-hint a{color:var(--accent-deep);text-decoration:none;font-weight:500}
 
+/* 개인정보 동의 */
+.consent-area{
+  margin-bottom:18px;
+  text-align:left;display:flex;flex-direction:column;gap:8px;
+}
+.consent-row{
+  display:flex;align-items:flex-start;gap:8px;
+  font-size:13px;color:var(--ink-soft);line-height:1.5;
+}
+.consent-row input[type="checkbox"]{
+  width:16px;height:16px;accent-color:var(--accent);
+  margin-top:1px;flex-shrink:0;cursor:pointer;
+}
+.consent-row .req{color:var(--danger);font-weight:600}
+.consent-row a{color:var(--accent-deep);text-decoration:underline}
+
 /* 푸터 */
 .page-footer{
   margin-top:40px;padding:24px 16px 32px;
@@ -706,37 +771,35 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 
     </div>
     <div class="tiers" id="tiers">
-      <label class="tier" data-tier="Cutting line + Vector" data-price="49000">
+      <label class="tier" data-tier="Cutting line + Vector" data-price="9900">
         <input type="radio" name="tier" value="Cutting line + Vector">
-        <div class="nm">Cutting line + Vector</div>
-        <div class="pr">19,900<span class="pr-sub">원~ <span class="vat-note">(VAT 포함)</span></span></div>
-        <div class="ds">AI로 생성한 이미지를 벡터화 파일로 <br>(수정2회)</div>
+        <div class="t-name">AI 이미지 벡터화 + 칼선 + 배경제거 <span class="t-ea">(1개당)</span></div>
+        <div class="t-en">Cutting line + Vector</div>
+        <div class="t-price">9,900<span>원~ · VAT 포함</span></div>
       </label>
       <label class="tier" data-tier="for PRINT" data-price="69000">
         <input type="radio" name="tier" value="for PRINT">
-        <div class="nm">for PRINT</div>
-        <div class="pr">69,000<span class="pr-sub">원~ <span class="vat-note">(VAT 포함)</span></span></div>
-        <div class="ds">리사이징·레이아웃·목업·다중 컴포지션<br>(수정2회)</div>
+        <div class="t-name">다중작업 <span class="t-ea">리사이징·레이아웃·목업</span></div>
+        <div class="t-en">for PRINT</div>
+        <div class="t-price">69,000<span>원~ · VAT 포함</span></div>
       </label>
       <label class="tier" data-tier="for Branding" data-price="0">
         <input type="radio" name="tier" value="for Branding">
-        <div class="nm">for Branding</div>
-        <div class="pr"><span style="font-size:18px">견적문의</span></div>
-        <div class="ds">브랜드 통합 디자인 · <strong>기초 자산화</strong></div>
+        <div class="t-name">브랜드 통합 디자인 <span class="t-ea">기초 자산화</span></div>
+        <div class="t-en">for Branding</div>
+        <div class="t-price">견적문의</div>
       </label>
     </div>
   </section>
 
+  <!-- ============ 04 담당자 연락처 ============ -->
   <section class="step" id="step4">
     <div class="step-head">
       <span class="step-num">04</span>
-      <div class="step-title">연락처 <span style="font-size:13px;color:var(--ink-mute);font-weight:400;letter-spacing:0">· (*) 필수 항목 입력</span></div>
+      <div class="step-title">담당자 연락처 <span style="font-size:13px;color:var(--ink-mute);font-weight:400;letter-spacing:0">· (*) 필수 항목 입력</span></div>
     </div>
     <div class="client-area">
-
-
-
-      <div class="form-grid">
+      <div class="form-grid grid-3">
         <div class="field">
           <label>담당자명 <span class="req">*</span></label>
           <input type="text" id="name" placeholder="이름">
@@ -745,33 +808,95 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
           <label>연락처 <span class="req">*</span></label>
           <input type="tel" id="phone" placeholder="010-0000-0000">
         </div>
-        <div class="field full">
+        <div class="field">
           <label>이메일 <span class="req">*</span></label>
           <input type="email" id="email" placeholder="email@example.com">
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 세금계산서 정보 ============ -->
+  <section class="step" id="step5">
+    <div class="step-head">
+      <span class="step-num">05</span>
+      <div class="step-title">세금계산서 정보 <span style="font-size:13px;color:var(--ink-mute);font-weight:400;letter-spacing:0">· 선택 · 세금계산서 발행 시 입력</span></div>
+      <span class="auto-badge" id="badge5"><span class="dot"></span>인식 대기</span>
+    </div>
+    <div class="client-area">
+
+      <div class="doc-upload-label">
+        사업자등록증 첨부
+        <span class="hint">필요한 부분만 촬영 시 정확도↑ · jpg·png 자동입력 / pdf 첨부</span>
+        <span class="opt">(선택)</span>
+      </div>
+      <div class="upload-slot" id="bizLicSlot">
+        <label class="drop-square" id="bizLicDrop">
+          <input type="file" id="bizLicInput" accept=".jpg,.jpeg,.png,.pdf">
+          <div class="plus">+</div>
+          <div class="lbl">사업자등록증</div>
+          <img id="bizLicImg" alt="">
+        </label>
+      </div>
+      <div class="ocr-raw" id="bizLicRaw"><div class="label">OCR 인식 결과</div><span id="bizLicRawText"></span></div>
+
+      <div style="font-size:12.5px;color:var(--ink-mute);line-height:1.6;margin-top:4px">
+        추출된 텍스트를 복사해 아래 칸에 붙여넣어 사용하세요. <strong style="color:var(--ink-soft)">값은 수정 가능 · 원본대조 필수</strong>
+      </div>
+
+      <div class="form-grid grid-3" style="margin-top:6px">
         <div class="field">
-          <label>회사명 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
+          <label>회사명 <span class="opt" style="color:var(--ink-faint);font-weight:400">(선택)</span><span class="auto-marker" id="m-companyName" style="display:none">자동</span></label>
           <input type="text" id="companyName" placeholder="회사명">
         </div>
         <div class="field">
-          <label>사업자등록번호 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
+          <label>사업자등록번호 <span class="opt" style="color:var(--ink-faint);font-weight:400">(선택)</span><span class="auto-marker" id="m-bizNo" style="display:none">자동</span></label>
           <input type="text" id="bizNo" placeholder="000-00-00000">
         </div>
         <div class="field">
-          <label>대표자 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
+          <label>대표자 <span class="opt" style="color:var(--ink-faint);font-weight:400">(선택)</span><span class="auto-marker" id="m-representative" style="display:none">자동</span></label>
           <input type="text" id="representative" placeholder="대표자">
         </div>
-        <div class="field full">
-          <label>사업장 소재지 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
+      </div>
+      <div class="form-grid" style="margin-top:10px;grid-template-columns:1fr">
+        <div class="field">
+          <label>사업장 소재지 <span class="opt" style="color:var(--ink-faint);font-weight:400">(선택)</span><span class="auto-marker" id="m-address" style="display:none">자동</span></label>
           <input type="text" id="address" placeholder="주소">
         </div>
+      </div>
+      <div class="form-grid" style="margin-top:10px">
         <div class="field">
-          <label>업태 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
+          <label>업태 <span class="opt" style="color:var(--ink-faint);font-weight:400">(선택)</span><span class="auto-marker" id="m-businessType" style="display:none">자동</span></label>
           <input type="text" id="businessType" placeholder="업태">
         </div>
         <div class="field">
-          <label>종목 (업종) <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택)</span></label>
+          <label>종목 (업종) <span class="opt" style="color:var(--ink-faint);font-weight:400">(선택)</span><span class="auto-marker" id="m-item" style="display:none">자동</span></label>
           <input type="text" id="item" placeholder="종목">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 영수증 발행 방법 ============ -->
+  <section class="step" id="step6">
+    <div class="step-head">
+      <span class="step-num">06</span>
+      <div class="step-title">영수증 발행 방법 <span style="font-size:13px;color:var(--ink-mute);font-weight:400;letter-spacing:0">· 둘 중 하나만 선택</span></div>
+    </div>
+    <div class="receipt-area">
+      <div class="receipt-cards">
+        <div class="receipt-card" data-rc="cash">
+          <input type="radio" name="receipt" value="cash" hidden>
+          <div class="rc-head"><span class="rc-radio"></span>현금영수증</div>
+          <input type="tel" id="cashReceiptNo" class="rc-input" placeholder="010-0000-0000" disabled>
+          <div class="rc-hint">04 연락처 자동입력 · 수정 가능</div>
+        </div>
+        <div class="receipt-card" data-rc="tax">
+          <input type="radio" name="receipt" value="tax" hidden>
+          <div class="rc-head"><span class="rc-radio"></span>세금계산서</div>
+          <input type="email" id="taxInvoiceEmail" class="rc-input" placeholder="email@example.com" disabled>
+          <label class="rc-later"><input type="checkbox" id="taxLater"> 이메일 추후 전달 (미정·확인필요)</label>
+          <div class="rc-hint">수신 이메일 입력</div>
         </div>
       </div>
     </div>
@@ -839,16 +964,26 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
   </div>
 
   <div class="submit-area">
-    <button class="submit" id="submitBtn" disabled>작업 요청 보내기</button>
-    <div class="submit-hint">
-      예상견적서를 이메일로 보내드립니다. 영업일 1일 이내 회신드립니다. 감사합니다.
+    <div class="consent-area">
+      <label class="consent-row">
+        <input type="checkbox" id="consentPrivacy">
+        <span><span class="req">[필수]</span> 견적 회신을 위한 개인정보 수집·이용에 동의합니다. (<a href="/privacy" target="_blank">개인정보처리방침</a>)</span>
+      </label>
+      <label class="consent-row">
+        <input type="checkbox" id="consentMarketing">
+        <span>[선택] 이벤트·신규 서비스 안내 수신에 동의합니다.</span>
+      </label>
     </div>
+
+    <button class="submit" id="submitBtn" disabled>작업 요청 보내기</button>
   </div>
 
   <footer class="page-footer">
     <div class="ft-brand">JPHIC UNIVERSE</div>
     <div class="ft-line">
       <a href="https://open.kakao.com/o/sLyIquni" target="_blank">오픈챗 문의</a>
+      <span class="sep">|</span>
+      <a href="/privacy" target="_blank">개인정보처리방침</a>
     </div>
   </footer>
 
@@ -869,57 +1004,26 @@ const state = {
   selectedTier: null,
   selectedPrice: 0,
   deadline: '',
-  notesImage: null,
-  notesOcrText: '',
-  cardImage: null,
-  cardOcrText: '',
-  bizLicImage: null,
+  bizLicBase64: null,
   bizLicOcrText: '',
-  docNo: '',
-  cardAddress: '',
-  bizAddress: ''
+  receiptType: '',
+  docNo: ''
 };
 
 const $ = (id) => document.getElementById(id);
 
-/* ============ FORM INTEGRITY VALIDATION ============ */
-function validateRequiredFields() {
-  const fields = ['name', 'phone', 'email'];
-  let isValid = true;
-
-  document.querySelectorAll('.field input').forEach(el => {
-    el.style.border = '';
-    el.style.backgroundColor = '';
-  });
-
-  fields.forEach(id => {
-    const el = $(id);
-    if (!el) return;
-    if (!el.value.trim()) {
-      el.style.border = '2px solid #FF4D4D';
-      el.style.backgroundColor = '#FFF5F5';
-      isValid = false;
-    }
-  });
-
-  const submitBtn = $('submitBtn');
-  if (submitBtn) {
-    submitBtn.disabled = !isValid;
-    submitBtn.style.opacity = isValid ? '1' : '0.4';
-    submitBtn.style.cursor = isValid ? 'pointer' : 'not-allowed';
-  }
-  return isValid;
-}
-
 /* ============ INIT META ============ */
 (function initMeta(){
   const d = new Date();
-  const docNo = `JPHIC-${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}-${Math.floor(Math.random()*9000+1000)}`;
+  // 견적번호 E63[십]C[일] · 화면 참고용(최종 발급은 GAS issueQuoteNo)
+  const seq = parseInt(localStorage.getItem('jphic_seq') || '0', 10) + 1;
+  state.seq = seq;
+  const docNo = makeQuoteNo(seq);
   $('docNo').textContent = docNo;
   $('docDate').textContent = `${d.getFullYear()}. ${pad(d.getMonth()+1)}. ${pad(d.getDate())}.`;
   state.docNo = docNo;
 
-  const ids = ['name', 'phone', 'email', 'bizNo', 'representative', 'address', 'businessType', 'item', 'notes'];
+  const ids = ['name', 'phone', 'email', 'companyName', 'bizNo', 'representative', 'address', 'businessType', 'item', 'notes'];
   ids.forEach(id => {
     const el = $(id);
     if (el) {
@@ -930,18 +1034,23 @@ function validateRequiredFields() {
     }
   });
 
-  const phoneEl = $('phone');
-  if (phoneEl) phoneEl.addEventListener('input', function() {
-    let v = this.value.replace(/[^0-9]/g, '');
-    if (v.startsWith('02')) {
-      v = v.length <= 9 ? v.replace(/^(02)([0-9]{1,3})([0-9]{0,4})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;})
-                        : v.replace(/^(02)([0-9]{4})([0-9]{0,4})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;});
-    } else {
-      v = v.length <= 10 ? v.replace(/^([0-9]{3})([0-9]{1,3})([0-9]{0,4})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;})
-                         : v.replace(/^([0-9]{3})([0-9]{4})([0-9]{0,4})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;});
-    }
-    this.value = v;
-  });
+  // 전화번호 포맷 (담당자 연락처 + 현금영수증 번호 공용)
+  function attachPhoneFormat(el){
+    if (!el) return;
+    el.addEventListener('input', function() {
+      let v = this.value.replace(/[^0-9]/g, '');
+      if (v.startsWith('02')) {
+        v = v.length <= 9 ? v.replace(/^(02)([0-9]{1,3})([0-9]{0,4})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;})
+                          : v.replace(/^(02)([0-9]{4})([0-9]{0,4})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;});
+      } else {
+        v = v.length <= 10 ? v.replace(/^([0-9]{3})([0-9]{1,3})([0-9]{0,4})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;})
+                           : v.replace(/^([0-9]{3})([0-9]{4})([0-9]{0,4})$/, function(_,a,b,c){return c?a+'-'+b+'-'+c:a+'-'+b;});
+      }
+      this.value = v;
+    });
+  }
+  attachPhoneFormat($('phone'));
+  attachPhoneFormat($('cashReceiptNo'));
 
   const bizNoEl = $('bizNo');
   if (bizNoEl) bizNoEl.addEventListener('input', function() {
@@ -950,6 +1059,7 @@ function validateRequiredFields() {
     this.value = v;
   });
 
+  // localStorage 저장 (영수증·동의 필드는 제외)
   const saveFields = ['name','companyName','phone','email','bizNo','representative','address','businessType','item'];
   saveFields.forEach(function(id) {
     const el = $(id);
@@ -960,9 +1070,7 @@ function validateRequiredFields() {
   });
 
   const printBtn = $('printBtn');
-  if (printBtn) printBtn.addEventListener('click', () => {
-    window.print();
-  });
+  if (printBtn) printBtn.addEventListener('click', () => window.print());
 
   document.querySelectorAll('input[name="deadline"]').forEach(r => {
     r.addEventListener('change', () => {
@@ -982,6 +1090,11 @@ function validateRequiredFields() {
     updateDocument();
   });
 
+  // 동의 체크 → 전송버튼 활성 재평가
+  ['consentPrivacy'].forEach(id => {
+    const el = $(id);
+    if (el) el.addEventListener('change', updateDocument);
+  });
 })();
 
 /* ============ DROPZONE HELPER ============ */
@@ -1005,7 +1118,6 @@ setupDrop($('drop1'), $('fileInput'), async (files) => {
     state.files.push(f);
     const dataUrl = await fileToDataUrl(f);
     const b64 = dataUrl.split(',')[1];
-    if (!state.filesBase64) state.filesBase64 = [];
     state.filesBase64.push({ name: f.name, type: f.type, data: b64 });
   }
   renderFiles();
@@ -1046,7 +1158,7 @@ function renderFiles() {
 }
 window.removeFile = (i) => {
   state.files.splice(i, 1);
-  if (state.filesBase64) state.filesBase64.splice(i, 1);
+  state.filesBase64.splice(i, 1);
   renderFiles();
   analyzeFiles();
 };
@@ -1077,9 +1189,7 @@ $('notes').addEventListener('input', () => {
 
 /* ============ STEP 3: TIER ============ */
 document.querySelectorAll('.tier').forEach(el => {
-  el.addEventListener('click', () => {
-    selectTier(el.dataset.tier, true);
-  });
+  el.addEventListener('click', () => selectTier(el.dataset.tier, true));
 });
 
 function selectTier(tierName, manual) {
@@ -1092,26 +1202,18 @@ function selectTier(tierName, manual) {
     state.selectedTier = tierName;
     state.selectedPrice = parseInt(String(tierEl.dataset.price).replace(/,/g,''), 10) || 0;
     $('step3').classList.add('done');
-    if (!manual) {
-      const badge = $('badge3');
-      if (badge) { badge.classList.add('show'); badge.querySelector('.dot').nextSibling.textContent = ` ${tierName} 자동 추천`; }
-    }
     updateDocument();
   }
 }
 
 function autoSelectTier() {
-  const notesText = ($('notes').value + ' ' + state.notesOcrText).toLowerCase();
-  const textLength = ($('notes').value + state.notesOcrText).length;
-
+  const textLength = $('notes').value.length;
   if (state.files.length === 0 && textLength === 0) {
     state.detectedTier = null;
     updateRec();
     return;
   }
-
-  const totalSize = state.files.reduce((s,f) => s+f.size, 0);
-  const totalMB = totalSize / 1024 / 1024;
+  const totalMB = state.files.reduce((s,f) => s+f.size, 0) / 1024 / 1024;
   const types = [...new Set(state.files.map(f => extOf(f.name)))];
   let score = state.files.length * 1.5 + totalMB * 0.5 + textLength * 0.02;
   types.forEach(t => {
@@ -1122,46 +1224,22 @@ function autoSelectTier() {
   state.detectedScore = score;
   state.detectedTier = score < 8 ? 'Cutting line + Vector' : score < 25 ? 'for PRINT' : 'for Branding';
   updateRec();
-  if (!state.selectedTier) {
-    selectTier(state.detectedTier, false);
-  }
+  if (!state.selectedTier) selectTier(state.detectedTier, false);
 }
 
 function updateRec() {
-  document.querySelectorAll('.tier').forEach(el => {
-    const existing = el.querySelector('.rec');
-    if (existing) existing.remove();
-    if (el.dataset.tier === state.detectedTier) {
-      const span = document.createElement('span');
-      span.className = 'rec'; span.textContent = '추천';
-      el.appendChild(span);
-    }
-  });
+  // 추천 뱃지 미표시 (문맥상 제거)
+  document.querySelectorAll('.tier .rec').forEach(e => e.remove());
 }
 
-function parseBusinessCard(text) {
-  const phone = text.match(/0?1[0-9][-. ]?\d{3,4}[-. ]?\d{4}/) || text.match(/0\d{1,2}[-. ]\d{3,4}[-. ]\d{4}/);
-  const email = text.match(/[\w.+-]+@[\w-]+\.[\w.-]+/);
-  const lines = text.split('\n').map(l => l.trim()).filter(l => l && l.length > 1 && l.length < 50);
-  const company = lines.find(l => /\(주\)|주식회사|\(유\)|유한회사|\(사\)|사단법인/.test(l));
-  const person = lines.find(l => /^[가-힣\s]{2,6}$/.test(l) && l.replace(/\s/g,'').length >= 2);
-  const name = company || person || lines[0] || '';
-  const addrMatch = text.match(/(?:서울시|서울지직|경기도|인천시|부산시|대구시|대전시|광주시|울산시|세종시|충북|충남|전북|전남|경북|경남|제주).+?[로길번지]\s*[0-9-]+/);
-  return {
-    name: name.replace(/\s+/g,' ').trim(),
-    phone: phone?.[0]?.replace(/[. ]/g,'-'),
-    email: email?.[0],
-    address: addrMatch ? addrMatch[0].trim() : ''
-  };
-}
-
+/* ============ STEP 5: 사업자등록증 OCR ============ */
 function parseBusinessLicense(text) {
   const grab = (re) => {
     const m = text.match(re);
     return m?.[1]?.trim().replace(/\s{2,}/g,' ');
   };
   return {
-    name: grab(/상\s*호\s*\(?[법인명]*\)?\s*[:：]\s*([^\n]+)/),
+    companyName: grab(/상\s*호\s*\(?[법인명]*\)?\s*[:：]\s*([^\n]+)/),
     representative: grab(/(?:대\s*표\s*자|성\s*명)\s*[:：]\s*([^\n,]+)/),
     bizNo: (text.match(/(\d{3}\s*-\s*\d{2}\s*-\s*\d{5})/)?.[1] || '').replace(/\s/g,''),
     address: grab(/(?:사업장\s*소재지|소\s*재\s*지|주\s*소)\s*[:：]\s*([^\n]+)/),
@@ -1170,43 +1248,21 @@ function parseBusinessLicense(text) {
   };
 }
 
-function processAddressMatching() {
-  const addrEl = $('address');
-  if (!addrEl) return;
-  if (state.cardAddress && state.bizAddress) {
-    const cleanCard = state.cardAddress.replace(/\s+/g, '').trim();
-    const cleanBiz = state.bizAddress.replace(/\s+/g, '').trim();
-    if (cleanCard === cleanBiz) {
-      addrEl.value = state.bizAddress;
-      $('m-address').style.display = 'inline-block';
-    } else {
-      addrEl.value = '';
-      if ($('m-address')) $('m-address').style.display = 'none';
-    }
-  } else {
-    const fallbackAddr = state.bizAddress || state.cardAddress || '';
-    if (fallbackAddr) {
-      addrEl.value = fallbackAddr;
-      $('m-address').style.display = 'inline-block';
-    }
-  }
-  updateDocument();
-}
-
-function autoFill(data) {
-  ['name','phone','email','bizNo','representative','businessType','item'].forEach(key => {
-    if (!data[key]) return;
-    const el = $(key);
-    if (!el || el.value.trim()) return; 
-    el.value = data[key];
+function autoFillBizLic(data) {
+  Object.entries(data).forEach(([id, val]) => {
+    if (!val) return;
+    const el = $(id);
+    if (!el || el.value.trim()) return; // 이미 입력된 값은 덮어쓰지 않음
+    el.value = val;
     el.classList.add('auto-filled');
-    if ($('m-' + key)) $('m-' + key).style.display = 'inline-block';
+    const m = $('m-' + id);
+    if (m) m.style.display = 'inline-block';
     setTimeout(() => el.classList.remove('auto-filled'), 1500);
   });
   updateDocument();
 }
 
-/* ============ OCR (Tesseract.js 동적 로드) ============ */
+/* OCR (Tesseract.js 동적 로드 — 이미지 전용) */
 let _tesseractMod = null;
 async function ocrImage(file) {
   if (!_tesseractMod) {
@@ -1216,6 +1272,91 @@ async function ocrImage(file) {
   const result = await T.recognize(file, 'kor+eng', { logger: () => {} });
   return result.data.text;
 }
+
+setupDrop($('bizLicDrop'), $('bizLicInput'), async (files) => {
+  const f = files[0];
+  if (!f) return;
+  const slot = $('bizLicSlot');
+  const drop = $('bizLicDrop');
+  const raw = $('bizLicRaw');
+  const rawText = $('bizLicRawText');
+  const badge = $('badge5');
+  const isImg = /^image\//i.test(f.type);
+
+  // 전송용 base64 저장
+  const dataUrl = await fileToDataUrl(f);
+  state.bizLicBase64 = { name: f.name, type: f.type, data: dataUrl.split(',')[1] };
+
+  slot.classList.remove('has-image','has-file');
+
+  if (isImg) {
+    // 미리보기
+    $('bizLicImg').src = dataUrl;
+    slot.classList.add('has-image');
+    // OCR
+    badge.classList.add('show','analyzing');
+    badge.querySelector('.dot').nextSibling.textContent = ' 인식 중...';
+    raw.classList.add('show');
+    rawText.textContent = '인식 중...';
+    try {
+      const text = await ocrImage(f);
+      state.bizLicOcrText = text;
+      rawText.textContent = text || '(인식된 텍스트 없음)';
+      autoFillBizLic(parseBusinessLicense(text));
+      badge.classList.remove('analyzing');
+      badge.querySelector('.dot').nextSibling.textContent = ' 자동 입력 완료';
+      $('step5').classList.add('done');
+    } catch (e) {
+      badge.classList.remove('show','analyzing');
+      rawText.textContent = '자동 인식 실패 — 아래 항목을 직접 입력해 주세요.';
+    }
+  } else {
+    // PDF 등: 첨부만, 자동입력 불가
+    slot.classList.add('has-file');
+    drop.querySelector('.plus').textContent = extOf(f.name).toUpperCase() || 'FILE';
+    drop.querySelector('.lbl').textContent = f.name;
+    raw.classList.add('show');
+    rawText.textContent = 'PDF는 첨부만 됩니다. 아래 항목을 직접 입력해 주세요.';
+    badge.classList.remove('analyzing');
+    badge.classList.add('show');
+    badge.querySelector('.dot').nextSibling.textContent = ' 첨부 완료';
+    $('step5').classList.add('done');
+  }
+});
+
+/* ============ STEP 6: 영수증 발행 방법 (2카드) ============ */
+document.querySelectorAll('.rc-input').forEach(i => i.addEventListener('click', e => e.stopPropagation()));
+(function(){
+  const later = document.getElementById('taxLater');
+  if (!later) return;
+  later.addEventListener('click', e => e.stopPropagation());
+  later.addEventListener('change', () => {
+    const t = $('taxInvoiceEmail');
+    if (later.checked) { t.value=''; t.disabled=true; t.placeholder='추후 전달'; }
+    else { t.disabled = state.receiptType !== 'tax'; t.placeholder='email@example.com'; }
+  });
+})();
+document.querySelectorAll('.receipt-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const v = card.dataset.rc;
+    state.receiptType = v;
+    card.querySelector('input[type=radio]').checked = true;
+    document.querySelectorAll('.receipt-card').forEach(c => {
+      const on = c.dataset.rc === v;
+      c.classList.toggle('selected', on);
+      const inp = c.querySelector('.rc-input');
+      if (inp) inp.disabled = !on;
+    });
+    $('step6').classList.add('done');
+    if (v === 'cash') {
+      const cash = $('cashReceiptNo');
+      if (cash && !cash.value.trim()) cash.value = $('phone').value.trim(); // 04 자동복사(수정 가능)
+      cash.focus();
+    } else {
+      $('taxInvoiceEmail').focus();
+    }
+  });
+});
 
 /* ============ DOCUMENT UPDATE ============ */
 function updateDocument() {
@@ -1273,7 +1414,10 @@ function updateDocument() {
     dlRow.style.display = 'none';
   }
 
-  const isReady = ['name','phone','email'].every(id => $(id) && $(id).value.trim());
+  // 필수 입력 + 개인정보 동의 → 전송 활성
+  const filled = ['name','phone','email'].every(id => $(id) && $(id).value.trim());
+  const agreed = $('consentPrivacy') && $('consentPrivacy').checked;
+  const isReady = filled && agreed;
   const btn = $('submitBtn');
   if (btn) {
     btn.disabled = !isReady;
@@ -1319,8 +1463,8 @@ $('submitBtn').addEventListener('click', async () => {
         if (!first) first = el;
       }
     });
-    if (first) { first.scrollIntoView({behavior:'smooth',block:'center'}); first.focus(); }
-    toast('필수 항목(이름·연락처·이메일)을 입력해 주세요.', true);
+    if (first) { first.scrollIntoView({behavior:'smooth',block:'center'}); first.focus(); toast('필수 항목(이름·연락처·이메일)을 입력해 주세요.', true); return; }
+    if (!$('consentPrivacy').checked) { toast('개인정보 수집·이용 동의가 필요합니다.', true); $('consentPrivacy').focus(); return; }
     return;
   }
 
@@ -1332,8 +1476,6 @@ $('submitBtn').addEventListener('click', async () => {
   const supply = isQuoteReq ? 0 : Math.round(grand / 1.1);
   const vat    = isQuoteReq ? 0 : grand - supply;
 
-  const finalAddress = $('address').value.trim();
-
   const payload = {
     timestamp: new Date().toISOString(),
     docNo: state.docNo,
@@ -1342,26 +1484,36 @@ $('submitBtn').addEventListener('click', async () => {
     vat: vat,
     grandTotal: grand,
     isQuoteRequest: isQuoteReq,
-    detectedTier: state.detectedTier, 
+    detectedTier: state.detectedTier,
     detectedScore: state.detectedScore,
     fileCount: state.files.length,
     totalSize: state.files.reduce((s,f) => s+f.size, 0),
     fileNames: state.files.map(f => f.name).join(' | '),
     fileTypes: [...new Set(state.files.map(f => extOf(f.name)))].join(','),
-    companyName: $('companyName').value.trim(),
-    representative: $('representative').value.trim(),
+    name: $('name').value.trim(),
     phone: $('phone').value.trim(),
     email: $('email').value.trim(),
+    companyName: $('companyName').value.trim(),
+    representative: $('representative').value.trim(),
     bizNo: $('bizNo').value.trim(),
-    address: finalAddress,
+    address: $('address').value.trim(),
     businessType: $('businessType').value.trim(),
     item: $('item').value.trim(),
-    name: $('name').value.trim(),
     notes: $('notes').value.trim(),
     deadline: state.deadline || '',
-    cardOcrText: '',
-    bizLicOcrText: '',
-    notesOcrText: '',
+    // 영수증 발행 (선택 유형만 전송)
+    receiptType: state.receiptType || '',
+    cashReceiptNo: state.receiptType === 'cash' ? $('cashReceiptNo').value.trim() : '',
+    taxInvoiceEmail: state.receiptType === 'tax'
+      ? (($('taxLater') && $('taxLater').checked) ? '추후' : ($('taxInvoiceEmail').value.trim() || '추후'))
+      : '',
+    // 동의
+    consentPrivacy: $('consentPrivacy').checked ? 'Y' : 'N',
+    consentMarketing: $('consentMarketing').checked ? 'Y' : 'N',
+    consentAt: new Date().toISOString(),
+    // 첨부
+    bizLicOcrText: state.bizLicOcrText || '',
+    bizLicFile: state.bizLicBase64 || null,
     referrer: document.referrer || 'direct',
     filesBase64: state.filesBase64 || [],
   };
@@ -1374,11 +1526,11 @@ $('submitBtn').addEventListener('click', async () => {
       mode: 'no-cors',
     });
     gtag('event','quote_submit',{tier:payload.tier,price:payload.estimatedPrice});
+    localStorage.setItem('jphic_seq', String(state.seq)); // 화면 참고번호 증가
     toast('견적 요청이 전송되었습니다. 곧 연락드릴게요.');
     setTimeout(() => location.reload(), 2400);
   } catch (err) {
     toast('전송 실패. 잠시 후 다시 시도해주세요.', true);
-    validateRequiredFields();
     $('submitBtn').disabled = false;
     $('submitBtn').textContent = '작업 요청 보내기';
   }
@@ -1386,17 +1538,16 @@ $('submitBtn').addEventListener('click', async () => {
 
 /* ============ REFRESH ============ */
 $('btnRefresh').addEventListener('click', () => {
-  if (confirm('모든 입력 내용을 초기화하시겠습니까?')) {
-    location.reload();
-  }
+  if (confirm('모든 입력 내용을 초기화하시겠습니까?')) location.reload();
 });
 
 /* ============ UTIL ============ */
 function pad(n){return String(n).padStart(2,'0')}
-function fmtSize(b){
-  if (b<1024) return b+'B';
-  if (b<1048576) return (b/1024).toFixed(1)+'KB';
-  return (b/1048576).toFixed(1)+'MB';
+function makeQuoteNo(n){
+  // E63[십]C[일] · E6=26년, 3=고정, C블록(99 차면 D)
+  const alpha = String.fromCharCode(67 + Math.floor((n-1)/99));
+  const w = ((n-1)%99)+1;
+  return 'E63' + Math.floor(w/10) + alpha + (w%10);
 }
 function extOf(name){return (name.split('.').pop()||'').toLowerCase()}
 function escapeHtml(s){
