@@ -1,4 +1,4 @@
-<!-- 260620 1530 -->
+<!-- 260626 1955 CTA버튼 활성_필수미체크 알림 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -649,6 +649,11 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
 }
 .consent-row .req{color:var(--danger);font-weight:600}
 .consent-row a{color:var(--accent-deep);text-decoration:underline}
+.consent-row.consent-warn{color:var(--danger);font-weight:600}
+.consent-row.consent-warn a{color:var(--danger)}
+.consent-row.consent-warn input{outline:2px solid var(--danger);outline-offset:2px}
+.consent-row.consent-warn{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
 
 /* 푸터 */
 .page-footer{
@@ -975,7 +980,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color
       </label>
     </div>
 
-    <button class="submit" id="submitBtn" disabled>작업 요청 보내기</button>
+    <button class="submit" id="submitBtn">작업 요청 보내기</button>
   </div>
 
   <footer class="page-footer">
@@ -1414,16 +1419,7 @@ function updateDocument() {
     dlRow.style.display = 'none';
   }
 
-  // 필수 입력 + 개인정보 동의 → 전송 활성
-  const filled = ['name','phone','email'].every(id => $(id) && $(id).value.trim());
-  const agreed = $('consentPrivacy') && $('consentPrivacy').checked;
-  const isReady = filled && agreed;
-  const btn = $('submitBtn');
-  if (btn) {
-    btn.disabled = !isReady;
-    btn.style.opacity = isReady ? '1' : '0.4';
-    btn.style.cursor = isReady ? 'pointer' : 'not-allowed';
-  }
+  // 버튼은 항상 활성 — 미충족 검증은 클릭 시 안내
 }
 
 function setParty(id, val) {
@@ -1451,23 +1447,30 @@ function tierDescription(t) {
 
 /* ============ SUBMIT ============ */
 $('submitBtn').addEventListener('click', async () => {
-  if ($('submitBtn').disabled) {
-    const fields = ['name','phone','email'];
-    let first = null;
-    fields.forEach(id => {
-      const el = $(id);
-      if (!el) return;
-      if (!el.value.trim()) {
-        el.style.border = '2px solid #FF4D4D';
-        el.style.backgroundColor = '#FFF5F5';
-        if (!first) first = el;
-      }
-    });
-    if (first) { first.scrollIntoView({behavior:'smooth',block:'center'}); first.focus(); toast('필수 항목(이름·연락처·이메일)을 입력해 주세요.', true); return; }
-    if (!$('consentPrivacy').checked) { toast('개인정보 수집·이용 동의가 필요합니다.', true); $('consentPrivacy').focus(); return; }
+  // 1) 필수 입력 검증
+  const fields = ['name','phone','email'];
+  let first = null;
+  fields.forEach(id => {
+    const el = $(id);
+    if (!el) return;
+    if (!el.value.trim()) {
+      el.style.border = '2px solid #FF4D4D';
+      el.style.backgroundColor = '#FFF5F5';
+      if (!first) first = el;
+    }
+  });
+  if (first) { first.scrollIntoView({behavior:'smooth',block:'center'}); first.focus(); toast('필수 항목(이름·연락처·이메일)을 입력해 주세요.', true); return; }
+
+  // 2) 개인정보 동의 검증 — 미체크 시 빨간 강조 + 흔들림
+  if (!$('consentPrivacy').checked) {
+    const crow = $('consentPrivacy').closest('.consent-row');
+    if (crow) { crow.classList.add('consent-warn'); setTimeout(() => crow.classList.remove('consent-warn'), 2000); crow.scrollIntoView({behavior:'smooth',block:'center'}); }
+    toast('개인정보 수집·이용 동의가 필요합니다.', true);
+    $('consentPrivacy').focus();
     return;
   }
 
+  // 3) 발송
   $('submitBtn').disabled = true;
   $('submitBtn').textContent = '전송 중...';
 
