@@ -1,0 +1,154 @@
+<!-- 260703 1200 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>단어장 홈</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+:root{ --bg:#F3F1ED; --ink:#161616; --sub:#7A766E; --card:#FFFFFF; --accent:#6D5AE0; --track:#D8D3C8; }
+*{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+html,body{height:100%; background:var(--bg); font-family:'Pretendard',sans-serif; color:var(--ink); overflow:hidden;}
+#app{position:fixed; inset:0; max-width:480px; margin:0 auto; display:flex; flex-direction:column; padding:26px;}
+
+.topline{text-align:center; font-size:14px; color:var(--sub); margin-bottom:26px;}
+
+#stackWrap{position:relative; flex:0 0 320px; display:flex; align-items:center; justify-content:center;}
+.arrow{position:absolute; top:50%; transform:translateY(-50%); width:34px; height:34px; border-radius:50%;
+  background:var(--card); border:1px solid var(--track); color:var(--sub); font-size:16px; z-index:50;}
+.arrow.left{left:-6px;} .arrow.right{right:-6px;}
+
+.card{position:absolute; width:220px; height:280px; background:var(--card); border-radius:22px;
+  box-shadow:0 10px 30px rgba(0,0,0,.12); display:flex; flex-direction:column; align-items:center; justify-content:center;
+  transition:transform .4s cubic-bezier(.25,.9,.35,1), opacity .4s ease; touch-action:pan-y;}
+.card .code{position:absolute; top:20px; left:22px; font-size:12px; color:var(--sub); letter-spacing:.05em;}
+.card .code::after{content:''; display:block; width:24px; height:1px; background:var(--track); margin-top:6px;}
+.card .word{font-size:34px; font-weight:900;}
+.card .tap{position:absolute; bottom:24px; font-size:11px; color:var(--sub); letter-spacing:.1em;}
+
+#thumbs{display:flex; gap:10px; overflow-x:auto; padding:18px 4px 22px; scrollbar-width:none;}
+#thumbs::-webkit-scrollbar{display:none;}
+.thumb{flex:0 0 auto; width:64px; height:64px; border-radius:14px; background:var(--card); border:2px solid transparent;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:10px; color:var(--sub); font-weight:700;}
+.thumb .tword{font-size:12px; color:var(--ink); font-weight:800; margin-top:2px;}
+.thumb.on{border-color:var(--accent);}
+
+#pasteBox{margin-top:auto; background:var(--card); border:1px solid var(--track); border-radius:18px; padding:16px;}
+#pasteBox textarea{width:100%; height:70px; border:none; resize:none; font-family:inherit; font-size:13px; color:var(--ink); background:transparent;}
+#pasteBox textarea::placeholder{color:var(--sub);}
+#pasteRow{display:flex; justify-content:flex-end;}
+#pasteSubmit{width:34px; height:34px; border-radius:50%; background:var(--track); border:none; color:var(--ink); font-size:15px;}
+#pasteSubmit.ready{background:var(--accent); color:#fff;}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="topline">슬라이드해서 두번째 뜻 모르는 세트 찾기</div>
+  <div id="stackWrap">
+    <button class="arrow left" id="arrL">←</button>
+    <div id="cards"></div>
+    <button class="arrow right" id="arrR">→</button>
+  </div>
+  <div id="thumbs"></div>
+  <div id="pasteBox">
+    <textarea id="pasteInput" placeholder="카톡으로 복사한거 붙여넣기. 세트 만들어 줄게."></textarea>
+    <div id="pasteRow"><button id="pasteSubmit">↑</button></div>
+  </div>
+</div>
+
+<script>
+/* ---------- 세트 데이터 (로컬 저장, 로그인 없음) ---------- */
+const LS_SETS='voca_home_sets';
+function lj(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}}
+function sj(k,v){localStorage.setItem(k, JSON.stringify(v));}
+
+let sets = lj(LS_SETS, [
+  {code:'A0901', word:'novel', count:15},
+  {code:'A0902', word:'approach', count:12},
+  {code:'A0903', word:'object', count:15},
+  {code:'A0904', word:'fine', count:10},
+  {code:'A0905', word:'contract', count:14},
+]);
+sj(LS_SETS, sets);
+
+let front = 0; // 현재 맨 앞 카드 index
+
+const cardsEl = document.getElementById('cards');
+const thumbsEl = document.getElementById('thumbs');
+
+function order(){ // front부터 순서대로 정렬된 배열(최대 4장 표시)
+  const arr=[]; for(let k=0;k<Math.min(4,sets.length);k++) arr.push(sets[(front+k)%sets.length]);
+  return arr;
+}
+function renderCards(){
+  const arr = order();
+  cardsEl.innerHTML = arr.map((s,k)=>`
+    <div class="card" data-idx="${k}" style="
+      transform:translateY(${k*10}px) scale(${1-k*0.045});
+      z-index:${100-k}; opacity:${k>2?0:1};">
+      <div class="code">#${s.code}</div>
+      <div class="word">${s.word}</div>
+      <div class="tap">${k===0?'tap':''}</div>
+    </div>`).join('');
+  const front0 = cardsEl.querySelector('.card[data-idx="0"]');
+  if(front0) front0.onclick = ()=> enterSet(sets[front]);
+  attachSwipe(front0);
+}
+function renderThumbs(){
+  thumbsEl.innerHTML = sets.map((s,i)=>`
+    <div class="thumb ${i===front?'on':''}" data-i="${i}">
+      <div>#${s.code.slice(-3)}</div><div class="tword">${s.word}</div>
+    </div>`).join('');
+  thumbsEl.querySelectorAll('.thumb').forEach(t=>{
+    t.onclick=()=>{ front=+t.dataset.i; renderAll(); };
+  });
+  const on = thumbsEl.querySelector('.thumb.on');
+  if(on) on.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+}
+function renderAll(){ renderCards(); renderThumbs(); }
+
+function next(){ front=(front+1)%sets.length; renderAll(); }
+function prev(){ front=(front-1+sets.length)%sets.length; renderAll(); }
+document.getElementById('arrR').onclick=next;
+document.getElementById('arrL').onclick=prev;
+
+function attachSwipe(el){
+  if(!el) return;
+  let sx=0, sy=0, lx=0, ly=0, drag=false;
+  el.addEventListener('pointerdown', e=>{ drag=true; sx=e.clientX; sy=e.clientY; lx=sx; ly=sy; });
+  el.addEventListener('pointermove', e=>{ if(drag){ lx=e.clientX; ly=e.clientY; } });
+  function end(){
+    if(!drag) return; drag=false;
+    const dx=lx-sx, dy=ly-sy;
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)){ dx<0 ? next() : prev(); }
+  }
+  el.addEventListener('pointerup', end);
+  el.addEventListener('pointercancel', end);
+}
+
+function enterSet(s){
+  // 실제 연결: voca-reels.html?set=코드 로 이동
+  location.href = 'voca-reels.html?set=' + encodeURIComponent(s.code);
+}
+
+/* ---------- 붙여넣기로 세트 생성 ---------- */
+const pasteInput = document.getElementById('pasteInput');
+const pasteSubmit = document.getElementById('pasteSubmit');
+pasteInput.addEventListener('input', ()=> pasteSubmit.classList.toggle('ready', pasteInput.value.trim().length>0));
+pasteSubmit.onclick = ()=>{
+  const txt = pasteInput.value.trim(); if(!txt) return;
+  const lines = txt.split('\n').map(l=>l.trim()).filter(Boolean);
+  const codeMatch = lines.find(l=>/^#?[A-Z]?\d{3,}/.test(l));
+  const code = codeMatch ? codeMatch.replace('#','').split(' ')[0] : 'SET'+(sets.length+1);
+  const words = lines.filter(l=> l!==codeMatch && !/^#/.test(l));
+  sets.push({code, word: words[0]||'new', count: words.length||1});
+  sj(LS_SETS, sets);
+  pasteInput.value=''; pasteSubmit.classList.remove('ready');
+  front = sets.length-1; renderAll();
+};
+
+renderAll();
+</script>
+</body>
+</html>
