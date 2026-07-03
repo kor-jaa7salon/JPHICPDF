@@ -579,8 +579,9 @@ function renderEnd(){
   if(nb) nb.onclick=()=>{ currentSet++; sj(LS_SET,currentSet); localStorage.setItem(LS_SET_START, Date.now()); location.reload(); };
   const kb = document.getElementById('kakaoBtn');
   if(kb) kb.onclick=()=>{
-    const txt = wrongToday.map(w=>`${w.en} - ${w.meaning}`).join('\n');
-    navigator.clipboard.writeText(`오늘 틀린 단어\n${txt}`).then(()=>{ kb.textContent='복사됨!'; });
+    const code = 'A' + Date.now().toString().slice(-4);
+    const txt = wrongToday.map(w=>`${w.en},${w.meaning}`).join('\n');
+    navigator.clipboard.writeText(`SET:${code}\n${txt}`).then(()=>{ kb.textContent='복사됨!'; });
   };
   document.getElementById('shareBtn2').onclick = doShare;
 }
