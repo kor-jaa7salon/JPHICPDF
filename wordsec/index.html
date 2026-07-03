@@ -59,7 +59,7 @@ html,body{height:100%; background:var(--bg); font-family:'Pretendard',sans-serif
   </div>
   <div id="thumbClip"><div id="thumbs"></div></div>
   <div id="pasteBox">
-    <textarea id="pasteInput" placeholder="카톡 형식 그대로 붙여넣기&#10;SET:코드&#10;en,meaning"></textarea>
+    <textarea id="pasteInput" placeholder="여기에 붙여넣기 (영어,뜻 한 줄씩)"></textarea>
     <div id="pasteRow"><button id="pasteSubmit">↑</button></div>
   </div>
 </div>
@@ -173,11 +173,12 @@ pasteInput.addEventListener('input', ()=> pasteSubmit.classList.toggle('ready', 
 pasteSubmit.onclick = ()=>{
   const txt = pasteInput.value.trim(); if(!txt) return;
   const lines = txt.split('\n').map(l=>l.trim()).filter(Boolean);
-  let code = 'SET'+(sets.length+1), wordLines = lines;
-  if(/^SET:/i.test(lines[0])){ code = lines[0].split(':')[1].trim(); wordLines = lines.slice(1); }
+  let wordLines = lines;
+  if(/^SET:/i.test(lines[0])) wordLines = lines.slice(1); // 코드 줄 있으면 무시(자동생성 우선)
   const parsed = wordLines.map(l=>{ const [en,meaning]=l.split(','); return {en:(en||'').trim(), meaning:(meaning||'').trim()}; })
     .filter(w=>w.en);
-  if(!parsed.length){ alert('형식 확인: SET:코드 다음줄부터 en,meaning'); return; }
+  if(!parsed.length){ alert('형식 확인: 한 줄에 "영어,뜻"'); return; }
+  const code = 'S' + Date.now().toString().slice(-5);
   sets.push({code, word: parsed[0].en, count: parsed.length, words: parsed});
   sj(LS_SETS, sets);
   pasteInput.value=''; pasteSubmit.classList.remove('ready');

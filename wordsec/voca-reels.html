@@ -242,12 +242,21 @@ function wordsFromSheet(setNo){
 }
 
 /* ---------- 덱 구성 ---------- */
+function homeSetPool(){
+  const code = new URLSearchParams(location.search).get('set');
+  if(!code) return null;
+  const homeSets = (()=>{ try{ return JSON.parse(localStorage.getItem('voca_home_sets'))||[]; }catch(e){ return []; } })();
+  const found = homeSets.find(s=>s.code===code);
+  if(!found || !found.words || !found.words.length) return null;
+  return found.words.map(w=>({en:w.en, meaning:w.meaning})); // 영-한만, 예문/컨텍스트 없음
+}
 function buildDeck(){
-  const pool = wordsFromSheet(currentSet) || SEED;
+  const homePool = homeSetPool();
+  const pool = homePool || wordsFromSheet(currentSet) || SEED;
   const newWords = [...pool].sort(()=>Math.random()-0.5).slice(0,9);
   const reviewWords = wrongPool.sort(()=>Math.random()-0.5).slice(0,5);
   const deck = [...newWords, ...reviewWords].sort(()=>Math.random()-0.5);
-  deck.splice(Math.min(5, deck.length), 0, IDIOM);
+  if(!homePool) deck.splice(Math.min(5, deck.length), 0, IDIOM);
   return deck;
 }
 let deck=[];
