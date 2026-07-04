@@ -1,4 +1,4 @@
-<!-- 260704 1830 -->
+<!-- 260704 1845 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,7 +22,7 @@ body.from-home #app{animation:slideInRight .45s cubic-bezier(.25,.8,.35,1) forwa
 @keyframes slideInRight{from{opacity:0; transform:translateX(45%);} to{opacity:1; transform:translateX(0);}}
 
 #topRight{position:fixed; top:14px; right:14px; z-index:60; display:flex; gap:8px;}
-#topRight button{width:34px; height:34px; border-radius:50%; background:var(--card); border:1px solid var(--track); color:var(--ink); font-size:14px; transition:background .3s, border-color .3s, color .3s;}
+#topRight button{width:34px; height:34px; border-radius:50%; background:var(--card); border:1px solid var(--track); color:var(--ink); display:flex; align-items:center; justify-content:center; transition:background .3s, border-color .3s, color .3s;}
 body.screen-dark #topRight button{background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.25); color:#fff;}
 
 #dots{position:fixed; right:8px; top:50%; transform:translateY(-50%); z-index:55; display:flex; flex-direction:column; gap:6px;}
@@ -187,15 +187,16 @@ body.screen-dark .dot{background:rgba(255,255,255,.2);}
 <body>
 <div id="app">
   <div id="topRight">
-    <button id="homeBtn">⌂</button>
-    <button id="csBtn">?</button>
+    <button id="homeBtn" aria-label="홈"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-5h4v5"/></svg></button>
+    <button id="guideBtn" aria-label="사용법"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h7M8 11h7"/></svg></button>
+    <button id="csBtn" aria-label="문의"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></button>
   </div>
   <div id="dots"></div>
   <div id="reels"></div>
 </div>
 <div id="guide" class="guide-hidden">
   <div class="guideCard">
-    <img class="guideImg" src="https://img.jphic.co.kr/wordsec/img/user_guide.png?v=5" alt="사용법">
+    <img class="guideImg" src="https://img.jphic.co.kr/wordsec/img/user_guide.png" alt="사용법">
     <label class="guideChk"><input type="checkbox" id="guideNoShow"> 다음부터 열지않기</label>
     <button class="guideBtn" id="guideClose">시작하기</button>
   </div>
@@ -275,6 +276,7 @@ function csvParse(text){
   });
 }
 document.getElementById('homeBtn').onclick=()=>{ location.href='./index.html'; };
+document.getElementById('guideBtn').onclick=()=>{ document.getElementById('guide').classList.remove('guide-hidden'); };
 document.getElementById('csBtn').onclick=()=>{ location.href='./cs.html'; };
 
 /* ---------- 덱 구성: sets/{code}.csv 로드 ---------- */
@@ -467,7 +469,7 @@ function finalizeVote(i){
 
 /* ---------- 왼쪽 스와이프: 풀스크린 예문뷰(3개 순환) ---------- */
 let exI = 0, exWordI = null;
-const EX_BG = ['#968095','#7e8891','#8f937f']; // 예문 1·2·3 배경
+const EX_BG = ['#16193e','#1e2140','#12233a']; // 예문 1·2·3 배경
 function renderExample(){
   const w = deck[exWordI]; if(!w) return;
   const sentence = w.example[exI];
@@ -599,13 +601,12 @@ async function boot(){
   document.getElementById('finishBtn').onclick = startSpellTest;
 
   // 시작 가이드
-  if(localStorage.getItem('wordsec_guide')!=='off'){
-    const g=document.getElementById('guide'); g.classList.remove('guide-hidden');
-    document.getElementById('guideClose').onclick=()=>{
-      if(document.getElementById('guideNoShow').checked) localStorage.setItem('wordsec_guide','off');
-      g.classList.add('guide-hidden');
-    };
-  }
+  const g=document.getElementById('guide');
+  document.getElementById('guideClose').onclick=()=>{
+    if(document.getElementById('guideNoShow').checked) localStorage.setItem('wordsec_guide','off');
+    g.classList.add('guide-hidden');
+  };
+  if(localStorage.getItem('wordsec_guide')!=='off') g.classList.remove('guide-hidden');
 
   // 휠/터치로 인덱스 이동
   let wheelLock=false;
