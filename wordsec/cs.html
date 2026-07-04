@@ -3,13 +3,14 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<base href="/wordsec/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>문의하기</title>
 <style>
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
 :root{ --bg:#F3F1ED; --ink:#161616; --sub:#7A766E; --card:#FFFFFF; --accent:#161616; --track:#D8D3C8; }
 *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
-html,body{height:100%; background:var(--bg); font-family:'Pretendard',sans-serif; color:var(--ink);}
+html,body{height:100dvh; background:var(--bg); font-family:'Pretendard',sans-serif; color:var(--ink); overscroll-behavior:none}
 #app{position:fixed; inset:0; max-width:480px; margin:0 auto; display:flex; flex-direction:column; justify-content:center; padding:30px;}
 #back{position:fixed; top:16px; left:16px; width:34px; height:34px; border-radius:50%; background:var(--card); border:1px solid var(--track); color:var(--ink); font-size:15px;}
 h1{font-size:16px; font-weight:600; text-align:center; margin-bottom:30px;}

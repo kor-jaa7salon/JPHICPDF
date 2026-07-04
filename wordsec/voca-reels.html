@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<base href="/wordsec/">
 <meta charset="UTF-8">
+<base href="/wordsec/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>단어장</title>
 <style>
@@ -15,7 +15,7 @@
   --accent:#161616; --track:#D8D3C8; --gold:#B98900;
 }
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent; margin:0; padding:0;}
-html,body{height:100%; overflow:hidden; background:var(--bg); font-family:'Pretendard',sans-serif; color:var(--ink);}
+html,body{height:100dvh; overflow:hidden; background:var(--bg); font-family:'Pretendard',sans-serif; color:var(--ink); overscroll-behavior:none}
 #app{position:fixed; inset:0; max-width:480px; margin:0 auto; background:var(--bg); opacity:0; animation:appIn .35s ease forwards;}
 @keyframes appIn{to{opacity:1;}}
 body.from-home #app{animation:slideInRight .45s cubic-bezier(.25,.8,.35,1) forwards;}
