@@ -1,4 +1,4 @@
-<!-- 260704 1730 -->
+<!-- 260704 1815 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -93,14 +93,23 @@ body.screen-dark .dot{background:rgba(255,255,255,.2);}
 .darkToggle .label.r{left:41px; width:52px; font-weight:800;}
 .darkToggle .label.l{left:4px; width:52px; font-weight:400;}
 
+#guide{position:fixed; inset:0; z-index:120; background:rgba(0,0,0,.45); display:flex; align-items:center; justify-content:center; padding:26px;}
+#guide.guide-hidden{display:none;}
+.guideCard{background:#2e2e2e; border-radius:22px; padding:0 0 16px; width:100%; max-width:340px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,.3);}
+.guideImg{width:100%; display:block; aspect-ratio:720/1200;}
+.guideChk{display:flex; align-items:center; gap:7px; font-size:12px; color:rgba(255,255,255,.6); margin:14px 20px 16px;}
+.guideChk input{width:auto;}
+.guideBtn{width:calc(100% - 40px); margin:0 20px; background:var(--accent); color:#fff; border:none; padding:14px; border-radius:14px; font-weight:900; font-size:14px;}
 #exampleView{position:fixed; inset:0; z-index:65; background:#16193e; color:#fff; padding:26px; touch-action:none;
-  transform:translateX(100%); transition:transform .35s ease; display:flex; flex-direction:column;}
+  transform:translateX(100%); transition:transform .42s cubic-bezier(.34,1.28,.5,1), background .3s; display:flex; flex-direction:column;}
 #exampleView.show{transform:translateX(0);}
-#exBack{align-self:flex-start; color:rgba(255,255,255,.55); font-size:13px; margin-bottom:36px;}
+#exBack{align-self:flex-start; color:rgba(255,255,255,.7); font-size:30px; line-height:1; margin-bottom:30px; width:34px; height:34px; display:flex; align-items:center; justify-content:center; margin-left:-6px;}
 .exDots{display:flex; gap:5px; align-self:center; margin-bottom:6px;}
 .exDots i{width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.25);}
 .exDots i.on{background:#fff;}
-.exBody{flex:1; display:flex; flex-direction:column; justify-content:center;}
+.exBody{flex:1; display:flex; flex-direction:column; justify-content:center; transition:transform .38s cubic-bezier(.34,1.28,.5,1), opacity .3s ease;}
+.exBody.slideIn{animation:exSlideIn .42s cubic-bezier(.34,1.28,.5,1);}
+@keyframes exSlideIn{0%{transform:translateX(60px); opacity:0;} 100%{transform:translateX(0); opacity:1;}}
 .exEn{font-size:22px; line-height:1.6; font-family:'Georgia',serif;}
 .exDivider{height:1px; background:#5e6791; margin:30px 0; opacity:.6;}
 .exKo{font-size:15px; line-height:1.7; color:rgba(255,255,255,.8);}
@@ -183,8 +192,15 @@ body.screen-dark .dot{background:rgba(255,255,255,.2);}
   <div id="dots"></div>
   <div id="reels"></div>
 </div>
+<div id="guide" class="guide-hidden">
+  <div class="guideCard">
+    <img class="guideImg" src="https://img.jphic.co.kr/wordsec/img/user_guide.png" alt="사용법">
+    <label class="guideChk"><input type="checkbox" id="guideNoShow"> 다음부터 열지않기</label>
+    <button class="guideBtn" id="guideClose">시작하기</button>
+  </div>
+</div>
 <div id="exampleView">
-  <span id="exBack">→ 오른쪽 스와이프로 back</span>
+  <span id="exBack">‹</span>
   <div class="exDots" id="exDots"></div>
   <div class="exBody">
     <div class="exEn" id="exEnText"></div>
@@ -449,7 +465,7 @@ function finalizeVote(i){
 
 /* ---------- 왼쪽 스와이프: 풀스크린 예문뷰(3개 순환) ---------- */
 let exI = 0, exWordI = null;
-const EX_BG = ['#968095','#7e8891','#8f937f']; // 예문 1·2·3 배경
+const EX_BG = ['#16193e','#1e2140','#12233a']; // 예문 1·2·3 배경
 function renderExample(){
   const w = deck[exWordI]; if(!w) return;
   const sentence = w.example[exI];
@@ -472,11 +488,16 @@ function openExample(i){
   if(navigator.vibrate) navigator.vibrate(8);
   renderExample();
   document.getElementById('exampleView').classList.add('show');
+  history.pushState({exOpen:1}, ''); // 하드웨어 back = 예문뷰 닫기
 }
-function closeExample(){
+function closeExample(fromPop){
   if(navigator.vibrate) navigator.vibrate(8);
   document.getElementById('exampleView').classList.remove('show');
+  if(!fromPop && history.state && history.state.exOpen){ history.back(); }
 }
+window.addEventListener('popstate', ()=>{
+  if(document.getElementById('exampleView').classList.contains('show')) closeExample(true);
+});
 
 /* 예문 가로스와이프는 boot()의 touch 핸들러에서 통합 처리 */
 
@@ -490,7 +511,7 @@ function endExSwipe(){
   const dx=exlx-exx, dy=exly-exy;
   if(Math.abs(dx)<50 || Math.abs(dx)<Math.abs(dy)) return;
   if(dx>0){ closeExample(); }
-  else { exI = (exI+1) % deck[exWordI].example.length; if(navigator.vibrate) navigator.vibrate(8); renderExample(); }
+  else { exI = (exI+1) % deck[exWordI].example.length; if(navigator.vibrate) navigator.vibrate(8); renderExample(); const b=document.querySelector('.exBody'); b.classList.remove('slideIn'); void b.offsetWidth; b.classList.add('slideIn'); }
 }
 exView.addEventListener('pointerdown', e=> exStart(e.clientX, e.clientY));
 exView.addEventListener('pointermove', e=> exMove(e.clientX, e.clientY));
@@ -567,6 +588,15 @@ async function boot(){
   renderDots();
   slideActivate(0);
   document.getElementById('finishBtn').onclick = startSpellTest;
+
+  // 시작 가이드
+  if(localStorage.getItem('wordsec_guide')!=='off'){
+    const g=document.getElementById('guide'); g.classList.remove('guide-hidden');
+    document.getElementById('guideClose').onclick=()=>{
+      if(document.getElementById('guideNoShow').checked) localStorage.setItem('wordsec_guide','off');
+      g.classList.add('guide-hidden');
+    };
+  }
 
   // 휠/터치로 인덱스 이동
   let wheelLock=false;
