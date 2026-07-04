@@ -1,0 +1,75 @@
+<!-- 260704 1230 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>문의하기</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+:root{ --bg:#F3F1ED; --ink:#161616; --sub:#7A766E; --card:#FFFFFF; --accent:#161616; --track:#D8D3C8; }
+*{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+html,body{height:100%; background:var(--bg); font-family:'Pretendard',sans-serif; color:var(--ink);}
+#app{position:fixed; inset:0; max-width:480px; margin:0 auto; display:flex; flex-direction:column; justify-content:center; padding:30px;}
+#back{position:fixed; top:16px; left:16px; width:34px; height:34px; border-radius:50%; background:var(--card); border:1px solid var(--track); color:var(--ink); font-size:15px;}
+h1{font-size:16px; font-weight:600; text-align:center; margin-bottom:30px;}
+.field{margin-bottom:20px;}
+.label{font-size:13px; color:var(--sub); margin-bottom:8px; display:block;}
+textarea,input{width:100%; background:var(--card); border:none; border-radius:14px; padding:16px; font-family:inherit; font-size:14px; color:var(--ink); resize:none;}
+textarea:focus,input:focus{outline:none; background:#F7F5F1;}
+.counter{text-align:right; font-size:11px; color:var(--sub); margin-top:4px;}
+.agree{display:flex; align-items:flex-start; gap:8px; font-size:12px; color:var(--sub); margin-bottom:20px; line-height:1.5;}
+.agree input{width:auto; flex:0 0 auto; margin-top:2px;}
+.agree a{color:var(--ink); text-decoration:underline;}
+button.send{width:100%; background:var(--accent); color:#fff; border:none; padding:15px; border-radius:14px; font-weight:600; font-size:14px;}
+button.send:disabled{background:var(--track); color:var(--sub);}
+.done{text-align:center; color:var(--sub); font-size:14px; margin-top:20px; display:none;}
+</style>
+</head>
+<body>
+<button id="back">←</button>
+<div id="app">
+  <h1>정보 오류 및 문의 환영합니다!</h1>
+  <div class="field">
+    <span class="label">내용</span>
+    <textarea id="content" rows="5" maxlength="100" placeholder="내용을 입력해 주세요"></textarea>
+    <div class="counter"><span id="cnt">0</span>/100</div>
+  </div>
+  <div class="field">
+    <span class="label">이메일</span>
+    <input id="email" type="email" placeholder="회신이 필요하면 남겨줘">
+  </div>
+  <label class="agree">
+    <input type="checkbox" id="agree">
+    <span>개인정보(이메일) 수집·이용에 동의합니다. 문의 응대 목적, 응대 후 파기. <a href="./privacy.html" target="_blank">자세히</a></span>
+  </label>
+  <button class="send" id="send" disabled>보내기</button>
+  <div class="done" id="done">접수되었습니다. 감사합니다.</div>
+</div>
+
+<script>
+const GAS_URL='https://script.google.com/macros/s/AKfycbwwzp8BL-FSUCZ7r-aF9z3d9MZLmZXvN6fnOqM-C4cxO_rN5emyXkL6eDL7fena00oAgg/exec';
+const $=id=>document.getElementById(id);
+$('back').onclick=()=>history.back();
+$('content').addEventListener('input',e=>{ $('cnt').textContent=e.target.value.length; validate(); });
+$('email').addEventListener('input',validate);
+$('agree').addEventListener('change',validate);
+function validate(){
+  const hasContent=$('content').value.trim().length>0;
+  const email=$('email').value.trim();
+  const needAgree = email.length>0; // 이메일 입력시 동의 필수
+  const ok = hasContent && (!needAgree || $('agree').checked);
+  $('send').disabled=!ok;
+}
+$('send').onclick=async()=>{
+  $('send').disabled=true; $('send').textContent='전송 중...';
+  const payload={ content:$('content').value.trim(), email:$('email').value.trim(), agreed:$('agree').checked };
+  try{
+    await fetch(GAS_URL,{ method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body:JSON.stringify(payload) });
+    $('app').querySelectorAll('.field,.agree,.send').forEach(el=>el.style.display='none');
+    $('done').style.display='block';
+  }catch(e){ $('send').disabled=false; $('send').textContent='보내기'; alert('전송 실패. 다시 시도해줘'); }
+};
+</script>
+</body>
+</html>

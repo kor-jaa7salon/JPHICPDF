@@ -7,45 +7,47 @@
 <title>단어장</title>
 <style>
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=DM+Serif+Display&family=Bebas+Neue&family=Caveat:wght@700&family=Space+Grotesk:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=DM+Serif+Display&family=Bebas+Neue&family=Caveat:wght@700&family=Space+Grotesk:wght@700&family=Nanum+Myeongjo:wght@700&display=swap');
 
 :root{
   --bg:#F3F1ED; --ink:#161616; --sub:#7A766E; --card:#FFFFFF;
-  --accent:#6D5AE0; --track:#D8D3C8; --gold:#B98900;
+  --accent:#161616; --track:#D8D3C8; --gold:#B98900;
 }
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent; margin:0; padding:0;}
 html,body{height:100%; overflow:hidden; background:var(--bg); font-family:'Pretendard',sans-serif; color:var(--ink);}
-#app{position:fixed; inset:0; max-width:480px; margin:0 auto; background:var(--bg);}
+#app{position:fixed; inset:0; max-width:480px; margin:0 auto; background:var(--bg); opacity:0; animation:appIn .35s ease forwards;}
+@keyframes appIn{to{opacity:1;}}
+body.from-home #app{animation:slideInRight .45s cubic-bezier(.25,.8,.35,1) forwards;}
+@keyframes slideInRight{from{opacity:0; transform:translateX(45%);} to{opacity:1; transform:translateX(0);}}
 
 #topRight{position:fixed; top:14px; right:14px; z-index:60; display:flex; gap:8px;}
-#topRight button{width:34px; height:34px; border-radius:50%; background:var(--card); border:1px solid var(--track); color:var(--ink); font-size:14px;}
+#topRight button{width:34px; height:34px; border-radius:50%; background:var(--card); border:1px solid var(--track); color:var(--ink); font-size:14px; transition:background .3s, border-color .3s, color .3s;}
+body.screen-dark #topRight button{background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.25); color:#fff;}
 
 #dots{position:fixed; right:8px; top:50%; transform:translateY(-50%); z-index:55; display:flex; flex-direction:column; gap:6px;}
-.dot{width:5px; height:5px; border-radius:50%; background:var(--track);}
+.dot{width:5px; height:5px; border-radius:50%; background:var(--track); transition:background .3s;}
 .dot.on{background:var(--accent); height:16px; border-radius:4px;}
+body.screen-dark .dot{background:rgba(255,255,255,.2);}
 
-#reels{height:100%; overflow-y:scroll; scroll-snap-type:y mandatory; scroll-behavior:smooth; -webkit-overflow-scrolling:touch;}
+#reels{height:100%; overflow:hidden; position:relative;}
 #reels::-webkit-scrollbar{display:none;}
-.slide{height:100%; scroll-snap-align:start; scroll-snap-stop:always; position:relative; display:flex; flex-direction:column;
-  justify-content:center; align-items:center; overflow:hidden; padding:26px; touch-action:pan-y;
+#track{position:absolute; top:0; left:0; width:100%; will-change:transform;}
+.slide{height:100vh; position:relative; display:flex; flex-direction:column;
+  justify-content:center; align-items:center; overflow:hidden; padding:26px; touch-action:none;
   background:var(--bg); color:var(--ink); transition:background .3s, color .3s;}
 .slide.dark-local{
-  --bg:#16193e; --ink:#F5F3F7; --sub:#8B8896; --card:#16151F; --track:#26232E;
+  --bg:#16193e; --ink:#F5F3F7; --sub:#8B8896; --card:#16151F; --track:#26232E; --accent:#F5F3F7;
 }
 
-.hook{text-align:center; font-size:16px; font-weight:600; line-height:1.5; margin-bottom:6px; max-width:300px;}
-.hintline{font-size:13px; color:var(--sub); margin-bottom:18px; letter-spacing:.02em; line-height:1.5; max-width:280px; text-align:center;}
+.hook{text-align:center; font-size:12px; font-weight:400; color:var(--sub); line-height:1.5; margin-bottom:10px; max-width:300px;}
+.hintline{font-size:16px; color:var(--ink); font-weight:600; margin-bottom:18px; line-height:1.5; max-width:290px; text-align:center;}
 
-.swipeHint{position:absolute; left:16px; bottom:120px; display:flex; flex-direction:column;
-  align-items:center; gap:4px; font-size:11px; color:var(--sub);}
-.pullHint{display:flex; flex-direction:column;
-  align-items:center; gap:4px; font-size:11px; color:var(--sub); margin-top:40px;}
 .primaryTag{font-size:13px; color:var(--sub); margin-top:8px;}
-
-.morphbox{position:relative; height:190px; width:100%; display:flex; align-items:center; justify-content:center; perspective:500px; margin:14px 0;}
+.morphbox{position:relative; height:190px; width:100%; display:flex; align-items:center; justify-content:center; margin:14px 0; opacity:1; transition:opacity .5s ease;}
+.slide.fading .morphbox{opacity:0; transition:opacity .22s ease;}
 .mtext{font-size:52px; font-weight:800; text-align:center; white-space:nowrap; line-height:1.3;}
 .mtext.ko{font-size:30px; font-weight:400;}
-.mtext .cw{display:inline-block; will-change:transform,opacity,filter;}
+.mtext .cw{display:inline-block;}
 
 
 @keyframes cwWave{from{opacity:0; transform:translateY(7px) scale(.85);} to{opacity:1; transform:translateY(0) scale(1);}}
@@ -90,7 +92,7 @@ html,body{height:100%; overflow:hidden; background:var(--bg); font-family:'Prete
 .darkToggle .label.r{left:41px; width:52px; font-weight:800;}
 .darkToggle .label.l{left:4px; width:52px; font-weight:400;}
 
-#exampleView{position:fixed; inset:0; z-index:65; background:#16193e; color:#fff; padding:26px;
+#exampleView{position:fixed; inset:0; z-index:65; background:#16193e; color:#fff; padding:26px; touch-action:none;
   transform:translateX(100%); transition:transform .35s ease; display:flex; flex-direction:column;}
 #exampleView.show{transform:translateX(0);}
 #exBack{align-self:flex-start; color:rgba(255,255,255,.55); font-size:13px; margin-bottom:36px;}
@@ -116,33 +118,66 @@ html,body{height:100%; overflow:hidden; background:var(--bg); font-family:'Prete
 
 .spell-wrap{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:26px; background:var(--bg);}
 .spell-tag{color:var(--sub); font-size:12px; margin-bottom:10px;}
-.spell-card{background:var(--card); border:1px solid var(--track); border-radius:22px; padding:30px 22px; text-align:center; width:100%; max-width:340px;}
+.spell-card{background:var(--card); border:none; border-radius:22px; padding:30px 22px; text-align:center; width:100%; max-width:340px; box-shadow:0 8px 30px rgba(0,0,0,.08);}
 .spell-card .ko{font-size:22px; font-weight:400; margin-bottom:16px;}
-.spell-card input{width:100%; background:var(--bg); border:2px solid var(--track); border-radius:14px; color:var(--ink); padding:14px; font-size:18px; text-align:center; font-weight:700;}
-.spell-card input.correct{border-color:#18B37A;}
-.spell-card input.incorrect{border-color:#E23A5D;}
+.spell-card input{width:100%; background:#EFEDE8; border:none; border-radius:14px; color:var(--ink); padding:16px; font-size:18px; text-align:center; font-weight:700;}
+.spell-card input:focus{outline:none; background:#E6E3DC;}
+.spell-card input.correct{background:#DFF3EA;}
+.spell-card input.incorrect{background:#FBE4E9;}
 .spell-card .answer{margin-top:8px; color:#E23A5D; font-size:13px;}
 .spell-card button{margin-top:16px; background:var(--accent); color:#fff; border:none; padding:12px 26px; border-radius:14px; font-weight:900;}
 .flash-pop{font-size:12px; color:var(--gold); margin-top:8px; font-weight:800; opacity:0;}
 .flash-pop.show{opacity:1;}
 
-#end{position:absolute; inset:0; overflow-y:auto; padding:24px 20px 40px; background:var(--bg);}
-#end h2{font-size:19px; font-weight:400; margin-bottom:6px;}
-.sub2{color:var(--sub); font-size:13px; margin-bottom:14px;}
-.adv-badge{display:inline-block; background:var(--card); color:var(--gold); border:1px solid var(--gold); padding:5px 14px; border-radius:20px; font-size:13px; font-weight:800; margin-bottom:16px;}
-.wrong-item{background:var(--card); border:1px solid var(--track); border-radius:16px; padding:14px 16px; margin-bottom:10px;}
-.wrong-item .en{font-weight:800; font-size:16px;}
-.wrong-item .ko{color:var(--accent); font-size:13px; margin-top:2px; font-weight:400;}
+#end{position:absolute; inset:0; overflow-y:auto; padding:24px 20px 40px; background:var(--bg); transition:background .3s;}
+.endHeader{display:flex; align-items:center; justify-content:space-between; margin-bottom:22px;}
+.endHeadL{text-align:left;}
+#end h2{font-size:15px; font-weight:500; margin-bottom:4px; color:#161616; opacity:.85; text-align:left;}
+#end .setdate{font-size:11px; color:#161616; opacity:.45; text-align:left;}
+#end.dark h2{color:#fff;}
+#end.dark .setdate{color:#fff;}
+@keyframes dissolveUp{from{opacity:0; transform:translateY(10px); filter:blur(3px);} to{opacity:1; transform:translateY(0); filter:blur(0);}}
+#end > *{opacity:0; animation:dissolveUp .5s ease forwards;}
+#end > *:nth-child(1){animation-delay:.05s;}
+#end > *:nth-child(2){animation-delay:.13s;}
+#end > *:nth-child(3){animation-delay:.21s;}
+#end > *:nth-child(4){animation-delay:.29s;}
+#end > *:nth-child(n+5){animation-delay:.37s;}
+#end.dark{background:#16193e; color:#fff;}
+.endToggle{position:relative; width:101px; height:45px; border-radius:999px; border:none; background:#8ECBEE; transition:background 1s; flex:0 0 auto;}
+.endToggle.dark{background:#282f59;}
+.endToggle .knob{position:absolute; top:4px; left:4px; width:37px; height:37px; border-radius:50%; background:#FFD400; font-size:18px;
+  display:flex; align-items:center; justify-content:center; transition:left 1s cubic-bezier(.34,1.56,.64,1), background .5s; box-shadow:0 2px 8px rgba(0,0,0,.2);}
+.endToggle.dark .knob{left:60px; background:#D7E3FF;}
+.endToggle .elabel{position:absolute; top:50%; transform:translateY(-50%); font-size:13px; color:#fff; text-align:center;}
+.endToggle .elabel.r{left:41px; width:52px; font-weight:800;} .endToggle .elabel.l{left:4px; width:52px; font-weight:400; display:none;}
+.endToggle.dark .elabel.r{display:none;} .endToggle.dark .elabel.l{display:block;}
+
+/* 카드 스택: absolute + translateY (접힘 기본, 탭하면 펼침) */
+#stackList{position:relative; margin:10px auto 30px; width:210px;}
+.wcard{position:absolute; left:0; width:210px; height:125px;
+  background:linear-gradient(160deg,#FFFFFF 0%,#EDEBE6 100%); border:none; border-radius:18px;
+  padding:16px 20px; box-shadow:0 14px 24px -6px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.6); cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+  transition:transform .5s cubic-bezier(.34,1.4,.5,1), box-shadow .4s;}
+#end.dark .wcard{background:linear-gradient(160deg,#3a4568 0%,#232b46 100%); box-shadow:0 14px 24px -6px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.12);}
+.wcard .en{font-weight:600; font-size:19px; font-family:'Nanum Myeongjo','Apple SD Gothic Neo',serif;}
+.wcard .ko{color:var(--ink); font-size:20px; font-weight:700; opacity:0; height:0; overflow:hidden; transition:opacity .35s;}
+#end.dark .wcard .ko{color:#fff;}
+.wcard.open{box-shadow:0 30px 54px -8px rgba(0,0,0,.5); z-index:999 !important; justify-content:center;}
+.wcard.open .en{display:none;}
+.wcard.open .ko{opacity:1; height:auto;}
 .next-set{background:var(--card); border:1px dashed var(--track); border-radius:16px; padding:16px; margin-top:18px; text-align:center; font-size:13px; color:var(--sub);}
-.kakao-btn{margin-top:16px; width:100%; background:#FEE500; color:#111; border:none; padding:14px; border-radius:16px; font-weight:900;}
-.share-btn{margin-top:10px; width:100%; background:var(--card); border:1px solid var(--track); color:var(--ink); padding:14px; border-radius:16px; font-weight:800;}
+.kakao-btn{margin:30px auto 0; display:block; width:260px; max-width:80%; background:#FEE500; color:#111; border:none; padding:13px; border-radius:14px; font-weight:500;}
+.share-btn{margin:10px auto 0; display:block; width:260px; max-width:80%; background:var(--card); border:1px solid var(--track); color:var(--ink); padding:13px; border-radius:14px; font-weight:500;}
+#end.dark .share-btn{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); color:#fff;}
 </style>
 </head>
 <body>
 <div id="app">
   <div id="topRight">
-    <button id="shareBtn">🔗</button>
-    <button id="gear">⚙</button>
+    <button id="homeBtn">⌂</button>
+    <button id="csBtn">?</button>
   </div>
   <div id="dots"></div>
   <div id="reels"></div>
@@ -158,6 +193,7 @@ html,body{height:100%; overflow:hidden; background:var(--bg); font-family:'Prete
 </div>
 
 <script>
+if(new URLSearchParams(location.search).get('from')==='home') document.body.classList.add('from-home');
 /* ---------- 브랜드 헤드카피 ---------- */
 const TAGLINES = [
   "첫 뜻은 다 알잖아, 두 번째 뜻은 너만 알아",
@@ -184,7 +220,6 @@ const SEED = [
 {en:"refuse", meaning1:"거절하다", meaning:"쓰레기", context:`"이 쓰레기(refuse) 갖다 버려!" (명사로 쓰임)`, example:["The refuse was collected early morning.","Household refuse piled up outside.","They dumped the refuse illegally."], subject:"영어"},
 {en:"tear", meaning1:"눈물", meaning:"찢다", context:`(눈물은 '티어', 찢는 건 '테어') 발음 주의!`, example:["He began to tear the paper apart.","She tore the letter into pieces.","Don't tear the pages of the book."], subject:"영어"},
 ];
-const IDIOM = {en:"塞翁之馬", meaning1:"", meaning:"세상 일의 좋고 나쁨은 예측 불가", context:"고전 수필·격언집에서 자주 등장", example:["전화위복과 같은 뜻으로 쓰인다.","인생사 새옹지마라는 말도 있다.","고진감래와 함께 자주 인용된다."], subject:"한자", isIdiom:true};
 
 /* ---------- 공유하기 ---------- */
 function doShare(){
@@ -195,7 +230,7 @@ function doShare(){
     navigator.clipboard.writeText(location.href).then(()=>alert('링크 복사됨')).catch(()=>prompt('링크 복사', location.href));
   } else { alert('공유하려면 웹 주소로 배포 필요 (현재는 로컬 파일)'); }
 }
-document.getElementById('shareBtn').onclick = doShare;
+const _sb=document.getElementById('shareBtn'); if(_sb) _sb.onclick = doShare;
 
 /* ---------- 상태 ---------- */
 const LS_WRONG='voca_wrong_pool', LS_ADV='voca_advantage', LS_SHEET='voca_sheet_url',
@@ -220,46 +255,48 @@ function csvParse(text){
     return o;
   });
 }
-async function loadSheet(url){
-  try{
-    const r = await fetch(url); const txt = await r.text();
-    const rows = csvParse(txt);
-    sheetRows = rows; sj('voca_sheet_rows', rows); sj(LS_SHEET, url);
-    alert('불러오기 완료: '+rows.length+'개');
-    boot();
-  }catch(e){ alert('불러오기 실패. CSV 게시 링크 확인'); }
-}
-document.getElementById('gear').onclick=()=>{
-  const cur = localStorage.getItem(LS_SHEET)||'';
-  const url = prompt('구글시트를 "웹에 게시 > CSV"로 게시한 뒤, 그 링크를 붙여넣으세요.\n필요한 열: set,en,meaning1,meaning,context,example1,example2,example3,subject', cur);
-  if(url) loadSheet(url);
-};
-function wordsFromSheet(setNo){
-  if(!sheetRows) return null;
-  return sheetRows.filter(r=>String(r.set)===String(setNo)).map(r=>({
-    en:r.en, meaning1:r.meaning1, meaning:r.meaning, context:r.context, example:[r.example1,r.example2,r.example3].filter(Boolean), subject:r.subject
-  }));
-}
+document.getElementById('homeBtn').onclick=()=>{ location.href='./index.html'; };
+document.getElementById('csBtn').onclick=()=>{ location.href='./cs.html'; };
 
-/* ---------- 덱 구성 ---------- */
-function homeSetPool(){
-  const code = new URLSearchParams(location.search).get('set');
-  if(!code) return null;
-  const homeSets = (()=>{ try{ return JSON.parse(localStorage.getItem('voca_home_sets'))||[]; }catch(e){ return []; } })();
-  const found = homeSets.find(s=>s.code===code);
-  if(!found || !found.words || !found.words.length) return null;
-  return found.words.map(w=>({en:w.en, meaning:w.meaning})); // 영-한만, 예문/컨텍스트 없음
+/* ---------- 덱 구성: sets/{code}.csv 로드 ---------- */
+function csvToWords(text){
+  const rows=[]; const lines=text.replace(/\r/g,'').split('\n');
+  const head=parseCsvLine(lines[0]);
+  for(let i=1;i<lines.length;i++){
+    if(!lines[i].trim()) continue;
+    const cols=parseCsvLine(lines[i]); const o={};
+    head.forEach((h,k)=>o[h.trim()]=(cols[k]||'').trim());
+    rows.push({en:o.en, meaning1:o.meaning1, meaning:o.meaning, context:o.context,
+      example:[o.example1,o.example2,o.example3].filter(Boolean)});
+  }
+  return rows.filter(w=>w.en);
 }
-function buildDeck(){
-  const homePool = homeSetPool();
-  const pool = homePool || wordsFromSheet(currentSet) || SEED;
-  const newWords = [...pool].sort(()=>Math.random()-0.5).slice(0,9);
-  const reviewWords = wrongPool.sort(()=>Math.random()-0.5).slice(0,5);
-  const deck = [...newWords, ...reviewWords].sort(()=>Math.random()-0.5);
-  if(!homePool) deck.splice(Math.min(5, deck.length), 0, IDIOM);
-  return deck;
+function parseCsvLine(line){
+  const out=[]; let cur='', q=false;
+  for(let i=0;i<line.length;i++){ const c=line[i];
+    if(q){ if(c==='"'){ if(line[i+1]==='"'){cur+='"';i++;} else q=false; } else cur+=c; }
+    else { if(c==='"') q=true; else if(c===','){ out.push(cur); cur=''; } else cur+=c; }
+  }
+  out.push(cur); return out;
 }
 let deck=[];
+async function buildDeck(){
+  const code = new URLSearchParams(location.search).get('set');
+  window.__setCode = code || 'SET';
+  let pool = SEED;
+  if(code){
+    const step=code[0], mm=code.slice(1,3);
+    try{
+      const r = await fetch(`./sets/${step}/${mm}/${code}.csv`, {cache:'no-store'});
+      if(r.ok){ const words = csvToWords(await r.text()); if(words.length) pool = words; }
+    }catch(e){}
+  }
+  const newWords = [...pool].sort(()=>Math.random()-0.5).slice(0,15);
+  window.__setFirstWord = newWords[0]?.en || '';
+  const reviewWords = wrongPool.sort(()=>Math.random()-0.5).slice(0,5);
+  return [...newWords, ...reviewWords].sort(()=>Math.random()-0.5);
+}
+
 
 /* ---------- 텍스트 등장 모션 엔진 ---------- */
 const ENTRANCE = ['wave','blur','skate','scramble','beat','smooth','flip','spacing'];
@@ -269,7 +306,7 @@ function charSpans(text){
 }
 function playEnter(el, text){
   const style = ENTRANCE[motionCounter % ENTRANCE.length]; motionCounter++;
-  el.style.opacity='1';
+  el.style.opacity='1'; el.style.transition=''; el.style.filter='';
   if(style==='blur' || style==='smooth' || style==='spacing'){
     el.textContent = text;
     el.className = el.className.replace(/blk-\w+( on)?/g,'').trim();
@@ -282,40 +319,35 @@ function playEnter(el, text){
   if(style==='scramble'){
     const glyphs='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     let frame=0; const total=text.length;
-    const interval=setInterval(()=>{
+    const iv=setInterval(()=>{
       frame++;
       el.textContent = text.split('').map((ch,i)=>{
         if(ch===' ') return ' ';
-        const settleAt = Math.floor((i/total)*10)+4;
-        if(frame>=settleAt) return ch;
-        return glyphs[Math.floor(Math.random()*glyphs.length)];
+        const settleAt = Math.floor((i/total)*8)+3;
+        return frame>=settleAt ? ch : glyphs[Math.floor(Math.random()*glyphs.length)];
       }).join('');
-      if(frame>14){ clearInterval(interval); el.textContent=text; }
+      if(frame>12){ clearInterval(iv); el.textContent=text; }
     }, 40);
     return;
   }
   el.innerHTML = charSpans(text);
   const spans = el.querySelectorAll('.cw');
   const len = spans.length, mid=(len-1)/2;
-  const waveVariant = ['center','left','bottom'][Math.floor(Math.random()*3)];
+  const wv = ['center','left','bottom'][Math.floor(Math.random()*3)];
   spans.forEach((s,i)=>{
     let delay=0, cls='cw-wave';
-    if(style==='wave'){ cls='cw-wave'; delay = waveVariant==='center' ? Math.abs(i-mid)*0.09 : i*0.09; }
-    else if(style==='skate'){ cls='cw-skate'; delay=i*0.06; }
-    else if(style==='flip'){ cls='cw-flip'; delay=i*0.05; }
-    else if(style==='beat'){ const stressIdx = Math.floor(len*0.4); cls = i===stressIdx ? 'cw-beat' : 'cw-fade'; delay = i*0.03; }
+    if(style==='wave'){ cls='cw-wave'; delay = wv==='center' ? Math.abs(i-mid)*0.05 : i*0.05; }
+    else if(style==='skate'){ cls='cw-skate'; delay=i*0.04; }
+    else if(style==='flip'){ cls='cw-flip'; delay=i*0.035; }
+    else if(style==='beat'){ const si=Math.floor(len*0.4); cls=i===si?'cw-beat':'cw-fade'; delay=i*0.02; }
     s.style.animationDelay = delay+'s';
     s.classList.add(cls);
   });
 }
-const EXIT_DIRS=['exit-up','exit-right','exit-down','exit-left'];
 function playExit(el, cb){
-  const dir = EXIT_DIRS[Math.floor(Math.random()*4)];
-  el.classList.remove('blk-blur','blk-smooth','blk-spacing','on');
-  el.style.animation='';
-  void el.offsetWidth;
-  el.classList.add(dir);
-  setTimeout(()=>{ el.classList.remove(dir); el.style.opacity='0'; cb&&cb(); }, 220);
+  el.style.transition='opacity .18s ease';
+  el.style.opacity='0';
+  setTimeout(()=>{ cb&&cb(); }, 180);
 }
 
 /* ---------- 렌더 ---------- */
@@ -328,20 +360,17 @@ function slideHTML(w, i){
   const idiomStyle = w.isIdiom ? 'font-size:34px; white-space:normal; line-height:1.3;' : '';
   return `
   <div class="slide" data-i="${i}" data-en="${w.en}">
-    <div class="hook">${TAGLINES[i % TAGLINES.length]}</div>
-    <div class="hintline">${w.context || ''}</div>
+    <div class="hook accessory">${w.meaning1 ? `첫 뜻은 <b>(1) ${w.meaning1}</b>` : TAGLINES[i % TAGLINES.length]}</div>
+    <div class="hintline accessory">${w.context || ''}</div>
     <div class="morphbox" id="box-${i}">
       <span class="mtext en" id="en-${i}" style="opacity:0; font-family:${font}; ${idiomStyle}"></span>
       <span class="mtext ko" id="ko-${i}" style="opacity:0; display:none"></span>
     </div>
-    ${w.meaning1 ? `<div class="primaryTag">1번째 뜻: ${w.meaning1}</div>` : ''}
-    <button class="darkToggle" id="dt-${i}" data-i="${i}">
+    <button class="darkToggle accessory" id="dt-${i}" data-i="${i}">
       <span class="knob" id="dtknob-${i}">☀️</span>
       <span class="label r show">got it</span>
       <span class="label l">again</span>
     </button>
-    ${w.example && w.example.length ? `<div class="swipeHint">←<span>swipe</span></div>` : ''}
-    <div class="pullHint">↑<span>pull up</span></div>
   </div>`;
 }
 function endSlideHTML(){
@@ -385,6 +414,7 @@ reels.addEventListener('click', e=>{
   const i = +dt.dataset.i;
   const slideEl = document.querySelector(`.slide[data-i="${i}"]`);
   const nowDark = slideEl.classList.toggle('dark-local');
+  document.body.classList.toggle('screen-dark', nowDark); // 전면 UI도 즉시 다크 동기화
   dt.classList.toggle('dark', nowDark); // 위치 이동 즉시 시작(1s transition)
   const kn = document.getElementById('dtknob-'+i);
   kn.classList.remove('spinning'); void kn.offsetWidth; kn.classList.add('spinning');
@@ -421,7 +451,7 @@ let exI = 0, exWordI = null;
 function renderExample(){
   const w = deck[exWordI]; if(!w) return;
   const sentence = w.example[exI];
-  const re = new RegExp('('+w.en+'\\s+\\S+|'+w.en+')', 'i');
+  const re = new RegExp('\\b('+w.en+'(?:s|es|ed|ing|d)?)\\b', 'i'); // 목표단어 어형변화까지만
   const enHtml = sentence.replace(re, m=>`<span class="hl" id="hlEn">${m}</span>`);
   document.getElementById('exEnText').innerHTML = enHtml;
   document.getElementById('exKoText').innerHTML = `<span class="hl" id="hlKo">${w.meaning}</span>`;
@@ -445,25 +475,13 @@ function closeExample(){
   document.getElementById('exampleView').classList.remove('show');
 }
 
-let hx=0, hy=0, hlx=0, hly=0, hdrag=false, hslideI=null;
-reels.addEventListener('pointerdown', e=>{
-  const slide = e.target.closest('.slide'); if(!slide || slide.dataset.i==='end') return;
-  hdrag=true; hx=e.clientX; hy=e.clientY; hlx=hx; hly=hy; hslideI=+slide.dataset.i;
-});
-reels.addEventListener('pointermove', e=>{ if(hdrag){ hlx=e.clientX; hly=e.clientY; } });
-function endSwipe(){
-  if(!hdrag) return; hdrag=false;
-  const dx=hlx-hx, dy=hly-hy;
-  if(dx<-50 && Math.abs(dx)>Math.abs(dy)){ openExample(hslideI); } // 왼쪽스와이프 = 다음(예문)
-}
-reels.addEventListener('pointerup', endSwipe);
-reels.addEventListener('pointercancel', endSwipe);
+/* 예문 가로스와이프는 boot()의 touch 핸들러에서 통합 처리 */
 
-/* exampleView 내부 스와이프: 오른쪽=back, 왼쪽=다음 예문 */
+/* exampleView 내부 스와이프: 오른쪽=back, 왼쪽=다음 예문 (pointer+touch 병행) */
 const exView = document.getElementById('exampleView');
 let exx=0, exy=0, exlx=0, exly=0, exdrag=false;
-exView.addEventListener('pointerdown', e=>{ exdrag=true; exx=e.clientX; exy=e.clientY; exlx=exx; exly=exy; });
-exView.addEventListener('pointermove', e=>{ if(exdrag){ exlx=e.clientX; exly=e.clientY; } });
+function exStart(x,y){ exdrag=true; exx=x; exy=y; exlx=x; exly=y; }
+function exMove(x,y){ if(exdrag){ exlx=x; exly=y; } }
 function endExSwipe(){
   if(!exdrag) return; exdrag=false;
   const dx=exlx-exx, dy=exly-exy;
@@ -471,49 +489,103 @@ function endExSwipe(){
   if(dx>0){ closeExample(); }
   else { exI = (exI+1) % deck[exWordI].example.length; if(navigator.vibrate) navigator.vibrate(8); renderExample(); }
 }
+exView.addEventListener('pointerdown', e=> exStart(e.clientX, e.clientY));
+exView.addEventListener('pointermove', e=> exMove(e.clientX, e.clientY));
 exView.addEventListener('pointerup', endExSwipe);
 exView.addEventListener('pointercancel', endExSwipe);
+exView.addEventListener('touchstart', e=>{ const t=e.touches[0]; exStart(t.clientX, t.clientY); }, {passive:true});
+exView.addEventListener('touchmove', e=>{ const t=e.touches[0]; exMove(t.clientX, t.clientY); }, {passive:true});
+exView.addEventListener('touchend', endExSwipe);
+document.getElementById('exBack').onclick = closeExample; // 스와이프 실패 대비 탭 폴백
 
 /* ---------- 활성 슬라이드 감지 ---------- */
 let io;
 const activated = new Set();
-function setupObserver(){
-  if(io) io.disconnect();
-  io = new IntersectionObserver(entries=>{
-    entries.forEach(en=>{
-      const i = en.target.dataset.i;
-      if(en.isIntersecting && en.intersectionRatio>0.6){
-        window.__activeIdx = i==='end' ? deck.length : +i;
-        renderDots();
-        if(i!=='end'){
-          const slideEl = en.target;
-          slideEl.classList.remove('dark-local');
-          const dt = document.getElementById('dt-'+i);
-          if(dt){
-            dt.classList.remove('dark');
-            const kn=document.getElementById('dtknob-'+i); if(kn){ kn.textContent='☀️'; kn.style.background='#FFD400'; kn.classList.remove('spinning','land'); }
-            const lr=dt.querySelector('.label.r'), ll=dt.querySelector('.label.l');
-            if(lr) lr.classList.add('show'); if(ll) ll.classList.remove('show');
-          }
-          activated.add(+i);
-          initWord(+i);
-        }
-      } else if(i!=='end' && activated.has(+i)){
-        finalizeVote(+i);
-      }
-    });
-  }, {threshold:[0,0.6,1]});
-  document.querySelectorAll('.slide').forEach(s=>io.observe(s));
+/* ---------- 커스텀 스크롤 엔진 (ease-in-out) ---------- */
+let curIdx = 0, totalSlides = 0, scrolling = false;
+function slideActivate(i){
+  window.__activeIdx = i;
+  renderDots();
+  const slideEl = document.querySelector(`.slide[data-i="${i}"]`);
+  if(!slideEl || i>=deck.length) return; // end 슬라이드
+  const firstVisit = !activated.has(i);
+  if(firstVisit){
+    slideEl.classList.remove('dark-local');
+    document.body.classList.remove('screen-dark');
+    const dt = document.getElementById('dt-'+i);
+    if(dt){
+      dt.classList.remove('dark');
+      const kn=document.getElementById('dtknob-'+i); if(kn){ kn.textContent='☀️'; kn.style.background='#FFD400'; kn.classList.remove('spinning','land'); }
+      const lr=dt.querySelector('.label.r'), ll=dt.querySelector('.label.l');
+      if(lr) lr.classList.add('show'); if(ll) ll.classList.remove('show');
+    }
+  } else {
+    document.body.classList.toggle('screen-dark', slideEl.classList.contains('dark-local'));
+  }
+  activated.add(i);
+  slideEl.classList.remove('fading','enter'); void slideEl.offsetWidth; slideEl.classList.add('enter');
+  initWord(i);
+}
+function slideDeactivate(i){
+  if(i>=deck.length) return;
+  finalizeVote(i);
+  const slideEl = document.querySelector(`.slide[data-i="${i}"]`);
+  if(slideEl){ slideEl.classList.remove('enter'); slideEl.classList.add('fading'); }
+}
+function easeInOut(t){ return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; } // cubic ease-in-out
+function scrollToIndex(target){
+  target = Math.max(0, Math.min(totalSlides-1, target));
+  if(target===curIdx || scrolling) return;
+  scrolling = true;
+  const track = document.getElementById('track');
+  const H = window.innerHeight;
+  const startY = -curIdx*H, endY = -target*H;
+  const prev = curIdx;
+  const dur = 620, t0 = performance.now();
+  slideDeactivate(prev); // 이동 시작과 함께 이전 페이드아웃
+  function frame(now){
+    const p = Math.min(1, (now-t0)/dur);
+    const y = startY + (endY-startY)*easeInOut(p);
+    track.style.transform = `translateY(${y}px)`;
+    if(p<1){ requestAnimationFrame(frame); }
+    else { scrolling=false; curIdx=target; slideActivate(target); }
+  }
+  requestAnimationFrame(frame);
 }
 
 /* ---------- 부트 ---------- */
-function boot(){
-  deck = buildDeck();
+async function boot(){
+  deck = await buildDeck();
   motionCounter = 0;
-  reels.innerHTML = deck.map((w,i)=>slideHTML(w,i)).join('') + endSlideHTML();
+  reels.innerHTML = `<div id="track">${deck.map((w,i)=>slideHTML(w,i)).join('')}${endSlideHTML()}</div>`;
+  totalSlides = deck.length + 1;
+  curIdx = 0;
+  document.getElementById('track').style.transform = 'translateY(0)';
   renderDots();
-  setupObserver();
+  slideActivate(0);
   document.getElementById('finishBtn').onclick = startSpellTest;
+
+  // 휠/터치로 인덱스 이동
+  let wheelLock=false;
+  reels.addEventListener('wheel', e=>{
+    e.preventDefault();
+    if(wheelLock||scrolling) return;
+    wheelLock=true; setTimeout(()=>wheelLock=false, 200);
+    scrollToIndex(curIdx + (e.deltaY>0?1:-1));
+  }, {passive:false});
+  let tx0=0, ty0=0, tmoved=false;
+  reels.addEventListener('touchstart', e=>{ tx0=e.touches[0].clientX; ty0=e.touches[0].clientY; tmoved=false; }, {passive:true});
+  reels.addEventListener('touchmove', e=>{ if(Math.abs(e.touches[0].clientY-ty0)>10||Math.abs(e.touches[0].clientX-tx0)>10) tmoved=true; }, {passive:true});
+  reels.addEventListener('touchend', e=>{
+    if(!tmoved || scrolling) return;
+    const dx = e.changedTouches[0].clientX - tx0;
+    const dy = e.changedTouches[0].clientY - ty0;
+    if(Math.abs(dx)>Math.abs(dy)){ // 가로 = 예문
+      if(dx<-50 && curIdx<deck.length) openExample(curIdx);
+    } else if(Math.abs(dy)>40){ // 세로 = 스크롤
+      scrollToIndex(curIdx + (dy<0?1:-1));
+    }
+  });
 }
 function startSpellTest(){
   const queue = Object.keys(sessionVotes).filter(en=>sessionVotes[en]==='dont')
@@ -558,45 +630,127 @@ function startSpellTest(){
   draw();
 }
 function renderEnd(){
-  const wrongToday = Object.keys(sessionVotes).filter(en=>sessionVotes[en]==='dont')
+  const knowList = Object.keys(sessionVotes).filter(en=>sessionVotes[en]==='know')
     .map(en=> deck.find(w=>w.en===en) || {en, meaning:''});
-  const startedAt = +localStorage.getItem(LS_SET_START);
-  const daysPassed = (Date.now()-startedAt)/86400000;
-  const nextSetExists = wordsFromSheet(currentSet+1) !== null;
-  let gate = '';
-  if(daysPassed < 3){
-    gate = `<div class="next-set">다음 세트까지 ${Math.ceil(3-daysPassed)}일 남음<br>작심삼일 채우면 세트 ${currentSet+1} 오픈</div>`;
-  } else if(nextSetExists){
-    gate = `<div class="next-set">세트 ${currentSet+1} 오픈 완료<br><button class="big-btn" id="nextSetBtn" style="margin-top:10px;">다음 세트 시작</button></div>`;
-  } else {
-    gate = `<div class="next-set">다음 세트 단어를 구글시트에 추가하면 이어서 열려요</div>`;
-  }
+  const dontList = Object.keys(sessionVotes).filter(en=>sessionVotes[en]==='dont')
+    .map(en=> deck.find(w=>w.en===en) || {en, meaning:''});
+  const wrongToday = dontList;
+  const today = new Date();
+  const dateStr = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}.${String(today.getDate()).padStart(2,'0')}`;
+  const setTitle = `#${window.__setCode||''} ${window.__setFirstWord||''} 세트`;
+
   document.getElementById('app').innerHTML = `<div id="end"></div>`;
   const end=document.getElementById('end');
   end.innerHTML = `
-    <h2>오늘 학습 끝 · 세트 ${currentSet}</h2>
-    <div class="sub2">몰라요 ${wrongToday.length}개</div>
-    <div class="adv-badge">⚡ 누적 어드밴티지 ${advantage}</div>
-    ${wrongToday.length ? wrongToday.map(w=>`<div class="wrong-item"><div class="en">${w.en}</div><div class="ko">${w.meaning}</div></div>`).join('') : '<p style="color:var(--sub)">오늘은 다 맞았어요</p>'}
-    ${wrongToday.length ? '<button class="kakao-btn" id="kakaoBtn">틀린 단어 복사 (카톡 공유)</button>' : ''}
-    <button class="share-btn" id="shareBtn2">친구에게 보내기</button>
-    <button class="share-btn" id="restartBtn">처음부터 다시</button>
-    ${gate}
+    <div class="endHeader">
+      <div class="endHeadL">
+        <h2>${setTitle}</h2>
+        <div class="setdate">${dateStr}</div>
+      </div>
+      <button class="endToggle" id="endFilter">
+        <span class="knob" id="endKnob">🌙</span>
+        <span class="elabel r">Got it!</span>
+        <span class="elabel l">Again!</span>
+      </button>
+    </div>
+    <div id="stackList"></div>
+    <button class="kakao-btn" id="kakaoBtn">저장안하면 날라감. 카톡으로 복사해</button>
+    <button class="share-btn" id="homeBtn2">홈으로</button>
+    <button class="share-btn" id="restartBtn">현재 세트 다시 시작</button>
   `;
+
+  let filterDark = true; // 기본: Again(모르는거) 표시
+  const CARD_H=125, PEEK=42; // 겹침 2/3, 하단 1/3(42px) 노출
+  let openIdx = -1, scrollOff = 0; // scrollOff: 위로 축적된 스크롤(카드 수)
+  let curList = [];
+  function drawList(){
+    curList = filterDark ? dontList : knowList;
+    const wrap = document.getElementById('stackList');
+    openIdx = -1; scrollOff = 0;
+    if(!curList.length){ wrap.style.height='60px'; wrap.innerHTML = `<p style="text-align:center; opacity:.5; font-size:13px;">${filterDark?'몰라요 표시한 단어 없음':'알아요 표시한 단어 없음'}</p>`; return; }
+    wrap.innerHTML = curList.map((w,k)=>`
+      <div class="wcard" id="wc-${k}" data-k="${k}">
+        <div class="en">${w.en}</div>
+        <div class="ko" id="wko-${k}"></div>
+      </div>`).join('');
+    layout();
+    attachBoardGesture();
+  }
+  function layout(){
+    const boardH = 125 + Math.max(0, curList.length-3)*PEEK + 40;
+    const wrap=document.getElementById('stackList');
+    wrap.style.height = boardH+'px';
+    curList.forEach((w,k)=>{
+      const el=document.getElementById('wc-'+k);
+      const isOpen = k===openIdx;
+      const baseY = (k - scrollOff) * PEEK;
+      const jx = ((k*37)%7 - 3); // -3~3px 미세 좌우
+      const rot = ((k*53)%5 - 2) * 0.6; // -1.2~1.2deg 미세 회전
+      if(isOpen){
+        el.style.transform = `translate(0,${baseY-10}px) scale(1.2) rotate(0deg)`;
+        el.style.zIndex = 999;
+      } else {
+        el.style.transform = `translate(${jx}px,${baseY}px) rotate(${rot}deg)`;
+        el.style.zIndex = k+1;
+      }
+      el.classList.toggle('open', isOpen);
+    });
+  }
+  function openCard(k){
+    openIdx = (openIdx===k) ? -1 : k;
+    if(openIdx===k){ const koEl=document.getElementById('wko-'+k); koEl.textContent=''; playEnter(koEl, curList[k].meaning); }
+    if(navigator.vibrate) navigator.vibrate(8);
+    layout();
+  }
+  function attachBoardGesture(){
+    const wrap=document.getElementById('stackList');
+    let sx=0, sy=0, lx=0, ly=0, drag=false, startK=-1;
+    function start(x,y,target){ drag=true; sx=x; sy=y; lx=x; ly=y; const c=target.closest('.wcard'); startK=c?+c.dataset.k:-1; }
+    function move(x,y){ if(drag){ lx=x; ly=y; } }
+    function end(){
+      if(!drag) return; drag=false;
+      const dx=lx-sx, dy=ly-sy, dist=Math.hypot(dx,dy);
+      if(dist<12){ if(startK>=0) openCard(startK); return; } // 이동 거의 없음 = 탭
+      if(openIdx>=0){ openIdx=-1; layout(); return; } // 열린 상태 스와이프 = 닫기
+      if(Math.abs(dy)>36){ // 세로 스와이프 = 스크롤
+        scrollOff = Math.min(Math.max(0, scrollOff + (dy<0?1:-1)), Math.max(0,curList.length-3));
+        layout();
+      }
+    }
+    wrap.addEventListener('pointerdown', e=> start(e.clientX,e.clientY,e.target));
+    wrap.addEventListener('pointermove', e=> move(e.clientX,e.clientY));
+    wrap.addEventListener('pointerup', end);
+    wrap.addEventListener('pointercancel', end);
+    wrap.addEventListener('touchstart', e=>{ const t=e.touches[0]; start(t.clientX,t.clientY,e.target); }, {passive:true});
+    wrap.addEventListener('touchmove', e=>{ const t=e.touches[0]; move(t.clientX,t.clientY); }, {passive:true});
+    wrap.addEventListener('touchend', end);
+  }
+  drawList();
+
+  const endFilter = document.getElementById('endFilter');
+  const endKnob = document.getElementById('endKnob');
+  end.classList.add('dark'); // 기본 Again 상태
+  endFilter.classList.add('dark');
+  endFilter.onclick = ()=>{
+    filterDark = !filterDark;
+    end.classList.toggle('dark', filterDark);
+    endFilter.classList.toggle('dark', filterDark);
+    endKnob.textContent = filterDark ? '🌙' : '☀️';
+    if(navigator.vibrate) navigator.vibrate(8);
+    drawList();
+  };
+
   document.getElementById('restartBtn').onclick=()=>location.reload();
-  const nb = document.getElementById('nextSetBtn');
-  if(nb) nb.onclick=()=>{ currentSet++; sj(LS_SET,currentSet); localStorage.setItem(LS_SET_START, Date.now()); location.reload(); };
+  document.getElementById('homeBtn2').onclick=()=>{ location.href='./index.html'; };
   const kb = document.getElementById('kakaoBtn');
   if(kb) kb.onclick=()=>{
-    const code = 'A' + Date.now().toString().slice(-4);
+    const code = window.__setCode || ('A'+Date.now().toString().slice(-4));
     const txt = wrongToday.map(w=>`${w.en},${w.meaning}`).join('\n');
-    navigator.clipboard.writeText(`SET:${code}\n${txt}`).then(()=>{ kb.textContent='복사됨!'; });
+    navigator.clipboard.writeText(`${setTitle} · ${dateStr}\nSET:${code}\n${txt}`).then(()=>{ kb.textContent='복사됨!'; });
   };
-  document.getElementById('shareBtn2').onclick = doShare;
 }
 
-const savedUrl = localStorage.getItem(LS_SHEET);
-if(savedUrl){ loadSheet(savedUrl); } else { boot(); }
+boot();
 </script>
 </body>
 </html>
