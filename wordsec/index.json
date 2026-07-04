@@ -1,3 +1,10 @@
 [
-  {"code":"A0703","title":"수능 다의어 1", "word":"novel", "count":15}
+  {"code":"A0703","title":"수능 다의어 1","word":"novel","count":15},
+  {"code":"A0704","title":"구체→추상 확장 동사","word":"address","count":15},
+  {"code":"A0705","title":"동사↔명사 의미이동","word":"fine","count":15},
+  {"code":"A0706","title":"구체→은유 전이","word":"harbor","count":15},
+  {"code":"A0707","title":"자기반의어 contronym","word":"sanction","count":15},
+  {"code":"A0708","title":"신체·사물명사→동사","word":"head","count":15},
+  {"code":"A0709","title":"학술지문 빈출 다의어","word":"yield","count":15},
+  {"code":"A0710","title":"수능 킬러 다의어","word":"qualify","count":15}
 ]
