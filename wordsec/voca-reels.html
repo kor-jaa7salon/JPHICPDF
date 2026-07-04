@@ -1,4 +1,4 @@
-<!-- 260702 2230 -->
+<!-- 260704 1730 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -47,7 +47,7 @@ body.screen-dark .dot{background:rgba(255,255,255,.2);}
 .morphbox{position:relative; height:190px; width:100%; display:flex; align-items:center; justify-content:center; margin:14px 0; opacity:1; transition:opacity .5s ease;}
 .slide.fading .morphbox{opacity:0; transition:opacity .22s ease;}
 .mtext{font-size:52px; font-weight:800; text-align:center; white-space:nowrap; line-height:1.3;}
-.mtext.ko{font-size:30px; font-weight:400;}
+.mtext.ko{font-size:30px; font-weight:400; white-space:normal; word-break:keep-all; max-width:320px; margin:0 auto;}
 .mtext .cw{display:inline-block;}
 
 
@@ -105,7 +105,7 @@ body.screen-dark .dot{background:rgba(255,255,255,.2);}
 .exDivider{height:1px; background:#5e6791; margin:30px 0; opacity:.6;}
 .exKo{font-size:15px; line-height:1.7; color:rgba(255,255,255,.8);}
 @keyframes hlDraw{0%{background-size:0% 60%; transform:skewX(0deg);} 60%{transform:skewX(-2deg);} 100%{background-size:100% 60%; transform:skewX(0deg);}}
-.hl{background-image:linear-gradient(#9C8CFF,#9C8CFF); background-repeat:no-repeat; background-size:0% 60%;
+.hl{background-image:linear-gradient(#000B99,#000B99); background-repeat:no-repeat; background-size:0% 60%;
   background-position:0 88%; padding:0 1px; display:inline-block;}
 .hl.draw{animation:hlDraw .5s ease-out forwards;}
 
@@ -449,9 +449,11 @@ function finalizeVote(i){
 
 /* ---------- 왼쪽 스와이프: 풀스크린 예문뷰(3개 순환) ---------- */
 let exI = 0, exWordI = null;
+const EX_BG = ['#16193e','#1e2140','#12233a']; // 예문 1·2·3 배경
 function renderExample(){
   const w = deck[exWordI]; if(!w) return;
   const sentence = w.example[exI];
+  document.getElementById('exampleView').style.background /* per-ex bg */ = EX_BG[exI] || EX_BG[0];
   const re = new RegExp('\\b('+w.en+'(?:s|es|ed|ing|d)?)\\b', 'i'); // 목표단어 어형변화까지만
   const enHtml = sentence.replace(re, m=>`<span class="hl" id="hlEn">${m}</span>`);
   document.getElementById('exEnText').innerHTML = enHtml;
