@@ -1,4 +1,4 @@
-<!-- 260704 1820 -->
+<!-- 260704 1830 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -113,6 +113,7 @@ body.screen-dark .dot{background:rgba(255,255,255,.2);}
 .exEn{font-size:22px; line-height:1.6; font-family:'Georgia',serif;}
 .exDivider{height:1px; background:#5e6791; margin:30px 0; opacity:.6;}
 .exKo{font-size:15px; line-height:1.7; color:rgba(255,255,255,.8);}
+#exSwipeBtn{position:absolute; right:26px; bottom:calc(env(safe-area-inset-bottom) + 26px); background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.25); color:#fff; padding:9px 16px; border-radius:999px; font-size:13px; font-family:inherit;}
 @keyframes hlDraw{0%{background-size:0% 60%; transform:skewX(0deg);} 60%{transform:skewX(-2deg);} 100%{background-size:100% 60%; transform:skewX(0deg);}}
 .hl{background-image:linear-gradient(#000B99,#000B99); background-repeat:no-repeat; background-size:0% 60%;
   background-position:0 88%; padding:0 1px; display:inline-block;}
@@ -194,7 +195,7 @@ body.screen-dark .dot{background:rgba(255,255,255,.2);}
 </div>
 <div id="guide" class="guide-hidden">
   <div class="guideCard">
-    <img class="guideImg" src="https://img.jphic.co.kr/wordsec/img/user_guide.png?v=4" alt="사용법">
+    <img class="guideImg" src="https://img.jphic.co.kr/wordsec/img/user_guide.png" alt="사용법">
     <label class="guideChk"><input type="checkbox" id="guideNoShow"> 다음부터 열지않기</label>
     <button class="guideBtn" id="guideClose">시작하기</button>
   </div>
@@ -207,6 +208,7 @@ body.screen-dark .dot{background:rgba(255,255,255,.2);}
     <div class="exDivider"></div>
     <div class="exKo" id="exKoText"></div>
   </div>
+  <button id="exSwipeBtn">← swipe</button>
 </div>
 
 <script>
@@ -511,7 +513,7 @@ function endExSwipe(){
   const dx=exlx-exx, dy=exly-exy;
   if(Math.abs(dx)<50 || Math.abs(dx)<Math.abs(dy)) return;
   if(dx>0){ closeExample(); }
-  else { exI = (exI+1) % deck[exWordI].example.length; if(navigator.vibrate) navigator.vibrate(8); renderExample(); const b=document.querySelector('.exBody'); b.classList.remove('slideIn'); void b.offsetWidth; b.classList.add('slideIn'); }
+  else { nextExample(); }
 }
 exView.addEventListener('pointerdown', e=> exStart(e.clientX, e.clientY));
 exView.addEventListener('pointermove', e=> exMove(e.clientX, e.clientY));
@@ -521,6 +523,13 @@ exView.addEventListener('touchstart', e=>{ const t=e.touches[0]; exStart(t.clien
 exView.addEventListener('touchmove', e=>{ const t=e.touches[0]; exMove(t.clientX, t.clientY); }, {passive:true});
 exView.addEventListener('touchend', endExSwipe);
 document.getElementById('exBack').onclick = closeExample; // 스와이프 실패 대비 탭 폴백
+function nextExample(){
+  exI = (exI+1) % deck[exWordI].example.length;
+  if(navigator.vibrate) navigator.vibrate(8);
+  renderExample();
+  const b=document.querySelector('.exBody'); b.classList.remove('slideIn'); void b.offsetWidth; b.classList.add('slideIn');
+}
+document.getElementById('exSwipeBtn').onclick = nextExample;
 
 /* ---------- 활성 슬라이드 감지 ---------- */
 let io;
