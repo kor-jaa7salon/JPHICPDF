@@ -27,17 +27,21 @@ main{padding:34px 20px 70px} h2{font-size:27px;margin:48px 0 18px} h3{font-size:
 .sectioncard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:18px}
 footer{padding:30px 20px 50px;color:var(--muted);font-size:13px}
 @media(max-width:760px){.hero h1{font-size:31px} .grid,.mapgrid,.gallery{grid-template-columns:1fr} .day{grid-template-columns:1fr;gap:4px} .photo{height:220px} iframe{height:280px}}
+
+.booking-board{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;margin:20px 0 34px}
+.booking-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px}
+.booking-head h2{margin:0}
+.booking-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.bookitem{border:1px solid var(--line);border-radius:15px;padding:16px;background:#fcfbf8}
+.booktop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.badge{display:inline-block;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800;white-space:nowrap}
+.badge.now{background:#ffe9e6;color:#a74137}.badge.soon{background:#fff1d8;color:#92661d}.badge.rec{background:#e9f1f7;color:#2d5f8a}.badge.free{background:#e9f2ec;color:#426a53}
+.deadline{font-size:13px;font-weight:800;margin:6px 0;color:#33424d}
+.bookitem p{font-size:14px;margin:8px 0;color:#52616b}
+.booking-note{margin-top:14px;padding:12px 14px;border-radius:12px;background:#f3f5f6;font-size:13px;color:#5d6972}
+@media(max-width:760px){.booking-grid{grid-template-columns:1fr}.booking-head{display:block}}
+
 </style>
-
-<meta name="description" content="도쿄 2박3일 아트 트립 · 모리미술관, 오르세 소장전, 터너전, 다이칸야마, 대욕장 호텔 일정">
-<link rel="canonical" href="https://www.jphic.co.kr/tokyo/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="도쿄 2박3일 아트 트립 · 2026.11.30–12.2">
-<meta property="og:description" content="모리미술관 · 오르세 소장전 · 터너전 · 다이칸야마 · 대욕장 호텔까지 한 번에 보는 2박3일 일정">
-<meta property="og:url" content="https://www.jphic.co.kr/tokyo/">
-<meta property="og:image" content="https://art-view.roppongihills.com/en/info/img/index_mv-sp_210422.jpg">
-<meta name="twitter:card" content="summary_large_image">
-
 </head>
 <body>
 <section class="hero">
@@ -52,14 +56,122 @@ footer{padding:30px 20px 50px;color:var(--muted);font-size:13px}
   </div>
 </section>
 
-
-<div style="max-width:1180px;margin:18px auto 0;padding:0 20px">
-  <div style="background:#fff;border:1px solid #dedbd3;border-radius:14px;padding:13px 16px;font-size:14px;color:#65727c">
-    공유주소 · <a href="https://www.jphic.co.kr/tokyo/" style="color:#2467a6;font-weight:700">https://www.jphic.co.kr/tokyo/</a>
-  </div>
-</div>
-
 <main class="wrap">
+
+<section class="booking-board">
+  <div class="booking-head">
+    <div>
+      <div class="small">BOOKING CHECKLIST</div>
+      <h2 style="margin-top:4px">미리 예약할 것</h2>
+    </div>
+    <div class="small">2026.10.27 기준 · 공식 사이트 확인</div>
+  </div>
+
+  <div class="booking-grid">
+    <div class="bookitem">
+      <div class="booktop">
+        <div><b>11/30 · 모리미술관</b><div class="deadline">지금 예약 추천 · 조기할인 10/30까지</div></div>
+        <span class="badge now">지금 하기</span>
+      </div>
+      <p>날짜·시간 지정 온라인 예매 가능. 11/30은 월요일 정상 개관 10:00–22:00. 평일 성인 온라인 정상가는 ¥2,600이지만, <b>10/30까지 조기 예매 시 ¥2,100</b>. 2인이라면 지금 사는 것이 가장 유리합니다. Wave UFO 체험은 수량이 제한됩니다.</p>
+      <div class="btns">
+        <a class="btn primary" href="https://www.mori.art.museum/en/exhibitions/marikomori/05/" target="_blank">공식 티켓 안내</a>
+        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Mori+Art+Museum+Tokyo" target="_blank">Google 지도</a>
+      </div>
+    </div>
+
+    <div class="bookitem">
+      <div class="booktop">
+        <div><b>12/1 · 오르세 미술관 소장전</b><div class="deadline">전시 전 예매 · 11/13 23:59까지</div></div>
+        <span class="badge soon">11/13 마감</span>
+      </div>
+      <p>12/1 관람은 <b>시간 지정 예약이 필요하지 않습니다.</b> 다만 사전권은 일반 ¥2,200(현장 ¥2,400)으로 저렴하고, 11/13까지 판매합니다. 인기 전시라 티켓 구매 줄을 피하려면 미리 사두는 편이 좋습니다.</p>
+      <div class="btns">
+        <a class="btn primary" href="https://art.nikkei.com/orsay2627/ticket/" target="_blank">공식 티켓</a>
+        <a class="btn" href="https://art.nikkei.com/orsay2627/" target="_blank">전시 공식</a>
+        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Tokyo+Metropolitan+Art+Museum" target="_blank">Google 지도</a>
+      </div>
+    </div>
+
+    <div class="bookitem">
+      <div class="booktop">
+        <div><b>12/1 · 터너전</b><div class="deadline">미리 구매 권장 · 2인 페어권 확인</div></div>
+        <span class="badge rec">예약 권장</span>
+      </div>
+      <p>국립서양미술관 공식 온라인 티켓 판매 중. 일반 사전권 ¥2,200/인. <b>2인 페어권 ¥4,200</b>은 12/20까지 판매되고 2027/1/11까지 사용 가능하므로 12/1 일정에 맞습니다. 오르세 관람 후 도보 이동 가능합니다.</p>
+      <div class="btns">
+        <a class="btn primary" href="https://turner2026-27.exhibit.jp/ticket/" target="_blank">공식 티켓</a>
+        <a class="btn" href="https://www.nmwa.go.jp/en/exhibitions/2026turner.html" target="_blank">미술관 공식</a>
+        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=The+National+Museum+of+Western+Art+Tokyo" target="_blank">Google 지도</a>
+      </div>
+    </div>
+
+    <div class="bookitem">
+      <div class="booktop">
+        <div><b>나리타 ↔ 도쿄 · Skyliner</b><div class="deadline">승차 30일 전부터 구매 가능</div></div>
+        <span class="badge rec">선택 예약</span>
+      </div>
+      <p>외국인용 Skyliner e-ticket은 승차 <b>30일 전부터</b> 구매 가능. 11/30 도착편은 10/31부터, 12/2 귀국편은 11/2부터 구매할 수 있습니다. 입국 지연 변수가 있으므로 도착편은 ‘필수 사전예약’까지는 아닙니다.</p>
+      <div class="btns">
+        <a class="btn primary" href="https://www.keisei.co.jp/keisei/tetudou/skyliner/e-ticket/ko/" target="_blank">Skyliner e-ticket</a>
+        <a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Narita+International+Airport&destination=Keisei+Ueno+Station&travelmode=transit" target="_blank">공항→우에노 교통</a>
+      </div>
+    </div>
+
+    <div class="bookitem">
+      <div class="booktop">
+        <div><b>12/1 점심 · 伊豆榮 梅川亭</b><div class="deadline">전화 예약만 가능</div></div>
+        <span class="badge rec">예약 권장</span>
+      </div>
+      <p>우에노공원 안 장어집. 공식 안내상 <b>예약은 전화로만</b> 받습니다. 12/1은 화요일이라 영업일이며, 오르세→점심→터너 동선을 고정하려면 예약 가치가 큽니다. 전화 +81-3-5685-2011.</p>
+      <div class="btns">
+        <a class="btn primary" href="https://izuei.co.jp/shop/" target="_blank">공식 점포 안내</a>
+        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Izuei+Umekawa-tei+Ueno" target="_blank">Google 지도</a>
+      </div>
+    </div>
+
+    <div class="bookitem">
+      <div class="booktop">
+        <div><b>12/2 · IVY PLACE</b><div class="deadline">브런치 시간 고정 시 웹예약</div></div>
+        <span class="badge rec">예약 가능</span>
+      </div>
+      <p>다이칸야마 T-SITE 안. 공식 사이트에서 전화·웹 예약이 가능합니다. 마지막 날 공항 이동 시간이 정해져 있으므로 점심 시간을 확실히 고정하고 싶다면 예약하는 편이 편합니다.</p>
+      <div class="btns">
+        <a class="btn primary" href="https://www.tysons.jp/ivyplace/en/access/" target="_blank">공식 예약/안내</a>
+        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=IVY+PLACE+Daikanyama" target="_blank">Google 지도</a>
+      </div>
+    </div>
+
+    <div class="bookitem">
+      <div class="booktop">
+        <div><b>11/30 점심 · Butagumi Shokudo</b><div class="deadline">현장 방문으로 두기</div></div>
+        <span class="badge free">예약 우선 아님</span>
+      </div>
+      <p>공식 페이지에는 영업시간과 위치 안내는 있지만 사전예약 안내가 확인되지 않습니다. 나리타 도착 시간이 유동적이라 첫날은 예약을 걸기보다 현장 상황에 맞춰 식사하는 편이 안전합니다.</p>
+      <div class="btns">
+        <a class="btn" href="https://www.butagumi.com/shokudo/access/index.html" target="_blank">공식 안내</a>
+        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Butagumi+Shokudo+Roppongi" target="_blank">Google 지도</a>
+      </div>
+    </div>
+
+    <div class="bookitem">
+      <div class="booktop">
+        <div><b>다이칸야마 T-SITE · 나카메구로</b><div class="deadline">사전예약 불필요</div></div>
+        <span class="badge free">예약 없음</span>
+      </div>
+      <p>서점·동네 산책 자체는 예약할 필요 없습니다. 12/2 오전 일정은 날씨와 컨디션에 따라 자유롭게 조절하면 됩니다.</p>
+      <div class="btns">
+        <a class="btn" href="https://store.tsite.jp/daikanyama/english/" target="_blank">T-SITE 공식</a>
+        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Daikanyama+T-SITE" target="_blank">Google 지도</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="booking-note">
+    <b>예약 순서 추천:</b> ① 모리미술관 10/30 전 → ② 오르세 11/13 전 → ③ 터너 페어권 → ④ 우에노 장어집 전화 → ⑤ IVY PLACE → ⑥ Skyliner는 30일 전부터 필요에 따라.
+  </div>
+</section>
+
 <h2>이번 여행의 숙박 조합</h2>
 <div class="choice"><b>추천:</b> 11/30 롯폰기 미쓰이가든 1박 → 12/1 우에노 대욕장 호텔 1박.<br>
 첫날은 모리미술관과 롯폰기 동선을 살리고, 둘째 날은 오르세·터너를 본 뒤 우에노에서 바로 쉬는 구성입니다.</div>
@@ -86,17 +198,17 @@ footer{padding:30px 20px 50px;color:var(--muted);font-size:13px}
 <h2>3일 동선</h2>
 <section class="sectioncard">
 <div class="day"><div class="daytag" style="color:var(--red)">11/30 MON</div><div><div class="route">나리타 → 롯폰기 → 모리미술관 → 아자부주반</div>
-<p>10:00 나리타 도착 → 12:30 전후 호텔 짐 보관 → 점심 → 14:00~17:00 모리미술관 → 롯폰기힐스·아자부주반 산책 → 저녁.</p>
+<p>10:00 나리타 도착 → 12:30 전후 호텔 짐 보관 → 점심 → 14:00~17:00 모리미술관 <b style='color:#b6534c'>[사전예매 추천]</b> → 롯폰기힐스·아자부주반 산책 → 저녁.</p>
 <div class="btns"><a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Narita+International+Airport&destination=Mitsui+Garden+Hotel+Roppongi+Tokyo+Premier&travelmode=transit" target="_blank">공항→호텔 교통</a>
 <a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Mitsui+Garden+Hotel+Roppongi+Tokyo+Premier&destination=Mori+Art+Museum&travelmode=walking" target="_blank">호텔→모리 도보</a></div></div></div>
 
 <div class="day"><div class="daytag" style="color:var(--blue)">12/1 TUE</div><div><div class="route">롯폰기 → 우에노 → 오르세전 → 터너전 → 시노바즈 연못</div>
-<p>호텔 조식 → 우에노 이동 → 09:30 오르세 미술관 소장전 → 점심 → 13:30 국립서양미술관 터너전 → 시노바즈 연못 → 대욕장.</p>
+<p>호텔 조식 → 우에노 이동 → 09:30 오르세 미술관 소장전 <b style='color:#b6534c'>[11/13까지 사전권]</b> → 점심 → 13:30 국립서양미술관 터너전 <b style='color:#315f8d'>[페어권 확인]</b> → 시노바즈 연못 → 대욕장.</p>
 <div class="btns"><a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Mitsui+Garden+Hotel+Roppongi+Tokyo+Premier&destination=Tokyo+Metropolitan+Art+Museum&travelmode=transit" target="_blank">롯폰기→우에노 교통</a>
 <a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Tokyo+Metropolitan+Art+Museum&destination=The+National+Museum+of+Western+Art+Tokyo&travelmode=walking" target="_blank">오르세→터너 도보</a></div></div></div>
 
 <div class="day"><div class="daytag" style="color:var(--green)">12/2 WED</div><div><div class="route">우에노 → 다이칸야마 T-SITE → 나카메구로 → 나리타</div>
-<p>조식·체크아웃 후 다이칸야마 T-SITE → 나카메구로 산책 → 브런치/점심 → 14:00~14:30 이동 준비 → 15:00 시내 출발 → 18:00 보딩.</p>
+<p>조식·체크아웃 후 다이칸야마 T-SITE → 나카메구로 산책 → 브런치/점심 <b style='color:#315f8d'>[예약 가능]</b> → 14:00~14:30 이동 준비 → 15:00 시내 출발 → 18:00 보딩.</p>
 <div class="btns"><a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=%26Here+TOKYO+UENO&destination=Daikanyama+T-SITE&travelmode=transit" target="_blank">우에노→다이칸야마</a>
 <a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Daikanyama+T-SITE&destination=Nakameguro+Station&travelmode=walking" target="_blank">T-SITE→나카메구로</a>
 <a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Nakameguro+Station&destination=Narita+International+Airport&travelmode=transit" target="_blank">나카메구로→나리타</a></div></div></div>
@@ -165,7 +277,7 @@ footer{padding:30px 20px 50px;color:var(--muted);font-size:13px}
 </main>
 
 <footer class="wrap">
-외부 사진은 해당 공개 웹 이미지 URL을 불러오는 방식입니다. 호텔 요금·욕장 운영시간·전시 운영시간·교통은 출발 직전 공식 페이지에서 최종 확인하세요.
+외부 사진은 해당 공개 웹 이미지 URL을 불러오는 방식입니다. 호텔 요금·욕장 운영시간·전시 운영시간·교통은 출발 직전 공식 페이지에서 최종 확인하세요. 티켓/예약 정보는 2026.10.27 공식 안내 기준으로 업데이트했습니다.
 </footer>
 </body>
 </html>
