@@ -1,8 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>도쿄 2박3일 아트 트립 · 2026.11.30–12.2</title>
 <style>
 :root{--ink:#19232c;--muted:#65727c;--paper:#f7f5ef;--card:#fff;--line:#dedbd3;--blue:#315f8d;--red:#b6534c;--green:#587967;--gold:#aa7f35;}
@@ -41,246 +42,500 @@ footer{padding:30px 20px 50px;color:var(--muted);font-size:13px}
 .booking-note{margin-top:14px;padding:12px 14px;border-radius:12px;background:#f3f5f6;font-size:13px;color:#5d6972}
 @media(max-width:760px){.booking-grid{grid-template-columns:1fr}.booking-head{display:block}}
 
+
+/* JPHIC field research · 2026.11.14 update */
+.research-hero{background:#203746;color:#fff;border-radius:20px;padding:26px;margin-top:24px}.research-hero p{color:#d8e4e9;margin:8px 0}.research-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.research-tabs button{border:1px solid #b6c7ce;border-radius:100px;background:#fff;padding:10px 18px;font-weight:800;cursor:pointer}.research-tabs button.active{background:#203746;color:#fff}.research-panel[hidden]{display:none}.research-day{border:1px solid var(--line);border-radius:18px;background:#fff;padding:20px;margin:15px 0}.research-day h3{margin-bottom:12px}.research-stop{border-top:1px solid #e9e8e3;padding:15px 0}.research-stop:first-of-type{border-top:0}.research-stop b{color:#203746}.research-meta{font-size:13px;color:#5d6d75;margin:5px 0}.research-tasks{display:grid;gap:7px;margin-top:8px}.research-tasks label{display:flex;gap:9px;align-items:flex-start;font-size:14px;cursor:pointer}.research-tasks input{accent-color:#315f8d;width:16px;height:16px;margin-top:4px;flex:none}.research-notes{display:grid;grid-template-columns:1fr 1fr;gap:12px}.research-notes label{font-size:13px;font-weight:800}.research-notes textarea{display:block;width:100%;min-height:86px;margin-top:7px;padding:12px;border-radius:12px;border:1px solid #cfd5d9;font:inherit;resize:vertical}.research-progress{background:#e0e8ec;border-radius:100px;height:9px;overflow:hidden;margin-top:10px}.research-progress div{height:100%;background:#587967;width:0;transition:width .2s}.research-stat{font-weight:800;font-size:14px}.research-help{font-size:13px;color:#6b747c}.research-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.research-actions button{cursor:pointer;background:#fff;border:1px solid #b9c9d2;border-radius:100px;padding:9px 14px;font-weight:700}.research-photo{color:#315f8d}.research-business{color:#587967}.research-warning{background:#f4f1e8;border-radius:12px;padding:14px;font-size:14px}.research-panel .research-day .btns{margin-top:7px}@media(max-width:760px){.research-notes{grid-template-columns:1fr}.research-hero{padding:20px}}
+<style>
+#jphic-japanese{scroll-margin-top:20px}.voice-heading h2{font-size:25px}.voice-tool{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:13px;border-radius:13px;background:#eaf0f4;margin:17px 0}.voice-tool select,.voice-tool button{font-size:14px;padding:10px;border:1px solid #b9c7cf;border-radius:10px;background:white;color:#182630}.voice-tool #voice-status{font-size:13px;color:#455c6a}.voice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}.voice-card{border:1px solid #d6dfe4;border-radius:15px;background:#fff;padding:16px;min-width:0}.voice-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}.voice-index{font-size:12px;background:#e5edf2;color:#365a70;border-radius:30px;padding:3px 8px}.voice-ja{font-size:17px;line-height:1.7;font-weight:700;overflow-wrap:anywhere}.voice-ko{font-size:13px;color:#5d6871;margin:10px 0}.voice-buttons{display:flex;gap:8px;flex-wrap:wrap}.voice-buttons button{border-radius:10px;padding:11px 13px;font-weight:700;font-size:14px;cursor:pointer}.speak-btn{background:#233746;color:white;border:1px solid #233746;flex:1}.copy-btn{background:#fff;color:#233746;border:1px solid #b6c4cd}.speak-btn.playing{background:#24765d;border-color:#24765d}@media(max-width:760px){.voice-grid{grid-template-columns:1fr}.voice-ja{font-size:18px}.voice-buttons button{min-height:47px}}
+
+/* 상단 섹션 바로가기: 모바일 가로 스크롤, 모든 앵커 부드러운 이동 */
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+[id]{scroll-margin-top:85px}
+.jump-nav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);border-bottom:1px solid #d8dcd8;box-shadow:0 4px 12px rgba(23,37,48,.07);backdrop-filter:blur(12px)}
+.jump-inner{max-width:1180px;margin:auto;padding:10px 18px;display:flex;gap:9px;overflow-x:auto;align-items:center;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.jump-inner a{white-space:nowrap;flex:none;text-decoration:none;background:#f2f5f5;color:#253846;border:1px solid #d9e1e3;border-radius:50px;padding:8px 12px;font-size:13px;font-weight:700;transition:background .2s,color .2s}
+.jump-inner a:hover,.jump-inner a:focus-visible,.jump-inner a.active{background:#243846;color:white;outline-offset:3px}
+.jump-label{white-space:nowrap;flex:none;font-size:12px;font-weight:800;color:#596874;margin-right:3px}
+@media(max-width:760px){.jump-inner{padding:9px 12px;gap:7px}.jump-inner a{padding:8px 11px;font-size:12px}.jump-label{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
-</head>
+<style>
+.voice-reading{font-size:14px;line-height:1.65;color:#2b6691;font-weight:650;margin-top:5px;overflow-wrap:anywhere}.voice-card .voice-ko{margin-top:6px}
+</style></head>
 <body>
 <section class="hero">
-  <div class="wrap">
-    <div class="small" style="color:#b9c6ce">TOKYO ART TRIP</div>
-    <h1>도쿄 2박3일<br>미술관 · 동네 · 욕장 여행</h1>
-    <p>2026.11.30(월) – 12.2(수) · 성인 2명 · 나리타 10:00 도착 / 귀국일 15:00 시내 출발</p>
-    <div class="chips">
-      <span class="chip">모리미술관</span><span class="chip">오르세 소장전</span><span class="chip">터너전</span>
-      <span class="chip">다이칸야마 T-SITE</span><span class="chip">1박 25~30만 원</span><span class="chip">대욕장 1박</span>
-    </div>
-  </div>
+<div class="wrap">
+<div class="small" style="color:#b9c6ce">TOKYO ART TRIP</div>
+<h1>도쿄 2박3일<br/>미술관 · 동네 · 욕장 여행</h1>
+<p>2026.11.30(월) – 12.2(수) · 성인 2명 (본인 + 친구 Kim) · 나리타 10:00 도착 / 귀국일 15:00 시내 출발</p>
+<div class="chips">
+<span class="chip">모리미술관</span><span class="chip">오르세 소장전</span><span class="chip">터너전</span>
+<span class="chip">다이칸야마 T-SITE</span><span class="chip">1박 25~30만 원</span><span class="chip">대욕장 1박</span>
+</div>
+</div>
 </section>
+
+<nav class="jump-nav" aria-label="페이지 섹션 바로가기"><div class="jump-inner"><span class="jump-label">바로가기</span><a href="#booking">예약</a><a href="#tickets">티켓</a><a href="#hotel">호텔</a><a href="#route-v1">일정 V1</a><a href="#route-v2">일정 V2</a><a href="#research">사업 리서치</a><a href="#jphic-japanese">일본어 음성</a><a href="#museums">미술관</a><a href="#maps">지도</a><a href="#luggage">짐 보관</a></div></nav>
 
 <main class="wrap">
-
 <section class="booking-board">
-  <div class="booking-head">
-    <div>
-      <div class="small">BOOKING CHECKLIST</div>
-      <h2 style="margin-top:4px">미리 예약할 것</h2>
-    </div>
-    <div class="small">2026.10.27 기준 · 공식 사이트 확인</div>
-  </div>
-
-  <div class="booking-grid">
-    <div class="bookitem">
-      <div class="booktop">
-        <div><b>11/30 · 모리미술관 + 어린왕자</b><div class="deadline">둘 다 사전예약 추천 · 별도 티켓</div></div>
-        <span class="badge now">지금 하기</span>
-      </div>
-      <p><b>① Mariko Mori: All That Shines</b> — 14:30 전후 입장 추천. 10/30까지 성인 사전권 ¥2,100/인. 이후 평일 온라인 정상가 ¥2,600/인.</p>
-      <p><b>② Le Petit Prince + Tokyo City View</b> — <b>17:00 슬롯 추천.</b> 날짜·시간 지정제. 2인이라면 12/25까지 판매하는 <b>페어티켓 ¥3,000</b>이 가장 유리합니다. 어린왕자 티켓으로 Tokyo City View 전망대도 함께 관람할 수 있습니다.</p>
-      <p><b>추천 구매 조합:</b> 모리 사전권 2장(¥4,200) + 어린왕자 페어티켓(¥3,000) = <b>총 ¥7,200 / 2인</b>.</p>
-      <div class="btns">
-        <a class="btn primary" href="https://www.mori.art.museum/en/exhibitions/marikomori/05/" target="_blank">모리 공식 티켓 안내</a>
-        <a class="btn primary" href="https://tcv.roppongihills.com/jp/exhibitions/hoshinooujisama/index.html" target="_blank">어린왕자 공식 티켓</a>
-        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Mori+Art+Museum+Tokyo" target="_blank">Google 지도</a>
-      </div>
-    </div>
-
-    <div class="bookitem">
-      <div class="booktop">
-        <div><b>12/1 · 오르세 미술관 소장전</b><div class="deadline">전시 전 예매 · 11/13 23:59까지</div></div>
-        <span class="badge soon">11/13 마감</span>
-      </div>
-      <p>12/1 관람은 <b>시간 지정 예약이 필요하지 않습니다.</b> 다만 사전권은 일반 ¥2,200(현장 ¥2,400)으로 저렴하고, 11/13까지 판매합니다. 인기 전시라 티켓 구매 줄을 피하려면 미리 사두는 편이 좋습니다.</p>
-      <div class="btns">
-        <a class="btn primary" href="https://art.nikkei.com/orsay2627/ticket/" target="_blank">공식 티켓</a>
-        <a class="btn" href="https://art.nikkei.com/orsay2627/" target="_blank">전시 공식</a>
-        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Tokyo+Metropolitan+Art+Museum" target="_blank">Google 지도</a>
-      </div>
-    </div>
-
-    <div class="bookitem">
-      <div class="booktop">
-        <div><b>12/1 · 터너전</b><div class="deadline">미리 구매 권장 · 2인 페어권 확인</div></div>
-        <span class="badge rec">예약 권장</span>
-      </div>
-      <p>국립서양미술관 공식 온라인 티켓 판매 중. 일반 사전권 ¥2,200/인. <b>2인 페어권 ¥4,200</b>은 12/20까지 판매되고 2027/1/11까지 사용 가능하므로 12/1 일정에 맞습니다. 오르세 관람 후 도보 이동 가능합니다.</p>
-      <div class="btns">
-        <a class="btn primary" href="https://turner2026-27.exhibit.jp/ticket/" target="_blank">공식 티켓</a>
-        <a class="btn" href="https://www.nmwa.go.jp/en/exhibitions/2026turner.html" target="_blank">미술관 공식</a>
-        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=The+National+Museum+of+Western+Art+Tokyo" target="_blank">Google 지도</a>
-      </div>
-    </div>
-
-    <div class="bookitem">
-      <div class="booktop">
-        <div><b>나리타 ↔ 도쿄 · Skyliner</b><div class="deadline">승차 30일 전부터 구매 가능</div></div>
-        <span class="badge rec">선택 예약</span>
-      </div>
-      <p>외국인용 Skyliner e-ticket은 승차 <b>30일 전부터</b> 구매 가능. 11/30 도착편은 10/31부터, 12/2 귀국편은 11/2부터 구매할 수 있습니다. 입국 지연 변수가 있으므로 도착편은 ‘필수 사전예약’까지는 아닙니다.</p>
-      <div class="btns">
-        <a class="btn primary" href="https://www.keisei.co.jp/keisei/tetudou/skyliner/e-ticket/ko/" target="_blank">Skyliner e-ticket</a>
-        <a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Narita+International+Airport&destination=Keisei+Ueno+Station&travelmode=transit" target="_blank">공항→우에노 교통</a>
-      </div>
-    </div>
-
-    <div class="bookitem">
-      <div class="booktop">
-        <div><b>12/1 점심 · 伊豆榮 梅川亭</b><div class="deadline">전화 예약만 가능</div></div>
-        <span class="badge rec">예약 권장</span>
-      </div>
-      <p>우에노공원 안 장어집. 공식 안내상 <b>예약은 전화로만</b> 받습니다. 12/1은 화요일이라 영업일이며, 오르세→점심→터너 동선을 고정하려면 예약 가치가 큽니다. 전화 +81-3-5685-2011.</p>
-      <div class="btns">
-        <a class="btn primary" href="https://izuei.co.jp/shop/" target="_blank">공식 점포 안내</a>
-        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Izuei+Umekawa-tei+Ueno" target="_blank">Google 지도</a>
-      </div>
-    </div>
-
-    <div class="bookitem">
-      <div class="booktop">
-        <div><b>12/2 · IVY PLACE</b><div class="deadline">브런치 시간 고정 시 웹예약</div></div>
-        <span class="badge rec">예약 가능</span>
-      </div>
-      <p>다이칸야마 T-SITE 안. 공식 사이트에서 전화·웹 예약이 가능합니다. 마지막 날 공항 이동 시간이 정해져 있으므로 점심 시간을 확실히 고정하고 싶다면 예약하는 편이 편합니다.</p>
-      <div class="btns">
-        <a class="btn primary" href="https://www.tysons.jp/ivyplace/en/access/" target="_blank">공식 예약/안내</a>
-        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=IVY+PLACE+Daikanyama" target="_blank">Google 지도</a>
-      </div>
-    </div>
-
-    <div class="bookitem">
-      <div class="booktop">
-        <div><b>11/30 점심 · Butagumi Shokudo</b><div class="deadline">현장 방문으로 두기</div></div>
-        <span class="badge free">예약 우선 아님</span>
-      </div>
-      <p>공식 페이지에는 영업시간과 위치 안내는 있지만 사전예약 안내가 확인되지 않습니다. 나리타 도착 시간이 유동적이라 첫날은 예약을 걸기보다 현장 상황에 맞춰 식사하는 편이 안전합니다.</p>
-      <div class="btns">
-        <a class="btn" href="https://www.butagumi.com/shokudo/access/index.html" target="_blank">공식 안내</a>
-        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Butagumi+Shokudo+Roppongi" target="_blank">Google 지도</a>
-      </div>
-    </div>
-
-    <div class="bookitem">
-      <div class="booktop">
-        <div><b>다이칸야마 T-SITE · 나카메구로</b><div class="deadline">사전예약 불필요</div></div>
-        <span class="badge free">예약 없음</span>
-      </div>
-      <p>서점·동네 산책 자체는 예약할 필요 없습니다. 12/2 오전 일정은 날씨와 컨디션에 따라 자유롭게 조절하면 됩니다.</p>
-      <div class="btns">
-        <a class="btn" href="https://store.tsite.jp/daikanyama/english/" target="_blank">T-SITE 공식</a>
-        <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Daikanyama+T-SITE" target="_blank">Google 지도</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="booking-note">
-    <b>예약 순서 추천:</b> ① 모리미술관 10/30 전 → ② 오르세 11/13 전 → ③ 터너 페어권 → ④ 우에노 장어집 전화 → ⑤ IVY PLACE → ⑥ Skyliner는 30일 전부터 필요에 따라.
+<div class="booking-head">
+<div>
+<div class="small">BOOKING CHECKLIST</div>
+<h2 id="booking" style="margin-top:4px">미리 예약할 것</h2>
+</div>
+<div class="small">2026.10.27 기준 · 공식 사이트 확인</div>
+</div>
+<div class="booking-grid">
+<div class="bookitem">
+<div class="booktop">
+<div><b>11/30 · 모리미술관 + 어린왕자</b><div class="deadline">둘 다 사전예약 추천 · 별도 티켓</div></div>
+<span class="badge now">지금 하기</span>
+</div>
+<p><b>① Mariko Mori: All That Shines</b> — 14:30 전후 입장 추천. 10/30까지 성인 사전권 ¥2,100/인. 이후 평일 온라인 정상가 ¥2,600/인.</p>
+<p><b>② Le Petit Prince + Tokyo City View</b> — <b>17:00 슬롯 추천.</b> 날짜·시간 지정제. 2인이라면 12/25까지 판매하는 <b>페어티켓 ¥3,000</b>이 가장 유리합니다. 어린왕자 티켓으로 Tokyo City View 전망대도 함께 관람할 수 있습니다.</p>
+<p><b>추천 구매 조합:</b> 모리 사전권 2장(¥4,200) + 어린왕자 페어티켓(¥3,000) = <b>총 ¥7,200 / 2인</b>.</p>
+<div class="btns">
+<a class="btn primary" href="https://www.mori.art.museum/en/exhibitions/marikomori/05/" target="_blank">모리 공식 티켓 안내</a>
+<a class="btn primary" href="https://tcv.roppongihills.com/jp/exhibitions/hoshinooujisama/index.html" target="_blank">어린왕자 공식 티켓</a>
+<a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Mori+Art+Museum+Tokyo" target="_blank">Google 지도</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>12/1 · 오르세 미술관 소장전</b><div class="deadline">전시 전 예매 · 11/13 23:59까지</div></div>
+<span class="badge soon">11/13 마감</span>
+</div>
+<p>12/1 관람은 <b>시간 지정 예약이 필요하지 않습니다.</b> 다만 사전권은 일반 ¥2,200(현장 ¥2,400)으로 저렴하고, 11/13까지 판매합니다. 인기 전시라 티켓 구매 줄을 피하려면 미리 사두는 편이 좋습니다.</p>
+<div class="btns">
+<a class="btn primary" href="https://art.nikkei.com/orsay2627/ticket/" target="_blank">공식 티켓</a>
+<a class="btn" href="https://art.nikkei.com/orsay2627/" target="_blank">전시 공식</a>
+<a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Tokyo+Metropolitan+Art+Museum" target="_blank">Google 지도</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>12/1 · 터너전</b><div class="deadline">미리 구매 권장 · 2인 페어권 확인</div></div>
+<span class="badge rec">예약 권장</span>
+</div>
+<p>국립서양미술관 공식 온라인 티켓 판매 중. 일반 사전권 ¥2,200/인. <b>2인 페어권 ¥4,200</b>은 12/20까지 판매되고 2027/1/11까지 사용 가능하므로 12/1 일정에 맞습니다. 오르세 관람 후 도보 이동 가능합니다.</p>
+<div class="btns">
+<a class="btn primary" href="https://turner2026-27.exhibit.jp/ticket/" target="_blank">공식 티켓</a>
+<a class="btn" href="https://www.nmwa.go.jp/en/exhibitions/2026turner.html" target="_blank">미술관 공식</a>
+<a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=The+National+Museum+of+Western+Art+Tokyo" target="_blank">Google 지도</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>나리타 ↔ 도쿄 · Skyliner</b><div class="deadline">승차 30일 전부터 구매 가능</div></div>
+<span class="badge rec">선택 예약</span>
+</div>
+<p>외국인용 Skyliner e-ticket은 승차 <b>30일 전부터</b> 구매 가능. 11/30 도착편은 10/31부터, 12/2 귀국편은 11/2부터 구매할 수 있습니다. 입국 지연 변수가 있으므로 도착편은 ‘필수 사전예약’까지는 아닙니다.</p>
+<div class="btns">
+<a class="btn primary" href="https://www.keisei.co.jp/keisei/tetudou/skyliner/e-ticket/ko/" target="_blank">Skyliner e-ticket</a>
+<a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Narita+International+Airport&amp;destination=Keisei+Ueno+Station&amp;travelmode=transit" target="_blank">공항→우에노 교통</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>12/1 점심 · 伊豆榮 梅川亭</b><div class="deadline">전화 예약만 가능</div></div>
+<span class="badge rec">예약 권장</span>
+</div>
+<p>우에노공원 안 장어집. 공식 안내상 <b>예약은 전화로만</b> 받습니다. 12/1은 화요일이라 영업일이며, 오르세→점심→터너 동선을 고정하려면 예약 가치가 큽니다. 전화 +81-3-5685-2011.</p>
+<div class="btns">
+<a class="btn primary" href="https://izuei.co.jp/shop/" target="_blank">공식 점포 안내</a>
+<a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Izuei+Umekawa-tei+Ueno" target="_blank">Google 지도</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>12/2 · IVY PLACE</b><div class="deadline">브런치 시간 고정 시 웹예약</div></div>
+<span class="badge rec">예약 가능</span>
+</div>
+<p>다이칸야마 T-SITE 안. 공식 사이트에서 전화·웹 예약이 가능합니다. 마지막 날 공항 이동 시간이 정해져 있으므로 점심 시간을 확실히 고정하고 싶다면 예약하는 편이 편합니다.</p>
+<div class="btns">
+<a class="btn primary" href="https://www.tysons.jp/ivyplace/en/access/" target="_blank">공식 예약/안내</a>
+<a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=IVY+PLACE+Daikanyama" target="_blank">Google 지도</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>11/30 점심 · Butagumi Shokudo</b><div class="deadline">현장 방문으로 두기</div></div>
+<span class="badge free">예약 우선 아님</span>
+</div>
+<p>공식 페이지에는 영업시간과 위치 안내는 있지만 사전예약 안내가 확인되지 않습니다. 나리타 도착 시간이 유동적이라 첫날은 예약을 걸기보다 현장 상황에 맞춰 식사하는 편이 안전합니다.</p>
+<div class="btns">
+<a class="btn" href="https://www.butagumi.com/shokudo/access/index.html" target="_blank">공식 안내</a>
+<a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Butagumi+Shokudo+Roppongi" target="_blank">Google 지도</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>다이칸야마 T-SITE · 나카메구로</b><div class="deadline">사전예약 불필요</div></div>
+<span class="badge free">예약 없음</span>
+</div>
+<p>서점·동네 산책 자체는 예약할 필요 없습니다. 12/2 오전 일정은 날씨와 컨디션에 따라 자유롭게 조절하면 됩니다.</p>
+<div class="btns">
+<a class="btn" href="https://store.tsite.jp/daikanyama/english/" target="_blank">T-SITE 공식</a>
+<a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Daikanyama+T-SITE" target="_blank">Google 지도</a>
+</div>
+</div>
+</div>
+<div class="booking-note">
+<b>예약 순서 추천:</b> ① 모리미술관 10/30 전 → ② 오르세 11/13 전 → ③ 터너 페어권 → ④ 우에노 장어집 전화 → ⑤ IVY PLACE → ⑥ Skyliner는 30일 전부터 필요에 따라.
   </div>
 </section>
-
-<h2>이번 여행의 숙박 조합</h2>
-<div class="choice"><b>추천:</b> 11/30 롯폰기 미쓰이가든 1박 → 12/1 우에노 대욕장 호텔 1박.<br>
-첫날은 모리미술관과 롯폰기 동선을 살리고, 둘째 날은 오르세·터너를 본 뒤 우에노에서 바로 쉬는 구성입니다.</div>
-
-<div class="grid">
-  <article class="card">
-    <img class="photo" src="https://img.easemytrip.com/EMTHotel-1694583/t/large/1137927_14.jpg" alt="미쓰이가든 호텔 롯폰기 도쿄 프리미어">
-    <div class="cardbody"><div class="daytag" style="color:var(--red)">1박차 · 롯폰기</div><h3>미쓰이가든 호텔 롯폰기 도쿄 프리미어</h3>
-      <p>첫날 숙박 추천. 롯폰기역 약 5분, 모리미술관 도보권. 14층 BALCÓN TOKYO 조식이 강점이라 첫날 ‘호텔+미술관+저녁 산책’ 동선이 깔끔합니다.</p><div class="caption">사진 설명 · 모던한 글라스 입구와 차분한 로비 분위기. 롯폰기 한복판이지만 호텔 내부는 비교적 정돈된 편.</div>
-      <div class="btns"><a class="btn primary" href="https://www.gardenhotels.co.jp/roppongi-premier/eng/" target="_blank">공식 홈페이지</a>
-      <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Mitsui+Garden+Hotel+Roppongi+Tokyo+Premier" target="_blank">Google 지도</a></div>
-    </div>
-  </article>
-  <article class="card">
-    <img class="photo" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/2e/01/d2/caption.jpg?h=800&s=1&w=1400" alt="&Here TOKYO UENO">
-    <div class="cardbody"><div class="daytag" style="color:var(--blue)">2박차 · 우에노</div><h3>&Here TOKYO UENO</h3>
-      <p>오르세전 보는 날 숙박으로 가장 좋은 후보. 시노바즈 연못 바로 앞, 우에노공원·도쿄도미술관 접근이 좋고 최상층에 노천탕 포함 남녀 대욕장이 있습니다.</p><div class="caption">사진 설명 · 우에노공원과 시노바즈 연못 쪽에 가까워 미술관 일정과 러닝을 함께 묶기 좋은 위치.</div>
-      <div class="btns"><a class="btn primary" href="https://andherehotels.jp/tokyoueno/en/" target="_blank">공식 홈페이지</a>
-      <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=%26Here+TOKYO+UENO" target="_blank">Google 지도</a></div>
-    </div>
-  </article>
-</div>
-
-<h2>3일 동선</h2>
+<h2 id="tickets">티켓 구매 체크리스트 · 성인 2인 기준</h2>
 <section class="sectioncard">
-<div class="day"><div class="daytag" style="color:var(--red)">11/30 MON</div><div><div class="route">나리타 → 롯폰기 → 모리미술관 → 아자부주반</div>
-<p>10:00 나리타 도착 → 12:30 전후 호텔 짐 보관 → 점심 → 14:30~16:30 모리미술관 <b style='color:#b6534c'>[사전예매]</b> → 17:00 어린왕자 80주년 특별전 + Tokyo City View <b style='color:#b6534c'>[시간지정 예약]</b> → 일몰·야경 → 롯폰기힐스·아자부주반 산책 → 저녁.</p>
-<div class="btns"><a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Narita+International+Airport&destination=Mitsui+Garden+Hotel+Roppongi+Tokyo+Premier&travelmode=transit" target="_blank">공항→호텔 교통</a>
-<a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Mitsui+Garden+Hotel+Roppongi+Tokyo+Premier&destination=Mori+Art+Museum&travelmode=walking" target="_blank">호텔→모리 도보</a></div></div></div>
-
-<div class="day"><div class="daytag" style="color:var(--blue)">12/1 TUE</div><div><div class="route">롯폰기 → 우에노 → 오르세전 → 터너전 → 시노바즈 연못</div>
-<p>호텔 조식 → 우에노 이동 → 09:30 오르세 미술관 소장전 <b style='color:#b6534c'>[11/13까지 사전권]</b> → 점심 → 13:30 국립서양미술관 터너전 <b style='color:#315f8d'>[페어권 확인]</b> → 시노바즈 연못 → 대욕장.</p>
-<div class="btns"><a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Mitsui+Garden+Hotel+Roppongi+Tokyo+Premier&destination=Tokyo+Metropolitan+Art+Museum&travelmode=transit" target="_blank">롯폰기→우에노 교통</a>
-<a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Tokyo+Metropolitan+Art+Museum&destination=The+National+Museum+of+Western+Art+Tokyo&travelmode=walking" target="_blank">오르세→터너 도보</a></div></div></div>
-
-<div class="day"><div class="daytag" style="color:var(--green)">12/2 WED</div><div><div class="route">우에노 → 다이칸야마 T-SITE → 나카메구로 → 나리타</div>
-<p>조식·체크아웃 후 다이칸야마 T-SITE → 나카메구로 산책 → 브런치/점심 <b style='color:#315f8d'>[예약 가능]</b> → 14:00~14:30 이동 준비 → 15:00 시내 출발 → 18:00 보딩.</p>
-<div class="btns"><a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=%26Here+TOKYO+UENO&destination=Daikanyama+T-SITE&travelmode=transit" target="_blank">우에노→다이칸야마</a>
-<a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Daikanyama+T-SITE&destination=Nakameguro+Station&travelmode=walking" target="_blank">T-SITE→나카메구로</a>
-<a class="btn map" href="https://www.google.com/maps/dir/?api=1&origin=Nakameguro+Station&destination=Narita+International+Airport&travelmode=transit" target="_blank">나카메구로→나리타</a></div></div></div>
-</section>
-
-<h2>미술관 & 동네</h2>
-<div class="grid">
-<article class="card"><img class="photo" src="https://art-view.roppongihills.com/en/info/img/index_mv-sp_210422.jpg" alt="모리미술관"><div class="cardbody"><h3>모리미술관 · 롯폰기</h3>
-<p>월요일에도 운영하는 현대미술관이라 첫날에 가장 잘 맞습니다. 롯폰기힐스 모리타워 53층, 도쿄 전망과 함께 보기 좋습니다.</p>
-<div class="caption">사진 설명 · 롯폰기힐스의 모리미술관·Tokyo City View 입구.</div><div class="btns">
-<a class="btn primary" href="https://www.mori.art.museum/en/exhibitions/marikomori/index.html" target="_blank">전시 공식</a>
-<a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Mori+Art+Museum+Tokyo" target="_blank">Google 지도</a></div></div></article>
-
-<article class="card"><img class="photo" src="https://ak-d.tripcdn.com/images/0103912000g4plus62B53_Q90.jpg" alt="도쿄도미술관"><div class="cardbody"><h3>오르세 미술관 소장전 · 도쿄도미술관</h3>
-<p>이번 여행의 메인. 우에노공원 안에 있어 터너전과 같은 날 묶기 좋습니다.</p>
-<div class="caption">사진 설명 · 벽돌 외관과 금속 구체 조형물이 보이는 도쿄도미술관 입구.</div><div class="btns">
-<a class="btn primary" href="https://www.tobikan.jp/en/exhibition/2026_orsay.html" target="_blank">전시 공식</a>
-<a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Tokyo+Metropolitan+Art+Museum" target="_blank">Google 지도</a></div></div></article>
-
-<article class="card"><img class="photo" src="https://bt.imgix.net/magazine/30144/main/1737532530667_b38967dbbb2a41bd2344040788bc2acc.jpg?auto=format%2Ccompress&v=5" alt="국립서양미술관"><div class="cardbody"><h3>터너전 · 국립서양미술관</h3>
-<p>오르세전에서 도보로 이동 가능. 르 코르뷔지에 건축까지 같이 볼 수 있어 우에노 미술관 데이를 풍성하게 만듭니다.</p>
-<div class="caption">사진 설명 · 르 코르뷔지에의 모더니즘 외관이 드러나는 국립서양미술관.</div><div class="btns">
-<a class="btn primary" href="https://www.nmwa.go.jp/en/exhibitions/2026turner.html" target="_blank">전시 공식</a>
-<a class="btn map" href="https://www.google.com/maps/search/?api=1&query=The+National+Museum+of+Western+Art+Tokyo" target="_blank">Google 지도</a></div></div></article>
-
-<article class="card"><img class="photo" src="https://media.architecturaldigest.com/photos/59776d4b7530e857b503082b/master/w_1600%2Cc_limit/Daikanyama%2520T%2520Site%2520Bookstore.jpg" alt="다이칸야마 T-SITE"><div class="cardbody"><h3>다이칸야마 T-SITE</h3>
-<p>마지막 날 미술관 대신 책·잡지·디자인·문구를 보고, 나카메구로 강변까지 이어 걷는 코스. 뉴욕 소호 같은 저층 디자인 동네 느낌을 즐기기 좋습니다.</p>
-<div class="caption">사진 설명 · T 패턴의 흰 격자 외관과 유리 파사드가 특징인 T-SITE.</div><div class="btns">
-<a class="btn primary" href="https://store.tsite.jp/daikanyama/english/" target="_blank">공식 홈페이지</a>
-<a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Daikanyama+T-SITE" target="_blank">Google 지도</a></div></div></article>
+<div class="choice">
+<b>추천 구매 총액: 약 ¥32,000 / 2인</b><br/>
+    현재 일정 기준으로 실제 필요한 8개 티켓 묶음입니다. 모리 사전할인은 <b>10/30까지</b>, 오르세 사전권은 <b>11/13까지</b>라 이 둘부터 먼저 구매하는 게 좋습니다.
+  </div>
+<div class="booking-grid">
+<div class="bookitem">
+<div class="booktop">
+<div><b>11/30 · 국립신미술관</b><div class="deadline">루브르 미술관전: 르네상스</div></div>
+<span class="badge rec">온라인 구매</span>
 </div>
-
-<h2>호텔 후보 · 대욕장 비교</h2>
+<p><b>일반 ¥2,400 × 2 = ¥4,800</b></p>
+<p>11/30은 날짜·시간 지정 기간이 아닙니다. 일반 온라인 티켓으로 구매하면 됩니다. 12/7~12/13만 시간지정제가 적용됩니다.</p>
+<div class="btns">
+<a class="btn primary" href="https://www.nact.jp/ticket/" target="_blank">공식 티켓</a>
+<a class="btn" href="https://www.nact.jp/english/exhibition_special/2026/louvre2026/" target="_blank">전시 안내</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>11/30 · 모리미술관</b><div class="deadline">Mariko Mori: All That Shines</div></div>
+<span class="badge now">10/30까지</span>
+</div>
+<p><b>사전권 ¥2,100 × 2 = ¥4,200</b></p>
+<p><b>10/30까지 구매 시</b> 평일 성인 사전가 ¥2,100. 이후 평일 온라인 정상가는 ¥2,600/인입니다. 날짜·시간 지정으로 예약.</p>
+<div class="btns">
+<a class="btn primary" href="https://www.mori.art.museum/en/exhibitions/marikomori/05/index.html" target="_blank">공식 티켓 안내</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>11/30 · 어린왕자 + Tokyo City View</b><div class="deadline">17:00 슬롯 추천</div></div>
+<span class="badge now">시간지정</span>
+</div>
+<p><b>페어티켓 ¥3,000 / 2인</b></p>
+<p>일반 온라인 2명보다 페어티켓이 훨씬 저렴합니다. 어린왕자 전시와 <b>Tokyo City View 전망대가 함께 포함</b>됩니다. 날짜·시간 지정제.</p>
+<div class="btns">
+<a class="btn primary" href="https://tcv.roppongihills.com/jp/exhibitions/hoshinooujisama/index.html" target="_blank">공식 티켓</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>12/1 · 오르세 미술관 소장전</b><div class="deadline">11/13 23:59까지 사전권</div></div>
+<span class="badge soon">사전권</span>
+</div>
+<p><b>사전권 ¥2,200 × 2 = ¥4,400</b></p>
+<p>현장 일반 ¥2,400보다 저렴합니다. <b>시간 지정은 필요 없음.</b> 인기 전시라 입장권은 미리 확보해두는 편이 좋습니다.</p>
+<div class="btns">
+<a class="btn primary" href="https://art.nikkei.com/orsay2627/" target="_blank">공식 티켓</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>12/1 · 터너전</b><div class="deadline">국립서양미술관</div></div>
+<span class="badge rec">페어권 추천</span>
+</div>
+<p><b>2인 페어티켓 ¥4,200</b></p>
+<p>당일 일반권 2장보다 ¥600 저렴합니다. 12/20까지 판매, 2027/1/11까지 사용 가능. <b>당일 상설전 관람도 포함</b>됩니다.</p>
+<div class="btns">
+<a class="btn primary" href="https://turner2026-27.exhibit.jp/ticket/" target="_blank">공식 티켓</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>12/1 · 신시내티미술관전</b><div class="deadline">우에노의 숲 미술관</div></div>
+<span class="badge free">시간지정 없음</span>
+</div>
+<p><b>당일 일반 ¥2,400 × 2 = ¥4,800</b></p>
+<p>현재 사전 할인 판매기간은 종료됐습니다. 온라인 또는 현장 구매 가능. <b>입장 시간 지정은 필요 없습니다.</b></p>
+<div class="btns">
+<a class="btn primary" href="https://www.cincinnati-art2026.jp/ticket.html" target="_blank">공식 티켓</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>12/2 · 미쓰비시1호관미술관</b><div class="deadline">폰타네지전</div></div>
+<span class="badge rec">온라인 할인</span>
+</div>
+<p><b>온라인 ¥2,100 × 2 = ¥4,200</b></p>
+<p>현장 일반 ¥2,300보다 온라인이 저렴합니다. 터너+폰타네지 세트권도 있지만, <b>터너 페어권 + 폰타네지 온라인권</b> 조합이 2인 기준 더 저렴합니다.</p>
+<div class="btns">
+<a class="btn primary" href="https://mimt.jp/ex_sp/fontanesi/ticket/" target="_blank">공식 티켓</a>
+</div>
+</div>
+<div class="bookitem">
+<div class="booktop">
+<div><b>12/2 · 아티존미술관</b><div class="deadline">The Strangers’ Gaze + WHOSE LIGHT?</div></div>
+<span class="badge now">시간지정</span>
+</div>
+<p><b>온라인 ¥1,200 × 2 = ¥2,400</b></p>
+<p>현장 ¥1,500보다 온라인이 저렴하며 <b>시간 지정제</b>입니다. 이 한 장으로 동시 개최 전시도 함께 관람할 수 있습니다.</p>
+<div class="btns">
+<a class="btn primary" href="https://www.artizon.museum/en/exhibition/detail/611" target="_blank">공식 티켓 안내</a>
+</div>
+</div>
+</div>
+<div class="booking-note">
+<b>구매 순서:</b>
+    ① 모리미술관(10/30까지 할인) →
+    ② 어린왕자 17:00 슬롯 →
+    ③ 오르세(11/13까지 사전가) →
+    ④ 터너 페어티켓 →
+    ⑤ 아티존 시간지정 →
+    ⑥ 국립신미술관 →
+    ⑦ 폰타네지 →
+    ⑧ 신시내티.
+  </div>
+<div class="booking-note">
+<b>2인 예상 합계 ¥32,000</b><br/>
+    국립신 ¥4,800 + 모리 ¥4,200 + 어린왕자 ¥3,000 + 오르세 ¥4,400 + 터너 ¥4,200 + 신시내티 ¥4,800 + 폰타네지 ¥4,200 + 아티존 ¥2,400.
+    <br/>※ 모리 사전할인을 놓치면 약 ¥1,000 추가됩니다.
+  </div>
+</section>
+<h2 id="hotel">이번 여행의 숙박</h2>
+<div class="choice"><b>예약 확정:</b> 11/30–12/2 <b>미쓰이가든 호텔 진구가이엔 도쿄 프리미어 2박 연박</b>.<br/>
+국립경기장역 도보 약 1분, JR 센다가야역 약 5분·시나노마치역 약 6분. 숙박객 대욕장과 진구가이엔 산책·러닝 환경이 강점이라 호텔 이동 없이 2박을 고정하는 편이 이번 일정에 더 편합니다.</div>
+<div class="grid">
+<article class="card">
+<img alt="미쓰이가든 호텔 진구가이엔 도쿄 프리미어" class="photo" src="https://www.shimz.co.jp/shimzdesign/works/images/2019/2019gardenhotels_ph007b.jpg"/>
+<div class="cardbody">
+<div class="daytag" style="color:var(--green)">2박 연박 · 진구가이엔</div>
+<h3>미쓰이가든 호텔 진구가이엔 도쿄 프리미어</h3>
+<p>국립경기장 바로 앞. 대욕장, 발코니, 진구가이엔 녹지와 러닝 동선이 강점입니다. 롯폰기까지는 오에도선으로 접근하고, 도쿄역은 JR 환승 기준 약 14분대라 마지막 날 마루노우치·교바시 미술관 일정에도 잘 맞습니다.</p>
+<div class="caption">사진 설명 · 국립경기장과 진구가이엔 사이에 있는 차분한 도심형 호텔. 첫날 롯폰기만 한 번 이동하고, 나머지는 호텔을 옮기지 않는 것이 장점.</div>
+<div class="btns">
+<a class="btn primary" href="https://www.gardenhotels.co.jp/jingugaientokyo-premier/eng/" target="_blank">호텔 공식</a>
+<a class="btn primary" href="https://www.gardenhotels.co.jp/jingugaientokyo-premier/ko/bath/" target="_blank">대욕장</a>
+<a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Mitsui+Garden+Hotel+Jingugaien+Tokyo+Premier" target="_blank">Google 지도</a>
+</div>
+</div>
+</article>
+</div>
+<h2 id="route-v1">일정 V1 · 균형형</h2>
+<section class="sectioncard">
+<div class="day"><div class="daytag" style="color:var(--red)">11/30 MON</div><div><div class="route">나리타 → 진구가이엔 호텔 → 모리미술관 → 어린왕자·야경</div>
+<p>10:00 전후 나리타 도착 → 호텔 짐 보관 → 점심 → 롯폰기 이동 → 15:30 전후 모리미술관 <b style="color:#b6534c">[사전예매]</b> → 18:00 어린왕자 80주년 특별전 + Tokyo City View <b style="color:#b6534c">[시간지정 예약]</b> → 저녁 → 진구가이엔 호텔 대욕장.</p>
+<div class="btns"><a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Narita+International+Airport&amp;destination=Mitsui+Garden+Hotel+Jingugaien+Tokyo+Premier&amp;travelmode=transit" target="_blank">공항→호텔</a>
+<a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Mitsui+Garden+Hotel+Jingugaien+Tokyo+Premier&amp;destination=Mori+Art+Museum&amp;travelmode=transit" target="_blank">호텔→모리</a></div></div></div>
+<div class="day"><div class="daytag" style="color:var(--blue)">12/1 TUE</div><div><div class="route">진구가이엔 → 우에노 → 오르세 → 터너 → 우에노 산책</div>
+<p>호텔 조식 → 우에노 이동 → 09:30 오르세 미술관 소장전 → 점심 → 13:00 전후 국립서양미술관 터너전 → 상설전 하이라이트/우에노공원 → 호텔 복귀·대욕장.</p>
+<div class="btns"><a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Mitsui+Garden+Hotel+Jingugaien+Tokyo+Premier&amp;destination=Tokyo+Metropolitan+Art+Museum&amp;travelmode=transit" target="_blank">호텔→우에노</a>
+<a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Tokyo+Metropolitan+Art+Museum&amp;destination=The+National+Museum+of+Western+Art+Tokyo&amp;travelmode=walking" target="_blank">오르세→터너</a></div></div></div>
+<div class="day"><div class="daytag" style="color:var(--green)">12/2 WED</div><div><div class="route">진구가이엔 → 다이칸야마 T-SITE → 나카메구로 → 나리타</div>
+<p>조식·체크아웃 → 다이칸야마 T-SITE → 나카메구로 산책 → 브런치 → 공항 이동. 미술관 과밀도를 낮추고 책·문구·디자인 동네를 넣는 원래의 느긋한 버전입니다.</p>
+<div class="btns"><a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Mitsui+Garden+Hotel+Jingugaien+Tokyo+Premier&amp;destination=Daikanyama+T-SITE&amp;travelmode=transit" target="_blank">호텔→다이칸야마</a>
+<a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Nakameguro+Station&amp;destination=Narita+International+Airport&amp;travelmode=transit" target="_blank">나카메구로→나리타</a></div></div></div>
+</section>
+<h2 id="route-v2">일정 V2 · 미술관 도장깨기</h2>
+<div class="choice"><b>이 버전 추천.</b> 지도 속 8곳 중 <b>네즈미술관은 11/24–12/4 전시 교체 공백</b>이라 이번 날짜에는 관람 불가. 나머지 <b>7곳</b>을 월·화·수 세 구역으로 묶으면 되돌아가는 동선 없이 가능합니다.</div>
+<section class="sectioncard">
+<div class="day"><div class="daytag" style="color:var(--red)">11/30 MON · 롯폰기 2관</div><div>
+<div class="route">호텔 → 국립신미술관 → 모리미술관 → 어린왕자 + Tokyo City View</div>
+<p><b>13:30–14:45 국립신미술관</b> — 「루브르 미술관전: 르네상스」를 우선 추천. 레오나르도 다 빈치의 <i>La Belle Ferronnière</i>를 중심으로 여행·기법 혁신·고대·초상이라는 4개 테마, 약 50여 점을 봅니다. 대안으로는 「소녀만화 인피니티」가 열리고 있어 만화·그래픽·원화 쪽 취향이면 이쪽으로 교체 가능.</p>
+<p><b>15:15–17:15 모리미술관</b> — 「Mariko Mori: All That Shines」. 1990년대 사이보그·대중문화 이미지부터 디지털 사진, 영상, 조각, 대형 인터랙티브 설치까지 30여 년을 훑는 대형 회고전.</p>
+<p><b>18:00 어린왕자 80주년 특별전 + Tokyo City View</b> — 시간지정 예약. 전망대 야경까지 한 번에 보고 호텔 복귀.</p>
+<div class="btns">
+<a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Mitsui+Garden+Hotel+Jingugaien+Tokyo+Premier&amp;destination=The+National+Art+Center+Tokyo&amp;travelmode=transit" target="_blank">호텔→국립신미술관</a>
+<a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=The+National+Art+Center+Tokyo&amp;destination=Mori+Art+Museum&amp;travelmode=walking" target="_blank">국립신→모리 도보</a>
+</div></div></div>
+<div class="day"><div class="daytag" style="color:var(--blue)">12/1 TUE · 우에노 3관</div><div>
+<div class="route">도쿄도미술관 → 국립서양미술관 → 우에노의 숲 미술관</div>
+<p><b>09:30–11:30 도쿄도미술관</b> — 오르세 소장전 「What a Wonderful World: Masterworks from the Musée d’Orsay」. 밀레 <i>이삭 줍는 여인들</i>, 르누아르·모네·반 고흐 등 약 110점. ‘지금을 살아가는 기쁨’을 회화·조각·공예·사진으로 엮는 이번 여행의 메인.</p>
+<p><b>12:40–14:20 국립서양미술관</b> — 「Turner: Painting the Sublime, in Dialogue with Contemporary Art」. 테이트 소장 터너와 올라퍼 엘리아슨·오톨리스 그룹 등 현대작가를 대화시키는 구성. 같은 날 상설전도 티켓에 포함되므로 르 코르뷔지에 건축과 함께 핵심만 추가.</p>
+<p><b>14:40–16:00 우에노의 숲 미술관</b> — 「Cincinnati Art Museum Exhibition: European Masterpieces」. 고흐 <i>Undergrowth with Two Figures</i>, 모네 <i>Rocks at Belle-Île, Port-Domois</i>, 피카소, 모딜리아니 등 미국으로 건너간 유럽 명작 80여 점. 세 미술관이 모두 우에노공원 안이라 이날이 도장깨기 효율 최고.</p>
+<div class="btns">
+<a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Tokyo+Metropolitan+Art+Museum&amp;destination=The+National+Museum+of+Western+Art+Tokyo&amp;travelmode=walking" target="_blank">오르세→터너</a>
+<a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=The+National+Museum+of+Western+Art+Tokyo&amp;destination=The+Ueno+Royal+Museum&amp;travelmode=walking" target="_blank">터너→우에노의 숲</a>
+</div></div></div>
+<div class="day"><div class="daytag" style="color:var(--green)">12/2 WED · 도쿄역 2관</div><div>
+<div class="route">호텔 체크아웃 → 도쿄역 짐보관 → 미쓰비시1호관 → 아티존 → 나리타</div>
+<p><b>10:00–11:15 미쓰비시1호관미술관</b> — 「Fontanesi: Italian Light, Landscapes of the Heart」. 19세기 이탈리아 풍경화가 안토니오 폰타네지의 일본 최초 대규모 회고전, 일본 제자·후대 이탈리아 작가까지 약 200점. <b>터너전과 묶은 특별 세트티켓 ¥4,300</b>도 있어 12/1 터너 + 12/2 폰타네지 조합에 딱 맞습니다.</p>
+<p><b>11:35–13:00 아티존미술관</b> — 「The Strangers’ Gaze—Japanese Artists in Europe」 + 「WHOSE LIGHT?」 동시 관람. 구로다 세이키·후지시마 다케지·야스이 소타로·후지타 쓰구하루 등 유럽에서 작업한 일본 화가 100점 이상과, 후지이 히카루의 동시대적 시선을 한 장의 티켓으로 연결.</p>
+<p><b>09:30 전후 도쿄역 도착 → 캐리어 보관.</b> 큰 캐리어라면 코인락커보다 <b>유인 수하물 보관소</b>를 1순위로 두는 편이 안전합니다. 마루노우치 북쪽 출구 쪽 JR EAST Travel Service Center 또는 야에스 남쪽 수하물 서비스 카운터를 후보로 잡습니다.</p>
+<p><b>10:00–11:15 미쓰비시1호관 → 11:35–13:00 아티존 → 13:00–13:45 점심 → 도쿄역 복귀 → 캐리어 수령 → 나리타.</b> 마지막 날은 두 미술관이 모두 도쿄역권이라 캐리어를 먼저 맡기고 도보 이동하는 게 가장 효율적입니다.</p>
+<div class="btns">
+<a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Mitsubishi+Ichigokan+Museum&amp;destination=Artizon+Museum&amp;travelmode=walking" target="_blank">미쓰비시→아티존</a>
+<a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Artizon+Museum&amp;destination=Tokyo+Station&amp;travelmode=walking" target="_blank">아티존→도쿄역</a>
+</div></div></div>
+</section>
+<div class="booking-note"><b>이번 여행에서 못 찍는 1곳:</b> 네즈미술관은 11/23까지 「Bugaku Costumes」가 끝난 뒤, 다음 「Lacquerware with Carvings」가 12/5 시작이라 11/30–12/2는 전시 교체 기간입니다. 억지로 동선에 넣지 않는 게 맞습니다.</div>
+<!-- JPHIC FIELD RESEARCH: V1/V2 원본 동선 보존 -->
+<section aria-label="JPHIC 도쿄 현장 리서치" id="jphic-research">
+<div class="research-hero"><div class="small" style="color:#b9c6ce">JPHIC · TOKYO FIELD LAB</div><h2 id="research" style="margin:7px 0 10px;color:#fff">3일 동선에서 찾는 사업 기회</h2><p>목표: 관광을 추가하는 대신 원래 동선에서 패키징·종이·브랜딩·고객경험·AI 주문 서비스의 힌트를 수집한다.</p><p><b>역할:</b> 본인 = 사업·디자인 관찰 / 친구 Kim = 동행자 관점의 경험 공유 / 오즈모 나노 = 영상 기록</p><div class="research-progress"><div id="research-progress-bar"></div></div><p class="research-stat" id="research-progress-label">미션 0개 완료</p></div>
+<div aria-label="일정별 조사 미션" class="research-tabs" role="tablist"><button aria-selected="true" class="active" data-research-tab="v1" type="button">V1 · 균형형 (다이칸야마)</button><button aria-selected="false" data-research-tab="v2" type="button">V2 · 미술관 7곳 (도쿄역)</button></div>
+<div class="research-panel" id="research-v1">
+<div class="research-day"><h3>11/30 월 · 나리타 → 진구가이엔 → 롯폰기</h3>
+<div class="research-stop"><b>공항·철도·호텔</b><p class="research-meta">관찰: 다국어 안내, 셀프체크인, 디지털 예약 → JPHIC AI 상담·견적 UX 개선</p><div class="research-tasks"><label><input data-research-key="v1-d1-a" type="checkbox"/>정보를 3초 안에 찾게 하는 안내 디자인 3건 기록</label><label><input data-research-key="v1-d1-b" type="checkbox"/>오즈모: 이동 POV 8초 + 호텔 사인 고정샷 5초</label></div></div>
+<div class="research-stop"><b>롯폰기힐스 · 모리미술관 · 어린왕자</b><p class="research-meta">관찰: 전시의 브랜드화, 티켓·포스터·샵 굿즈·조명·쇼윈도</p><div class="research-tasks"><label><input data-research-key="v1-d1-c" type="checkbox"/>뮤지엄숍 상품 5개: 재질·가격·가공 방식 기록</label><label><input data-research-key="v1-d1-d" type="checkbox"/>디저트·쇼핑백 패키징 2개: 로고·색·재사용성 비교</label><label><input data-research-key="v1-d1-e" type="checkbox"/>오즈모: 공간 대칭 1컷 + 쇼윈도 반사 1컷 (촬영 허용 구역)</label></div></div>
+</div>
+<div class="research-day"><h3>12/1 화 · 오르세 → 터너 → 우에노 산책</h3>
+<div class="research-stop"><b>도쿄도미술관 · 국립서양미술관</b><p class="research-meta">관찰: 회화 IP의 굿즈 변환, 서체·색상·전시 안내, 해설 난이도</p><div class="research-tasks"><label><input data-research-key="v1-d2-a" type="checkbox"/>명화 기반 굿즈 5개: 원작 이미지 사용·라이선스 표기 확인</label><label><input data-research-key="v1-d2-b" type="checkbox"/>Kim과 '가장 이해하기 쉬운 해설/동선' 한 가지 비교해보기</label><label><input data-research-key="v1-d2-c" type="checkbox"/>오즈모: 건축물 와이드 → 티켓 → 구매 굿즈 탑뷰 시퀀스</label></div></div>
+<div class="research-stop"><b>우에노공원 · 아메요코 (시간 허용 시)</b><p class="research-meta">관찰: 소형 점포의 판촉 문구, 식품 포장, 가격표, 고객 대기 동선</p><div class="research-tasks"><label><input data-research-key="v1-d2-d" type="checkbox"/>카페/간식점 2곳의 컵·스티커·포장 단가 추정용 정보 기록</label><label><input data-research-key="v1-d2-e" type="checkbox"/>오즈모: 거리 정면 5초 + 손에 든 패키지 로우앵글 5초</label></div></div>
+</div>
+<div class="research-day"><h3>12/2 수 · 다이칸야마 T-SITE → 나카메구로 → 공항</h3>
+<div class="research-stop"><b>다이칸야마 T-SITE · 주변 종이/패턴 매장</b><p class="research-meta">핵심: 고급 패턴 포장재, 문구·북패키지, 정기 컬렉션, 편집숍 진열</p><div class="research-tasks"><label><input data-research-key="v1-d3-a" type="checkbox"/>표지·포장·종이 샘플 5개: 소재·규격·가격·구매처 기록</label><label><input data-research-key="v1-d3-b" type="checkbox"/>전통 문양과 현대 패턴의 상품화 방식 3개 스케치</label><label><input data-research-key="v1-d3-c" type="checkbox"/>오즈모: 건물 파사드 패턴 → 책장 반복 → 종이 탑뷰</label></div></div>
+<div class="research-stop"><b>나카메구로 · 꽃집·베이커리·카페</b><p class="research-meta">관찰: 꽃다발 포장지, 디저트 박스·리본·실링, 컵 슬리브·쇼핑백</p><div class="research-tasks"><label><input data-research-key="v1-d3-d" type="checkbox"/>포장재 구매 담당자를 만날 수 있는 업체 1곳 확인</label><label><input data-research-key="v1-d3-e" type="checkbox"/>거래 관심이 실제로 있으면 명함·QR 교환하고 후속 연락 동의 받기</label><label><input data-research-key="v1-d3-f" type="checkbox"/>오즈모: 포장 개봉·접지 손동작 10초 (구매품으로 촬영)</label></div></div>
+<div class="research-warning"><b>시간 제약:</b> 이 날은 오후 3시 시내 출발 계획. 정오 이후 방문만 가능한 매장은 우선순위를 낮추고 공항 이동을 먼저 확보.</div>
+</div>
+</div>
+<div class="research-panel" hidden="" id="research-v2">
+<div class="research-day"><h3>11/30 월 · 국립신미술관 → 모리 → 어린왕자</h3>
+<div class="research-stop"><b>국립신미술관</b><p class="research-meta">관찰: 공간 사인, 특별전 포스터와 도록, 전시별 톤앤매너 비교</p><div class="research-tasks"><label><input data-research-key="v2-d1-a" type="checkbox"/>전시 홍보물 3종의 타이포·그리드 비교</label><label><input data-research-key="v2-d1-b" type="checkbox"/>오즈모: 곡선 건축·그림자·대칭 앵글 (허용 구역)</label></div></div>
+<div class="research-stop"><b>모리미술관 · 롯폰기힐스 · 어린왕자</b><p class="research-meta">관찰: 전시 브랜드 협업, IP 굿즈, 야경을 콘텐츠로 판매하는 방식</p><div class="research-tasks"><label><input data-research-key="v2-d1-c" type="checkbox"/>IP 상품과 일반 상품의 가격차·포장차 비교</label><label><input data-research-key="v2-d1-d" type="checkbox"/>쇼윈도와 패키지의 계절 연출 3개 기록</label><label><input data-research-key="v2-d1-e" type="checkbox"/>오즈모: 브랜드 로고·유리 반사·야경 연결 3컷</label></div></div>
+</div>
+<div class="research-day"><h3>12/1 화 · 우에노 3개 미술관</h3>
+<div class="research-stop"><b>오르세 · 터너 · 신시내티 전시</b><p class="research-meta">관찰: 서로 다른 회화전의 기획·홍보·판매 방식 비교</p><div class="research-tasks"><label><input data-research-key="v2-d2-a" type="checkbox"/>전시별 굿즈의 소재·가공·라이선스 표기 1건씩 기록</label><label><input data-research-key="v2-d2-b" type="checkbox"/>전시별 설명문/유도 사인 중 이해 쉬운 것 순위 매기기</label><label><input data-research-key="v2-d2-c" type="checkbox"/>오즈모: 3개 미술관 외관을 동일 구도로 5초씩 촬영</label><label><input data-research-key="v2-d2-d" type="checkbox"/>시간 남으면 우에노의 소형 패키징 사례 2건 조사</label></div></div>
+</div>
+<div class="research-day"><h3>12/2 수 · 도쿄역 → 미쓰비시1호관 → 아티존 → 나리타</h3>
+<div class="research-stop"><b>마루노우치 · 미쓰비시1호관</b><p class="research-meta">관찰: 역사적 건축과 현대 브랜딩, 고급 공간 연출, 편집 인쇄물</p><div class="research-tasks"><label><input data-research-key="v2-d3-a" type="checkbox"/>상업공간의 고급감 요소: 조명·지류·여백 3가지 기록</label><label><input data-research-key="v2-d3-b" type="checkbox"/>오즈모: 낮은 앵글의 건물 파사드 + 정면 대칭 촬영</label></div></div>
+<div class="research-stop"><b>아티존 · 교바시 · 도쿄역 상업공간</b><p class="research-meta">관찰: 디지털 예약, 작품 해설, 뮤지엄숍과 도쿄역 선물 패키징</p><div class="research-tasks"><label><input data-research-key="v2-d3-c" type="checkbox"/>선물용 박스 3개: 접이구조·종이·후가공 관찰</label><label><input data-research-key="v2-d3-d" type="checkbox"/>JPHIC의 AI 상담/견적 플로우에 접목할 안내 UX 2개 메모</label><label><input data-research-key="v2-d3-e" type="checkbox"/>오즈모: 가방에서 제품 꺼내기·탑뷰 5초씩, 타인 비노출</label></div></div>
+<div class="research-warning"><b>시간 제약:</b> 도쿄역 캐리어 수령과 공항 이동 우선. V2의 마지막 날에는 다이칸야마·나카메구로를 추가하지 않음.</div>
+</div>
+</div>
+<div class="sectioncard"><h3>모든 동선 공통 · 현장 영업과 촬영 규칙</h3><p><b>명함:</b> 무작정 배포하지 않고 종이·패키징·굿즈 관련 담당자에게 관심과 거래 가능성을 먼저 묻는다. JPHIC 포트폴리오 QR과 이메일을 준비.</p><p><b>일본어:</b> 韓国でデザインとパッケージ制作の仕事をしています。海外とのお取引は可能でしょうか？<br/><br/><span class="voice-reading">칸코쿠데 데자인토 팟케에지 세에사쿠노 시고토오 시테이마스. 카이가이토노 오토리히키와 카노오 데쇼오카?</span><span class="small">한국에서 디자인·패키지 제작 일을 합니다. 해외 거래가 가능할까요?</span></p><p><b>오즈모:</b> ① 공간 와이드 ② 제품 중간샷 ③ 표면·접지 디테일 ④ 내가 쓰는 손 ⑤ 짧은 소감. 매장·전시 촬영 규정과 타인의 초상권을 우선 확인.</p><p><b>마이크:</b> 첫 송신기로 본인 해설을 테스트하고, Kim과 2인 대화 촬영을 지속적으로 할 계획일 때 두 번째 송신기 구매 판단.</p><div class="research-notes"><label>연락처·협업 후보<textarea data-research-note="contacts" placeholder="업체명 / 담당자 / 이메일 / 후속 연락 동의 여부"></textarea></label><label>새 상품 아이디어<textarea data-research-note="ideas" placeholder="패턴 포장지, 베이커리 패키지, 디지털 주문 UX 등"></textarea></label><label>소재·가격 메모<textarea data-research-note="materials" placeholder="상품 / 재료 / 규격 / 가격 / 판매처"></textarea></label><label>촬영·편집 아이디어<textarea data-research-note="shots" placeholder="카메라 위치 / 동작 / 길이 / 활용 채널"></textarea></label></div><div class="research-actions"><button id="research-export" type="button">조사 기록 TXT 저장</button><button id="research-clear" type="button">체크·메모 초기화</button></div><p class="research-help">이 브라우저의 로컬 저장소에 체크와 메모를 보관합니다. 다른 기기에서는 자동 동기화되지 않으므로 귀국 전 TXT로 저장하세요.</p></div>
+</section>
+<section class="sectioncard" id="jphic-japanese"><div class="voice-heading"><div><div class="small">JPHIC · JAPANESE BUSINESS TALK</div><h2 style="margin:3px 0 8px">🔊 현지 영업 일본어 · 터치해서 들려주기</h2><p class="small">매장에서 직원에게 휴대폰 화면을 보여주고, 문장별 재생 버튼을 누르세요. 처음부터 모두 읽기보다 상대의 반응에 맞춰 하나씩 진행합니다.</p></div></div><div class="voice-tool"><label for="voice-rate">말하기 속도</label><select id="voice-rate"><option value="0.8">느리게</option><option selected="" value="0.95">자연스럽게</option><option value="1.1">빠르게</option></select><button id="voice-stop" type="button">■ 음성 중지</button><span aria-live="polite" id="voice-status" role="status">준비됨</span></div><h3>내가 말할 문장</h3><div class="voice-grid"><article class="voice-card"><div class="voice-top"><span class="voice-index">01</span><b>첫 인사</b></div><div class="voice-ja" lang="ja">こんにちは。少しお話ししてもよろしいでしょうか。</div><div class="voice-reading" lang="ko">곤니치와. 스코시 오하나시 시테모 요로시이 데쇼오카.</div><div class="voice-ko">안녕하세요. 잠깐 말씀 나눌 수 있을까요?</div><div class="voice-buttons"><button aria-label="첫 인사 일본어 음성 재생" class="speak-btn" data-speak="こんにちは。少しお話ししてもよろしいでしょうか。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="こんにちは。少しお話ししてもよろしいでしょうか。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">02</span><b>대표 소개</b></div><div class="voice-ja" lang="ja">私は韓国でデザイン会社を経営しています。</div><div class="voice-reading" lang="ko">와타시와 칸코쿠데 데자인가이샤오 케이에이 시테이마스.</div><div class="voice-ko">저는 한국에서 디자인 회사를 운영하고 있는 대표입니다.</div><div class="voice-buttons"><button aria-label="대표 소개 일본어 음성 재생" class="speak-btn" data-speak="私は韓国でデザイン会社を経営しています。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="私は韓国でデザイン会社を経営しています。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">03</span><b>제품 관심</b></div><div class="voice-ja" lang="ja">御社の商品に興味があります。デザインと品質がとても印象的です。</div><div class="voice-reading" lang="ko">온샤노 쇼오힌니 쿄오미가 아리마스. 데자이은토 힌시츠가 토테모 인쇼오테키데스.</div><div class="voice-ko">귀사의 제품에 관심이 있습니다. 디자인과 품질이 인상적입니다.</div><div class="voice-buttons"><button aria-label="제품 관심 일본어 음성 재생" class="speak-btn" data-speak="御社の商品に興味があります。デザインと品質がとても印象的です。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="御社の商品に興味があります。デザインと品質がとても印象的です。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">04</span><b>해외 거래</b></div><div class="voice-ja" lang="ja">韓国の企業とのお取引や、韓国での販売にご興味はありますか。</div><div class="voice-reading" lang="ko">칸코쿠노 키교오토노 오토리히키야, 칸코쿠데노 한바이니 고쿄오미와 아리마스카.</div><div class="voice-ko">한국 기업과 거래하거나 한국에 판매하는 것에 관심이 있으신가요?</div><div class="voice-buttons"><button aria-label="해외 거래 일본어 음성 재생" class="speak-btn" data-speak="韓国の企業とのお取引や、韓国での販売にご興味はありますか。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="韓国の企業とのお取引や、韓国での販売にご興味はありますか。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">05</span><b>AI 번역 안내</b></div><div class="voice-ja" lang="ja">申し訳ありませんが、私は日本語が話せません。AI翻訳を使ってお話ししてもよろしいでしょうか。</div><div class="voice-reading" lang="ko">모오시와케 아리마셍가, 와타시와 니혼고가 하나세마셍. 에에아이 혼야쿠오 츠캇테 오하나시 시테모 요로시이 데쇼오카.</div><div class="voice-ko">죄송하지만 저는 일본어를 하지 못합니다. AI 번역을 사용해 대화해도 괜찮을까요?</div><div class="voice-buttons"><button aria-label="AI 번역 안내 일본어 음성 재생" class="speak-btn" data-speak="申し訳ありませんが、私は日本語が話せません。AI翻訳を使ってお話ししてもよろしいでしょうか。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="申し訳ありませんが、私は日本語が話せません。AI翻訳を使ってお話ししてもよろしいでしょうか。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">06</span><b>샘플 요청</b></div><div class="voice-ja" lang="ja">まずはサンプルを購入、またはご提供いただき、韓国のお客様の反応を確かめたいと考えています。</div><div class="voice-reading" lang="ko">마즈와 산푸루오 코오뉴우, 마타와 고테이쿄오 이타다키, 칸코쿠노 오캬쿠사마노 한노오오 타시카메타이토 칸가에테이마스.</div><div class="voice-ko">우선 샘플을 구매하거나 받아서 한국 고객의 반응을 확인하고 싶습니다.</div><div class="voice-buttons"><button aria-label="샘플 요청 일본어 음성 재생" class="speak-btn" data-speak="まずはサンプルを購入、またはご提供いただき、韓国のお客様の反応を確かめたいと考えています。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="まずはサンプルを購入、またはご提供いただき、韓国のお客様の反応を確かめたいと考えています。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">07</span><b>샘플 조건</b></div><div class="voice-ja" lang="ja">サンプルの価格、最低注文数量、韓国への発送が可能かどうかを教えていただけますか。</div><div class="voice-reading" lang="ko">산푸루노 카카쿠, 사이테에 추우몬 스우료오, 칸코쿠에노 핫소오가 카노오카 도오카오 오시에테 이타다케마스카.</div><div class="voice-ko">샘플 가격, 최소 주문 수량, 한국으로 배송이 가능한지 알려주실 수 있나요?</div><div class="voice-buttons"><button aria-label="샘플 조건 일본어 음성 재생" class="speak-btn" data-speak="サンプルの価格、最低注文数量、韓国への発送が可能かどうかを教えていただけますか。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="サンプルの価格、最低注文数量、韓国への発送が可能かどうかを教えていただけますか。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">08</span><b>판매 협의</b></div><div class="voice-ja" lang="ja">反応が良ければ、韓国での正式な販売契約についてご相談できますか。</div><div class="voice-reading" lang="ko">한노오가 요케레바, 칸코쿠데노 세에시키나 한바이케에야쿠니 츠이테 고소오단 데키마스카.</div><div class="voice-ko">반응이 좋다면 한국에서의 정식 판매 계약을 상의할 수 있을까요?</div><div class="voice-buttons"><button aria-label="판매 협의 일본어 음성 재생" class="speak-btn" data-speak="反応が良ければ、韓国での正式な販売契約についてご相談できますか。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="反応が良ければ、韓国での正式な販売契約についてご相談できますか。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">09</span><b>담당자 연결</b></div><div class="voice-ja" lang="ja">海外取引や卸売りのご担当者をご紹介いただけますか。</div><div class="voice-reading" lang="ko">카이가이토리히키야 오로시우리노 고탄토오샤오 고쇼오카이 이타다케마스카.</div><div class="voice-ko">해외 거래나 도매 업무 담당자분을 소개해 주실 수 있을까요?</div><div class="voice-buttons"><button aria-label="담당자 연결 일본어 음성 재생" class="speak-btn" data-speak="海外取引や卸売りのご担当者をご紹介いただけますか。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="海外取引や卸売りのご担当者をご紹介いただけますか。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">10</span><b>명함 전달</b></div><div class="voice-ja" lang="ja">こちらが私の名刺です。ご興味がありましたら、メールでご連絡いただけますと幸いです。</div><div class="voice-reading" lang="ko">코치라가 와타시노 메에시데스. 고쿄오미가 아리마시타라, 메에루데 고렌라쿠 이타다케루토 사이와이데스.</div><div class="voice-ko">이것이 제 명함입니다. 관심이 있으시면 이메일로 연락 부탁드립니다.</div><div class="voice-buttons"><button aria-label="명함 전달 일본어 음성 재생" class="speak-btn" data-speak="こちらが私の名刺です。ご興味がありましたら、メールでご連絡いただけますと幸いです。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="こちらが私の名刺です。ご興味がありましたら、メールでご連絡いただけますと幸いです。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">11</span><b>시간 배려</b></div><div class="voice-ja" lang="ja">お忙しければ、後ほどメールで詳しくご連絡してもよろしいでしょうか。</div><div class="voice-reading" lang="ko">오이소가시케레바, 노치호도 메에루데 쿠와시쿠 고렌라쿠 시테모 요로시이 데쇼오카.</div><div class="voice-ko">지금 바쁘시면 나중에 이메일로 자세히 연락드려도 될까요?</div><div class="voice-buttons"><button aria-label="시간 배려 일본어 음성 재생" class="speak-btn" data-speak="お忙しければ、後ほどメールで詳しくご連絡してもよろしいでしょうか。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="お忙しければ、後ほどメールで詳しくご連絡してもよろしいでしょうか。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">12</span><b>감사 인사</b></div><div class="voice-ja" lang="ja">お時間をいただき、ありがとうございました。お会いできてうれしかったです。</div><div class="voice-reading" lang="ko">오지칸오 이타다키, 아리가토오 고자이마시타. 오아이 데키테 우레시캇타데스.</div><div class="voice-ko">시간 내주셔서 감사합니다. 만나 뵙게 되어 반가웠습니다.</div><div class="voice-buttons"><button aria-label="감사 인사 일본어 음성 재생" class="speak-btn" data-speak="お時間をいただき、ありがとうございました。お会いできてうれしかったです。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="お時間をいただき、ありがとうございました。お会いできてうれしかったです。" type="button">문장 복사</button></div></article></div><h3 style="margin-top:24px">상대방의 예상 대답 · 듣고 확인하기</h3><div class="voice-grid"><article class="voice-card"><div class="voice-top"><span class="voice-index">01</span><b>관심 있습니다</b></div><div class="voice-ja" lang="ja">興味があります。詳しい資料を送ってください。</div><div class="voice-reading" lang="ko">쿄오미가 아리마스. 쿠와시이 시료오오 오쿳테 쿠다사이.</div><div class="voice-ko">관심 있습니다. 자세한 자료를 보내주세요.</div><div class="voice-buttons"><button aria-label="관심 있습니다 일본어 음성 재생" class="speak-btn" data-speak="興味があります。詳しい資料を送ってください。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="興味があります。詳しい資料を送ってください。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">02</span><b>담당자와 상의할게요</b></div><div class="voice-ja" lang="ja">担当者に確認します。</div><div class="voice-reading" lang="ko">탄토오샤니 카쿠닌 시마스.</div><div class="voice-ko">담당자에게 확인하겠습니다.</div><div class="voice-buttons"><button aria-label="담당자와 상의할게요 일본어 음성 재생" class="speak-btn" data-speak="担当者に確認します。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="担当者に確認します。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">03</span><b>한국 배송 가능</b></div><div class="voice-ja" lang="ja">韓国への発送は可能です。</div><div class="voice-reading" lang="ko">칸코쿠에노 핫소오와 카노오데스.</div><div class="voice-ko">한국으로 배송할 수 있습니다.</div><div class="voice-buttons"><button aria-label="한국 배송 가능 일본어 음성 재생" class="speak-btn" data-speak="韓国への発送は可能です。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="韓国への発送は可能です。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">04</span><b>현재는 어렵습니다</b></div><div class="voice-ja" lang="ja">今のところ、海外との取引は行っていません。</div><div class="voice-reading" lang="ko">이마노 토코로, 카이가이토노 토리히키와 오코낫테 이마셍.</div><div class="voice-ko">현재는 해외 거래를 하지 않고 있습니다.</div><div class="voice-buttons"><button aria-label="현재는 어렵습니다 일본어 음성 재생" class="speak-btn" data-speak="今のところ、海外との取引は行っていません。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="今のところ、海外との取引は行っていません。" type="button">문장 복사</button></div></article><article class="voice-card"><div class="voice-top"><span class="voice-index">05</span><b>명함 부탁합니다</b></div><div class="voice-ja" lang="ja">名刺をいただけますか。</div><div class="voice-reading" lang="ko">메에시오 이타다케마스카.</div><div class="voice-ko">명함을 주시겠어요?</div><div class="voice-buttons"><button aria-label="명함 부탁합니다 일본어 음성 재생" class="speak-btn" data-speak="名刺をいただけますか。" type="button">🔊 일본어 들려주기</button><button class="copy-btn" data-copy="名刺をいただけますか。" type="button">문장 복사</button></div></article></div><div class="research-warning"><b>현장 팁:</b> AI 번역은 서로 동의한 뒤 사용하고, 가격·독점권·유통권·샘플비는 현장에서 확정하지 마세요. 거래 조건은 추후 이메일과 서면 계약으로 확인합니다. 이 음성은 휴대폰 브라우저의 일본어 음성 엔진을 사용하므로 일본어 음성 설치나 첫 재생 설정이 필요할 수 있습니다. 주변에 들려주기 전에 볼륨을 확인하세요.</div></section>
+<h2 id="museums">이번 날짜에 볼 수 있는 미술관 7곳</h2>
+<div class="grid">
+<article class="card"><div class="cardbody"><div class="daytag" style="color:var(--red)">11/30 · ①</div><h3>국립신미술관</h3>
+<p><b>루브르 미술관전: 르네상스</b> (9/9–12/13). 레오나르도 다 빈치의 <i>La Belle Ferronnière</i>가 첫 일본 방문. 약 50여 점을 4개 테마로 구성. 같은 날 「소녀만화 인피니티」도 선택 가능.</p>
+<div class="btns"><a class="btn primary" href="https://www.nact.jp/exhibition_special/2026/louvre2026/" target="_blank">루브르전 공식</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=The+National+Art+Center+Tokyo" target="_blank">지도</a></div></div></article>
+<article class="card"><div class="cardbody"><div class="daytag" style="color:var(--red)">11/30 · ②</div><h3>모리미술관</h3>
+<p><b>Mariko Mori: All That Shines</b> (10/31–2027/3/28). 약 40점, 사진·영상·조각·대형 설치를 통해 기술·팝문화·의식/명상으로 이어지는 30여 년의 작업을 회고.</p>
+<div class="btns"><a class="btn primary" href="https://www.mori.art.museum/en/exhibitions/marikomori/index.html" target="_blank">전시 공식</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Mori+Art+Museum+Tokyo" target="_blank">지도</a></div></div></article>
+<article class="card"><div class="cardbody"><div class="daytag" style="color:var(--blue)">12/1 · ③</div><h3>도쿄도미술관</h3>
+<p><b>오르세 미술관 소장전</b> (11/14–2027/3/28). ‘지금을 살아가는 기쁨’을 주제로 밀레·르누아르·모네·반 고흐 등 약 110점. 이번 여행의 핵심.</p>
+<div class="btns"><a class="btn primary" href="https://www.tobikan.jp/kr/exhibition/2026_orsay.html" target="_blank">전시 공식</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Tokyo+Metropolitan+Art+Museum" target="_blank">지도</a></div></div></article>
+<article class="card"><div class="cardbody"><div class="daytag" style="color:var(--blue)">12/1 · ④</div><h3>국립서양미술관</h3>
+<p><b>Turner: Painting the Sublime</b> (10/24–2027/2/21). 터너의 빛·대기·폭풍·산업화 풍경을 현대미술과 대화시키는 전시. 같은 날 상설전 입장 포함.</p>
+<div class="btns"><a class="btn primary" href="https://www.nmwa.go.jp/en/exhibitions/2026turner.html" target="_blank">전시 공식</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=The+National+Museum+of+Western+Art+Tokyo" target="_blank">지도</a></div></div></article>
+<article class="card"><div class="cardbody"><div class="daytag" style="color:var(--blue)">12/1 · ⑤</div><h3>우에노의 숲 미술관</h3>
+<p><b>Cincinnati Art Museum Exhibition</b> (10/10–2027/1/10). 고흐·모네·피카소·모딜리아니 등 미국 신시내티미술관의 유럽 명작 80여 점. 회기 중 무휴.</p>
+<div class="btns"><a class="btn primary" href="https://www.cincinnati-art2026.jp/" target="_blank">전시 공식</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=The+Ueno+Royal+Museum" target="_blank">지도</a></div></div></article>
+<article class="card"><div class="cardbody"><div class="daytag" style="color:var(--green)">12/2 · ⑥</div><h3>미쓰비시1호관미술관</h3>
+<p><b>Fontanesi: Italian Light, Landscapes of the Heart</b> (10/17–2027/1/24). 일본 최초 폰타네지 대규모 회고전, 일본 제자와 후대 이탈리아 작가까지 약 200점. 터너와의 세트티켓도 있음.</p>
+<div class="btns"><a class="btn primary" href="https://mimt.jp/ex_sp/fontanesi/" target="_blank">전시 공식</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Mitsubishi+Ichigokan+Museum" target="_blank">지도</a></div></div></article>
+<article class="card"><div class="cardbody"><div class="daytag" style="color:var(--green)">12/2 · ⑦</div><h3>아티존미술관</h3>
+<p><b>The Strangers’ Gaze—Japanese Artists in Europe</b> + <b>WHOSE LIGHT?</b> (10/24–2027/1/31). 유럽에서 작업한 일본 근대 화가 100점 이상과 후지이 히카루의 동시대 작업을 함께 관람. 날짜·시간 지정 온라인 티켓제.</p>
+<div class="btns"><a class="btn primary" href="https://www.artizon.museum/en/exhibition/" target="_blank">전시 공식</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Artizon+Museum" target="_blank">지도</a></div></div></article>
+<article class="card"><div class="cardbody"><div class="daytag" style="color:#888">이번 여행 제외 · ⑧</div><h3>네즈미술관</h3>
+<p>11/23 「Bugaku Costumes」 종료 후, 다음 「Lacquerware with Carvings」가 12/5 시작. <b>11/30–12/2는 전시 교체 공백</b>이라 이번 일정에는 넣지 않습니다.</p>
+<div class="btns"><a class="btn primary" href="https://www.nezu-muse.or.jp/en/exhibitions/schedule/" target="_blank">전시 일정</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Nezu+Museum+Tokyo" target="_blank">지도</a></div></div></article>
+</div>
+<h2>숙박 확정 · 참고 비교</h2>
 <table class="compare">
 <thead><tr><th>호텔</th><th>추천 포인트</th><th>욕장</th><th>동선</th><th>링크</th></tr></thead>
 <tbody>
-<tr><td><b>&Here TOKYO UENO</b></td><td>우에노공원·오르세전·나리타 이동 균형</td><td>최상층 대욕장 + 노천탕</td><td>12/1 숙박 최적</td><td><a href="https://andherehotels.jp/tokyoueno/en/" target="_blank">공식</a> · <a href="https://www.google.com/maps/search/?api=1&query=%26Here+TOKYO+UENO" target="_blank">지도</a></td></tr>
-<tr><td><b>미쓰이가든 호텔 진구가이엔 도쿄 프리미어</b></td><td>미쓰이 계열 + 러닝 환경</td><td>숙박객 대욕장</td><td>아오야마·롯폰기 접근</td><td><a href="https://www.gardenhotels.co.jp/jingugaientokyo-premier/ko/bath/" target="_blank">욕장</a> · <a href="https://www.google.com/maps/search/?api=1&query=Mitsui+Garden+Hotel+Jingugaien+Tokyo+Premier" target="_blank">지도</a></td></tr>
-<tr><td><b>도미인 우에노 오카치마치</b></td><td>욕장 체험과 가성비</td><td>대욕장·반노천·사우나·냉탕</td><td>우에노·아메요코</td><td><a href="https://dormy-hotels.com/en/dormyinn/hotels/ueno/" target="_blank">공식</a> · <a href="https://www.google.com/maps/search/?api=1&query=Dormy+Inn+Ueno+Okachimachi" target="_blank">지도</a></td></tr>
-<tr><td><b>칸데오 호텔즈 도쿄 롯폰기</b></td><td>호텔 이동 최소화</td><td>옥상 SkySpa</td><td>롯폰기 2박 가능</td><td><a href="https://www.candeohotels.com/en/tokyo-roppongi/skyspa/" target="_blank">SkySpa</a> · <a href="https://www.google.com/maps/search/?api=1&query=Candeo+Hotels+Tokyo+Roppongi" target="_blank">지도</a></td></tr>
+<tr><td><b>&amp;Here TOKYO UENO</b></td><td>우에노공원·오르세전·나리타 이동 균형</td><td>최상층 대욕장 + 노천탕</td><td>12/1 숙박 최적</td><td><a href="https://andherehotels.jp/tokyoueno/en/" target="_blank">공식</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=%26Here+TOKYO+UENO" target="_blank">지도</a></td></tr>
+<tr><td><b>★ 미쓰이가든 호텔 진구가이엔 도쿄 프리미어</b></td><td>예약 확정 · 러닝·대욕장·2박 연박</td><td>숙박객 대욕장</td><td>국립경기장 1분 · 롯폰기/도쿄역 접근</td><td><a href="https://www.gardenhotels.co.jp/jingugaientokyo-premier/ko/bath/" target="_blank">욕장</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Mitsui+Garden+Hotel+Jingugaien+Tokyo+Premier" target="_blank">지도</a></td></tr>
+<tr><td><b>도미인 우에노 오카치마치</b></td><td>욕장 체험과 가성비</td><td>대욕장·반노천·사우나·냉탕</td><td>우에노·아메요코</td><td><a href="https://dormy-hotels.com/en/dormyinn/hotels/ueno/" target="_blank">공식</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Dormy+Inn+Ueno+Okachimachi" target="_blank">지도</a></td></tr>
+<tr><td><b>칸데오 호텔즈 도쿄 롯폰기</b></td><td>호텔 이동 최소화</td><td>옥상 SkySpa</td><td>롯폰기 2박 가능</td><td><a href="https://www.candeohotels.com/en/tokyo-roppongi/skyspa/" target="_blank">SkySpa</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Candeo+Hotels+Tokyo+Roppongi" target="_blank">지도</a></td></tr>
 </tbody></table>
-
 <h2>욕장 호텔 사진</h2>
 <div class="grid">
-<article class="card"><img class="photo" src="https://imgcp.aacdn.jp/img-a/1600/1200/aa_news/article/2026/03/11/69b12cd000617.jpg" alt="미쓰이가든 호텔 진구가이엔 도쿄 프리미어"><div class="cardbody"><h3>미쓰이가든 호텔 진구가이엔 도쿄 프리미어</h3><p>대욕장 있는 미쓰이 계열 중급 호텔. 숙박객 전용 대욕장과 메이지진구가이엔 주변 산책·러닝이 장점입니다.</p><div class="caption">국립경기장 옆, 나무와 공원이 가까운 입지. 러닝과 대욕장을 모두 중요하게 볼 때 후보.</div><div class="btns"><a class="btn primary" href="https://www.gardenhotels.co.jp/jingugaientokyo-premier/ko/bath/" target="_blank">대욕장 공식</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Mitsui+Garden+Hotel+Jingugaien+Tokyo+Premier" target="_blank">Google 지도</a></div></div></article>
-<article class="card"><img class="photo" src="https://cdn-ak.f.st-hatena.com/images/fotolife/c/cosami1215/20230207/20230207215300.jpg" alt="도미인 우에노 오카치마치"><div class="cardbody"><h3>도미인 우에노 오카치마치</h3><p>욕장 만족도 우선 후보. 상층 대욕장, 반노천탕, 사우나, 냉탕이 있고 야식 라멘·목욕 후 간식 같은 도미인 특유 서비스가 있습니다.</p><div class="caption">우에노·오카치마치 중심의 실용적인 비즈니스호텔. 객실보다 욕장 체험과 위치 효율에 무게.</div><div class="btns"><a class="btn primary" href="https://dormy-hotels.com/en/dormyinn/hotels/ueno/" target="_blank">공식 홈페이지</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Dormy+Inn+Ueno+Okachimachi" target="_blank">Google 지도</a></div></div></article>
-<article class="card"><img class="photo" src="https://www.candeohotels.com/en/assets_c/2020/05/16_roppongi_11_ourhotels_02_sp-thumb-800x800-8422.jpg" alt="칸데오 호텔즈 도쿄 롯폰기"><div class="cardbody"><h3>칸데오 호텔즈 도쿄 롯폰기</h3><p>호텔 이동을 최소화하려면 좋은 선택. 롯폰기역 약 2분, 옥상 SkySpa 노천탕이 핵심입니다. 25~30만 원 안으로 뜨면 잡을 만합니다.</p><div class="caption">롯폰기 도심 한가운데의 옥상 SkySpa. 숙소 이동은 최소화하면서 목욕 경험을 넣고 싶을 때 적합.</div><div class="btns"><a class="btn primary" href="https://www.candeohotels.com/en/tokyo-roppongi/" target="_blank">호텔 공식</a><a class="btn primary" href="https://www.candeohotels.com/en/tokyo-roppongi/skyspa/" target="_blank">SkySpa 공식</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&query=Candeo+Hotels+Tokyo+Roppongi" target="_blank">Google 지도</a></div></div></article>
-<article class="card"><img class="photo" src="https://www.candeohotels.com/ja/assets_c/2020/05/16_roppongi_03_skyspa_02_outside_01_pc_01-thumb-2080x1280-6455.jpg" alt="칸데오 SkySpa"><div class="cardbody"><h3>칸데오 SkySpa</h3><p>도심 한가운데서 야경을 보며 목욕하는 타입. 천연온천보다는 ‘도쿄 시티뷰 대욕장’ 체험에 가깝습니다.</p><div class="caption">사진 설명 · 롯폰기 스카이라인이 보이는 SkySpa 욕장.</div><div class="btns"><a class="btn primary" href="https://www.candeohotels.com/en/tokyo-roppongi/skyspa/" target="_blank">SkySpa 자세히</a></div></div></article>
+<article class="card"><img alt="미쓰이가든 호텔 진구가이엔 도쿄 프리미어" class="photo" src="https://imgcp.aacdn.jp/img-a/1600/1200/aa_news/article/2026/03/11/69b12cd000617.jpg"/><div class="cardbody"><h3>미쓰이가든 호텔 진구가이엔 도쿄 프리미어</h3><p>대욕장 있는 미쓰이 계열 중급 호텔. 숙박객 전용 대욕장과 메이지진구가이엔 주변 산책·러닝이 장점입니다.</p><div class="caption">국립경기장 옆, 나무와 공원이 가까운 입지. 러닝과 대욕장을 모두 중요하게 볼 때 후보.</div><div class="btns"><a class="btn primary" href="https://www.gardenhotels.co.jp/jingugaientokyo-premier/ko/bath/" target="_blank">대욕장 공식</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Mitsui+Garden+Hotel+Jingugaien+Tokyo+Premier" target="_blank">Google 지도</a></div></div></article>
+<article class="card"><img alt="도미인 우에노 오카치마치" class="photo" src="https://cdn-ak.f.st-hatena.com/images/fotolife/c/cosami1215/20230207/20230207215300.jpg"/><div class="cardbody"><h3>도미인 우에노 오카치마치</h3><p>욕장 만족도 우선 후보. 상층 대욕장, 반노천탕, 사우나, 냉탕이 있고 야식 라멘·목욕 후 간식 같은 도미인 특유 서비스가 있습니다.</p><div class="caption">우에노·오카치마치 중심의 실용적인 비즈니스호텔. 객실보다 욕장 체험과 위치 효율에 무게.</div><div class="btns"><a class="btn primary" href="https://dormy-hotels.com/en/dormyinn/hotels/ueno/" target="_blank">공식 홈페이지</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Dormy+Inn+Ueno+Okachimachi" target="_blank">Google 지도</a></div></div></article>
+<article class="card"><img alt="칸데오 호텔즈 도쿄 롯폰기" class="photo" src="https://www.candeohotels.com/en/assets_c/2020/05/16_roppongi_11_ourhotels_02_sp-thumb-800x800-8422.jpg"/><div class="cardbody"><h3>칸데오 호텔즈 도쿄 롯폰기</h3><p>호텔 이동을 최소화하려면 좋은 선택. 롯폰기역 약 2분, 옥상 SkySpa 노천탕이 핵심입니다. 25~30만 원 안으로 뜨면 잡을 만합니다.</p><div class="caption">롯폰기 도심 한가운데의 옥상 SkySpa. 숙소 이동은 최소화하면서 목욕 경험을 넣고 싶을 때 적합.</div><div class="btns"><a class="btn primary" href="https://www.candeohotels.com/en/tokyo-roppongi/" target="_blank">호텔 공식</a><a class="btn primary" href="https://www.candeohotels.com/en/tokyo-roppongi/skyspa/" target="_blank">SkySpa 공식</a><a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Candeo+Hotels+Tokyo+Roppongi" target="_blank">Google 지도</a></div></div></article>
+<article class="card"><img alt="칸데오 SkySpa" class="photo" src="https://www.candeohotels.com/ja/assets_c/2020/05/16_roppongi_03_skyspa_02_outside_01_pc_01-thumb-2080x1280-6455.jpg"/><div class="cardbody"><h3>칸데오 SkySpa</h3><p>도심 한가운데서 야경을 보며 목욕하는 타입. 천연온천보다는 ‘도쿄 시티뷰 대욕장’ 체험에 가깝습니다.</p><div class="caption">사진 설명 · 롯폰기 스카이라인이 보이는 SkySpa 욕장.</div><div class="btns"><a class="btn primary" href="https://www.candeohotels.com/en/tokyo-roppongi/skyspa/" target="_blank">SkySpa 자세히</a></div></div></article>
 </div>
-
-<h2>Google 지도 · 바로 보기</h2>
+<h2 id="maps">Google 지도 · 이번 동선</h2>
 <div class="mapgrid">
-<div class="mapbox"><h3>1박차 · 롯폰기</h3><iframe loading="lazy" src="https://www.google.com/maps?q=Mitsui+Garden+Hotel+Roppongi+Tokyo+Premier&output=embed"></iframe><div class="btns"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Mitsui+Garden+Hotel+Roppongi+Tokyo+Premier">큰 지도 열기</a></div></div>
-<div class="mapbox"><h3>2박차 · 우에노</h3><iframe loading="lazy" src="https://www.google.com/maps?q=%26Here+TOKYO+UENO&output=embed"></iframe><div class="btns"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=%26Here+TOKYO+UENO">큰 지도 열기</a></div></div>
-<div class="mapbox"><h3>모리미술관</h3><iframe loading="lazy" src="https://www.google.com/maps?q=Mori+Art+Museum+Tokyo&output=embed"></iframe><div class="btns"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Mori+Art+Museum+Tokyo">큰 지도 열기</a></div></div>
-<div class="mapbox"><h3>우에노 미술관 구역</h3><iframe loading="lazy" src="https://www.google.com/maps?q=Tokyo+Metropolitan+Art+Museum+Ueno&output=embed"></iframe><div class="btns"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Tokyo+Metropolitan+Art+Museum+Ueno">큰 지도 열기</a></div></div>
-<div class="mapbox"><h3>다이칸야마 T-SITE</h3><iframe loading="lazy" src="https://www.google.com/maps?q=Daikanyama+T-SITE&output=embed"></iframe><div class="btns"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Daikanyama+T-SITE">큰 지도 열기</a></div></div>
-<div class="mapbox"><h3>나카메구로</h3><iframe loading="lazy" src="https://www.google.com/maps?q=Nakameguro+Station&output=embed"></iframe><div class="btns"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Nakameguro+Station">큰 지도 열기</a></div></div>
+<div class="mapbox"><h3>숙소 · 진구가이엔 2박</h3><iframe loading="lazy" src="https://www.google.com/maps?q=Mitsui+Garden+Hotel+Jingugaien+Tokyo+Premier&amp;output=embed"></iframe><div class="btns"><a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Mitsui+Garden+Hotel+Jingugaien+Tokyo+Premier" target="_blank">큰 지도 열기</a></div></div>
+<div class="mapbox"><h3>11/30 · 롯폰기 미술관 구역</h3><iframe loading="lazy" src="https://www.google.com/maps?q=The+National+Art+Center+Tokyo&amp;output=embed"></iframe><div class="btns"><a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=The+National+Art+Center+Tokyo&amp;destination=Mori+Art+Museum&amp;travelmode=walking" target="_blank">국립신→모리</a></div></div>
+<div class="mapbox"><h3>12/1 · 우에노 3관</h3><iframe loading="lazy" src="https://www.google.com/maps?q=Tokyo+Metropolitan+Art+Museum+Ueno&amp;output=embed"></iframe><div class="btns"><a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Tokyo+Metropolitan+Art+Museum&amp;destination=The+Ueno+Royal+Museum&amp;waypoints=The+National+Museum+of+Western+Art+Tokyo&amp;travelmode=walking" target="_blank">우에노 3관 경로</a></div></div>
+<div class="mapbox"><h3>12/2 · 도쿄역 2관</h3><iframe loading="lazy" src="https://www.google.com/maps?q=Mitsubishi+Ichigokan+Museum&amp;output=embed"></iframe><div class="btns"><a class="btn map" href="https://www.google.com/maps/dir/?api=1&amp;origin=Mitsubishi+Ichigokan+Museum&amp;destination=Artizon+Museum&amp;travelmode=walking" target="_blank">미쓰비시→아티존</a></div></div>
 </div>
-
+<h2 id="luggage">3일차 · 도쿄역 캐리어 보관</h2>
+<section class="sectioncard">
+<p class="lead"><b>추천 흐름:</b> 진구가이엔 체크아웃 → 도쿄역 → 캐리어 보관 → 미쓰비시1호관 → 아티존 → 점심 → 도쿄역 복귀 → 나리타.</p>
+<div class="grid">
+<article class="card">
+<div class="cardbody">
+<div class="daytag" style="color:var(--green)">1순위</div>
+<h3>유인 수하물 보관소</h3>
+<p>큰 캐리어 2개라면 빈자리 걱정이 적은 유인 보관소가 더 편합니다. <b>마루노우치 북쪽 출구 1층 JR EAST Travel Service Center</b> 또는 <b>야에스 남쪽 수하물 서비스 카운터</b>를 후보로 둡니다.</p>
+<div class="caption">미쓰비시1호관이 마루노우치 쪽이라, 마루노우치 북쪽 출구에서 맡기면 첫 미술관으로 이동하기 자연스럽습니다.</div>
+<div class="btns">
+<a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=JR+EAST+Travel+Service+Center+Tokyo+Station" target="_blank">JR EAST 보관소 지도</a>
+<a class="btn map" href="https://www.google.com/maps/search/?api=1&amp;query=Tokyo+Station+Yaesu+South+Exit+Luggage+Storage" target="_blank">야에스 보관소 지도</a>
+</div>
+</div>
+</article>
+<article class="card">
+<div class="cardbody">
+<div class="daytag" style="color:var(--blue)">2순위</div>
+<h3>대형 코인락커</h3>
+<p>도쿄역 안에 대형 스ーツケース용 락커가 다수 있지만, 시간대에 따라 꽉 찰 수 있습니다. 빈자리 있으면 가장 빠르고 간단한 선택.</p>
+<div class="caption">락커가 꽉 찼으면 역 안을 오래 헤매지 말고 바로 유인 보관소로 전환하는 게 좋습니다.</div>
+<div class="btns">
+<a class="btn" href="https://www.tokyostationcity.com/en/information/" target="_blank">도쿄역 공식 안내</a>
+</div>
+</div>
+</article>
+</div>
+<div class="booking-note"><b>실전 팁:</b> 12/2는 공항 이동일이라 캐리어 보관 위치를 “마루노우치 북쪽” 쪽으로 잡으면 미쓰비시1호관과 가깝고, 마지막에 도쿄역으로 돌아와 짐을 찾은 뒤 나리타행으로 연결하기 편합니다.</div>
+</section>
 <h2>한 줄 정리</h2>
 <div class="sectioncard">
-<p class="lead"><b>월 롯폰기 → 화 우에노 → 수 다이칸야마 → 나리타.</b><br>
-첫날은 현대미술과 도심, 둘째 날은 오르세·터너 집중 관람 후 대욕장, 마지막 날은 책·문구·디자인과 동네 산책으로 분위기를 바꾸는 2박3일입니다.</p>
+<p class="lead"><b>V2 도장깨기 기준: 월 롯폰기 2관 → 화 우에노 3관 → 수 도쿄역 2관.</b><br/>
+호텔은 진구가이엔 2박 연박으로 고정하고, 네즈만 전시교체 기간 때문에 제외하면 2박3일에 7개 미술관을 가장 덜 되돌아가는 방식으로 묶을 수 있습니다.</p>
 </div>
 </main>
-
 <footer class="wrap">
-외부 사진은 해당 공개 웹 이미지 URL을 불러오는 방식입니다. 호텔 요금·욕장 운영시간·전시 운영시간·교통은 출발 직전 공식 페이지에서 최종 확인하세요. 티켓/예약 정보는 2026.10.27 공식 안내 기준으로 업데이트했습니다.
+외부 사진은 해당 공개 웹 이미지 URL을 불러오는 방식입니다. 호텔 요금·욕장 운영시간·전시 운영시간·교통은 출발 직전 공식 페이지에서 최종 확인하세요. 티켓/예약 정보와 전시 회기는 2026.10.29 공식 안내 기준으로 업데이트했습니다.
 </footer>
+<script>
+(function(){
+  const prefix='jphic_tokyo_research_20261114_';
+  const safeGet=k=>{try{return localStorage.getItem(prefix+k)}catch(e){return null}};
+  const safeSet=(k,v)=>{try{localStorage.setItem(prefix+k,v)}catch(e){}};
+  const boxes=[...document.querySelectorAll('#jphic-research input[data-research-key]')];
+  const notes=[...document.querySelectorAll('#jphic-research textarea[data-research-note]')];
+  boxes.forEach(el=>{el.checked=safeGet(el.dataset.researchKey)==='1';el.addEventListener('change',()=>{safeSet(el.dataset.researchKey,el.checked?'1':'0');progress()})});
+  notes.forEach(el=>{el.value=safeGet('note_'+el.dataset.researchNote)||'';el.addEventListener('input',()=>safeSet('note_'+el.dataset.researchNote,el.value))});
+  const tabs=[...document.querySelectorAll('[data-research-tab]')];
+  function activate(tab){tabs.forEach(b=>{const on=b.dataset.researchTab===tab;b.classList.toggle('active',on);b.setAttribute('aria-selected',on?'true':'false')});document.querySelectorAll('.research-panel').forEach(p=>p.hidden=p.id!=='research-'+tab);safeSet('active',tab);progress()}
+  tabs.forEach(b=>b.addEventListener('click',()=>activate(b.dataset.researchTab)));
+  function progress(){const panel=document.querySelector('.research-panel:not([hidden])');const current=[...panel.querySelectorAll('input[data-research-key]')];const done=current.filter(x=>x.checked).length;document.getElementById('research-progress-bar').style.width=(100*done/current.length)+'%';document.getElementById('research-progress-label').textContent='현재 동선 '+done+' / '+current.length+'개 미션 완료'}
+  activate(safeGet('active')==='v2'?'v2':'v1');
+  document.getElementById('research-export').addEventListener('click',()=>{let txt='JPHIC TOKYO FIELD RESEARCH\n2026.11.30–12.2\n\n';for(const panel of document.querySelectorAll('.research-panel')){txt+=(panel.id==='research-v1'?'[V1 균형형]':'[V2 미술관 7곳]')+'\n';panel.querySelectorAll('input[data-research-key]').forEach(b=>txt+=(b.checked?'[완료] ':'[미완료] ')+b.parentElement.textContent.trim()+'\n');txt+='\n'}notes.forEach(n=>txt+='['+n.previousSibling?.textContent?.trim()+ ' / '+n.dataset.researchNote+']\n'+n.value+'\n\n');const url=URL.createObjectURL(new Blob([txt],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='JPHIC_Tokyo_Field_Research.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+  document.getElementById('research-clear').addEventListener('click',()=>{if(!confirm('현장 체크와 메모를 모두 초기화할까요?'))return;boxes.forEach(b=>{b.checked=false;safeSet(b.dataset.researchKey,'0')});notes.forEach(n=>{n.value='';safeSet('note_'+n.dataset.researchNote,'')});progress()});
+})();
+</script>
+<script>
+(function(){
+ const root=document.getElementById('jphic-japanese');if(!root)return;
+ const status=root.querySelector('#voice-status');let active=null;const synth=window.speechSynthesis;
+ function reset(){root.querySelectorAll('.speak-btn').forEach(b=>{b.classList.remove('playing');b.textContent='🔊 일본어 들려주기'});active=null}
+ root.querySelectorAll('.speak-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  if(!synth||!window.SpeechSynthesisUtterance){status.textContent='이 브라우저에서는 음성 재생을 지원하지 않습니다.';return}
+  synth.cancel();reset();const u=new SpeechSynthesisUtterance(btn.dataset.speak);u.lang='ja-JP';u.rate=Number(root.querySelector('#voice-rate').value);u.pitch=1;u.volume=1;
+  const voices=synth.getVoices();const voice=voices.find(v=>v.lang.toLowerCase()==='ja-jp')||voices.find(v=>v.lang.toLowerCase().startsWith('ja'));if(voice)u.voice=voice;
+  active=btn;btn.classList.add('playing');btn.textContent='▶ 재생 중';status.textContent='일본어 재생 중';
+  u.onend=()=>{reset();status.textContent='재생 완료'};u.onerror=e=>{reset();status.textContent='재생 실패: 기기에서 일본어 음성 설정을 확인하세요'};
+  synth.speak(u);
+ }));
+ root.querySelector('#voice-stop').addEventListener('click',()=>{if(synth)synth.cancel();reset();status.textContent='중지됨'});
+ root.querySelectorAll('.copy-btn').forEach(btn=>btn.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(btn.dataset.copy);btn.textContent='복사됨 ✓';setTimeout(()=>btn.textContent='문장 복사',1200)}catch(e){status.textContent='복사가 차단되었습니다. 문장을 길게 눌러 복사하세요.'}}));
+})();
+</script>
+
+<script>
+(function(){
+const links=[...document.querySelectorAll('.jump-inner a')];
+links.forEach(a=>a.addEventListener('click',()=>{links.forEach(x=>x.classList.remove('active'));a.classList.add('active')}));
+if(!('IntersectionObserver' in window))return;
+const nodes=links.map(a=>document.getElementById(a.hash.slice(1))).filter(Boolean);
+const observer=new IntersectionObserver(entries=>{for(const ent of entries){if(ent.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.hash==='#'+ent.target.id));}}},{rootMargin:'-90px 0px -65% 0px',threshold:0});
+nodes.forEach(x=>observer.observe(x));
+})();
+</script>
 </body>
 </html>
