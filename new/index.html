@@ -1,0 +1,220 @@
+<!-- 2026-11-19: jphic.co.kr/new 시험 게시용 — 파일 경로를 /new/ 절대경로로, 검색 제외. v0.9 첫 단계 이름·연락처(로그인 없음), 진행 중 구글시트 자동 저장, 접수 확인, 오픈채팅 버튼. v0.8.2 모바일도 3:4 배너, 전문 분야 박스(각진 사각·왼쪽 아이콘). v0.8.1 배너 재생 버튼 삭제(자동 무음 반복만). v0.8 배너 파스텔 팔레트(라벤더·크림·핑크, 코코아 글자, 앰버 버튼). v0.7.1 실제 배너 영상·포스터. v0.7 상단 배너 영상 자리(모바일 9:16·PC 3:4), 디자인 의뢰서 모양 상담창. -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- 시험 운영 중: 검색엔진에 노출하지 않음. 메인으로 옮길 때 이 줄을 지웁니다. -->
+<meta name="robots" content="noindex">
+<title>JPHIC — 작은 이미지도 크게 쓸 수 있도록</title>
+<meta name="description" content="AI 생성 이미지·저해상도 이미지를 출력 크기에 맞춰 보정·벡터화·재제작합니다. 포스터·키비주얼, 대형실사, 전시월·포토존, LED 영상, 판촉물까지 디자인 의뢰 상담.">
+<meta name="theme-color" content="#F2EBF9">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JPHIC — 작은 이미지도 크게 쓸 수 있도록">
+<meta property="og:description" content="출력 크기에 맞춘 보정·벡터화·재제작부터 행사·공간 그래픽 제작까지.">
+<!-- 배포 주소가 정해지면 og:image를 절대주소로 바꿔야 카카오톡 미리보기에 이미지가 나옵니다. -->
+<meta property="og:image" content="https://jphic.co.kr/new/assets/og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F4AE00'/%3E%3Cpath d='M38 14v24a10 10 0 0 1-20 0' fill='none' stroke='%234A3426' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="/new/style.css">
+</head>
+<body>
+<header class="site-head">
+  <a class="logo" href="#top" aria-label="JPHIC 처음으로">JPHIC</a>
+  <a class="head-link" href="#consult">디자인 의뢰 <span aria-hidden="true">↓</span></a>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="JPHIC 상단 배너">
+    <!-- 배너 영상: 모바일·PC 모두 assets/banner_3x4.mp4. 파일이 없으면 포스터 이미지가 보입니다. -->
+    <video id="heroVideo" muted loop playsinline preload="metadata" poster="/new/assets/banner_poster_3x4.jpg" aria-label="접시 위 식빵 레이어가 칼선으로 겹치며 JPHIC 글씨가 완성되는 상단 배너 영상">
+      <source src="/new/assets/banner_3x4.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <section class="intro">
+    <p class="eyebrow">출력용 이미지 보정 · 행사·공간 그래픽</p>
+    <h1>AI 이미지도, 작은 이미지도.<br><em>크게</em> 쓸 수 있도록.</h1>
+    <p class="lead">출력 크기에 맞춘 보정·벡터화·재제작으로 픽셀 깨짐을 줄이고, 포스터부터 전시월·LED 영상까지 공간에 맞게 제작합니다.</p>
+    <div class="cta-row">
+      <a class="cta" href="#consult">디자인 의뢰 시작하기 <span aria-hidden="true">↓</span></a>
+      <a class="cta ghost" data-openchat hidden target="_blank" rel="noopener">카카오톡 오픈채팅 상담 <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section class="section dark" id="why" aria-labelledby="whyTitle">
+    <p class="eyebrow">전문 분야</p>
+    <h2 id="whyTitle">크게 출력하면<br>왜 깨질까요?</h2>
+    <p>화면에서 선명하던 이미지도 수 미터 크기로 출력하면 픽셀이 그대로 커져 계단처럼 보입니다. 출력 크기를 기준으로 이미지를 다시 정리해야 합니다.</p>
+    <figure class="diagram">
+      <div class="diagram-row">
+        <div class="diagram-cell">
+          <svg viewBox="0 0 120 120" role="img" aria-labelledby="dA">
+            <title id="dA">작은 이미지를 그대로 확대해 계단처럼 보이는 원</title>
+            <g fill="#C9B6EA">
+              <rect x="40" y="10" width="40" height="10"/><rect x="25" y="20" width="70" height="10"/>
+              <rect x="15" y="30" width="90" height="15"/><rect x="10" y="45" width="100" height="30"/>
+              <rect x="15" y="75" width="90" height="15"/><rect x="25" y="90" width="70" height="10"/>
+              <rect x="40" y="100" width="40" height="10"/>
+            </g>
+          </svg>
+          <figcaption>원본을 그대로 확대</figcaption>
+        </div>
+        <span class="diagram-arrow" aria-hidden="true">→</span>
+        <div class="diagram-cell">
+          <svg viewBox="0 0 120 120" role="img" aria-labelledby="dB">
+            <title id="dB">출력 크기에 맞춰 매끄러운 선으로 다시 정리한 원</title>
+            <circle cx="60" cy="60" r="50" fill="#F4AE00"/>
+            <g fill="#FFFFFF" stroke="#4A3426" stroke-width="2">
+              <rect x="56" y="6" width="8" height="8"/><rect x="106" y="56" width="8" height="8"/>
+              <rect x="56" y="106" width="8" height="8"/><rect x="6" y="56" width="8" height="8"/>
+            </g>
+          </svg>
+          <figcaption>출력 크기 기준으로 정리</figcaption>
+        </div>
+      </div>
+      <p class="fineprint">이해를 돕는 도식이며 실제 작업 결과물이 아닙니다.</p>
+    </figure>
+    <ol class="methods">
+      <li>
+        <span class="m-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21l11-11"/><path d="M14 10l2-2"/><path d="M17 3v3M17 12v3M12.5 7.5h-2M23.5 7.5h-2"/><path d="M15 5.5l-1-1M20 10.5l1 1M20 4.5l1-1"/></svg></span>
+        <div><strong>보정 <em lang="en">Retouch</em></strong><span>출력 크기에 맞춰 해상도와 노이즈, 경계를 정리합니다.</span></div>
+      </li>
+      <li>
+        <span class="m-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 18C7 9 17 9 19 18"/><path d="M5 18L10 6M19 18L14 6"/><rect x="3" y="16" width="4" height="4"/><rect x="17" y="16" width="4" height="4"/><rect x="9" y="5" width="2" height="2"/><rect x="13" y="5" width="2" height="2"/></svg></span>
+        <div><strong>벡터화 <em lang="en">Vector</em></strong><span>로고·도형·글자를 선으로 다시 그려 크기 제약을 줄입니다.</span></div>
+      </li>
+      <li>
+        <span class="m-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 17L15 6l3 3L7 20H4z"/><path d="M13 8l3 3"/><path d="M11 21h2M15 21h2M19 21h2"/></svg></span>
+        <div><strong>재제작 <em lang="en">Tracing</em></strong><span>원본 자료가 훼손되었거나 품질이 부족한 부분은 출력 크기에 맞춰 새로 그립니다.</span></div>
+      </li>
+    </ol>
+    <p class="fineprint">원본 상태에 따라 알맞은 방법과 결과가 달라지며, 완전한 복원을 보장하지는 않습니다.</p>
+  </section>
+
+  <section class="consult" id="consult" aria-label="디자인 의뢰 상담">
+    <div class="chat">
+      <div class="sheet-head"><span class="sheet-title">디자인 의뢰서</span><span class="sheet-no" id="sheetNo"></span></div>
+      <div class="ai-welcome" id="welcome">
+        <p class="order-label">디자인 의뢰 요청하기</p>
+        <h2 id="welcomeTitle">무엇을 <span>만들고 싶으세요?</span></h2>
+        <p class="lead-note" id="welcomeNote">로그인 없이 바로 의뢰할 수 있어요.<br>창이 닫혀도 이어서 연락드릴 수 있게 <b>이름(닉네임)과 연락처</b>만 먼저 알려주세요.</p>
+        <form id="startForm" class="start-form" novalidate>
+          <label>이름 또는 닉네임<input id="cName" autocomplete="name" maxlength="40" placeholder="홍길동"></label>
+          <label>연락처 <small>휴대폰 또는 이메일</small><input id="cContact" autocomplete="tel" maxlength="80" placeholder="010-1234-5678"></label>
+          <label>회사·단체명 <small>선택</small><input id="cCompany" autocomplete="organization" maxlength="80"></label>
+          <input id="cWebsite" class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label class="check"><input id="cConsent" type="checkbox"> 개인정보 수집·이용에 동의해요</label>
+          <details class="consent-detail">
+            <summary>수집 안내 보기</summary>
+            <ul>
+              <li>항목: 이름(닉네임), 연락처, 회사·단체명, 의뢰 내용 요약</li>
+              <li>목적: 디자인 의뢰 회신과 견적 안내</li>
+              <li id="retentionLine">보관 기간: 운영 정책 확정 후 안내</li>
+            </ul>
+          </details>
+          <p id="startMsg" class="form-msg" role="status"></p>
+          <button type="submit" class="start-btn" id="startBtn">의뢰 시작하기</button>
+          <button type="button" id="browseOnly" class="link-btn">연락처 없이 둘러보기 <small>창을 닫으면 내용이 사라져요</small></button>
+        </form>
+      </div>
+      <dl class="sheet-fields" id="sheetFields" hidden aria-label="의뢰서 확인 항목"></dl>
+      <div class="messages" id="messages" role="log" aria-live="polite"></div>
+      <button id="toLatest" class="to-latest" type="button" hidden>새 메시지 ↓</button>
+      <div class="choices" id="choices" hidden aria-label="의뢰 종류 바로 선택">
+        <button type="button">이미지 보정·벡터화</button>
+        <button type="button">포스터·키비주얼</button>
+        <button type="button">대형실사·현수막</button>
+        <button type="button">전시월·포토존</button>
+        <button type="button">LED 이미지·영상</button>
+        <button type="button">판촉물·굿즈</button>
+      </div>
+      <div class="confirm-bar" id="confirmBar" hidden>
+        <button type="button" id="confirmBtn">이대로 의뢰 접수하기</button>
+        <a href="#summarySection">내용 확인·수정 ↓</a>
+      </div>
+      <p class="sync-note" id="syncNote" hidden role="status"></p>
+      <form id="chatForm" hidden>
+        <textarea id="input" rows="2" maxlength="2000" aria-label="의뢰 내용" placeholder="필요한 작업을 편하게 적어주세요"></textarea>
+        <button type="submit" aria-label="메시지 보내기" title="보내기 (Enter)">↑</button>
+      </form>
+    </div>
+    <div class="openchat-row">
+      <p>파일을 보내거나 바로 이야기하고 싶으면</p>
+      <a class="cta openchat" data-openchat hidden target="_blank" rel="noopener">카카오톡 오픈채팅 상담 <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section class="section" id="summarySection" hidden aria-labelledby="summaryTitle">
+    <h2 id="summaryTitle">의뢰 내용</h2>
+    <p>제작 전에 필요한 정보만 요약했어요. 빠졌거나 바뀐 내용은 직접 고칠 수 있어요.</p>
+    <p class="who" id="who" hidden></p>
+    <div id="summary"></div>
+    <p class="inquiries" id="inquiries" hidden></p>
+    <div class="tools">
+      <input id="itemName" maxlength="30" aria-label="추가할 품목" placeholder="추가할 품목 이름">
+      <button id="addItem" type="button">품목 추가</button>
+    </div>
+    <div class="order-box">
+      <button id="submitOrder" type="button">의뢰 접수하기</button>
+      <p id="orderMsg" class="form-msg" role="status"></p>
+    </div>
+    <div class="tools">
+      <button id="copySummary" type="button" class="sub">요약 복사</button>
+      <button id="reset" type="button" class="sub">새 의뢰</button>
+    </div>
+    <p class="fineprint">금액은 원본과 제작 조건을 확인한 뒤 안내합니다.</p>
+  </section>
+
+  <section class="section alt" id="services" aria-labelledby="servicesTitle">
+    <p class="eyebrow">제작 범위</p>
+    <h2 id="servicesTitle">한 장의 이미지에서<br>공간 전체까지.</h2>
+    <p>카테고리를 누르면 작업 사례를 볼 수 있어요.</p>
+    <div class="carousel">
+      <button class="car-nav prev" type="button" aria-label="이전 카테고리" aria-controls="catTrack">‹</button>
+      <div class="track" id="catTrack" role="list" aria-label="제작 카테고리"></div>
+      <button class="car-nav next" type="button" aria-label="다음 카테고리" aria-controls="catTrack">›</button>
+    </div>
+    <p class="car-count" id="carCount" aria-hidden="true"></p>
+  </section>
+
+  <section class="section" id="process" aria-labelledby="processTitle">
+    <p class="eyebrow">진행 순서</p>
+    <h2 id="processTitle">상담부터 출고까지</h2>
+    <ol class="steps">
+      <li><strong>상담</strong><span>만들 제작물과 행사일·필요한 날짜를 확인해요.</span></li>
+      <li><strong>원본·조건 확인</strong><span>파일 상태와 규격·수량·재질을 확인하고 작업 방법을 정해요.</span></li>
+      <li><strong>견적 안내</strong><span>디자인비와 제작비를 나눠 안내하고, 배송비는 따로 표시해요.</span></li>
+      <li><strong>시안·수정</strong><span>시안을 확인하고 수정 사항을 모아 반영해요.</span></li>
+      <li><strong>제작·출고</strong><span>최종 파일로 제작해요. 배송·설치 범위는 상담 때 따로 확인해요.</span></li>
+    </ol>
+  </section>
+
+  <section class="section alt" id="faq" aria-labelledby="faqTitle">
+    <p class="eyebrow">자주 묻는 질문</p>
+    <h2 id="faqTitle">궁금한 점</h2>
+    <div class="faq">
+      <details><summary>어떤 파일을 보내야 하나요?</summary><p>가지고 계신 파일 그대로 보내주세요. AI·일러스트 원본이나 PDF, 고해상도 이미지가 가장 좋고, JPG·PPT·캡처 이미지도 상태를 확인해 방법을 안내해 드려요.</p></details>
+      <details><summary>AI로 만든 이미지도 크게 출력할 수 있나요?</summary><p>출력 크기와 이미지 상태를 확인한 뒤 보정·벡터화·재제작 중 맞는 방법을 안내해요. 원본에 따라 결과가 달라질 수 있어요.</p></details>
+      <details><summary>크기를 아직 모르겠어요.</summary><p>설치할 공간 사진이나 대략적인 가로·높이, 기존 거치대 규격을 알려주시면 함께 정해요.</p></details>
+      <details><summary>견적은 어떻게 나오나요?</summary><p>디자인비와 제작비를 나눠 안내하고, 배송비는 실비로 따로 표시해요. 원본과 제작 조건을 확인한 뒤 부가세를 포함한 금액으로 알려드려요.</p></details>
+      <details><summary>설치도 해주시나요?</summary><p>배송과 설치 포함 범위는 품목과 장소에 따라 달라서 상담 때 따로 확인해요.</p></details>
+      <details><summary>로그인해야 하나요?</summary><p>아니요. 이름(닉네임)과 연락처만 남기면 바로 의뢰할 수 있어요.</p></details>
+      <details><summary>파일은 어디로 보내나요?</summary><p>카카오톡 오픈채팅으로 상담하면서 파일을 함께 보내주시면 돼요.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <strong>JPHIC</strong>
+  <dl id="companyInfo"></dl>
+  <p id="footLinks"></p>
+</footer>
+
+<script src="/new/config.js"></script>
+<script src="/new/portfolio.js"></script>
+<script src="/new/consult-engine.js"></script>
+<script src="/new/app.js"></script>
+</body>
+</html>

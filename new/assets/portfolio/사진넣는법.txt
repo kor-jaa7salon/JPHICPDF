@@ -1,0 +1,5 @@
+포트폴리오 사진 폴더
+
+이 폴더 안에 카테고리별 폴더를 만들고 사진을 넣은 뒤 portfolio.js의 items에 등록하세요.
+폴더 이름: poster(포스터·키비주얼), title(타이틀 타이포그래픽), print(대형실사·배너·현수막), wall(전시월·가벽·포토존), standee(입체 등신대·스카시·칼선), led(전광판 LED용 이미지·영상), goods(기업판촉물·굿즈)
+예: assets/portfolio/poster/01.jpg
