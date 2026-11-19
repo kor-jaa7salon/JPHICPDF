@@ -1,0 +1,119 @@
+<!-- 2026-11-19: JPHIC Atelier 시제품 — 오픈채팅으로 이미 연결된 분께 보내는 갤러리 페이지. 누르지 않아도 스크롤만으로 끝까지 보이게. 사진은 임시(배너·베이커리 이미지)이며 실제 포트폴리오로 교체 예정. -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!-- 시험 중: 검색엔진 노출 안 함 -->
+<meta name="robots" content="noindex">
+<title>JPHIC Atelier — 크게, 예쁘게, 오래 맡기는 곳</title>
+<meta name="description" content="키비주얼 하나에서 전시월·포토존·게이트까지, 칼선 굿즈와 매장 사이니지까지. 제이픽 아틀리에.">
+<meta name="theme-color" content="#F5F4F0">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JPHIC Atelier — 크게, 예쁘게, 오래 맡기는 곳">
+<meta property="og:description" content="제이픽이 해온 것, 하는 것, 할 것을 한 장의 갤러리로.">
+<meta property="og:image" content="https://jphic.co.kr/atelier/assets/og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F5F4F0'/%3E%3Cpath d='M12 12h10M12 12v10M52 12H42M52 12v10M12 52h10M12 52V42M52 52H42M52 52V42' stroke='%23E4007F' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap">
+<link rel="stylesheet" href="/atelier/atelier.css">
+</head>
+<body>
+<header class="top">
+  <a href="/" class="mark">JPHIC</a>
+  <span class="tag">Atelier</span>
+</header>
+
+<main>
+  <section class="intro">
+    <h1>크게, 예쁘게,<br>오래 맡기는 곳.</h1>
+    <p class="meta">JPHIC Atelier · 4 Rooms</p>
+    <p class="scroll-hint" aria-hidden="true">scroll</p>
+  </section>
+
+  <!-- 01 Large Format -->
+  <section class="room" id="room1" aria-labelledby="r1">
+    <p class="room-no" id="r1"><b>01</b> Large Format <span>전시월 · 포토존 · 게이트 · 현수막 · X배너</span></p>
+    <figure class="hero-work reveal">
+      <img src="/atelier/assets/kv_hero.jpg" alt="키비주얼 대표 작품 (임시 이미지)" width="1200" height="1600" decoding="async">
+      <figcaption>키비주얼 · 2026 · 대표 작품 자리</figcaption>
+    </figure>
+
+    <div class="morph" id="morph">
+      <div class="morph-stage">
+        <p class="morph-cap">키비주얼 하나, 여러 개의 크기</p>
+        <div class="frame-box">
+          <div class="frame" id="frame">
+            <img src="/atelier/assets/kv_square.webp" alt="" decoding="async">
+            <i class="crop tl"></i><i class="crop tr"></i><i class="crop bl"></i><i class="crop br"></i>
+          </div>
+        </div>
+        <p class="morph-label"><span id="mName">키비주얼 원본</span> · <span id="mSize">1080×1080px</span> · <b id="mRatio">1:1</b></p>
+        <ol class="morph-dots" id="mDots" aria-hidden="true"></ol>
+      </div>
+    </div>
+
+    <figure class="lineup reveal" id="lineup" aria-label="실제 크기 비교">
+      <div class="floor" id="floor"></div>
+      <figcaption>실제 크기 비교 · 사람 키 170cm 기준</figcaption>
+    </figure>
+  </section>
+
+  <!-- 02 Cut & Shape -->
+  <section class="room" id="room2" aria-labelledby="r2">
+    <p class="room-no" id="r2"><b>02</b> Cut &amp; Shape <span>칼선 · 아크릴 · 허니콤보드 · 포맥스 · 스티커</span></p>
+    <div class="salon" id="salon"></div>
+  </section>
+
+  <!-- 03 Goods -->
+  <section class="room" id="room3" aria-labelledby="r3">
+    <p class="room-no" id="r3"><b>03</b> Goods <span>기업 행사 · 판촉물 · 굿즈</span></p>
+    <div class="boxes" id="boxes"></div>
+    <p class="note">제작 예시 · <button type="button" id="reshuffle" class="text-btn">다시 섞기</button></p>
+  </section>
+
+  <!-- 04 Screen -->
+  <section class="room screen-room" id="room4" aria-labelledby="r4">
+    <div class="screen-scroll" id="screenScroll">
+      <div class="screen-stage">
+        <div class="blind" id="blind" aria-hidden="true"></div>
+        <p class="room-no on-stage" id="r4"><b>04</b> Screen <span>매장 · 행사 · 은행 · 모니터 간판</span></p>
+        <div class="monitors">
+          <figure class="monitor" id="monA">
+            <div class="screen"><img data-src="/atelier/assets/kv_9x16.jpg" alt="정지 JPG 간판 예시"><video data-src="/atelier/assets/kv_9x16.mp4" muted loop playsinline preload="none" aria-label="JPG에 움직임을 넣은 모션 간판 예시"></video></div>
+            <span class="pole"></span><span class="base"></span>
+            <figcaption>JPG → MOTION</figcaption>
+          </figure>
+          <figure class="monitor" id="monB">
+            <div class="screen"><video data-src="/atelier/assets/kv_9x16.mp4" muted loop playsinline preload="none" aria-label="모션 간판 예시"></video></div>
+            <span class="pole"></span><span class="base"></span>
+            <figcaption>MOTION · 9:16</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 맺음말: 텍스트는 여기에 한 번에 -->
+  <section class="closing reveal">
+    <p>제이픽은 이야기를 먼저 듣습니다.<br>
+    당신의 히스토리를 들려줄수록 결과물은 더 단단해집니다.</p>
+    <p>키비주얼 하나에서 전시월·포토존·게이트·현수막까지 크게 펼치고,
+    칼선으로 잘라 아크릴·허니콤보드·스티커·굿즈로 만들고,
+    행사를 위한 판촉물을 준비하고,
+    멈춰 있는 이미지를 매장 화면 속 움직이는 간판으로 바꿉니다.</p>
+    <p>매 작업마다 고객의 만족을 먼저 두고,<br>그 과정의 경험을 조금씩 더 좋게 다듬어 갑니다.</p>
+    <a class="chat-link" href="https://open.kakao.com/o/sLyIquni" target="_blank" rel="noopener">오픈채팅에서 편하게 말씀하세요 ↗</a>
+  </section>
+</main>
+
+<footer class="foot"><a href="/">JPHIC UNIVERSE</a> · jphic.co.kr</footer>
+
+<div class="lightbox" id="lightbox" hidden><img alt=""><button type="button" aria-label="닫기">×</button></div>
+
+<script src="/atelier/atelier.js"></script>
+</body>
+</html>
