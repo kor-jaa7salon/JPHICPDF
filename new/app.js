@@ -94,7 +94,7 @@ function submitOrder(){if(submitted)return;
 $('confirmBtn').addEventListener('click',submitOrder);$('submitOrder').addEventListener('click',submitOrder);
 
 /* 구글시트 저장: 순번(seq)으로 오래된 저장이 새 저장을 덮지 않게 하고, 실패하면 2·5·10·30초 간격으로 다시 보냄 */
-function payload(status){const sm=E.summary(state);return {requestId:state.requestId,seq:++seq,status,contact:{name:contact.name,contact:contact.contact,company:contact.company},consent:true,website:contact.website||'',items:sm.items,inquiries:sm.inquiries,missing:sm.missing}}
+function payload(status){const sm=E.summary(state);return {requestId:state.requestId,seq:++seq,status,source:'/new',contact:{name:contact.name,contact:contact.contact,company:contact.company},consent:true,website:contact.website||'',items:sm.items,inquiries:sm.inquiries,missing:sm.missing}}
 function queueSave(){if(mode!=='named'||!C.intakeEndpoint)return;dirty=true;clearTimeout(timer);timer=setTimeout(()=>syncNow(submitted?'접수완료':'작성중'),800)}
 function note(text,kind){syncNote.hidden=!text;syncNote.textContent=text;syncNote.className='sync-note'+(kind?' '+kind:'')}
 async function syncNow(status){if(mode!=='named'||!C.intakeEndpoint)return;if(inflight){dirty=true;return}inflight=true;dirty=false;clearTimeout(timer);

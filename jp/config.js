@@ -8,7 +8,7 @@ window.JPHIC_JP_CONFIG = {
   // ファイル受け取り用メール (Googleドライブの共有リンクもここかLINEへ)
   fileEmail: 'jphic_cloud@naver.com',
   // 受付サーバー: /new と同じ Googleスプレッドシート Apps Script ウェブアプリ。{ok:true} が返ったときだけ受付完了と表示。
-  intakeEndpoint: 'https://script.google.com/macros/s/AKfycbzCHM3GeJOcsbV-8xbPj2DqKjhS5Bmz9GFDMHdsPMYtP43OVT_cApXmqxzUNfPNU11Ufg/exec',
+  intakeEndpoint: 'https://script.google.com/macros/s/AKfycbyhnxwYEDekHRTdjCdOkiMEs6ZxMwNG3JwVL6hXoLT9LSHL1YWmdL2-OlAYOkcdasXTEA/exec',
   // 個人情報の保管期間 (例: '相談終了後1年')。運営方針が決まったら入れます。
   retention: ''
 };
