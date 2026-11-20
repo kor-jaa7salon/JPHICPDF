@@ -179,8 +179,7 @@ footer{margin-top:28px;font-size:12px;color:var(--gray);line-height:1.7}
   /* 공급자 정보: 견적 시트(config)에서 불러옴 — 견적번호가 있을 때만 */
   (async function(){var no=(P.get('no')||'').trim();if(!no||!C.intakeEndpoint)return;
     try{var r=await fetch(C.intakeEndpoint+'?kind=supplier&no='+encodeURIComponent(no));var j=await r.json();if(!j.ok||!j.supplier)return;var s=j.supplier;
-      var rows=[['상호',s.company+(s.ceo?' (대표 '+s.ceo+')':'')],['사업자등록번호',s.bizNo],['주소',s.address],['담당자',s.manager],['연락처',s.phone],['이메일',s.email],
-        ['입금 계좌',s.account?s.bank+' '+s.account+' (예금주 '+s.holder+')':'']];
+      var rows=[['상호',s.company],['사업자등록번호',s.bizNo],['입금 계좌',s.account?s.bank+' '+s.account+' (예금주 '+s.holder+')':'']];
       var dl=document.getElementById('supList');rows.forEach(function(x){if(!x[1])return;var dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=x[0];dd.textContent=x[1];dl.append(dt,dd)});
       var act=document.getElementById('supAct');
       if(s.account){var b=document.createElement('button');b.type='button';b.textContent='계좌번호 복사';b.onclick=async function(){try{await navigator.clipboard.writeText(s.bank+' '+s.account);b.textContent='복사했어요'}catch(e){b.textContent=s.account}setTimeout(function(){b.textContent='계좌번호 복사'},1600)};act.append(b)}
