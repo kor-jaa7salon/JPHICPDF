@@ -137,3 +137,7 @@ button:disabled{opacity:.45;cursor:default}
 /* 2026-11-20: 질문 번호와 같은 줄에서 답변이 시작되도록 들여쓰기, 휴대폰에서 파일 보내는 방법을 FAQ와 같은 여백으로 */
 .faq details>p,.faq details>ul{margin-left:36px}
 @media(max-width:440px){.file-ways{padding:0 12px}}
+/* 2026-11-20: 섹션 사이 여백을 다른 섹션(맺음말 → 05 Request)과 같게 — 파일 보내는 방법 위아래, FAQ 위아래 */
+/* 맺음말 아래 여백(40px) + 섹션 간격(--gap-room)과 같은 눈에 보이는 간격 */
+.file-ways{margin-top:calc(var(--gap-room) - 18px)}
+.faqsec{margin-top:calc(var(--gap-room) + 16px);padding-bottom:calc(var(--gap-room) - 44px)}
