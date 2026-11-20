@@ -93,6 +93,16 @@ function screenScroll(){const r=scr.getBoundingClientRect(),total=scr.offsetHeig
   if(on&&!room4.classList.contains('on')){room4.classList.add('on');room4.querySelectorAll('video').forEach(v=>v.play().catch(()=>{}));clearTimeout(motionTimer);motionTimer=setTimeout(()=>room4.classList.add('motion'),1600)}
   if(!on&&room4.classList.contains('on')){room4.classList.remove('on','motion');clearTimeout(motionTimer);room4.querySelectorAll('video').forEach(v=>v.pause())}}
 
+/* ── 01 마우스 휠 한 칸 = 한 단계 (2026-11-20). 화면에 고정된 동안만 동작, 처음·끝에서는 바로 빠져나감. 터치 스크롤은 그대로 ── */
+let wheelLock=0;
+addEventListener('wheel',e=>{if(RM||e.ctrlKey||Math.abs(e.deltaY)<4)return;
+  const r=morph.getBoundingClientRect();if(r.top>2||r.bottom<innerHeight-2)return;
+  const dir=e.deltaY>0?1:-1,top=r.top+scrollY,total=morph.offsetHeight-innerHeight,cur=Math.max(step,0);
+  e.preventDefault();const now=performance.now();if(now<wheelLock)return;wheelLock=now+520;
+  const next=cur+dir;let y;
+  if(next>=MORPH.length)y=top+total+60;else if(next<0)y=top-60;else y=top+(next+0.5)/MORPH.length*total;
+  const h=document.documentElement,sb=h.style.scrollBehavior;h.style.scrollBehavior='auto';scrollTo(0,y);h.style.scrollBehavior=sb},{passive:false});
+
 /* ── 스크롤·크기 변경 ── */
 let ticking=false;
 function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(()=>{ticking=false;if(!RM)morphScroll();screenScroll()})}
