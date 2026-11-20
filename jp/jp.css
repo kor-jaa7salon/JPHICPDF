@@ -1,0 +1,131 @@
+/* 2026-11-20: /jp 日本語版 — /atelier/atelier.css の上に重ねる。日本語フォント・改行、ヘッダー、デザイン依頼書(美術館の壁色 + 墨色 + M100 一色)。 */
+:root{
+  --serif:"Noto Serif JP","Noto Serif KR",serif;
+  --sans:"Pretendard Variable",Pretendard,"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",-apple-system,BlinkMacSystemFont,sans-serif;
+  --white:#fff;--ok:#2F7D4A;--warn:#B3261E;
+}
+/* 日本語は keep-all だと折り返せないので通常の改行 + 禁則 */
+body{word-break:normal;overflow-wrap:anywhere;line-break:strict}
+html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--m100);outline-offset:3px}
+
+.top{position:sticky;top:0;z-index:20;background:rgba(245,244,240,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.top-right{display:flex;align-items:center;gap:14px}
+.top .tag{font-weight:600}
+.lang{font-size:12px;color:var(--gray);border:1px solid var(--line);padding:3px 8px}
+
+.intro{padding-top:14vh}
+.kicker{font-size:12px;letter-spacing:.12em;color:var(--m100);margin:0 0 18px}
+.intro h1{font-weight:600;letter-spacing:.01em;line-height:1.42}
+.sub{font-size:16px;line-height:1.9;margin:0 0 26px;color:#3a3a3a}
+.sub span{font-size:12px;color:var(--gray);letter-spacing:.06em}
+
+.closing p:first-child{font-family:var(--serif);font-size:clamp(18px,4.4vw,22px);line-height:1.8;color:var(--ink)}
+
+/* ── デザイン依頼書 ── */
+.consult{margin-top:var(--gap-room);padding:0 var(--pad);scroll-margin-top:64px}
+.chat{position:relative;display:flex;flex-direction:column;background:var(--white);color:var(--ink);border:1px solid var(--ink);overflow:hidden}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--ink);font-size:12px}
+.sheet-title{font-weight:600;letter-spacing:.12em}
+.sheet-no{color:var(--gray);font-variant-numeric:tabular-nums}
+.ai-welcome{text-align:center;padding:34px 20px 22px}
+.order-label{display:inline-block;font-size:12px;color:var(--m100);border:1px solid var(--m100);padding:4px 10px;margin:0 0 16px;letter-spacing:.04em}
+.ai-welcome h2{font-family:var(--serif);font-weight:400;font-size:clamp(24px,6vw,32px);line-height:1.45;margin:0 auto 12px}
+.ai-welcome h2 span{color:var(--m100)}
+.lead-note{font-size:14px;color:#55534e;margin:0 0 4px;line-height:1.8}
+.lead-note b{color:var(--ink);font-weight:600}
+.start-form{max-width:420px;margin:18px auto 0;text-align:left}
+.start-form label{display:grid;gap:6px;font-size:13px;color:#55534e;margin:12px 0}
+.start-form label small{color:var(--gray)}
+.start-form input:not([type=checkbox]),#summary input,.tools input{width:100%;min-width:0;padding:12px;font:inherit;font-size:16px;color:var(--ink);background:var(--white);border:1px solid var(--line);border-radius:0}
+.start-form input:not([type=checkbox]):focus,#summary input:focus,.tools input:focus{outline:2px solid var(--m100);outline-offset:1px;border-color:transparent}
+.start-form .check{display:flex;align-items:center;gap:8px;color:var(--ink);margin-top:16px}
+.start-form .check input{width:18px;height:18px;accent-color:var(--m100)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.consent-detail{margin:10px 0 4px;font-size:12px;color:var(--gray)}
+.consent-detail summary{cursor:pointer}
+.consent-detail ul{margin:10px 0;padding-left:18px;line-height:1.8}
+.form-msg{font-size:13px;min-height:1.4em;margin:10px 0 0}
+.form-msg.warn{color:var(--warn)}.form-msg.ok{color:var(--ok)}
+.start-btn,#confirmBtn,#submitOrder,.tools button,#summary button{display:block;width:100%;border:1px solid var(--ink);background:var(--ink);color:var(--wall);padding:15px 16px;font-size:15px;font-weight:600;letter-spacing:.04em;cursor:pointer;border-radius:0}
+.start-btn:hover,#confirmBtn:hover,#submitOrder:hover{background:var(--m100);border-color:var(--m100);color:#fff}
+.link-btn{display:block;margin:12px auto 0;border:0;background:none;color:var(--gray);font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;text-align:center}
+.link-btn small{display:block;text-decoration:none;font-size:11px}
+button:disabled{opacity:.45;cursor:default}
+
+.sheet-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0;border-bottom:1px solid var(--line)}
+.sheet-fields div{padding:8px 12px;border-right:1px solid var(--line);border-top:1px solid var(--line);min-width:0}
+.sheet-fields .item{grid-column:1/-1;border-top:0;display:flex;gap:10px;align-items:baseline;background:var(--wall)}
+.sheet-fields dt{font-size:11px;color:var(--gray)}
+.sheet-fields dd{margin:2px 0 0;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sheet-fields .item dd{margin:0;font-size:14px}
+.sheet-fields dd.todo{color:var(--gray);font-weight:400}
+.sheet-fields dd.todo::before,.sheet-fields dd.done::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:1px}
+.sheet-fields dd.todo::before{border:1px solid var(--gray)}
+.sheet-fields dd.done::before{background:var(--m100)}
+
+.messages{display:flex;flex-direction:column;gap:10px;padding:16px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.chat:not(.started) .messages{padding:0;height:0;overflow:hidden}
+.bubble{max-width:88%;white-space:pre-wrap;background:var(--wall);border:1px solid var(--line);border-radius:2px 12px 12px 12px;padding:11px 14px;font-size:15px;line-height:1.75}
+.bubble.user{align-self:flex-end;background:#fff;border-color:var(--ink);border-radius:12px 2px 12px 12px}
+.to-latest{position:absolute;left:50%;transform:translateX(-50%);bottom:92px;border:0;background:var(--ink);color:var(--wall);font-size:12px;padding:7px 12px;z-index:2}
+.choices{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:12px 16px 20px}
+.choices button{background:var(--white);border:1px solid var(--line);padding:9px 12px;font-size:13px;cursor:pointer}
+.choices button:hover{border-color:var(--m100);color:var(--m100)}
+.confirm-bar{display:flex;flex-direction:column;gap:6px;align-items:center;padding:4px 14px 10px}
+.confirm-bar a{font-size:12px;color:var(--gray);text-decoration:underline;text-underline-offset:3px}
+.sync-note{font-size:12px;text-align:center;margin:0 14px 8px;color:var(--gray)}
+.sync-note.warn{color:var(--warn)}
+#chatForm{display:flex;align-items:flex-end;gap:8px;margin:0 14px 14px;padding:6px 6px 6px 14px;background:var(--white);border:1px solid var(--ink)}
+#chatForm:focus-within{outline:2px solid var(--m100);outline-offset:2px}
+#chatForm textarea{flex:1;min-width:0;min-height:52px;max-height:120px;resize:none;border:0;outline:none;background:transparent;color:var(--ink);font:inherit;font-size:16px;line-height:1.6;padding:8px 0}
+#chatForm button{flex:0 0 44px;width:44px;height:44px;border:0;background:var(--m100);color:#fff;font-size:22px;font-weight:600;line-height:1;cursor:pointer}
+.chat.started{height:min(calc(100svh - 90px),680px);min-height:460px}
+.chat.started .ai-welcome{display:none}
+.chat.asking .ai-welcome{display:block;overflow:auto}
+.chat.asking .messages,.chat.asking #chatForm,.chat.asking .choices,.chat.asking .sheet-fields{display:none}
+.chat.started .choices{padding:4px 14px 12px}
+.chat.started .messages{flex:1;min-height:0}
+.chat.started #chatForm textarea{min-height:44px}
+
+.line-row{text-align:center;padding:26px 0 0;font-size:13px;color:var(--gray)}
+.line-row p{margin:0 0 12px}
+.line-btn{display:inline-block;background:#06C755;color:#fff;font-weight:600;font-size:15px;padding:13px 22px;letter-spacing:.02em}
+.line-id{font-size:14px;color:var(--ink)}
+.line-id b{font-weight:600;letter-spacing:.04em;margin:0 6px}
+
+/* 依頼内容 */
+.sumsec,.faqsec{margin-top:80px;padding:0 var(--pad)}
+.sumsec h2{font-family:var(--serif);font-weight:400;font-size:24px;margin:0 0 10px}
+.sumsec>p{font-size:14px;color:#55534e;line-height:1.8}
+.who{font-size:13px;color:var(--ink)}
+#summary details{border:1px solid var(--line);padding:14px 16px;margin:12px 0;background:var(--white)}
+#summary summary{cursor:pointer;font-weight:600}
+#summary label{display:grid;gap:6px;font-size:13px;color:var(--gray);margin:12px 0}
+#summary button{margin-top:6px;width:auto;padding:10px 14px;font-size:13px;background:transparent;color:var(--ink)}
+#summary .changed{font-size:13px;color:var(--m100);margin:10px 0 0}
+.inquiries{font-size:13px;color:var(--m100)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.tools input{flex:1;min-width:150px}
+.tools button{width:auto;flex:0 0 auto;padding:12px 14px;font-size:14px}
+.tools button.sub{background:transparent;color:var(--ink)}
+.order-box{margin:18px 0}
+.fineprint{font-size:11px;color:var(--gray)}
+
+/* よくある質問 */
+.faq details{border-bottom:1px solid var(--line);padding:2px 0}
+.faq summary{cursor:pointer;list-style:none;padding:16px 28px 16px 0;font-size:15px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:13px;font-size:20px;color:var(--m100)}
+.faq details[open] summary::after{content:"−"}
+.faq details p{font-size:14px;line-height:1.85;color:#3a3a3a;margin:0 0 16px;padding-right:12px}
+
+@media(max-width:440px){
+  .consult{padding:0 10px}
+  .ai-welcome{padding:28px 14px 18px}
+  .choices{padding:10px 10px 18px}.choices button{font-size:12px;padding:8px 10px}
+  #chatForm{margin:0 10px 12px}.messages{padding:14px 12px}.bubble{max-width:94%}
+  .sheet-fields div{padding:7px 9px}
+  .tools button{flex:1}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

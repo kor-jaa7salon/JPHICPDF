@@ -11,7 +11,8 @@
     { "source": "/event", "destination": "/event/index.html" },
     { "source": "/kit", "destination": "/kit/index.html" },
     { "source": "/new", "destination": "/new/index.html" },
-    { "source": "/atelier", "destination": "/atelier/index.html" }
+    { "source": "/atelier", "destination": "/atelier/index.html" },
+    { "source": "/jp", "destination": "/jp/index.html" }
   ],
   "headers": [
     {
