@@ -20,6 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap">
 <link rel="stylesheet" href="/atelier/atelier.css">
+<link rel="stylesheet" href="/atelier/consult.css">
 </head>
 <body>
 <header class="top">
@@ -109,6 +110,102 @@
     <p>제이픽과 함께하는 여정이<br>조금씩 더 좋아지도록 다듬어 갑니다.</p>
     <a class="chat-link" href="https://open.kakao.com/o/sLyIquni" target="_blank" rel="noopener">제이픽유니버스 : 카톡 오픈채팅 바로가기 ↗</a>
   </section>
+
+  <!-- 2026-11-20: 오픈채팅 바로가기 아래 — 초기 상담 기록 의뢰서(/new와 같은 흐름·같은 구글시트, source:/atelier) + FAQ -->
+  <section class="consult" id="consult" aria-label="디자인 의뢰 상담">
+    <p class="room-no"><b>05</b> Request <span>디자인 의뢰서 · 로그인 없이 바로</span></p>
+    <div class="chat">
+      <div class="sheet-head"><span class="sheet-title">디자인 의뢰서</span><span class="sheet-no" id="sheetNo"></span></div>
+      <div class="ai-welcome" id="welcome">
+        <p class="order-label">디자인 의뢰 요청하기</p>
+        <h2 id="welcomeTitle">무엇을 <span>만들고 싶으세요?</span></h2>
+        <p class="lead-note" id="welcomeNote">로그인 없이 바로 의뢰할 수 있어요.<br>창이 닫혀도 이어서 연락드릴 수 있게 <b>이름(닉네임)과 연락처</b>만 먼저 알려주세요.</p>
+        <form id="startForm" class="start-form" novalidate>
+          <label>이름 또는 닉네임<input id="cName" autocomplete="name" maxlength="40" placeholder="홍길동"></label>
+          <label>연락처 <small>휴대폰 또는 이메일</small><input id="cContact" autocomplete="tel" maxlength="80" placeholder="010-1234-5678"></label>
+          <label>회사·단체명 <small>선택</small><input id="cCompany" autocomplete="organization" maxlength="80"></label>
+          <input id="cWebsite" class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label class="check"><input id="cConsent" type="checkbox"> 개인정보 수집·이용에 동의해요</label>
+          <details class="consent-detail">
+            <summary>수집 안내 보기</summary>
+            <ul>
+              <li>항목: 이름(닉네임), 연락처, 회사·단체명, 의뢰 내용 요약</li>
+              <li>목적: 디자인 의뢰 회신과 견적 안내</li>
+              <li id="retentionLine">보관 기간: 운영 정책 확정 후 안내</li>
+            </ul>
+          </details>
+          <p id="startMsg" class="form-msg" role="status"></p>
+          <button type="submit" class="start-btn" id="startBtn">의뢰 시작하기</button>
+          <button type="button" id="browseOnly" class="link-btn">연락처 없이 둘러보기 <small>창을 닫으면 내용이 사라져요</small></button>
+        </form>
+      </div>
+      <dl class="sheet-fields" id="sheetFields" hidden aria-label="의뢰서 확인 항목"></dl>
+      <div class="messages" id="messages" role="log" aria-live="polite"></div>
+      <button id="toLatest" class="to-latest" type="button" hidden>새 메시지 ↓</button>
+      <div class="choices" id="choices" hidden aria-label="의뢰 종류 바로 선택">
+        <button type="button">이미지 보정·벡터화</button>
+        <button type="button">포스터·키비주얼</button>
+        <button type="button">대형실사·현수막</button>
+        <button type="button">전시월·포토존</button>
+        <button type="button">LED 이미지·영상</button>
+        <button type="button">판촉물·굿즈</button>
+      </div>
+      <div class="confirm-bar" id="confirmBar" hidden>
+        <button type="button" id="confirmBtn">이대로 의뢰 접수하기</button>
+        <a href="#summarySection">내용 확인·수정 ↓</a>
+      </div>
+      <p class="sync-note" id="syncNote" hidden role="status"></p>
+      <form id="chatForm" hidden>
+        <textarea id="input" rows="2" maxlength="2000" aria-label="의뢰 내용" placeholder="필요한 작업을 편하게 적어주세요"></textarea>
+        <button type="submit" aria-label="메시지 보내기" title="보내기 (Enter)">↑</button>
+      </form>
+    </div>
+    <div class="line-row">
+      <div class="file-ways" aria-label="파일 보내는 방법">
+        <p class="fw-title">파일 보내는 방법 <span>편한 방법 하나로</span></p>
+        <ol>
+          <li><b>카카오톡</b><span><a data-openchat hidden target="_blank" rel="noopener">오픈채팅</a>에 바로 첨부</span></li>
+          <li><b>이메일</b><span><a data-mail href="mailto:jphic_cloud@naver.com">jphic_cloud@naver.com</a></span></li>
+          <li><b>구글드라이브</b><span>큰 파일은 「링크가 있는 모든 사용자」로 공유한 링크를 오픈채팅이나 메일로 보내주세요</span></li>
+        </ol>
+        <p class="fw-note" data-reqno hidden>보낼 때 접수번호 <b></b>를 함께 적어주세요.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sumsec" id="summarySection" hidden aria-labelledby="summaryTitle">
+    <h2 id="summaryTitle">의뢰 내용</h2>
+    <p>제작 전에 필요한 정보만 요약했어요. 빠졌거나 바뀐 내용은 직접 고칠 수 있어요.</p>
+    <p class="who" id="who" hidden></p>
+    <div id="summary"></div>
+    <p class="inquiries" id="inquiries" hidden></p>
+    <div class="tools">
+      <input id="itemName" maxlength="30" aria-label="추가할 품목" placeholder="추가할 품목 이름">
+      <button id="addItem" type="button">품목 추가</button>
+    </div>
+    <div class="order-box">
+      <button id="submitOrder" type="button">의뢰 접수하기</button>
+      <p id="orderMsg" class="form-msg" role="status"></p>
+    </div>
+    <div class="tools">
+      <button id="copySummary" type="button" class="sub">요약 복사</button>
+      <button id="reset" type="button" class="sub">새 의뢰</button>
+    </div>
+    <p class="fineprint">금액은 원본과 제작 조건을 확인한 뒤 안내합니다.</p>
+  </section>
+
+  <section class="faqsec" aria-labelledby="faqTitle">
+    <p class="room-no" id="faqTitle"><b>Q&amp;A</b> 자주 묻는 질문</p>
+    <div class="faq">
+      <details><summary>어떤 파일을 보내야 하나요?</summary><p>가지고 계신 파일 그대로 보내주세요. AI·일러스트 원본이나 PDF, 고해상도 이미지가 가장 좋고, JPG·PPT·캡처 이미지도 상태를 확인해 방법을 안내해 드려요.</p></details>
+      <details><summary>AI로 만든 이미지도 크게 출력할 수 있나요?</summary><p>출력 크기와 이미지 상태를 확인한 뒤 보정·벡터화·재제작 중 맞는 방법을 안내해요. 원본에 따라 결과가 달라질 수 있어요.</p></details>
+      <details><summary>크기를 아직 모르겠어요.</summary><p>설치할 공간 사진이나 대략적인 가로·높이, 기존 거치대 규격을 알려주시면 함께 정해요.</p></details>
+      <details><summary>견적은 어떻게 나오나요?</summary><p>디자인비와 제작비를 나눠 안내하고, 배송비는 실비로 따로 표시해요. 원본과 제작 조건을 확인한 뒤 부가세를 포함한 금액으로 알려드려요.</p></details>
+      <details><summary>설치도 해주시나요?</summary><p>배송과 설치 포함 범위는 품목과 장소에 따라 달라서 상담 때 따로 확인해요.</p></details>
+      <details><summary>로그인해야 하나요?</summary><p>아니요. 이름(닉네임)과 연락처만 남기면 바로 의뢰할 수 있어요.</p></details>
+      <details><summary>파일은 어떻게 보내나요?</summary><p>카카오톡 오픈채팅, 이메일(jphic_cloud@naver.com), 구글드라이브 공유 링크 중 편한 방법으로 보내주세요. 용량이 큰 파일은 구글드라이브에서 「링크가 있는 모든 사용자」로 공유한 뒤 링크를 보내주시면 확실해요. 접수번호가 있으면 함께 적어주세요.</p></details>
+    </div>
+  </section>
 </main>
 
 <footer class="foot"><a href="/">JPHIC UNIVERSE</a> · jphic.co.kr</footer>
@@ -117,5 +214,8 @@
 
 <script src="/atelier/kv.js"></script>
 <script src="/atelier/atelier.js"></script>
+<script src="/new/config.js"></script>
+<script src="/new/consult-engine.js"></script>
+<script src="/atelier/consult-app.js"></script>
 </body>
 </html>
