@@ -18,8 +18,8 @@ if(C.retention)$('retentionLine').textContent='保管期間：'+C.retention;
 const lineHint=()=>C.lineUrl?'LINE':(C.lineId?'LINE（ID：'+C.lineId+'）':'LINE');
 /* ファイルの送り方: LINE・メール・Googleドライブ共有リンク。メールの件名に受付番号を入れる */
 const fileHint=()=>'LINE・メール（'+(C.fileEmail||'')+'）・Googleドライブの共有リンクのいずれか';
-function refreshFileWays(){const no=state.requestId;document.querySelectorAll('[data-mail]').forEach(a=>{if(!C.fileEmail)return;a.textContent=C.fileEmail;a.href='mailto:'+C.fileEmail+'?subject='+encodeURIComponent('[JPHIC] ファイル送付 '+no)});
-  document.querySelectorAll('[data-reqno]').forEach(p=>{p.querySelector('b').textContent=no;p.hidden=!(contact&&state.items.length)})}
+function refreshFileWays(){const no=officialNo||'';document.querySelectorAll('[data-mail]').forEach(a=>{if(!C.fileEmail)return;a.textContent=C.fileEmail;a.href='mailto:'+C.fileEmail+'?subject='+encodeURIComponent('[JPHIC] ファイル送付'+(no?' '+no:''))});
+  document.querySelectorAll('[data-reqno]').forEach(p=>{p.querySelector('b').textContent=no;p.hidden=!no})}
 
 const chat=document.querySelector('.chat'),messages=$('messages'),input=$('input'),toLatest=$('toLatest'),choices=$('choices'),chatForm=$('chatForm');
 const confirmBar=$('confirmBar'),syncNote=$('syncNote');
@@ -34,7 +34,7 @@ function bubble(text,user=false){const follow=user||nearBottom();const el=docume
 function say(text){state.history.push({role:'assistant',text});bubble(text)}
 function changed(){render();queueSave()}
 function send(text){text=text.trim();if(!text)return;bubble(text,true);input.value='';
-  if(submitted){say('受付は完了しています。追加の内容やファイルは'+fileHint()+'で送ってください（受付番号 '+state.requestId+'）。');return}
+  if(submitted){say('受付は完了しています。追加の内容やファイルは'+fileHint()+'で送ってください。'+(officialNo?'（依頼番号 '+officialNo+'）':''));return}
   const wasDone=E.complete(state);const r=E.ingest(state,text);
   bubble(wasDone&&r.field===null?'その件は担当者が直接確認してご案内します。準備ができたら、下から依頼を送信してください。':r.text);changed()}
 chatForm.addEventListener('submit',e=>{e.preventDefault();send(input.value)});
@@ -62,13 +62,15 @@ $('startForm').addEventListener('submit',e=>{e.preventDefault();
 $('browseOnly').addEventListener('click',()=>{mode='anon';startChat();say('「見てみる」で始めました。この場合、閉じると内容は消えます。送信するときにお名前と連絡先が必要です。');say('何を作りましょうか？下から選ぶか、自由に書いてください。');choices.hidden=false});
 
 /* 依頼書・要約 */
-function summaryText(){const sm=E.summary(state);return ['JPHIC デザイン依頼の要約 ('+state.requestId+')',...(contact?['依頼者: '+contact.name+' · '+contact.contact+(contact.company?' · '+contact.company:'')]:[]),...state.items.map(p=>['■ '+p.name,...E.ORDER.map(k=>E.fields[k]+': '+(p[k]||'未入力'))].join('\n')),...(sm.inquiries.length?['お問い合わせ: '+sm.inquiries.join('、')]:[])].join('\n\n')}
+function summaryText(){const sm=E.summary(state);return ['JPHIC デザイン依頼の要約'+(officialNo?' ('+officialNo+')':''),...(contact?['依頼者: '+contact.name+' · '+contact.contact+(contact.company?' · '+contact.company:'')]:[]),...state.items.map(p=>['■ '+p.name,...E.ORDER.map(k=>E.fields[k]+': '+(p[k]||'未入力'))].join('\n')),...(sm.inquiries.length?['お問い合わせ: '+sm.inquiries.join('、')]:[])].join('\n\n')}
 const sheetFields=$('sheetFields'),sheetNo=$('sheetNo');
-function sheetNumber(){sheetNo.textContent='No. '+state.requestId.replace('JPHIC-JP-','').slice(-6).toUpperCase()}
+/* 依頼番号: 受付サーバー(Googleスプレッドシート)が正式番号(例: E636C0)を返したら表示。それまでは非表示 */
+let officialNo='';
+function sheetNumber(){sheetNo.textContent=officialNo?'No. '+officialNo:'';sheetNo.hidden=!officialNo}
 function renderSheet(){sheetFields.replaceChildren();const p=state.items[state.active];sheetFields.hidden=!p;if(!p)return;
   const cell=(label,value,cls)=>{const d=document.createElement('div');if(cls)d.className=cls;const t=document.createElement('dt');t.textContent=label;const v=document.createElement('dd');
     if(value){v.textContent=value;v.className='done';v.title=value}else{v.textContent='確認中';v.className='todo'}d.append(t,v);sheetFields.append(d)};
-  cell(state.items.length>1?'品目 '+(state.active+1)+'/'+state.items.length:'品目',p.name,'item');
+  cell(state.items.length>1?'品目 '+(state.active+1)+'/'+state.items.length:'品目',p.name,'item');{const n=E.ORDER.filter(k=>p[k]).length,pr=document.createElement('span');pr.className='prog';pr.textContent=n+' / '+E.ORDER.length;sheetFields.firstChild.append(pr)}
   for(const key of E.ORDER)cell(E.fields[key],p[key])}
 function render(){renderSheet();UI&&UI.refresh();refreshFileWays();const host=$('summary');host.replaceChildren();const has=!!state.items.length;$('summarySection').hidden=!has;choices.hidden=!(chat.classList.contains('started')&&!has);
   const complete=E.complete(state);confirmBar.hidden=!(complete&&!submitted);$('confirmBtn').textContent=mode==='named'?'この内容で依頼する':'お名前・連絡先を入れて依頼する';
@@ -102,8 +104,8 @@ function note(text,kind){syncNote.hidden=!text;syncNote.textContent=text;syncNot
 async function syncNow(status){if(mode!=='named'||!C.intakeEndpoint)return;if(inflight){dirty=true;return}inflight=true;dirty=false;clearTimeout(timer);
   const body=JSON.stringify(payload(status));
   try{const r=await fetch(C.intakeEndpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body});const j=await r.json().catch(()=>({}));
-    if(!(r.ok&&j.ok===true))throw new Error('fail');retry=0;note('','');
-    if(status==='접수완료'&&!done){done=true;formMsg('orderMsg','送信しました。確認後、いただいた連絡先にご連絡します。','ok');say('受け付けました！確認後、'+contact.contact+' にご連絡します。参考ファイルは'+fileHint()+'で送ってください。受付番号は '+state.requestId+' です。');render()}}
+    if(!(r.ok&&j.ok===true))throw new Error('fail');retry=0;note('','');if(j.no&&j.no!==officialNo){officialNo=String(j.no);sheetNumber();refreshFileWays()}
+    if(status==='접수완료'&&!done){done=true;formMsg('orderMsg','送信しました。確認後、いただいた連絡先にご連絡します。','ok');say('受け付けました！確認後、'+contact.contact+' にご連絡します。参考ファイルは'+fileHint()+'で送ってください。'+(officialNo?'依頼番号は '+officialNo+' です。':''));render()}}
   catch{dirty=true;const wait=[2,5,10,30][Math.min(retry,3)];retry++;note('接続が少し不安定です。'+wait+'秒後に自動で保存し直します。','warn');setTimeout(()=>{if(dirty)syncNow(submitted?'접수완료':'작성중')},wait*1000)}
   finally{inflight=false;if(dirty&&retry===0)queueSave()}}
 function flush(){if(mode!=='named'||!C.intakeEndpoint||!dirty)return;try{navigator.sendBeacon(C.intakeEndpoint,new Blob([JSON.stringify(payload(submitted?'접수완료':'작성중'))],{type:'text/plain;charset=utf-8'}));dirty=false}catch{}}

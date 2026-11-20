@@ -15,8 +15,8 @@ if(C.retention)$('retentionLine').textContent='보관 기간: '+C.retention;
 const lineHint=()=>'카카오톡 오픈채팅';
 /* ファイルの送り方: LINE・メール・Googleドライブ共有リンク。メールの件名に受付番号を入れる */
 const fileHint=()=>'카카오톡 오픈채팅·이메일('+FILE_EMAIL+')·구글드라이브 공유 링크 중 편한 방법';
-function refreshFileWays(){const no=state.requestId;document.querySelectorAll('[data-mail]').forEach(a=>{a.textContent=FILE_EMAIL;a.href='mailto:'+FILE_EMAIL+'?subject='+encodeURIComponent('[JPHIC] 파일 전달 '+no)});
-  document.querySelectorAll('[data-reqno]').forEach(p=>{p.querySelector('b').textContent=no;p.hidden=!(contact&&state.items.length)})}
+function refreshFileWays(){const no=officialNo||'';document.querySelectorAll('[data-mail]').forEach(a=>{a.textContent=FILE_EMAIL;a.href='mailto:'+FILE_EMAIL+'?subject='+encodeURIComponent('[JPHIC] 파일 전달'+(no?' '+no:''))});
+  document.querySelectorAll('[data-reqno]').forEach(p=>{p.querySelector('b').textContent=no;p.hidden=!no})}
 
 const chat=document.querySelector('.chat'),messages=$('messages'),input=$('input'),toLatest=$('toLatest'),choices=$('choices'),chatForm=$('chatForm');
 const confirmBar=$('confirmBar'),syncNote=$('syncNote');
@@ -31,7 +31,7 @@ function bubble(text,user=false){const follow=user||nearBottom();const el=docume
 function say(text){state.history.push({role:'assistant',text});bubble(text)}
 function changed(){render();queueSave()}
 function send(text){text=text.trim();if(!text)return;bubble(text,true);input.value='';
-  if(submitted){say('접수는 끝났어요. 추가로 전하실 내용이나 파일은 '+fileHint()+'으로 보내주세요. (접수번호 '+state.requestId+')');return}
+  if(submitted){say('접수는 끝났어요. 추가로 전하실 내용이나 파일은 '+fileHint()+'으로 보내주세요.'+(officialNo?' (의뢰번호 '+officialNo+')':''));return}
   const wasDone=E.complete(state);const r=E.ingest(state,text);
   bubble(wasDone&&r.field===null?'그 부분은 담당자가 직접 확인해 드릴게요. 준비되면 아래에서 의뢰를 접수해 주세요.':r.text);changed()}
 chatForm.addEventListener('submit',e=>{e.preventDefault();send(input.value)});
@@ -40,7 +40,12 @@ choices.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{co
 
 /* ① 이름·연락처 */
 const PHONE=/^0\d{1,2}[- ]?\d{3,4}[- ]?\d{4}$/,MAIL=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-function normContact(v){v=v.trim();return (PHONE.test(v)||MAIL.test(v))?v:null}
+/* 휴대폰 번호는 010-1234-5678 형식으로 맞춰서 저장(구글시트에서 앞자리 0이 사라지지 않게) */
+function fmtPhone(v){const d=v.replace(/\D/g,'');if(/^02/.test(d))return d.length===9?d.replace(/^(02)(\d{3})(\d{4})$/,'$1-$2-$3'):d.replace(/^(02)(\d{4})(\d{4})$/,'$1-$2-$3');return d.length===10?d.replace(/^(\d{3})(\d{3})(\d{4})$/,'$1-$2-$3'):d.replace(/^(\d{3})(\d{4})(\d{4})$/,'$1-$2-$3')}
+function normContact(v){v=v.trim();if(MAIL.test(v))return v;if(PHONE.test(v))return fmtPhone(v);return null}
+/* 연락처 칸: 기본은 숫자 키패드, '이메일로 남길게요'를 누르면 이메일 자판 */
+(function(){const i=$('cContact'),t=$('cMailToggle'),hint=$('cContactHint');if(!t)return;let mail=false;
+  t.addEventListener('click',()=>{mail=!mail;i.type=mail?'email':'tel';i.inputMode=mail?'email':'tel';i.autocomplete=mail?'email':'tel';i.placeholder=mail?'name@example.com':'010-1234-5678';hint.textContent=mail?'이메일':'휴대폰 번호';t.textContent=mail?'휴대폰 번호로 남길게요':'이메일로 남길게요';i.value='';i.focus()})})();
 function formMsg(id,text,kind){const m=$(id);m.textContent=text;m.className='form-msg'+(kind?' '+kind:'')}
 $('startForm').addEventListener('submit',e=>{e.preventDefault();
   const name=$('cName').value.trim(),raw=$('cContact').value.trim(),company=$('cCompany').value.trim();
@@ -55,13 +60,15 @@ $('startForm').addEventListener('submit',e=>{e.preventDefault();
 $('browseOnly').addEventListener('click',()=>{mode='anon';startChat();say('둘러보기로 시작했어요. 이 경우 창을 닫으면 내용이 사라지고, 접수할 때 이름·연락처가 필요해요.');say('어떤 걸 만들까요? 아래에서 고르거나 편하게 적어주세요.');choices.hidden=false});
 
 /* 依頼書・要約 */
-function summaryText(){const sm=E.summary(state);return ['JPHIC 디자인 의뢰 요약 ('+state.requestId+')',...(contact?['접수자: '+contact.name+' · '+contact.contact+(contact.company?' · '+contact.company:'')]:[]),...state.items.map(p=>['■ '+p.name,...E.ORDER.map(k=>E.fields[k]+': '+(p[k]||'미입력'))].join('\n')),...(sm.inquiries.length?['문의: '+sm.inquiries.join(', ')]:[])].join('\n\n')}
+function summaryText(){const sm=E.summary(state);return ['JPHIC 디자인 의뢰 요약'+(officialNo?' ('+officialNo+')':''),...(contact?['접수자: '+contact.name+' · '+contact.contact+(contact.company?' · '+contact.company:'')]:[]),...state.items.map(p=>['■ '+p.name,...E.ORDER.map(k=>E.fields[k]+': '+(p[k]||'미입력'))].join('\n')),...(sm.inquiries.length?['문의: '+sm.inquiries.join(', ')]:[])].join('\n\n')}
 const sheetFields=$('sheetFields'),sheetNo=$('sheetNo');
-function sheetNumber(){sheetNo.textContent='No. '+state.requestId.replace('JPHIC-','').slice(-6).toUpperCase()}
+/* 의뢰번호: 접수 서버(구글시트)가 정식 번호(예: E636C0)를 돌려주면 그걸 표시. 그 전에는 숨김 */
+let officialNo='';
+function sheetNumber(){sheetNo.textContent=officialNo?'No. '+officialNo:'';sheetNo.hidden=!officialNo}
 function renderSheet(){sheetFields.replaceChildren();const p=state.items[state.active];sheetFields.hidden=!p;if(!p)return;
   const cell=(label,value,cls)=>{const d=document.createElement('div');if(cls)d.className=cls;const t=document.createElement('dt');t.textContent=label;const v=document.createElement('dd');
     if(value){v.textContent=value;v.className='done';v.title=value}else{v.textContent='확인 중';v.className='todo'}d.append(t,v);sheetFields.append(d)};
-  cell(state.items.length>1?'품목 '+(state.active+1)+'/'+state.items.length:'품목',p.name,'item');
+  cell(state.items.length>1?'품목 '+(state.active+1)+'/'+state.items.length:'품목',p.name,'item');{const n=E.ORDER.filter(k=>p[k]).length,pr=document.createElement('span');pr.className='prog';pr.textContent=n+' / '+E.ORDER.length;sheetFields.firstChild.append(pr)}
   for(const key of E.ORDER)cell(E.fields[key],p[key])}
 function render(){renderSheet();UI&&UI.refresh();refreshFileWays();const host=$('summary');host.replaceChildren();const has=!!state.items.length;$('summarySection').hidden=!has;choices.hidden=!(chat.classList.contains('started')&&!has);
   const complete=E.complete(state);confirmBar.hidden=!(complete&&!submitted);$('confirmBtn').textContent=mode==='named'?'이대로 의뢰 접수하기':'이름·연락처 남기고 접수하기';
@@ -95,8 +102,8 @@ function note(text,kind){syncNote.hidden=!text;syncNote.textContent=text;syncNot
 async function syncNow(status){if(mode!=='named'||!C.intakeEndpoint)return;if(inflight){dirty=true;return}inflight=true;dirty=false;clearTimeout(timer);
   const body=JSON.stringify(payload(status));
   try{const r=await fetch(C.intakeEndpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body});const j=await r.json().catch(()=>({}));
-    if(!(r.ok&&j.ok===true))throw new Error('fail');retry=0;note('','');
-    if(status==='접수완료'&&!done){done=true;formMsg('orderMsg','접수됐어요. 확인 후 남겨주신 연락처로 연락드릴게요.','ok');say('접수됐어요! 확인 후 '+contact.contact+'로 연락드릴게요. 참고 파일은 '+fileHint()+'으로 보내주세요. 접수번호는 '+state.requestId+'예요.');render()}}
+    if(!(r.ok&&j.ok===true))throw new Error('fail');retry=0;note('','');if(j.no&&j.no!==officialNo){officialNo=String(j.no);sheetNumber();refreshFileWays()}
+    if(status==='접수완료'&&!done){done=true;formMsg('orderMsg','접수됐어요. 확인 후 남겨주신 연락처로 연락드릴게요.','ok');say('접수됐어요! 확인 후 '+contact.contact+'로 연락드릴게요. 참고 파일은 '+fileHint()+'으로 보내주세요.'+(officialNo?' 의뢰번호는 '+officialNo+'예요.':''));render()}}
   catch{dirty=true;const wait=[2,5,10,30][Math.min(retry,3)];retry++;note('연결이 잠깐 불안정해요. '+wait+'초 뒤 자동으로 다시 저장할게요.','warn');setTimeout(()=>{if(dirty)syncNow(submitted?'접수완료':'작성중')},wait*1000)}
   finally{inflight=false;if(dirty&&retry===0)queueSave()}}
 function flush(){if(mode!=='named'||!C.intakeEndpoint||!dirty)return;try{navigator.sendBeacon(C.intakeEndpoint,new Blob([JSON.stringify(payload(submitted?'접수완료':'작성중'))],{type:'text/plain;charset=utf-8'}));dirty=false}catch{}}

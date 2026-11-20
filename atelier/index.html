@@ -32,6 +32,7 @@
   <section class="intro">
     <h1>AI로 뽑은<br>작은 이미지를,<br>크고 예쁘게.</h1>
     <p class="lead">출력할 수 있는 디자인 파일로 만드는 곳,<br><b>제이픽 JPHIC</b></p>
+    <p class="intro-links"><a class="go-consult" href="#consult">디자인 의뢰 바로가기 ↓</a><a class="go-chat" href="https://open.kakao.com/o/sLyIquni" target="_blank" rel="noopener">오픈채팅 바로가기 ↗</a></p>
     <p class="meta">JPHIC Atelier · 4 Rooms</p>
     <p class="scroll-hint" aria-hidden="true">scroll</p>
   </section>
@@ -122,7 +123,8 @@
         <p class="lead-note" id="welcomeNote">로그인 없이 바로 의뢰할 수 있어요.<br>창이 닫혀도 이어서 연락드릴 수 있게 <b>이름(닉네임)과 연락처</b>만 먼저 알려주세요.</p>
         <form id="startForm" class="start-form" novalidate>
           <label>이름 또는 닉네임<input id="cName" autocomplete="name" maxlength="40" placeholder="홍길동"></label>
-          <label>연락처 <small>휴대폰 또는 이메일</small><input id="cContact" autocomplete="tel" maxlength="80" placeholder="010-1234-5678"></label>
+          <label>연락처 <small id="cContactHint">휴대폰 번호</small><input id="cContact" type="tel" inputmode="tel" autocomplete="tel" maxlength="80" placeholder="010-1234-5678"></label>
+          <button type="button" id="cMailToggle" class="link-btn mini">이메일로 남길게요</button>
           <label>회사·단체명 <small>선택</small><input id="cCompany" autocomplete="organization" maxlength="80"></label>
           <input id="cWebsite" class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
           <label class="check"><input id="cConsent" type="checkbox"> 개인정보 수집·이용에 동의해요 <em>(필수)</em></label>
