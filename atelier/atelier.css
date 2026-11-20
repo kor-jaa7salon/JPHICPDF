@@ -21,6 +21,8 @@ button{font:inherit;color:inherit}
 .intro{padding:18vh var(--pad) 10vh}
 .intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,7.6vw,52px);line-height:1.38;letter-spacing:-.02em;margin:0 0 20px}
 .meta{font-size:12px;color:var(--gray);letter-spacing:.08em;margin:0}
+.intro .lead{font-size:16px;line-height:1.9;color:#3a3a3a;margin:0 0 26px}
+.intro .lead b{font-weight:600;color:var(--ink);letter-spacing:.02em}
 .scroll-hint{margin:12vh 0 0;font-size:11px;letter-spacing:.3em;color:var(--gray);text-transform:uppercase}
 .scroll-hint::after{content:"";display:block;width:1px;height:48px;background:var(--line);margin-top:10px}
 

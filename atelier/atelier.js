@@ -39,7 +39,7 @@ document.querySelector('.hero-work img').addEventListener('click',e=>zoom(e.targ
 
 /* ── 01 비율 변환 ── */
 const morph=$('morph'),frame=$('frame'),box=frame.parentElement;
-const KV=window.JphicKV,KVT={head1:'크게, 예쁘게, 오래 맡기는 곳',head2:'크게, 예쁘게,<br>오래 맡기는 곳',url:'jphic.co.kr'};frame.querySelector('img').remove();const kv=KV.create(frame,KVT);
+const KV=window.JphicKV,KVT={head1:'작은 AI 이미지를, 크고 예쁘게',head2:'작은 AI 이미지를,<br>크고 예쁘게',url:'jphic.co.kr'};frame.querySelector('img').remove();const kv=KV.create(frame,KVT);
 const dots=$('mDots');MORPH.forEach(()=>dots.append(document.createElement('li')));
 let step=-1;
 function fit(s){const bw=box.clientWidth*.86,bh=box.clientHeight*.92;const k=Math.min(bw/s.w,bh/s.h);return [s.w*k,s.h*k]}
