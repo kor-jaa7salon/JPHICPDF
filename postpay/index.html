@@ -184,7 +184,7 @@ footer{margin-top:28px;font-size:12px;color:var(--gray);line-height:1.7}
       var dl=document.getElementById('supList');rows.forEach(function(x){if(!x[1])return;var dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=x[0];dd.textContent=x[1];dl.append(dt,dd)});
       var act=document.getElementById('supAct');
       if(s.account){var b=document.createElement('button');b.type='button';b.textContent='계좌번호 복사';b.onclick=async function(){try{await navigator.clipboard.writeText(s.bank+' '+s.account);b.textContent='복사했어요'}catch(e){b.textContent=s.account}setTimeout(function(){b.textContent='계좌번호 복사'},1600)};act.append(b)}
-      if(s.docs&&s.docs.length){var n=document.createElement('p');n.className='hint';n.style.margin='0';n.style.flexBasis='100%';n.textContent=s.docs.join('·')+'은(는) 확인서를 보내시면 메일에 첨부해 드려요.';act.append(n)}
+      if(s.docs&&s.docs.length){var n=document.createElement('p');n.className='hint';n.style.margin='0';n.style.flexBasis='100%';n.textContent=s.docs.join('·')+'은 확인서를 보내시면 메일에 첨부해 드려요.';act.append(n)}
       if(dl.children.length)document.getElementById('supplier').hidden=false}catch(e){}})();
   form.elements.amount.addEventListener('input',function(e){var d=e.target.value.replace(/\D/g,'');e.target.value=d?Number(d).toLocaleString('ko-KR'):''});
   function err(t,el){msg.className='msg err';msg.textContent=t;if(el)el.focus();return false}
