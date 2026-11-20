@@ -2,7 +2,7 @@
 window.JPHIC_JP_CONFIG = {
   // LINE 友だち追加リンク (LINEアプリ → ホーム → 友だち追加 → QRコード → 自分のQRコード →「リンクをコピー」で出る https://line.me/ti/p/... )
   // 空のままだと、ボタンの代わりに下の LINE ID とコピーボタンが表示されます。
-  lineUrl: '',
+  lineUrl: 'https://line.me/ti/p/WQ2jLRC9tU',
   // LINE ID (表示用)
   lineId: '2glad',
   // ファイル受け取り用メール (Googleドライブの共有リンクもここかLINEへ)
