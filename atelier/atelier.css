@@ -1,0 +1,175 @@
+/* 2026-11-19: JPHIC Atelier — 미술관 벽(웜 화이트) + 먹색 글자 + 강조색 M100 하나. 여백 넉넉히, 선은 1px. */
+:root{
+  --wall:#F5F4F0;--ink:#1B1B1B;--gray:#8C8A85;--line:#CFCCC5;--m100:#E4007F;--dark:#121212;
+  --gap-room:160px;--pad:22px;
+  --serif:"Noto Serif KR",serif;
+  --sans:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--wall);color:var(--ink);font-family:var(--sans);word-break:keep-all;-webkit-font-smoothing:antialiased}
+main,.top,.foot{width:min(100%,880px);margin:0 auto}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+
+.top{display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad)}
+.mark{font-weight:600;letter-spacing:.32em;font-size:14px}
+.tag{font-size:13px;color:var(--m100);letter-spacing:.04em}
+
+.intro{padding:18vh var(--pad) 10vh}
+.intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,7.6vw,52px);line-height:1.38;letter-spacing:-.02em;margin:0 0 20px}
+.meta{font-size:12px;color:var(--gray);letter-spacing:.08em;margin:0}
+.scroll-hint{margin:12vh 0 0;font-size:11px;letter-spacing:.3em;color:var(--gray);text-transform:uppercase}
+.scroll-hint::after{content:"";display:block;width:1px;height:48px;background:var(--line);margin-top:10px}
+
+.room{margin-top:var(--gap-room);padding:0 var(--pad)}
+.room-no{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;font-size:13px;letter-spacing:.04em;margin:0 0 28px;color:var(--ink)}
+.room-no b{color:var(--m100);font-weight:600;font-size:15px}
+.room-no span{flex-basis:100%;font-size:11px;color:var(--gray);letter-spacing:.02em}
+
+figure{margin:0}
+figcaption,.note{font-size:11px;color:var(--gray);letter-spacing:.02em;margin-top:10px}
+
+/* 등장: 화면에 들어오면 살짝 떠오름 */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* 01 대표작 */
+.hero-work img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;background:#E8E6E0;cursor:zoom-in}
+
+/* 01 비율 변환 장면: 스크롤 동안 화면에 고정 */
+.morph{height:560vh;margin-top:120px;position:relative}
+.morph-stage{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+.morph-cap{font-size:12px;color:var(--gray);letter-spacing:.06em;margin:0}
+.frame-box{width:100%;height:58vh;height:58svh;display:flex;align-items:center;justify-content:center}
+.frame{position:relative;width:300px;height:300px;transition:width .7s cubic-bezier(.65,0,.35,1),height .7s cubic-bezier(.65,0,.35,1)}
+.frame img{width:100%;height:100%;object-fit:cover;background:#E8E6E0}
+.crop{position:absolute;width:14px;height:14px;border-color:var(--m100);border-style:solid;border-width:0}
+.crop.tl{left:-10px;top:-10px;border-left-width:1px;border-top-width:1px}
+.crop.tr{right:-10px;top:-10px;border-right-width:1px;border-top-width:1px}
+.crop.bl{left:-10px;bottom:-10px;border-left-width:1px;border-bottom-width:1px}
+.crop.br{right:-10px;bottom:-10px;border-right-width:1px;border-bottom-width:1px}
+.morph-label{font-size:12px;letter-spacing:.02em;margin:0;min-height:1.4em}
+.morph-label b{color:var(--m100);font-weight:600}
+.morph-dots{list-style:none;display:flex;gap:6px;margin:0;padding:0}
+.morph-dots li{width:14px;height:2px;background:var(--line);transition:background .3s}
+.morph-dots li.on{background:var(--ink)}
+
+/* 01 실제 크기 줄세우기 */
+.lineup{margin-top:80px}
+.floor{position:relative;display:flex;align-items:flex-end;justify-content:center;gap:14px;border-bottom:1px solid var(--ink);padding:0 4px;min-height:60px}
+.lu{position:relative;flex:none}
+.lu .art{width:100%;height:100%;background:#E8E6E0 center/cover no-repeat}
+.lu .crop{width:8px;height:8px}
+.lu .crop.tl,.lu .crop.tr{top:-6px}.lu .crop.bl,.lu .crop.br{bottom:-6px}
+.lu .crop.tl,.lu .crop.bl{left:-6px}.lu .crop.tr,.lu .crop.br{right:-6px}
+.lu small{position:absolute;left:50%;transform:translateX(-50%);top:100%;margin-top:calc(8px + var(--row,0) * 14px);font-size:10px;color:var(--gray);text-align:center;white-space:nowrap}
+.lu.person svg{width:100%;height:100%;overflow:visible}
+.lineup figcaption{margin-top:54px}
+
+/* 02 살롱 벽: 사진 비율대로 자동 배치, 칼선(M100) → 실물 */
+.salon{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:6px;column-gap:16px;row-gap:0}
+.tile{position:relative;margin:0 0 16px;cursor:pointer;align-self:start}
+.tile .art{position:relative;width:100%;padding:12%}
+.tile.white .art{background:#fff}
+.tile .pic{position:relative}
+.tile .shape{position:absolute;inset:0;background:var(--m100);-webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat;clip-path:inset(0 0 0 0);transition:clip-path .8s cubic-bezier(.65,0,.35,1)}
+.tile img{position:relative;width:100%;height:auto;clip-path:inset(0 0 100% 0);transition:clip-path .8s cubic-bezier(.65,0,.35,1)}
+.tile .blade{position:absolute;left:-8%;right:-8%;top:0;height:1px;background:var(--m100);opacity:0}
+.tile.cut .shape{clip-path:inset(100% 0 0 0)}
+.tile.cut img{clip-path:inset(0 0 0 0)}
+.tile.cut .blade{animation:blade .8s cubic-bezier(.65,0,.35,1)}
+@keyframes blade{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(var(--travel,200px))}}
+.tile figcaption{margin-top:8px}
+
+/* 03 블라인드 박스 */
+.boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.box{position:relative;aspect-ratio:1;border:1px solid var(--ink);background:transparent;padding:0;cursor:pointer;overflow:hidden}
+.box .num{position:absolute;inset:0;display:grid;place-items:center;font-size:15px;letter-spacing:.06em;transition:opacity .35s,transform .35s}
+.box .lid{position:absolute;left:0;right:0;top:0;height:18%;border-bottom:1px solid var(--ink);transform-origin:top left;transition:transform .45s cubic-bezier(.3,0,.2,1),opacity .45s}
+.box img{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;opacity:0;transform:scale(.6) translateY(18%);transition:opacity .45s ease .12s,transform .5s cubic-bezier(.2,.7,.2,1) .12s}
+.box.open .num{opacity:0;transform:translateY(-30%)}
+.box.open .lid{transform:rotate(-24deg) translateY(-60%);opacity:0}
+.box.open img{opacity:1;transform:none}
+.box.open{background:#fff;border-color:var(--line)}
+.text-btn{border:0;background:none;padding:0;color:var(--gray);font-size:11px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+
+/* 04 상영관: 천장에서 블라인드가 내려오고, 어두워지면 모니터가 켜짐 */
+.screen-room{padding:0}
+.screen-scroll{height:300vh;position:relative}
+.screen-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:0 var(--pad)}
+.blind{position:absolute;left:0;right:0;top:0;height:100%;background:var(--dark);transform:translateY(calc((var(--b,0) - 1) * 100%));will-change:transform}
+.blind::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:#2a2a2a}
+.on-stage{position:relative;z-index:1;transition:color .4s}
+.screen-room.dark .on-stage{color:#d8d8d8}
+.screen-room.dark .on-stage span{color:#7c7c7c}
+.monitors{position:relative;z-index:1;display:flex;justify-content:center;gap:9vw;align-items:flex-end}
+.monitor{display:flex;flex-direction:column;align-items:center;width:min(34vw,220px)}
+.screen{position:relative;width:100%;aspect-ratio:9/16;border:1px solid var(--ink);background:transparent;overflow:hidden;transition:border-color .4s,background .4s}
+.screen img,.screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s}
+.pole{width:1px;height:9vh;background:var(--ink);transition:background .4s}
+.base{width:46%;height:1px;background:var(--ink);transition:background .4s}
+.monitor figcaption{transition:opacity .4s;opacity:0;color:#8a8a8a}
+.screen-room.dark .screen{border-color:#5a5a5a;background:#000}
+.screen-room.dark .pole,.screen-room.dark .base{background:#5a5a5a}
+.screen-room.on .monitor figcaption{opacity:1}
+.screen-room.on #monA img{opacity:1;animation:flicker .5s steps(1)}
+.screen-room.on #monB video{opacity:1;animation:flicker .5s steps(1)}
+.screen-room.on.motion #monA video{opacity:1}
+@keyframes flicker{0%{opacity:0}20%{opacity:.7}35%{opacity:.1}55%{opacity:1}70%{opacity:.4}100%{opacity:1}}
+
+/* 맺음말 */
+.closing{margin-top:var(--gap-room);padding:0 var(--pad) 40px;font-size:15px;line-height:2;color:#3a3a3a}
+.closing p{margin:0 0 22px}
+.chat-link{display:inline-block;margin-top:10px;color:var(--m100);border-bottom:1px solid var(--m100);padding-bottom:2px;font-size:15px}
+.foot{padding:60px var(--pad) 48px;font-size:11px;color:var(--gray);letter-spacing:.04em}
+
+/* 확대 보기 */
+.lightbox{position:fixed;inset:0;z-index:50;background:rgba(245,244,240,.97);display:flex;align-items:center;justify-content:center;padding:24px}
+.lightbox img{max-width:100%;max-height:90vh;object-fit:contain}
+.lightbox button{position:absolute;top:12px;right:16px;border:0;background:none;font-size:28px;cursor:pointer}
+
+@media(min-width:760px){
+  :root{--gap-room:240px;--pad:48px}
+  .salon{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px}
+  .tile{margin-bottom:24px}
+  .boxes{gap:16px}
+  .hero-work img{aspect-ratio:4/5}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .morph{height:auto}.morph-stage{position:static;height:auto;padding:40px 0}
+  .frame{transition:none}
+  .tile .shape{display:none}.tile img{clip-path:none;transition:none}
+  .box img,.box .num,.box .lid{transition:none}
+  .screen-scroll{height:auto}.screen-stage{position:static;height:auto;padding:80px var(--pad)}
+  .blind{transform:none}
+}
+
+/* 2026-11-20: 01 키비주얼 재배치 (kv.js, /atelier·/jp 공용) — 사진을 자르지 않고 요소를 크기마다 다시 배치 */
+.frame .kv{position:absolute;inset:0;overflow:hidden;background:#F6ECFD;container-type:size}
+.kv>*{position:absolute;transition:left .7s cubic-bezier(.65,0,.35,1),top .7s cubic-bezier(.65,0,.35,1),width .7s cubic-bezier(.65,0,.35,1),height .7s cubic-bezier(.65,0,.35,1),font-size .7s cubic-bezier(.65,0,.35,1),opacity .4s ease}
+.kv.still>*,.kv.still .kv-ring{transition:none}
+.kv-bg{inset:0;background-color:#F6ECFD;background-image:linear-gradient(90deg,rgba(232,150,178,.5) 50%,transparent 50%),linear-gradient(rgba(232,150,178,.5) 50%,transparent 50%);transition:none}
+.kv-rep{inset:0;opacity:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Cg font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='22' letter-spacing='4' fill='%234A3426' fill-opacity='.22'%3E%3Ctext x='8' y='34'%3EJPHIC%3C/text%3E%3Ctext x='108' y='84'%3EJPHIC%3C/text%3E%3C/g%3E%3C/svg%3E");background-color:rgba(246,236,253,.82)}
+.kv-plate{transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 50% 50%,#DCCDF3 0 60%,#D2C0F0 61% 66%,#CBB7EE 67% 100%);box-shadow:0 0 0 1px #B9A3E6 inset,0 2px 0 rgba(74,52,38,.08)}
+.kv-toast{position:absolute;left:50%;top:50%;width:62%;height:auto;transform:translate(-50%,-52%);filter:drop-shadow(0 3px 4px rgba(74,52,38,.18))}
+.kv-ring{position:absolute;inset:-16%;transition:opacity .4s ease;pointer-events:none}
+.kv-ring svg{width:100%;height:100%;overflow:visible}
+.kv-ring text{font-family:Georgia,"Times New Roman",serif;font-size:5.6px;fill:#4A3426;letter-spacing:.1px}
+.kv-head,.kv-logo,.kv-url,.kv-svc{margin:0;transform:translate(-50%,-50%);color:#4A3426;text-align:center;line-height:1.35}
+.kv-head{font-family:var(--sans);font-weight:700;white-space:nowrap;letter-spacing:.02em}
+.kv-logo{font-family:"Pretendard Variable",Arial,sans-serif;font-weight:800;letter-spacing:.12em;white-space:nowrap;color:#4A3426}
+.kv-url{font-family:"Pretendard Variable",Arial,sans-serif;font-weight:600;letter-spacing:.04em;white-space:nowrap;color:#E4007F}
+.kv-svc{font-family:Georgia,"Times New Roman",serif;line-height:1.5;opacity:0}
+.kv-svc{white-space:normal;word-break:normal}
+.kv-svc i{font-style:normal;color:#E4007F;margin:0 .15em}
+.kv-svc.list span{display:block}
+.kv-svc.list i{display:none}
+.kv-svc.flow span{white-space:nowrap}
+.frame{background:#E8E6E0}
+.lu .kv-host{position:absolute;inset:0;overflow:hidden}
+.lu .kv-host .kv{position:absolute;inset:0;overflow:hidden}
+.frame .kv-toast,.lu .kv-toast{width:62%;height:auto;object-fit:contain;background:none}
