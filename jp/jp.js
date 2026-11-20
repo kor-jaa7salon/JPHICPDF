@@ -7,18 +7,18 @@ const A='/atelier/assets/';
 
 /* ── 写真・作品リスト (実際のポートフォリオに差し替える場所) ── */
 const J='/jp/assets/';
-const MORPH=[ // 同じキービジュアルのサイズ別展開
-  {name:'キービジュアル原本',size:'1080×1080px',w:1,h:1,src:A+'kv_square.webp'},
-  {name:'Xバナー',size:'600×1800mm',w:1,h:3,src:A+'kv_square.webp'},
-  {name:'横断幕',size:'5000×1000mm',w:5,h:1,src:A+'kv_square.webp'},
-  {name:'フォトウォール',size:'3000×2400mm',w:5,h:4,src:A+'kv_square.webp'},
-  {name:'ゲート',size:'6000×3000mm',w:2,h:1,src:A+'kv_square.webp'},
-  {name:'サイネージ',size:'1080×1920px',w:9,h:16,src:A+'kv_square.webp'}];
+const MORPH=[ // 同じキービジュアルのサイズ別展開。L = kv.js の配置表(画像を切り抜くのではなく、要素を組み直す)
+  {name:'キービジュアル原本',size:'1080×1080px',w:1,h:1,L:'sq'},
+  {name:'Xバナー',size:'600×1800mm',w:1,h:3,L:'xb'},
+  {name:'横断幕',size:'5000×1000mm',w:5,h:1,L:'bn'},
+  {name:'フォトウォール',size:'3000×2400mm',w:5,h:4,L:'pw'},
+  {name:'ゲート',size:'6000×3000mm',w:2,h:1,L:'gt'},
+  {name:'サイネージ',size:'1080×1920px',w:9,h:16,L:'sg'}];
 const LINEUP=[
   {name:'人',mw:500,mh:1700,person:true},
-  {name:'Xバナー',mw:600,mh:1800,src:A+'kv_square.webp'},
-  {name:'フォトウォール',mw:3000,mh:2400,src:A+'kv_square.webp'},
-  {name:'ゲート',mw:6000,mh:3000,src:A+'kv_square.webp'}];
+  {name:'Xバナー',mw:600,mh:1800,L:'xb'},
+  {name:'フォトウォール',mw:3000,mh:2400,L:'pw'},
+  {name:'ゲート',mw:6000,mh:3000,L:'gt'}];
 const CUTS=[ // 背景なしPNG/WebPがあれば、カットライン(M100)面は自動で作られる
   {src:J+'st_wordmark.webp',cap:'ファブリックステッカー · JPHIC'},
   {src:A+'cut_cake.webp',cap:'アクリルスタンド'},
@@ -42,12 +42,13 @@ lb.addEventListener('click',()=>{lb.hidden=true});
 document.querySelector('.hero-work img').addEventListener('click',e=>zoom(e.target.src));
 
 /* ── 01 비율 변환 ── */
-const morph=$('morph'),frame=$('frame'),fimg=frame.querySelector('img'),box=frame.parentElement;
+const morph=$('morph'),frame=$('frame'),box=frame.parentElement;
+const KV=window.JphicKV;frame.querySelector('img').remove();const KVT={head1:'韓国っぽで、ブランドをデコろう。',head2:'韓国っぽで、<br>ブランドをデコろう。',url:'jphic.co.kr/jp'};const kv=KV.create(frame,KVT);let kvKey='sq';
 const dots=$('mDots');MORPH.forEach(()=>dots.append(document.createElement('li')));
 let step=-1;
 function fit(s){const bw=box.clientWidth*.86,bh=box.clientHeight*.92;const k=Math.min(bw/s.w,bh/s.h);return [s.w*k,s.h*k]}
-function setStep(i){if(i===step)return;step=i;const s=MORPH[i];const [w,h]=fit(s);frame.style.width=w+'px';frame.style.height=h+'px';
-  if(fimg.getAttribute('src')!==s.src)fimg.src=s.src;
+function setStep(i){if(i===step)return;const first=step<0;step=i;const s=MORPH[i];const [w,h]=fit(s);frame.style.width=w+'px';frame.style.height=h+'px';
+  kv.apply(s.L,w,h,!(first||RM));kvKey=s.L;
   $('mName').textContent=s.name;$('mSize').textContent=s.size;$('mRatio').textContent=s.w+':'+s.h;
   [...dots.children].forEach((d,k)=>d.classList.toggle('on',k<=i))}
 function morphScroll(){const r=morph.getBoundingClientRect(),total=morph.offsetHeight-innerHeight;const p=Math.min(1,Math.max(0,-r.top/Math.max(total,1)));
@@ -58,7 +59,7 @@ const floor=$('floor');
 function buildLineup(){floor.replaceChildren();const gap=14,avail=floor.clientWidth-8-gap*(LINEUP.length-1);const k=avail/LINEUP.reduce((a,x)=>a+x.mw,0);
   LINEUP.forEach((x,idx)=>{const d=document.createElement('div');d.style.setProperty('--row',idx%2);d.className='lu'+(x.person?' person':'');d.style.width=x.mw*k+'px';d.style.height=x.mh*k+'px';
     if(x.person){d.innerHTML='<svg viewBox="0 0 50 170" aria-hidden="true"><circle cx="25" cy="14" r="11" fill="none" stroke="#1B1B1B"/><path d="M25 26v62M25 40l-18 34M25 40l18 34M25 88l-14 80M25 88l14 80" fill="none" stroke="#1B1B1B"/></svg>'}
-    else{const a=document.createElement('div');a.className='art';a.style.backgroundImage='url('+x.src+')';d.append(a);['tl','tr','bl','br'].forEach(c=>{const i=document.createElement('i');i.className='crop '+c;d.append(i)})}
+    else{const a=document.createElement('div');a.className='kv-host';d.append(a);KV.create(a,KVT).apply(x.L,x.mw*k,x.mh*k,false);['tl','tr','bl','br'].forEach(c=>{const i=document.createElement('i');i.className='crop '+c;d.append(i)})}
     const s=document.createElement('small');s.textContent=x.name+(x.person?' 170cm':' '+x.mw/1000+'×'+x.mh/1000+'m');d.append(s);floor.append(d)})}
 
 /* ── 02 살롱 벽: 사진 원래 비율로 자리 계산, 화면에 들어오면 칼선 → 실물 ── */

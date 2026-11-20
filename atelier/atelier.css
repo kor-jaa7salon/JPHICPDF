@@ -147,3 +147,29 @@ figcaption,.note{font-size:11px;color:var(--gray);letter-spacing:.02em;margin-to
   .screen-scroll{height:auto}.screen-stage{position:static;height:auto;padding:80px var(--pad)}
   .blind{transform:none}
 }
+
+/* 2026-11-20: 01 키비주얼 재배치 (kv.js, /atelier·/jp 공용) — 사진을 자르지 않고 요소를 크기마다 다시 배치 */
+.frame .kv{position:absolute;inset:0;overflow:hidden;background:#F6ECFD;container-type:size}
+.kv>*{position:absolute;transition:left .7s cubic-bezier(.65,0,.35,1),top .7s cubic-bezier(.65,0,.35,1),width .7s cubic-bezier(.65,0,.35,1),height .7s cubic-bezier(.65,0,.35,1),font-size .7s cubic-bezier(.65,0,.35,1),opacity .4s ease}
+.kv.still>*,.kv.still .kv-ring{transition:none}
+.kv-bg{inset:0;background-color:#F6ECFD;background-image:linear-gradient(90deg,rgba(232,150,178,.5) 50%,transparent 50%),linear-gradient(rgba(232,150,178,.5) 50%,transparent 50%);transition:none}
+.kv-rep{inset:0;opacity:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Cg font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='22' letter-spacing='4' fill='%234A3426' fill-opacity='.22'%3E%3Ctext x='8' y='34'%3EJPHIC%3C/text%3E%3Ctext x='108' y='84'%3EJPHIC%3C/text%3E%3C/g%3E%3C/svg%3E");background-color:rgba(246,236,253,.82)}
+.kv-plate{transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 50% 50%,#DCCDF3 0 60%,#D2C0F0 61% 66%,#CBB7EE 67% 100%);box-shadow:0 0 0 1px #B9A3E6 inset,0 2px 0 rgba(74,52,38,.08)}
+.kv-toast{position:absolute;left:50%;top:50%;width:62%;height:auto;transform:translate(-50%,-52%);filter:drop-shadow(0 3px 4px rgba(74,52,38,.18))}
+.kv-ring{position:absolute;inset:-16%;transition:opacity .4s ease;pointer-events:none}
+.kv-ring svg{width:100%;height:100%;overflow:visible}
+.kv-ring text{font-family:Georgia,"Times New Roman",serif;font-size:5.6px;fill:#4A3426;letter-spacing:.1px}
+.kv-head,.kv-logo,.kv-url,.kv-svc{margin:0;transform:translate(-50%,-50%);color:#4A3426;text-align:center;line-height:1.35}
+.kv-head{font-family:var(--sans);font-weight:700;white-space:nowrap;letter-spacing:.02em}
+.kv-logo{font-family:"Pretendard Variable",Arial,sans-serif;font-weight:800;letter-spacing:.12em;white-space:nowrap;color:#4A3426}
+.kv-url{font-family:"Pretendard Variable",Arial,sans-serif;font-weight:600;letter-spacing:.04em;white-space:nowrap;color:#E4007F}
+.kv-svc{font-family:Georgia,"Times New Roman",serif;line-height:1.5;opacity:0}
+.kv-svc{white-space:normal;word-break:normal}
+.kv-svc i{font-style:normal;color:#E4007F;margin:0 .15em}
+.kv-svc.list span{display:block}
+.kv-svc.list i{display:none}
+.kv-svc.flow span{white-space:nowrap}
+.frame{background:#E8E6E0}
+.lu .kv-host{position:absolute;inset:0;overflow:hidden}
+.lu .kv-host .kv{position:absolute;inset:0;overflow:hidden}
+.frame .kv-toast,.lu .kv-toast{width:62%;height:auto;object-fit:contain;background:none}
