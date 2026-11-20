@@ -112,12 +112,16 @@ footer{margin-top:28px;font-size:12px;color:var(--gray);line-height:1.7}
         <li><b>견적서로 진행</b> — 소액은 제이픽 견적서만으로 진행해요. 납품 후 세금계산서로 지급돼요.</li>
         <li><b>발주서 발행</b> — 기관이 품목·금액을 적은 발주서(주문서)를 보내주시는 방식이에요.</li>
         <li><b>계약서 작성</b> — 금액이 크거나 기간이 길 때 정식 계약서를 써요. 계약서 조건이 우선해요.</li>
-        <li>잘 모르시면 「아직 모름」으로 두세요. 담당 부서 확인 후 메일로 알려주셔도 돼요.</li>
+        <li>잘 모르시면 「아직 모름」으로 두세요. 담당 부서 확인 후 오픈채팅으로 알려주셔도 돼요.</li>
       </ul>
-      <div class="grid two" style="margin-top:14px">
-        <label class="f">납품 예정일<span class="req">*</span><input type="date" name="deliveryDate" required></label>
-        <label class="f">검수 예정일<input type="date" name="inspectDate"><div class="hint">납품물을 확인(검수)하시는 날이에요.</div></label>
+      <label class="f" style="margin-top:14px">납품 내용<span class="req">*</span></label>
+      <div class="chips">
+        <label><input type="radio" name="deliveryType" value="디자인 파일" checked> 디자인 파일</label>
+        <label><input type="radio" name="deliveryType" value="인쇄·제작물(발주 물품)"> 인쇄·제작물</label>
+        <label><input type="radio" name="deliveryType" value="디자인 파일 + 인쇄·제작물"> 둘 다</label>
       </div>
+      <label class="f" style="margin-top:12px;max-width:320px">납품 예정일 (디자인 또는 인쇄물)<span class="req">*</span><input type="date" name="deliveryDate" required>
+        <div class="hint" id="deliveryHint">디자인 파일을 전달하는 날이에요.</div></label>
       <label class="f" style="margin-top:14px">대금 지급<span class="req">*</span></label>
       <div class="chips">
         <label><input type="radio" name="payTerm" value="검수 완료 후 5일 이내" checked> 검수 완료 후 5일 이내</label>
@@ -173,7 +177,10 @@ footer{margin-top:28px;font-size:12px;color:var(--gray);line-height:1.7}
   ['no','org','dept','name','phone','email','title','amount'].forEach(function(k){var v=P.get(k);if(v&&form.elements[k])form.elements[k].value=v});
   if(P.get('amount'))form.elements.amount.value=Number(String(P.get('amount')).replace(/\D/g,'')).toLocaleString('ko-KR');
   if(P.get('no'))form.elements.no.readOnly=true;
-  function toggle(){document.getElementById('payDateWrap').hidden=form.elements.payTerm.value!=='지정일';document.getElementById('prepayWrap').hidden=form.elements.prepay.value!=='선금 있음'}
+  function today(){var t=new Date();t.setMinutes(t.getMinutes()-t.getTimezoneOffset());return t.toISOString().slice(0,10)}
+  form.elements.deliveryDate.min=today();form.elements.payDate.min=today();
+  var DH={'디자인 파일':'디자인 파일을 전달하는 날이에요.','인쇄·제작물(발주 물품)':'인쇄·제작물이 도착(설치)하는 날이에요.','디자인 파일 + 인쇄·제작물':'마지막 납품(인쇄·제작물 도착) 날짜를 골라주세요.'};
+  function toggle(){document.getElementById('deliveryHint').textContent=DH[form.elements.deliveryType.value]||'';document.getElementById('payDateWrap').hidden=form.elements.payTerm.value!=='지정일';document.getElementById('prepayWrap').hidden=form.elements.prepay.value!=='선금 있음'}
   form.addEventListener('change',toggle);toggle();
   function unmark(e){var box=e.target.closest&&(e.target.closest('label.f')||e.target.closest('label.check'));if(box&&box.classList.contains('bad')){box.classList.remove('bad');if(!form.querySelector('.bad'))msg.textContent=''}}
   form.addEventListener('input',unmark);form.addEventListener('change',unmark);
@@ -198,13 +205,15 @@ footer{margin-top:28px;font-size:12px;color:var(--gray);line-height:1.7}
     need.forEach(function(x){if(!String(f[x[0]].value).trim())mark(f[x[0]],x[1])});
     if(f.email.value.trim()&&!MAIL.test(f.email.value.trim()))mark(f.email,'이메일 주소 형식');
     if(f.taxEmail.value.trim()&&!MAIL.test(f.taxEmail.value.trim()))mark(f.taxEmail,'세금계산서 이메일 형식');
+    if(f.deliveryDate.value&&f.deliveryDate.value<today())mark(f.deliveryDate,'납품 예정일(오늘 이후)');
     if(f.payTerm.value==='지정일'&&!f.payDate.value)mark(f.payDate,'지급 예정일');
+    if(f.payDate.value&&f.payDate.value<today())mark(f.payDate,'지급 예정일(오늘 이후)');
     if(!f.agree.checked)mark(f.agree,'지급 조건 동의');
     if(!f.privacy.checked)mark(f.privacy,'개인정보 동의');
     if(bad.length){msg.className='msg err';msg.textContent='붉게 표시된 '+bad.length+'개 항목을 확인해 주세요: '+bad.map(function(x){return x[1]}).join(', ');
       var first=bad[0][0],box=first.closest('label')||first;box.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){first.focus({preventScroll:true})},350);return}
     if(!C.intakeEndpoint)return err('지금은 발송 연결을 준비 중이에요. 아래 카카오톡 오픈채팅으로 연락 주세요.');
-    var d={kind:'postpay-confirm'};['no','amount','title','org','dept','name','phone','email','bizNo','contractType','deliveryDate','inspectDate','payTerm','payDate','prepay','prepayRate','taxEmail','memo','website'].forEach(function(k){d[k]=String(f[k].value||'').trim()});
+    var d={kind:'postpay-confirm'};['no','amount','title','org','dept','name','phone','email','bizNo','contractType','deliveryType','deliveryDate','payTerm','payDate','prepay','prepayRate','taxEmail','memo','website'].forEach(function(k){d[k]=String(f[k].value||'').trim()});
     d.agree=true;d.privacy=true;
     var sending=document.getElementById('sending'),stay=function(e){e.preventDefault();e.returnValue=''};
     go.disabled=true;go.innerHTML='<span class="dot" aria-hidden="true"></span>보내는 중이에요';msg.textContent='';
