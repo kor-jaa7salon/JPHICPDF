@@ -143,6 +143,7 @@ figcaption,.note{font-size:11px;color:var(--gray);letter-spacing:.02em;margin-to
 /* 맺음말 */
 .closing{margin-top:var(--gap-room);padding:0 var(--pad) 40px;font-size:15px;line-height:2;color:#3a3a3a}
 .closing p{margin:0 0 22px}
+.closing .lead-in{font-family:var(--serif);font-size:clamp(18px,4.4vw,22px);line-height:1.8;color:var(--ink)}
 .chat-link{display:inline-block;margin-top:10px;color:var(--m100);border-bottom:1px solid var(--m100);padding-bottom:2px;font-size:15px}
 .foot{padding:60px var(--pad) 48px;font-size:11px;color:var(--gray);letter-spacing:.04em}
 
