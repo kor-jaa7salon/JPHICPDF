@@ -169,6 +169,12 @@ p{line-height:1.75;color:var(--soft);font-size:15px;margin:0 0 12px}
 .faq summary::after{content:"+";position:absolute;right:4px;top:13px;font-size:20px;color:var(--violet)}
 .faq details[open] summary::after{content:"−"}
 .faq details p{font-size:14px;padding-right:12px}
+/* 2026-11-20: 견적·수정·취소 답변 목록 */
+.faq details ul{margin:-4px 0 16px;padding:0 12px 0 18px;font-size:14px;line-height:1.75}
+.faq details li{margin:0 0 6px}
+.faq details b{color:var(--violet)}
+.faq-more{font-size:13px;margin:18px 0 0}
+.faq-more a{color:var(--violet);font-weight:800;text-decoration:underline;text-underline-offset:3px}
 
 /* 푸터 */
 .site-foot{padding:32px 24px 40px;background:var(--cocoa);font-size:12px;color:var(--pink)}

@@ -97,6 +97,11 @@ button:disabled{opacity:.45;cursor:default}
 .faq summary::after{content:"+";position:absolute;right:4px;top:13px;font-size:20px;color:var(--m100)}
 .faq details[open] summary::after{content:"−"}
 .faq details p{font-size:14px;line-height:1.85;color:#3a3a3a;margin:0 0 16px;padding-right:12px}
+.faq details ul{margin:-6px 0 18px;padding:0 12px 0 18px;font-size:14px;line-height:1.8;color:#3a3a3a}
+.faq details li{margin:0 0 6px}
+.faq details b{color:var(--m100);font-weight:600}
+.faq-more{font-size:13px;color:var(--gray);margin:22px 0 0}
+.faq-more a{color:var(--m100);border-bottom:1px solid var(--m100)}
 
 @media(max-width:440px){
   .consult{padding:0 10px}
