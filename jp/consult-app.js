@@ -32,6 +32,8 @@ toLatest.addEventListener('click',toBottom);
 function startChat(){chat.classList.add('started');chatForm.hidden=false;requestAnimationFrame(()=>chat.scrollIntoView({block:'start',behavior:RM?'auto':'smooth'}));UI&&UI.enter()}
 function bubble(text,user=false){const follow=user||nearBottom();const el=document.createElement('div');el.className='bubble'+(user?' user':'');el.textContent=text;messages.append(el);if(follow)toBottom();else toLatest.hidden=false}
 function say(text){state.history.push({role:'assistant',text});bubble(text)}
+/* 2026-11-21: 접수 중 로딩 말풍선 (서버가 번호를 발급하는 몇 초 동안) */
+let busyEl=null;function busy(on,text){if(busyEl){busyEl.remove();busyEl=null}if(!on)return;busyEl=document.createElement('div');busyEl.className='bubble typing';busyEl.setAttribute('role','status');busyEl.innerHTML='<span class="typing-dots" aria-hidden="true"><i></i><i></i><i></i></span>';const t=document.createElement('span');t.textContent=text;busyEl.append(t);messages.append(busyEl);toBottom()}
 function changed(){render();queueSave()}
 function send(text){text=text.trim();if(!text)return;bubble(text,true);input.value='';
   if(submitted){say('受付は完了しています。追加の内容やファイルは'+fileHint()+'で送ってください。'+(officialNo?'（依頼番号 '+officialNo+'）':''));return}
@@ -94,7 +96,7 @@ $('reset').addEventListener('click',()=>{if(!confirm('今の内容を消して�
 function submitOrder(){if(submitted)return;
   if(mode!=='named'){awaitingContactForSubmit=true;chat.classList.add('asking');$('welcomeTitle').textContent='送信先の連絡先を教えてください';$('welcomeNote').textContent='ログインは不要です。お名前（ニックネーム）と連絡先だけで大丈夫です。';$('browseOnly').hidden=true;$('startBtn').textContent='連絡先を入れて送信する';chat.scrollIntoView({block:'start'});$('cName').focus({preventScroll:true});return}
   if(!C.intakeEndpoint){formMsg('orderMsg','受付の接続を準備中です。要約をコピーして'+lineHint()+'で送ってください。','warn');say('ただいま受付の接続を準備しています。下の「要約をコピー」のあと、'+lineHint()+'で送っていただければすぐに確認します。');return}
-  submitted=true;render();formMsg('orderMsg','送信しています…','');syncNow('접수완료')}
+  submitted=true;render();formMsg('orderMsg','送信しています…','');busy(true,'送信しています。少々お待ちください');syncNow('접수완료')}
 $('confirmBtn').addEventListener('click',submitOrder);$('submitOrder').addEventListener('click',submitOrder);
 
 /* スプレッドシート保存: 順番(seq)で古い保存が新しい保存を上書きしないようにし、失敗したら 2・5・10・30秒後に再送 */
@@ -105,7 +107,7 @@ async function syncNow(status){if(mode!=='named'||!C.intakeEndpoint)return;if(in
   const body=JSON.stringify(payload(status));
   try{const r=await fetch(C.intakeEndpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body});const j=await r.json().catch(()=>({}));
     if(!(r.ok&&j.ok===true))throw new Error('fail');retry=0;note('','');if(j.no&&j.no!==officialNo){officialNo=String(j.no);sheetNumber();refreshFileWays()}
-    if(status==='접수완료'&&!done){done=true;formMsg('orderMsg','送信しました。確認後、いただいた連絡先にご連絡します。','ok');say('受け付けました！確認後、'+contact.contact+' にご連絡します。参考ファイルは'+fileHint()+'で送ってください。'+(officialNo?'依頼番号は '+officialNo+' です。':''));render()}}
+    if(status==='접수완료'&&!done){done=true;busy(false);formMsg('orderMsg','送信しました。確認後、いただいた連絡先にご連絡します。','ok');say('受け付けました！確認後、'+contact.contact+' にご連絡します。参考ファイルは'+fileHint()+'で送ってください。'+(officialNo?'依頼番号は '+officialNo+' です。':''));render()}}
   catch{dirty=true;const wait=[2,5,10,30][Math.min(retry,3)];retry++;note('接続が少し不安定です。'+wait+'秒後に自動で保存し直します。','warn');setTimeout(()=>{if(dirty)syncNow(submitted?'접수완료':'작성중')},wait*1000)}
   finally{inflight=false;if(dirty&&retry===0)queueSave()}}
 function flush(){if(mode!=='named'||!C.intakeEndpoint||!dirty)return;try{navigator.sendBeacon(C.intakeEndpoint,new Blob([JSON.stringify(payload(submitted?'접수완료':'작성중'))],{type:'text/plain;charset=utf-8'}));dirty=false}catch{}}

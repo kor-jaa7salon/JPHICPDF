@@ -29,6 +29,8 @@ toLatest.addEventListener('click',toBottom);
 function startChat(){chat.classList.add('started');chatForm.hidden=false;requestAnimationFrame(()=>chat.scrollIntoView({block:'start',behavior:RM?'auto':'smooth'}));UI&&UI.enter()}
 function bubble(text,user=false){const follow=user||nearBottom();const el=document.createElement('div');el.className='bubble'+(user?' user':'');el.textContent=text;messages.append(el);if(follow)toBottom();else toLatest.hidden=false}
 function say(text){state.history.push({role:'assistant',text});bubble(text)}
+/* 2026-11-21: 접수 중 로딩 말풍선 (서버가 번호를 발급하는 몇 초 동안) */
+let busyEl=null;function busy(on,text){if(busyEl){busyEl.remove();busyEl=null}if(!on)return;busyEl=document.createElement('div');busyEl.className='bubble typing';busyEl.setAttribute('role','status');busyEl.innerHTML='<span class="typing-dots" aria-hidden="true"><i></i><i></i><i></i></span>';const t=document.createElement('span');t.textContent=text;busyEl.append(t);messages.append(busyEl);toBottom()}
 function changed(){render();queueSave()}
 function send(text){text=text.trim();if(!text)return;bubble(text,true);input.value='';
   if(submitted){say('접수는 끝났어요. 추가로 전하실 내용이나 파일은 '+fileHint()+'으로 보내주세요.'+(officialNo?' (의뢰번호 '+officialNo+')':''));return}
@@ -92,7 +94,7 @@ $('reset').addEventListener('click',()=>{if(!confirm('지금 내용을 지우고
 function submitOrder(){if(submitted)return;
   if(mode!=='named'){awaitingContactForSubmit=true;chat.classList.add('asking');$('welcomeTitle').textContent='접수할 연락처를 남겨주세요';$('welcomeNote').textContent='로그인은 필요 없어요. 이름(닉네임)과 연락처만 있으면 돼요.';$('browseOnly').hidden=true;$('startBtn').textContent='연락처 남기고 접수하기';chat.scrollIntoView({block:'start'});$('cName').focus({preventScroll:true});return}
   if(!C.intakeEndpoint){formMsg('orderMsg','접수 연결 준비 중이에요. 요약을 복사해 '+lineHint()+'으로 보내주세요.','warn');say('지금은 접수 연결을 준비하고 있어요. 아래 요약 복사 후 '+lineHint()+'으로 보내주시면 바로 확인할게요.');return}
-  submitted=true;render();formMsg('orderMsg','접수하는 중이에요…','');syncNow('접수완료')}
+  submitted=true;render();formMsg('orderMsg','접수하는 중이에요…','');busy(true,'접수하는 중이에요. 잠시만 기다려 주세요');syncNow('접수완료')}
 $('confirmBtn').addEventListener('click',submitOrder);$('submitOrder').addEventListener('click',submitOrder);
 
 /* スプレッドシート保存: 順番(seq)で古い保存が新しい保存を上書きしないようにし、失敗したら 2・5・10・30秒後に再送 */
@@ -103,7 +105,7 @@ async function syncNow(status){if(mode!=='named'||!C.intakeEndpoint)return;if(in
   const body=JSON.stringify(payload(status));
   try{const r=await fetch(C.intakeEndpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body});const j=await r.json().catch(()=>({}));
     if(!(r.ok&&j.ok===true))throw new Error('fail');retry=0;note('','');if(j.no&&j.no!==officialNo){officialNo=String(j.no);sheetNumber();refreshFileWays()}
-    if(status==='접수완료'&&!done){done=true;formMsg('orderMsg','접수됐어요. 확인 후 남겨주신 연락처로 연락드릴게요.','ok');say('접수됐어요! 확인 후 '+contact.contact+'로 연락드릴게요. 참고 파일은 '+fileHint()+'으로 보내주세요.'+(officialNo?' 의뢰번호는 '+officialNo+'예요.':''));render()}}
+    if(status==='접수완료'&&!done){done=true;busy(false);formMsg('orderMsg','접수됐어요. 확인 후 남겨주신 연락처로 연락드릴게요.','ok');say('접수됐어요! 확인 후 '+contact.contact+'로 연락드릴게요. 참고 파일은 '+fileHint()+'으로 보내주세요.'+(officialNo?' 의뢰번호는 '+officialNo+'예요.':''));render()}}
   catch{dirty=true;const wait=[2,5,10,30][Math.min(retry,3)];retry++;note('연결이 잠깐 불안정해요. '+wait+'초 뒤 자동으로 다시 저장할게요.','warn');setTimeout(()=>{if(dirty)syncNow(submitted?'접수완료':'작성중')},wait*1000)}
   finally{inflight=false;if(dirty&&retry===0)queueSave()}}
 function flush(){if(mode!=='named'||!C.intakeEndpoint||!dirty)return;try{navigator.sendBeacon(C.intakeEndpoint,new Blob([JSON.stringify(payload(submitted?'접수완료':'작성중'))],{type:'text/plain;charset=utf-8'}));dirty=false}catch{}}
