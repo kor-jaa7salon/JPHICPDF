@@ -127,7 +127,7 @@
     <div class="chat">
       <div class="sheet-head"><span class="sheet-title">デザイン依頼書</span><span class="sheet-no" id="sheetNo"></span></div>
       <div class="ai-welcome" id="welcome">
-        <p class="order-label">デザインを依頼する</p>
+        <p class="order-label">デザイン制作のご相談</p>
         <h2 id="welcomeTitle">何を<span>作りたいですか？</span></h2>
         <p class="lead-note" id="welcomeNote">ログインなしで、すぐに依頼できます。<br>ウィンドウを閉じても続けてご連絡できるよう、<b>お名前（ニックネーム）と連絡先</b>だけ先に教えてください。</p>
         <form id="startForm" class="start-form" novalidate>
@@ -135,7 +135,7 @@
           <label>連絡先 <small>LINE ID・メール・電話番号</small><input id="cContact" autocomplete="email" maxlength="80" placeholder="LINE ID または hanako@example.com"></label>
           <label>会社・団体名 <small>任意</small><input id="cCompany" autocomplete="organization" maxlength="80"></label>
           <input id="cWebsite" class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <label class="check"><input id="cConsent" type="checkbox"> 個人情報の収集・利用に同意します</label>
+          <label class="check"><input id="cConsent" type="checkbox"> 個人情報の収集・利用に同意します <em>（必須）</em></label>
           <details class="consent-detail">
             <summary>取り扱いについて</summary>
             <ul>
@@ -146,7 +146,7 @@
             </ul>
           </details>
           <p id="startMsg" class="form-msg" role="status"></p>
-          <button type="submit" class="start-btn" id="startBtn">依頼をはじめる</button>
+          <button type="submit" class="start-btn" id="startBtn">作りたい内容を伝える</button>
           <button type="button" id="browseOnly" class="link-btn">連絡先なしで見てみる <small>閉じると内容は消えます</small></button>
         </form>
       </div>
@@ -176,7 +176,7 @@
       <a class="line-btn" data-line hidden target="_blank" rel="noopener">LINEで相談する ↗</a>
       <p class="line-id" data-line-id hidden>LINE ID <b></b> <button type="button" class="text-btn" data-copy-id>IDをコピー</button></p>
       <div class="file-ways" aria-label="ファイルの送り方">
-        <p class="fw-title">ファイルの送り方 <span>3つの方法</span></p>
+        <p class="room-no"><b>File</b> ファイルの送り方</p>
         <ol>
           <li><b>LINE</b><span>トークにそのまま添付</span></li>
           <li><b>メール</b><span><a data-mail href="mailto:jphic_cloud@naver.com">jphic_cloud@naver.com</a></span></li>

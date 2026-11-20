@@ -117,7 +117,7 @@
     <div class="chat">
       <div class="sheet-head"><span class="sheet-title">디자인 의뢰서</span><span class="sheet-no" id="sheetNo"></span></div>
       <div class="ai-welcome" id="welcome">
-        <p class="order-label">디자인 의뢰 요청하기</p>
+        <p class="order-label">디자인 제작상담</p>
         <h2 id="welcomeTitle">무엇을 <span>만들고 싶으세요?</span></h2>
         <p class="lead-note" id="welcomeNote">로그인 없이 바로 의뢰할 수 있어요.<br>창이 닫혀도 이어서 연락드릴 수 있게 <b>이름(닉네임)과 연락처</b>만 먼저 알려주세요.</p>
         <form id="startForm" class="start-form" novalidate>
@@ -125,7 +125,7 @@
           <label>연락처 <small>휴대폰 또는 이메일</small><input id="cContact" autocomplete="tel" maxlength="80" placeholder="010-1234-5678"></label>
           <label>회사·단체명 <small>선택</small><input id="cCompany" autocomplete="organization" maxlength="80"></label>
           <input id="cWebsite" class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <label class="check"><input id="cConsent" type="checkbox"> 개인정보 수집·이용에 동의해요</label>
+          <label class="check"><input id="cConsent" type="checkbox"> 개인정보 수집·이용에 동의해요 <em>(필수)</em></label>
           <details class="consent-detail">
             <summary>수집 안내 보기</summary>
             <ul>
@@ -135,7 +135,7 @@
             </ul>
           </details>
           <p id="startMsg" class="form-msg" role="status"></p>
-          <button type="submit" class="start-btn" id="startBtn">의뢰 시작하기</button>
+          <button type="submit" class="start-btn" id="startBtn">만들 내용 남길게요</button>
           <button type="button" id="browseOnly" class="link-btn">연락처 없이 둘러보기 <small>창을 닫으면 내용이 사라져요</small></button>
         </form>
       </div>
@@ -162,9 +162,9 @@
     </div>
     <div class="line-row">
       <div class="file-ways" aria-label="파일 보내는 방법">
-        <p class="fw-title">파일 보내는 방법 <span>편한 방법 하나로</span></p>
+        <p class="room-no"><b>File</b> 파일 보내는 방법</p>
         <ol>
-          <li><b>카카오톡</b><span><a data-openchat hidden target="_blank" rel="noopener">오픈채팅</a>에 바로 첨부</span></li>
+          <li><b>카카오톡</b><span><a data-openchat hidden target="_blank" rel="noopener">오픈채팅</a>에 바로 전달</span></li>
           <li><b>이메일</b><span><a data-mail href="mailto:jphic_cloud@naver.com">jphic_cloud@naver.com</a></span></li>
           <li><b>구글드라이브</b><span>큰 파일은 「링크가 있는 모든 사용자」로 공유한 링크를 오픈채팅이나 메일로 보내주세요</span></li>
         </ol>
