@@ -1,4 +1,4 @@
-// 2026-11-18: v0.9 상담 엔진 v3 — 칸에는 요약·정규화된 값만 저장(원문 통째 저장 금지), 고객 질문은 문의사항으로 분리, 상대 날짜 계산, 한글 수량, 단위 없는 규격 표시.
+// 2026-11-20: 날짜 20261124·11-24 형식도 읽음. 2026-11-18: v0.9 상담 엔진 v3 — 칸에는 요약·정규화된 값만 저장(원문 통째 저장 금지), 고객 질문은 문의사항으로 분리, 상대 날짜 계산, 한글 수량, 단위 없는 규격 표시.
 (function(root){
 'use strict';
 const fields={deadline:'필요 날짜',place:'사용 장소',size:'규격',quantity:'수량',assets:'자료 준비',scope:'작업 범위'};
@@ -25,7 +25,8 @@ function parseDeadline(text,nowMs){const now=new Date(nowMs),t=String(text);
   if(/최대한\s*빨리|급해|급하|asap|빠를수록|빨리\s*요/i.test(t))return '최대한 빨리';
   let m=t.match(/(20\d{2})\s*[.\-/년]\s*(\d{1,2})\s*[.\-/월]\s*(\d{1,2})/);
   if(m)return fmtDate(new Date(+m[1],+m[2]-1,+m[3]),now);
-  m=t.match(/(\d{1,2})\s*월\s*(\d{1,2})\s*일/)||t.match(/(?<![\d.])(\d{1,2})\s*[./]\s*(\d{1,2})(?![\d.]|\s*(?:mm|cm|m\b|미터|센))/);
+  m=t.match(/(?<!\d)(20\d{2})(\d{2})(\d{2})(?!\d)/);if(m&&+m[2]>=1&&+m[2]<=12&&+m[3]>=1&&+m[3]<=31)return fmtDate(new Date(+m[1],+m[2]-1,+m[3]),now);
+  m=t.match(/(\d{1,2})\s*월\s*(\d{1,2})\s*일/)||t.match(/(?<![\d.\-])(\d{1,2})\s*[./\-]\s*(\d{1,2})(?![\d.]|\s*(?:mm|cm|m\b|미터|센))/);
   if(m){const mo=+m[1],da=+m[2];if(mo>=1&&mo<=12&&da>=1&&da<=31){let d=new Date(now.getFullYear(),mo-1,da);if(d<addDays(now,0))d=new Date(now.getFullYear()+1,mo-1,da);return fmtDate(d,now)}}
   if(/오늘/.test(t))return fmtDate(addDays(now,0),now);
   if(/내일/.test(t))return fmtDate(addDays(now,1),now);
@@ -66,9 +67,9 @@ function parseQuantity(text,forced){const t=String(text);
   return null}
 
 /* ── 사용 장소: 장소 낱말만 모아 요약 ── */
-const PLACES=['행사장','전시장','박람회','컨벤션','코엑스','킨텍스','벡스코','매장','팝업','카페','식당','사무실','로비','학교','강당','체육관','호텔','연회장','무대','야외','실외','실내','입구','벽면','기둥','창문','엘리베이터','회의실','병원','교회','공연장','온라인','SNS','인스타','홈페이지','유튜브','현장'];
+const PLACES=['팝업스토어','행사장','전시장','박람회','컨벤션','코엑스','킨텍스','벡스코','매장','팝업','카페','식당','사무실','로비','학교','강당','체육관','호텔','연회장','무대','야외','실외','실내','입구','벽면','기둥','창문','엘리베이터','회의실','병원','교회','공연장','온라인','SNS','인스타','홈페이지','유튜브','현장'];
 function parsePlace(text,forced){const t=String(text);if(forced&&UNDECIDED.test(t))return '미정';
-  const found=PLACES.filter(p=>t.includes(p));if(found.length)return found.join(' ');
+  const found=PLACES.filter(p=>t.includes(p)).filter((p,i,arr)=>!arr.some(q=>q!==p&&q.includes(p)));if(found.length)return found.join(' ');
   if(forced){const s=shortPhrase(t);return s||'원문 확인'}return null}
 
 /* ── 자료 준비: 종류로 분류 ── */

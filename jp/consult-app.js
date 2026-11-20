@@ -109,9 +109,25 @@ async function syncNow(status){if(mode!=='named'||!C.intakeEndpoint)return;if(in
 function flush(){if(mode!=='named'||!C.intakeEndpoint||!dirty)return;try{navigator.sendBeacon(C.intakeEndpoint,new Blob([JSON.stringify(payload(submitted?'접수완료':'작성중'))],{type:'text/plain;charset=utf-8'}));dirty=false}catch{}}
 addEventListener('pagehide',flush);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush()});
 
-/* 2026-11-20: 휴대폰 전체 화면 대화 + 빠른 답 버튼(자료 있음/없음) — /atelier/consult-ui.js */
-if(window.JphicChatUI)UI=window.JphicChatUI({chat,chatForm,messages,texts:{close:'閉じる ✕',resume:'相談を続ける'},quick:{assets:[['はい、あります','資料あり'],['いいえ、ありません','資料なし']]},
-  currentField:()=>{if(submitted||chat.classList.contains('asking'))return null;const p=state.items[state.active];return p?(E.ORDER.find(k=>!p[k])||null):null},
-  onQuick:(f,label,value)=>{bubble(label,true);state.history.push({role:'user',text:label});E.set(state,state.active,f,value);say(E.ask(state).text);changed()}});
+/* 2026-11-20: 휴대폰 전체 화면 대화 + 질문별 빠른 답 버튼(날짜·장소·크기·수량·자료·작업) — /atelier/consult-ui.js */
+/* 品目ごとのよく使うサイズ (サイズ質問のクイックボタン) */
+function sizePresets(name){name=name||'';
+  if(/横断幕|懸垂幕|タペストリー/.test(name))return ['5000×900mm','3000×700mm'];
+  if(/バナー|のぼり/.test(name))return ['600×1800mm','600×1600mm'];
+  if(/フォト|展示壁|バックパネル|ポップアップ/.test(name))return ['3000×2400mm','2400×2400mm','4000×2400mm'];
+  if(/サイネージ|モーション|LED/.test(name))return ['1920×1080px','1080×1920px'];
+  if(/ステッカー|アクリル|ノベルティ|グッズ/.test(name))return ['50×50mm','90×50mm','A5'];
+  if(/ポスター|キービジュアル/.test(name))return ['A3','A2','A1','1080×1350px'];
+  return ['A4','A3','A1','600×1800mm','3000×2400mm']}
+if(window.JphicChatUI)UI=window.JphicChatUI({chat,chatForm,messages,input,send,texts:{close:'閉じる ✕',resume:'相談を続ける',calendar:'カレンダーで日付を選ぶ',mmdd:'日付を直接入力（月-日）',ok:'入力'},
+  options:{
+  deadline:{type:'single',date:{fmt:(m,d)=>m+'月'+d+'日'},chips:['今週','来週','今月末','できるだけ早く','未定です']},
+  place:{type:'single',chips:['イベント会場の入口','店舗の壁面','ポップアップ','展示会','オフィス・ロビー','オンライン・SNS'],other:{label:'その他',placeholder:'使う場所を書いてください'}},
+  size:{type:'size',presets:sizePresets,chips:['まだ分かりません'],form:{label:'直接入力',w:'横',h:'縦',units:['mm','cm','m','px'],ok:'入力'}},
+  quantity:{type:'single',chips:['1個','2個','3個','5個','10個','100個'],other:{label:'直接入力',placeholder:'数量を数字で書いてください',numeric:true}},
+  assets:{type:'multi',chips:['ロゴデータ','写真・画像','PPT・文書','AIで作った画像','原稿（文章）'],none:'まだありません',done:'選択完了 →'},
+  scope:{type:'multi',chips:['韓国っぽ新規デザイン','補正','ベクター化','リサイズ','カットライン','印刷・制作'],other:{label:'その他',placeholder:'必要な作業を書いてください'},done:'選択完了 →'}},
+  currentItem:()=>{const p=state.items[state.active];return p?p.name:''},
+  currentField:()=>{if(submitted||chat.classList.contains('asking'))return null;const p=state.items[state.active];return p?(E.ORDER.find(k=>!p[k])||null):null}});
 sheetNumber();render();
 })();

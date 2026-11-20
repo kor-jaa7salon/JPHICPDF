@@ -102,9 +102,25 @@ async function syncNow(status){if(mode!=='named'||!C.intakeEndpoint)return;if(in
 function flush(){if(mode!=='named'||!C.intakeEndpoint||!dirty)return;try{navigator.sendBeacon(C.intakeEndpoint,new Blob([JSON.stringify(payload(submitted?'접수완료':'작성중'))],{type:'text/plain;charset=utf-8'}));dirty=false}catch{}}
 addEventListener('pagehide',flush);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush()});
 
-/* 2026-11-20: 휴대폰 전체 화면 대화 + 빠른 답 버튼(자료 있음/없음) — /atelier/consult-ui.js */
-if(window.JphicChatUI)UI=window.JphicChatUI({chat,chatForm,messages,texts:{close:'닫기 ✕',resume:'대화 이어서 하기'},quick:{assets:[['네, 있어요','자료 있음'],['아니요, 없어요','자료 없음']]},
-  currentField:()=>{if(submitted||chat.classList.contains('asking'))return null;const p=state.items[state.active];return p?(E.ORDER.find(k=>!p[k])||null):null},
-  onQuick:(f,label,value)=>{bubble(label,true);state.history.push({role:'user',text:label});E.set(state,state.active,f,value);say(E.ask(state).text);changed()}});
+/* 2026-11-20: 휴대폰 전체 화면 대화 + 질문별 빠른 답 버튼(날짜·장소·크기·수량·자료·작업) — /atelier/consult-ui.js */
+/* 품목별 자주 쓰는 규격 (크기 질문의 빠른 버튼) */
+function sizePresets(name){name=name||'';
+  if(/현수막|대형실사/.test(name))return ['5000×900mm','3000×700mm','6000×900mm'];
+  if(/배너/.test(name))return ['600×1800mm','500×1600mm'];
+  if(/포토|전시월|백월|가벽/.test(name))return ['3000×2400mm','2400×2400mm','4000×2400mm'];
+  if(/LED|영상|사이니지|모션/.test(name))return ['1920×1080px','1080×1920px','3840×2160px'];
+  if(/판촉|굿즈|스티커|칼선|아크릴/.test(name))return ['50×50mm','90×50mm','A5'];
+  if(/포스터|키비주얼/.test(name))return ['A3','A2','A1','1080×1350px'];
+  return ['A4','A3','A1','600×1800mm','3000×2400mm']}
+if(window.JphicChatUI)UI=window.JphicChatUI({chat,chatForm,messages,input,send,texts:{close:'닫기 ✕',resume:'대화 이어서 하기',calendar:'달력에서 날짜 고르기',mmdd:'날짜를 바로 입력 (월-일)',ok:'입력'},
+  options:{
+  deadline:{type:'single',date:{fmt:(m,d)=>m+'월 '+d+'일'},chips:['이번 주','다음 주','이번 달 말','최대한 빨리','미정이에요']},
+  place:{type:'single',chips:['행사장 입구','매장 벽면','팝업스토어','전시장','사무실·로비','온라인·SNS'],other:{label:'기타',placeholder:'사용할 곳을 적어주세요'}},
+  size:{type:'size',presets:sizePresets,chips:['아직 몰라요'],form:{label:'직접 입력',w:'가로',h:'세로',units:['mm','cm','m','px'],ok:'입력'}},
+  quantity:{type:'single',chips:['1개','2개','3개','5개','10개','100개'],other:{label:'직접 입력',placeholder:'수량을 숫자로 적어주세요',numeric:true}},
+  assets:{type:'multi',chips:['로고 파일','사진·이미지','PPT·문서','AI로 만든 이미지','원고(문구)'],none:'아직 없어요',done:'선택 완료 →'},
+  scope:{type:'multi',chips:['새 디자인','보정','벡터화','리사이징','칼선','출력·제작'],other:{label:'기타',placeholder:'필요한 작업을 적어주세요'},done:'선택 완료 →'}},
+  currentItem:()=>{const p=state.items[state.active];return p?p.name:''},
+  currentField:()=>{if(submitted||chat.classList.contains('asking'))return null;const p=state.items[state.active];return p?(E.ORDER.find(k=>!p[k])||null):null}});
 sheetNumber();render();
 })();

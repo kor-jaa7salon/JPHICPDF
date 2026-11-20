@@ -33,7 +33,8 @@ function parseDeadline(text,nowMs){const now=new Date(nowMs),t=z2h(text);
   if(/至急|大至急|できるだけ早|なるべく早|急ぎ|ASAP|早めに|早ければ早い/i.test(t))return 'できるだけ早く';
   let m=t.match(/(20\d{2})\s*[.\-/年]\s*(\d{1,2})\s*[.\-/月]\s*(\d{1,2})/);
   if(m)return fmtDate(new Date(+m[1],+m[2]-1,+m[3]),now);
-  m=t.match(/(\d{1,2})\s*月\s*(\d{1,2})\s*日/)||t.match(/(?<![\d.])(\d{1,2})\s*\/\s*(\d{1,2})(?![\d.]|\s*(?:mm|cm|m\b))/);
+  m=t.match(/(?<!\d)(20\d{2})(\d{2})(\d{2})(?!\d)/);if(m&&+m[2]>=1&&+m[2]<=12&&+m[3]>=1&&+m[3]<=31)return fmtDate(new Date(+m[1],+m[2]-1,+m[3]),now);
+  m=t.match(/(\d{1,2})\s*月\s*(\d{1,2})\s*日/)||t.match(/(?<![\d.\-])(\d{1,2})\s*[\/\-]\s*(\d{1,2})(?![\d.]|\s*(?:mm|cm|m\b))/);
   if(m){const mo=+m[1],da=+m[2];if(mo>=1&&mo<=12&&da>=1&&da<=31){let d=new Date(now.getFullYear(),mo-1,da);if(d<addDays(now,0))d=new Date(now.getFullYear()+1,mo-1,da);return fmtDate(d,now)}}
   if(/今日|本日/.test(t))return fmtDate(addDays(now,0),now);
   if(/明後日|あさって/.test(t))return fmtDate(addDays(now,2),now);
