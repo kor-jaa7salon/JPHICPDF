@@ -29,7 +29,10 @@
 .form-msg{font-size:13px;min-height:1.4em;margin:10px 0 0}
 .form-msg.warn{color:var(--warn)}.form-msg.ok{color:var(--ok)}
 .start-btn{margin-top:26px}
-.start-btn,#confirmBtn,#submitOrder,.tools button,#summary button{display:block;width:100%;border:1px solid var(--ink);background:var(--ink);color:var(--wall);padding:17px 16px;font-size:15px;font-weight:600;letter-spacing:.04em;cursor:pointer;border-radius:0}
+/* 버튼 단계 — 1단계(최종 행동: 시작·접수): 먹색 사각, 가로 꽉 / 2단계(고객 선택지·빠른 답): #30302f 둥근 알약, 흰 글자 / 3단계(보조: 품목 추가·복사·새 의뢰): 테두리만 / 4단계: 밑줄 글자. 마우스를 올리면 1·2단계는 핫핑크 */
+.start-btn,#confirmBtn,#submitOrder{display:block;width:100%;border:1px solid var(--ink);background:var(--ink);color:var(--wall);padding:17px 16px;font-size:15px;font-weight:600;letter-spacing:.04em;cursor:pointer;border-radius:0}
+.tools button,#summary button{display:block;border:1px solid var(--ink);background:transparent;color:var(--ink);font-weight:500;letter-spacing:.02em;cursor:pointer;border-radius:0;transition:background .2s,color .2s}
+.tools button:hover,#summary button:hover{background:var(--ink);color:var(--wall)}
 .start-btn:hover,#confirmBtn:hover,#submitOrder:hover{background:var(--m100);border-color:var(--m100);color:#fff}
 .link-btn{display:block;margin:18px auto 0;border:0;background:none;color:var(--gray);font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;text-align:center}
 .link-btn small{display:block;text-decoration:none;font-size:11px;margin-top:4px}
@@ -48,12 +51,13 @@ button:disabled{opacity:.45;cursor:default}
 
 .messages{display:flex;flex-direction:column;gap:14px;padding:20px 18px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
 .chat:not(.started) .messages{padding:0;height:0;overflow:hidden}
-.bubble{max-width:88%;white-space:pre-wrap;background:var(--wall);border:1px solid var(--line);border-radius:2px 12px 12px 12px;padding:11px 14px;font-size:15px;line-height:1.75}
+.bubble{max-width:88%;white-space:pre-wrap;background:#FCEFF4;border:1px solid #F3D7E2;border-radius:2px 12px 12px 12px;padding:11px 14px;font-size:15px;line-height:1.75}
 .bubble.user{align-self:flex-end;background:#fff;border-color:var(--ink);border-radius:12px 2px 12px 12px}
 .to-latest{position:absolute;left:50%;transform:translateX(-50%);bottom:92px;border:0;background:var(--ink);color:var(--wall);font-size:12px;padding:7px 12px;z-index:2}
 .choices{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:14px 18px 24px}
-.choices button{background:var(--white);border:1px solid var(--line);padding:9px 12px;font-size:13px;cursor:pointer}
-.choices button:hover{border-color:var(--m100);color:var(--m100)}
+.choices button,.chip{background:#30302F;color:#fff;border:0;border-radius:999px;padding:11px 18px;font:inherit;font-size:14px;font-weight:500;line-height:1.2;cursor:pointer;transition:background .2s}
+.choices button:hover,.chip:hover,.choices button:focus-visible,.chip:focus-visible{background:var(--m100);color:#fff}
+.quick{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;padding:2px 18px 14px}
 .confirm-bar{display:flex;flex-direction:column;gap:6px;align-items:center;padding:4px 14px 10px}
 .confirm-bar a{font-size:12px;color:var(--gray);text-decoration:underline;text-underline-offset:3px}
 .sync-note{font-size:12px;text-align:center;margin:0 14px 8px;color:var(--gray)}
@@ -115,7 +119,8 @@ button:disabled{opacity:.45;cursor:default}
 @media(max-width:440px){
   .consult{padding:0 10px}
   .ai-welcome{padding:40px 18px 32px}
-  .choices{padding:10px 10px 18px}.choices button{font-size:12px;padding:8px 10px}
+  .choices{padding:10px 10px 18px}.choices button{font-size:13px;padding:10px 14px}
+  .quick{padding:2px 12px 12px}
   #chatForm{margin:0 10px 12px}.messages{padding:14px 12px}.bubble{max-width:94%}
   .sheet-fields div{padding:7px 9px}
   .tools button{flex:1}
@@ -141,3 +146,16 @@ button:disabled{opacity:.45;cursor:default}
 /* 맺음말 아래 여백(40px) + 섹션 간격(--gap-room)과 같은 눈에 보이는 간격 */
 .file-ways{margin-top:calc(var(--gap-room) - 18px)}
 .faqsec{margin-top:calc(var(--gap-room) + 16px);padding-bottom:calc(var(--gap-room) - 44px)}
+/* 2026-11-20: 휴대폰 — 대화는 화면 전체를 덮는 고정 창(키보드 높이에 맞춤), 안쪽만 스크롤. 요약 화면은 고정하지 않음 */
+html.chat-lock,html.chat-lock body{overflow:hidden;overscroll-behavior:none}
+.sheet-head{gap:12px}
+.sheet-no{margin-left:auto}
+.chat-close{display:none;border:0;background:none;font:inherit;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;padding:4px 0 4px 6px}
+.resume-btn{display:block;margin:18px auto 0}
+.resume-btn[hidden]{display:none}
+@media(max-width:759px){
+  .chat.started{height:min(calc(100svh - 90px),620px);min-height:420px}
+  .chat.full{position:fixed;left:0;right:0;top:0;width:auto;height:100dvh;min-height:0;z-index:200;margin:0;border:0}
+  .chat.full .chat-close{display:inline-block}
+  .chat.full.asking .ai-welcome{flex:1;min-height:0}
+}

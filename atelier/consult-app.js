@@ -20,12 +20,13 @@ function refreshFileWays(){const no=state.requestId;document.querySelectorAll('[
 
 const chat=document.querySelector('.chat'),messages=$('messages'),input=$('input'),toLatest=$('toLatest'),choices=$('choices'),chatForm=$('chatForm');
 const confirmBar=$('confirmBar'),syncNote=$('syncNote');
+let UI=null;
 let contact=null,mode='none',submitted=false,seq=0,dirty=false,timer=null,retry=0,inflight=false,awaitingContactForSubmit=false,done=false;
 const nearBottom=()=>messages.scrollHeight-messages.scrollTop-messages.clientHeight<80;
 const toBottom=()=>{messages.scrollTop=messages.scrollHeight;toLatest.hidden=true};
 messages.addEventListener('scroll',()=>{if(nearBottom())toLatest.hidden=true});
 toLatest.addEventListener('click',toBottom);
-function startChat(){chat.classList.add('started');chatForm.hidden=false;requestAnimationFrame(()=>chat.scrollIntoView({block:'start',behavior:RM?'auto':'smooth'}))}
+function startChat(){chat.classList.add('started');chatForm.hidden=false;requestAnimationFrame(()=>chat.scrollIntoView({block:'start',behavior:RM?'auto':'smooth'}));UI&&UI.enter()}
 function bubble(text,user=false){const follow=user||nearBottom();const el=document.createElement('div');el.className='bubble'+(user?' user':'');el.textContent=text;messages.append(el);if(follow)toBottom();else toLatest.hidden=false}
 function say(text){state.history.push({role:'assistant',text});bubble(text)}
 function changed(){render();queueSave()}
@@ -62,7 +63,7 @@ function renderSheet(){sheetFields.replaceChildren();const p=state.items[state.a
     if(value){v.textContent=value;v.className='done';v.title=value}else{v.textContent='확인 중';v.className='todo'}d.append(t,v);sheetFields.append(d)};
   cell(state.items.length>1?'품목 '+(state.active+1)+'/'+state.items.length:'품목',p.name,'item');
   for(const key of E.ORDER)cell(E.fields[key],p[key])}
-function render(){renderSheet();refreshFileWays();const host=$('summary');host.replaceChildren();const has=!!state.items.length;$('summarySection').hidden=!has;choices.hidden=!(chat.classList.contains('started')&&!has);
+function render(){renderSheet();UI&&UI.refresh();refreshFileWays();const host=$('summary');host.replaceChildren();const has=!!state.items.length;$('summarySection').hidden=!has;choices.hidden=!(chat.classList.contains('started')&&!has);
   const complete=E.complete(state);confirmBar.hidden=!(complete&&!submitted);$('confirmBtn').textContent=mode==='named'?'이대로 의뢰 접수하기':'이름·연락처 남기고 접수하기';
   const sb=$('submitOrder');sb.disabled=submitted||!has;sb.textContent=submitted?'접수 완료':(mode==='named'?'의뢰 접수하기':'이름·연락처 남기고 접수하기');
   const who=$('who');who.hidden=!contact;if(contact)who.textContent='접수자: '+contact.name+' · '+contact.contact+(contact.company?' · '+contact.company:'');
@@ -101,5 +102,9 @@ async function syncNow(status){if(mode!=='named'||!C.intakeEndpoint)return;if(in
 function flush(){if(mode!=='named'||!C.intakeEndpoint||!dirty)return;try{navigator.sendBeacon(C.intakeEndpoint,new Blob([JSON.stringify(payload(submitted?'접수완료':'작성중'))],{type:'text/plain;charset=utf-8'}));dirty=false}catch{}}
 addEventListener('pagehide',flush);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush()});
 
+/* 2026-11-20: 휴대폰 전체 화면 대화 + 빠른 답 버튼(자료 있음/없음) — /atelier/consult-ui.js */
+if(window.JphicChatUI)UI=window.JphicChatUI({chat,chatForm,messages,texts:{close:'닫기 ✕',resume:'대화 이어서 하기'},quick:{assets:[['네, 있어요','자료 있음'],['아니요, 없어요','자료 없음']]},
+  currentField:()=>{if(submitted||chat.classList.contains('asking'))return null;const p=state.items[state.active];return p?(E.ORDER.find(k=>!p[k])||null):null},
+  onQuick:(f,label,value)=>{bubble(label,true);state.history.push({role:'user',text:label});E.set(state,state.active,f,value);say(E.ask(state).text);changed()}});
 sheetNumber();render();
 })();
