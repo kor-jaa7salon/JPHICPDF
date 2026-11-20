@@ -162,13 +162,14 @@ footer{margin-top:28px;font-size:12px;color:var(--gray);line-height:1.7}
     <p>보통 5~10초 걸려요.<br>완료될 때까지 <strong>창을 닫지 말아 주세요.</strong></p>
   </div>
 
-  <footer>제이픽유니버스 · jphic.co.kr · 문의 jphic_cloud@naver.com</footer>
+  <footer>제이픽유니버스 · jphic.co.kr<br>문의 <a id="askChat" href="https://open.kakao.com/o/sLyIquni" target="_blank" rel="noopener" style="color:var(--ink);font-weight:700;text-decoration:underline">카카오톡 오픈채팅</a></footer>
 </main>
 <script src="/new/config.js"></script>
 <script>
 (function(){
   var C=window.JPHIC_CONFIG||{},form=document.getElementById('form'),msg=document.getElementById('msg'),go=document.getElementById('go');
   var P=new URLSearchParams(location.search);
+  if(C.openChatUrl)document.getElementById('askChat').href=C.openChatUrl;
   ['no','org','dept','name','phone','email','title','amount'].forEach(function(k){var v=P.get(k);if(v&&form.elements[k])form.elements[k].value=v});
   if(P.get('amount'))form.elements.amount.value=Number(String(P.get('amount')).replace(/\D/g,'')).toLocaleString('ko-KR');
   if(P.get('no'))form.elements.no.readOnly=true;
@@ -202,7 +203,7 @@ footer{margin-top:28px;font-size:12px;color:var(--gray);line-height:1.7}
     if(!f.privacy.checked)mark(f.privacy,'개인정보 동의');
     if(bad.length){msg.className='msg err';msg.textContent='붉게 표시된 '+bad.length+'개 항목을 확인해 주세요: '+bad.map(function(x){return x[1]}).join(', ');
       var first=bad[0][0],box=first.closest('label')||first;box.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){first.focus({preventScroll:true})},350);return}
-    if(!C.intakeEndpoint)return err('지금은 발송 연결을 준비 중이에요. jphic_cloud@naver.com으로 연락 주세요.');
+    if(!C.intakeEndpoint)return err('지금은 발송 연결을 준비 중이에요. 아래 카카오톡 오픈채팅으로 연락 주세요.');
     var d={kind:'postpay-confirm'};['no','amount','title','org','dept','name','phone','email','bizNo','contractType','deliveryDate','inspectDate','payTerm','payDate','prepay','prepayRate','taxEmail','memo','website'].forEach(function(k){d[k]=String(f[k].value||'').trim()});
     d.agree=true;d.privacy=true;
     var sending=document.getElementById('sending'),stay=function(e){e.preventDefault();e.returnValue=''};
