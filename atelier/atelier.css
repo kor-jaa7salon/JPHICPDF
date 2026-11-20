@@ -55,9 +55,27 @@ figcaption,.note{font-size:11px;color:var(--gray);letter-spacing:.02em;margin-to
 .crop.br{right:-10px;bottom:-10px;border-right-width:1px;border-bottom-width:1px}
 .morph-label{font-size:12px;letter-spacing:.02em;margin:0;min-height:1.4em}
 .morph-label b{color:var(--m100);font-weight:600}
-.morph-dots{list-style:none;display:flex;gap:6px;margin:0;padding:0}
-.morph-dots li{width:14px;height:2px;background:var(--line);transition:background .3s}
-.morph-dots li.on{background:var(--ink)}
+/* 2026-11-20: 진행 표시 = 오른쪽 세로 레일(스크롤 방향과 같게). 선이 스크롤만큼 채워지고, 현재 크기 이름이 강조됨 */
+.morph-stage{padding-right:34px}
+.morph-dots{list-style:none;margin:0;padding:0;position:absolute;right:var(--pad);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:22px;z-index:2}
+.morph-dots::before,.morph-dots::after{content:"";position:absolute;left:4px;top:5px;width:1px;background:var(--line)}
+.morph-dots::before{bottom:5px}
+.morph-dots::after{height:calc((100% - 10px) * var(--p,0));background:var(--m100)}
+.morph-dots li{position:relative}
+.morph-dots button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.02em;color:var(--gray);line-height:1;padding:2px 0}
+.morph-dots i{position:relative;z-index:1;flex:none;width:9px;height:9px;border-radius:50%;border:1px solid var(--line);background:var(--wall);transition:background .3s,border-color .3s,transform .3s}
+.morph-dots li.on i{border-color:var(--m100);background:var(--m100)}
+.morph-dots li.cur i{transform:scale(1.45)}
+.morph-dots li.cur span{color:var(--ink);font-weight:600}
+.morph-dots span{transition:color .3s}
+.morph-count{margin:0;font-size:11px;letter-spacing:.12em;color:var(--gray);font-variant-numeric:tabular-nums}
+.morph-count b{color:var(--ink);font-weight:600}
+.morph-hint{position:absolute;left:0;right:0;bottom:22px;margin:0;text-align:center;font-size:11px;letter-spacing:.2em;color:var(--gray);transition:opacity .4s}
+.morph-hint b{display:inline-block;color:var(--m100);font-weight:400;animation:hintdown 1.6s ease-in-out infinite}
+.morph-hint.end{opacity:0}
+@keyframes hintdown{0%,100%{transform:translateY(-2px)}50%{transform:translateY(4px)}}
+@media(max-width:759px){.morph-dots span{display:none}.morph-dots{right:12px;gap:18px}}
+@media(min-width:760px){.morph-stage{padding-right:150px}}
 
 /* 01 실제 크기 줄세우기 */
 .lineup{margin-top:80px}
@@ -143,6 +161,7 @@ figcaption,.note{font-size:11px;color:var(--gray);letter-spacing:.02em;margin-to
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none}
   .morph{height:auto}.morph-stage{position:static;height:auto;padding:40px 0}
+  .morph-hint b{animation:none}
   .frame{transition:none}
   .tile .shape{display:none}.tile img{clip-path:none;transition:none}
   .box img,.box .num,.box .lid{transition:none}

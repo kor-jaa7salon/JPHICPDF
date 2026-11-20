@@ -40,14 +40,18 @@ document.querySelector('.hero-work img').addEventListener('click',e=>zoom(e.targ
 /* ── 01 비율 변환 ── */
 const morph=$('morph'),frame=$('frame'),box=frame.parentElement;
 const KV=window.JphicKV,KVT={head1:'작은 AI 이미지를, 크고 예쁘게',head2:'작은 AI 이미지를,<br>크고 예쁘게',url:'jphic.co.kr'};frame.querySelector('img').remove();const kv=KV.create(frame,KVT);
-const dots=$('mDots');MORPH.forEach(()=>dots.append(document.createElement('li')));
+/* 2026-11-20: 진행 표시를 세로 레일로 — 가로 점선이 좌우 스와이프로 오해돼서, 스크롤 방향(아래)과 같은 세로 눈금 + 채워지는 선 + 숫자·스크롤 힌트 */
+const dots=$('mDots');MORPH.forEach((m,k)=>{const li=document.createElement('li');const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',m.name);b.innerHTML='<i></i><span></span>';b.querySelector('span').textContent=m.name;b.addEventListener('click',()=>{const r=morph.getBoundingClientRect(),total=morph.offsetHeight-innerHeight;scrollTo({top:r.top+scrollY+(k+0.5)/MORPH.length*total,behavior:RM?'auto':'smooth'})});li.append(b);dots.append(li)});
+const mCount=document.createElement('p');mCount.className='morph-count';dots.parentElement.insertBefore(mCount,dots);
+const mHint=document.createElement('p');mHint.className='morph-hint';mHint.setAttribute('aria-hidden','true');mHint.innerHTML='스크롤 <b>↓</b>';dots.parentElement.append(mHint);
 let step=-1;
 function fit(s){const bw=box.clientWidth*.86,bh=box.clientHeight*.92;const k=Math.min(bw/s.w,bh/s.h);return [s.w*k,s.h*k]}
 function setStep(i){if(i===step)return;const first=step<0;step=i;const s=MORPH[i];const [w,h]=fit(s);frame.style.width=w+'px';frame.style.height=h+'px';
   kv.apply(s.L,w,h,!(first||RM));
   $('mName').textContent=s.name;$('mSize').textContent=s.size;$('mRatio').textContent=s.w+':'+s.h;
-  [...dots.children].forEach((d,k)=>d.classList.toggle('on',k<=i))}
-function morphScroll(){const r=morph.getBoundingClientRect(),total=morph.offsetHeight-innerHeight;const p=Math.min(1,Math.max(0,-r.top/Math.max(total,1)));
+  [...dots.children].forEach((d,k)=>{d.classList.toggle('on',k<=i);d.classList.toggle('cur',k===i)});
+  mCount.innerHTML='<b>'+String(i+1).padStart(2,'0')+'</b> / '+String(MORPH.length).padStart(2,'0');mHint.classList.toggle('end',i===MORPH.length-1)}
+function morphScroll(){const r=morph.getBoundingClientRect(),total=morph.offsetHeight-innerHeight;const p=Math.min(1,Math.max(0,-r.top/Math.max(total,1)));dots.style.setProperty('--p',p.toFixed(4));
   setStep(Math.min(MORPH.length-1,Math.floor(p*MORPH.length*0.999)))}
 
 /* ── 01 실제 크기 줄세우기 ── */
